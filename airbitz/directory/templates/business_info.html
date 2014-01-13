@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load imagekit %}
+{% load humanize %}
+
+{% block title%} {{ biz.name }} {% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>{{ biz.name }}
+                {% if user.is_superuser %}
+                <a class="pull-right btn btn-default btn-sm" href="{% url 'mgmt_biz_view' biz.id %}">Edit</a>
+                {% endif %}
+            </h4>
+            <hr />
+            {{ biz.pretty_address }}
+            <dl class="dl-horizontal">
+                {% if biz.website %}
+                    <dt>Website:</dt>
+                    <dd><a target="_blank" href="{{ biz.website }}">{{ biz.website|truncatechars:100 }}</a></dd>
+                {% endif %}
+
+                <dt>Brick &amp; Mortar:</dt>
+                <dd>{{ biz.has_physical_business|yesno:"Yes,No" }} </dd>
+
+                <dt>Online Business:</dt>
+                <dd>{{ biz.has_online_business|yesno:"Yes,No" }} </dd>
+
+                <dt>Bitcoin Discount:</dt>
+                <dd>{{ biz.has_bitcoin_discount|yesno:"Yes,No" }} </dd>
+            </dl>
+            {% if biz.description %}
+                <dl>
+                    <dt>Description:</dt>
+                    <dd>{{ biz.description }} </dd>
+                </dl>
+            {% endif %}
+        </div>
+        <div class="col-sm-4">
+            <div class="row">
+                {% if biz.landing_image %}
+                    {% thumbnail '380x250' biz.landing_image.image -- class="img-thumbnail" %}
+                {% else %}
+                    <img data-src="holder.js/400x300/sky" class="img-thumbnail">
+                {% endif %}
+            </div>
+            <div class="row">
+                {% for img in imgs %}
+                    {% if img.image %}
+                        {% thumbnail '50x50' img.image as th %}
+                        <img src="{{ th.url}} " style="height: {{ th.height }}; width: {{ th.width }}" class="img-thumbnail">
+                    {% else %}
+                        <img data-src="holder.js/50x50/sky" class="img-thumbnail">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="img-thumbnail">
+                    <div id="map" style="width: 380px; height: 300px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if nearby %}
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">Nearby</div>
+                <div class="panel-body">
+                    {% for b in nearby %}
+                        <div class="col-sm-3 col-md-3">
+                            <div class="thumbnail">
+                                <a href="{% url 'business_info' b.id %}">
+                                    {% if b.landing_image %}
+                                        {% thumbnail '280x150' b.landing_image.image -- class="img-thumbnail" %}
+                                    {% else %}
+                                        <img data-src="holder.js/280x150/sky" class="img-thumbnail">
+                                    {% endif %}
+                                    <div class="caption">
+                                        <h4>{{ b.name }}</h4>
+                                    </div>
+                                </a>
+                                <div><b>{{ b.distance.km|floatformat:2 }} km</b> from {{ biz.name }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block javascript_headers %}
+    {{ block.super }}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ mapkey }}&sensor=false"> </script>
+{% endblock javascript_headers %} 
+{% block javascript %} 
+    {{ block.super }}
+    <script type="text/javascript">
+        $(function() {
+            var json = [
+                { lat: {{ biz.center.y }}, lon: {{ biz.center.x }} },
+            ];
+            addMap($('#map'), 16, {{ biz.center.y }}, {{ biz.center.x }}, json);
+        });
+    </script>
+{% endblock %}
+

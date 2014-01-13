@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load imagekit %}
+
+{% block title %}Search{% endblock title %}
+
+{% block body %}
+    <h1>Search Results Here</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            {% for biz in results %}
+                <div class="row" >
+                    {% if biz.landing_image %}
+                        {% thumbnail '100x75' biz.landing_image.image -- class="img-thumbnail" %}
+                    {% else %}
+                        <img data-src="holder.js/100x75/sky" class="img-thumbnail">
+                    {% endif %}
+                    <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">{{ biz.name }}</a>
+                </div>
+            {% empty %}
+                <p>No results found.</p>
+            {% endfor %}
+        </div>
+        <div class="col-sm-6">
+            <div data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+                <div id="map" style="width: 400px; height: 400px">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript_headers %}
+    {{ block.super }}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ mapkey }}&sensor=false"> </script>
+{% endblock javascript_headers %} 
+{% block javascript %} 
+    {{ block.super }}
+    <script type="text/javascript">
+        var json = [
+        {% for biz in results %}
+            { lat: {{ biz.center.y }}, lon: {{ biz.center.x }} },
+        {% endfor %}
+        {} ];
+        
+        $(function() {
+            console.log(json.length);
+            if (json.length > 0) {
+                addMap($('#map'), 5, json[0].lat, json[0].lon, json);
+            }
+        });
+    </script>
+{% endblock %}

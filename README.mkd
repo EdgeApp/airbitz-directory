@@ -1,0 +1,50 @@
+# Airbitz
+
+### Requirements
+
+1. [Vagrant 1.2.x][vagrantdownload]
+1. Clone breadsticks (you probably already have).
+
+        git clone git@github.com:teambreadcrumbs/breadsticks.git
+
+
+### Start it up
+
+    local> cd vagrant
+    local> vagrant up 
+
+### Hack away
+
+Once the VM is up you can connect to it.
+
+    local> vagrant ssh
+
+Enter development environment
+
+    vm> source ./quick_bitz.sh
+
+Sync database
+
+    vm> python manage.py syncdb
+    vm> python manage.py migrate
+
+Start dev server
+
+    # Access through django dev server via http://localhost:8000/admin/
+    vm> python manage.py runserver 0.0.0.0:8000
+
+### Coin Map data
+
+    local> vagrant ssh
+    vm> sudo pip install requests
+    vm> mkdir -p $HOME/local/src
+    vm> cd $HOME/local/src
+    vm> git clone https://github.com/prusnak/coinmap.git
+    vm> cd coinmap/data
+    vm> refresh.py
+    vm> cd $HOME
+    vm> source ./quick_bitz.sh
+    vm> python manage.py overpass_fetch $HOME/local/src/coinmap/data/data-overpass-bitcoin.json
+
+[vagrantdownload]: http://downloads.vagrantup.com/
+

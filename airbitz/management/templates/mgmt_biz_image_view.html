@@ -1,0 +1,77 @@
+{% extends 'mgmt_biz_base.html' %}
+{% load imagekit %}
+
+{% block title%} {{ biz.name }} - Images {% endblock %}
+
+{% block bizbody %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">IMAGES
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-default btn-sm" href="{% url 'mgmt_biz_image_link' biz.id %}">From Link</a>
+                        <a class="btn btn-default btn-sm" href="{% url 'mgmt_biz_image_add' biz.id %}">From Desktop</a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="thumbnails">
+                    {% for i in images %}
+                        <div class="col-xs-6 col-md-3">
+                            {% thumbnail '380x250' i.image -- class="img-thumbnail" %}
+                            <div class="bottom-overlay">
+                                <button class="btn btn-default btn-link pull-left select-image" data-value="{{ i.id }}" >Select <i class="icon-ok"></i></button>
+                                &nbsp;
+                                <a class="btn btn-default btn-link pull-right" href="{% url 'mgmt_biz_image_edit' biz.id i.id %}">Edit <i class="icon-pencil"></i></a>
+                            </div>
+                        </div>
+                    {% empty %}
+                        Yikes! No images. 
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script>
+        $(function() {
+            function csrfSafeMethod(method) {
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            $.ajaxSetup({
+                crossDomain: false,
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type)) {
+                        xhr.setRequestHeader("X-CSRFToken", $('meta[name="csrf-token"]').attr('content'));
+                    }
+                }
+            });
+            {% if biz.landing_image %}
+                $('.select-image[data-value="{{ biz.landing_image.image.id }}"]')
+                    .attr("disabled", "disabled");
+            {% endif %}
+            $('.select-image').click(function() {
+                var self = $(this);
+                var id = $(this).attr('data-value');
+                var url = "{% url 'mgmt_biz_set_landing_image' biz.id 0 %}";
+                $.ajax({
+                    url: url.replace(/\/0\//, '/' + id + '/'),
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    complete: function(result) {
+                        if (confirm('Are you sure you want to change the title image?')) {
+                            $('.select-image').removeAttr("disabled");
+                            self.attr("disabled", "disabled");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock javascript %}
+

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Management Dashboard {% endblock title %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <a class="pull-right btn btn-success" href="{% url 'mgmt_biz_import' %}">Import Place</a>
+            <a class="pull-right btn btn-success" href="{% url 'mgmt_biz_add' %}">Add Place</a>
+            {% for biz in results %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        <a class="place-name" href="{% url 'mgmt_biz_view' biz.id %}" title="{{ biz.name }}">
+                            <h4>{{ biz.name }}</h4>
+                        </a>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No results found.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title%} {{ biz.name }} {% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <a class="pull-left btn btn-default" href="{% url 'mgmt_biz_view' biz.id %}">Back to Business</a>
+        </div>
+    </div>
+    <hr />
+    <div class="panel panel-default">
+        <div class="panel-heading">{{ title }}</div>
+        <div class="panel-body" style="margin: 0 10px">
+            {% if helper %}
+                {% crispy form helper %}
+            {% else %}
+                {% crispy form %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+[
+  {
+    "model": "directory.Category",
+    "pk": "2",
+    "fields": {
+      "name": "Finance",
+      "description": ""
+    }
+  },
+  {
+    "model": "directory.Category",
+    "pk": "3",
+    "fields": {
+      "name": "Health",
+      "description": ""
+    }
+  },
+  {
+    "model": "directory.Category",
+    "pk": "4",
+    "fields": {
+      "name": "Home Services",
+      "description": ""
+    }
+  },
+  {
+    "model": "directory.Category",
+    "pk": "5",
+    "fields": {
+      "name": "Travel",
+      "description": ""
+    }
+  },
+  {
+    "model": "directory.Category",
+    "pk": "1",
+    "fields": {
+      "name": "Restaurant",
+      "description": ""
+    }
+  },
+  {
+    "model": "directory.Category",
+    "pk": "6",
+    "fields": {
+      "name": "Shopping",
+      "description": ""
+    }
+  }
+]
+

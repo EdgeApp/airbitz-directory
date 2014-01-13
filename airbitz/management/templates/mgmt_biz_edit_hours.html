@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<style> input { width: 100px; } </style>
+
+<div class="row">
+    <div class="panel">
+        <div class="panel-heading">Hours Edit</div>
+        <div class="panel-body" id="hoursapp">
+            <div class="row-fluid">
+                <table class="table table-striped" id="hours-list">
+                    <thead>
+                        <tr>
+                            <th>Day of Week</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th width="30%"></th>
+                            <th></td>
+                        </tr>
+                    </thead>
+                    <tbody> </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <select class="dayOfWeek" style="width: 100px">
+                                    <option value="sunday">Sunday</option>
+                                    <option value="monday">Monday</option>
+                                    <option value="tuesday">Tuesday</option>
+                                    <option value="wednesday">Wednesday</option>
+                                    <option value="thursday">Thursday</option>
+                                    <option value="friday">Friday</option>
+                                    <option value="saturday">Saturday</option>
+                                </select>
+                            </td>
+                            <td><input class="hourStart" type="text" placeholder="Start Time"></td>
+                            <td><input class="hourEnd" type="text" placeholder="End Time"></td>
+                            <td> </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">
+                                <textarea class="description" type="text" placeholder="Description" rows="4" style="width: 98%"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">
+                                <button class="save btn btn-success"><i class="icon-plus"></i> Add</button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script id="template-row" type="text/x-handlebars-template">
+        <td>
+            <span class="dayOfWeek" data-type="select2" data-name="dayOfWeek" data-pk="{% templatetag openvariable %}  id {% templatetag closevariable %}" data-title="Lookup" data-value="{% templatetag openvariable %}  dayOfWeek }}">{% templatetag openvariable %}  lookupDayOfWeek dayOfWeek {% templatetag closevariable %}</span>
+        </td> 
+        <td>
+            <span class="houreditable"  data-type="text" data-name="hourStart" data-pk="{% templatetag openvariable %}  id {% templatetag closevariable %}" data-title="Lookup" data-value="{% templatetag openvariable %}  hourStart {% templatetag closevariable %}">{% templatetag openvariable %}  hourStart {% templatetag closevariable %} </span> 
+        </td>
+        <td>
+            <span class="houreditable"  data-type="text" data-name="hourEnd" data-pk="{% templatetag openvariable %}  id {% templatetag closevariable %}" data-title="Lookup" data-value="{% templatetag openvariable %}  hourEnd {% templatetag closevariable %}">{% templatetag openvariable %}  hourEnd {% templatetag closevariable %}</span>
+        </td>
+        <td >
+            <span class="houreditable"  data-type="textarea" data-name="description" data-pk="{% templatetag openvariable %}  id {% templatetag closevariable %}" data-title="Description" data-value="{% templatetag openvariable %}  description {% templatetag closevariable %}">{% templatetag openvariable %}  description {% templatetag closevariable %}</span>
+        </td>
+        <td><button class="destroy btn btn-default"><i class="icon-trash"></i></button></td>
+    </script>
+    <script>
+
+        function findIn(val, arr) {
+            for (var i = 0; i < arr.length; ++i) {
+                if (val === arr[i].id) {
+                    return arr[i].text;
+                }
+            }
+            return val;
+        }
+        {% autoescape off %}
+        Handlebars.registerHelper('lookupDayOfWeek', function(val) {
+        });
+        {% endautoescape %}
+        function csrfSafeMethod(method) {
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        function c(val) {
+            return (val === '') ? null : val;
+        }
+
+        $(function() {
+            $.ajaxSetup({
+                crossDomain: false,
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type)) {
+                        xhr.setRequestHeader("X-CSRFToken", $('meta[name="csrf-token"]').attr('content'));
+                    }
+                }
+            });
+            var BizHours = Backbone.Model.extend({
+                defaults: function() {
+                    return {
+                        dayOfWeek: "monday",
+                        hourEnd: null,
+                        hourStart: null,
+                        description: null,
+                        business_id: {{ biz.id }}
+                    };
+                },
+                url: function() {
+                    if (this.id) {
+                        return '/api/v1/curation/recurring/' + this.id + '/';
+                    } else {
+                        return '/api/v1/curation/recurring/';
+                    }
+                },
+            });
+
+            var HourList = Backbone.Collection.extend({
+                model: BizHours,
+                url: function() {
+                    return '/api/v1/biz/hours/?limit=1000&business_id={{biz.id}}';
+                },
+                parse: function(response) {
+                    return response.objects;
+                }
+            });
+            var hours = new HourList;
+            var HoursView = Backbone.View.extend({
+                tagName:  "tr",
+                template: Handlebars.compile($('#template-row').html()),
+                animateAdd: false,
+                events: {
+                    "dblclick .view" : "edit",
+                    "click .save"   : "save",
+                    "blur .description" : "save",
+                    "click .destroy" : "destroy"
+                },
+
+                initialize: function() {
+                    this.listenTo(this.model, 'change', this.render);
+                    this.listenTo(this.model, 'destroy', this.remove);
+                },
+
+                render: function() {
+                    this.$el.html(this.template(this.model.toJSON()));
+                    this.$('td').css('background-color', '#fafafa');
+                    this.$('td').animate({ backgroundColor: 'transparent' }, 500);
+                    {% autoescape off %}
+                    this.$('.dayOfWeek').editable({
+                    });
+                    {% endautoescape %}
+                    this.$('.houreditable').editable({ });
+                    return this;
+                },
+
+                destroy: function() {
+                    this.model.destroy({
+                        wait: true,
+                        success: function() { },
+                        error: function() {
+                            alert("Unable to delete model for some reason...");
+                        }
+                    });
+                }
+
+            });
+
+            var AppView = Backbone.View.extend({
+                el: $("#hours-list tfoot"),
+                events: {
+                    "click .save":  "createOnEnter",
+                    "blur .description":  "createOnEnter"
+                },
+
+                initialize: function() {
+                    this.listenTo(hours, 'add', this.addAnimate);
+                    this.listenTo(hours, 'reset', this.reset);
+                    this.listenTo(hours, 'all', this.render);
+                    this.clearForm();
+                    hours.fetch({
+                        success: function(c, r, o) {
+                            c.sort();
+                        }
+                    });
+                },
+
+                render: function() { },
+
+                addAnimate: function(model) {
+                    this.addOne(model, true);
+                },
+
+                addOne: function(model, anim) {
+                    anim = typeof anim !== 'undefined' ? anim : false;
+                    var view = new HoursView({model: model, animateAdd: anim});
+                    $("#hours-list tbody").append(view.render().el);
+                },
+
+                reset: function() {
+                    $("#hours-list tbody").html('');
+                    this.addAll();
+                },
+
+                addAll: function() {
+                    hours.each(this.addOne, this);
+                },
+
+                createOnEnter: function(e) {
+                    if (c(this.$el.find(".hourStart").val()) === null) {
+                        return;
+                    }
+                    var newEvent = new RecurringEvent({
+                        dayInMonth: c(this.$el.find(".dayInMonth").val()),
+                        dayOfWeek: c(this.$el.find(".dayOfWeek").val()),
+                        description: c(this.$el.find(".description").val()),
+                        eventType: c(this.$el.find(".eventType").val()),
+                        hourEnd: c(this.$el.find(".hourEnd").val()),
+                        hourStart: c(this.$el.find(".hourStart").val()),
+                        business_id: {{ biz.id }}
+                    });
+                    hours.create(newEvent, {
+                        wait: true,
+                        success: function() {},
+                        error: function() {
+                            alert("Unable to create new record! Suxors!1!1")
+                        },
+                    });
+                    this.clearForm();
+                },
+                clearForm: function() {
+                    this.$(".eventType").val('');
+                    this.$(".dayInMonth").val('');
+                    this.$(".dayOfWeek").val('');
+                    this.$(".description").val('');
+                    this.$(".hourEnd").val('');
+                    this.$(".hourStart").val('');
+                    this.$(".eventType").focus();
+                }
+            });
+            $('#baseType').change(function() {
+                $('#hours-list tfoot .eventType').val($(this).val());
+                hours.fetch({ reset: true });
+            });
+            var App = new AppView;
+        });
+    </script>
+{% endblock javascript %}
+

@@ -1,0 +1,115 @@
+{% extends 'mgmt_biz_base.html' %}
+
+{% block title%} {{ biz.name }} {% endblock %}
+
+{% block bizbody %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">MAIN
+                    <a class="pull-right" href="{% url 'mgmt_biz_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" /></a>
+                </div>
+                <div class="panel-body">
+                    <dl>
+                        <dt>Status:</dt>
+                        <dd>
+                            <span id="status" class="editable" data-type="text" data-placeholder="Name" data-inputclass="select2"> {{ biz.lookupStatus }} </span>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>Name:</dt>
+                        <dd>
+                            <span id="name" class="editable" data-type="text" data-placeholder="Name" data-inputclass="input-large"> {{ biz.name }} </span>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>Description:</dt>
+                        <dd>
+                            <span id="description" class="editable" data-type="text" data-placeholder="Description" data-inputclass="input-large"> {{ biz.description }} </span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">SOCIAL
+                    <a class="pull-right" href="{% url 'mgmt_biz_social_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" /></a>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">                    
+                    {% for s in social %}
+                        <tr>
+                            <td> {{ s.social_type }} </td>
+                            <td> {{ s.social_id }} </td>
+                            <td> <a href="{{ s.social_url }}">Link</a> </td>
+                        </tr>
+                    {% empty %}
+                        <tr><td colspan="3">No social defined.</td></tr>
+                    {% endfor %}
+                    </table>                    
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">HOURS
+                    <a class="pull-right" href="{% url 'mgmt_biz_hours_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" /></a>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th></th>
+                            <th>Start</th>
+                            <th>End</th>
+                        </tr>
+                    {% for h in hours %}
+                        <tr>
+                            <td>{{ h.dayOfWeek }}</td>
+                            <td>{{ h.hourStart }}</td>
+                            <td>{{ h.hourEnd }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr colspan="3"><td>No hours defined.</td></tr>
+                    {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">LOCATION
+                    <a class="pull-right" href="{% url 'mgmt_biz_loc_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" /></a>
+                    </div>
+                <div class="panel-body">
+                    <dl>
+                        <dt>Address:</dt>
+                        <dd>
+                            <span id="address" class="editable" data-type="text" data-placeholder="Address" data-inputclass="input-large"> {{ biz.address }} </span>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>City:</dt>
+                        <dd>
+                            <span id="city" class="editable" data-type="text" data-placeholder="City" data-inputclass="input-large"> {{ biz.city }} </span>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>State:</dt>
+                        <dd>
+                            <span id="state" class="editable" data-type="text" data-placeholder="State" data-inputclass="input-large"> {{ biz.state }} </span>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>Postal Code:</dt>
+                        <dd>
+                            <span id="postalcode" class="editable" data-type="text" data-placeholder="Postal Code" data-inputclass="input-large"> {{ biz.postalcode }} </span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

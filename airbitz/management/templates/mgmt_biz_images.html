@@ -1,0 +1,36 @@
+{% extends 'mgmt_biz_base.html' %}
+
+{% block title%} {{ biz.name }} {% endblock %}
+
+{% block bizbody %}
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="block">
+                <h4 class="bar">MAIN</h4>
+                <div class="row-fluid">
+                    <div class="blockcontent span6">
+                        <dl>
+                            <dt>Status:</dt>
+                            <dd>
+                                <span href="#" id="status" data-type="select2" data-title="Status" data-value="{{ biz.status }}">{{ biz.lookupStatus }}</span>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>Name:</dt>
+                            <dd>
+                                <span href="#" id="name" class="editable" data-type="text" data-title="Place name" data-inputclass="input-xlarge">{{ biz.name }}</span>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>Description:</dt>
+                            <dd>
+                                <span id="description" class="editable" data-type="textarea" data-title="Place description" data-rows=6 data-inputclass="input-xlarge">{{ biz.description|urlizetrunc:40|linebreaksbr }}</span>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

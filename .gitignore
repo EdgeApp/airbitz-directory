@@ -1,0 +1,16 @@
+*.pyc
+logs
+media
+*.db
+*.swp
+*.swo
+.vagrant
+
+
+# pycharm
+*.idea
+
+# codekit
+*-ck.js
+
+business_images
