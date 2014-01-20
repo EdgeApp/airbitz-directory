@@ -6,17 +6,18 @@ from django.forms.models import inlineformset_factory
 
 from directory.models import Business, BusinessImage, BusinessHours, SocialId
 
-class BizImportForm(forms.ModelForm):
-    id = forms.URLField(label='FS Id: ', required=True)
+class BizImportForm(forms.Form):
+    id = forms.CharField(label='FS Id: ', required=True)
     url = forms.URLField(label='FS URL: ', required=True)
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.layout = Layout(
+            Field('id'),
             Field('url'),
             FormActions(
-                Submit('submit', 'Save', css_class='btn btn-success'),
+                Submit('submit', 'Import', css_class='btn btn-success'),
             )
         )
         super(BizImportForm, self).__init__(*args, **kwargs)

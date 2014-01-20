@@ -10,24 +10,48 @@
                     <a class="pull-right" href="{% url 'mgmt_biz_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" /></a>
                 </div>
                 <div class="panel-body">
-                    <dl>
-                        <dt>Status:</dt>
-                        <dd>
-                            <span id="status" class="editable" data-type="text" data-placeholder="Name" data-inputclass="select2"> {{ biz.lookupStatus }} </span>
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>Name:</dt>
-                        <dd>
-                            <span id="name" class="editable" data-type="text" data-placeholder="Name" data-inputclass="input-large"> {{ biz.name }} </span>
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>Description:</dt>
-                        <dd>
-                            <span id="description" class="editable" data-type="text" data-placeholder="Description" data-inputclass="input-large"> {{ biz.description }} </span>
-                        </dd>
-                    </dl>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <dl>
+                                <dt>Status:</dt>
+                                <dd>
+                                    <span id="status" class="editable" data-type="text" data-placeholder="Name" data-inputclass="select2"> {{ biz.lookupStatus }} </span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>Name:</dt>
+                                <dd>
+                                    <span id="name" class="editable" data-type="text" data-placeholder="Name" data-inputclass="input-large"> {{ biz.name }} </span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>Description:</dt>
+                                <dd>
+                                    <span id="description" class="editable" data-type="text" data-placeholder="Description" data-inputclass="input-large"> {{ biz.description }} </span>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-sm-6">
+                            <dl>
+                                <dt>Has Physical Business:</dt>
+                                <dd>
+                                    <span id="has_physical_business" class="editable" data-type="text" data-placeholder="Physical Business" data-inputclass="input-large"> {{ biz.has_physical_business|yesno }} </span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>Has Online Business:</dt>
+                                <dd>
+                                    <span id="has_online_business" class="editable" data-type="text" data-placeholder="Online Business" data-inputclass="input-large"> {{ biz.has_online_business|yesno }} </span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>Bitcoin Discount:</dt>
+                                <dd>
+                                    <span id="has_bitcoin_discount" class="editable" data-type="text" data-placeholder="Bitcoin Discoint" data-inputclass="input-large"> {{ biz.has_bitcoin_discount|yesno }} </span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,18 +84,18 @@
                 <div class="panel-body">
                     <table class="table table-striped">
                         <tr>
-                            <th></th>
+                            <th>Day of Week</th>
                             <th>Start</th>
                             <th>End</th>
                         </tr>
                     {% for h in hours %}
                         <tr>
-                            <td>{{ h.dayOfWeek }}</td>
+                            <td>{{ h.lookupDayOfWeek }}</td>
                             <td>{{ h.hourStart }}</td>
                             <td>{{ h.hourEnd }}</td>
                         </tr>
                     {% empty %}
-                        <tr colspan="3"><td>No hours defined.</td></tr>
+                        <tr><td colspan="3">No hours defined.</td></tr>
                     {% endfor %}
                     </table>
                 </div>
@@ -106,6 +130,18 @@
                         <dt>Postal Code:</dt>
                         <dd>
                             <span id="postalcode" class="editable" data-type="text" data-placeholder="Postal Code" data-inputclass="input-large"> {{ biz.postalcode }} </span>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>Country:</dt>
+                        <dd>
+                            <span id="country" class="editable" data-type="text" data-placeholder="Country" data-inputclass="input-large"> {{ biz.country }} </span>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>Lat/Lon:</dt>
+                        <dd>
+                        <span id="latlon" class="editable" data-type="text" data-placeholder="Lat,Lon" data-inputclass="input-large"> {{ biz.center.y }}, {{ biz.center.x }} </span>
                         </dd>
                     </dl>
                 </div>

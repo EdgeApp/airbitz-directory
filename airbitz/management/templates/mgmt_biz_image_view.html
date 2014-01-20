@@ -50,7 +50,7 @@
                 }
             });
             {% if biz.landing_image %}
-                $('.select-image[data-value="{{ biz.landing_image.image.id }}"]')
+                $('.select-image[data-value="{{ biz.landing_image_id }}"]')
                     .attr("disabled", "disabled");
             {% endif %}
             $('.select-image').click(function() {

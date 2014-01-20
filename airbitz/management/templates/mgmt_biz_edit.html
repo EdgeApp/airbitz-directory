@@ -6,7 +6,11 @@
 {% block body %}
     <div class="row">
         <div class="col-sm-12">
-            <a class="pull-left btn btn-default" href="{% url 'mgmt_biz_view' biz.id %}">Back to Business</a>
+            {% if biz %}
+                <a class="pull-left btn btn-default" href="{% url 'mgmt_biz_view' biz.id %}">Back to Business</a>
+            {% else %}
+                <a class="pull-left btn btn-default" href="{% url 'mgmt_dashboard' %}">Back to Dashboard</a>
+            {% endif %}
         </div>
     </div>
     <hr />

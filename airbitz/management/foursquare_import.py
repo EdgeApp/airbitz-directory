@@ -8,7 +8,7 @@ import foursquare
 import logging
 
 from directory.models import BusinessImage, BusinessHours
-from settings import FS_CLIENT_ID, FS_CLIENT_SECRET
+from airbitz.settings import FS_CLIENT_ID, FS_CLIENT_SECRET
 
 log=logging.getLogger("airbitz." + __name__)
 
@@ -106,7 +106,7 @@ class FoursquareClient:
                                             client_secret=FS_CLIENT_SECRET)
 
     def update_business(self, biz, fsId):
-        fq_data = self.client.venues(biz)
+        fq_data = self.client.venues(fsId)
         data = fq_data['venue']
         loc = data['location']
         con = data['contact']
@@ -115,8 +115,8 @@ class FoursquareClient:
         biz.description = data.get('decription', '')
         biz.phone = con.get('phone', '')
         biz.website = data.get('url', '')
-        biz.latitude = Point(float(loc.get('lng', 1.0)),\
-                             float(loc.get('lat', 1.0)))
+        biz.center = Point(float(loc.get('lng', 1.0)),\
+                           float(loc.get('lat', 1.0)))
         biz.address = loc.get('address', '')
         biz.postalcode = loc.get('postalCode', '')
         biz.city = loc.get('city', '')
@@ -133,9 +133,6 @@ class FoursquareClient:
             if len(images) > 0: 
                 for i in images:
                     img_url = "%s%sx%s%s" % (i['prefix'], i['width'], i['height'], i['suffix'])
-                    if BusinessImage.objects.filter(business=biz, image_url=img_url).exists():
-                        log.info('Skipping %s' % img_url)
-                        continue
                     img = BusinessImage.create_from_url(biz.id, img_url)
                     if img and not biz.landing_image:
                         biz.splash_image = img

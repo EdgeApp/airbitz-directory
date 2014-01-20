@@ -53,13 +53,16 @@ def business_import(request):
     if request.method == 'POST':
         form = BizImportForm(request.POST)
         if form.is_valid():
+            fsid = form.cleaned_data['id']
+            fsurl = form.cleaned_data['url']
             biz = Business.objects.create()
             social = SocialId.objects.create(business=biz,
                                              social_type='foursquare',
-                                             social_id=form.id,
-                                             social_url=form.url)
+                                             social_id=fsid,
+                                             social_url=fsurl)
             import foursquare_import as fs
-            fs.update_business(biz, social.social_id)
+            importer = fs.FoursquareClient()
+            importer.update_business(biz, social.social_id)
             messages.success(request, 'Place Imported')
             return HttpResponseRedirect(reverse('mgmt_biz_view', args=(biz.id, )))
         else:
