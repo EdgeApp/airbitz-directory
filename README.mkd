@@ -46,5 +46,17 @@ Start dev server
     vm> source ./quick_bitz.sh
     vm> python manage.py overpass_fetch $HOME/local/src/coinmap/data/data-overpass-bitcoin.json
 
+### GeoNames data
+
+    local> vagrant ssh
+    vm> mkdir geonames
+    vm> wget http://download.geonames.org/export/zip/US.zip 
+    vm> unzip US.zip
+    vm> cd 
+    vm> source ./quick_bitz.sh
+    vm> python manage.py geonames_load $HOME/geonames/US.txt
+
+
 [vagrantdownload]: http://www.vagrantup.com/downloads.html
+
 

@@ -35,6 +35,19 @@ class Category(models.Model):
     def __unicode__(self):
         return "{0}".format(self.name)
 
+class GeoName(models.Model):
+    country = models.CharField(max_length=2)
+    postalcode = models.CharField(max_length=20)
+    place_name = models.CharField(max_length=180)
+    admin_name1 = models.CharField(max_length=100) # state
+    admin_code1 = models.CharField(max_length=20)
+    admin_name2 = models.CharField(max_length=100, null=True) # county/province
+    admin_code2 = models.CharField(max_length=20, null=True)
+    admin_name3 = models.CharField(max_length=100, null=True) # community
+    accuracy = models.IntegerField(null=True) # accuracy of lat/lng from 1=estimated to 6=centroid
+    center = models.PointField(null=True)
+    objects = models.GeoManager()
+
 class Business(models.Model):
     status = models.CharField(max_length=5, choices=STATUS_CHOICES, default='DR')
     name = models.CharField(max_length=200, blank=False)
