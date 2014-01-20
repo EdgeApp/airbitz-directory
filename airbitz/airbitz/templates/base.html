@@ -32,7 +32,7 @@
                             <input id="q" name="q" type="text" style="width: 200px" placeholder="Business name..." autocomplete="off"  class="typeahead form-control">
                         </div>
                         <div class="form-group">
-                            <input id="near" name="near" type="text" style="width: 200px" placeholder="City..." autocomplete="off" class="typeahead form-control">
+                            <input id="near" name="near" type="text" style="width: 200px" placeholder="City..." autocomplete="off" class="typeahead form-control" value="{{ near }}">
                         </div>
                         <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
                     </form>
@@ -91,11 +91,8 @@
                     google.maps.event.addDomListener(window, 'load', initialize);
                     return map;
                 };
-                var addPlaceSearch = function(selector, near) {
+                var addPlaceSearch = function(selector) {
                     var end = '';
-                    if (near) {
-                        end += '&near=1';
-                    }
                     var geo = Geo.latestLocation();
                     if (geo) {
                         end += '&lat=' + geo.coords.latitude + '&lon=' + geo.coords.longitude;
@@ -117,6 +114,31 @@
                     }]);
                     selector.on('typeahead:selected', function (object, datum) {
                         location.href = '/biz/' + datum.id;
+                    });
+                };
+                var addLocationSearch = function(selector) {
+                    var end = '';
+                    var geo = Geo.latestLocation();
+                    if (geo) {
+                        end += '&lat=' + geo.coords.latitude + '&lon=' + geo.coords.longitude;
+                    }
+                    selector.typeahead('destroy');
+                    selector.typeahead([{
+                        name: 'near',
+                        remote: {
+                            url: '/api/v1/autocomplete-location/?q=%QUERY' + end,
+                            filter: function(data) {
+                                return data.map(function(e, i) {
+                                    return { text: e.place_name, value: e.place_name };
+                                });
+                            }
+                        },
+                        template: function(datum) {
+                            return '<p>' + datum.text + '</p>';
+                        },
+                    }]);
+                    selector.on('typeahead:selected', function (object, datum) {
+                        $(this).val(data.text);
                     });
                 };
                 var Geo = {
@@ -194,8 +216,8 @@
                         }
                         return true;
                     });
+                    addLocationSearch($('#near'));
                     addPlaceSearch($('#q'));
-                    addPlaceSearch($('#near'), true);
                     Geo.requestLocation();
                 });
             </script>

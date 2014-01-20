@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from directory.models import Business, BusinessImage, Category
+from directory.models import Business, BusinessImage, Category, GeoName
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,6 +42,15 @@ class AutoCompleteSerializer(serializers.Serializer):
             return instance
         # Create new instance
         return AutoCompleteSerializer(**attrs)
+
+class AutoCompleteLocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GeoName
+        fields = ('country',
+                  'postalcode',
+                  'place_name',
+                 )
+
 
 class CitySuggestSerializer(serializers.ModelSerializer):
     class Meta:
