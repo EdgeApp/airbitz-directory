@@ -2,10 +2,10 @@
 
 ### Requirements
 
-1. [Vagrant 1.2.x][vagrantdownload]
-1. Clone breadsticks (you probably already have).
+1. [Vagrant 1.4.x][vagrantdownload]
+1. Clone airbitz.
 
-        git clone git@github.com:teambreadcrumbs/breadsticks.git
+        git clone git@github.com:paullinator/airbitz-directory.git
 
 
 ### Start it up
@@ -46,5 +46,5 @@ Start dev server
     vm> source ./quick_bitz.sh
     vm> python manage.py overpass_fetch $HOME/local/src/coinmap/data/data-overpass-bitcoin.json
 
-[vagrantdownload]: http://downloads.vagrantup.com/
+[vagrantdownload]: http://www.vagrantup.com/downloads.html
 
