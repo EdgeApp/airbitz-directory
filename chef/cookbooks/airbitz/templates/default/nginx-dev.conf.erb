@@ -36,7 +36,7 @@ http {
         }
 
         location /static/admin/ {
-            root <%=@home%>/breadsticks/ENV/lib/python2.7/site-packages/django/contrib/admin;
+            root <%=@home%>/airbitz/ENV/lib/python2.7/site-packages/django/contrib/admin;
         }
 
         location /media/ {
@@ -58,7 +58,7 @@ http {
 
         error_page 500 502 503 504 /500.html;
         location = /500.html {
-            root <%=@home%>/breadsticks/ENV/breadsticks/static;
+            root <%=@home%>/airbitz/ENV/airbitz/static;
         }
     }
 }
