@@ -56,7 +56,7 @@ end
 
 execute "geoip-database-contrib_update" do
   command "geoip-database-contrib_update"
-  user root
+  user "root"
 end
 
 # Create our environment
