@@ -115,13 +115,16 @@ class BusinessImage(models.Model):
         img.save()
         return img
 
+    def get_absolute_url(self):
+        return os.path.join(settings.MEDIA_URL, self.image.url)
+
     @property
     def name(self):
         return os.path.basename(self.image.name)
 
     @property
     def url(self):
-        return os.path.join(settings.SITE_URL, self.image.url)
+        return os.path.join(settings.MEDIA_URL, self.image.url)
 
     def save(self, *args, **kwargs):
         super(BusinessImage, self).save(*args, **kwargs)

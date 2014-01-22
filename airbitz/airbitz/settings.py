@@ -114,10 +114,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 if DEBUG:
     MEDIA_ROOT = os.path.join(SITE_ROOT, 'media')
+    MEDIA_URL = '/media/'
 else:
     MEDIA_ROOT = os.path.join(os.environ['HOME'], 'media')
+    MEDIA_URL = 'http://www.airbitz.co/media/'
 
-MEDIA_URL = '/media/'
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(SITE_ROOT, 'static/'),
@@ -156,7 +158,8 @@ REST_FRAMEWORK = {
         'rest_framework.serializers.HyperlinkedModelSerializer',
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'PAGINATE_BY': 20
 }
 SWAGGER_SETTINGS = {
     "exclude_namespaces": [], # List URL namespaces to ignore

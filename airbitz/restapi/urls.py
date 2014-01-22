@@ -8,7 +8,7 @@ urlpatterns = patterns('',
 
      url(r'^categories/$', views.CategoryView.as_view()),
 
-     url(r'^city-suggest/?$', views.CitySuggest.as_view()),
+     url(r'^location-suggest/?$', views.LocationSuggest.as_view()),
      url(r'^autocomplete-business/?$', views.AutoCompleteBusiness.as_view()),
      url(r'^autocomplete-location/?$', views.AutoCompleteLocation.as_view()),
 

@@ -24,8 +24,7 @@ class BusinessView(generics.RetrieveAPIView):
     """
     serializer_class = serializers.BusinessSerializer
     model = Business
-    def get(self, request, bizId):
-        return Response(Business.objects.get(pk=bizId))
+    pk_url_kwarg = 'bizId'
 
 class PhotosView(generics.ListAPIView):
     """ 
@@ -33,15 +32,22 @@ class PhotosView(generics.ListAPIView):
     """
     model = BusinessImage
     serializer_class = serializers.BusinessImageSerializer
-    def get(self, request, bizId):
-        return Response(BusinessImage.objects.filter(business_id=bizId))
+
+    # def get(self, request, bizId):
+    #     return Response(BusinessImage.objects.filter(business_id=bizId))
 
 class SearchView(generics.ListAPIView):
     """
         Comprehensive search of the businesses
-        q -- The search term (optional)
-        lat -- Latitude (optional)
-        lng -- Latitude (optional)
+        q --  term (optional)
+        location -- (optional), 
+        lat -- (optional)
+        lon -- (optional)
+        radius -- radius (optional)
+        limit -- (optional), 
+        offset -- (optional)
+        sort -- (optional)
+        catagory -- filter by category (optional))
     """
     model = Business
     serializer_class = serializers.MiniBusinessSerializer
@@ -56,6 +62,10 @@ class SearchView(generics.ListAPIView):
 class AutoCompleteBusiness(generics.ListAPIView):
     """
         Autocomplete businesses
+        q   -- Query
+        location -- Location string
+        lon -- Longitude (optional)
+        lat -- Latitude (optional)
     """
     model = Business
     serializer_class = serializers.AutoCompleteSerializer
@@ -102,7 +112,7 @@ class AutoCompleteLocation(generics.ListAPIView):
             return Business.objects.none()
 
 
-class CitySuggest(APIView):
+class LocationSuggest(APIView):
     """
         Suggests a default city based on the IP address and lat/lon.
         lat -- Latitude (optional)
@@ -112,7 +122,7 @@ class CitySuggest(APIView):
         address.
     """
     model = Business
-    serializer_class = serializers.CitySuggestSerializer
+    serializer_class = serializers.LocationSuggestSerializer
 
     def get(self, request, *args, **kwargs):
         lat = self.request.QUERY_PARAMS.get('lat', None)
