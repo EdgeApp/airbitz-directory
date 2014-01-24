@@ -4,6 +4,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
   config.vm.network :forwarded_port, guest: 8000, host: 8000
   config.vm.network :forwarded_port, guest: 80, host: 8888
+  config.vm.network :forwarded_port, guest: 8983, host: 8983
   config.vm.provision :shell, :inline => "sudo apt-get update"
   config.vm.synced_folder "../airbitz", "/airbitz", :create => true
   config.vm.synced_folder "../staging", "/staging", :create => true
@@ -13,6 +14,7 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "postgresql::server_debian"
     chef.add_recipe "airbitz::web"
     chef.add_recipe "airbitz::db"
+    chef.add_recipe "airbitz::search"
     chef.json = {
       :postgresql => {
         :listen_addresses => '*',

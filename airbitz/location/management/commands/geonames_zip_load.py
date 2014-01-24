@@ -1,7 +1,7 @@
 from django.core.management import BaseCommand
 from django.contrib.gis.geos import Point
 
-from directory.models import GeoNameZip
+from location.models import GeoNameZip, LocationString
 
 import sys
 reload(sys)
@@ -21,5 +21,14 @@ class Command(BaseCommand):
                     admin_name2=values[5],
                     admin_code2=values[6],
                     admin_name3=values[7],
+                    center = Point(float(values[10]), float(values[9]))
+                )
+                geo, created = LocationString.objects.get_or_create(
+                    postalcode=values[1],
+                    admin1_name=values[3],
+                    admin1_code=values[4],
+                    admin2_name=values[5],
+                    admin2_code=values[6],
+                    admin3_name=values[7],
                     center = Point(float(values[10]), float(values[9]))
                 )

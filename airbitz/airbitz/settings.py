@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.gis',
+    'haystack',
     'imagekit',
     'pipeline',
     'crispy_forms',
@@ -52,6 +53,7 @@ INSTALLED_APPS = (
     'south',
 
     'restapi',
+    'location',
     'directory',
     'management',
 )
@@ -172,4 +174,12 @@ SWAGGER_SETTINGS = {
     "api_key": '', # An API key
     "is_authenticated": False,  # Set to True to enforce user authentication,
     "is_superuser": False,  # Set to True to enforce admin only access
+}
+SEARCH_HOST=os.environ.get('SEARCH_HOST', '127.0.0.1')
+SEARCH_PORT=os.environ.get('SEARCH_PORT', '8983')
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://%s:%s/solr' % (SEARCH_HOST, SEARCH_PORT)
+    },
 }

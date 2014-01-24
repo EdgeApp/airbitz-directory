@@ -1,0 +1,9 @@
+{{object.admin1_code}}
+{{object.admin1_name}}
+{{object.admin2_code}}
+{{object.admin2_name}}
+{{object.admin3_code}}
+{{object.admin3_name}}
+{{object.admin4_code}}
+{{object.admin4_name}}
+{{object.postalcode}}

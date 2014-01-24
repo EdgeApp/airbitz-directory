@@ -1,7 +1,7 @@
 from django.core.management import BaseCommand
 from django.contrib.gis.geos import Point
 
-from directory.models import GeoName
+from location.models import GeoName
 
 import sys
 reload(sys)

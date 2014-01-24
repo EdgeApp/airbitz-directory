@@ -67,18 +67,6 @@ execute "virtualenv" do
   cwd $BASE
 end
 
-# Copy install_db.sh 
-template "#{$HOME}/install_db.sh" do
-  source "install_db.sh.erb"
-  mode 00754
-  owner $USER
-  group $GROUP
-  variables({
-    :db => node[:airbitz][:database][:name],
-    :user => node[:airbitz][:database][:username]
-  })
-end
-
 # Copy shell scripts
 %w{quick_bitz.sh}.each do |file|
   cookbook_file "#{$HOME}/#{file}" do
