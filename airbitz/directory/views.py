@@ -1,4 +1,3 @@
-from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
@@ -6,6 +5,7 @@ from django.template import RequestContext
 
 from directory.models import Business, BusinessImage
 from airbitz.settings import GOOGLE_MAP_KEY
+from restapi import api
 
 SEARCH_LIMIT = 20
 DISTANCE_LIMIT_KILOMETERS = 20
@@ -15,23 +15,10 @@ def landing(request):
     return render_to_response('landing.html', RequestContext(request, context))
 
 def business_search(request):
-    results = Business.objects.all()
-    q = request.GET.get('q', None)
-    lat = request.GET.get('lat', None)
-    lon = request.GET.get('lon', None)
+    term = request.GET.get('term', None)
+    ll = request.GET.get('ll', None)
     near = request.GET.get('near', None)
-    results = Business.objects.all()
-    if not q and not near:
-        results = []
-    else:
-        if q:
-            results = results.filter(name__icontains=q)
-        if near:
-            results = results.filter(postalcode=near)
-        if lat and lon:
-            origin = Point((float(lon), float(lat)))
-            results = results.distance(origin).order_by('distance')
-        
+    results = api.searchDirectory(term=term, location=near, geolocation=ll)
     context = {
         'results': results[:20],
         'mapkey': GOOGLE_MAP_KEY

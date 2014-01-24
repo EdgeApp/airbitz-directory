@@ -141,10 +141,7 @@ PIPELINE_JS = {
     'core': {
         'source_filenames': (
             'js/jquery-1.9.1.min.js',
-            'js/json2.js',
-            'js/underscore-min.js',
-            'js/backbone-min.js',
-            'js/handlebars.js',
+            'js/core.js',
             'js/holder.js',
             'js/typeahead.js',
         ),

@@ -1,7 +1,7 @@
 from django.core.management import BaseCommand
 from django.contrib.gis.geos import Point
 
-from directory.models import GeoName
+from directory.models import GeoNameZip
 
 import sys
 reload(sys)
@@ -12,7 +12,7 @@ class Command(BaseCommand):
         with open(args[0]) as f:
             for line in f:
                 values = line.split('\t')
-                geo, created = GeoName.objects.get_or_create(
+                geo, created = GeoNameZip.objects.get_or_create(
                     country=values[0],
                     postalcode=values[1],
                     place_name=values[2],
@@ -21,5 +21,5 @@ class Command(BaseCommand):
                     admin_name2=values[5],
                     admin_code2=values[6],
                     admin_name3=values[7],
-                    center = Point(float(values[9]), float(values[10]))
+                    center = Point(float(values[10]), float(values[9]))
                 )

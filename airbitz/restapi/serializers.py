@@ -8,7 +8,8 @@ from django.utils.translation import ugettext_lazy as _
 import json
 
 from directory.models import Business, BusinessHours, \
-                             BusinessImage, Category, GeoName
+                             BusinessImage, Category, \
+                             GeoNameZip
 
 class PointField(fields.WritableField):
     type_name = 'PointField'
@@ -89,28 +90,10 @@ class AutoCompleteSerializer(serializers.Serializer):
     pk = serializers.Field()
     name = serializers.CharField(required=False, max_length=100)
 
-    def restore_object(self, attrs, instance=None):
-        if instance:
-            # Update existing instance
-            instance.name = attrs.get('name', instance.title)
-            instance.distance = attrs.get('distance', instance.title)
-            return instance
-        # Create new instance
-        return AutoCompleteSerializer(**attrs)
-
 class AutoCompleteLocationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = GeoName
-        fields = ('country',
-                  'postalcode',
-                  'place_name',
+        model = GeoNameZip
+        fields = ('admin_name2',
+                  'admin_code1',
                  )
-
-
-class LocationSuggestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Business
-        fields = ('name',
-                  'description',
-                  )
 

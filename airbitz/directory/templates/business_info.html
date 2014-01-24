@@ -103,7 +103,7 @@
             var json = [
                 { lat: {{ biz.center.y }}, lon: {{ biz.center.x }} },
             ];
-            addMap($('#map'), 16, {{ biz.center.y }}, {{ biz.center.x }}, json);
+            AB.addMap($('#map'), 16, {{ biz.center.y }}, {{ biz.center.x }}, json);
         });
     </script>
 {% endblock %}
