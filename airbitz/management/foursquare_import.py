@@ -119,8 +119,8 @@ class FoursquareClient:
                            float(loc.get('lat', 1.0)))
         biz.address = loc.get('address', '')
         biz.postalcode = loc.get('postalCode', '')
-        biz.city = loc.get('city', '')
-        biz.state = loc.get('state', '')
+        biz.admin3_name = loc.get('city', '')
+        biz.admin1_code = loc.get('state', '')
         biz.country = loc.get('country', '')
 
         try:

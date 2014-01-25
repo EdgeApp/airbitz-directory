@@ -15,7 +15,10 @@ class LocationStringIndex(indexes.SearchIndex, indexes.Indexable):
     postalcode = indexes.CharField(model_attr='postalcode')
     location = indexes.LocationField(model_attr='center', null=True)
 
+    content_auto = indexes.EdgeNgramField(model_attr='content_auto')
+
     def get_model(self):
         return LocationString
+
 
 

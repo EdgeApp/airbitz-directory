@@ -37,8 +37,8 @@ class Command(BaseCommand):
                 biz.website = row['web']
             if row.has_key('addr') and not biz.address:
                 biz.address = row['addr']
-            if row.has_key('city') and not biz.city:
-                biz.city = row['city']
+            if row.has_key('city') and not biz.admin3_name:
+                biz.admin3_name = row['city']
             if row.has_key('country') and not biz.country:
                 biz.country = row['country']
             if row.has_key('phone') and not biz.phone:

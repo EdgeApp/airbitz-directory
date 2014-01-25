@@ -1,10 +1,12 @@
 from django.contrib.gis.geos import Point, Polygon
 from django.contrib.gis.measure import D
 from django.db.models import Q
+from haystack.query import SearchQuerySet
 import logging
 import subprocess
 
-from directory.models import Business, GeoName, GeoNameZip
+from directory.models import Business
+from location.models import GeoName, GeoNameZip
 
 log=logging.getLogger("airbitz." + __name__)
 
@@ -68,28 +70,17 @@ def autocompleteBusiness(term=None, location=None, geolocation=None):
     print qs.query
     return qs
 
-# for f in autocompleteLocation('San D'): print f.admin_name2, f.admin_code1
-# for f in autocompleteLocation('Califor'): print f.admin_name2, f.admin_code1
 def autocompleteLocation(term=None, geolocation=None):
-    if term:
-        qs = GeoNameZip.objects.filter(Q(admin_name2__icontains=term)\
-                                     | Q(admin_name1__icontains=term)\
-                                     | Q(admin_code1__icontains=term))
-        if geolocation:
-            d = parseGeoLocation(geolocation)
-            origin = Point((d['lon'], d['lat']))
-            qs = qs.distance(origin).order_by('distance')
-        qs = qs.distinct('admin_code1', 'admin_name2')
-        return qs
-    else:
-        return GeoNameZip.objects.none()
+    sqs = SearchQuerySet().autocomplete(content_auto=term)[:10]
+    return [result.content_auto for result in sqs]
 
 def querySetAddLocation(qs, location):
     d = parseLocationString(location)
-    #if d['county']:
-    #    qs = qs.filter(city=d['county'])
-    if d['state']:
-        qs = qs.filter(state=d['state'])
+    print d
+    if d['admin2_name']:
+        qs = qs.filter(admin2_name=d['admin2_name'])
+    if d['admin1_code']:
+        qs = qs.filter(admin1_code=d['admin1_code'])
     if d['country']:
         qs = qs.filter(country=d['country'])
     if d['postalcode']:
@@ -118,60 +109,62 @@ def suggestNearText(ip, geolocation=None):
         return processGeoIp(ip)
 
 
-# TODO: this function needs a lot of work and a lot of testing
-#   parseLocationString('   Oceanside, CA')
-#   parseLocationString('  California   ')
-#   parseLocationString(' San Diego, CA,   92127     ')
-#   parseLocationString('OR') == parseLocationString('Oregon')
 def parseLocationString(location):
     d = {
-        'city': None,
-        'country': None,
-        'postalcode': None,
+        'admin2_name': None,
+        'admin1_code': None,
+        'admin3_name': None,
         'county': None,
-        'state': None,
         'point': None,
+        'postalcode': None,
     }
     if not location:
         return d
-    values = map(lambda x : x.strip(), location.split(","))
-    values.reverse()
-    for v in values:
-        v = v.strip()
-        if not d['postalcode']:
-            r = GeoNameZip.objects.filter(postalcode=v)[:1]
-            if r:
-                d['postalcode'] = r[0].postalcode
-                d['city'] = r[0].place_name
-                d['county'] = r[0].admin_name2
-                d['state'] = r[0].admin_code1
-                d['country'] = r[0].country
-                d['point'] = Point(r[0].center.y, r[0].center.x)
-                continue
-        if not d['state']:
-            r = GeoNameZip.objects.filter(Q(admin_code1=v) | Q(admin_name1=v))[:1]
-            if r:
-                d['state'] = r[0].admin_code1
-                d['country'] = r[0].country
-                continue
-        if not d['county']:
-            r = GeoNameZip.objects.filter(Q(admin_code2=v) | Q(admin_name2=v))[:1]
-            if r:
-                d['city'] = r[0].place_name
-                d['county'] = r[0].admin_name2
-                d['state'] = r[0].admin_code1
-                d['point'] = Point(r[0].center.y, r[0].center.x)
-                d['country'] = r[0].country
-                continue
-        if not d['city']:
-            r = GeoNameZip.objects.filter(place_name=v)[:1]
-            if r:
-                d['city'] = r[0].place_name
-                d['county'] = r[0].admin_name2
-                d['state'] = r[0].admin_code1
-                d['point'] = Point(r[0].center.y, r[0].center.x)
-                d['country'] = r[0].country
-                continue
+
+    sqs = SearchQuerySet().autocomplete(content_auto=location)[:1]
+    if len(sqs) > 0:
+        d['admin1_code'] = sqs[0].admin1_code
+        d['admin2_name'] = sqs[0].admin2_name
+        d['country'] = sqs[0].country
+    else:
+        values = map(lambda x : x.strip(), location.split(","))
+        values.reverse()
+        for v in values:
+            v = v.strip()
+            if not d['postalcode']:
+                r = GeoNameZip.objects.filter(postalcode=v)[:1]
+                if r:
+                    d['postalcode'] = r[0].postalcode
+                    d['admin3_name'] = r[0].place_name
+                    d['admin2_name'] = r[0].admin_name2
+                    d['admin1_code'] = r[0].admin_code1
+                    d['country'] = r[0].country
+                    d['point'] = Point(r[0].center.y, r[0].center.x)
+                    continue
+            if not d['admin1_code']:
+                r = GeoNameZip.objects.filter(Q(admin_code1=v) | Q(admin_name1=v))[:1]
+                if r:
+                    d['admin1_code'] = r[0].admin_code1
+                    d['country'] = r[0].country
+                    continue
+            if not d['admin2_name']:
+                r = GeoNameZip.objects.filter(Q(admin_code2=v) | Q(admin_name2=v))[:1]
+                if r:
+                    d['admin3_name'] = r[0].place_name
+                    d['admin2_name'] = r[0].admin_name2
+                    d['admin1_code'] = r[0].admin_code1
+                    d['point'] = Point(r[0].center.y, r[0].center.x)
+                    d['country'] = r[0].country
+                    continue
+            if not d['admin3_name']:
+                r = GeoNameZip.objects.filter(place_name=v)[:1]
+                if r:
+                    d['admin3_name'] = r[0].place_name
+                    d['admin2_name'] = r[0].admin_name2
+                    d['admin1_code'] = r[0].admin_code1
+                    d['point'] = Point(r[0].center.y, r[0].center.x)
+                    d['country'] = r[0].country
+                    continue
     return d
 
 def parseGeoLocation(ll):

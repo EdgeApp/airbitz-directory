@@ -77,8 +77,7 @@
           remote: {
               url: '/api/v1/autocomplete-location/?term=%QUERY' + end,
               filter: function(data) {
-                  return data.results.map(function(e, i) {
-                      var s = e.admin_name2 + ', ' + e.admin_code1
+                  return data.results.map(function(s, i) {
                       return { text: s, value: s };
                   });
               }

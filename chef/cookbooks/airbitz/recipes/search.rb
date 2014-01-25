@@ -37,14 +37,6 @@ template "#{$HOME}/solr_install.sh" do
   })
 end
 
-template "#{$HOME}/solr/solr/collection1/conf/schema.xml" do
-  source "solr/solr_schema.xml.erb"
-  mode 00555
-  user "#{$USER}"
-  group "#{$GROUP}"
-end
-
-
 script "install_something" do
   interpreter "bash"
   creates "#{$HOME}/solr"
@@ -53,6 +45,13 @@ script "install_something" do
   code <<-EOH
   #{$HOME}/solr_install.sh
   EOH
+end
+
+template "#{$HOME}/solr/solr/collection1/conf/schema.xml" do
+  source "solr/solr_schema.xml.erb"
+  mode 00555
+  user "#{$USER}"
+  group "#{$GROUP}"
 end
 
 service "solr" do

@@ -42,8 +42,10 @@ class Business(models.Model):
     website = models.URLField(max_length=2000, blank=False, null=True)
     phone = models.CharField(max_length=200, blank=True, null=True)
     address = models.CharField(max_length=200, blank=True, null=True)
-    city = models.CharField(max_length=200, blank=True)
-    state = models.CharField(max_length=200, blank=True)
+    neighborhood = models.CharField(max_length=200, blank=True)
+    admin3_name = models.CharField(max_length=200, blank=True)
+    admin2_name = models.CharField(max_length=200, blank=True)
+    admin1_code = models.CharField(max_length=200, blank=True)
     postalcode = models.CharField(max_length=200, blank=True)
     country = models.CharField(max_length=200, blank=True)
     category = models.ForeignKey(Category, null=True)
@@ -67,8 +69,12 @@ class Business(models.Model):
         s = ''
         if self.address:
             s = self.address
-        if self.city:
-            s += ', ' + self.city 
+        if self.admin3_name:
+            s += ', ' + self.admin3_name 
+        if self.admin2_name:
+            s += ', ' + self.admin2_name 
+        if self.admin1_code:
+            s += ', ' + self.admin1_code 
         return s
         
 

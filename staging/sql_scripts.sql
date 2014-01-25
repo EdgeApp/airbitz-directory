@@ -9,5 +9,5 @@ UPDATE directory_business AS b
   set postalcode = z.postalcode,
       country = z.country,
       state = z.admin_code1
-FROM directory_geonamezip AS z
+FROM location_geonamezip AS z
 WHERE b.center @ ST_Expand(z.center, 0.05)

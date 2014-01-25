@@ -8,8 +8,8 @@ from django.utils.translation import ugettext_lazy as _
 import json
 
 from directory.models import Business, BusinessHours, \
-                             BusinessImage, Category, \
-                             GeoNameZip
+                             BusinessImage, Category
+from location.models import GeoNameZip
 
 class PointField(fields.WritableField):
     type_name = 'PointField'
@@ -53,8 +53,9 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
         fields = ('name',
                   'category',
                   'description',
-                  'city',
-                  'state', 
+                  'admin3_name',
+                  'admin2_name',
+                  'admin1_code', 
                   'postalcode',
                   'country',
                   'center', )
@@ -69,8 +70,9 @@ class BusinessSerializer(serializers.ModelSerializer):
         fields = ('name',
                   'category',
                   'description',
-                  'city',
-                  'state', 
+                  'admin3_name',
+                  'admin2_name',
+                  'admin1_code', 
                   'postalcode',
                   'country',
                   'center',

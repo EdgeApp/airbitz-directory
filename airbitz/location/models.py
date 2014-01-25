@@ -11,6 +11,8 @@ class LocationString(models.Model):
     admin4_code = models.CharField(max_length=20, null=True)
     admin4_name = models.CharField(max_length=200, null=True)
     postalcode = models.CharField(max_length=20)
+    country_code = models.CharField(max_length=20)
+    content_auto = models.CharField(max_length=200, unique=True)
     center = models.PointField(null=True)
     objects = models.GeoManager()
 
@@ -39,7 +41,7 @@ class GeoName(models.Model):
 
 class GeoNameZip(models.Model):
     country = models.CharField(max_length=2)
-    postalcode = models.CharField(max_length=20)
+    postalcode = models.CharField(max_length=20, unique=True)
     place_name = models.CharField(max_length=180)
     admin_name1 = models.CharField(max_length=100) # state
     admin_code1 = models.CharField(max_length=20)

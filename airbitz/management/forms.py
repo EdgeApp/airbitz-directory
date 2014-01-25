@@ -56,8 +56,9 @@ class BizAddressForm(forms.ModelForm):
     class Meta:
         model = Business
         fields = ( "address",
-                   "city", 
-                   "state",
+                   "admin3_name", 
+                   "admin2_name", 
+                   "admin1_code",
                    "postalcode",
                    "country"
                  )
@@ -67,8 +68,9 @@ class BizAddressForm(forms.ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.layout = Layout(
             Field('address', css_class='input-xxlarge'),
-            Field('city', css_class='input-xxlarge'),
-            Field('state'),
+            Field('admin3_name', css_class='input-xxlarge'),
+            Field('admin2_name', css_class='input-xxlarge'),
+            Field('admin1_code'),
             Field('postalcode'),
             Field('country'),
             FormActions(

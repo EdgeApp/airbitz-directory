@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 import logging
 
-from directory.models import Business, BusinessImage, Category, GeoNameZip
+from directory.models import Business, BusinessImage, Category
 from restapi import api
 from restapi import serializers 
 
@@ -82,24 +82,24 @@ class AutoCompleteBusiness(generics.ListAPIView):
         return api.autocompleteBusiness(term=term, location=location, geolocation=ll)
 
 
-class AutoCompleteLocation(generics.ListAPIView):
+class AutoCompleteLocation(APIView):
     """
         Autocomplete location
         term -- Search term
         ll   -- Latitude,Longitude (optional)
     """
-    model = GeoNameZip
-    serializer_class = serializers.AutoCompleteLocationSerializer
+    model = Business
 
-    def get_queryset(self):
+    def get(self, request, *args, **kwargs):
         term = self.request.QUERY_PARAMS.get('term', None)
         ll = self.request.QUERY_PARAMS.get('ll', None)
-        return api.autocompleteLocation(term=term, geolocation=ll)
+        results = api.autocompleteLocation(term=term, geolocation=ll)
+        return Response({ 'results':  results })
 
 
 class LocationSuggest(APIView):
     """
-        Suggests a default city based on the IP address and lat/lon.
+        Suggests a default location based on the IP address and lat/lon.
         ll -- Latitude,Longitude (optional)
 
         If lat/lon aren't provided, then this method falls back to using the IP
