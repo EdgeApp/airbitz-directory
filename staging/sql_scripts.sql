@@ -8,6 +8,7 @@ WHERE b.center @ ST_Expand(z.center, 0.05)
 UPDATE directory_business AS b
   set postalcode = z.postalcode,
       country = z.country,
-      state = z.admin_code1
+      admin2_name = z.admin_name2,
+      admin1_code = z.admin_code1
 FROM location_geonamezip AS z
 WHERE b.center @ ST_Expand(z.center, 0.05)

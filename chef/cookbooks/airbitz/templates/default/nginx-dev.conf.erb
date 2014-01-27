@@ -14,7 +14,10 @@ events {
 }
 
 http {
-    default_type application/octet-stream;
+    default_type  application/octet-stream;
+    types_hash_max_size 2048;
+    include       /etc/nginx/mime.types;
+
     access_log /tmp/nginx.access.log combined;
     sendfile on;
 
@@ -49,6 +52,7 @@ http {
         }
 
         location @proxy_to_app {
+            proxy_set_header REMOTE_ADDR $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header Host $http_host;
             proxy_redirect off;

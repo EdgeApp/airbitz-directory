@@ -64,6 +64,11 @@ Start dev server
     vm> source ./quick_bitz.sh
     vm> python manage.py geonames_main_load $HOME/geonames/main/US.txt
 
+### Digital Ocean Provider
+
+    local> vagrant plugin install vagrant-omnibus
+    local> vagrant plugin install vagrant-digitalocean
+    local> vagrant up --provider=digital_ocean
 
 [vagrantdownload]: http://www.vagrantup.com/downloads.html
 
