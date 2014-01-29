@@ -24,17 +24,24 @@ class Command(BaseCommand):
                 geo.center = Point(float(values[10]), float(values[9]))
                 geo.save()
 
-                searchables = []
-                searchables.append("{0}, {1}".format(values[5], values[3]))
-                searchables.append("{0}, {1}".format(values[5], values[4]))
-                for s in searchables:
-                    geo, created = LocationString.objects.get_or_create(content_auto=s)
-                    geo.postalcode=values[1]
-                    geo.admin1_name=values[3]
-                    geo.admin1_code=values[4]
-                    geo.admin2_name=values[5]
-                    geo.admin2_code=values[6]
-                    geo.admin3_name=values[7]
-                    geo.center = Point(float(values[10]), float(values[9]))
-                    geo.save()
+                s0 = "{0}".format(values[3])
+                self.update(values, s0, admin2=False, admin3=False, postalcode=False)
+                s1 = "{0}, {1}".format(values[5], values[3])
+                self.update(values, s1, admin3=False)
+                s2 = "{0}, {1}".format(values[5], values[4])
+                self.update(values, s2, admin3=False)
 
+    def update(self, values, id, admin1=True, admin2=True, admin3=True, postalcode=True):
+        geo, created = LocationString.objects.get_or_create(content_auto=id)
+        if postalcode:
+            geo.postalcode=values[1]
+        if admin1:
+            geo.admin1_name=values[3]
+            geo.admin1_code=values[4]
+        if admin2:
+            geo.admin2_name=values[5]
+            geo.admin2_code=values[6]
+        if admin3:
+            geo.admin3_name=values[7]
+        geo.center = Point(float(values[10]), float(values[9]))
+        geo.save()

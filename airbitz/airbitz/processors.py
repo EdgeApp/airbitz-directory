@@ -1,13 +1,13 @@
-from restapi.api import suggestNearText
+from restapi.api import suggestNearByRequest
 
 def near(request):
+    nearText = None
     if request.GET.get('near', None):
         nearText = request.GET.get('near', None)
-        request.session['nearText'] = nearText
     else:
         nearText = request.session.get('nearText', None) 
         if not nearText: 
-            nearText = suggestNearText(request.META['REMOTE_ADDR'])
-            request.session['nearText'] = nearText
+            nearText = suggestNearByRequest(request)
+    request.session['nearText'] = nearText
     return { 'near': nearText }
 

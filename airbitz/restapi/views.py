@@ -109,7 +109,6 @@ class LocationSuggest(APIView):
 
     def get(self, request, *args, **kwargs):
         ll = self.request.QUERY_PARAMS.get('ll', None)
-        ip = request.META['REMOTE_ADDR']
-        results = api.suggestNearText(ip=ip, geolocation=ll)
+        results = api.suggestNearByRequest(request, geolocation=ll)
         return Response({ 'near':  results })
 

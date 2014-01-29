@@ -6,7 +6,7 @@ import logging
 import subprocess
 
 from directory.models import Business
-from location.models import GeoName, GeoNameZip
+from location.models import GeoNameZip
 
 log=logging.getLogger("airbitz." + __name__)
 
@@ -19,6 +19,7 @@ log=logging.getLogger("airbitz." + __name__)
 
 RADIUS_DEFAULT=40000
 DEFAULT_IP='24.152.191.12'
+DEFAULT_LOC_STRING='San Francisco, CA'
 
 class AirbitzApiException(BaseException):
     pass
@@ -76,7 +77,6 @@ def autocompleteLocation(term=None, geolocation=None):
 
 def querySetAddLocation(qs, location):
     d = parseLocationString(location)
-    print d
     if d['admin2_name']:
         qs = qs.filter(admin2_name=d['admin2_name'])
     if d['admin1_code']:
@@ -96,25 +96,32 @@ def querySetAddGeoLocation(qs, geolocation, radius=RADIUS_DEFAULT):
             qs = qs.filter(center__distance_lt=(origin, D(m=radius)))
     return (qs, origin)
 
+def suggestNearByRequest(request, geolocation=None):
+    if request.META.has_key('HTTP_X_REAL_IP'):
+        ip = request.META['HTTP_X_REAL_IP']
+    else:
+        ip = request.META['REMOTE_ADDR']
+    print ip
+    return suggestNearText(ip, geolocation)
+
 def suggestNearText(ip, geolocation=None):
     if geolocation:
         d = parseGeoLocation(geolocation)
         origin = Point((d['lon'], d['lat']))
-        qs = GeoName.objects.all().distance(origin).order_by('distance')[1]
+        qs = GeoNameZip.objects.all().distance(origin).order_by('distance')[1]
         if qs:
-            return qs[0].place_name, qs[0].admin_name1, qs[0].country
+            return "{0}, {1}".format(qs[0].admin_name2, qs[0].admin1_code)
         else:
             return processGeoIp(ip)
     else:
         return processGeoIp(ip)
 
-
 def parseLocationString(location):
     d = {
-        'admin2_name': None,
         'admin1_code': None,
+        'admin2_name': None,
         'admin3_name': None,
-        'county': None,
+        'country': None,
         'point': None,
         'postalcode': None,
     }
@@ -207,7 +214,7 @@ def processGeoIp(ip):
                 data = processGeoCounty(v)
             if data:
                 return data
-    return None
+    return DEFAULT_LOC_STRING
 
 def localToPublicIp():
     """ This should only be called during development """
@@ -225,10 +232,14 @@ def processGeoCounty(row):
         v = row.strip().split(",")
         lat, lon = float(v[4]), float(v[5])
         origin = Point(lon, lat)
+        print origin
         rs = GeoNameZip.objects.all().distance(origin).order_by('distance')[:1]
         if rs:
-            return "{0}, {1}".format(rs[0].admin_name2, rs[0].admin_code1)
+            s = "{0}, {1}".format(rs[0].admin_name2, rs[0].admin_code1)
+            print s
+            return s
     except Exception as e:
+        print e
         log.warn(e)
     return None
 
