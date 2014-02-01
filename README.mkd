@@ -11,6 +11,7 @@
 ### Start it up
 
     local> cd vagrant
+    local> vagrant plugin install vagrant-omnibus # install required vagrant plugin
     local> vagrant up 
 
 ### Hack away
