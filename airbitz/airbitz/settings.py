@@ -139,6 +139,15 @@ PIPELINE_CSS = {
             'media': 'screen,projection',
         },
     },
+    'dataTables': {
+        'source_filenames': (
+            'extras/DataTables-1.9.4/media/css/jquery.dataTables.css',
+        ),
+        'output_filename': 'css/dataTables.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
 }
 PIPELINE_JS = {
     'core': {
@@ -150,6 +159,12 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/core.js',
     },
+    'dataTables': {
+        'source_filenames': (
+            'extras/DataTables-1.9.4/media/js/jquery.dataTables.min.js',
+        ),
+        'output_filename': 'js/dataTables.js',
+    }
 }
 
 CRISPY_TEMPLATE_PACK='bootstrap3'

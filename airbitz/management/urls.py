@@ -4,6 +4,15 @@ urlpatterns = patterns('',
     url(r'^login/$', 'management.views.login_user', name='mgmt_login'),
     url(r'^logout/$', 'management.views.logout_user', name='mgmt_logout'),
 
+    url(r'^cat/list/$', 'management.views.category_list', name='mgmt_category_list'),
+    url(r'^cat/add/$', 'management.views.category_edit', name='mgmt_category_add'),
+    url(r'^cat/edit/(?P<catId>\d+)/main/$', 'management.views.category_edit', name='mgmt_category_edit'),
+
+    url(r'^tag/list/$', 'management.views.image_tag_list', name='mgmt_image_tag_list'),
+    url(r'^tag/add/$', 'management.views.image_tag_edit', name='mgmt_image_tag_add'),
+    url(r'^tag/edit/(?P<tagId>\d+)/$', 'management.views.image_tag_edit', name='mgmt_image_tag_edit'),
+    url(r'^tag/delete/(?P<tagId>\d+)/$', 'management.views.image_tag_delete', name='mgmt_image_tag_delete'),
+
     url(r'^dashboard/$', 'management.views.dashboard', name='mgmt_dashboard'),
     url(r'^biz/import/$', 'management.views.business_import', name='mgmt_biz_import'),
     url(r'^biz/view/(?P<bizId>\d+)/main$', 'management.views.business_view', name='mgmt_biz_view'),

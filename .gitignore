@@ -5,6 +5,7 @@ media
 *.swp
 *.swo
 .vagrant
+.vagrant*
 
 
 # pycharm
