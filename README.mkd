@@ -40,7 +40,7 @@ Start dev server
     vm> sudo pip install requests
     vm> git clone https://github.com/prusnak/coinmap.git
     vm> cd coinmap/data
-    vm> refresh.py
+    vm> ./refresh.py
     vm> cd $HOME
     vm> source ./quick_bitz.sh
     vm> python manage.py overpass_fetch $HOME/coinmap/data/data-overpass-bitcoin.json
@@ -55,15 +55,8 @@ Start dev server
     vm> cd 
     vm> source ./quick_bitz.sh
     vm> python manage.py geonames_zip_load $HOME/geonames/zip/US.txt
-
-    local> vagrant ssh
-    vm> mkdir -p geonames/main
-    vm> cd geonames/main
-    vm> wget http://download.geonames.org/export/dump/US.zip 
-    vm> unzip US.zip
-    vm> cd 
-    vm> source ./quick_bitz.sh
-    vm> python manage.py geonames_main_load $HOME/geonames/main/US.txt
+	vm> python manage.py rebuild_index
+    
 
 ### Digital Ocean Provider
 
