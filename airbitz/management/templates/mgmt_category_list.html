@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load compressed %}
+
+{% block title %} Category View {% endblock title %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <a class="pull-right btn-sm btn btn-default" href="{% url 'mgmt_category_add' %}">Add Category</a>
+            <ul class="nav nav-tabs">
+                <li><a href="{% url 'mgmt_dashboard' %}">Dashboard</a></li>
+                <li class="active"><a href="{% url 'mgmt_category_list' %}">Categories</a></li>
+                <li><a href="{% url 'mgmt_image_tag_list' %}">Image Tags</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table dataTableCustom">
+                                <thead>
+                                    <th style="width: 30px"></th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th style="width: 30px"></th>
+                                </thead>
+                                <tbody>
+                                    {% for cat in cats %}
+                                        <tr>
+                                            <td><a class="pull-right btn-sm btn btn-default" href="{% url 'mgmt_category_edit' cat.id %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                            <td>{{ cat.name }}</td>
+                                            <td>{{ cat.description }} </td>
+                                            <td><a class="pull-right btn-sm btn btn-danger" href="{% url 'mgmt_category_edit' cat.id %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+                                        </tr>
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="3">No results found.</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

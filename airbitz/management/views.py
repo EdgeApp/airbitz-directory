@@ -8,8 +8,11 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from directory.models import Business, BusinessImage, BusinessHours, SocialId
-from management.forms import BusinessForm, BizAddressForm, \
+from directory.models import Category, ImageTag, \
+                             Business, BusinessImage, \
+                             BusinessHours, SocialId
+from management.forms import CategoryForm, ImageTagForm, \
+                             BusinessForm, BizAddressForm, \
                              BizImageForm, BizImageLinkForm, \
                              BizImportForm, HoursFormSet, HoursFormSetHelper, \
                              SocialFormSet, SocialFormHelper
@@ -47,6 +50,72 @@ def dashboard(request):
         'results': results
     }
     return render_to_response('mgmt_dashboard.html', RequestContext(request, context))
+
+@user_passes_test(isManager, login_url=LOGIN_URL)
+def category_list(request):
+    results = Category.objects.all()
+    context = {
+        'cats': results
+    }
+    return render_to_response('mgmt_category_list.html', RequestContext(request, context))
+
+@user_passes_test(isManager, login_url=LOGIN_URL)
+def image_tag_list(request):
+    results = ImageTag.objects.all()
+    context = {
+        'tags': results
+    }
+    return render_to_response('mgmt_image_tag_list.html', RequestContext(request, context))
+
+@user_passes_test(isManager, login_url=LOGIN_URL)
+def category_edit(request, catId=None):
+    return object_edit(request, title='Category Edit',
+                       objId=catId, objclass=Category, \
+                       objform=CategoryForm, returnUrl='mgmt_category_list')
+
+@user_passes_test(isManager, login_url=LOGIN_URL)
+def category_delete(request, catId=None):
+    obj = get_object_or_404(Category, pk=catId)
+    obj.delete()
+    messages.success(request, 'Category deleted')
+    return HttpResponseRedirect(reverse('mgmt_category_list'))
+
+@user_passes_test(isManager, login_url=LOGIN_URL)
+def image_tag_edit(request, tagId=None):
+    return object_edit(request, title='Image Tag Edit',
+                       objId=tagId, objclass=ImageTag,
+                       objform=ImageTagForm, returnUrl='mgmt_image_tag_list')
+
+@user_passes_test(isManager, login_url=LOGIN_URL)
+def image_tag_delete(request, tagId=None):
+    obj = get_object_or_404(ImageTag, pk=tagId)
+    obj.delete()
+    messages.success(request, 'Tag deleted')
+    return HttpResponseRedirect(reverse('mgmt_image_tag_list'))
+
+@user_passes_test(isManager, login_url=LOGIN_URL)
+def object_edit(request, title=None, objId=None, objclass=None, \
+                objform=None, returnUrl=None):
+    if objId:
+        obj = get_object_or_404(objclass, pk=objId)
+    else:
+        obj = objclass()
+    if request.method == 'POST':
+        form = objform(request.POST, instance=obj)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Changes Saved')
+            return HttpResponseRedirect(reverse(returnUrl))
+        else:
+            messages.error(request, 'Unable to save record.')
+    else:
+        form = objform(instance=obj)
+
+    return render(request, 'mgmt_biz_edit.html', {
+        'title': title,
+        'obj': obj,
+        'form': form,
+    })
 
 @user_passes_test(isManager, login_url=LOGIN_URL)
 def business_import(request):
@@ -137,12 +206,15 @@ def business_image_edit(request, bizId, imgId=None):
         img = BusinessImage()
     img.business = biz
     if request.method == 'POST':
-        form = formclass(request.POST, instance=img)
+        form = formclass(request.POST, request.FILES, instance=img)
         if form.is_valid():
             form.save()
             messages.success(request, 'Changes Saved')
-            return HttpResponseRedirect(reverse('mgmt_biz_view', args=(biz.id, )))
+            return HttpResponseRedirect(reverse('mgmt_biz_image_view', args=(biz.id, )))
         else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    print field, error
             messages.error(request, 'Unable to save record.')
     else:
         form = formclass(instance=img)

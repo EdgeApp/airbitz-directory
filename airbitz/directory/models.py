@@ -10,6 +10,8 @@ from airbitz import settings
 STATUS_CHOICES = (
     ('DR', 'Draft'),
     ('PUB', 'Published'),
+    ('PEN', 'Pending'),
+    ('TR', 'Trashed'),
 )
 
 DAY_OF_WEEK_CHOICES = (
@@ -35,6 +37,13 @@ class Category(models.Model):
     def __unicode__(self):
         return "{0}".format(self.name)
 
+class ImageTag(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.CharField(max_length=2500, null=True)
+
+    def __unicode__(self):
+        return "{0}".format(self.name)
+
 class Business(models.Model):
     status = models.CharField(max_length=5, choices=STATUS_CHOICES, default='DR')
     name = models.CharField(max_length=200, blank=False)
@@ -48,7 +57,7 @@ class Business(models.Model):
     admin1_code = models.CharField(max_length=200, blank=True) # State
     postalcode = models.CharField(max_length=200, blank=True)
     country = models.CharField(max_length=200, blank=True)
-    category = models.ForeignKey(Category, null=True)
+    categories = models.ManyToManyField(Category, blank=True)
     landing_image = models.ForeignKey('BusinessImage', null=True, blank=True, 
                                       on_delete=models.SET_NULL, related_name='landing_image_business')
 
@@ -100,6 +109,7 @@ class BusinessImage(models.Model):
     width = models.PositiveIntegerField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    tags = models.ManyToManyField(ImageTag, blank=True, null=True)
 
     @staticmethod
     def create_from_url(bizId, img_url):

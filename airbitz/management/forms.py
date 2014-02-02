@@ -1,10 +1,49 @@
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, Submit
+from crispy_forms.layout import HTML, Layout, Field, Submit
 from django import forms
 from django.forms.models import inlineformset_factory
 
-from directory.models import Business, BusinessImage, BusinessHours, SocialId
+from directory.models import Business, BusinessImage, BusinessHours, \
+                             ImageTag, Category, SocialId
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ( "name",
+                   "description", 
+                 )
+
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.layout = Layout(
+            Field('name', css_class='input-xxlarge'),
+            Field('description', css_class='input-xxlarge'),
+            FormActions(
+                Submit('submit', 'Save', css_class='btn btn-success'),
+            )
+        )
+        super(CategoryForm, self).__init__(*args, **kwargs)
+
+class ImageTagForm(forms.ModelForm):
+    class Meta:
+        model = ImageTag
+        fields = ( "name",
+                   "description", 
+                 )
+
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.layout = Layout(
+            Field('name', css_class='input-xxlarge'),
+            Field('description', css_class='input-xxlarge'),
+            FormActions(
+                Submit('submit', 'Save', css_class='btn btn-success'),
+            )
+        )
+        super(ImageTagForm, self).__init__(*args, **kwargs)
 
 class BizImportForm(forms.Form):
     id = forms.CharField(label='FS Id: ', required=True)
@@ -27,7 +66,7 @@ class BusinessForm(forms.ModelForm):
         model = Business
         fields = ( "status",
                    "name", 
-                   "category",
+                   "categories",
                    "description",
                    "has_physical_business",
                    "has_online_business",
@@ -35,12 +74,14 @@ class BusinessForm(forms.ModelForm):
                  )
 
     def __init__(self, *args, **kwargs):
+        catSet = Category.objects.all().order_by('title')
+        self.categories = forms.ModelMultipleChoiceField(queryset=catSet)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.layout = Layout(
             Field('status'),
             Field('name', css_class='input-xxlarge'),
-            Field('category'),
+            Field('categories'),
             Field('has_physical_business'),
             Field('has_online_business'),
             Field('has_bitcoin_discount'),
@@ -82,13 +123,15 @@ class BizAddressForm(forms.ModelForm):
 class BizImageForm(forms.ModelForm):
     class Meta:
         model = BusinessImage
-        fields = ("image", )
+        fields = ("image", "tags", )
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.layout = Layout(
+            HTML("""{% if form.image.value %}<img class="img-responsive" src="{{ MEDIA_URL }}{{ form.image.value }}">{% endif %}""", ),
             Field('image'),
+            Field('tags'),
             FormActions(
                 Submit('submit', 'Save', css_class='btn btn-success'),
             )
