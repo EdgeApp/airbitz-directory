@@ -63,7 +63,7 @@ class Business(models.Model):
 
     has_physical_business = models.BooleanField(default=False) # Brick and Mortar?
     has_online_business = models.BooleanField(default=False)
-    has_bitcoin_discount = models.BooleanField(default=False)
+    has_bitcoin_discount = models.DecimalField(default=0.0, decimal_places=3, max_digits=5)
 
     # PostGis fields
     center = models.PointField(null=True)
