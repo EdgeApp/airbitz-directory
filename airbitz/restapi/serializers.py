@@ -33,6 +33,11 @@ class PointField(fields.WritableField):
 
         return value
 
+class BoundingBoxField(fields.Field):
+    type_name = 'BoundingBoxField'
+
+    def field_to_native(self, obj, field_name):
+        return "[0.0, 0.0, 1.0, 0.25]"
 
 class BusinessHoursSerializer(serializers.ModelSerializer):
     class Meta:
@@ -83,10 +88,11 @@ class BusinessSerializer(serializers.ModelSerializer):
 
 class BusinessImageSerializer(serializers.ModelSerializer):
     image = serializers.CharField(source='get_absolute_url', read_only=True)
+    bounding_box = BoundingBoxField()
 
     class Meta:
         model = BusinessImage
-        fields = ('image', 'height', 'width')
+        fields = ('image', 'height', 'width', 'bounding_box',)
 
 class AutoCompleteSerializer(serializers.Serializer):
     pk = serializers.Field()
