@@ -71,7 +71,7 @@ def searchDirectory(term=None, location=None, \
 def autocompleteBusiness(term=None, location=None, geolocation=None):
     qs = Business.objects.filter(status='PUB')
     if term:
-        qs = Business.objects.filter(name__icontains=term)
+        qs = qs.filter(name__icontains=term)
     (qs, _) = querySetAddLocation(qs, location)
     (qs, _) = querySetAddGeoLocation(qs, geolocation)
     print qs.query
