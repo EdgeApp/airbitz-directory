@@ -1,12 +1,49 @@
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Layout, Field, Submit
+from django.core import validators
 from django import forms
 from django.forms.models import inlineformset_factory
 from django.contrib.gis import forms as geoforms
+from django.utils.translation import ugettext as _
 
 from directory.models import Business, BusinessImage, BusinessHours, \
                              ImageTag, Category, SocialId
+
+class LatLongWidget(forms.MultiWidget):
+    def __init__(self, attrs=None, date_format=None, time_format=None):
+        widgets = (forms.TextInput(attrs=attrs),
+                   forms.TextInput(attrs=attrs))
+        super(LatLongWidget, self).__init__(widgets, attrs)
+
+    def decompress(self, value):
+        if value:
+            return tuple(reversed(value.coords))
+        return (None, None)
+
+class LatLongField(forms.MultiValueField):
+    widget = LatLongWidget
+    srid = 4326
+
+    default_error_messages = {
+        'invalid_latitude' : _('Enter a valid latitude.'),
+        'invalid_longitude' : _('Enter a valid longitude.'),
+    }
+    def __init__(self, *args, **kwargs):
+        fields = (forms.FloatField(min_value=-90, max_value=90), 
+                  forms.FloatField(min_value=-180, max_value=180))
+        super(LatLongField, self).__init__(fields, *args, **kwargs)
+
+    def compress(self, data_list):
+        if data_list:
+            if data_list[0] in validators.EMPTY_VALUES:
+                raise forms.ValidationError(self.error_messages['invalid_latitude'])
+            if data_list[1] in validators.EMPTY_VALUES:
+                raise forms.ValidationError(self.error_messages['invalid_longitude'])
+            srid_str = 'SRID=%d'%self.srid
+            point_str = 'POINT(%f %f)'%tuple(reversed(data_list))
+            return ';'.join([srid_str, point_str])
+        return None
 
 class CategoryForm(forms.ModelForm):
     class Meta:
@@ -99,8 +136,7 @@ class BusinessForm(forms.ModelForm):
 
 
 class BizAddressForm(geoforms.ModelForm):
-    # center = geoforms.PointField(label="Latitude/Longitude", \
-    #             widget=geoforms.OSMWidget(attrs={'map_width': 400, 'map_height': 400}))
+    center = LatLongField(label="Latitude/Longitude", required=False)
     admin3_name = forms.CharField(label='City: ', required=False)
     admin2_name = forms.CharField(label='County: ', required=False)
     admin1_code = forms.CharField(label='State: ', required=False)
@@ -111,7 +147,8 @@ class BizAddressForm(geoforms.ModelForm):
                    "admin2_name", 
                    "admin1_code",
                    "postalcode",
-                   "country"
+                   "country",
+                   "center"
                  )
 
     def __init__(self, *args, **kwargs):

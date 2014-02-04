@@ -30,8 +30,13 @@ class Command(BaseCommand):
                 self.update(values, s1, admin3=False)
                 s2 = "{0}, {1}".format(values[5], values[4])
                 self.update(values, s2, admin3=False)
+                s3 = "{0}, {1}".format(values[2], values[4])
+                self.update(values, s3, admin3=False)
+                s4 = "{0}, {1}".format(values[2], values[3])
+                self.update(values, s4, place_name=True, admin3=False)
 
-    def update(self, values, id, admin1=True, admin2=True, admin3=True, postalcode=True):
+    def update(self, values, id, place_name=False, admin1=True, \
+                                 admin2=True, admin3=True, postalcode=True):
         geo, created = LocationString.objects.get_or_create(content_auto=id)
         if postalcode:
             geo.postalcode=values[1]
@@ -43,5 +48,7 @@ class Command(BaseCommand):
             geo.admin2_code=values[6]
         if admin3:
             geo.admin3_name=values[7]
+        elif place_name:
+            geo.admin3_name=values[2]
         geo.center = Point(float(values[10]), float(values[9]))
         geo.save()

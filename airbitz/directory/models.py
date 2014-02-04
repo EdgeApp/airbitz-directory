@@ -66,7 +66,7 @@ class Business(models.Model):
     has_bitcoin_discount = models.DecimalField(default=0.0, decimal_places=3, max_digits=5)
 
     # PostGis fields
-    center = models.PointField(null=True)
+    center = models.PointField(blank=True, null=True)
     objects = models.GeoManager()
 
     @property
