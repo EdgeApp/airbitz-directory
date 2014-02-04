@@ -98,9 +98,9 @@ class BusinessForm(forms.ModelForm):
 
 
 class BizAddressForm(forms.ModelForm):
-    admin3_name = forms.CharField(label='City: ', required=True)
-    admin2_name = forms.CharField(label='County: ', required=True)
-    admin1_code = forms.CharField(label='State: ', required=True)
+    admin3_name = forms.CharField(label='City: ', required=False)
+    admin2_name = forms.CharField(label='County: ', required=False)
+    admin1_code = forms.CharField(label='State: ', required=False)
     class Meta:
         model = Business
         fields = ( "address",

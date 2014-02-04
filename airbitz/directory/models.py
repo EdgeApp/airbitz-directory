@@ -32,7 +32,7 @@ def lookupChoice(value, choices):
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
-    description = models.CharField(max_length=2500, null=True)
+    description = models.CharField(max_length=2500, blank=True, null=True)
 
     def __unicode__(self):
         return "{0}".format(self.name)
@@ -47,17 +47,17 @@ class ImageTag(models.Model):
 class Business(models.Model):
     status = models.CharField(max_length=5, choices=STATUS_CHOICES, default='DR')
     name = models.CharField(max_length=200, blank=False)
-    description = models.TextField(blank=False, null=True)
-    website = models.URLField(max_length=2000, blank=False, null=True)
+    description = models.TextField(blank=True, null=True)
+    website = models.URLField(max_length=2000, blank=True, null=True)
     phone = models.CharField(max_length=200, blank=True, null=True)
     address = models.CharField(max_length=200, blank=True, null=True)
-    neighborhood = models.CharField(max_length=200, blank=True)
-    admin3_name = models.CharField(max_length=200, blank=True) # City
-    admin2_name = models.CharField(max_length=200, blank=True) # County
-    admin1_code = models.CharField(max_length=200, blank=True) # State
-    postalcode = models.CharField(max_length=200, blank=True)
-    country = models.CharField(max_length=200, blank=True)
-    categories = models.ManyToManyField(Category, blank=True)
+    neighborhood = models.CharField(max_length=200, blank=True, null=True)
+    admin3_name = models.CharField(max_length=200, blank=True, null=True) # City
+    admin2_name = models.CharField(max_length=200, blank=True, null=True) # County
+    admin1_code = models.CharField(max_length=200, blank=True, null=True) # State
+    postalcode = models.CharField(max_length=200, blank=True, null=True)
+    country = models.CharField(max_length=200, blank=True, null=True)
+    categories = models.ManyToManyField(Category, blank=True, null=True)
     landing_image = models.ForeignKey('BusinessImage', null=True, blank=True, 
                                       on_delete=models.SET_NULL, related_name='landing_image_business')
 
