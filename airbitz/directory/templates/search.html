@@ -15,6 +15,15 @@
                         <img data-src="holder.js/100x75/sky" class="img-thumbnail">
                     {% endif %}
                     <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">{{ biz.name }}</a>
+
+                    <div class="pull-right">
+                        {% for s in biz.socialid_set.all %}
+                            <a class="btn btn-default" href="{{ s.social_url }}">
+                                {{ s.social_type }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                    <hr />
                 </div>
             {% empty %}
                 <p>No results found.</p>

@@ -42,7 +42,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return HttpResponseRedirect('directory.views.landing')
+    return HttpResponseRedirect(reverse('landing'))
 
 @user_passes_test(isManager, login_url=LOGIN_URL)
 def dashboard(request):

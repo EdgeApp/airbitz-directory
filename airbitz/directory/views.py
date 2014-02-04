@@ -39,7 +39,7 @@ def business_info(request, bizId):
 
     nearby = []
     if biz.center:
-        nearby = Business.objects.filter(\
+        nearby = Business.objects.filter(status='PUB').filter(\
                     ~Q(pk=biz.id), \
                     center__distance_lt=(biz.center, D(km=DISTANCE_LIMIT_KILOMETERS)))
         nearby = nearby.distance(biz.center).order_by('distance')[:4]

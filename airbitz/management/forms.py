@@ -3,6 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Layout, Field, Submit
 from django import forms
 from django.forms.models import inlineformset_factory
+from django.contrib.gis import forms as geoforms
 
 from directory.models import Business, BusinessImage, BusinessHours, \
                              ImageTag, Category, SocialId
@@ -97,7 +98,9 @@ class BusinessForm(forms.ModelForm):
         super(BusinessForm, self).__init__(*args, **kwargs)
 
 
-class BizAddressForm(forms.ModelForm):
+class BizAddressForm(geoforms.ModelForm):
+    # center = geoforms.PointField(label="Latitude/Longitude", \
+    #             widget=geoforms.OSMWidget(attrs={'map_width': 400, 'map_height': 400}))
     admin3_name = forms.CharField(label='City: ', required=False)
     admin2_name = forms.CharField(label='County: ', required=False)
     admin1_code = forms.CharField(label='State: ', required=False)
@@ -121,6 +124,7 @@ class BizAddressForm(forms.ModelForm):
             Field('admin1_code'),
             Field('postalcode'),
             Field('country'),
+            Field('center'),
             FormActions(
                 Submit('submit', 'Save', css_class='btn btn-success'),
             )

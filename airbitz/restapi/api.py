@@ -87,7 +87,8 @@ def autocompleteLocation(term=None, geolocation=None):
 def querySetAddLocation(qs, location):
     d = parseLocationString(location)
     if d['admin2_name']:
-        qs = qs.filter(admin2_name=d['admin2_name'])
+        qs = qs.filter(Q(admin2_name=d['admin2_name']) 
+                     | Q(admin3_name=d['admin2_name']))
     if d['admin1_code']:
         qs = qs.filter(admin1_code=d['admin1_code'])
     if d['country']:

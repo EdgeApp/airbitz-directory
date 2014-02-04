@@ -3,6 +3,11 @@
 
 {% block title %} Category View {% endblock title %}
 
+{% block head %}
+    {{ block.super }}
+    {% compressed_css 'dataTables' %}
+{% endblock head %}
+
 {% block body %}
     <div class="row">
         <div class="col-sm-12">
@@ -50,3 +55,24 @@
     </div>
 {% endblock %}
 
+{% block javascript_headers %}
+    {{ block.super }}
+    {% compressed_js 'dataTables' %}
+{% endblock javascript_headers %}
+
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript">
+    $(function() {
+        /* Initialise the DataTable */
+        var oTable = $('.dataTableCustom').dataTable({
+            "aLengthMenu": [[10, 25, 50, 100, 500, -1],
+                            [10, 25, 50, 100, 500, "All"]],
+            "iDisplayLength": 10,
+            "aaSorting": [[ 2, "asc" ]],
+            // "bStateSave": true,
+        });
+    });
+    </script>
+{% endblock javascript %}
