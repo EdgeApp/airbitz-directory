@@ -41,7 +41,14 @@
                                             </td>
                                             <td>{{ biz.lookupStatus }} </td>
                                             <td>{{ biz.name }}</td>
-                                            <td></td>
+                                            <td>
+                                                {% if biz.categories.all %}
+                                                    {% for category in biz.categories.all %}
+                                                        <span class="btn btn-sm btn-default">{{category}}</span>
+                                                    {% endfor %}
+                                                {% endif %}
+
+                                            </td>
                                         </tr>
                                     {% empty %}
                                         <tr>
