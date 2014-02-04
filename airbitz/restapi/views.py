@@ -9,6 +9,8 @@ from restapi import serializers
 
 log=logging.getLogger("airbitz." + __name__)
 
+DEFAULT_PAGE_SIZE=20
+
 class CategoryView(generics.ListAPIView):
     """
         Retrieve business categories. 
@@ -23,7 +25,7 @@ class BusinessView(generics.RetrieveAPIView):
         Retrieve detailed information about a business.
     """
     serializer_class = serializers.BusinessSerializer
-    model = Business
+    queryset = Business.objects.filter(status='PUB')
     pk_url_kwarg = 'bizId'
 
 
@@ -39,18 +41,21 @@ class SearchView(generics.ListAPIView):
     """
         Comprehensive search of the businesses
 
-        term --  term (optional)
-        location -- (optional), 
-        ll -- latitude,longitude (optional)
-        radius -- radius (optional)
-        bounds -- sw_latitude,sw_longitude|ne_latitude,ne_longitude (optional)
-        category -- filter by category (optional))
-        limit -- (optional)
-        offset -- (optional)
-        sort -- (optional) 0, default, best match. 1, sort based off distance
+        term --  The term to search against, currently only searchs business names 
+        location -- location string such as "San Diego, CA" , 
+        ll -- latitude,longitude 
+        radius -- search radius in meters 
+        bounds -- bounding box of search area. sw_latitude,sw_longitude|ne_latitude,ne_longitude 
+        category -- filter by category, can be a comma delimited string such as "Health,Finance" 
+        page_size -- How many businesses each page, defaults to 20, max of 50 
+        page -- Which page of data to return 
+        sort --  0: default, best match. 1: sort based off distance
     """
-    model = Business
+    queryset = Business.objects.all()
     serializer_class = serializers.MiniBusinessSerializer
+    paginate_by = DEFAULT_PAGE_SIZE
+    paginate_by_param = 'page_size'
+    max_paginate_by = 50
 
     def get_queryset(self):
         term = self.request.QUERY_PARAMS.get('term', None)
@@ -67,10 +72,11 @@ class SearchView(generics.ListAPIView):
 
 class AutoCompleteBusiness(generics.ListAPIView):
     """
-        Autocomplete businesses
-        term     -- Search term
-        location -- Location string
-        ll   -- Latitude,Longitude (optional)
+        Autocompletes base on business name.
+
+        term     -- The term to autocomplete
+        location -- Location string such as "San Diego, CA"
+        ll   -- Latitude,Longitude 
     """
     model = Business
     serializer_class = serializers.AutoCompleteSerializer
@@ -84,23 +90,24 @@ class AutoCompleteBusiness(generics.ListAPIView):
 
 class AutoCompleteLocation(APIView):
     """
-        Autocomplete location
-        term -- Search term
-        ll   -- Latitude,Longitude (optional)
+        Autocomplete location.
+
+        term -- The location string to autocomplete
+        ll   -- Latitude,Longitude 
     """
     model = Business
 
     def get(self, request, *args, **kwargs):
         term = self.request.QUERY_PARAMS.get('term', None)
         ll = self.request.QUERY_PARAMS.get('ll', None)
-        results = api.autocompleteLocation(term=term, geolocation=ll)
+        results = api.autocompleteLocation(term=term, geolocation=ll)[:DEFAULT_PAGE_SIZE]
         return Response({ 'results':  results })
 
 
 class LocationSuggest(APIView):
     """
         Suggests a default location based on the IP address and lat/lon.
-        ll -- Latitude,Longitude (optional)
+        ll -- Latitude,Longitude 
 
         If lat/lon aren't provided, then this method falls back to using the IP
         address.
@@ -109,6 +116,6 @@ class LocationSuggest(APIView):
 
     def get(self, request, *args, **kwargs):
         ll = self.request.QUERY_PARAMS.get('ll', None)
-        results = api.suggestNearByRequest(request, geolocation=ll)
+        results = api.suggestNearByRequest(request, geolocation=ll)[:DEFAULT_PAGE_SIZE]
         return Response({ 'near':  results })
 

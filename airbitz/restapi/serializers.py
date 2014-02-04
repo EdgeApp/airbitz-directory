@@ -1,43 +1,23 @@
 from rest_framework import serializers
 from rest_framework import fields
-from django.contrib.gis.geos import GEOSGeometry, GEOSException
-from django.contrib.gis.gdal import OGRException
-from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
-
-import json
+from rest_framework import pagination
 
 from directory.models import Business, BusinessHours, \
-                             BusinessImage, Category
+                             BusinessImage, Category, \
+                             SocialId
 from location.models import GeoNameZip
 
-class PointField(fields.WritableField):
+class PointField(fields.Field):
     type_name = 'PointField'
 
-    def to_native(self, value):
-        if isinstance(value, dict) or value is None:
-            return value
-        return json.loads(value.geojson)
-
-    def from_native(self, value):
-        if value == '' or value is None:
-            return value
-
-        if isinstance(value, dict):
-            value = json.dumps(value)
-
-        try:
-            return GEOSGeometry(value)
-        except (ValueError, GEOSException, OGRException, TypeError):
-            raise ValidationError(_('Invalid format: string or unicode input unrecognized as WKT EWKT, and HEXEWKB.'))
-
-        return value
+    def field_to_native(self, obj, field_name):
+        return {'latitude': obj.center.y, 'longitude': obj.center.x}
 
 class BoundingBoxField(fields.Field):
     type_name = 'BoundingBoxField'
 
     def field_to_native(self, obj, field_name):
-        return "{x: 0.0, y: 0.0, height: 0.25, width: 1.0}"
+        return {'x': 0.0, 'y': 0.0, 'height': 0.25, 'width': 1.0}
 
 class BusinessHoursSerializer(serializers.ModelSerializer):
     class Meta:
@@ -49,35 +29,59 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ('name','description')
 
+class SocialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SocialId
+        fields = ('social_type', 'social_id', 'social_url')
+
 class MiniBusinessSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(source='category')
+    categories = CategorySerializer(source='categories')
+    social = SocialSerializer(source='socialid_set')
+    state = serializers.CharField(source='admin1_code')
+    county = serializers.CharField(source='admin2_name')
+    city = serializers.CharField(source='admin3_name')
+    has_bitcoin_discount = serializers.CharField(source='has_bitcoin_discount')
     center = PointField()
 
     class Meta:
         model = Business
         fields = ('name',
-                  'category',
+                  'categories',
+                  'social',
                   'description',
-                  'admin3_name',
-                  'admin2_name',
-                  'admin1_code', 
+                  'website',
+                  'phone',
+                  'city',
+                  'county',
+                  'state', 
                   'postalcode',
                   'country',
                   'center', )
 
+class PaginatedMiniBizSerializer(pagination.PaginationSerializer):
+    class Meta:
+        object_serializer_class = MiniBusinessSerializer
+
 class BusinessSerializer(serializers.ModelSerializer):
+    state = serializers.CharField(source='admin1_code')
+    county = serializers.CharField(source='admin2_name')
+    city = serializers.CharField(source='admin3_name')
     hours = BusinessHoursSerializer(source='businesshours_set')
-    category = CategorySerializer(source='category')
+    categories = CategorySerializer(source='categories')
+    social = SocialSerializer(source='socialid_set')
     center = PointField()
 
     class Meta:
         model = Business
         fields = ('name',
-                  'category',
+                  'categories',
+                  'social',
                   'description',
-                  'admin3_name',
-                  'admin2_name',
-                  'admin1_code', 
+                  'website',
+                  'phone',
+                  'city',
+                  'county',
+                  'state', 
                   'postalcode',
                   'country',
                   'center',
@@ -85,6 +89,7 @@ class BusinessSerializer(serializers.ModelSerializer):
                   'has_physical_business', 
                   'has_online_business',
                   'has_bitcoin_discount', )
+
 
 class BusinessImageSerializer(serializers.ModelSerializer):
     image = serializers.CharField(source='get_absolute_url', read_only=True)

@@ -33,6 +33,18 @@
                         </div>
                         <div class="col-sm-6">
                             <dl>
+                                <dt>Phone:</dt>
+                                <dd>
+                                    <span id="phone" class="editable" data-type="text" data-placeholder="Website" data-inputclass="input-large"> {{ biz.phone }} </span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>Website:</dt>
+                                <dd>
+                                    <span id="website" class="editable" data-type="text" data-placeholder="Website" data-inputclass="input-large"> <a href="{{ biz.website }}">{{ biz.website }}</a>  </span>
+                                </dd>
+                            </dl>
+                            <dl>
                                 <dt>Has Physical Business:</dt>
                                 <dd>
                                     <span id="has_physical_business" class="editable" data-type="text" data-placeholder="Physical Business" data-inputclass="input-large"> {{ biz.has_physical_business|yesno }} </span>
@@ -117,13 +129,19 @@
                     <dl>
                         <dt>City:</dt>
                         <dd>
-                            <span id="city" class="editable" data-type="text" data-placeholder="City" data-inputclass="input-large"> {{ biz.city }} </span>
+                            <span id="city" class="editable" data-type="text" data-placeholder="City" data-inputclass="input-large"> {{ biz.admin3_name }} </span>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>County:</dt>
+                        <dd>
+                            <span id="city" class="editable" data-type="text" data-placeholder="County" data-inputclass="input-large"> {{ biz.admin2_name }} </span>
                         </dd>
                     </dl>
                     <dl>
                         <dt>State:</dt>
                         <dd>
-                            <span id="state" class="editable" data-type="text" data-placeholder="State" data-inputclass="input-large"> {{ biz.state }} </span>
+                            <span id="state" class="editable" data-type="text" data-placeholder="State" data-inputclass="input-large"> {{ biz.admin1_code }} </span>
                         </dd>
                     </dl>
                     <dl>

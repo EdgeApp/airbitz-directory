@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.contrib.gis.measure import D
 from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
@@ -9,6 +10,13 @@ from restapi import api
 
 SEARCH_LIMIT = 20
 DISTANCE_LIMIT_KILOMETERS = 20
+
+def get_biz(request, *args, **kwargs):
+    biz = get_object_or_404(Business, **kwargs)
+    if request.user.is_superuser or biz.status == 'PUB':
+        return biz
+    else:
+        raise Http404
 
 def landing(request):
     context = { }
@@ -26,7 +34,7 @@ def business_search(request):
     return render_to_response('search.html', RequestContext(request, context))
 
 def business_info(request, bizId):
-    biz = get_object_or_404(Business, pk=bizId)
+    biz = get_biz(request, pk=bizId)
     imgs = BusinessImage.objects.filter(business=biz)
 
     nearby = []

@@ -19,9 +19,11 @@
                         <div class="col-xs-6 col-md-3">
                             {% thumbnail '380x250' i.image -- class="img-thumbnail" %}
                             <div class="bottom-overlay">
-                                <button class="btn btn-default btn-link pull-left select-image" data-value="{{ i.id }}" >Select <i class="icon-ok"></i></button>
+                                <button class="btn btn-default pull-left select-image" data-image-id="{{ i.id }}" >Select <i class="icon-ok"></i></button>
                                 &nbsp;
-                                <a class="btn btn-default btn-link pull-right" href="{% url 'mgmt_biz_image_edit' biz.id i.id %}">Edit <i class="icon-pencil"></i></a>
+                                <span class="image-delete btn btn-danger btn-link pull-right" data-image-id="{{ i.id }}"><span class="glyphicon glyphicon-trash"></span></span>
+                                &nbsp;
+                                <a class="btn btn-default btn-link pull-right" href="{% url 'mgmt_biz_image_edit' biz.id i.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
                             </div>
                         </div>
                     {% empty %}
@@ -50,25 +52,40 @@
                 }
             });
             {% if biz.landing_image %}
-                $('.select-image[data-value="{{ biz.landing_image_id }}"]')
+                $('.select-image[data-image-id="{{ biz.landing_image.id }}"]')
                     .attr("disabled", "disabled");
             {% endif %}
             $('.select-image').click(function() {
                 var self = $(this);
-                var id = $(this).attr('data-value');
+                var id = $(this).data('image-id');
                 var url = "{% url 'mgmt_biz_set_landing_image' biz.id 0 %}";
-                $.ajax({
-                    url: url.replace(/\/0\//, '/' + id + '/'),
-                    type: "POST",
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    complete: function(result) {
-                        if (confirm('Are you sure you want to change the title image?')) {
+                if (confirm('Are you sure you want to change the title image?')) {
+                    $.ajax({
+                        url: url.replace(/\/0\//, '/' + id + '/'),
+                        type: "POST",
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        complete: function(result) {
                             $('.select-image').removeAttr("disabled");
                             self.attr("disabled", "disabled");
                         }
-                    }
-                });
+                    });
+                }
+            });
+            $('.image-delete').click(function() {
+                var id = $(this).data('image-id');
+                var url = "{% url 'mgmt_image_delete' biz.id 0 %}";
+                if (confirm('Are you sure you want to delete this image?')) {
+                    $.ajax({
+                        url: url.replace(/\/0\//, '/' + id + '/'),
+                        type: "DELETE",
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        complete: function(result) {
+                            location.href = '{% url "mgmt_biz_image_view" biz.id %}';
+                        }
+                    });
+                }
             });
         });
     </script>

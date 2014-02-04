@@ -26,6 +26,7 @@ urlpatterns = patterns('',
     url(r'^biz/view/(?P<bizId>\d+)/image/add$', 'management.views.business_image_edit', name='mgmt_biz_image_add'),
     url(r'^biz/view/(?P<bizId>\d+)/image/link$', 'management.views.business_image_link', name='mgmt_biz_image_link'),
     url(r'^biz/view/(?P<bizId>\d+)/images/edit/(?P<imgId>\d+)/$', 'management.views.business_image_edit', name='mgmt_biz_image_edit'),
+    url(r'^biz/view/(?P<bizId>\d+)/images/delete/(?P<imgId>\d+)/$', 'management.views.image_delete', name='mgmt_image_delete'),
 
     url(r'^biz/edit/(?P<bizId>\d+)/images/landing/(?P<imgId>\d+)/$', 'management.views.set_landing_image', name='mgmt_biz_set_landing_image'),
 )

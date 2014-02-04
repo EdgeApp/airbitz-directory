@@ -174,6 +174,11 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
+    'DEFAULT_RENDERER_CLASSES': (
+        # 'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.JSONRenderer',
+        #'rest_framework_csv.renderers.CSVRenderer',
+    ),
     'PAGINATE_BY': 20
 }
 SWAGGER_SETTINGS = {

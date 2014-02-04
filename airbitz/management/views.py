@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import user_passes_test
 from django.core.urlresolvers import reverse
+from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -278,7 +279,7 @@ def business_social_edit(request, bizId):
                       title='Edit Social')
 
 
-@user_passes_test(isManager, login_url='account_login')
+@user_passes_test(isManager, login_url=LOGIN_URL)
 def generic_biz_edit(request, bizId, title, formClass,
                      template='mgmt_biz_edit.html',
                      stayView='mgmt_biz_view',
@@ -311,4 +312,14 @@ def generic_biz_edit(request, bizId, title, formClass,
         'form': form,
     }
     return render(request, template, dict(context.items() + extras.items()))
+
+@user_passes_test(isManager, login_url=LOGIN_URL)
+def image_delete(request, bizId, imgId):
+    if request.method == 'DELETE':
+        get_object_or_404(Business, pk=bizId)
+        get_object_or_404(BusinessImage, pk=imgId).delete()
+        messages.success(request, 'Image deleted')
+        return HttpResponseRedirect(reverse('mgmt_biz_image_view', args=(bizId, )))
+    else:
+        raise Http404
 

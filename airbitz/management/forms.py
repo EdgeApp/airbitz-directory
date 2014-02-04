@@ -68,6 +68,8 @@ class BusinessForm(forms.ModelForm):
                    "name", 
                    "categories",
                    "description",
+                   "phone",
+                   "website",
                    "has_physical_business",
                    "has_online_business",
                    "has_bitcoin_discount",
@@ -82,6 +84,8 @@ class BusinessForm(forms.ModelForm):
             Field('status'),
             Field('name', css_class='input-xxlarge'),
             Field('categories'),
+            Field('phone'),
+            Field('website'),
             Field('has_physical_business'),
             Field('has_online_business'),
             Field('has_bitcoin_discount'),
@@ -94,6 +98,9 @@ class BusinessForm(forms.ModelForm):
 
 
 class BizAddressForm(forms.ModelForm):
+    admin3_name = forms.CharField(label='City: ', required=True)
+    admin2_name = forms.CharField(label='County: ', required=True)
+    admin1_code = forms.CharField(label='State: ', required=True)
     class Meta:
         model = Business
         fields = ( "address",
@@ -157,6 +164,7 @@ class SocialForm(forms.ModelForm):
     social_type = forms.ChoiceField(choices=(
         ("foursquare", "Foursquare"),
         ("facebook", "Faceboook"),
+        ("yelp", "Yelp"),
     ))
     class Meta:
         model = SocialId

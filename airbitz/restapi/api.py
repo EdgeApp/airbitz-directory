@@ -37,12 +37,19 @@ def toInt(request, key, default):
 def searchDirectory(term=None, location=None, \
                     geolocation=None, geobounds=None, \
                     radius=None, category=None, sort=0):
-    qs = Business.objects.all()
+    qs = Business.objects.filter(status='PUB')
     origin = None
     if term:
         qs = qs.filter(Q(name__icontains=term) | Q(description__icontains=term))
     if category:
-        qs = qs.filter(category__name=category)
+        f = None
+        for cterm in category.split(","):
+            q = Q(categories__name=cterm)
+            if not f:
+                f = q
+            else:
+                f = f | q
+        qs = qs.filter(f)
     (qs, dloc) = querySetAddLocation(qs, location)
     if dloc['point']:
         origin = dloc['point']
@@ -54,16 +61,15 @@ def searchDirectory(term=None, location=None, \
         geom = Polygon.from_bbox((d['minlon'], d['minlat'], d['maxlon'], d['maxlat']))
         qs = qs.filter(center__contained=geom)
     if origin:
-        qs.distance(origin)
+        qs = qs.distance(origin)
     if sort == 0:
         qs = qs.order_by('has_bitcoin_discount', 'name')
     elif sort == 1 and origin:
         qs = qs.order_by('distance')
-    print qs.query
     return qs
 
 def autocompleteBusiness(term=None, location=None, geolocation=None):
-    qs = Business.objects.none()
+    qs = Business.objects.filter(status='PUB')
     if term:
         qs = Business.objects.filter(name__icontains=term)
     (qs, _) = querySetAddLocation(qs, location)
@@ -72,8 +78,11 @@ def autocompleteBusiness(term=None, location=None, geolocation=None):
     return qs
 
 def autocompleteLocation(term=None, geolocation=None):
-    sqs = SearchQuerySet().autocomplete(content_auto=term)[:10]
-    return [result.content_auto for result in sqs]
+    if term:
+        sqs = SearchQuerySet().autocomplete(content_auto=term)[:10]
+        return [result.content_auto for result in sqs]
+    else:
+        return []
 
 def querySetAddLocation(qs, location):
     d = parseLocationString(location)
@@ -88,6 +97,7 @@ def querySetAddLocation(qs, location):
     return (qs, d)
 
 def querySetAddGeoLocation(qs, geolocation, radius=RADIUS_DEFAULT):
+    radius = max(radius, 1)
     origin = None
     if geolocation:
         d = parseGeoLocation(geolocation)
