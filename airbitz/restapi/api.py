@@ -86,6 +86,14 @@ def autocompleteLocation(term=None, geolocation=None):
 
 def querySetAddLocation(qs, location):
     d = parseLocationString(location)
+    print d
+    if not d['country'] \
+            and not d['admin1_code'] \
+            and not d['admin2_name'] \
+            and not ['admin3_name']:
+        # If no country found, then return empty results
+        qs = qs.filter(pk=0)
+        return (qs, d)
     if d['admin2_name']:
         qs = qs.filter(Q(admin2_name=d['admin2_name']) 
                      | Q(admin3_name=d['admin2_name']))
@@ -143,7 +151,7 @@ def parseLocationString(location):
     if len(sqs) > 0:
         d['admin1_code'] = sqs[0].admin1_code
         d['admin2_name'] = sqs[0].admin2_name
-        d['country'] = sqs[0].country
+        d['country'] = sqs[0].country_code
     else:
         values = map(lambda x : x.strip(), location.split(","))
         values.reverse()
