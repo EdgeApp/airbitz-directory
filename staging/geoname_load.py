@@ -15,7 +15,7 @@ with open(sys.argv[1]) as f:
     linenum = 0
     for line in f:
         linenum = linenum + 1
-        if len(data) >= 10000:
+        if len(data) >= 500:
             solr.add(data)
             data = []
         values = line.split('\t')

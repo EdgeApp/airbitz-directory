@@ -28,3 +28,40 @@
     </div>
 {% endblock %}
 
+{% block javascript %}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('.geocode-address').click(function() {
+                var self = $(this);
+                var origText = self.html();
+                var address = $('input[name="address"]').val();
+                var city = $('input[name="admin2_name"]').val();
+                var state = $('input[name="admin1_code"]').val();
+                var zip = $('input[name="postalcode"]').val();
+                var self = jQuery(this);
+                if (!address || !city || !state || !zip) {
+                    return false;
+                }
+                var address = address + ',' + city + ',' + state + ',' + zip
+                var geocoder = new google.maps.Geocoder();
+                self.html('Fetching...');
+                geocoder.geocode({'address': address}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var loc = results[0].geometry;
+                        latestResult = results[0];
+                        console.log(latestResult);
+                        var g = latestResult.geometry.location;
+                        $('input[name=center_0]').val(g.d);
+                        $('input[name=center_1]').val(g.e);
+                    } else {
+                        alert('Unable to find lat/lon from ' + address);
+                    }
+                    self.html(origText);
+                });
+                return false;
+            });
+
+        });
+    </script>
+{% endblock javascript %}

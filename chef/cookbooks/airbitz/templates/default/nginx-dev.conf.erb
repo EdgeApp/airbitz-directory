@@ -21,6 +21,17 @@ http {
     access_log /tmp/nginx.access.log combined;
     sendfile on;
 
+    gzip on;
+    gzip_disable "msie6";
+
+    gzip_comp_level 6;
+    #gzip_comp_level 9;
+    gzip_min_length  1100;
+    gzip_buffers 16 8k;
+    gzip_proxied any;
+    # gzip_http_version 1.1;
+    gzip_types       text/plain application/xml text/css text/js text/xml application/x-javascript text/javascript application/json application/xml+rss;
+
     upstream app_server {
         #server unix:/tmp/gunicorn.sock fail_timeout=0;
         # For a TCP configuration:

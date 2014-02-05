@@ -1,6 +1,6 @@
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Layout, Field, Submit
+from crispy_forms.layout import HTML, Layout, Field, Submit, Div
 from django.core import validators
 from django import forms
 from django.forms.models import inlineformset_factory
@@ -136,7 +136,8 @@ class BusinessForm(forms.ModelForm):
 
 
 class BizAddressForm(geoforms.ModelForm):
-    center = LatLongField(label="Latitude/Longitude", required=False)
+    center = LatLongField(label="", required=False, \
+                          widget=LatLongWidget(attrs={'style': 'width: 150px'}))
     admin3_name = forms.CharField(label='City: ', required=False)
     admin2_name = forms.CharField(label='County: ', required=False)
     admin1_code = forms.CharField(label='State: ', required=False)
@@ -153,18 +154,32 @@ class BizAddressForm(geoforms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
-        self.helper.form_class = 'form-horizontal'
         self.helper.layout = Layout(
-            Field('address', css_class='input-xxlarge'),
-            Field('admin3_name', css_class='input-xxlarge'),
-            Field('admin2_name', css_class='input-xxlarge'),
-            Field('admin1_code'),
-            Field('postalcode'),
-            Field('country'),
-            Field('center'),
-            FormActions(
-                Submit('submit', 'Save', css_class='btn btn-success'),
-            )
+            Div(
+                Div(
+                    Field('address', css_class='input-xxlarge'),
+                    Field('admin3_name', css_class='input-xxlarge'),
+                    Field('admin2_name', css_class='input-xxlarge'),
+                    Field('admin1_code'),
+                    css_class="col-sm-6"),
+                Div(
+                    Field('postalcode'),
+                    Field('country'),
+                    Div(
+                        HTML("<label class='control-group'>Lat/Lon</label>"),
+                        Div(
+                            Field('center'),
+                            HTML('&nbsp;<button class="btn btn-default geocode-address">Lookup Lat/Lon</button>'),
+                            css_class='form-inline')),
+                    css_class="col-sm-6"),
+                css_class="row"),
+            Div(
+                Div(
+                    FormActions(
+                        Submit('submit', 'Save', css_class='btn btn-success'),
+                    ),
+                    style='text-align: center;', css_class='col-sm-12'),
+                css_class='row')
         )
         super(BizAddressForm, self).__init__(*args, **kwargs)
 
