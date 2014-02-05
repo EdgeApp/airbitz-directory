@@ -116,6 +116,7 @@ class LocationSuggest(APIView):
 
     def get(self, request, *args, **kwargs):
         ll = self.request.QUERY_PARAMS.get('ll', None)
-        results = api.suggestNearByRequest(request, geolocation=ll)[:DEFAULT_PAGE_SIZE]
+        ip = api.getRequestIp(request)
+        results = api.suggestNearByRequest(request, geolocation=ll, ip=ip)[:DEFAULT_PAGE_SIZE]
         return Response({ 'near':  results })
 

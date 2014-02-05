@@ -39,7 +39,6 @@
       if (geo) {
           end += '&ll=' + geo.coords.latitude + ',' + geo.coords.longitude;
       }
-      selector.typeahead('destroy');
       selector.typeahead([{
           name: 'business',
           remote: {
@@ -55,11 +54,12 @@
                   return data.results.map(function(e, i) {
                       return { name: e.name, value: e.name, id: e.pk };
                   });
-              }
+              },
+              rateLimitWait: 0
           },
           template: function(datum) {
               return '<p>' + datum.name + '</p>';
-          },
+          }
       }]);
       selector.on('typeahead:selected', function (object, datum) {
           location.href = '/biz/' + datum.id;
@@ -71,7 +71,6 @@
       if (geo) {
           end += '&lat=' + geo.coords.latitude + '&lon=' + geo.coords.longitude;
       }
-      selector.typeahead('destroy');
       selector.typeahead([{
           name: 'location',
           remote: {
@@ -82,9 +81,10 @@
                   });
               }
           },
+          rateLimitWait: 0,
           template: function(datum) {
               return '<p>' + datum.text + '</p>';
-          },
+          }
       }]);
       selector.on('typeahead:selected', function (object, datum) {
           $(this).val(data.text);

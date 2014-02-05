@@ -8,7 +8,7 @@ from django.contrib.gis import forms as geoforms
 from django.utils.translation import ugettext as _
 
 from directory.models import Business, BusinessImage, BusinessHours, \
-                             ImageTag, Category, SocialId
+                             ImageTag, Category, SocialId, SOCIAL_TYPES
 
 class LatLongWidget(forms.MultiWidget):
     def __init__(self, attrs=None, date_format=None, time_format=None):
@@ -202,11 +202,7 @@ class BizImageLinkForm(forms.Form):
 
 
 class SocialForm(forms.ModelForm):
-    social_type = forms.ChoiceField(choices=(
-        ("foursquare", "Foursquare"),
-        ("facebook", "Faceboook"),
-        ("yelp", "Yelp"),
-    ))
+    social_type = forms.ChoiceField(choices=SOCIAL_TYPES)
     class Meta:
         model = SocialId
         fields=("social_type", "social_id", "social_url", )

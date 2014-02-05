@@ -2,7 +2,7 @@ from django.core.management import BaseCommand
 from django.contrib.gis.geos import Point
 import json
 
-from directory.models import Business
+from directory.models import Business, SocialId
 
 import sys
 reload(sys)
@@ -17,20 +17,32 @@ class Command(BaseCommand):
         data = json.loads(w)
         for row in data:
             # Only Bitcoin, sorry Damian
-            if row['type'] != 'node' and row['icon'] != 'bitcoin':
+            if row['type'] != 'node' and row['type'] != 'way':
                 continue
             title = None
             if row.has_key('title'):
                 title = row['title']
-            center = Point((row['lon'], row['lat']))
             if not title:
                 continue
+            center = Point((row['lon'], row['lat']))
+            try:
+                sid = SocialId.objects.get(social_type='osm', social_id=row['id'])
+                biz = sid.business
+                created = False
+            except SocialId.DoesNotExist:
+                biz = Business.objects.create(name=title, center=center)
+                sid = SocialId.objects.create(social_type='osm', social_id=row['id'], business=biz)
+                created = True
+
             print title,
-            biz, created = Business.objects.get_or_create(name=title, center=center)
             if created:
-                print "...created\r"
+                print "...created"
             else:
-                print "...updating\r"
+                if biz.status in ( 'PUB', 'PEN' ):
+                    print "...skipping"
+                    continue
+                else:
+                    print "...updating"
             if row.has_key('desc') and not biz.description:
                 biz.description = row['desc']
             if row.has_key('web') and not biz.website:
@@ -44,4 +56,3 @@ class Command(BaseCommand):
             if row.has_key('phone') and not biz.phone:
                 biz.phone = row['phone']
             biz.save()
-            

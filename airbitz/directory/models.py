@@ -24,6 +24,13 @@ DAY_OF_WEEK_CHOICES = (
     ('saturday', 'Saturday'),
 )
 
+SOCIAL_TYPES = (
+    ("facebook", "Faceboook"),
+    ("foursquare", "Foursquare"),
+    ("osm", "Open Street Map"),
+    ("yelp", "Yelp"),
+)
+
 def lookupChoice(value, choices):
     for (i,s) in choices:
         if i == value:
@@ -98,6 +105,10 @@ class SocialId(models.Model):
     social_type = models.CharField(max_length=50, null=True)
     social_id = models.CharField(max_length=200, null=True)
     social_url = models.URLField(max_length=2000, null=True)
+
+    @property
+    def lookupType(self):
+        return lookupChoice(self.social_type, SOCIAL_TYPES)
 
 class BusinessImage(models.Model):
     image = models.ImageField(upload_to='business_images', 

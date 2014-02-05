@@ -24,16 +24,16 @@ class Command(BaseCommand):
                 geo.center = Point(float(values[10]), float(values[9]))
                 geo.save()
 
-                s0 = "{0}".format(values[3])
-                self.update(values, s0, admin2=False, admin3=False, postalcode=False)
-                s1 = "{0}, {1}".format(values[5], values[3])
-                self.update(values, s1, admin3=False)
-                s2 = "{0}, {1}".format(values[5], values[4])
-                self.update(values, s2, admin3=False)
-                s3 = "{0}, {1}".format(values[2], values[4])
-                self.update(values, s3, admin3=False)
-                s4 = "{0}, {1}".format(values[2], values[3])
-                self.update(values, s4, place_name=True, admin3=False)
+                # s0 = "{0}".format(values[3])
+                # self.update(values, s0, admin2=False, admin3=False, postalcode=False)
+                # s1 = "{0}, {1}".format(values[5], values[3])
+                # self.update(values, s1, admin3=False)
+                # s2 = "{0}, {1}".format(values[5], values[4])
+                # self.update(values, s2, admin3=False)
+                # s3 = "{0}, {1}".format(values[2], values[3])
+                # self.update(values, s3, admin3=False)
+                # s4 = "{0}, {1}".format(values[2], values[4])
+                # self.update(values, s4, place_name=True, admin3=False)
 
     def update(self, values, id, place_name=False, admin1=True, \
                                  admin2=True, admin3=True, postalcode=True):

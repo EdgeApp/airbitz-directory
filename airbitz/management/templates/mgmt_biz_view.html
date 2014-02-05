@@ -79,7 +79,7 @@
                     <table class="table table-striped">                    
                     {% for s in social %}
                         <tr>
-                            <td> {{ s.social_type }} </td>
+                            <td> {{ s.lookupType }} </td>
                             <td> {{ s.social_id }} </td>
                             <td> <a href="{{ s.social_url }}">Link</a> </td>
                         </tr>

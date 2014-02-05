@@ -17,6 +17,7 @@ log=logging.getLogger("airbitz." + __name__)
 # # Open street map equivalent
 # http://openstreetmap.org/?minlon=-117.2221&minlat=32.7506&maxlon=-116.9041&maxlat=33.1709
 
+DEFAULT_POINT=Point((-117.124603, 33.028400))
 RADIUS_DEFAULT=40000
 DEFAULT_IP='24.152.191.12'
 DEFAULT_LOC_STRING='San Francisco, CA'
@@ -77,9 +78,15 @@ def autocompleteBusiness(term=None, location=None, geolocation=None):
     print qs.query
     return qs
 
-def autocompleteLocation(term=None, geolocation=None):
+def autocompleteLocation(term=None, geolocation=None, ip=None):
     if term:
-        sqs = SearchQuerySet().autocomplete(content_auto=term)[:10]
+        sqs = SearchQuerySet().autocomplete(content_auto=term)
+        if geolocation:
+            sqs = sqs.distance('center', geolocation).order_by('distance')
+        else:
+            # XXX: Biased this to san diego, need to bias by IP
+            sqs = sqs.distance('location', DEFAULT_POINT).order_by('distance')
+        sqs = sqs[:10]
         return [result.content_auto for result in sqs]
     else:
         return []
@@ -115,12 +122,15 @@ def querySetAddGeoLocation(qs, geolocation, radius=RADIUS_DEFAULT):
             qs = qs.filter(center__distance_lt=(origin, D(m=radius)))
     return (qs, origin)
 
-def suggestNearByRequest(request, geolocation=None):
+def getRequestIp(request):
     if request.META.has_key('HTTP_X_REAL_IP'):
         ip = request.META['HTTP_X_REAL_IP']
     else:
         ip = request.META['REMOTE_ADDR']
-    print ip
+    return ip
+
+def suggestNearByRequest(request, geolocation=None):
+    ip = getRequestIp(request)
     return suggestNearText(ip, geolocation)
 
 def suggestNearText(ip, geolocation=None):
@@ -147,7 +157,8 @@ def parseLocationString(location):
     if not location:
         return d
 
-    sqs = SearchQuerySet().autocomplete(content_auto=location)[:1]
+    sqs = SearchQuerySet().autocomplete(content_auto=location)
+    sqs = sqs.distance('location', DEFAULT_POINT).order_by('distance')[:1]
     if len(sqs) > 0:
         d['admin1_code'] = sqs[0].admin1_code
         d['admin2_name'] = sqs[0].admin2_name

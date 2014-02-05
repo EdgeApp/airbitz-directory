@@ -3,11 +3,19 @@ from __future__ import print_function
 import pysolr
 import sys
 
+def c(s):
+    if s:
+        return s.replace(" County", "")
+    else:
+        return s
+
 solr = pysolr.Solr('http://localhost:8983/solr/', timeout=100)
 data = []
 with open(sys.argv[1]) as f:
+    linenum = 0
     for line in f:
-        if len(data) == 10000:
+        linenum = linenum + 1
+        if len(data) >= 10000:
             solr.add(data)
             data = []
         values = line.split('\t')
@@ -20,24 +28,31 @@ with open(sys.argv[1]) as f:
         admin_name2=values[5]
         admin_code2=values[6]
         admin_name3=values[7]
-        lon,lat=float(values[10]), float(values[9])
+        try:
+            lon,lat=float(values[10]), float(values[9])
+        except ValueError as e:
+            print("LineNo: {0}".format(linenum))
+            print(e)
 
         searchable=[]
-        searchable.append("{0}, {1}".format(admin_name2, admin_code1))
-        searchable.append("{0}, {1}".format(admin_name2, admin_name1))
+        searchable.append("{0}, {1}".format(c(admin_name2), admin_code1))
+        searchable.append("{0}, {1}".format(c(place_name), admin_code1))
         for s in searchable:
             data.append({
                 "id": s,
                 "postalcode": postalcode,
                 "text": s,
                 "content_auto": s,
+                "country_code": country,
                 "admin1_code": admin_code1,
                 "admin1_name": admin_name1,
                 "admin2_code": admin_code2,
                 "admin2_name": admin_name2,
                 "admin3_name": admin_name3,
+                # Hacks to appease haystack
+                "location": "{0},{1}".format(lat,lon),
                 "django_ct": "location.locationstring",
-                "location": "{0},{1}".format(lat,lon)
+                "django_id": 0,
             })
 
 if len(data) > 0:
