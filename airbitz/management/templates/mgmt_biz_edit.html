@@ -52,8 +52,8 @@
                         latestResult = results[0];
                         console.log(latestResult);
                         var g = latestResult.geometry.location;
-                        $('input[name=center_0]').val(g.d);
-                        $('input[name=center_1]').val(g.e);
+                        $('input[name=center_0]').val(g.d.toFixed(7));
+                        $('input[name=center_1]').val(g.e.toFixed(7));
                     } else {
                         alert('Unable to find lat/lon from ' + address);
                     }
