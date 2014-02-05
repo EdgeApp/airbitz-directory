@@ -33,6 +33,12 @@
                         </div>
                         <div class="col-sm-6">
                             <dl>
+                                <dt>Categories:</dt>
+                                <dd>
+                                    <span id="categories" class="editable" data-type="text" data-placeholder="Categories" data-inputclass="input-large"> {{ biz.categories.all|join:','}} </span>
+                                </dd>
+                            </dl>
+                            <dl>
                                 <dt>Phone:</dt>
                                 <dd>
                                     <span id="phone" class="editable" data-type="text" data-placeholder="Website" data-inputclass="input-large"> {{ biz.phone }} </span>
