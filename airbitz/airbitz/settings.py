@@ -130,6 +130,7 @@ STATICFILES_DIRS = (
 PIPELINE_CSS = {
     'global': {
         'source_filenames': (
+            'bootstrap/css/bootstrap.css',
             'css/global-stylesheet.css',
         ),
         'output_filename': 'css/global.css',
