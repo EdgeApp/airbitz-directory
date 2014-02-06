@@ -41,14 +41,13 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
     has_bitcoin_discount = serializers.CharField(source='has_bitcoin_discount')
-    center = PointField()
+    location = PointField()
 
     class Meta:
         model = Business
         fields = ('name',
                   'categories',
                   'social',
-                  'description',
                   'website',
                   'phone',
                   'city',
@@ -56,7 +55,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
                   'state', 
                   'postalcode',
                   'country',
-                  'center', )
+                  'location', )
 
 class PaginatedMiniBizSerializer(pagination.PaginationSerializer):
     class Meta:
@@ -69,7 +68,7 @@ class BusinessSerializer(serializers.ModelSerializer):
     hours = BusinessHoursSerializer(source='businesshours_set')
     categories = CategorySerializer(source='categories')
     social = SocialSerializer(source='socialid_set')
-    center = PointField()
+    location = PointField()
 
     class Meta:
         model = Business
@@ -84,11 +83,11 @@ class BusinessSerializer(serializers.ModelSerializer):
                   'state', 
                   'postalcode',
                   'country',
-                  'center',
                   'hours',
                   'has_physical_business', 
                   'has_online_business',
-                  'has_bitcoin_discount', )
+                  'has_bitcoin_discount', 
+                  'location', )
 
 
 class BusinessImageSerializer(serializers.ModelSerializer):
@@ -100,7 +99,7 @@ class BusinessImageSerializer(serializers.ModelSerializer):
         fields = ('image', 'height', 'width', 'bounding_box',)
 
 class AutoCompleteSerializer(serializers.Serializer):
-    pk = serializers.Field()
+    bizId = serializers.Field(source='pk')
     name = serializers.CharField(required=False, max_length=100)
 
 class AutoCompleteLocationSerializer(serializers.ModelSerializer):

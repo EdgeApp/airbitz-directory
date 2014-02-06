@@ -137,9 +137,9 @@ def suggestNearText(ip, geolocation=None):
     if geolocation:
         d = parseGeoLocation(geolocation)
         origin = Point((d['lon'], d['lat']))
-        qs = GeoNameZip.objects.all().distance(origin).order_by('distance')[1]
-        if qs:
-            return "{0}, {1}".format(qs[0].admin_name2, qs[0].admin1_code)
+        qs = GeoNameZip.objects.all().distance(origin).order_by('distance')[:1]
+        if len(qs) > 0:
+            return "{0}, {1}".format(qs[0].admin_name2, qs[0].admin_code1)
         else:
             return processGeoIp(ip)
     else:
