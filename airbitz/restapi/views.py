@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, filters
 from rest_framework.response import Response 
 from rest_framework.views import APIView
 import logging
@@ -11,14 +11,22 @@ log=logging.getLogger("airbitz." + __name__)
 
 DEFAULT_PAGE_SIZE=20
 
+
+class InternalOrderFilter(filters.OrderingFilter):
+    ordering_param = 'sort'
+
 class CategoryView(generics.ListAPIView):
     """
         Retrieve business categories. 
+
+        sort -- which field sort by, either 'name' or 'level'
     """
     model = Category
     serializer_class = serializers.CategorySerializer
     queryset = Category.objects.all()
-
+    pagination_serializer_class = serializers.LastUpdatedSerializer
+    filter_backends = (InternalOrderFilter,)
+    ordering_fields = ('name', 'level')
 
 class BusinessView(generics.RetrieveAPIView):
     """

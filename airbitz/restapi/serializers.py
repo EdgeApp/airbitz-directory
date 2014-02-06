@@ -1,11 +1,21 @@
-from rest_framework import serializers
+from django.db.models import Max
 from rest_framework import fields
 from rest_framework import pagination
+from rest_framework import serializers
 
 from directory.models import Business, BusinessHours, \
                              BusinessImage, Category, \
                              SocialId
 from location.models import GeoNameZip
+
+
+class LastUpdated(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        m = Category.objects.all().aggregate(Max('modified'))
+        return m['modified__max']
+
+class LastUpdatedSerializer(pagination.PaginationSerializer):
+    last_updated = LastUpdated(source='*')
 
 class PointField(fields.Field):
     type_name = 'PointField'
@@ -27,7 +37,7 @@ class BusinessHoursSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('name','description')
+        fields = ('name', 'level', )
 
 class SocialSerializer(serializers.ModelSerializer):
     class Meta:
