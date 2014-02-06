@@ -11,7 +11,6 @@ log=logging.getLogger("airbitz." + __name__)
 
 DEFAULT_PAGE_SIZE=20
 
-
 class InternalOrderFilter(filters.OrderingFilter):
     ordering_param = 'sort'
 

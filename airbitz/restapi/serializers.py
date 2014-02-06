@@ -29,6 +29,14 @@ class BoundingBoxField(fields.Field):
     def field_to_native(self, obj, field_name):
         return {'x': 0.0, 'y': 0.0, 'height': 0.25, 'width': 1.0}
 
+class BusinessImageSerializer(serializers.ModelSerializer):
+    image = serializers.CharField(source='get_absolute_url', read_only=True)
+    bounding_box = BoundingBoxField()
+
+    class Meta:
+        model = BusinessImage
+        fields = ('image', 'height', 'width', 'bounding_box',)
+
 class BusinessHoursSerializer(serializers.ModelSerializer):
     class Meta:
         model = BusinessHours
@@ -47,6 +55,7 @@ class SocialSerializer(serializers.ModelSerializer):
 class MiniBusinessSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(source='categories')
     social = SocialSerializer(source='socialid_set')
+    images = BusinessImageSerializer(source='businessimage_set')
     state = serializers.CharField(source='admin1_code')
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
@@ -58,6 +67,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
         fields = ('name',
                   'categories',
                   'social',
+                  'images',
                   'website',
                   'phone',
                   'city',
@@ -75,6 +85,7 @@ class BusinessSerializer(serializers.ModelSerializer):
     state = serializers.CharField(source='admin1_code')
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
+    images = BusinessImageSerializer(source='businessimage_set')
     hours = BusinessHoursSerializer(source='businesshours_set')
     categories = CategorySerializer(source='categories')
     social = SocialSerializer(source='socialid_set')
@@ -85,6 +96,7 @@ class BusinessSerializer(serializers.ModelSerializer):
         fields = ('name',
                   'categories',
                   'social',
+                  'images',
                   'description',
                   'website',
                   'phone',
@@ -99,14 +111,6 @@ class BusinessSerializer(serializers.ModelSerializer):
                   'has_bitcoin_discount', 
                   'location', )
 
-
-class BusinessImageSerializer(serializers.ModelSerializer):
-    image = serializers.CharField(source='get_absolute_url', read_only=True)
-    bounding_box = BoundingBoxField()
-
-    class Meta:
-        model = BusinessImage
-        fields = ('image', 'height', 'width', 'bounding_box',)
 
 class AutoCompleteSerializer(serializers.Serializer):
     bizId = serializers.Field(source='pk')
