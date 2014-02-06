@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, filters
 from rest_framework.response import Response 
 from rest_framework.views import APIView
 import logging
@@ -11,14 +11,21 @@ log=logging.getLogger("airbitz." + __name__)
 
 DEFAULT_PAGE_SIZE=20
 
+class InternalOrderFilter(filters.OrderingFilter):
+    ordering_param = 'sort'
+
 class CategoryView(generics.ListAPIView):
     """
         Retrieve business categories. 
+
+        sort -- which field sort by, either 'name' or 'level'
     """
     model = Category
     serializer_class = serializers.CategorySerializer
     queryset = Category.objects.all()
-
+    pagination_serializer_class = serializers.LastUpdatedSerializer
+    filter_backends = (InternalOrderFilter,)
+    ordering_fields = ('name', 'level')
 
 class BusinessView(generics.RetrieveAPIView):
     """
@@ -70,7 +77,7 @@ class SearchView(generics.ListAPIView):
                                    radius=radius, category=category, sort=sort)
 
 
-class AutoCompleteBusiness(generics.ListAPIView):
+class AutoCompleteBusiness(APIView):
     """
         Autocompletes base on business name.
 
@@ -79,13 +86,13 @@ class AutoCompleteBusiness(generics.ListAPIView):
         ll   -- Latitude,Longitude 
     """
     model = Business
-    serializer_class = serializers.AutoCompleteSerializer
 
-    def get_queryset(self):
+    def get(self, request, *args, **kwars):
         term = self.request.QUERY_PARAMS.get('term', None)
         location = self.request.QUERY_PARAMS.get('location', None)
         ll = self.request.QUERY_PARAMS.get('ll', None)
-        return api.autocompleteBusiness(term=term, location=location, geolocation=ll)
+        results = api.autocompleteBusiness(term=term, location=location, geolocation=ll)[:DEFAULT_PAGE_SIZE]
+        return Response({ 'results':  results })
 
 
 class AutoCompleteLocation(APIView):
@@ -116,7 +123,6 @@ class LocationSuggest(APIView):
 
     def get(self, request, *args, **kwargs):
         ll = self.request.QUERY_PARAMS.get('ll', None)
-        ip = api.getRequestIp(request)
-        results = api.suggestNearByRequest(request, geolocation=ll, ip=ip)[:DEFAULT_PAGE_SIZE]
+        results = api.suggestNearByRequest(request, geolocation=ll)[:DEFAULT_PAGE_SIZE]
         return Response({ 'near':  results })
 

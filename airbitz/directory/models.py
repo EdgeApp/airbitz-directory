@@ -40,6 +40,9 @@ def lookupChoice(value, choices):
 class Category(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=2500, blank=True, null=True)
+    level = models.IntegerField(null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return "{0}".format(self.name)

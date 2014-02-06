@@ -29,6 +29,7 @@
                                 <thead>
                                     <th style="width: 30px"></th>
                                     <th>Name</th>
+                                    <th>Level</th>
                                     <th>Description</th>
                                     <th style="width: 30px"></th>
                                 </thead>
@@ -37,6 +38,7 @@
                                         <tr>
                                             <td><a class="pull-right btn-sm btn btn-default" href="{% url 'mgmt_category_edit' cat.id %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                                             <td>{{ cat.name }}</td>
+                                            <td>{{ cat.level }}</td>
                                             <td>{{ cat.description }} </td>
                                             <td><a class="pull-right btn-sm btn btn-danger" href="{% url 'mgmt_category_edit' cat.id %}"><span class="glyphicon glyphicon-trash"></span></a></td>
                                         </tr>

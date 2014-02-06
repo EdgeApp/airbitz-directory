@@ -52,9 +52,8 @@
         {} ];
         
         $(function() {
-            console.log(json.length);
             if (json.length > 0) {
-                addMap($('#map'), 5, json[0].lat, json[0].lon, json);
+                AB.addMap($('#map'), 5, json[0].lat, json[0].lon, json);
             }
         });
     </script>

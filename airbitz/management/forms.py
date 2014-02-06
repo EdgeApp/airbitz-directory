@@ -49,6 +49,7 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ( "name",
+                   "level", 
                    "description", 
                  )
 
@@ -56,7 +57,14 @@ class CategoryForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.layout = Layout(
-            Field('name', css_class='input-xxlarge'),
+            Div(
+                Div(
+                    Field('name', css_class='input-xxlarge'),
+                    css_class='col-sm-8'),
+                Div(
+                    Field('level'),
+                    css_class='col-sm-4'),
+                css_class='row'),
             Field('description', css_class='input-xxlarge'),
             FormActions(
                 Submit('submit', 'Save', css_class='btn btn-success'),

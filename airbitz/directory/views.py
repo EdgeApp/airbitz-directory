@@ -24,9 +24,10 @@ def landing(request):
 
 def business_search(request):
     term = request.GET.get('term', None)
+    category = request.GET.get('category', None)
     ll = request.GET.get('ll', None)
     near = request.GET.get('near', None)
-    results = api.searchDirectory(term=term, location=near, geolocation=ll)
+    results = api.searchDirectory(term=term, location=near, geolocation=ll, category=category)
     context = {
         'results': results[:20],
         'mapkey': GOOGLE_MAP_KEY
