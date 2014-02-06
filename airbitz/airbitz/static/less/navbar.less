@@ -1,0 +1,55 @@
+//
+// Customize Navbar
+// --------------------------------------------------
+
+
+.navbar-inverse {
+    background-color: @ab-blue;
+    border: #eee;
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+
+    .navbar-brand {
+        padding: 0;
+
+        .logo {
+            height: 50px;
+            margin-left: 15px;
+        }
+    }
+
+    .navbar-nav > .active a,
+    .navbar-nav > .active > a:hover,
+    .navbar-nav > .active > a:focus {
+        background-color: rgba(0,0,0,.2);
+    }
+    .navbar-nav > li > a {
+        color: #eee;
+    }
+
+    .navbar-nav > .open > a,
+    .navbar-nav > .open > a:hover,
+    .navbar-nav > .open > a:focus {
+        background: @ab-green;
+    }
+}
+
+
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper .container {
+    padding-left: 0;
+    padding-right: 0;
+}
+.navbar-wrapper .navbar {
+    padding-left: 15px;
+    padding-right: 15px;
+}
