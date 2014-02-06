@@ -77,7 +77,7 @@ class SearchView(generics.ListAPIView):
                                    radius=radius, category=category, sort=sort)
 
 
-class AutoCompleteBusiness(generics.ListAPIView):
+class AutoCompleteBusiness(APIView):
     """
         Autocompletes base on business name.
 
@@ -86,13 +86,13 @@ class AutoCompleteBusiness(generics.ListAPIView):
         ll   -- Latitude,Longitude 
     """
     model = Business
-    serializer_class = serializers.AutoCompleteSerializer
 
-    def get_queryset(self):
+    def get(self, request, *args, **kwars):
         term = self.request.QUERY_PARAMS.get('term', None)
         location = self.request.QUERY_PARAMS.get('location', None)
         ll = self.request.QUERY_PARAMS.get('ll', None)
-        return api.autocompleteBusiness(term=term, location=location, geolocation=ll)
+        results = api.autocompleteBusiness(term=term, location=location, geolocation=ll)[:DEFAULT_PAGE_SIZE]
+        return Response({ 'results':  results })
 
 
 class AutoCompleteLocation(APIView):

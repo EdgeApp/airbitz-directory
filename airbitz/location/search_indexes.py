@@ -12,8 +12,8 @@ class LocationStringIndex(indexes.SearchIndex, indexes.Indexable):
     admin3_name = indexes.CharField(model_attr='admin3_name', null=True)
     admin4_code = indexes.CharField(model_attr='admin4_code', null=True)
     admin4_name = indexes.CharField(model_attr='admin4_name', null=True)
-    postalcode = indexes.CharField(model_attr='postalcode')
-    country_code = indexes.CharField(model_attr='country_code')
+    postalcode = indexes.CharField(model_attr='postalcode', null=True)
+    country = indexes.CharField(model_attr='country_code', null=True)
     location = indexes.LocationField(model_attr='center', null=True)
 
     content_auto = indexes.EdgeNgramField(model_attr='content_auto')

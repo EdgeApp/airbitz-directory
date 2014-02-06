@@ -2,11 +2,12 @@ from django.contrib.gis.geos import Point, Polygon
 from django.contrib.gis.measure import D
 from django.db.models import Q
 from haystack.query import SearchQuerySet
+from haystack.query import SQ
 import logging
 import subprocess
 
-from directory.models import Business
-from location.models import GeoNameZip
+from directory.models import Business, Category
+from location.models import GeoNameZip, LocationString
 
 log=logging.getLogger("airbitz." + __name__)
 
@@ -70,30 +71,49 @@ def searchDirectory(term=None, location=None, \
     return qs
 
 def autocompleteBusiness(term=None, location=None, geolocation=None):
-    qs = Business.objects.filter(status='PUB')
+    sqs = SearchQuerySet()
     if term:
-        qs = qs.filter(name__icontains=term)
-    (qs, _) = querySetAddLocation(qs, location)
-    (qs, _) = querySetAddGeoLocation(qs, geolocation)
-    print qs.query
-    return qs
+        sqs = sqs.filter(content_auto=term)
+    if location: 
+        fits = SQ(django_ct='directory.business')
+        d = parseLocationString(location)
+        if d['admin2_name']:
+            fits = fits & SQ(admin2_name=d['admin2_name'])
+        if d['admin1_code']:
+            fits = fits & SQ(admin1_code=d['admin1_code'])
+        if d['country']:
+            fits = fits & SQ(country=d['country'])
+    else:
+        fits = SQ(django_ct='directory.business')
+    fits = (fits) | SQ(django_ct='directory.category')
+    sqs = searchAddGeoLocation(sqs, geolocation)
+    sqs = sqs.filter(fits).models(Business, Category)
+    return [autocompleteSerialize(result) for result in sqs]
+
+def autocompleteSerialize(row):
+    if row.model.__name__ == 'Business':
+        return { 'type': 'business', 'bizId': row.pk, 'text': row.content_auto }
+    else:
+        return { 'type': 'category', 'text': row.content_auto }
 
 def autocompleteLocation(term=None, geolocation=None, ip=None):
     if term:
-        sqs = SearchQuerySet().autocomplete(content_auto=term)
-        if geolocation:
-            sqs = sqs.distance('center', geolocation).order_by('distance')
-        else:
-            # XXX: Biased this to san diego, need to bias by IP
-            sqs = sqs.distance('location', DEFAULT_POINT).order_by('distance')
+        sqs = SearchQuerySet().models(LocationString).autocomplete(content_auto=term)
+        sqs = searchAddGeoLocation(sqs, geolocation)
         sqs = sqs[:10]
         return [result.content_auto for result in sqs]
     else:
         return []
 
+def searchAddGeoLocation(sqs, geolocation):
+    if geolocation:
+        return sqs.distance('center', geolocation).order_by('distance')
+    else:
+        # XXX: Biased this to san diego, need to bias by IP
+        return sqs.distance('location', DEFAULT_POINT).order_by('distance')
+
 def querySetAddLocation(qs, location):
     d = parseLocationString(location)
-    print d
     if not d['country'] \
             and not d['admin1_code'] \
             and not d['admin2_name'] \

@@ -43,7 +43,7 @@ with open(sys.argv[1]) as f:
                 "postalcode": postalcode,
                 "text": s,
                 "content_auto": s,
-                "country_code": country,
+                "country": country,
                 "admin1_code": admin_code1,
                 "admin1_name": admin_name1,
                 "admin2_code": admin_code2,

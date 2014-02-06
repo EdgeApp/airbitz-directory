@@ -52,17 +52,21 @@
               },
               filter: function(data) {
                   return data.results.map(function(e, i) {
-                      return { name: e.name, value: e.name, id: e.pk };
+                      return { type: e.type, name: e.text, value: e.text, id: e.bizId };
                   });
-              },
-              rateLimitWait: 0
+              }
           },
           template: function(datum) {
               return '<p>' + datum.name + '</p>';
           }
       }]);
       selector.on('typeahead:selected', function (object, datum) {
-          location.href = '/biz/' + datum.id;
+          if (datum.type === 'business' && datum.id) {
+            location.href = '/biz/' + datum.id;
+          } else {
+            location.href = '/search?category=' + encodeURIComponent(datum.value) + 
+                                   '&location=' + encodeURIComponent($('#near').val());
+          }
       });
   };
   AB.addLocationSearch = function(selector, locSelector) {
