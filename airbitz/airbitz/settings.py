@@ -130,8 +130,6 @@ STATICFILES_DIRS = (
 PIPELINE_CSS = {
     'global': {
         'source_filenames': (
-            'bootstrap/css/bootstrap.css',
-            'bootstrap/css/bootstrap-responsive.css',
             'css/global-stylesheet.css',
         ),
         'output_filename': 'css/global.css',
@@ -153,6 +151,7 @@ PIPELINE_JS = {
     'core': {
         'source_filenames': (
             'js/jquery-1.9.1.min.js',
+            'bootstrap/js/bootstrap.min.js',
             'js/core.js',
             'js/holder.js',
             'js/typeahead.js',
