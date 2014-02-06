@@ -8,41 +8,66 @@
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-            <title>{% block title %}{% endblock %}</title>
+            <title>{% block title %}Airbitz | Bitcoin Business Directory{% endblock title %}</title>
             <meta name="viewport" content="width=device-width">
+
+            <link rel="icon" type="image/png" href="{{ STATIC_URL }}img/favicon.ico">
             {% compressed_css 'global' %}
         {% endblock head %}
     </head>
     <body>
-        {% block topbar %}
-        <div class="navbar navbar-default navbar-static-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{% url 'landing' %}">Airbitz</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <form name="search" class="navbar-form navbar-left" role="search" method="get" action="{% url 'search' %}">
-                        <div class="form-group">
-                            <input id="term" name="term" type="text" style="width: 200px" placeholder="Business name..." autocomplete="off"  class="typeahead form-control">
-                        </div>
-                        <div class="form-group">
-                            <input id="near" name="near" type="text" style="width: 200px" placeholder="City..." autocomplete="off" class="typeahead form-control" value="{{ near }}">
-                        </div>
-                        <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
-                    </form>
-                </div><!--/.navbar-collapse -->
-            </div>
-        </div>
-        {% endblock %}
-
         <div id="wrap">
-            <div class="container">
+            {% block topbar %}
+
+            <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{% url 'landing' %}">
+                            <img class="logo" src="{{ STATIC_URL }}img/logo-mono-white.png" alt="airBitz" />
+                        </a>
+                    </div>
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#" class="active">About</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Directory <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header">Categories</li>
+                                    <li><a href="#">All Businesses</a></li>
+                                    <li><a href="#">Food and Drink</a></li>
+                                    <li><a href="#">Local Events</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Submit Info</li>
+                                    <li><a href="#">List a Business</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <form name="search" class="navbar-form text-center" role="search" method="get" action="{% url 'search' %}">
+                            <div class="form-group">
+                                <input id="term" name="term" type="text" class="typeahead form-control" placeholder="Business Name..." autocomplete="off" style="width: 200px;">
+                            </div>
+                            <div class="form-group">
+                                <input id="near" name="near" type="text" class="typeahead form-control" placeholder="City..." autocomplete="off" value="{{ near }}" style="width: 200px;">
+                            </div>
+                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                        </form>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+            </nav>
+
+        {% endblock topbar %}
+
+
+            <div class="main-content container">
                 {% block message %}
                     {% if messages %}
                         <div class="row">
@@ -54,17 +79,19 @@
                 {% endblock message %}
 
                 {% block body %}
-                {% endblock %}
+                {% endblock body %}
             </div><!-- /.container -->
+
+
         </div><!-- /#wrap -->
 
         {% block footer %}
-            <div class="footer">
-                <p class="text-center">
-                    &copy; {% now "Y" %} - AirBitz&nbsp;
-                </p>
+            <div id="footer">
+                <div class="container">
+                    <p class="text-center">&copy; {% now "Y" %} - AirBitz</p>
+                </div>
             </div>
-        {% endblock %}
+        {% endblock footer %}
 
         {% block javascript_headers %}
             {% compressed_js 'core' %}

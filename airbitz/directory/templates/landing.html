@@ -3,21 +3,123 @@
 {% block title %} AirBitz {% endblock %}
 
 {% block body %}
-     <div class="row">
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="{{ STATIC_URL }}img/landing/slides/cityscape.jpg" alt="Bitcoin in Your Area" style="opacity: .8">
+          <div class="container">
+            <div class="carousel-caption">
+              <img src="{{ STATIC_URL }}img/landing/slides/bitcoin-icon-logo_white-bg.png" alt="Bitcoin" width="128px">
+              <h1>Find Places to Spend Bitcoin</h1>
+              <p>The easiest way to find places locally in your area to use your bitcoins.</p>
+              <p><a class="btn btn-lg btn-success" href="#" role="button">Search Now</a></p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-       </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        <div class="item">
+          <img src="{{ STATIC_URL }}img/landing/slides/restaurant-outdoor-table.jpg" alt="List a Local Business" style="opacity: .5">
+          <div class="container">
+            <div class="carousel-caption">
+              <img src="{{ STATIC_URL }}img/landing/slides/local-bitcoin-directory.png" alt="Bitcoin" width="128px">
+              <h1>List a Business</h1>
+              <p>Do you know about a business that is accepting bitcoin?</p>
+              <p><a class="btn btn-lg btn-danger" href="#" role="button">List a Business</a></p>
+            </div>
+          </div>
         </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div><!-- /.carousel -->
+
+
+
+    <div class="container-full row" style="margin-bottom: 60px; padding: 30px; background: #efefef">
+
+      <div class="text-center col-md-12">
+        <h2>Get Notified</h2>
+        <h4 class="text-muted">We can let you know as new businesses accept Bitcoin in your area.</h4>
+        <form class="form-inline col-md-12" role="form">
+          <div class="row">
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputEmail2">Email address</label>
+              <input type="email" class="form-control input-lg" placeholder="Email Address" style="width: 300px;">
+            </div>
+
+            <select class="form-control input-lg">
+              <option>- Radius -</option>
+              <option>10 Miles</option>
+              <option>25 Miles</option>
+              <option>50</option>
+              <option>Any</option>
+            </select>
+
+            <button type="submit" class="btn btn-info btn-lg">Get Notified</button>
+          </div>
+        </form>
+      </div>
+
     </div>
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+      <!-- START THE FEATURETTES -->
+      <div class="row featurette">
+        <div class="col-md-8">
+          <h2 class="featurette-heading">Local Businesses.<br />
+            <span class="text-muted">Choose local and sustainable.
+          </h2>
+          <p class="lead">Easier than ever to find mechanics, lawyers, stylists, you name it, all taking bitcoin in your area.</p>
+          <div class="row">
+
+          </div>
+        </div>
+        <div class="col-md-4">
+          <img class="featurette-image img-responsive" src="{{ STATIC_URL }}img/landing/local-business.jpg" alt="Generic placeholder image">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-4">
+          <img class="featurette-image img-responsive" src="{{ STATIC_URL }}img/landing/place-to-eat.jpg" alt="Generic placeholder image">
+        </div>
+        <div class="col-md-8">
+          <h2 class="featurette-heading">Great Food and Drink.<br />
+            <span class="text-muted">It tastes even better with bitcoin.</span>
+          </h2>
+          <p class="lead">Adoption starts locally and supporting local restaurants, bars and cafes that accept bitcoin is a great way to keep bitcoin visible.</p>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-8">
+          <h2 class="featurette-heading">Local Events Things to Do.<br />
+            <span class="text-muted">Have fun with your bitcoin.</span>
+          </h2>
+          <p class="lead">From the local farmers market to the local music and art scene find out where transient events are accepting bitcoin.</p>
+        </div>
+        <div class="col-md-4">
+          <img class="featurette-image img-responsive" src="{{ STATIC_URL }}img/landing/events.jpg" alt="Generic placeholder image">
+        </div>
+      </div>
+
+
+      <!-- /END THE FEATURETTES -->
+    </div>
+
 {% endblock %}
