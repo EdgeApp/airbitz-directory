@@ -1,73 +1,102 @@
 {% extends 'mgmt_biz_base.html' %}
+{% load compressed %}
 
 {% block title%} {{ biz.name }} {% endblock %}
 
+{% block head %}
+    {{ block.super }}
+    {% compressed_css 'management' %}
+{% endblock head %}
+
 {% block bizbody %}
+<div id="bizapp">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="alertsdiv">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12" style="text-align: center; padding-bottom: 10px;">
+            <div class="btn-group">
+                <button class="save btn btn-success">Save</button>
+                <a class="btn btn-default" href="{% url 'mgmt_biz_edit' biz.id %}">Edit</a>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-default">
-                <div class="panel-heading">MAIN
-                    <a class="pull-right" href="{% url 'mgmt_biz_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" /></a>
-                </div>
+                <div class="panel-heading"></div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-6">
-                            <dl>
-                                <dt>Status:</dt>
-                                <dd>
-                                    <span id="status" class="editable" data-type="text" data-placeholder="Name" data-inputclass="select2"> {{ biz.lookupStatus }} </span>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>Name:</dt>
-                                <dd>
-                                    <span id="name" class="editable" data-type="text" data-placeholder="Name" data-inputclass="input-large"> {{ biz.name }} </span>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>Description:</dt>
-                                <dd>
-                                    <span id="description" class="editable" data-type="text" data-placeholder="Description" data-inputclass="input-large"> {{ biz.description }} </span>
-                                </dd>
-                            </dl>
+                            <div>
+                                <label for="status">Status:</label>
+                                <div>
+                                    <select id="status" name="status" />
+                                        {% for s in STATUS_CHOICES %}
+                                            <option value="{{ s.0 }}">{{ s.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="name">Name:</label>
+                                <div>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ biz.name }}" />
+                                </div>
+                            </div>
+                            <div>
+                                <label>Description:</label>
+                                <div>
+                                    <textarea class="form-control" rows="5" id="description" name="description">{{ biz.description }}</textarea>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-6">
-                            <dl>
-                                <dt>Categories:</dt>
-                                <dd>
-                                    <span id="categories" class="editable" data-type="text" data-placeholder="Categories" data-inputclass="input-large"> {{ biz.categories.all|join:','}} </span>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>Phone:</dt>
-                                <dd>
-                                    <span id="phone" class="editable" data-type="text" data-placeholder="Website" data-inputclass="input-large"> {{ biz.phone }} </span>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>Website:</dt>
-                                <dd>
-                                    <span id="website" class="editable" data-type="text" data-placeholder="Website" data-inputclass="input-large"> <a href="{{ biz.website }}">{{ biz.website }}</a>  </span>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>Has Physical Business:</dt>
-                                <dd>
-                                    <span id="has_physical_business" class="editable" data-type="text" data-placeholder="Physical Business" data-inputclass="input-large"> {{ biz.has_physical_business|yesno }} </span>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>Has Online Business:</dt>
-                                <dd>
-                                    <span id="has_online_business" class="editable" data-type="text" data-placeholder="Online Business" data-inputclass="input-large"> {{ biz.has_online_business|yesno }} </span>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>Bitcoin Discount:</dt>
-                                <dd>
-                                    <span id="has_bitcoin_discount" class="editable" data-type="text" data-placeholder="Bitcoin Discoint" data-inputclass="input-large"> {{ biz.has_bitcoin_discount }} </span>
-                                </dd>
-                            </dl>
+                            <div>
+                                <label for="categories">Categories:</label>
+                                <div>
+                                    <input id="categories" value="{% for c in biz.categories.all %}{{c.id}},{% endfor %} " />
+                                </div>
+                            </div>
+                            <div>
+                                <label for="phone">Phone:</label>
+                                <div>
+                                    <input type="tel" class="form-control" id="phone" name="phone" value="{{ biz.phone }}" />
+                                </div>
+                            </div>
+                            <div>
+                                <label for="website">Website:</label>
+                                <div>
+                                    <input type="url" class="form-control" id="website" name="website" value="{{ biz.website }}" />
+                                </div>
+                            </div>
+                            <div>
+                                <label for="has_physical_business">Has Physical Business:</label>
+                                <div>
+                                    <select id="has_physical_business" name="has_physical_business" />
+                                        <option value="True">Yes</option>
+                                        <option value="False">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="has_online_business">Has Online Business:</label>
+                                <div>
+                                    <select id="has_online_business" name="has_online_business" value="{{ biz.has_online_business }}" />
+                                        <option value="True">Yes</option>
+                                        <option value="False">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="has_bitcoin_discount">Bitcoin Discount:</label>
+                                <div>
+                                    <input type="number" class="form-control" id="has_bitcoin_discount" name="has_bitcoin_discount" value="{{ biz.has_bitcoin_discount }}" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,47 +158,232 @@
                     <dl>
                         <dt>Address:</dt>
                         <dd>
-                            <span id="address" class="editable" data-type="text" data-placeholder="Address" data-inputclass="input-large"> {{ biz.address }} </span>
+                            <input type="text" id="address" name="address" class="form-control" value="{{ biz.address }}" />
                         </dd>
                     </dl>
                     <dl>
                         <dt>City:</dt>
                         <dd>
-                            <span id="city" class="editable" data-type="text" data-placeholder="City" data-inputclass="input-large"> {{ biz.admin3_name }} </span>
+                            <input type="text" id="admin3_name" name="admin3_name" class="form-control" value="{{ biz.admin3_name }}" />
                         </dd>
                     </dl>
                     <dl>
                         <dt>County:</dt>
                         <dd>
-                            <span id="city" class="editable" data-type="text" data-placeholder="County" data-inputclass="input-large"> {{ biz.admin2_name }} </span>
+                            <input type="text" id="admin2_name" name="admin2_name" class="form-control" value="{{ biz.admin2_name }}" />
                         </dd>
                     </dl>
                     <dl>
                         <dt>State:</dt>
                         <dd>
-                            <span id="state" class="editable" data-type="text" data-placeholder="State" data-inputclass="input-large"> {{ biz.admin1_code }} </span>
+                            <input type="text" id="admin1_code" name="admin1_code" class="form-control" value="{{ biz.admin1_code }}" />
                         </dd>
                     </dl>
                     <dl>
                         <dt>Postal Code:</dt>
                         <dd>
-                            <span id="postalcode" class="editable" data-type="text" data-placeholder="Postal Code" data-inputclass="input-large"> {{ biz.postalcode }} </span>
+                            <input type="text" id="postalcode" name="postalcode" class="form-control" value="{{ biz.postalcode }}" />
                         </dd>
                     </dl>
                     <dl>
                         <dt>Country:</dt>
                         <dd>
-                            <span id="country" class="editable" data-type="text" data-placeholder="Country" data-inputclass="input-large"> {{ biz.country }} </span>
+                            <input type="text" id="country" name="country" class="form-control" value="{{ biz.country }}" />
                         </dd>
                     </dl>
-                    <dl>
-                        <dt>Lat/Lon:</dt>
-                        <dd>
-                        <span id="latlon" class="editable" data-type="text" data-placeholder="Lat,Lon" data-inputclass="input-large"> {{ biz.center.y }}, {{ biz.center.x }} </span>
-                        </dd>
-                    </dl>
+                    <div>
+                        <label>Lat/Lon:</label>
+                        <div class="form-inline">
+                            <input type="text" style="width: 150px" class="form-control" id="latitude" name="latitude" value="{{ biz.center.y }}" />
+                            <input type="text" style="width: 150px" class="form-control" id="longitude" name="longitude" value="{{ biz.center.x }}" />
+                            <button class="btn btn-default geocode-address">Lookup Lat/Lon</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12" style="text-align: center; padding-bottom: 10px;">
+            <div class="btn-group">
+                <button class="save btn btn-success">Save</button>
+                <a class="btn btn-default" href="{% url 'mgmt_biz_edit' biz.id %}">Edit</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
+
+{% block javascript_headers %}
+    {{ block.super }}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    {% compressed_js 'management' %}
+{% endblock javascript_headers %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script>
+        $(function() {
+            var Social = Backbone.Model.extend({
+                defaults: function() {
+                    return {
+                        name: "",
+                        description: "",
+                        business_id: {{ biz.id }}
+                    };
+                },
+                url: function() {
+                    if (this.id) {
+                        return '/api/v1/admin/biz/' + this.id + '/';
+                    } else {
+                        return '/api/v1/admin/biz/';
+                    }
+                }
+            });
+            var SocialList = Backbone.Collection.extend({
+                model: Social,
+                url: function() {
+                    return '/api/v1/admin/social/';
+                },
+                parse: function(response) {
+                    return response.results;
+                }
+            });
+
+            var Business = Backbone.Model.extend({
+                defaults: function() {
+                    return {
+                        name: "",
+                        description: ""
+                    };
+                },
+                url: function() {
+                    return '/api/v1/admin/biz/' + this.id + '/';
+                },
+            });
+            var biz = new Business({id: {{ biz.id }} });
+            biz.fetch()
+
+            var AppView = Backbone.View.extend({
+                el: $("#bizapp"),
+                events: {
+                    "click .save":  "saveBusiness",
+
+                    "change input": "changed",
+                    "change textarea": "changed",
+                    "change select": "changed"
+                },
+
+                initialize: function() {
+                    this.listenTo(biz, 'change', this.render);
+                },
+
+                render: function() {
+                },
+
+                changed: function(evt) {
+                    var changed = evt.currentTarget;
+                    var value = $(evt.currentTarget).val();
+                    var obj = {};
+                    obj[changed.id] = value;
+                    biz.set(obj);
+                    console.log(biz);
+                },
+
+                updateOnEnter: function(e) {
+                    if (e.ctrlKey && e.keyCode == 13) {
+                        this.saveBusiness();
+                    }
+                },
+
+                saveBusiness: function() { 
+                    var obj = {};
+                    obj['center'] = {
+                        latitude: parseFloat($('#latitude').val()),
+                        longitude: parseFloat($('#longitude').val())
+                    };
+                    // var cats = $.map($('#categories').select2('data'), function(m) {
+                    //     return { id: m.id };
+                    // });
+                    // console.log(cats);
+                    // obj['categories'] = cats;
+                    biz.set(obj);
+
+                    $('.save').html('Updating...');
+                    biz.save({}, {
+                        success: function() {
+                            $('.save').html('Save');
+                            $('.alertsdiv').html(
+                                '<div class="alert-dismissable alert alert-success">Successfullly updated.</div>')
+                        },
+                        error: function() {
+                            alert('An error occurred.');
+                            $('.alertsdiv').html(
+                                '<div class="alert-dismissable alert alert-danger">Unable to save form!</div>')
+                        }
+                    });
+                },
+            });
+            AB.setup();
+            $.ajax({
+                dataType: 'json',
+                contentType: 'json',
+                type: "GET",
+                url: "/api/v1/admin/cat/"
+            }).done(function(data) {
+                var d = data.results.map(function(m) {
+                    return { id: m.id, text: m.name };
+                });
+                $('#categories').select2({ 
+                    width: '100%',
+                    multiple: true,
+                    data : d,
+                    createSearchChoice: function(term, data) {
+                        return { id: term, text: term, needsId: true };
+                    }
+                });
+            });
+            $('#status').select2({ 
+                width: '200px' 
+            }).select2('val', '{{ biz.status }}');
+
+            $('#has_physical_business').select2({ 
+                width: '200px' 
+            }).select2('val', '{{ biz.has_physical_business }}');
+            $('#has_online_business').select2({ 
+                width: '200px' 
+            }).select2('val', '{{ biz.has_online_business }}');
+            var App = new AppView();
+
+            $('.geocode-address').click(function() {
+                var self = $(this);
+                var origText = self.html();
+                var address = $('#address').val();
+                var city = $('#admin2_name').val();
+                var state = $('#admin1_code').val();
+                var zip = $('#postalcode').val();
+                var self = jQuery(this);
+                if (!address || !city || !state || !zip) {
+                    return false;
+                }
+                var address = address + ',' + city + ',' + state + ',' + zip
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({'address': address}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var loc = results[0].geometry;
+                        latestResult = results[0];
+                        console.log(latestResult);
+                        var g = latestResult.geometry.location;
+                        $('#latitude').val(g.d.toFixed(7));
+                        $('#longitude').val(g.e.toFixed(7));
+                    } else {
+                        alert('Unable to find lat/lon from ' + address);
+                    }
+                    self.html(origText);
+                });
+                return false;
+            });
+        });
+    </script>
+{% endblock javascript %}
+

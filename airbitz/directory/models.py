@@ -105,9 +105,9 @@ class Business(models.Model):
 
 class SocialId(models.Model):
     business = models.ForeignKey(Business, null=False)
-    social_type = models.CharField(max_length=50, null=True)
-    social_id = models.CharField(max_length=200, null=True)
-    social_url = models.URLField(max_length=2000, null=True)
+    social_type = models.CharField(max_length=50, null=True, blank=True)
+    social_id = models.CharField(max_length=200, null=True, blank=True)
+    social_url = models.URLField(max_length=2000, null=True, blank=True)
 
     @property
     def lookupType(self):

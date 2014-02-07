@@ -243,7 +243,7 @@ class SocialFormHelper(FormHelper):
         self.template = 'bootstrap/table_inline_formset.html'
         self.add_input(Submit("submit", "Save"))
 
-SocialFormSet = inlineformset_factory(Business, SocialId, form=SocialForm, extra=1, can_delete=False)
+SocialFormSet = inlineformset_factory(Business, SocialId, form=SocialForm, extra=1, can_delete=True)
 
 class HoursForm(forms.ModelForm):
     class Meta:
@@ -263,6 +263,6 @@ class HoursFormSetHelper(FormHelper):
         self.template = 'bootstrap3/table_inline_formset.html'
         self.add_input(Submit("submit", "Save"))
 
-HoursFormSet = inlineformset_factory(Business, BusinessHours, form=HoursForm, extra=1, can_delete=False)
+HoursFormSet = inlineformset_factory(Business, BusinessHours, form=HoursForm, extra=1, can_delete=True)
 
 

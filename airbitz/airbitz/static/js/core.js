@@ -6,7 +6,7 @@
     $.ajaxSetup({
         crossDomain: false,
         beforeSend: function(xhr, settings) {
-            if (!AB.csrfSafeMethod(settings.type)) {
+            if (!AB.Util.csrfSafeMethod(settings.type)) {
                 xhr.setRequestHeader("X-CSRFToken", $('meta[name="csrf-token"]').attr('content'));
             }
         }
@@ -126,7 +126,7 @@
       }
   };
   var Util = AB.Util = {
-      csrfSafeMethod: function() {
+      csrfSafeMethod: function(method) {
           return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
       },
       setCookie: function(c_name, value, exdays) {

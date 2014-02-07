@@ -138,6 +138,15 @@ PIPELINE_CSS = {
             'media': 'screen,projection',
         },
     },
+    'management': {
+        'source_filenames': (
+            'extras/select2/select2.css',
+        ),
+        'output_filename': 'css/management.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
     'dataTables': {
         'source_filenames': (
             'extras/DataTables-1.9.4/media/css/jquery.dataTables.css',
@@ -158,6 +167,18 @@ PIPELINE_JS = {
             'js/typeahead.js',
         ),
         'output_filename': 'js/core.js',
+    },
+    'management': {
+        'source_filenames': (
+            'bootstrap/js/bootstrap.min.js',
+            'js/json2.js',
+            'js/underscore-min.js',
+            'js/backbone-min.js',
+            'js/handlebars.js',
+            'js/moment.min.js',
+            'extras/select2/select2.js',
+        ),
+        'output_filename': 'js/management.js',
     },
     'dataTables': {
         'source_filenames': (
