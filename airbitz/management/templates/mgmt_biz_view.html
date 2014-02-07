@@ -234,16 +234,16 @@
                 },
                 url: function() {
                     if (this.id) {
-                        return '/api/v1/admin/biz/' + this.id + '/';
+                        return '/mgmt/api/biz/' + this.id + '/';
                     } else {
-                        return '/api/v1/admin/biz/';
+                        return '/mgmt/api/biz/';
                     }
                 }
             });
             var SocialList = Backbone.Collection.extend({
                 model: Social,
                 url: function() {
-                    return '/api/v1/admin/social/';
+                    return '/mgmt/api/social/';
                 },
                 parse: function(response) {
                     return response.results;
@@ -258,7 +258,7 @@
                     };
                 },
                 url: function() {
-                    return '/api/v1/admin/biz/' + this.id + '/';
+                    return '/mgmt/api/biz/' + this.id + '/';
                 },
             });
             var biz = new Business({id: {{ biz.id }} });
@@ -329,7 +329,7 @@
                 dataType: 'json',
                 contentType: 'json',
                 type: "GET",
-                url: "/api/v1/admin/cat/"
+                url: "/mgmt/api/cat/"
             }).done(function(data) {
                 var d = data.results.map(function(m) {
                     return { id: m.id, text: m.name };

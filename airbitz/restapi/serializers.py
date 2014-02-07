@@ -53,6 +53,7 @@ class SocialSerializer(serializers.ModelSerializer):
         fields = ('social_type', 'social_id', 'social_url')
 
 class MiniBusinessSerializer(serializers.ModelSerializer):
+    bizId = serializers.Field(source='pk')
     categories = CategorySerializer(source='categories')
     social = SocialSerializer(source='socialid_set')
     images = BusinessImageSerializer(source='businessimage_set')
@@ -64,12 +65,14 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Business
-        fields = ('name',
+        fields = ('bizId',
+                  'name',
                   'categories',
                   'social',
                   'images',
                   'website',
                   'phone',
+                  'address',
                   'city',
                   'county',
                   'state', 
@@ -82,6 +85,7 @@ class PaginatedMiniBizSerializer(pagination.PaginationSerializer):
         object_serializer_class = MiniBusinessSerializer
 
 class BusinessSerializer(serializers.ModelSerializer):
+    bizId = serializers.Field(source='pk')
     state = serializers.CharField(source='admin1_code')
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
@@ -93,13 +97,15 @@ class BusinessSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Business
-        fields = ('name',
+        fields = ('bizId',
+                  'name',
                   'categories',
                   'social',
                   'images',
                   'description',
                   'website',
                   'phone',
+                  'address',
                   'city',
                   'county',
                   'state', 
