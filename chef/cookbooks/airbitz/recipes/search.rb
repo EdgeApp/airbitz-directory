@@ -47,16 +47,17 @@ script "install_something" do
   EOH
 end
 
+service "solr" do
+  supports :restart => true
+  pattern "solr"
+  action [:enable, :start]
+end
+
 template "#{$HOME}/solr/solr/collection1/conf/schema.xml" do
   source "solr/solr_schema.xml.erb"
   mode 00555
   user "#{$USER}"
   group "#{$GROUP}"
-end
-
-service "solr" do
-  supports :restart => true
-  pattern "solr"
-  action [:enable, :start]
+  notifies :restart, "service[solr]", :delayed
 end
 
