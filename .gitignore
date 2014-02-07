@@ -1,6 +1,6 @@
 *.pyc
 logs
-media
+airbitz/media
 *.db
 *.swp
 *.swo
