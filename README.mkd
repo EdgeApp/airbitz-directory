@@ -55,7 +55,7 @@ Start dev server
     vm> cd 
     vm> source ./quick_bitz.sh
     vm> python manage.py geonames_zip_load $HOME/geonames/zip/US.txt
-	vm> /staging/geoname_load.py $HOME/geonames/zip/US.txt
+    vm> /staging/geoname_load.py $HOME/geonames/zip/US.txt
 
 ### Load up Solr
 
@@ -63,8 +63,8 @@ Start dev server
 
     vm> source ./quick_bitz.sh
     vm> python manage.py clear_index
-	vm> python manage.py update_index directory
-	vm> /staging/geoname_load.py $HOME/geonames/zip/US.txt
+    vm> python manage.py update_index directory
+    vm> /staging/geoname_load.py $HOME/geonames/zip/US.txt
 
 ### Digital Ocean Provider
 
@@ -73,5 +73,4 @@ Start dev server
     local> vagrant up --provider=digital_ocean
 
 [vagrantdownload]: http://www.vagrantup.com/downloads.html
-
 
