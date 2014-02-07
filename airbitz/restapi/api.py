@@ -42,7 +42,9 @@ def searchDirectory(term=None, location=None, \
     qs = Business.objects.filter(status='PUB')
     origin = None
     if term:
-        qs = qs.filter(Q(name__icontains=term) | Q(description__icontains=term))
+        qs = qs.filter(Q(name__icontains=term)
+                     | Q(description__icontains=term)
+                     | Q(categories__name__icontains=term))
     if category:
         f = None
         for cterm in category.split(","):
