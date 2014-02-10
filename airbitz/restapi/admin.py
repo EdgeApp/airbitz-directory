@@ -12,7 +12,7 @@ from rest_framework.response import Response
 
 import logging
 
-from directory.models import Business, Category
+from directory.models import Business, BusinessHours, Category, SocialId
 from restapi.api import querySetAddLocation
 
 log=logging.getLogger("airbitz." + __name__)
@@ -47,8 +47,21 @@ class AdminCategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ('id', 'name', )
 
+class AdminSocialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SocialId
+        fields = ('social_type', 'social_id', 'social_url')
+
+class AdminHoursSerializer(serializers.ModelSerializer):
+    hourStart = fields.CharField(required=False);
+    hourEnd = fields.CharField(required=False);
+    class Meta:
+        model = BusinessHours
+        fields = ('id', 'dayOfWeek','hourStart', 'hourEnd', )
+
 class AdminBizSerializer(serializers.ModelSerializer):
     categories = AdminCategorySerializer(source='categories', many=True)
+    hours = AdminHoursSerializer(source='businesshours_set', many=True)
     center = AdminPointField(source='center')
 
     class Meta:
@@ -141,7 +154,7 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
                 if not c.has_key('name') or not c.has_key('id'):
                     continue
                 if c['id'] == 0:
-                    newcat, _ = Category.objects.get_or_create(name__iexact=c['name'])
+                    newcat, _ = Category.objects.get_or_create(name=c['name'])
                     c['id'] = newcat.id
                     self.object.categories.add(newcat)
                 elif not any([c['id'] == c2.id for c2 in cats]):
@@ -158,6 +171,39 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
                 serial = AdminCategorySerializer(c)
                 catList.append(serial.data)
             request.DATA['categories'] = catList
+
+    def __update_hours__(self, request):
+        if request.DATA.has_key('hours'):
+            hours = self.object.businesshours_set.all()
+            delhours = dict((c.id, c) for c in hours)
+            print delhours
+            for c in request.DATA['hours']:
+                print c
+                if not c.has_key('id'):
+                    continue
+                if c['id'] == 0:
+                    newhour = BusinessHours.objects.create(business=self.object,\
+                                                           dayOfWeek=c['dayOfWeek'],\
+                                                           hourStart=c['hourStart'],\
+                                                           hourEnd=c['hourEnd'])
+                    c['id'] = newhour.id
+                if delhours.has_key(c['id']):
+                    d = delhours[c['id']]
+                    d.dayOfWeek = c['dayOfWeek']
+                    d.hourStart = c['hourStart']
+                    d.hourEnd = c['hourEnd']
+                    d.save()
+                    delhours.pop(c['id'])
+            for i in delhours.itervalues():
+                print 'deleting ', i
+                i.delete()
+
+            hourList = []
+            self.object = Business.objects.get(id=self.object.id)
+            for h in self.object.businesshours_set.all():
+                serial = AdminHoursSerializer(h)
+                hourList.append(serial.data)
+            request.DATA['hours'] = hourList
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
@@ -177,6 +223,7 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
 
 
         self.__update_cats__(request)
+        self.__update_hours__(request)
         if serializer.is_valid():
             try:
                 self.pre_save(serializer.object)

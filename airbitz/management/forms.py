@@ -74,6 +74,7 @@ class CategoryForm(forms.ModelForm):
         super(CategoryForm, self).__init__(*args, **kwargs)
 
 class ImageTagForm(forms.ModelForm):
+    description = forms.CharField(label='Description: ', required=False)
     class Meta:
         model = ImageTag
         fields = ( "name",

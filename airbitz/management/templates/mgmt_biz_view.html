@@ -118,26 +118,23 @@
                     </table>                    
                 </div>
             </div>
-            <div class="panel panel-default">
+            <div class="panel panel-default" id="hours-list">
                 <div class="panel-heading">HOURS
-                    <a class="pull-right" href="{% url 'mgmt_biz_hours_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" /></a>
+                    <button class="btn btn-sm btn-default hours-add pull-right"><span class="glyphicon glyphicon-plus" ></span> Add Hours</button>
+                    <a class="btn btn-sm btn-default pull-right" href="{% url 'mgmt_biz_hours_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" ></span> Edit</a>
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped">
-                        <tr>
-                            <th>Day of Week</th>
-                            <th>Start</th>
-                            <th>End</th>
-                        </tr>
-                    {% for h in hours %}
-                        <tr>
-                            <td>{{ h.lookupDayOfWeek }}</td>
-                            <td>{{ h.hourStart }}</td>
-                            <td>{{ h.hourEnd }}</td>
-                        </tr>
-                    {% empty %}
-                        <tr><td colspan="3">No hours defined.</td></tr>
-                    {% endfor %}
+                        <thead>
+                            <tr>
+                                <th>Day of Week</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -216,34 +213,30 @@
 
 {% block javascript %}
     {{ block.super }}
+    <script id="template-row" type="text/x-handlebars-template">
+        <td>
+            <input type="hidden" name="id" value="{% templatetag openvariable %} id {% templatetag closevariable %}">
+            <select name="dayOfWeek">
+                <option value="sunday">Sunday</option>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+            </select>
+        </td> 
+        <td>
+            <input type="text" name="hourStart" class="form-control" value="{% templatetag openvariable %} hourStart {% templatetag closevariable %}"/>
+        </td>
+        <td>
+            <input type="text" name="hourEnd" class="form-control" value="{% templatetag openvariable %} hourEnd {% templatetag closevariable %}"/>
+        </td>
+        <td><button class="destroy btn btn-sm btn-default delete"><span class=" glyphicon glyphicon-trash"></span></button></td>
+    </script>
+
     <script>
         $(function() {
-            var Social = Backbone.Model.extend({
-                defaults: function() {
-                    return {
-                        name: "",
-                        description: "",
-                        business_id: {{ biz.id }}
-                    };
-                },
-                url: function() {
-                    if (this.id) {
-                        return '/mgmt/api/biz/' + this.id + '/';
-                    } else {
-                        return '/mgmt/api/biz/';
-                    }
-                }
-            });
-            var SocialList = Backbone.Collection.extend({
-                model: Social,
-                url: function() {
-                    return '/mgmt/api/social/';
-                },
-                parse: function(response) {
-                    return response.results;
-                }
-            });
-
             var Business = Backbone.Model.extend({
                 defaults: function() {
                     return {
@@ -258,21 +251,106 @@
             var biz = new Business({id: {{ biz.id }} });
             biz.fetch()
 
+            var HoursView = Backbone.View.extend({
+                events: {
+                    "click .delete":  "deleteHours",
+
+                    "keyup input[name='hourStart']": "copyHourStart",
+                    "keyup input[name='hourEnd']": "copyHourEnd"
+                },
+                tagName:  "tr",
+                template: Handlebars.compile($('#template-row').html()),
+                initialize: function() { },
+
+                findJoins: function(selector) {
+                    var that = this;
+                    return  $(selector).filter(function(i) {
+                        return $(this) != that.$el && $(this).val() === '';
+                    });
+                },
+
+                copyHourStart: function() {
+                    var v = this.$el.find("input[name='hourStart']").val();
+                    if (!this.joinedStart) {
+                        this.joinedStart = this.findJoins("input[name='hourStart']");
+                    }
+                    this.joinedStart.each(function() {
+                        $(this).val(v);
+                    });
+                },
+
+                copyHourEnd: function() {
+                    var v = this.$el.find("input[name='hourEnd']").val();
+                    if (!this.joinedEnd) {
+                        this.joinedEnd = this.findJoins("input[name='hourEnd']");
+                    }
+                    this.joinedEnd.each(function() {
+                        $(this).val(v);
+                    });
+                },
+
+                render: function(data) {
+                    try {
+                        this.$el.html(this.template(data));
+                        if (data.dayOfWeek) {
+                            this.$el.find('select[name="dayOfWeek"]').val(data.dayOfWeek);
+                        } else {
+                            this.$el.find('select[name="dayOfWeek"]').val("sunday");
+                        }
+                        this.$el.find('select').select2({ width: '150px' });
+                    } catch (e) {
+                        console.log(data);
+                        console.log(e);
+                    }
+                    return this;
+                },
+                deleteHours: function() {
+                    this.$el.remove();
+                }
+            });
+
             var AppView = Backbone.View.extend({
                 el: $("#bizapp"),
+                hoursViews: {},
                 events: {
                     "click .save":  "saveBusiness",
-
-                    "change input": "changed",
-                    "change textarea": "changed",
-                    "change select": "changed"
+                    "click .hours-add": "addHours"
                 },
 
                 initialize: function() {
                     this.listenTo(biz, 'change', this.render);
                 },
 
+                addToTable: function(row) {
+                    $("#hours-list tbody:last").append(row);
+                },
+
                 render: function() {
+                    var hours = biz.get("hours");
+                    $("#hours-list tbody").html(''); // Clear hours
+                    if (hours.length > 0) {
+                        for (var i = 0; i < hours.length; ++i) {
+                            var h = hours[i];
+                            var view = new HoursView();
+                            this.addToTable(view.render(hours[i]).el);
+                        }
+                    } else {
+                        var a = [
+                            "sunday", "monday", "tuesday", "wednesday", 
+                            "thursday", "friday", "saturday"
+                        ];
+                        for (var i = 0; i < a.length; ++i) {
+                            var h = { "dayOfWeek": a[i] };
+                            var view = new HoursView();
+                            this.addToTable(view.render(h).el);
+                        }
+                    }
+                },
+
+                addHours: function() {
+                    var data = {};
+                    var view = new HoursView();
+                    this.addToTable(view.render({}).el);
                 },
 
                 changed: function(evt) {
@@ -281,7 +359,6 @@
                     var obj = {};
                     obj[changed.id] = value;
                     biz.set(obj);
-                    console.log(biz);
                 },
 
                 updateOnEnter: function(e) {
@@ -292,6 +369,20 @@
 
                 saveBusiness: function() { 
                     var obj = {};
+                    obj['name'] = $('#name').val();
+                    obj['description'] = $('#description').val();
+                    obj['status'] = $('#status').select2('val');
+                    obj['phone'] = $('#phone').val();
+                    obj['website'] = $('#website').val();
+                    obj['has_physical_business'] = $('#has_physical_business').is(':checked');
+                    obj['has_online_business'] = $('#has_online_business').is(':checked');
+                    obj['has_bitcoin_discount'] = $('#has_bitcoin_discount').val();
+                    obj['address'] = $('#address').val();
+                    obj['admin1_code'] = $('#admin1_code').val();
+                    obj['admin2_name'] = $('#admin2_name').val();
+                    obj['admin3_name'] = $('#admin3_name').val();
+                    obj['postalcode'] = $('#postalcode').val();
+                    obj['country'] = $('#country').val();
                     obj['center'] = {
                         latitude: parseFloat($('#latitude').val()),
                         longitude: parseFloat($('#longitude').val())
@@ -300,6 +391,15 @@
                         return { id: m.id, name: m.text };
                     });
                     obj['categories'] = cats;
+                    var hours = $('#hours-list tbody tr').map(function(i, e) {
+                        var d = {};
+                        d['id'] = parseInt($(this).find('input[name="id"]').val() || 0);
+                        d['dayOfWeek'] = $(this).find('select[name="dayOfWeek"]').select2('val');
+                        d['hourStart'] = $(this).find('input[name="hourStart"]').val();
+                        d['hourEnd'] = $(this).find('input[name="hourEnd"]').val();
+                        return d;
+                    }).toArray();
+                    obj['hours'] = hours;
                     biz.set(obj);
 
                     $('.save').html('Updating...');
@@ -358,7 +458,6 @@
                     if (status == google.maps.GeocoderStatus.OK) {
                         var loc = results[0].geometry;
                         latestResult = results[0];
-                        console.log(latestResult);
                         var g = latestResult.geometry.location;
                         $('#latitude').val(g.d.toFixed(7));
                         $('#longitude').val(g.e.toFixed(7));
