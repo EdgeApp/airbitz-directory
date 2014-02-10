@@ -46,6 +46,7 @@ class LatLongField(forms.MultiValueField):
         return None
 
 class CategoryForm(forms.ModelForm):
+    level = forms.IntegerField(label='Level: ', required=False)
     class Meta:
         model = Category
         fields = ( "name",

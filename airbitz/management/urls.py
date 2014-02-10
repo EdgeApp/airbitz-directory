@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     url(r'^cat/list/$', 'management.views.category_list', name='mgmt_category_list'),
     url(r'^cat/add/$', 'management.views.category_edit', name='mgmt_category_add'),
     url(r'^cat/edit/(?P<catId>\d+)/main/$', 'management.views.category_edit', name='mgmt_category_edit'),
+    url(r'^cat/delete/(?P<catId>\d+)/main/$', 'management.views.category_delete', name='mgmt_category_delete'),
 
     url(r'^tag/list/$', 'management.views.image_tag_list', name='mgmt_image_tag_list'),
     url(r'^tag/add/$', 'management.views.image_tag_edit', name='mgmt_image_tag_add'),

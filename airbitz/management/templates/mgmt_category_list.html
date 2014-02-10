@@ -40,7 +40,7 @@
                                             <td>{{ cat.name }}</td>
                                             <td>{{ cat.level }}</td>
                                             <td>{{ cat.description }} </td>
-                                            <td><a class="pull-right btn-sm btn btn-danger" href="{% url 'mgmt_category_edit' cat.id %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+                                            <td><a class="pull-right btn-sm btn btn-danger" href="{% url 'mgmt_category_delete' cat.id %}"><span class="glyphicon glyphicon-trash"></span></a></td>
                                         </tr>
                                     {% empty %}
                                         <tr>
