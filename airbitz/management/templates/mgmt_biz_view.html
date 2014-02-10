@@ -64,7 +64,7 @@
                             <div>
                                 <label for="phone">Phone:</label>
                                 <div>
-                                    <input type="tel" class="form-control" id="phone" name="phone" value="{{ biz.phone }}" />
+                                    <input type="tel" class="form-control" id="phone" name="phone" value="{{ biz.phone|default:"" }}" />
                                 </div>
                             </div>
                             <div>
@@ -73,22 +73,16 @@
                                     <input type="url" class="form-control" id="website" name="website" value="{{ biz.website }}" />
                                 </div>
                             </div>
-                            <div>
+                            <div class="form-horizontal">
                                 <label for="has_physical_business">Has Physical Business:</label>
                                 <div>
-                                    <select id="has_physical_business" name="has_physical_business" />
-                                        <option value="True">Yes</option>
-                                        <option value="False">No</option>
-                                    </select>
+                                    <input type="checkbox" id="has_physical_business" name="has_physical_business" {% if biz.has_physical_business %}checked{% endif %} />
                                 </div>
                             </div>
-                            <div>
+                            <div class="form-horizontal">
                                 <label for="has_online_business">Has Online Business:</label>
                                 <div>
-                                    <select id="has_online_business" name="has_online_business" value="{{ biz.has_online_business }}" />
-                                        <option value="True">Yes</option>
-                                        <option value="False">No</option>
-                                    </select>
+                                    <input type="checkbox" id="has_online_business" name="has_online_business" {% if biz.has_online_business %}checked{% endif %} />
                                 </div>
                             </div>
                             <div>
@@ -158,37 +152,37 @@
                     <dl>
                         <dt>Address:</dt>
                         <dd>
-                            <input type="text" id="address" name="address" class="form-control" value="{{ biz.address }}" />
+                            <input type="text" id="address" name="address" class="form-control" value="{{ biz.address|default:"" }}" />
                         </dd>
                     </dl>
                     <dl>
                         <dt>City:</dt>
                         <dd>
-                            <input type="text" id="admin3_name" name="admin3_name" class="form-control" value="{{ biz.admin3_name }}" />
+                            <input type="text" id="admin3_name" name="admin3_name" class="form-control" value="{{ biz.admin3_name|default:"" }}" />
                         </dd>
                     </dl>
                     <dl>
                         <dt>County:</dt>
                         <dd>
-                            <input type="text" id="admin2_name" name="admin2_name" class="form-control" value="{{ biz.admin2_name }}" />
+                            <input type="text" id="admin2_name" name="admin2_name" class="form-control" value="{{ biz.admin2_name|default:"" }}" />
                         </dd>
                     </dl>
                     <dl>
                         <dt>State:</dt>
                         <dd>
-                            <input type="text" id="admin1_code" name="admin1_code" class="form-control" value="{{ biz.admin1_code }}" />
+                            <input type="text" id="admin1_code" name="admin1_code" class="form-control" value="{{ biz.admin1_code|default:"" }}" />
                         </dd>
                     </dl>
                     <dl>
                         <dt>Postal Code:</dt>
                         <dd>
-                            <input type="text" id="postalcode" name="postalcode" class="form-control" value="{{ biz.postalcode }}" />
+                            <input type="text" id="postalcode" name="postalcode" class="form-control" value="{{ biz.postalcode|default:"" }}" />
                         </dd>
                     </dl>
                     <dl>
                         <dt>Country:</dt>
                         <dd>
-                            <input type="text" id="country" name="country" class="form-control" value="{{ biz.country }}" />
+                            <input type="text" id="country" name="country" class="form-control" value="{{ biz.country|default:"" }}" />
                         </dd>
                     </dl>
                     <div>
@@ -346,14 +340,7 @@
                 width: '200px' 
             }).select2('val', '{{ biz.status }}');
 
-            $('#has_physical_business').select2({ 
-                width: '200px' 
-            }).select2('val', '{{ biz.has_physical_business }}');
-            $('#has_online_business').select2({ 
-                width: '200px' 
-            }).select2('val', '{{ biz.has_online_business }}');
             var App = new AppView();
-
             $('.geocode-address').click(function() {
                 var self = $(this);
                 var origText = self.html();
