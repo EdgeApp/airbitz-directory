@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load imagekit %}
+{% load compressed %}
 
 {% block title %}Search{% endblock title %}
 
@@ -36,13 +37,79 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+    <div class="row">
+        <div class="well well-sm" style="margin-top: 230px;">
+            <div class="btn-group">
+                <a href="#" id="list" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-th-list"></span> List</a>
+                <a href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span> Grid</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="results" class="row list-group">
+
+    {% for biz in results %}
+        <div class="item col-xs-6 col-md-4">
+            <div class="thumbnail">
+                <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">
+                {% if biz.landing_image %}
+                    {% thumbnail '400x250' biz.landing_image.image -- class="img-responsive group list-group-image" %}
+                {% else %}
+                    <img data-src="holder.js/358x250/sky" class="img-responsive group list-group-image">
+                {% endif %}
+                </a>
+                <div class="caption">
+                    <h3 class="group inner list-group-item-heading">{{ biz.name }}</h3>
+                    <div class="pull-right">
+                        {% for s in biz.socialid_set.all %}
+                            <a class="btn btn-default" href="{{ s.social_url }}">
+                                {{ s.social_type }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                    <p class="group inner list-group-item-text">
+                    {% if biz.description %}
+                        {{ biz.description }}
+                    {% else %}
+                        Description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                    {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No results found.</p>
+    {% endfor %}
+
+
+    </div><!-- /#results -->
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}
 
 {% block javascript_headers %}
     {{ block.super }}
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ mapkey }}&sensor=false"> </script>
-{% endblock javascript_headers %} 
-{% block javascript %} 
+    {% compressed_js 'directory' %}
+{% endblock javascript_headers %}
+
+{% block javascript %}
     {{ block.super }}
     <script type="text/javascript">
         var json = [

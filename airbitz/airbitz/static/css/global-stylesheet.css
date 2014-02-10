@@ -1,3 +1,4 @@
+@import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 .navbar-inverse {
   background-color: #2291cf;
   border: #eee;
@@ -40,13 +41,9 @@
   padding-left: 15px;
   padding-right: 15px;
 }
-body {
-  margin: 0;
-  font: 14px/24px "Open Sans", Helvetica, Arial, sans-serif;
-}
-body .typeahead,
-body .tt-query,
-body .tt-hint {
+.typeahead,
+.tt-query,
+.tt-hint {
   width: 200px;
   height: 30px;
   padding: 8px 12px;
@@ -57,21 +54,21 @@ body .tt-hint {
   border-radius: 2px;
   outline: none;
 }
-body .twitter-typeahead .typeahead {
+.twitter-typeahead .typeahead {
   background-color: #fff;
 }
-body .twitter-typeahead .typeahead:focus {
+.twitter-typeahead .typeahead:focus {
   border: 2px solid #0097cf;
 }
-body .twitter-typeahead .tt-query {
+.twitter-typeahead .tt-query {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
-body .twitter-typeahead .tt-hint {
+.twitter-typeahead .tt-hint {
   color: #999999;
 }
-body .twitter-typeahead .tt-dropdown-menu {
+.twitter-typeahead .tt-dropdown-menu {
   width: 422px;
   margin-top: 1px;
   padding: 8px 0;
@@ -85,33 +82,36 @@ body .twitter-typeahead .tt-dropdown-menu {
   -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
-body .twitter-typeahead .tt-suggestion {
+.twitter-typeahead .tt-suggestion {
   padding: 3px 20px;
   font-size: 18px;
   line-height: 24px;
 }
-body .twitter-typeahead .tt-suggestion.tt-is-under-cursor {
+.twitter-typeahead .tt-suggestion.tt-is-under-cursor {
   color: #fff;
   background-color: #0097cf;
 }
-body .twitter-typeahead .tt-suggestion p {
+.twitter-typeahead .tt-suggestion p {
   margin: 0;
+  text-align: left;
 }
-body .top-section .place-header {
-  position: relative;
-  height: 250px;
+body {
   margin: 0;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: left center;
+  padding-top: 0px;
+  font: 14px/24px "Open Sans", Helvetica, Arial, sans-serif;
 }
-@media (max-width: 767px) {
-  body .top-section .place-header {
-    display: none;
+body .top-bg {
+  display: none;
+}
+@media (min-width: 992px) {
+  body .top-bg {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 390px;
+    border-bottom: 2px solid #F8F8F0;
+    background: #F5F5F0;
   }
-}
-body .footer {
-  margin: 40px 0;
 }
 .main-content {
   /* CUSTOMIZE THE CAROUSEL
@@ -123,10 +123,10 @@ body .footer {
     -------------------------------------------------- */
   /* Pad the edges of the mobile views a bit */
   /* Center align the text within the three columns below the carousel */
-  /* Featurettes
+  /* FEATURETTES
     ------------------------- */
   /* Thin out the marketing headings */
-  /* RESPONSIVE CSS
+  /* LANDING PAGE RESPONSIVE CSS
     -------------------------------------------------- */
 }
 .main-content .carousel {
@@ -181,27 +181,11 @@ body .footer {
 @media (min-width: 768px) {
   .main-content {
     /* Remove the edge padding needed for mobile */
-    /* Navbar positioning foo */
-    /* The navbar becomes detached from the top, so we round the corners */
     /* Bump up size of carousel content */
   }
   .main-content .marketing {
     padding-left: 0;
     padding-right: 0;
-  }
-  .main-content .navbar-wrapper {
-    margin-top: 20px;
-  }
-  .main-content .navbar-wrapper .container {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-  .main-content .navbar-wrapper .navbar {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .main-content .navbar-wrapper .navbar {
-    border-radius: 4px;
   }
   .main-content .carousel-caption p {
     margin-bottom: 20px;
@@ -217,13 +201,78 @@ body .footer {
     margin-top: 120px;
   }
 }
-.main-content .business-details {
-  text-overflow: ellipsis;
-  display: inline-block;
-  vertical-align: top;
-  white-space: nowrap;
-  overflow: hidden;
+.main-content .business-info-one {
+  margin-bottom: 30px;
+}
+@media (min-width: 992px) {
+  .main-content .business-info-one {
+    margin-bottom: 0;
+  }
+}
+.main-content .business-details .dl-horizontal dt {
+  width: 75px;
+}
+@media (min-width: 768px) {
+  .main-content .business-details .dl-horizontal dd {
+    margin-left: 85px;
+  }
+}
+.glyphicon {
+  margin-right: 5px;
+}
+.thumbnail {
+  margin-bottom: 20px;
+  padding: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.item.list-group-item {
+  margin-left: -15px;
+  margin-right: -15px;
+  float: none;
   width: 100%;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+.item.list-group-item:before,
+.item.list-group-item:after {
+  content: " ";
+  display: table;
+}
+.item.list-group-item:after {
+  clear: both;
+}
+.item.list-group-item:nth-of-type(odd):hover,
+.item.list-group-item:hover {
+  background: #eee;
+}
+.item.list-group-item .thumbnail {
+  border: none;
+  background: none;
+}
+.item.list-group-item .list-group-image {
+  margin-right: 10px;
+}
+.item.list-group-item .thumbnail {
+  margin-bottom: 0px;
+}
+.item.list-group-item .caption {
+  padding: 9px 9px 0px 9px;
+}
+.item.list-group-item:before,
+.item.list-group-item:after {
+  display: table;
+  content: " ";
+}
+.item.list-group-item img {
+  float: left;
+}
+.item.list-group-item:after {
+  clear: both;
+}
+.list-group-item-text {
+  margin: 0 0 11px;
 }
 html,
 body {
@@ -242,7 +291,8 @@ body {
 /* Set the fixed height of the footer here */
 #footer {
   height: 60px;
-  background-color: #f5f5f5;
+  background-color: #f5f5f0;
+  border-top: 2px solid #eee;
 }
 #footer p {
   margin-top: 20px;

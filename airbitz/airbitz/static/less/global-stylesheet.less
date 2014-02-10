@@ -6,109 +6,32 @@
 @import "mixins.less";
 
 @import "navbar.less";
+@import "typeahead.less";
 
+
+// TEMP FONTAWESOME IMPORT
+@import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 
 
 body {
     margin: 0;
+    padding-top: 0px;
     font: 14px/24px "Open Sans", Helvetica, Arial, sans-serif;
 
 
-
-    .typeahead,
-    .tt-query,
-    .tt-hint {
-        width: 200px;
-        height: 30px;
-        padding: 8px 12px;
-        line-height: 30px;
-        border: 2px solid #ccc;
-        -webkit-border-radius: 2px;
-        -moz-border-radius: 2px;
-        border-radius: 2px;
-        outline: none;
-    }
-
-
-
-    .twitter-typeahead {
-
-
-        .typeahead {
-            background-color: #fff;
-        }
-
-        .typeahead:focus {
-            border: 2px solid #0097cf;
-        }
-
-        .tt-query {
-            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-        }
-
-        .tt-hint {
-            color: #999
-        }
-
-        .tt-dropdown-menu {
-            width: 422px;
-            margin-top: 1px;
-            padding: 8px 0;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            -webkit-border-radius: 2px;
-             -moz-border-radius: 2px;
-                  border-radius: 2px;
-            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-             -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-                  box-shadow: 0 5px 10px rgba(0,0,0,.2);
-        }
-
-        .tt-suggestion {
-            padding: 3px 20px;
-            font-size: 18px;
-            line-height: 24px;
-        }
-
-        .tt-suggestion.tt-is-under-cursor {
-            color: #fff;
-            background-color: #0097cf;
-
-        }
-
-        .tt-suggestion p {
-            margin: 0;
+    .top-bg {
+        display: none;
+        @media(min-width: @screen-md) {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 390px;
+            border-bottom: 2px solid #F8F8F0;
+            background: #F5F5F0;
         }
     }
 
 
-
-
-    .top-section {
-
-
-        .place-header {
-            position: relative;
-            height: 250px;
-            margin: 0;
-            background-size: 100%;
-            background-repeat: no-repeat;
-            background-position: left center;
-
-            @media (max-width: 767px) {
-                display: none;
-            }
-        }
-    }
-
-
-
-    .footer {
-        margin: 40px 0;
-    }
 
 
 
@@ -128,14 +51,8 @@ body {
 
 
 
-
-
-
 .main-content {
 //    padding-top: 50px;
-
-
-
 
 
 
@@ -164,9 +81,6 @@ body {
       min-width: 100%;
       min-height: 500px;
     }
-
-
-
     .container-full {
       margin: 0 auto;
       width: 100%;
@@ -196,7 +110,7 @@ body {
     }
 
 
-    /* Featurettes
+    /* FEATURETTES
     ------------------------- */
 
     .featurette-divider {
@@ -215,33 +129,14 @@ body {
     }
 
 
-    /* RESPONSIVE CSS
+    /* LANDING PAGE RESPONSIVE CSS
     -------------------------------------------------- */
 
     @media (min-width: 768px) {
-
       /* Remove the edge padding needed for mobile */
       .marketing {
         padding-left: 0;
         padding-right: 0;
-      }
-
-      /* Navbar positioning foo */
-      .navbar-wrapper {
-        margin-top: 20px;
-      }
-      .navbar-wrapper .container {
-        padding-left:  15px;
-        padding-right: 15px;
-      }
-      .navbar-wrapper .navbar {
-        padding-left:  0;
-        padding-right: 0;
-      }
-
-      /* The navbar becomes detached from the top, so we round the corners */
-      .navbar-wrapper .navbar {
-        border-radius: 4px;
       }
 
       /* Bump up size of carousel content */
@@ -265,9 +160,14 @@ body {
 
 
 
-
+    // DIRECTORY BUSINESS INFO
     .business-info-one {
 
+        margin-bottom: 30px;
+
+        @media(min-width: @screen-md){
+            margin-bottom: 0;
+        }
     }
 
     .business-info-two {
@@ -275,34 +175,30 @@ body {
     }
     .business-images {
 
-        .col-sm-4 {
-//            padding-left: 0;
-//            padding-right: 0;
+        img {
+
+            &:nth-child(2) {
+
+            }
         }
     }
 
 
     .business-details {
-        .truncate-line();
+
+        .dl-horizontal {
+            
+            dt {
+                width: 75px;
+            }
+            dd {
+
+                @media(min-width: @screen-sm-min) {
+                    margin-left: 85px;
+                }
+            }
+        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -311,6 +207,65 @@ body {
 
 
 
+
+
+
+// SEARCH STUFF
+.glyphicon { margin-right:5px; }
+.thumbnail
+{
+    margin-bottom: 20px;
+    padding: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.item.list-group-item {
+
+    .make-row();
+
+    float: none;
+    width: 100%;
+    background-color: #fff;
+    margin-bottom: 10px;
+
+    &:nth-of-type(odd):hover,&:hover {
+        background: #eee;
+    }
+    .thumbnail {
+
+        border: none;
+        background: none;
+    }
+    .list-group-image {
+        margin-right: 10px;
+    }
+
+    .thumbnail {
+        margin-bottom: 0px;
+    }
+    .caption {
+        padding: 9px 9px 0px 9px;
+    }
+
+    &:before, &:after {
+        display: table;
+        content: " ";
+    }
+
+    img {
+        float: left;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+
+.list-group-item-text {
+    margin: 0 0 11px;
+}
 
 
 
@@ -334,17 +289,30 @@ body {
     margin: 0 auto -60px;
     /* Pad bottom by footer height */
     padding: 0 0 60px;
+
 }
 
 /* Set the fixed height of the footer here */
 #footer {
     height: 60px;
-    background-color: #f5f5f5;
-    
+    background-color: #f5f5f0;
+    border-top: 2px solid #eee;
     p {
         margin-top: 20px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
