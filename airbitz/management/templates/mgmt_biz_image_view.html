@@ -19,11 +19,27 @@
                         <div class="col-xs-6 col-md-3">
                             {% thumbnail '380x250' i.image -- class="img-thumbnail" %}
                             <div class="bottom-overlay">
-                                <button class="btn btn-default pull-left select-image" data-image-id="{{ i.id }}" >Select <i class="icon-ok"></i></button>
-                                &nbsp;
-                                <span class="image-delete btn btn-danger btn-link pull-right" data-image-id="{{ i.id }}"><span class="glyphicon glyphicon-trash"></span></span>
-                                &nbsp;
-                                <a class="btn btn-default btn-link pull-right" href="{% url 'mgmt_biz_image_edit' biz.id i.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-default pull-left select-image" data-image-id="{{ i.id }}" >Select <i class="icon-ok"></i></button>
+                                        &nbsp;
+                                        <span class="image-delete btn btn-danger btn-link pull-right" data-image-id="{{ i.id }}"><span class="glyphicon glyphicon-trash"></span></span>
+                                        &nbsp;
+                                        <a class="btn btn-default btn-link pull-right" href="{% url 'mgmt_biz_image_edit' biz.id i.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        Tags: 
+                                        {% for t in i.tags.all %}
+                                            <span class="btn btn-default">
+                                                {{ t.name }}
+                                            </span>
+                                        {% empty %}
+                                        None
+                                        {% endfor %}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     {% empty %}
