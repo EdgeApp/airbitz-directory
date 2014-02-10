@@ -1,93 +1,196 @@
 {% extends 'base.html' %}
 {% load imagekit %}
 {% load humanize %}
+{% load compressed %}
 
-{% block title%} {{ biz.name }} {% endblock %}
+{% block title%}{{ biz.name }}{% endblock %}
+
+{% block top_bg %}<div class="top-bg">&nbsp;</div>{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-sm-4">
-            <h4>{{ biz.name }}
+
+    <div class="row" style="margin-bottom: 30px;">
+        <div class="col-xs-12">
+            <h1>{{ biz.name }}
                 {% if user.is_superuser %}
-                <a class="pull-right btn btn-default btn-sm" href="{% url 'mgmt_biz_view' biz.id %}">Edit</a>
+                <a class="pull-right btn btn-danger btn-sm" href="{% url 'mgmt_biz_view' biz.id %}">Edit</a>
                 {% endif %}
-            </h4>
-            <hr />
-            {{ biz.pretty_address }}
-            <dl class="dl-horizontal">
-                {% if biz.website %}
-                    <dt>Website:</dt>
-                    <dd><a target="_blank" href="{{ biz.website }}">{{ biz.website|truncatechars:100 }}</a></dd>
-                {% endif %}
-
-                <dt>Brick &amp; Mortar:</dt>
-                <dd>{{ biz.has_physical_business|yesno:"Yes,No" }} </dd>
-
-                <dt>Online Business:</dt>
-                <dd>{{ biz.has_online_business|yesno:"Yes,No" }} </dd>
-
-                <dt>Bitcoin Discount:</dt>
-                <dd>{{ biz.has_bitcoin_discount }} </dd>
-            </dl>
-            {% if biz.description %}
-                <dl>
-                    <dt>Description:</dt>
-                    <dd>{{ biz.description }} </dd>
-                </dl>
-            {% endif %}
+            </h1>
         </div>
-        <div class="col-sm-4">
+
+        <div class="business-info-one col-md-6">
             <div class="row">
-                {% if biz.landing_image %}
-                    {% thumbnail '380x250' biz.landing_image.image -- class="img-thumbnail" %}
-                {% else %}
-                    <img data-src="holder.js/400x300/sky" class="img-thumbnail">
-                {% endif %}
+                <div class="ratings-review col-xs-12">
+                    <div id="ratings" class="star"></div>
+                    <span class="review-number">22 Reviews</span>
+                </div>
+
+                <div class="categories col-xs-12">
+                    {% for c in biz.categories.all %}
+                        <span class="label label-default">{{c.name}}</span>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="row">
-                {% for img in imgs %}
-                    {% if img.image %}
-                        {% thumbnail '50x50' img.image as th %}
-                        <img src="{{ th.url}} " style="height: {{ th.height }}; width: {{ th.width }}" class="img-thumbnail">
-                    {% else %}
-                        <img data-src="holder.js/50x50/sky" class="img-thumbnail">
+        </div>
+
+        <div class="interaction-buttons col-md-6">
+            <a class="btn btn-lg btn-default pull-right" href="#"><span class="fa fa-thumbs-down"></span></a>
+            <a class="btn btn-lg btn-default pull-right" href="#" style="margin-right: 10px;"><span class="fa fa-thumbs-up"></span></a>
+            <a class="btn btn-lg btn-primary pull-right" href="#" style="margin-right: 10px;"><span class="fa fa-star"></span> Review</a>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="business-info-two col-sm-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-image">
+                    <div id="map" class="img-responsive" style="width: 750px; height: 150px">
+                    </div>
+                </div>
+                <div class="business-details panel-body">
+                    <h4>{{ biz.name }}</h4>
+
+                    {{ biz.pretty_address }}
+
+                    {% if biz.website %}
+                    <div>
+                        <a target="_blank" href="{{ biz.website }}">{{ biz.website|truncatechars:100 }}</a>
+                    </div>
                     {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="row">
-                <div class="img-thumbnail">
-                    <div id="map" style="width: 380px; height: 300px">
+
+                    <dl class="dl-horizontal">
+
+                        <dt>Local:</dt>
+                        <dd>{{ biz.has_physical_business|yesno:"Yes,No" }} </dd>
+
+                        <dt>Online:</dt>
+                        <dd>{{ biz.has_online_business|yesno:"Yes,No" }} </dd>
+
+                        <dt>Discount:</dt>
+                        <dd>{{ biz.has_bitcoin_discount }} </dd>
+                    </dl>
+                    {% if biz.description %}
+                        <p>
+                            {{ biz.description }}
+                        </p>
+                    {% endif %}
+                </div>
+                <div class="panel-footer text-center">
+                    <div class="btn-group" style="">
+                        <button class="btn btn-default" href="#"><span class="fa fa-upload"></span> Add Photo</button>
+                        <button class="btn btn-default" href="#"><span class="fa fa-share"></span> Share</button>
+                        <button class="btn btn-default" href="#"><span class="fa fa-bookmark"></span> Bookmark</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    {% if nearby %}
-        <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-heading">Nearby</div>
-                <div class="panel-body">
-                    {% for b in nearby %}
-                        <div class="col-sm-3 col-md-3">
-                            <div class="thumbnail">
-                                <a href="{% url 'business_info' b.id %}">
-                                    {% if b.landing_image %}
-                                        {% thumbnail '280x150' b.landing_image.image -- class="img-thumbnail" %}
-                                    {% else %}
-                                        <img data-src="holder.js/280x150/sky" class="img-thumbnail">
-                                    {% endif %}
-                                    <div class="caption">
-                                        <h4>{{ b.name }}</h4>
-                                    </div>
-                                </a>
-                                <div><b>{{ b.distance.km|floatformat:2 }} km</b> from {{ biz.name }}</div>
-                            </div>
+
+
+
+        <div class="business-images col-md-8">
+
+            {% if imgs %}
+            <div class="row" style="margin-bottom: 30px;">
+                {% for img in imgs %}
+                    {% if img.image %}
+                        {% thumbnail '400x300' img.image as th %}
+                        <div class="col-sm-4">
+                            <img src="{{ th.url}} " style="height: {{ th.height }}; width: {{ th.width }}" class="img-responsive">
                         </div>
-                    {% endfor %}
+                    {% else %}
+                        <img data-src="holder.js/400x300/sky" class="img-responsive">
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+
+    {% if nearby %}
+
+    <div class="row">
+        <div class="col-xs-12" style="margin-top: 60px;">
+            <div class="well well-sm">
+                <div class="btn-group">
+                    <a href="#" id="list" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-th-list"></span> List</a>
+                    <a href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span> Grid</a>
+                </div>
             </div>
         </div>
+    </div>
+
+    <div id="results" class="row list-group">
+
+            <h3>Nearby</h3>
+            <div class="clearfix"></div>
+            {% for nbiz in nearby %}
+
+                <div class="item col-xs-6 col-md-4">
+                    <div><b>{{ nbiz.distance.km|floatformat:2 }} km</b> from {{ biz.name }}</div>
+                    <div class="thumbnail">
+                        <a href="{% url 'business_info' nbiz.id %}" title="{{ nbiz.name }}">
+                        {% if nbiz.landing_image %}
+                            {% thumbnail '358x250' nbiz.landing_image.image -- class="img-responsive group list-group-image" %}
+                        {% else %}
+                            <img data-src="holder.js/358x250/sky" class="img-responsive group list-group-image">
+                        {% endif %}
+                        </a>
+                        <div class="caption">
+                            <h3 class="group inner list-group-item-heading">{{ nbiz.name }}</h3>
+                            <div class="pull-right">
+                                {% for s in nbiz.socialid_set.all %}
+                                    <a class="btn btn-default" href="{{ s.social_url }}">
+                                        {{ s.social_type }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <p class="group inner list-group-item-text">
+                            {% if nbiz.description %}
+                                {{ nbiz.description }}
+                            {% else %}
+                                Description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                            {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+    </div>
+
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Nearby</div>
+                    <div class="panel-body">
+                        {% for b in nearby %}
+                            <div class="col-sm-6 col-md-3">
+                                <div class="thumbnail">
+                                    <a href="{% url 'business_info' b.id %}">
+                                        {% if b.landing_image %}
+                                            {% thumbnail '280x150' b.landing_image.image -- class="img-thumbnail" %}
+                                        {% else %}
+                                            <img data-src="holder.js/280x150/sky" class="img-responsive">
+                                        {% endif %}
+                                        <div class="caption">
+                                            <h4>{{ b.name }}</h4>
+                                        </div>
+                                    </a>
+                                    <div><b>{{ b.distance.km|floatformat:2 }} km</b> from {{ biz.name }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
     {% endif %}
 
 {% endblock %}
@@ -95,7 +198,9 @@
 {% block javascript_headers %}
     {{ block.super }}
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ mapkey }}&sensor=false"> </script>
-{% endblock javascript_headers %} 
+    {% compressed_js 'directory' %}
+{% endblock javascript_headers %}
+
 {% block javascript %} 
     {{ block.super }}
     <script type="text/javascript">

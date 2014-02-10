@@ -180,6 +180,13 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/management.js',
     },
+    'directory': {
+        'source_filenames': (
+            'extras/raty-master/lib/jquery.raty.js',
+            'js/directory.js',
+        ),
+        'output_filename': 'js/directory.js',
+    },
     'dataTables': {
         'source_filenames': (
             'extras/DataTables-1.9.4/media/js/jquery.dataTables.min.js',
