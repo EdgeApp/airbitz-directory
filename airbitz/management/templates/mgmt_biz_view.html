@@ -302,11 +302,10 @@
                         latitude: parseFloat($('#latitude').val()),
                         longitude: parseFloat($('#longitude').val())
                     };
-                    // var cats = $.map($('#categories').select2('data'), function(m) {
-                    //     return { id: m.id };
-                    // });
-                    // console.log(cats);
-                    // obj['categories'] = cats;
+                    var cats = $.map($('#categories').select2('data'), function(m) {
+                        return { id: m.id, name: m.text };
+                    });
+                    obj['categories'] = cats;
                     biz.set(obj);
 
                     $('.save').html('Updating...');
@@ -329,7 +328,7 @@
                 dataType: 'json',
                 contentType: 'json',
                 type: "GET",
-                url: "/mgmt/api/cat/"
+                url: "/mgmt/api/cat/?page_size=2000"
             }).done(function(data) {
                 var d = data.results.map(function(m) {
                     return { id: m.id, text: m.name };
@@ -339,7 +338,7 @@
                     multiple: true,
                     data : d,
                     createSearchChoice: function(term, data) {
-                        return { id: term, text: term, needsId: true };
+                        return { id: 0, text: term };
                     }
                 });
             });

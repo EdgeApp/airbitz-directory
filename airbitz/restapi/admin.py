@@ -1,11 +1,14 @@
 from django.contrib.gis.geos import Point
-from django.db.models import Q
 from django.core.paginator import Paginator
+from django.db.models import Q
+from django.core.exceptions import ValidationError
+from rest_framework import fields
 from rest_framework import pagination
 from rest_framework import serializers
-from rest_framework import fields
+from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAdminUser
+from rest_framework.response import Response
 
 import logging
 
@@ -45,8 +48,9 @@ class AdminCategorySerializer(serializers.ModelSerializer):
         fields = ('id', 'name', )
 
 class AdminBizSerializer(serializers.ModelSerializer):
-    categories = AdminCategorySerializer(source='categories', many=True, read_only=False)
+    categories = AdminCategorySerializer(source='categories', many=True)
     center = AdminPointField(source='center')
+
     class Meta:
         model = Business
 
@@ -55,6 +59,7 @@ class AdminCategory(ListCreateAPIView):
     filter_fields = ('name', )
     permission_classes = (IsAdminUser,)
     model = Category
+    paginate_by = 1000
 
 class AdminCategoryDetail(RetrieveUpdateDestroyAPIView):
     serializer_class = AdminCategorySerializer
@@ -75,7 +80,6 @@ class DataTablePaginate(Paginator):
                 self.converted = True
             except (TypeError, ValueError):
                 pass
-            print page, self.per_page, number
             return number
 
 class AdminBusinessView(ListCreateAPIView):
@@ -128,4 +132,59 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
     serializer_class = AdminBizSerializer
     permission_classes = (IsAdminUser,)
     model = Business
+
+    def __update_cats__(self, request):
+        if request.DATA.has_key('categories'):
+            cats = self.object.categories.all()
+            delcats = dict((c.id, c) for c in cats)
+            for c in request.DATA['categories']:
+                if not c.has_key('name') or not c.has_key('id'):
+                    continue
+                if c['id'] == 0:
+                    newcat, _ = Category.objects.get_or_create(name__iexact=c['name'])
+                    c['id'] = newcat.id
+                    self.object.categories.add(newcat)
+                elif not any([c['id'] == c2.id for c2 in cats]):
+                    self.object.categories.add(Category.objects.get(id=c['id']))
+
+                if delcats.has_key(c['id']):
+                    delcats.pop(c['id'])
+            for i in delcats.itervalues():
+                self.object.categories.remove(i)
+
+            catList = []
+            self.object = Business.objects.get(id=self.object.id)
+            for c in self.object.categories.all():
+                serial = AdminCategorySerializer(c)
+                catList.append(serial.data)
+            request.DATA['categories'] = catList
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        self.object = self.get_object_or_none()
+
+        if self.object is None:
+            created = True
+            save_kwargs = {'force_insert': True}
+            success_status_code = status.HTTP_201_CREATED
+        else:
+            created = False
+            save_kwargs = {'force_update': True}
+            success_status_code = status.HTTP_200_OK
+
+        serializer = self.get_serializer(self.object, data=request.DATA,
+                                         files=request.FILES, partial=partial)
+
+
+        self.__update_cats__(request)
+        if serializer.is_valid():
+            try:
+                self.pre_save(serializer.object)
+            except ValidationError as err:
+                return Response(err.message_dict, status=status.HTTP_400_BAD_REQUEST)
+            self.object = serializer.save(**save_kwargs)
+            self.post_save(self.object, created=created)
+            return Response(serializer.data, status=success_status_code)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
