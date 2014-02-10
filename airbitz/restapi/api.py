@@ -80,7 +80,8 @@ def autocompleteBusiness(term=None, location=None, geolocation=None):
         fits = SQ(django_ct='directory.business')
         d = parseLocationString(location)
         if d['admin2_name']:
-            fits = fits & SQ(admin2_name=d['admin2_name'])
+            fits = fits & (SQ(admin2_name=d['admin2_name'])
+                         | SQ(admin3_name=d['admin2_name']))
         if d['admin1_code']:
             fits = fits & SQ(admin1_code=d['admin1_code'])
         if d['country']:

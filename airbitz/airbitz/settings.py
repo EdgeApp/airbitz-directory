@@ -222,6 +222,7 @@ SEARCH_PORT=os.environ.get('SEARCH_PORT', '8983')
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://%s:%s/solr' % (SEARCH_HOST, SEARCH_PORT)
+        'URL': 'http://%s:%s/solr' % (SEARCH_HOST, SEARCH_PORT),
+        'INCLUDE_SPELLING': True
     },
 }

@@ -12,7 +12,6 @@
         }
     });
   };
-
   AB.addMap = function(selector, zoom, lat, lon, markers) {
       function initialize() {
           var mapOptions = {
@@ -34,15 +33,10 @@
       return map;
   };
   AB.addPlaceSearch = function(selector) {
-      var end = '';
-      var geo = Geo.latestLocation();
-      if (geo) {
-          end += '&ll=' + geo.coords.latitude + ',' + geo.coords.longitude;
-      }
       selector.typeahead([{
           name: 'business',
           remote: {
-              url: '/api/v1/autocomplete-business/?term=%QUERY' + end,
+              url: '/api/v1/autocomplete-business/?term=%QUERY',
               replace: function (url, uriEncodedQuery) {
                   q = url.replace(/%QUERY/, uriEncodedQuery)
                   if ($('#near').val()) {
@@ -70,15 +64,10 @@
       });
   };
   AB.addLocationSearch = function(selector, locSelector) {
-      var end = '';
-      var geo = Geo.latestLocation();
-      if (geo) {
-          end += '&lat=' + geo.coords.latitude + '&lon=' + geo.coords.longitude;
-      }
       selector.typeahead([{
           name: 'location',
           remote: {
-              url: '/api/v1/autocomplete-location/?term=%QUERY' + end,
+              url: '/api/v1/autocomplete-location/?term=%QUERY',
               filter: function(data) {
                   return data.results.map(function(s, i) {
                       return { text: s, value: s };
@@ -93,37 +82,6 @@
       selector.on('typeahead:selected', function (object, datum) {
           $(this).val(data.text);
       });
-  };
-  var Geo = AB.Geo = {
-      latestLocation: function() {
-          var cookie = Util.getCookie('geo');
-          try {
-              var geo = JSON.parse(cookie);
-          } catch (e) {
-              console.log(e);
-          }
-          return geo;
-      },
-      requestLocation: function() {
-          var now = new Date();
-          var geo = this.latestLocation();
-          if (geo) {
-              try {
-                  var then = new Date(geo.timestamp).getTime();
-                  if (now - then < 1000 * 60 * 60 * 1) {
-                      return;
-                  }
-              } catch (e) {
-                  console.log(e);
-              }
-          }
-          if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(this.postPosition);
-          }
-      },
-      postPosition: function(geo) {
-          Util.setCookie('geo', JSON.stringify(geo), 1);
-      }
   };
   var Util = AB.Util = {
       csrfSafeMethod: function(method) {

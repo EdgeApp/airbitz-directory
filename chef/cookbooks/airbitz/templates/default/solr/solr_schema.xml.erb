@@ -15,8 +15,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<schema name="default" version="1.4">
 
+<schema name="default" version="1.4">
   <types>
     <fieldtype name="string"  class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
     <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" omitNorms="true"/>
@@ -60,6 +60,35 @@
         <filter class="solr.LowerCaseFilterFactory"/>
       </analyzer>
     </fieldType>
+
+  <searchComponent class="solr.SpellCheckComponent" name="suggest">
+    <lst name="spellchecker">
+      <str name="name">suggest</str>
+      <str name="classname">org.apache.solr.spelling.suggest.Suggester</str>
+      <str name="lookupImpl">org.apache.solr.spelling.suggest.tst.TSTLookupFactory</str>
+      <!-- Alternatives to lookupImpl: 
+           org.apache.solr.spelling.suggest.fst.FSTLookupFactory   [finite state automaton]
+           org.apache.solr.spelling.suggest.fst.WFSTLookupFactory [weighted finite state automaton]
+           org.apache.solr.spelling.suggest.jaspell.JaspellLookupFactory [default, jaspell-based]
+           org.apache.solr.spelling.suggest.tst.TSTLookupFactory   [ternary trees]
+      -->
+      <str name="field">name</str>  <!-- the indexed field to derive suggestions from -->
+      <float name="threshold">0.005</float>
+      <str name="buildOnCommit">true</str>
+    </lst>
+  </searchComponent>
+  <requestHandler class="org.apache.solr.handler.component.SearchHandler" name="/suggest">
+    <lst name="defaults">
+      <str name="spellcheck">true</str>
+      <str name="spellcheck.dictionary">suggest</str>
+      <str name="spellcheck.onlyMorePopular">true</str>
+      <str name="spellcheck.count">5</str>
+      <str name="spellcheck.collate">true</str>
+    </lst>
+    <arr name="components">
+      <str>suggest</str>
+    </arr>
+  </requestHandler>
 
     <fieldType name="text_en" class="solr.TextField" positionIncrementGap="100">
       <analyzer type="index">

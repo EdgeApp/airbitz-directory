@@ -5,6 +5,7 @@
 
 {% block head %}
     {{ block.super }}
+    {% compressed_css 'management' %}
     {% compressed_css 'dataTables' %}
 {% endblock head %}
 
@@ -33,29 +34,7 @@
                                     <th>Name</th>
                                     <th>Categories</th>
                                 </thead>
-                                <tbody>
-                                    {% for biz in results %}
-                                        <tr>
-                                            <td>
-                                                <a href="{% url 'mgmt_biz_view' biz.id %}" title="{{ biz.name }}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                            </td>
-                                            <td>{{ biz.lookupStatus }} </td>
-                                            <td>{{ biz.name }}</td>
-                                            <td>
-                                                {% if biz.categories.all %}
-                                                    {% for category in biz.categories.all %}
-                                                        <span class="btn btn-sm btn-default">{{category}}</span>
-                                                    {% endfor %}
-                                                {% endif %}
-
-                                            </td>
-                                        </tr>
-                                    {% empty %}
-                                        <tr>
-                                            <td colspan="4">No results found.</td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
+                                <tbody></tbody>
                                 <tfoot>
                                     <th></th>
                                     <th></th>
@@ -73,87 +52,79 @@
 
 {% block javascript_headers %}
     {{ block.super }}
+    {% compressed_js 'management' %}
     {% compressed_js 'dataTables' %}
-    <script   type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/OpenLayers.js" charset="utf-8"></script>
 {% endblock javascript_headers %}
 
 
 {% block javascript %}
     {{ block.super }}
     <script type="text/javascript">
-    (function($) {
-        $.fn.dataTableExt.oApi.fnGetColumnData = function ( oSettings, iColumn, bUnique, bFiltered, bIgnoreEmpty ) {
-            // check that we have a column id
-            if ( typeof iColumn == "undefined" ) return new Array();
-            
-            // by default we only want unique data
-            if ( typeof bUnique == "undefined" ) bUnique = true;
-            
-            // by default we do want to only look at filtered data
-            if ( typeof bFiltered == "undefined" ) bFiltered = true;
-            
-            // by default we do not want to include empty values
-            if ( typeof bIgnoreEmpty == "undefined" ) bIgnoreEmpty = true;
-            
-            // list of rows which we're going to loop through
-            var aiRows;
-            
-            // use only filtered rows
-            if (bFiltered == true) aiRows = oSettings.aiDisplay;
-            // use all rows
-            else aiRows = oSettings.aiDisplayMaster; // all row numbers
-        
-            // set up data array   
-            var asResultData = new Array();
-            
-            for (var i=0,c=aiRows.length; i<c; i++) {
-                iRow = aiRows[i];
-                var aData = this.fnGetData(iRow);
-                var sValue = aData[iColumn];
-                
-                // ignore empty values?
-                if (bIgnoreEmpty == true && sValue.length == 0) continue;
-        
-                // ignore unique values?
-                else if (bUnique == true && jQuery.inArray(sValue, asResultData) > -1) continue;
-                
-                // else push the value onto the result data array
-                else asResultData.push(sValue);
-            }
-            
-            return asResultData;
-    }}(jQuery));
- 
-    function fnCreateSelect(aData) {
-        var r='<select><option value=""></option>', i, iLen=aData.length;
-        r += '<option value="Pending">Pending</option>';
-        r += '<option value="Draft">Draft</option>';
-        r += '<option value="Published">Published</option>';
-        r += '<option value="Trashed">Trashed</option>';
-        return r+'</select>';
-    }
- 
     $(function() {
-        /* Initialise the DataTable */
         var oTable = $('.dataTableCustom').dataTable({
-            "aLengthMenu": [[10, 25, 50, 100, 500, -1],
-                            [10, 25, 50, 100, 500, "All"]],
-            "iDisplayLength": 10,
-            "aaSorting": [[ 2, "asc" ]],
-            // "bStateSave": true,
-        });
-        
-        /* Add a select menu for each TH element in the table footer */
-        $("tfoot th").each( function(i) {
-            if (i == 1) {
-                this.innerHTML = fnCreateSelect( oTable.fnGetColumnData(i) );
-                $('select', this).change( function () {
-                    oTable.fnFilter( $(this).val(), i );
-                } );
+          "sPaginationType": "full_numbers",
+          "iDisplayLength": 10,
+          "aLengthMenu": [5, 10, 20, 50],
+          "bProcessing": true,
+          "bServerSide": true,
+          "sAjaxSource": "/mgmt/api/biz/",
+          "fnServerData": function (sSource, aoData, fnCallback) {
+            aoData.push({ "name": "location", "value": $('#near').val() });
+            $.getJSON(sSource, aoData, function (json) { 
+                fnCallback(json)
+            });
+          },
+          "aoColumns": [
+            {"mData": "id"},
+            {"mData": "status"},
+            {"mData": "name"},
+            {"mData": "categories"}
+          ],
+          "aoColumnDefs": [ {
+            "aTargets":[0],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+              $(nTd).css('text-align', 'center');
+            },
+            "mData": null,
+            "mRender": function(data, type, full) {
+                return '<td><a href="/mgmt/biz/view/' + data + '/main" class="add">' + 
+                            '<span class="glyphicon glyphicon-pencil"></span>' + 
+                       '</a></td>';
             }
-        } );
+          } , {
+            "aTargets":[1],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+              $(nTd).css('text-align', 'left');
+            },
+            "mData": null,
+            "mRender": function(data, type, full) {
+                if (data === "DR") {
+                    return '<td>Draft</td>';
+                } else if (data === "PUB") {
+                    return '<td>Published</td>';
+                } else if (data === "PEN") {
+                    return '<td>Pending</td>';
+                } else {
+                    return '<td>Trashed</td>';
+                }
+            }
+          } , {
+            "aTargets":[3],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+              $(nTd).css('text-align', 'center');
+            },
+            "mData": null,
+            "mRender": function(data, type, full) {
+              var html = '';
+              for (var i = 0; i < data.length; ++i) {
+                html += '<span class="btn btn-sm btn-default">' + data[i].name + '</span>';
+              }
+              return html;
+            }
+          }]
+        });
+        $('.panel select').select2({ 'width': '200px' });
     });
-
     </script>
 {% endblock javascript %}
 

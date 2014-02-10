@@ -99,23 +99,8 @@
         {% block javascript %}
             <script type="text/javascript">
                 $(function() {
-                    $("form[name='search']").submit(function() {
-                        var geo = AB.Geo.latestLocation();
-                        if (geo) {
-                            var lat = $("<input>")
-                                        .attr("type", "hidden")
-                                        .attr("name", "lat").val(geo.coords.latitude);
-                            var lon = $("<input>")
-                                        .attr("type", "hidden")
-                                        .attr("name", "lon").val(geo.coords.longitude);
-                            $(this).append($(lat));
-                            $(this).append($(lon));
-                        }
-                        return true;
-                    });
                     AB.addLocationSearch($('#near'));
                     AB.addPlaceSearch($('#term'));
-                    // AB.Geo.requestLocation();
                 });
             </script>
         {% endblock javascript %}

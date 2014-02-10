@@ -9,6 +9,15 @@ from directory.models import Business, BusinessHours, \
 from location.models import GeoNameZip
 
 
+class ProfileImageField(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        images = BusinessImage.objects.filter(business=obj)[:1]
+        if len(images) > 0:
+            i = images[0]
+            return BusinessImageSerializer(i).to_native(i)
+        else:
+            return {}
+
 class LastUpdated(serializers.Field):
     def field_to_native(self, obj, field_name):
         m = Category.objects.all().aggregate(Max('modified'))
@@ -56,7 +65,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
     bizId = serializers.Field(source='pk')
     categories = CategorySerializer(source='categories')
     social = SocialSerializer(source='socialid_set')
-    images = BusinessImageSerializer(source='businessimage_set')
+    profile_image = ProfileImageField(source='*')
     state = serializers.CharField(source='admin1_code')
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
@@ -69,7 +78,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
                   'name',
                   'categories',
                   'social',
-                  'images',
+                  'profile_image',
                   'website',
                   'phone',
                   'address',
