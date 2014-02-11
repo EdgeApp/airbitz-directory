@@ -27,6 +27,19 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-12">
+                            <div class="pull-right">
+                                <label for="status">Status</label>
+                                <select id="status">
+                                    <option value="DR">Draft</option>
+                                    <option value="PEN">Pending</option>
+                                    <option value="PUB">Published</option>
+                                    <option value="TR">Trashed</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
                             <table class="table dataTableCustom">
                                 <thead>
                                     <th></th>
@@ -61,15 +74,21 @@
     {{ block.super }}
     <script type="text/javascript">
     $(function() {
+        if (localStorage.getItem('mgmt_status')) {
+            $('#status').val(localStorage.getItem('mgmt_status'));
+        }
+        var tableUrl = "/mgmt/api/biz/";
         var oTable = $('.dataTableCustom').dataTable({
           "sPaginationType": "full_numbers",
           "iDisplayLength": 10,
           "aLengthMenu": [5, 10, 20, 50],
+          "bStateSave": true,
           "bProcessing": true,
           "bServerSide": true,
-          "sAjaxSource": "/mgmt/api/biz/",
+          "sAjaxSource": tableUrl,
           "fnServerData": function (sSource, aoData, fnCallback) {
             aoData.push({ "name": "location", "value": $('#near').val() });
+            aoData.push({ "name": "status", "value": $('#status').val() });
             $.getJSON(sSource, aoData, function (json) { 
                 fnCallback(json)
             });
@@ -124,6 +143,11 @@
           }]
         });
         $('.panel select').select2({ 'width': '200px' });
+        $('#status').change(function() {
+            localStorage.setItem('mgmt_status', $(this).val());
+            oTable._fnAjaxUpdate();
+        });
+        $('#status').select2({ 'width': '200px' });
     });
     </script>
 {% endblock javascript %}

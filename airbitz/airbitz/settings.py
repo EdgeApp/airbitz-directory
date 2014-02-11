@@ -170,12 +170,13 @@ PIPELINE_JS = {
     },
     'management': {
         'source_filenames': (
-            'bootstrap/js/bootstrap.min.js',
+            'js/jquery.hotkeys.js',
             'js/json2.js',
             'js/underscore-min.js',
             'js/backbone-min.js',
             'js/handlebars.js',
             'js/moment.min.js',
+            'js/parsley.js',
             'extras/select2/select2.js',
         ),
         'output_filename': 'js/management.js',

@@ -153,8 +153,8 @@ class BusinessHours(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     business = models.ForeignKey(Business, null=False)
     dayOfWeek = models.CharField(max_length=30, choices=DAY_OF_WEEK_CHOICES)
-    hourStart = models.TimeField()
-    hourEnd = models.TimeField()
+    hourStart = models.TimeField(blank=True, null=True)
+    hourEnd = models.TimeField(blank=True, null=True)
 
     @property
     def lookupDayOfWeek(self):

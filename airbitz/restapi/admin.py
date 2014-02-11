@@ -50,7 +50,7 @@ class AdminCategorySerializer(serializers.ModelSerializer):
 class AdminSocialSerializer(serializers.ModelSerializer):
     class Meta:
         model = SocialId
-        fields = ('social_type', 'social_id', 'social_url')
+        fields = ('id', 'social_type', 'social_id', 'social_url')
 
 class AdminHoursSerializer(serializers.ModelSerializer):
     hourStart = fields.CharField(required=False);
@@ -62,6 +62,7 @@ class AdminHoursSerializer(serializers.ModelSerializer):
 class AdminBizSerializer(serializers.ModelSerializer):
     categories = AdminCategorySerializer(source='categories', many=True)
     hours = AdminHoursSerializer(source='businesshours_set', many=True)
+    social = AdminSocialSerializer(source='socialid_set', many=True)
     center = AdminPointField(source='center')
 
     class Meta:
@@ -122,6 +123,7 @@ class AdminBusinessView(ListCreateAPIView):
     def get_queryset(self):
         search = self.request.QUERY_PARAMS.get('sSearch', None)
         location = self.request.QUERY_PARAMS.get('location', None)
+        bizStatus = self.request.QUERY_PARAMS.get('status', None)
         cols = self.paramArray('mDataProp_', self.request)
         sorts = self.paramArray('iSortCol_', self.request)
         dirs = self.paramArray('sSortDir_', self.request)
@@ -132,12 +134,15 @@ class AdminBusinessView(ListCreateAPIView):
                        | Q(categories__name__icontains=search))
         if location:
             (q, _) = querySetAddLocation(q, location)
+        if bizStatus:
+            q = q.filter(status=bizStatus)
         if sorts:
             l = []
             for (s, d) in zip(sorts, dirs):
                 c = cols[int(s)]
                 l.append(self.formatDir(c, d))
             q = q.order_by(*l)
+        q = q.distinct('id')
         print q.query
         return q
 
@@ -153,7 +158,7 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
             for c in request.DATA['categories']:
                 if not c.has_key('name') or not c.has_key('id'):
                     continue
-                if c['id'] == 0:
+                if c['id'] <= 0:
                     newcat, _ = Category.objects.get_or_create(name=c['name'])
                     c['id'] = newcat.id
                     self.object.categories.add(newcat)
@@ -205,6 +210,39 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
                 hourList.append(serial.data)
             request.DATA['hours'] = hourList
 
+    def __update_social__(self, request):
+        if request.DATA.has_key('social'):
+            socials = self.object.socialid_set.all()
+            delsocial = dict((c.id, c) for c in socials)
+            print delsocial
+            for c in request.DATA['social']:
+                print c
+                if not c.has_key('id'):
+                    continue
+                if c['id'] == 0:
+                    newsocial = SocialId.objects.create(business=self.object,\
+                                                      social_type=c['social_type'],\
+                                                      social_id=c['social_id'],\
+                                                      social_url=c['social_url'])
+                    c['id'] = newsocial.id
+                if delsocial.has_key(c['id']):
+                    d = delsocial[c['id']]
+                    d.social_id = c['social_id']
+                    d.social_type = c['social_type']
+                    d.social_url = c['social_url']
+                    d.save()
+                    delsocial.pop(c['id'])
+            for i in delsocial.itervalues():
+                print 'deleting ', i
+                i.delete()
+
+            socialList = []
+            self.object = Business.objects.get(id=self.object.id)
+            for s in self.object.socialid_set.all():
+                serial = AdminSocialSerializer(s)
+                socialList.append(serial.data)
+            request.DATA['social'] = socialList
+
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         self.object = self.get_object_or_none()
@@ -224,6 +262,7 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
 
         self.__update_cats__(request)
         self.__update_hours__(request)
+        self.__update_social__(request)
         if serializer.is_valid():
             try:
                 self.pre_save(serializer.object)

@@ -6,10 +6,27 @@
 {% block head %}
     {{ block.super }}
     {% compressed_css 'management' %}
+
+    <style>
+        .floatingAlert {
+            margin-left: auto;
+            margin-right: auto;
+            position: fixed;
+            top: 60px; 
+            width: 80%;
+            z-index: 100000;
+            box-shadow: 1px 1px 2px #DDD;
+        }
+        .parsley-error-list {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 {% endblock head %}
 
 {% block bizbody %}
 <div id="bizapp">
+    <form>
     <div class="row">
         <div class="col-sm-12">
             <div class="alertsdiv">
@@ -19,7 +36,7 @@
     <div class="row">
         <div class="col-sm-12" style="text-align: center; padding-bottom: 10px;">
             <div class="btn-group">
-                <button class="save btn btn-success">Save</button>
+                <a class="save btn btn-success">Save</a>
                 <a class="btn btn-default" href="{% url 'mgmt_biz_edit' biz.id %}">Edit</a>
             </div>
         </div>
@@ -33,19 +50,16 @@
                         <div class="col-sm-6">
                             <div>
                                 <label for="status">Status:</label>
-                                <div>
-                                    <select id="status" name="status" />
-                                        {% for s in STATUS_CHOICES %}
-                                            <option value="{{ s.0 }}">{{ s.1 }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
+                                <select id="status" name="status" />
+                                    {% for s in STATUS_CHOICES %}
+                                        <option value="{{ s.0 }}">{{ s.1 }}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <div>
+                            <div class="form-group">
                                 <label for="name">Name:</label>
-                                <div>
-                                    <input type="text" class="form-control" id="name" name="name" value="{{ biz.name }}" />
-                                </div>
+                                <input type="text" class="form-control" id="name" name="name" 
+                                       value="{{ biz.name }}" required />
                             </div>
                             <div>
                                 <label>Description:</label>
@@ -63,33 +77,29 @@
                             </div>
                             <div>
                                 <label for="phone">Phone:</label>
-                                <div>
-                                    <input type="tel" class="form-control" id="phone" name="phone" value="{{ biz.phone|default:"" }}" />
-                                </div>
+                                <input type="tel" class="form-control" id="phone" name="phone" 
+                                       value="{{ biz.phone|default:"" }}" 
+                                       parsley-trigger="change" parsley-type="phone" />
                             </div>
                             <div>
                                 <label for="website">Website:</label>
-                                <div>
-                                    <input type="url" class="form-control" id="website" name="website" value="{{ biz.website }}" />
-                                </div>
+                                <input type="url" class="form-control" id="website" name="website" 
+                                       value="{{ biz.website }}" 
+                                       parsley-trigger="change" parsley-type="url" />
                             </div>
                             <div class="form-horizontal">
                                 <label for="has_physical_business">Has Physical Business:</label>
-                                <div>
-                                    <input type="checkbox" id="has_physical_business" name="has_physical_business" {% if biz.has_physical_business %}checked{% endif %} />
-                                </div>
+                                <input type="checkbox" id="has_physical_business" name="has_physical_business" {% if biz.has_physical_business %}checked{% endif %} />
                             </div>
                             <div class="form-horizontal">
                                 <label for="has_online_business">Has Online Business:</label>
-                                <div>
-                                    <input type="checkbox" id="has_online_business" name="has_online_business" {% if biz.has_online_business %}checked{% endif %} />
-                                </div>
+                                <input type="checkbox" id="has_online_business" name="has_online_business" {% if biz.has_online_business %}checked{% endif %} />
                             </div>
                             <div>
                                 <label for="has_bitcoin_discount">Bitcoin Discount:</label>
-                                <div>
-                                    <input type="number" class="form-control" id="has_bitcoin_discount" name="has_bitcoin_discount" value="{{ biz.has_bitcoin_discount }}" />
-                                </div>
+                                <input type="number" class="form-control" id="has_bitcoin_discount" name="has_bitcoin_discount" 
+                                       value="{{ biz.has_bitcoin_discount }}" 
+                                       parsley-trigger="change" parsley-type="number" />
                             </div>
                         </div>
                     </div>
@@ -100,21 +110,14 @@
 
     <div class="row">
         <div class="col-sm-6">
-            <div class="panel panel-default">
+            <div class="panel panel-default" id="social-list">
                 <div class="panel-heading">SOCIAL
-                    <a class="pull-right" href="{% url 'mgmt_biz_social_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" /></a>
+                    <button class="btn btn-sm btn-default social-add pull-right"><span class="glyphicon glyphicon-plus" ></span> Add Social</button>
+                    <a class="btn btn-sm btn-default pull-right" href="{% url 'mgmt_biz_social_edit' biz.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped">                    
-                    {% for s in social %}
-                        <tr>
-                            <td> {{ s.lookupType }} </td>
-                            <td> {{ s.social_id }} </td>
-                            <td> <a href="{{ s.social_url }}">Link</a> </td>
-                        </tr>
-                    {% empty %}
-                        <tr><td colspan="3">No social defined.</td></tr>
-                    {% endfor %}
+                        <tbody></tbody>
                     </table>                    
                 </div>
             </div>
@@ -146,42 +149,30 @@
                     <a class="pull-right" href="{% url 'mgmt_biz_loc_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" /></a>
                     </div>
                 <div class="panel-body">
-                    <dl>
-                        <dt>Address:</dt>
-                        <dd>
-                            <input type="text" id="address" name="address" class="form-control" value="{{ biz.address|default:"" }}" />
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>City:</dt>
-                        <dd>
-                            <input type="text" id="admin3_name" name="admin3_name" class="form-control" value="{{ biz.admin3_name|default:"" }}" />
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>County:</dt>
-                        <dd>
-                            <input type="text" id="admin2_name" name="admin2_name" class="form-control" value="{{ biz.admin2_name|default:"" }}" />
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>State:</dt>
-                        <dd>
-                            <input type="text" id="admin1_code" name="admin1_code" class="form-control" value="{{ biz.admin1_code|default:"" }}" />
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>Postal Code:</dt>
-                        <dd>
-                            <input type="text" id="postalcode" name="postalcode" class="form-control" value="{{ biz.postalcode|default:"" }}" />
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>Country:</dt>
-                        <dd>
-                            <input type="text" id="country" name="country" class="form-control" value="{{ biz.country|default:"" }}" />
-                        </dd>
-                    </dl>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address" class="form-control" value="{{ biz.address|default:"" }}" />
+                    </div>
+                    <div class="form-group">
+                        <label for="admin3_name">City:</label>
+                        <input type="text" id="admin3_name" name="admin3_name" class="form-control" value="{{ biz.admin3_name|default:"" }}" />
+                    </div>
+                    <div class="form-group">
+                        <label for="admin2_name">County:</label>
+                        <input type="text" id="admin2_name" name="admin2_name" class="form-control" value="{{ biz.admin2_name|default:"" }}" />
+                    </div>
+                    <div class="form-group">
+                        <label for="admin1_code">State:</label>
+                        <input type="text" id="admin1_code" name="admin1_code" class="form-control" value="{{ biz.admin1_code|default:"" }}" />
+                    </div>
+                    <div class="form-group">
+                        <label for="postalcode">Postal Code:</label>
+                        <input type="text" id="postalcode" name="postalcode" class="form-control" value="{{ biz.postalcode|default:"" }}" />
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country:</label>
+                        <input type="text" id="country" name="country" class="form-control" value="{{ biz.country|default:"" }}" />
+                    </div>
                     <div>
                         <label>Lat/Lon:</label>
                         <div class="form-inline">
@@ -194,14 +185,15 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12" style="text-align: center; padding-bottom: 10px;">
-            <div class="btn-group">
-                <button class="save btn btn-success">Save</button>
-                <a class="btn btn-default" href="{% url 'mgmt_biz_edit' biz.id %}">Edit</a>
+        <div class="row">
+            <div class="col-sm-12" style="text-align: center; padding-bottom: 10px;">
+                <div class="btn-group">
+                    <button class="save btn btn-success">Save</button>
+                    <a class="btn btn-default" href="{% url 'mgmt_biz_edit' biz.id %}">Edit</a>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 {% endblock %}
 
@@ -213,9 +205,10 @@
 
 {% block javascript %}
     {{ block.super }}
-    <script id="template-row" type="text/x-handlebars-template">
+    <script id="hours-row" type="text/x-handlebars-template">
         <td>
-            <input type="hidden" name="id" value="{% templatetag openvariable %} id {% templatetag closevariable %}">
+            <input type="hidden" name="id" 
+                   value="{% templatetag openvariable %} id {% templatetag closevariable %}">
             <select name="dayOfWeek">
                 <option value="sunday">Sunday</option>
                 <option value="monday">Monday</option>
@@ -227,16 +220,51 @@
             </select>
         </td> 
         <td>
-            <input type="text" name="hourStart" class="form-control" value="{% templatetag openvariable %} hourStart {% templatetag closevariable %}"/>
+            <input type="text" name="hourStart" class="form-control" 
+                   value="{% templatetag openvariable %} hourStart {% templatetag closevariable %}"/>
         </td>
         <td>
-            <input type="text" name="hourEnd" class="form-control" value="{% templatetag openvariable %} hourEnd {% templatetag closevariable %}"/>
+            <input type="text" name="hourEnd" class="form-control" 
+                   value="{% templatetag openvariable %} hourEnd {% templatetag closevariable %}"/>
         </td>
         <td><button class="destroy btn btn-sm btn-default delete"><span class=" glyphicon glyphicon-trash"></span></button></td>
     </script>
 
+    <script id="social-row" type="text/x-handlebars-template">
+        <td>
+            <div class="col-sm-12">
+                <input type="text" name="social_url" class="form-control" 
+                       parsley-trigger="change" parsley-type="url" 
+                       value="{% templatetag openvariable %} social_url {% templatetag closevariable %}"/>
+            </div>
+        </td>
+        <td>
+            <input type="hidden" name="id" 
+                   value="{% templatetag openvariable %} id {% templatetag closevariable %}">
+            <select name="social_type">
+                <option value="osm">Open Street Map</option>
+                <option value="foursquare">Foursquare</option>
+                <option value="facebook">Facebook</option>
+                <option value="yelp">Yelp</option>
+            </select>
+        </td>
+        <td>
+            <input type="text" name="social_id" class="form-control" value="{% templatetag openvariable %} social_id {% templatetag closevariable %}"/>
+        </td>
+        <td>
+            <button class="destroy btn btn-sm btn-default delete"><span class="glyphicon glyphicon-trash"></span></button>
+        </td>
+    </script>
+
     <script>
         $(function() {
+            var ifEmpty = function(s) {
+                return (s === null || s === '') ? null : s;
+            };
+            var DAYS_OF_WEEK = [
+                "sunday", "monday", "tuesday", "wednesday", 
+                "thursday", "friday", "saturday"
+            ];
             var Business = Backbone.Model.extend({
                 defaults: function() {
                     return {
@@ -251,6 +279,28 @@
             var biz = new Business({id: {{ biz.id }} });
             biz.fetch()
 
+            var SocialView = Backbone.View.extend({
+                events: {
+                    "click .delete":  "deleteSocial"
+                },
+                tagName:  "tr",
+                template: Handlebars.compile($('#social-row').html()),
+                initialize: function() { },
+                render: function(data) {
+                    this.$el.html(this.template(data));
+                    if (data.social_type) {
+                        this.$el.find('select[name="social_type"]').val(data.social_type);
+                    } else {
+                        this.$el.find('select[name="social_type"]').val("yelp");
+                    }
+                    this.$el.find('select').select2({ width: '150px' });
+                    return this;
+                },
+                deleteSocial: function() {
+                    this.$el.remove();
+                }
+            });
+
             var HoursView = Backbone.View.extend({
                 events: {
                     "click .delete":  "deleteHours",
@@ -259,16 +309,14 @@
                     "keyup input[name='hourEnd']": "copyHourEnd"
                 },
                 tagName:  "tr",
-                template: Handlebars.compile($('#template-row').html()),
+                template: Handlebars.compile($('#hours-row').html()),
                 initialize: function() { },
-
                 findJoins: function(selector) {
                     var that = this;
                     return  $(selector).filter(function(i) {
                         return $(this) != that.$el && $(this).val() === '';
                     });
                 },
-
                 copyHourStart: function() {
                     var v = this.$el.find("input[name='hourStart']").val();
                     if (!this.joinedStart) {
@@ -278,7 +326,6 @@
                         $(this).val(v);
                     });
                 },
-
                 copyHourEnd: function() {
                     var v = this.$el.find("input[name='hourEnd']").val();
                     if (!this.joinedEnd) {
@@ -288,20 +335,14 @@
                         $(this).val(v);
                     });
                 },
-
                 render: function(data) {
-                    try {
-                        this.$el.html(this.template(data));
-                        if (data.dayOfWeek) {
-                            this.$el.find('select[name="dayOfWeek"]').val(data.dayOfWeek);
-                        } else {
-                            this.$el.find('select[name="dayOfWeek"]').val("sunday");
-                        }
-                        this.$el.find('select').select2({ width: '150px' });
-                    } catch (e) {
-                        console.log(data);
-                        console.log(e);
+                    this.$el.html(this.template(data));
+                    if (data.dayOfWeek) {
+                        this.$el.find('select[name="dayOfWeek"]').val(data.dayOfWeek);
+                    } else {
+                        this.$el.find('select[name="dayOfWeek"]').val("sunday");
                     }
+                    this.$el.find('select').select2({ width: '150px' });
                     return this;
                 },
                 deleteHours: function() {
@@ -314,60 +355,60 @@
                 hoursViews: {},
                 events: {
                     "click .save":  "saveBusiness",
-                    "click .hours-add": "addHours"
+                    "click .hours-add": "addHours",
+                    "click .social-add": "addSocial"
                 },
-
                 initialize: function() {
                     this.listenTo(biz, 'change', this.render);
                 },
-
-                addToTable: function(row) {
+                addToHours: function(row) {
                     $("#hours-list tbody:last").append(row);
                 },
-
+                addToSocial: function(row) {
+                    $("#social-list tbody:last").append(row);
+                },
                 render: function() {
+                    var that = this;
                     var hours = biz.get("hours");
                     $("#hours-list tbody").html(''); // Clear hours
                     if (hours.length > 0) {
-                        for (var i = 0; i < hours.length; ++i) {
-                            var h = hours[i];
+                        $.map(hours, function(m) {
                             var view = new HoursView();
-                            this.addToTable(view.render(hours[i]).el);
-                        }
+                            that.addToHours(view.render(m).el);
+                        });
                     } else {
-                        var a = [
-                            "sunday", "monday", "tuesday", "wednesday", 
-                            "thursday", "friday", "saturday"
-                        ];
-                        for (var i = 0; i < a.length; ++i) {
-                            var h = { "dayOfWeek": a[i] };
+                        $.map(DAYS_OF_WEEK, function(m) {
+                            var h = { "dayOfWeek": m };
                             var view = new HoursView();
-                            this.addToTable(view.render(h).el);
-                        }
+                            that.addToHours(view.render(h).el);
+                        });
                     }
+                    var social = biz.get("social");
+                    $("#social-list tbody").html('');
+                    $.map(social, function(m) {
+                        var view = new SocialView();
+                        that.addToSocial(view.render(m).el);
+                    });
+                    $('#bizapp form').parsley();
                 },
-
                 addHours: function() {
                     var data = {};
                     var view = new HoursView();
-                    this.addToTable(view.render({}).el);
+                    this.addToHours(view.render({}).el);
+                    view.$el.find('input[name="dayOfWeek"]').focus();
                 },
-
-                changed: function(evt) {
-                    var changed = evt.currentTarget;
-                    var value = $(evt.currentTarget).val();
-                    var obj = {};
-                    obj[changed.id] = value;
-                    biz.set(obj);
+                addSocial: function() {
+                    var data = {};
+                    var view = new SocialView();
+                    this.addToSocial(view.render({}).el);
+                    view.$el.find('input[name="social_url"]').focus();
                 },
-
-                updateOnEnter: function(e) {
-                    if (e.ctrlKey && e.keyCode == 13) {
-                        this.saveBusiness();
-                    }
-                },
-
                 saveBusiness: function() { 
+                    $('#bizapp form').parsley('validate');
+                    if (!$('#bizapp form').parsley('isValid')) {
+                        this.flash('alert-danger', 'Errors exist in form! Please correct!');
+                        return;
+                    }
                     var obj = {};
                     obj['name'] = $('#name').val();
                     obj['description'] = $('#description').val();
@@ -390,32 +431,49 @@
                     var cats = $.map($('#categories').select2('data'), function(m) {
                         return { id: m.id, name: m.text };
                     });
-                    obj['categories'] = cats;
-                    var hours = $('#hours-list tbody tr').map(function(i, e) {
-                        var d = {};
-                        d['id'] = parseInt($(this).find('input[name="id"]').val() || 0);
-                        d['dayOfWeek'] = $(this).find('select[name="dayOfWeek"]').select2('val');
-                        d['hourStart'] = $(this).find('input[name="hourStart"]').val();
-                        d['hourEnd'] = $(this).find('input[name="hourEnd"]').val();
-                        return d;
+                    var social = $('#social-list tbody tr').map(function(i, e) {
+                        return {
+                            'id': parseInt($(this).find('input[name="id"]').val() || 0),
+                            'social_type': $(this).find('select[name="social_type"]').select2('val'),
+                            'social_id': $(this).find('input[name="social_id"]').val(),
+                            'social_url': $(this).find('input[name="social_url"]').val()
+                        };
                     }).toArray();
+                    var hours = $('#hours-list tbody tr').map(function(i, e) {
+                        return {
+                            'id': parseInt($(this).find('input[name="id"]').val() || 0),
+                            'dayOfWeek': $(this).find('select[name="dayOfWeek"]').select2('val'),
+                            'hourStart': ifEmpty($(this).find('input[name="hourStart"]').val()),
+                            'hourEnd': ifEmpty($(this).find('input[name="hourEnd"]').val())
+                        }
+                    }).toArray();
+                    obj['categories'] = cats;
+                    obj['social'] = social;
                     obj['hours'] = hours;
                     biz.set(obj);
 
                     $('.save').html('Updating...');
+                    var that = this;
                     biz.save({}, {
                         success: function() {
                             $('.save').html('Save');
-                            $('.alertsdiv').html(
-                                '<div class="alert-dismissable alert alert-success">Successfullly updated.</div>')
+                            that.flash('alert-success', 'Successfullly updated business.');
                         },
                         error: function() {
                             alert('An error occurred.');
-                            $('.alertsdiv').html(
-                                '<div class="alert-dismissable alert alert-danger">Unable to save form!</div>')
+                            that.flash('alert-danger', 'Unable to save form!');
                         }
                     });
                 },
+                flash: function(classes, msg) {
+                    var $d = $('<div class="floatingAlert alert-dismissable alert ' + classes + '">' +
+                                msg + 
+                             '</div>');
+                    $('.alertsdiv').html($d);
+                    $d.delay(2000).fadeOut("slow", function() {
+                            $d.remove();
+                    });
+                }
             });
             AB.setup();
             $.ajax({
@@ -427,12 +485,13 @@
                 var d = data.results.map(function(m) {
                     return { id: m.id, text: m.name };
                 });
+                var startId = 0;
                 $('#categories').select2({ 
                     width: '100%',
                     multiple: true,
                     data : d,
                     createSearchChoice: function(term, data) {
-                        return { id: 0, text: term };
+                        return { id: startId--, text: term };
                     }
                 });
             });
@@ -440,7 +499,17 @@
                 width: '200px' 
             }).select2('val', '{{ biz.status }}');
 
-            var App = new AppView();
+            var app = new AppView();
+            $(document).bind('keydown', 'ctrl+return', function(e) {
+                e.preventDefault();
+                app.saveBusiness();
+            });
+            $(document).bind('keydown', 'tab+s', function() {
+                app.addSocial();
+            });
+            $(document).bind('keydown', 'tab+h', function() {
+                app.addHours();
+            });
             $('.geocode-address').click(function() {
                 var self = $(this);
                 var origText = self.html();
