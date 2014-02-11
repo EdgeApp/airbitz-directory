@@ -165,6 +165,7 @@ PIPELINE_JS = {
             'js/core.js',
             'js/holder.js',
             'js/typeahead.js',
+            'js/frontend-ui.js',
         ),
         'output_filename': 'js/core.js',
     },

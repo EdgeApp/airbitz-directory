@@ -54,6 +54,18 @@
   border-radius: 2px;
   outline: none;
 }
+.twitter-typeahead .tooltip-inner,
+.twitter-typeahead .popover {
+  white-space: pre;
+  max-width: none;
+  text-align: left;
+}
+.twitter-typeahead #term {
+  width: 200px;
+}
+.twitter-typeahead #near {
+  width: 200px;
+}
 .twitter-typeahead .typeahead {
   background-color: #fff;
 }
@@ -94,6 +106,26 @@
 .twitter-typeahead .tt-suggestion p {
   margin: 0;
   text-align: left;
+}
+.tooltip-inner .primary,
+.popover .primary {
+  color: #428bca;
+}
+.tooltip-inner .success,
+.popover .success {
+  color: #80c341;
+}
+.tooltip-inner .warning,
+.popover .warning {
+  color: #f0ad4e;
+}
+.tooltip-inner .danger,
+.popover .danger {
+  color: #d9534f;
+}
+.tooltip-inner .info,
+.popover .info {
+  color: #5bc0de;
 }
 body {
   margin: 0;
