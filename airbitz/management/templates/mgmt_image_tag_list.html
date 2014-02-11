@@ -3,6 +3,18 @@
 
 {% block title %} Image Tags {% endblock title %}
 
+{% block head %}
+    {{ block.super }}
+    {% compressed_css 'dataTables' %}
+    <style>
+        .panel-tabbed {
+            border-top: 0px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    </style>
+{% endblock head %}
+
 {% block body %}
     <div class="row">
         <div class="col-sm-12">
@@ -16,7 +28,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <div class="panel panel-default">
+            <div class="panel panel-default panel-tabbed">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-12">

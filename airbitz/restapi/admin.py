@@ -142,7 +142,6 @@ class AdminBusinessView(ListCreateAPIView):
                 c = cols[int(s)]
                 l.append(self.formatDir(c, d))
             q = q.order_by(*l)
-        q = q.distinct('id')
         print q.query
         return q
 

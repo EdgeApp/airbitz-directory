@@ -7,6 +7,13 @@
     {{ block.super }}
     {% compressed_css 'management' %}
     {% compressed_css 'dataTables' %}
+    <style>
+        .panel-tabbed {
+            border-top: 0px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    </style>
 {% endblock head %}
 
 {% block body %}
@@ -23,7 +30,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <div class="panel panel-default">
+            <div class="panel panel-default panel-tabbed">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-12">
@@ -35,6 +42,7 @@
                                     <option value="PUB">Published</option>
                                     <option value="TR">Trashed</option>
                                 </select>
+                                <button class="btn btn-default btn-sm" id="refresh">Refresh</button>
                             </div>
                         </div>
                     </div>
@@ -145,6 +153,12 @@
         $('.panel select').select2({ 'width': '200px' });
         $('#status').change(function() {
             localStorage.setItem('mgmt_status', $(this).val());
+            oTable._fnAjaxUpdate();
+        });
+        $('#refresh').click(function() {
+            oTable._fnAjaxUpdate();
+        });
+        $('#near').on('keyup', function() {
             oTable._fnAjaxUpdate();
         });
         $('#status').select2({ 'width': '200px' });
