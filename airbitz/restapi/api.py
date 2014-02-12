@@ -97,13 +97,20 @@ def autocompleteBusiness(term=None, location=None, geolocation=None):
     if location: 
         fits = SQ(django_ct='directory.business')
         d = parseLocationString(location)
-        if d['admin2_name']:
-            fits = fits & (SQ(admin2_name=d['admin2_name'])
-                         | SQ(admin3_name=d['admin2_name']))
-        if d['admin1_code']:
-            fits = fits & SQ(admin1_code=d['admin1_code'])
-        if d['country']:
-            fits = fits & SQ(country=d['country'])
+        if d['current_location']:
+            pass
+        elif d['web_only']:
+            fits = fits & SQ(has_online_business=True) & SQ(has_physical_business=False)
+        elif d['on_web']:
+            fits = fits & SQ(has_online_business=True)
+        else:
+            if d['admin2_name']:
+                fits = fits & (SQ(admin2_name=d['admin2_name'])
+                            | SQ(admin3_name=d['admin2_name']))
+            if d['admin1_code']:
+                fits = fits & SQ(admin1_code=d['admin1_code'])
+            if d['country']:
+                fits = fits & SQ(country=d['country'])
     else:
         fits = SQ(django_ct='directory.business')
     fits = (fits) | SQ(django_ct='directory.category')
@@ -134,7 +141,7 @@ def isWebOnly(location):
     return location.lower() == 'web only'
 
 def isOnWebOnly(location):
-    return location.lower() == 'on web'
+    return location.lower() == 'on the web'
 
 def isCurrentLocation(location):
     return location.lower() == 'current location'
@@ -164,7 +171,9 @@ def querySetAddLocation(qs, location):
         qs = qs.filter(country=d['country'])
     if d['postalcode']:
         qs = qs.filter(postalcode=d['postalcode'])
-    if d['web_only']:
+    if d['current_location']:
+        pass
+    elif d['web_only']:
         qs = qs.filter(has_online_business=True, has_physical_business=False)
     elif d['on_web']:
         qs = qs.filter(has_online_business=True)

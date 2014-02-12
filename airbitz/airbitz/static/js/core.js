@@ -20,14 +20,21 @@
               disableDefaultUI: true,
               mapTypeId: google.maps.MapTypeId.ROADMAP
           };
+          var bounds = new google.maps.LatLngBounds();
           var map = new google.maps.Map(selector[0], mapOptions);
           for (var i = 0; i < markers.length; ++i) {
               var m = markers[i];
-              var marker = new google.maps.Marker({
-                  position: new google.maps.LatLng(m.lat, m.lon),
-                  map: map
-              });
+              if (m.lat && m.lon) {
+                var loc = new google.maps.LatLng(m.lat, m.lon);
+                var marker = new google.maps.Marker({
+                    position: loc,
+                    map: map
+                });
+                bounds.extend(loc);
+              }
           }
+          map.fitBounds(bounds);
+          map.panToBounds(bounds); 
       }
       google.maps.event.addDomListener(window, 'load', initialize);
       return map;
