@@ -1,7 +1,9 @@
 from django.contrib import admin
-from django.core.files.base import File
 from django.contrib.gis.db import models
+from django.core.files.base import File
 from django.utils.formats import time_format
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill, ResizeToFit
 import os
 import urllib
 
@@ -113,12 +115,32 @@ class SocialId(models.Model):
     def lookupType(self):
         return lookupChoice(self.social_type, SOCIAL_TYPES)
 
+class Sliver(ResizeToFit):
+    def __init__(self, width=None, height=None, sliverSize=None):
+        super(Sliver, self).__init__(width=width, height=height)
+        self.sliverSize = sliverSize
+
+    def process(self, img):
+        img = super(Sliver, self).process(img)
+        processor = ResizeToFill(width=self.width, height=self.sliverSize)
+        return processor.process(img)
+
+
 class BusinessImage(models.Model):
     image = models.ImageField(upload_to='business_images', 
                               max_length=5000, 
                               height_field='height', 
                               width_field='width')
+    mobile_photo = ImageSpecField(source='image',
+                              processors=[ResizeToFit(320, 600)],
+                              format='JPEG',
+                              options={'quality': 60})
+    mobile_thumbnail = ImageSpecField(source='image',
+                              processors=[Sliver(320, 600, 100)],
+                              format='JPEG',
+                              options={'quality': 60})
     business = models.ForeignKey(Business, null=False)
+
     height = models.PositiveIntegerField(null=True)
     width = models.PositiveIntegerField(null=True)
     created = models.DateTimeField(auto_now_add=True)
