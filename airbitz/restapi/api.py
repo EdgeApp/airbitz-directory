@@ -33,8 +33,12 @@ class WildCard(Clean):
         super(WildCard, self).__init__(query_string, **kwargs)
 
     def prepare(self, query_obj):
-        query_string = super(WildCard, self).prepare(query_obj)
-        return query_string + '*';
+        query_string = self.query_string.replace(',', '')
+        qs = ''
+        a = query_string.split(' ')
+        for i,q in enumerate(a):
+            qs += q + '* '
+        return qs.strip()
 
 class AirbitzApiException(BaseException):
     pass
