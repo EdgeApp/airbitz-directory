@@ -24,6 +24,9 @@
     </style>
 {% endblock head %}
 
+{% block search %}
+{% endblock search %}
+
 {% block bizbody %}
 <div id="bizapp">
     <form>
@@ -112,7 +115,7 @@
         <div class="col-sm-6">
             <div class="panel panel-default" id="social-list">
                 <div class="panel-heading">SOCIAL
-                    <button class="btn btn-sm btn-default social-add pull-right"><span class="glyphicon glyphicon-plus" ></span> Add Social</button>
+                    <a class="btn btn-sm btn-default social-add pull-right"><span class="glyphicon glyphicon-plus" ></span> Add Social</a>
                     <a class="btn btn-sm btn-default pull-right" href="{% url 'mgmt_biz_social_edit' biz.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
                 </div>
                 <div class="panel-body">
@@ -123,7 +126,7 @@
             </div>
             <div class="panel panel-default" id="hours-list">
                 <div class="panel-heading">HOURS
-                    <button class="btn btn-sm btn-default hours-add pull-right"><span class="glyphicon glyphicon-plus" ></span> Add Hours</button>
+                    <a class="btn btn-sm btn-default hours-add pull-right"><span class="glyphicon glyphicon-plus" ></span> Add Hours</a>
                     <a class="btn btn-sm btn-default pull-right" href="{% url 'mgmt_biz_hours_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" ></span> Edit</a>
                 </div>
                 <div class="panel-body">
@@ -188,7 +191,7 @@
         <div class="row">
             <div class="col-sm-12" style="text-align: center; padding-bottom: 10px;">
                 <div class="btn-group">
-                    <button class="save btn btn-success">Save</button>
+                    <a class="save btn btn-success">Save</a>
                     <a class="btn btn-default" href="{% url 'mgmt_biz_edit' biz.id %}">Edit</a>
                 </div>
             </div>
@@ -514,15 +517,18 @@
                 var self = $(this);
                 var origText = self.html();
                 var address = $('#address').val();
-                var city = $('#admin2_name').val();
+                var city = $('#admin3_name').val();
                 var state = $('#admin1_code').val();
                 var zip = $('#postalcode').val();
                 var self = jQuery(this);
+                console.log(origText);
                 if (!address || !city || !state || !zip) {
+                    alert("Missing address fields. Unable to geocode address.");
                     return false;
                 }
                 var address = address + ',' + city + ',' + state + ',' + zip
                 var geocoder = new google.maps.Geocoder();
+                console.log(address);
                 geocoder.geocode({'address': address}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var loc = results[0].geometry;

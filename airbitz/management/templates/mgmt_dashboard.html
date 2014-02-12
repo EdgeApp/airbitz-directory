@@ -16,6 +16,9 @@
     </style>
 {% endblock head %}
 
+{% block search %}
+{% endblock search %}
+
 {% block body %}
     <div class="row">
         <div class="col-sm-12">
@@ -37,11 +40,13 @@
                             <div class="pull-right">
                                 <label for="status">Status</label>
                                 <select id="status">
-                                    <option value="DR">Draft</option>
-                                    <option value="PEN">Pending</option>
-                                    <option value="PUB">Published</option>
-                                    <option value="TR">Trashed</option>
+                                    <option value="ALL">All</option>
+                                    {% for s in STATUS_CHOICES %}
+                                        <option value="{{ s.0 }}">{{ s.1 }}</option>
+                                    {% endfor %}
                                 </select>
+                                <label for="status">Location</label>
+                                <input id="location" type="text">
                                 <button class="btn btn-default btn-sm" id="refresh">Refresh</button>
                             </div>
                         </div>
@@ -85,6 +90,9 @@
         if (localStorage.getItem('mgmt_status')) {
             $('#status').val(localStorage.getItem('mgmt_status'));
         }
+        if (localStorage.getItem('mgmt_location')) {
+            $('#location').val(localStorage.getItem('mgmt_location'));
+        }
         var tableUrl = "/mgmt/api/biz/";
         var oTable = $('.dataTableCustom').dataTable({
           "sPaginationType": "full_numbers",
@@ -95,8 +103,11 @@
           "bServerSide": true,
           "sAjaxSource": tableUrl,
           "fnServerData": function (sSource, aoData, fnCallback) {
-            aoData.push({ "name": "location", "value": $('#near').val() });
-            aoData.push({ "name": "status", "value": $('#status').val() });
+            var st = $('#status').val()
+            if (st && st !== 'ALL') {
+                aoData.push({ "name": "status", "value": st });
+            }
+            aoData.push({ "name": "location", "value": $('#location').val() });
             $.getJSON(sSource, aoData, function (json) { 
                 fnCallback(json)
             });
@@ -155,10 +166,11 @@
             localStorage.setItem('mgmt_status', $(this).val());
             oTable._fnAjaxUpdate();
         });
-        $('#refresh').click(function() {
+        $('#location').change(function() {
+            localStorage.setItem('mgmt_location', $(this).val());
             oTable._fnAjaxUpdate();
         });
-        $('#near').on('keyup', function() {
+        $('#refresh').click(function() {
             oTable._fnAjaxUpdate();
         });
         $('#status').select2({ 'width': '200px' });

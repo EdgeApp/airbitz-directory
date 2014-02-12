@@ -37,10 +37,16 @@ class AdminPointField(serializers.WritableField):
     type_name = 'AdminPointField'
 
     def to_native(self, obj):
-        return {'latitude': obj.y, 'longitude': obj.x}
+        if obj:
+            return {'latitude': obj.y, 'longitude': obj.x}
+        else:
+            return None
 
     def from_native(self, data):
-        return Point((data['longitude'], data['latitude']))
+        if data['longitude'] and data['latitude']:
+            return Point((data['longitude'], data['latitude']))
+        else:
+            return None
 
 class AdminCategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -63,7 +69,7 @@ class AdminBizSerializer(serializers.ModelSerializer):
     categories = AdminCategorySerializer(source='categories', many=True)
     hours = AdminHoursSerializer(source='businesshours_set', many=True)
     social = AdminSocialSerializer(source='socialid_set', many=True)
-    center = AdminPointField(source='center')
+    center = AdminPointField(source='center', required=False)
 
     class Meta:
         model = Business
@@ -132,6 +138,7 @@ class AdminBusinessView(ListCreateAPIView):
         if search:
             q = q.filter(Q(name__icontains=search)
                        | Q(categories__name__icontains=search))
+            q = q.distinct()
         if location:
             (q, _) = querySetAddLocation(q, location)
         if bizStatus:

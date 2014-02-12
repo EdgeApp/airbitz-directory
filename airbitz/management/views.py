@@ -47,9 +47,8 @@ def logout_user(request):
 
 @user_passes_test(isManager, login_url=LOGIN_URL)
 def dashboard(request):
-    results = Business.objects.all()
     context = {
-        'results': results
+        'STATUS_CHOICES': STATUS_CHOICES
     }
     return render_to_response('mgmt_dashboard.html', RequestContext(request, context))
 
