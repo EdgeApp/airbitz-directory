@@ -241,6 +241,14 @@ body .top-bg {
     margin-bottom: 0;
   }
 }
+.main-content .business-images img {
+  marign-top: 15px;
+}
+@media (min-width: 992px) {
+  .main-content .business-images img.col-md-4:nth-child(n+4) {
+    margin-top: 15px;
+  }
+}
 .main-content .business-details .dl-horizontal dt {
   width: 75px;
 }

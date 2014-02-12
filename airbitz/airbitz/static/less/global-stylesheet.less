@@ -190,9 +190,12 @@ body {
     .business-images {
 
         img {
+            marign-top: 15px;
 
-            &:nth-child(2) {
-
+            @media(min-width: @screen-md-min){
+                &.col-md-4:nth-child(n+4) {
+                    margin-top: 15px;
+                }
             }
         }
     }
