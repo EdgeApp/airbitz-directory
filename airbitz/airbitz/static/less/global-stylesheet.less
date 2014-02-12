@@ -13,6 +13,29 @@
 @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 
 
+
+
+// TEMP BOOTSTRAP CHANGES
+.tooltip-inner, .popover {
+
+    .primary {
+        color: @brand-primary;
+    }
+    .success {
+        color: @brand-success;
+    }
+    .warning {
+        color: @brand-warning;
+    }
+    .danger {
+        color: @brand-danger;
+    }
+    .info {
+        color: @brand-info;
+    }
+}
+
+
 body {
     margin: 0;
     padding-top: 0px;
@@ -32,16 +55,7 @@ body {
     }
 
 
-
-
-
-
 } // body
-
-
-
-
-
 
 
 
@@ -176,9 +190,12 @@ body {
     .business-images {
 
         img {
+            marign-top: 15px;
 
-            &:nth-child(2) {
-
+            @media(min-width: @screen-md-min){
+                &.col-md-4:nth-child(n+4) {
+                    margin-top: 15px;
+                }
             }
         }
     }
