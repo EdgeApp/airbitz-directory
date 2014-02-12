@@ -33,27 +33,41 @@
       return map;
   };
   AB.addPlaceSearch = function(selector) {
-      selector.typeahead([{
-          name: 'business',
-          remote: {
-              url: '/api/v1/autocomplete-business/?term=%QUERY',
-              replace: function (url, uriEncodedQuery) {
-                  q = url.replace(/%QUERY/, uriEncodedQuery)
-                  if ($('#near').val()) {
-                      q += "&location=" + encodeURIComponent($('#near').val());
-                  }
-                  return q;
-              },
-              filter: function(data) {
-                  return data.results.map(function(e, i) {
-                      return { type: e.type, name: e.text, value: e.text, id: e.bizId };
-                  });
+      var engine = new Bloodhound({
+        name: 'business',
+        datumTokenizer: function(d) {
+          return d.results; 
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+          url: '/api/v1/autocomplete-business/?term=%QUERY',
+          replace: function (url, uriEncodedQuery) {
+              q = url.replace(/%QUERY/, uriEncodedQuery)
+              if ($('#near').val()) {
+                  q += "&location=" + encodeURIComponent($('#near').val());
               }
+              return q;
           },
+          filter: function(data) {
+            return data.results.map(function(e, i) {
+                return { type: e.type, name: e.text, value: e.text, id: e.bizId };
+            });
+          },
+          rateLimitWait: 100
+        }
+      });
+      engine.initialize();
+      selector.typeahead({
+        minLength: 1,
+        highlight: true
+      }, {
+          displaykey: 'name',
+          name: 'business',
+          source: engine.ttAdapter(),
           template: function(datum) {
               return '<p>' + datum.name + '</p>';
           }
-      }]);
+      });
       selector.on('typeahead:selected', function (object, datum) {
           if (datum.type === 'business' && datum.id) {
             location.href = '/biz/' + datum.id;
@@ -64,20 +78,46 @@
       });
   };
   AB.addLocationSearch = function(selector, locSelector) {
-      selector.typeahead([{
-          name: 'location',
-          remote: {
-              url: '/api/v1/autocomplete-location/?term=%QUERY',
-              filter: function(data) {
-                  return data.results.map(function(s, i) {
-                      return { text: s, value: s };
-                  });
-              }
+      var local = new Bloodhound({
+        name: 'always',
+        datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.text); },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        sorter: function(a, b) {
+        },
+        local: [
+          { text: 'On the Web', value: 'On the Web' },
+          { text: 'Current Location', value: 'Current Location' }
+        ]
+      });
+      local.initialize();
+      var engine = new Bloodhound({
+        name: 'location',
+        datumTokenizer: function(d) { return d.results; },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+          url: '/api/v1/autocomplete-location/?term=%QUERY',
+          filter: function(data) {
+            return data.results.map(function(s, i) {
+                return { text: s, value: s };
+            });
           },
-          rateLimitWait: 0,
-          template: function(datum) {
-              return '<p>' + datum.text + '</p>';
-          }
+          rateLimitWait: 100
+        }
+      });
+      engine.initialize();
+      selector.typeahead({
+        minLength: 1,
+        highlight: true
+      }, [{
+        displaykey: 'text',
+        name: 'location',
+        source: engine.ttAdapter(),
+        template: function(datum) {
+            return '<p>' + datum.text + '</p>';
+        }
+      }, {
+        displaykey: 'text',
+        source: local.ttAdapter()
       }]);
       selector.on('typeahead:selected', function (object, datum) {
           $(this).val(data.text);

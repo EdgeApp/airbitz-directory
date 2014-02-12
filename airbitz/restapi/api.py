@@ -1,8 +1,9 @@
 from django.contrib.gis.geos import Point, Polygon
 from django.contrib.gis.measure import D
 from django.db.models import Q
-from haystack.query import SearchQuerySet
-from haystack.query import SQ
+from haystack.query import SearchQuerySet, SQ
+from haystack.inputs import Clean
+
 import logging
 import subprocess
 
@@ -22,6 +23,18 @@ DEFAULT_POINT=Point((-117.124603, 33.028400))
 RADIUS_DEFAULT=40000
 DEFAULT_IP='24.152.191.12'
 DEFAULT_LOC_STRING='San Francisco, CA'
+
+class WildCard(Clean):
+    input_type_name = 'wildcard'
+    post_process = True
+
+    def __init__(self, query_string, **kwargs):
+        self.original = query_string
+        super(WildCard, self).__init__(query_string, **kwargs)
+
+    def prepare(self, query_obj):
+        query_string = super(WildCard, self).prepare(query_obj)
+        return query_string + '*';
 
 class AirbitzApiException(BaseException):
     pass
@@ -67,7 +80,7 @@ def searchDirectory(term=None, location=None, \
     if origin:
         qs = qs.distance(origin)
     if sort == 0:
-        qs = qs.order_by('has_bitcoin_discount', 'name')
+        qs = qs.order_by('-has_bitcoin_discount', 'name')
     elif sort == 1 and origin:
         qs = qs.order_by('distance')
     return qs
@@ -75,7 +88,8 @@ def searchDirectory(term=None, location=None, \
 def autocompleteBusiness(term=None, location=None, geolocation=None):
     sqs = SearchQuerySet()
     if term:
-        sqs = sqs.filter(content_auto=term)
+        formatted = wildcardFormat(term)
+        sqs = sqs.filter(content_auto=formatted)
     if location: 
         fits = SQ(django_ct='directory.business')
         d = parseLocationString(location)
@@ -101,12 +115,22 @@ def autocompleteSerialize(row):
 
 def autocompleteLocation(term=None, geolocation=None, ip=None):
     if term:
-        sqs = SearchQuerySet().models(LocationString).autocomplete(content_auto=term)
+        formatted = wildcardFormat(term)
+        sqs = SearchQuerySet().models(LocationString).filter(content_auto=formatted)
         sqs = searchAddGeoLocation(sqs, geolocation)
         sqs = sqs[:10]
         return [result.content_auto for result in sqs]
     else:
         return []
+
+def wildcardFormat(term):
+    return WildCard(term)
+
+def isWebOnly(location):
+    return location.lower() == 'web only'
+
+def isCurrentLocation(location):
+    return location.lower() == 'current location'
 
 def searchAddGeoLocation(sqs, geolocation):
     if geolocation:
@@ -133,6 +157,8 @@ def querySetAddLocation(qs, location):
         qs = qs.filter(country=d['country'])
     if d['postalcode']:
         qs = qs.filter(postalcode=d['postalcode'])
+    if d['web_only']:
+        qs = qs.filter(has_online_business=True)
     return (qs, d)
 
 def querySetAddGeoLocation(qs, geolocation, radius=RADIUS_DEFAULT):
@@ -170,6 +196,8 @@ def suggestNearText(ip, geolocation=None):
 
 def parseLocationString(location):
     d = {
+        'current_location': False,
+        'web_only': False,
         'admin1_code': None,
         'admin2_name': None,
         'admin3_name': None,
@@ -179,8 +207,16 @@ def parseLocationString(location):
     }
     if not location:
         return d
+    if isCurrentLocation(location):
+        d['current_location'] = True
+        return d
 
-    sqs = SearchQuerySet().autocomplete(content_auto=location)
+    if isWebOnly(location):
+        d['web_only'] = True
+        return d
+
+    formatted = wildcardFormat(location)
+    sqs = SearchQuerySet().filter(content_auto=formatted)
     sqs = sqs.distance('location', DEFAULT_POINT).order_by('distance')[:1]
     if len(sqs) > 0:
         d['admin1_code'] = sqs[0].admin1_code

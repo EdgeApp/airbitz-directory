@@ -164,7 +164,7 @@ PIPELINE_JS = {
             'bootstrap/js/bootstrap.min.js',
             'js/core.js',
             'js/holder.js',
-            'js/typeahead.js',
+            'js/typeahead.bundle.js',
         ),
         'output_filename': 'js/core.js',
     },
