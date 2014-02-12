@@ -25,16 +25,18 @@ class Command(BaseCommand):
             if not title:
                 continue
             center = Point((row['lon'], row['lat']))
+            print title,
             try:
                 sid = SocialId.objects.get(social_type='osm', social_id=row['id'])
                 biz = sid.business
                 created = False
+            except SocialId.MultipleObjectsReturned:
+                print 'Multiple entries!'
             except SocialId.DoesNotExist:
-                biz = Business.objects.create(name=title, center=center)
+                biz = Business.objects.create(status='DR', name=title, center=center)
                 sid = SocialId.objects.create(social_type='osm', social_id=row['id'], business=biz)
                 created = True
 
-            print title,
             if created:
                 print "...created"
             else:
@@ -43,16 +45,16 @@ class Command(BaseCommand):
                     continue
                 else:
                     print "...updating"
-            if row.has_key('desc') and not biz.description:
+            if row.has_key('desc'):
                 biz.description = row['desc']
-            if row.has_key('web') and not biz.website:
+            if row.has_key('web'):
                 biz.website = row['web']
-            if row.has_key('addr') and not biz.address:
+            if row.has_key('addr'):
                 biz.address = row['addr']
-            if row.has_key('city') and not biz.admin3_name:
+            if row.has_key('city'):
                 biz.admin3_name = row['city']
-            if row.has_key('country') and not biz.country:
+            if row.has_key('country'):
                 biz.country = row['country']
-            if row.has_key('phone') and not biz.phone:
+            if row.has_key('phone'):
                 biz.phone = row['phone']
             biz.save()
