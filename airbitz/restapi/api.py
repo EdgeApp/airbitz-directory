@@ -133,6 +133,9 @@ def wildcardFormat(term):
 def isWebOnly(location):
     return location.lower() == 'web only'
 
+def isOnWebOnly(location):
+    return location.lower() == 'on web'
+
 def isCurrentLocation(location):
     return location.lower() == 'current location'
 
@@ -162,6 +165,8 @@ def querySetAddLocation(qs, location):
     if d['postalcode']:
         qs = qs.filter(postalcode=d['postalcode'])
     if d['web_only']:
+        qs = qs.filter(has_online_business=True, has_physical_business=False)
+    elif d['on_web']:
         qs = qs.filter(has_online_business=True)
     return (qs, d)
 
@@ -202,6 +207,7 @@ def parseLocationString(location):
     d = {
         'current_location': False,
         'web_only': False,
+        'on_web': False,
         'admin1_code': None,
         'admin2_name': None,
         'admin3_name': None,
@@ -213,6 +219,10 @@ def parseLocationString(location):
         return d
     if isCurrentLocation(location):
         d['current_location'] = True
+        return d
+
+    if isOnWebOnly(location):
+        d['on_web'] = True
         return d
 
     if isWebOnly(location):

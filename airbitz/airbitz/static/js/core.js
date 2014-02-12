@@ -86,6 +86,7 @@
         },
         local: [
           { text: 'On the Web', value: 'On the Web' },
+          { text: 'Web Only', value: 'Web Only' },
           { text: 'Current Location', value: 'Current Location' }
         ]
       });

@@ -166,7 +166,7 @@
             localStorage.setItem('mgmt_status', $(this).val());
             oTable._fnAjaxUpdate();
         });
-        $('#location').change(function() {
+        $('#location').keyup(function() {
             localStorage.setItem('mgmt_location', $(this).val());
             oTable._fnAjaxUpdate();
         });
