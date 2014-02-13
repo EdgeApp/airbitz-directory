@@ -117,7 +117,7 @@
         highlight: true
       }, [ {
         displaykey: 'text',
-        name: 'ontheweb',
+        name: 'always',
         source: local.ttAdapter(),
         templates: function(datum) {
           return datum.text;
