@@ -25,13 +25,14 @@ class Command(BaseCommand):
             if not title:
                 continue
             center = Point((row['lon'], row['lat']))
-            print title,
+            print title, row['id']
             try:
                 sid = SocialId.objects.get(social_type='osm', social_id=row['id'])
                 biz = sid.business
                 created = False
             except SocialId.MultipleObjectsReturned:
                 print 'Multiple entries!'
+                continue
             except SocialId.DoesNotExist:
                 biz = Business.objects.create(status='DR', name=title, center=center)
                 sid = SocialId.objects.create(social_type='osm', social_id=row['id'], business=biz)

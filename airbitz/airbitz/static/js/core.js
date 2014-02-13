@@ -85,21 +85,20 @@
       });
   };
   AB.addLocationSearch = function(selector, locSelector) {
+      var values = ['On the Web', 'Current Location'];
+      var defaultString = '';
+      $.each(values, function(val) {
+        return defaultString += val + ' ';
+      });
       var local = new Bloodhound({
-        name: 'always',
-        datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.text); },
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        sorter: function(a, b) {
-        },
-        local: [
-          { text: 'On the Web', value: 'On the Web' },
-          { text: 'Web Only', value: 'Web Only' },
-          { text: 'Current Location', value: 'Current Location' }
-        ]
+        datumTokenizer: function(d) { return defaultString.split(/\s+/); },
+        queryTokenizer: function(d) { return defaultString.split(/\s+/); },
+        local: $.map(values, function(val) {
+          return { text: val, value: val };
+        })
       });
       local.initialize();
       var engine = new Bloodhound({
-        name: 'location',
         datumTokenizer: function(d) { return d.results; },
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
@@ -116,16 +115,20 @@
       selector.typeahead({
         minLength: 1,
         highlight: true
-      }, [{
+      }, [ {
         displaykey: 'text',
-        name: 'location',
-        source: engine.ttAdapter(),
-        template: function(datum) {
-            return '<p>' + datum.text + '</p>';
+        name: 'ontheweb',
+        source: local.ttAdapter(),
+        templates: function(datum) {
+          return datum.text;
         }
       }, {
         displaykey: 'text',
-        source: local.ttAdapter()
+        name: 'location',
+        source: engine.ttAdapter(),
+        templates: function(datum) {
+          return datum.text;
+        }
       }]);
       selector.on('typeahead:selected', function (object, datum) {
           $(this).val(data.text);

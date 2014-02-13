@@ -38,7 +38,7 @@ Start dev server
 
     local> vagrant ssh
     vm> sudo pip install requests
-    vm> git clone https://github.com/prusnak/coinmap.git
+    vm> git clone https://github.com/teneighty/coinmap.git
     vm> cd coinmap/data
     vm> ./refresh.py
     vm> cd $HOME
