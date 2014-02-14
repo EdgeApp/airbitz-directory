@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.gis',
+    'django_extensions',
     'haystack',
     'imagekit',
     'pipeline',
