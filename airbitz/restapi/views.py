@@ -85,6 +85,8 @@ class AutoCompleteBusiness(APIView):
         location -- Location string such as "San Diego, CA"
         ll   -- Latitude,Longitude 
     """
+    permission_classes = []
+    authentication_classes = []
     model = Business
 
     def get(self, request, *args, **kwars):
@@ -102,6 +104,8 @@ class AutoCompleteLocation(APIView):
         term -- The location string to autocomplete
         ll   -- Latitude,Longitude 
     """
+    permission_classes = []
+    authentication_classes = []
     model = Business
 
     def get(self, request, *args, **kwargs):

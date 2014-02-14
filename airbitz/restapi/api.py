@@ -27,15 +27,14 @@ class WildCard(Clean):
 
     def prepare(self, query_obj):
         query_string = self.query_string.replace(',', '')
-        # if len(query_string) > 0:
-        #     query_string = query_string[:-1]
         qs = ''
-        a = query_string.strip().split(' ')
+        query_string = query_string.strip()
+        a = query_string.split(' ')
         for i,q in enumerate(a):
             q = q.strip()
             if not q:
                 continue
-            if i == len(query_string) - 1:
+            if i == len(a) - 1:
                 qs += q + '*'
             else:
                 qs += q + '~0.8 '
@@ -124,6 +123,7 @@ def autocompleteBusiness(term=None, location=None, geolocation=None):
     fits = (fits) | SQ(django_ct='directory.category')
     sqs = searchAddGeoLocation(sqs, geolocation)
     sqs = sqs.filter(fits).models(Business, Category)
+    sqs = sqs[:10]
     return [autocompleteSerialize(result) for result in sqs]
 
 def autocompleteSerialize(row):
@@ -133,14 +133,13 @@ def autocompleteSerialize(row):
         return { 'type': 'category', 'text': row.content_auto }
 
 def autocompleteLocation(term=None, geolocation=None, ip=None):
+    sqs = SearchQuerySet().models(LocationString)
     if term:
         formatted = wildcardFormat(term)
-        sqs = SearchQuerySet().models(LocationString).filter(content_auto=formatted)
-        sqs = searchAddGeoLocation(sqs, geolocation)
-        sqs = sqs[:10]
-        return [result.content_auto for result in sqs]
-    else:
-        return []
+        sqs = sqs.filter(content_auto=formatted)
+    sqs = searchAddGeoLocation(sqs, geolocation)
+    sqs = sqs[:10]
+    return [result.content_auto for result in sqs]
 
 def wildcardFormat(term):
     return WildCard(term)
@@ -156,7 +155,9 @@ def isCurrentLocation(location):
 
 def searchAddGeoLocation(sqs, geolocation):
     if geolocation:
-        return sqs.distance('center', geolocation).order_by('distance')
+        d = parseGeoLocation(geolocation)
+        origin = Point(d['lon'], d['lat'])
+        return sqs.distance('location', origin).order_by('distance')
     else:
         # XXX: Biased this to san diego, need to bias by IP
         return sqs.distance('location', DEFAULT_POINT).order_by('distance')

@@ -45,7 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.gis',
-    'django_extensions',
+
     'haystack',
     'imagekit',
     'pipeline',
@@ -61,6 +61,7 @@ INSTALLED_APPS = (
 if DEBUG:
     INSTALLED_APPS += (
         'rest_framework_swagger',
+        'django_extensions',
     )
 
 MIDDLEWARE_CLASSES = (
