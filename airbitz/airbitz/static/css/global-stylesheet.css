@@ -233,29 +233,51 @@ body .top-bg {
     margin-top: 120px;
   }
 }
-.main-content .business-info-one {
+.main-content .biz-info-one {
   margin-bottom: 30px;
 }
 @media (min-width: 992px) {
-  .main-content .business-info-one {
+  .main-content .biz-info-one {
     margin-bottom: 0;
   }
 }
-.main-content .business-images img {
-  marign-top: 15px;
-}
-@media (min-width: 992px) {
-  .main-content .business-images img.col-md-4:nth-child(n+4) {
-    margin-top: 15px;
-  }
-}
-.main-content .business-details .dl-horizontal dt {
+.main-content .biz-info-two .biz-details .dl-horizontal dt {
   width: 75px;
 }
 @media (min-width: 768px) {
-  .main-content .business-details .dl-horizontal dd {
+  .main-content .biz-info-two .biz-details .dl-horizontal dd {
     margin-left: 85px;
   }
+}
+.main-content .biz-info-three .biz-gallery .biz-gallery-item img {
+  margin-top: 15px;
+}
+@media (min-width: 992px) {
+  .main-content .biz-info-three .biz-gallery .biz-gallery-item img.col-md-4:nth-child(n+4) {
+    margin-top: 15px;
+  }
+}
+@media (min-width: 768px) {
+  .map-container #map {
+    width: 360px;
+    height: 400px;
+  }
+}
+@media (min-width: 992px) {
+  .map-container #map {
+    width: 470px;
+    height: 400px;
+  }
+}
+@media (min-width: 1200px) {
+  .map-container #map {
+    width: 570px;
+    height: 600px;
+  }
+}
+#results {
+  position: relative;
+  background: #fff;
 }
 .glyphicon {
   margin-right: 5px;
@@ -263,9 +285,20 @@ body .top-bg {
 .thumbnail {
   margin-bottom: 20px;
   padding: 0px;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.biz-img {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.biz-categories {
+  height: 25px;
+  line-height: 20px;
 }
 .item.list-group-item {
   margin-left: -15px;
@@ -288,13 +321,12 @@ body .top-bg {
   background: #eee;
 }
 .item.list-group-item .thumbnail {
-  border: none;
   background: none;
 }
 .item.list-group-item .list-group-image {
   margin-right: 10px;
 }
-.item.list-group-item .thumbnail {
+.item.list-group-item .list-group-image .thumbnail {
   margin-bottom: 0px;
 }
 .item.list-group-item .caption {
@@ -312,7 +344,8 @@ body .top-bg {
   clear: both;
 }
 .list-group-item-text {
-  margin: 0 0 11px;
+  height: 90px;
+  margin: 0 0 4px;
 }
 html,
 body {

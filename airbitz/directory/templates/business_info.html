@@ -18,7 +18,7 @@
             </h1>
         </div>
 
-        <div class="business-info-one col-md-6">
+        <div class="biz-info-one col-md-6">
             <div class="row">
                 <div class="ratings-review col-xs-12">
                     <div id="ratings" class="star"></div>
@@ -43,13 +43,13 @@
 
     <div class="row">
 
-        <div class="business-info-two col-sm-12 col-md-4">
+        <div class="biz-info-two col-sm-12 col-md-4">
             <div class="panel panel-default">
                 <div class="panel-image">
                     <div id="map" class="img-responsive" style="width: 750px; height: 150px">
                     </div>
                 </div>
-                <div class="business-details panel-body">
+                <div class="biz-details panel-body">
                     <h4>{{ biz.name }}</h4>
 
                     {{ biz.pretty_address }}
@@ -72,16 +72,16 @@
                         <dd>{{ biz.has_bitcoin_discount }} </dd>
                     </dl>
                     {% if biz.description %}
-                        <p>
+                        <p class="biz-description">
                             {{ biz.description }}
                         </p>
                     {% endif %}
                 </div>
                 <div class="panel-footer text-center">
                     <div class="btn-group" style="">
-                        <button class="btn btn-default" href="#"><span class="fa fa-upload"></span> Add Photo</button>
-                        <button class="btn btn-default" href="#"><span class="fa fa-share"></span> Share</button>
-                        <button class="btn btn-default" href="#"><span class="fa fa-bookmark"></span> Bookmark</button>
+                        <button class="btn btn-primary" href="#"><span class="fa fa-upload"></span> Add Photo</button>
+                        <button class="btn btn-primary" href="#"><span class="fa fa-share"></span> Share</button>
+                        <button class="btn btn-primary" href="#"><span class="fa fa-bookmark"></span> Bookmark</button>
                     </div>
                 </div>
             </div>
@@ -89,14 +89,16 @@
 
 
 
-        <div class="business-images col-md-8">
+        <div class="biz-info-three col-md-8">
 
             {% if imgs %}
-            <div class="row" style="margin-bottom: 30px;">
+            <div class="biz-gallery row" style="margin-bottom: 30px;">
                 {% for img in imgs %}
                     {% if img.image %}
-                        {% thumbnail '400x300' img.image as th %}
+                        <a rel="biz-images" class="swipebox biz-gallery-item" href="{{ img.url }}">
+                            {% thumbnail '400x300' img.image as th %}
                             <img src="{{ th.url}} " style="height: {{ th.height }}; width: {{ th.width }}" class="img-responsive col-sm-6 col-md-4">
+                        </a>
                     {% else %}
                         <img data-src="holder.js/400x300/sky" class="img-responsive">
                     {% endif %}
@@ -121,7 +123,7 @@
         </div>
     </div>
 
-    <div id="results" class="row list-group">
+    <div id="results" class="list-group row">
 
         <div class="clearfix"></div>
         {% for nbiz in nearby %}
@@ -138,19 +140,19 @@
                     </a>
                     <div class="caption">
                         <h3 class="group inner list-group-item-heading">{{ nbiz.name }}</h3>
-                        <div class="pull-right">
+                        <div class="">
                             {% for s in nbiz.socialid_set.all %}
-                                <a class="btn btn-default" href="{{ s.social_url }}">
+                                <a class="" href="{{ s.social_url }}">
                                     {{ s.social_type }}
                                 </a>
                             {% endfor %}
                         </div>
-                        <p class="group inner list-group-item-text">
-                        {% if nbiz.description %}
-                            {{ nbiz.description }}
-                        {% else %}
-                            Description coming soon.
-                        {% endif %}
+                        <p class="biz-description group inner list-group-item-text">
+                            {% if nbiz.description %}
+                                {{ nbiz.description }}
+                            {% else %}
+                                Description coming soon.
+                            {% endif %}
                         </p>
                     </div>
                 </div>

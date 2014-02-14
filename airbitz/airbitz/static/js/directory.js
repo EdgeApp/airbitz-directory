@@ -21,4 +21,13 @@ $(function() {
         $('#results .item').addClass('grid-group-item');
     });
 
+
+
+
+    // ENABLE BIZ LIGHTBOX GALLERY
+    $('.swipebox').swipebox();
+
+
+
+
 });
