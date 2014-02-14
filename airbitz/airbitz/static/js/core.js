@@ -51,7 +51,7 @@
           replace: function (url, uriEncodedQuery) {
               q = url.replace(/%QUERY/, uriEncodedQuery)
               if ($('#near').val()) {
-                  q += "&location=" + encodeURIComponent($('#near').val());
+                  q += "&near=" + encodeURIComponent($('#near').val());
               }
               return q;
           },
@@ -80,7 +80,7 @@
             location.href = '/biz/' + datum.id;
           } else {
             location.href = '/search?category=' + encodeURIComponent(datum.value) + 
-                                   '&location=' + encodeURIComponent($('#near').val());
+                                   '&near=' + encodeURIComponent($('#near').val());
           }
       });
   };

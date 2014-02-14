@@ -12,13 +12,6 @@ from location.models import GeoNameZip, LocationString
 
 log=logging.getLogger("airbitz." + __name__)
 
-# # Query San Diego bounding box
-# http://localhost:8000/api/v1/search?query=Spi&bounds=32.7506,-117.2221|33.1709,-116.9041
-# http://localhost:8000/api/v1/search?query=Spi&ll=32.7506,-117.2220
-# 
-# # Open street map equivalent
-# http://openstreetmap.org/?minlon=-117.2221&minlat=32.7506&maxlon=-116.9041&maxlat=33.1709
-
 DEFAULT_POINT=Point((-117.124603, 33.028400))
 RADIUS_DEFAULT=40000
 DEFAULT_IP='24.152.191.12'
@@ -34,10 +27,18 @@ class WildCard(Clean):
 
     def prepare(self, query_obj):
         query_string = self.query_string.replace(',', '')
+        # if len(query_string) > 0:
+        #     query_string = query_string[:-1]
         qs = ''
-        a = query_string.split(' ')
+        a = query_string.strip().split(' ')
         for i,q in enumerate(a):
-            qs += q + '* '
+            q = q.strip()
+            if not q:
+                continue
+            if i == len(query_string) - 1:
+                qs += q + '*'
+            else:
+                qs += q + '~0.8 '
         return qs.strip()
 
 class AirbitzApiException(BaseException):
@@ -56,22 +57,15 @@ def toInt(request, key, default):
 def searchDirectory(term=None, location=None, \
                     geolocation=None, geobounds=None, \
                     radius=None, category=None, sort=0):
-    qs = Business.objects.filter(status='PUB')
+    qs = Business.objects.filter(status='PUB').distinct()
     origin = None
     if term:
         qs = qs.filter(Q(name__icontains=term)
                      | Q(description__icontains=term)
                      | Q(categories__name__icontains=term))
-    if category:
-        f = None
-        for cterm in category.split(","):
-            q = Q(categories__name=cterm)
-            if not f:
-                f = q
-            else:
-                f = f | q
-        qs = qs.filter(f)
+    qs = querySetAddCategories(qs, category)
     (qs, dloc) = querySetAddLocation(qs, location)
+    print location, dloc
     if dloc['point']:
         origin = dloc['point']
     (qs, lloc) = querySetAddGeoLocation(qs, geolocation, radius=radius)
@@ -87,7 +81,21 @@ def searchDirectory(term=None, location=None, \
         qs = qs.order_by('-has_bitcoin_discount', 'name')
     elif sort == 1 and origin:
         qs = qs.order_by('distance')
+    print qs.query
     return qs
+
+def querySetAddCategories(qs, category):
+    if not category:
+        return qs
+
+    f = None
+    for cterm in category.split(","):
+        q = Q(categories__name=cterm)
+        if not f:
+            f = q
+        else:
+            f = f | q
+    return qs.filter(f)
 
 def autocompleteBusiness(term=None, location=None, geolocation=None):
     sqs = SearchQuerySet()
@@ -155,6 +163,14 @@ def searchAddGeoLocation(sqs, geolocation):
 
 def querySetAddLocation(qs, location):
     d = parseLocationString(location)
+    if d['current_location']:
+        return (qs, d)
+    elif d['web_only']:
+        qs = qs.filter(has_online_business=True, has_physical_business=False)
+        return (qs, d)
+    elif d['on_web']:
+        qs = qs.filter(has_online_business=True)
+        return (qs, d)
     if not d['country'] \
             and not d['admin1_code'] \
             and not d['admin2_name'] \
@@ -171,12 +187,6 @@ def querySetAddLocation(qs, location):
         qs = qs.filter(country=d['country'])
     if d['postalcode']:
         qs = qs.filter(postalcode=d['postalcode'])
-    if d['current_location']:
-        pass
-    elif d['web_only']:
-        qs = qs.filter(has_online_business=True, has_physical_business=False)
-    elif d['on_web']:
-        qs = qs.filter(has_online_business=True)
     return (qs, d)
 
 def querySetAddGeoLocation(qs, geolocation, radius=RADIUS_DEFAULT):
