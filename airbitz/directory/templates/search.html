@@ -18,10 +18,8 @@
                     <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">{{ biz.name }}</a>
 
                     <div class="pull-right">
-                        {% for s in biz.socialid_set.all %}
-                            <a class="btn btn-default" href="{{ s.social_url }}">
-                                {{ s.social_type }}
-                            </a>
+                        {% for c in biz.categories.all %}
+                            <span class="label label-default">{{c.name}}</span>
                         {% endfor %}
                     </div>
                     <hr />
@@ -30,16 +28,12 @@
                 <p>No results found.</p>
             {% endfor %}
         </div>
-        <div class="col-sm-6">
+        <div class="map-container hidden-xs col-sm-6">
             <div data-spy="affix" data-offset-top="0" data-offset-bottom="200">
-                <div id="map" style="width: 400px; height: 400px">
-                </div>
+                <div id="map"></div>
             </div>
         </div>
     </div>
-
-
-
 
 
     <div class="row">
@@ -55,32 +49,30 @@
     <div id="results" class="row list-group">
 
     {% for biz in results %}
-        <div class="item col-xs-6 col-md-4">
+        <div class="biz-result item col-xs-12 col-sm-6 col-md-4">
             <div class="thumbnail">
                 <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">
                 {% if biz.landing_image %}
-                    {% thumbnail '400x250' biz.landing_image.image -- class="img-responsive group list-group-image" %}
+                    {% thumbnail '400x250' biz.landing_image.image -- class="biz-img img-responsive group list-group-image" %}
                 {% else %}
-                    <img data-src="holder.js/358x250/sky" class="img-responsive group list-group-image">
+                    <img data-src="holder.js/358x250/sky" class="biz-img img-responsive group list-group-image">
                 {% endif %}
                 </a>
                 <div class="caption">
-                    <h3 class="group inner list-group-item-heading">{{ biz.name }}</h3>
-                    <div class="pull-right">
-                        {% for s in biz.socialid_set.all %}
-                            <a class="btn btn-default" href="{{ s.social_url }}">
-                                {{ s.social_type }}
-                            </a>
+                    <h3 class="biz-name group inner list-group-item-heading">{{ biz.name }}</h3>
+                    <div class="biz-categories">
+                        {% for c in biz.categories.all %}
+                            <span class="label label-default">{{c.name}}</span>
                         {% endfor %}
                     </div>
-                    <p class="group inner list-group-item-text">
-                    {% if biz.description %}
-                        {{ biz.description }}
-                    {% else %}
-                        Description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                    {% endif %}
-                    </p>
+                    <div class="biz-description group inner list-group-item-text">
+                        {% if biz.description %}
+                            {{ biz.description }}
+                        {% else %}
+                            Description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

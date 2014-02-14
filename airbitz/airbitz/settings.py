@@ -132,6 +132,7 @@ PIPELINE_CSS = {
     'global': {
         'source_filenames': (
             'bootstrap/css/bootstrap.css',
+            'extras/swipebox-master/source/swipebox.css',
             'css/global-stylesheet.css',
         ),
         'output_filename': 'css/global.css',
@@ -166,6 +167,10 @@ PIPELINE_JS = {
             'js/core.js',
             'js/holder.js',
             'js/typeahead.bundle.js',
+            'extras/jQuery.dotdotdot-master/src/js/jquery.dotdotdot.min.js',
+            'extras/Readmore.js-master/readmore.min.js',
+            'extras/colorbox-master/jquery.colorbox-min.js',
+            'extras/swipebox-master/source/jquery.swipebox.min.js',
             'js/frontend-ui.js'
         ),
         'output_filename': 'js/core.js',

@@ -2,6 +2,7 @@
 @import "../bootstrap/less/mixins.less";
 
 
+// BELOW OVERWRITES IS IN ADDITION TO BOOTSTRAP LESS
 @import "variables.less";
 @import "mixins.less";
 
@@ -9,7 +10,7 @@
 @import "typeahead.less";
 
 
-// TEMP FONTAWESOME IMPORT
+// TEMP FONTAWESOME IMPORT UNTIL INCLUDED LOCALLY
 @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 
 
@@ -174,8 +175,11 @@ body {
 
 
 
+
+
+
     // DIRECTORY BUSINESS INFO
-    .business-info-one {
+    .biz-info-one {
 
         margin-bottom: 30px;
 
@@ -184,41 +188,43 @@ body {
         }
     }
 
-    .business-info-two {
+    .biz-info-two {
 
+        .biz-details {
+
+            .dl-horizontal {
+
+                dt {
+                    width: 75px;
+                }
+                dd {
+
+                    @media(min-width: @screen-sm-min) {
+                        margin-left: 85px;
+                    }
+                }
+            }
+        }
     }
-    .business-images {
 
-        img {
-            marign-top: 15px;
+    .biz-info-three {
 
-            @media(min-width: @screen-md-min){
-                &.col-md-4:nth-child(n+4) {
+        .biz-gallery {
+
+            .biz-gallery-item {
+
+                img {
                     margin-top: 15px;
+
+                    @media(min-width: @screen-md-min){
+                        &.col-md-4:nth-child(n+4) {
+                            margin-top: 15px;
+                        }
+                    }
                 }
             }
         }
     }
-
-
-    .business-details {
-
-        .dl-horizontal {
-            
-            dt {
-                width: 75px;
-            }
-            dd {
-
-                @media(min-width: @screen-sm-min) {
-                    margin-left: 85px;
-                }
-            }
-        }
-    }
-
-
-
 }
 
 
@@ -228,14 +234,48 @@ body {
 
 
 // SEARCH STUFF
+.map-container {
+
+    #map {
+
+        @media(min-width: @screen-sm-min) {
+            width: 360px;
+            height: 400px;
+        }
+        @media(min-width: @screen-md-min) {
+            width: 470px;
+            height: 400px;
+        }
+        @media(min-width: @screen-lg-min) {
+            width: 570px;
+            height: 600px;
+        }
+    }
+}
+
+#results {
+    position: relative;     // TEMP for map to go behind the results at bottom
+    background: #fff;       // TEMP
+}
+
+.biz-result {
+}
+
+
 .glyphicon { margin-right:5px; }
-.thumbnail
-{
+.thumbnail {
     margin-bottom: 20px;
     padding: 0px;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
+    .border-radius();
+}
+
+.biz-img {
+    .border-top-radius(5px);
+}
+
+.biz-categories {
+    height: 25px;
+    line-height: 20px;
 }
 
 .item.list-group-item {
@@ -252,16 +292,19 @@ body {
     }
     .thumbnail {
 
-        border: none;
         background: none;
+
     }
     .list-group-image {
+
+
         margin-right: 10px;
+
+        .thumbnail {
+            margin-bottom: 0px;
+        }
     }
 
-    .thumbnail {
-        margin-bottom: 0px;
-    }
     .caption {
         padding: 9px 9px 0px 9px;
     }
@@ -281,7 +324,12 @@ body {
 
 
 .list-group-item-text {
-    margin: 0 0 11px;
+    height: 90px;
+    margin: 0 0 4px;
+
+    .view-details {
+//        margin-top: 4px;
+    }
 }
 
 
@@ -314,6 +362,7 @@ body {
     height: 60px;
     background-color: #f5f5f0;
     border-top: 2px solid #eee;
+
     p {
         margin-top: 20px;
     }
