@@ -78,18 +78,16 @@
                 var self = $(this);
                 var id = $(this).data('image-id');
                 var url = "{% url 'mgmt_biz_set_landing_image' biz.id 0 %}";
-                if (confirm('Are you sure you want to change the title image?')) {
-                    $.ajax({
-                        url: url.replace(/\/0\//, '/' + id + '/'),
-                        type: "POST",
-                        dataType: 'json',
-                        contentType: 'application/json',
-                        complete: function(result) {
-                            $('.select-image').removeAttr("disabled");
-                            self.attr("disabled", "disabled");
-                        }
-                    });
-                }
+                $.ajax({
+                    url: url.replace(/\/0\//, '/' + id + '/'),
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    complete: function(result) {
+                        $('.select-image').removeAttr("disabled");
+                        self.attr("disabled", "disabled");
+                    }
+                });
             });
             $('.image-delete').click(function() {
                 var id = $(this).data('image-id');
