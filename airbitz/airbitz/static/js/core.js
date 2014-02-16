@@ -76,12 +76,9 @@
           }
       });
       selector.on('typeahead:selected', function (object, datum) {
-          if (datum.type === 'business' && datum.id) {
-            location.href = '/biz/' + datum.id;
-          } else {
-            location.href = '/search?category=' + encodeURIComponent(datum.value) + 
-                                   '&near=' + encodeURIComponent($('#near').val());
-          }
+        if (datum.type === 'business' && datum.id) {
+          location.href = '/biz/' + datum.id;
+        }
       });
   };
   AB.addLocationSearch = function(selector, locSelector) {
