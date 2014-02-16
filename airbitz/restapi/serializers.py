@@ -10,15 +10,14 @@ from location.models import GeoNameZip
 
 class ProfileImageField(serializers.Field):
     def field_to_native(self, obj, field_name):
-        images = BusinessImage.objects.filter(business=obj)[:1]
-        if len(images) > 0:
-            i = images[0]
+        image = obj.landing_image
+        if image:
             return {
-                'image': i.mobile_photo.url,
-                'width': i.mobile_photo.width,
-                'height': i.mobile_photo.height,
+                'image': image.mobile_photo.url,
+                'width': image.mobile_photo.width,
+                'height': image.mobile_photo.height,
                 'bounding_box': {'x': 0.0, 'y': 0.0, 'height': 0.25, 'width': 1.0},
-                'thumbnail': i.mobile_thumbnail.url,
+                'thumbnail': image.mobile_thumbnail.url,
             }
         else:
             return {}
