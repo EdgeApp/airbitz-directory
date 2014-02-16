@@ -952,6 +952,7 @@
                 switch (keyName) {
                   case "tab":
                     trigger = !withModifier($e);
+                    trigger = true;
                     break;
 
                   default:
@@ -1423,8 +1424,9 @@
             _onTabKeyed: function onTabKeyed(type, $e) {
                 var datum;
                 if (datum = this.dropdown.getDatumForCursor()) {
-                    this._select(datum);
-                    $e.preventDefault();
+                    this.input.clearHint();
+                    this.input.setQuery(datum.value);
+                    this.input.setInputValue(datum.value, true);
                 } else {
                     this._autocomplete();
                 }
