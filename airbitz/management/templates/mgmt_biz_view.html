@@ -507,6 +507,10 @@
                 e.preventDefault();
                 app.saveBusiness();
             });
+            $('input,textarea').bind('keydown', 'ctrl+return', function(e) {
+                e.preventDefault();
+                app.saveBusiness();
+            });
             $(document).bind('keydown', 'tab+s', function() {
                 app.addSocial();
             });
