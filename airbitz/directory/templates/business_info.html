@@ -123,7 +123,7 @@
         </div>
     </div>
 
-    <div id="results" class="list-group row">
+    <div id="results-grid" class="list-group row">
 
         <div class="clearfix"></div>
         {% for nbiz in nearby %}
@@ -139,21 +139,19 @@
                     {% endif %}
                     </a>
                     <div class="caption">
-                        <h3 class="group inner list-group-item-heading">{{ nbiz.name }}</h3>
-                        <div class="">
-                            {% for s in nbiz.socialid_set.all %}
-                                <a class="" href="{{ s.social_url }}">
-                                    {{ s.social_type }}
-                                </a>
+                        <h3 class="single-line group inner list-group-item-heading">{{ nbiz.name }}</h3>
+                        <div class="biz-categories">
+                            {% for c in biz.categories.all %}
+                                <span class="label label-default">{{c.name}}</span>
                             {% endfor %}
                         </div>
-                        <p class="biz-description group inner list-group-item-text">
+                        <div class="biz-description group inner list-group-item-text">
                             {% if nbiz.description %}
                                 {{ nbiz.description }}
                             {% else %}
                                 Description coming soon.
                             {% endif %}
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>

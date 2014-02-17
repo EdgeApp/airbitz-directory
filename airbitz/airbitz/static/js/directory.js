@@ -13,12 +13,12 @@ $(function() {
     // SEARCH TOGGLE DISPLAY
     $('#list').click(function(event){
         event.preventDefault();
-        $('#results .item').addClass('list-group-item');
+        $('.results-grid .item').addClass('list-group-item');
     });
     $('#grid').click(function(event){
         event.preventDefault();
-        $('#results .item').removeClass('list-group-item');
-        $('#results .item').addClass('grid-group-item');
+        $('.results-grid .item').removeClass('list-group-item');
+        $('.results-grid .item').addClass('grid-group-item');
     });
 
 

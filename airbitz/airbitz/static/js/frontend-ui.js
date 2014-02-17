@@ -23,8 +23,15 @@ $(function() {
     });
 
 
+    $('.single-line').dotdotdot({
+        height: parseInt( $('.biz-name').css('line-height'), 10) * 1, //this is the line height
+        ellipsis: ' ...',
+        wrap: 'letter',
+        watch: true,
+    });
+
     // hide the long text areas for search results this will standarize their height
-    $('#results .biz-description').dotdotdot({
+    $('.results-grid .biz-description').dotdotdot({
         height: parseInt( $('.biz-description').css('line-height'), 10) * 5, //this is the line height
         ellipsis: ' ...',
         wrap: 'word',
@@ -32,12 +39,14 @@ $(function() {
         after: '.view-details'
     });
 
-    $('#results .biz-name').dotdotdot({
-        height: parseInt( $('.biz-name').css('line-height'), 10) * 1, //this is the line height
+    $('.results-map-list .biz-description').dotdotdot({
+        height: parseInt( $('.biz-name').css('line-height'), 10) * 3, //this is the line height
         ellipsis: ' ...',
         wrap: 'letter',
         watch: true,
     });
+
+
 
     // hide but make description expandable on biz info page
     $('.biz-info-two .biz-description').readmore({
