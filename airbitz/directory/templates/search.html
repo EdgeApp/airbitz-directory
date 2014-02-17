@@ -13,7 +13,7 @@
             {% for biz in results %}
                 <div class="result-list-item row" >
                     {% if biz.has_bitcoin_discount > 0 %}
-                        <span class="biz-discount label label-info">{{ biz.has_bitcoin_discount|floatformat:0 }}% Off</span>
+                        <span class="biz-discount label label-info" title="Discount for Bitcoin"><i class="fa fa-bitcoin"></i> {{ biz.has_bitcoin_discount|floatformat:0 }}%</span>
                     {% endif %}
                     <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">
                     {% if biz.landing_image %}
@@ -30,7 +30,7 @@
                     <div class="biz-meta">
                         <div class="biz-categories">
                             {% for c in biz.categories.all %}
-                                <span class="label label-default">{{c.name}}</span>
+                                <span class="label label-primary">{{c.name}}</span>
                             {% empty %}
                                 <span class="label label-warning">Uncategorized</span>
                             {% endfor %}
@@ -38,11 +38,11 @@
 
                         {% if biz.address %}
                             <div class="biz-location">
-                                <span class="biz-address">{{ biz.address }}</span>
+                                <span class="biz-address"><i class="fa fa-map-marker"></i> {{ biz.address }}</span>
                                 {% if biz.distance %}
-                                    <span class="biz-distance">{{ biz.distance }}</span> {# NEED TO GET VIEW TO CALC DISTANCE SOMEHOW? #}
+                                    <span class="biz-distance"><i class="fa fa-crosshairs"></i> {{ biz.distance }}</span> {# NEED TO GET VIEW TO CALC DISTANCE SOMEHOW? #}
                                 {% else %}
-                                    <span class="biz-distance label label-primary">10.54mi</span> {# TEMP FILLER #}
+                                    <span class="biz-distance"><i class="fa fa-crosshairs"></i> 10.54mi</span> {# TEMP FILLER #}
                                 {% endif %}
                             </div>
                         {% else %}

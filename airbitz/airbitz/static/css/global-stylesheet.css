@@ -109,7 +109,7 @@
 }
 .tooltip-inner .primary,
 .popover .primary {
-  color: #428bca;
+  color: #2291cf;
 }
 .tooltip-inner .success,
 .popover .success {
@@ -292,6 +292,7 @@ body .top-bg {
 }
 .results-map-list .biz-discount {
   position: absolute;
+  cursor: pointer;
 }
 .results-map-list .biz-img {
   float: left;
@@ -326,7 +327,7 @@ body .top-bg {
 }
 .results-map-list .biz-name a:hover {
   text-decoration: none;
-  color: #428bca;
+  color: #2291cf;
   -webkit-transition: 0.5s ease;
   -moz-transition: 0.5s ease;
   -ms-transition: 0.5s ease;
@@ -342,25 +343,15 @@ body .top-bg {
 .results-map-list .biz-meta {
   margin: 4px 0 2px 0;
 }
-@media (min-width: 992px) {
-  .results-map-list .biz-meta .biz-categories {
-    float: none;
-  }
-}
-@media (min-width: 768px) {
-  .results-map-list .biz-meta .biz-categories {
-    float: left;
-    margin-right: 5px;
-  }
-}
 .results-map-list .biz-meta .biz-location .biz-address {
   letter-spacing: -1px;
-  margin-left: 5px;
-  color: #428bca;
+  margin-left: 0px;
+  color: #555555;
 }
 .results-map-list .biz-meta .biz-location .biz-distance {
   position: absolute;
   right: 0;
+  color: #a94442;
 }
 .results-map-list .biz-description {
   line-height: 18px;

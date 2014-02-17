@@ -285,6 +285,7 @@ body {
 
     .biz-discount {
         position: absolute;
+        cursor: pointer;
     }
 
     .biz-img {
@@ -334,23 +335,21 @@ body {
         .biz-categories {
 
             @media(min-width: @screen-md-min) {
-                float: none;
             }
             @media(min-width: @screen-sm-min) {
-                float: left;
-                margin-right: 5px;
             }
         }
         .biz-location {
 
             .biz-address {
                 letter-spacing: -1px;
-                margin-left: 5px;
-                color: @brand-primary;
+                margin-left: 0px;
+                color: @gray;
             }
             .biz-distance {
                 position: absolute;
                 right: 0;
+                color: @alert-danger-text;
             }
         }
     }

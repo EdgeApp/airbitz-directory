@@ -40,7 +40,7 @@ $(function() {
     });
 
     $('.results-map-list .biz-description').dotdotdot({
-        height: parseInt( $('.biz-name').css('line-height'), 10) * 3, //this is the line height
+        height: parseInt( $('.biz-name').css('line-height'), 10) * 2, //this is the line height
         ellipsis: ' ...',
         wrap: 'letter',
         watch: true,
