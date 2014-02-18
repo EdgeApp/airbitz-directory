@@ -89,6 +89,13 @@ ROOT_URLCONF = 'airbitz.urls'
 
 WSGI_APPLICATION = 'airbitz.wsgi.application'
 
+if not DEBUG:
+    ALLOWED_HOSTS = [
+            'admin.airbitz.co',
+            'airbitz.co']
+
+if os.environ.has_key('DATABASE_HOST'):
+    DB_HOST = os.environ.get('DATABASE_HOST')
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
