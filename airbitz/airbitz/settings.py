@@ -23,10 +23,8 @@ DEBUG = os.environ.get('USER') not in prod_usernames
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'vjhh1t5!3t69w%ytjq5+@u12hh)(qme(&kkxzdmf%gy*&x4cur'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-TEMPLATE_DEBUG = True
+if DEBUG:
+    TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 GOOGLE_MAP_KEY = 'AIzaSyAfLR1iSlX6422D6huTncZWn5LIh2-HcVU'
