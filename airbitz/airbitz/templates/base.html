@@ -58,7 +58,8 @@
                             </li>
                         </ul>
                         {% block search %}
-                        <form name="search" class="navbar-form text-center" role="search" method="get" action="{% url 'search' %}">
+                        <form id="navbar-search" name="search" class="navbar-form text-center" role="search" method="get" action="{% url 'search' %}">
+                            <i id="help-search" class="fa fa-2x fa-question-circle"></i>
                             <div class="form-group">
                                 <input id="term" tabindex=1" name="term" type="text" class="typeahead form-control" placeholder="Business or Category" autocomplete="off">
                             </div>

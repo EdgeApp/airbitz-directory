@@ -10,20 +10,15 @@
 {% block body %}
 
     <div class="row" style="margin-bottom: 30px;">
-        <div class="col-xs-12">
-            <h1>{{ biz.name }}
-                {% if user.is_superuser %}
-                <a class="pull-right btn btn-danger btn-sm" href="{% url 'mgmt_biz_view' biz.id %}">Edit</a>
-                {% endif %}
-            </h1>
+        <div class="biz-info-header col-xs-12">
+            <h1 clas="biz-name">{{ biz.name }}</h1>
+            {% if user.is_superuser %}
+                <a class="admin-edit pull-right btn btn-danger btn-sm" href="{% url 'mgmt_biz_view' biz.id %}">Edit</a>
+            {% endif %}
         </div>
 
         <div class="biz-info-one col-md-6">
             <div class="row">
-                <div class="ratings-review col-xs-12">
-                    <div id="ratings" class="star"></div>
-                    <span class="review-number">22 Reviews</span>
-                </div>
 
                 <div class="categories col-xs-12">
                     {% for c in biz.categories.all %}

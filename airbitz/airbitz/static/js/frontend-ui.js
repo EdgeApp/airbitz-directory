@@ -2,20 +2,53 @@
 
 $(function() {
 
-    $('#term').tooltip({
-        show: true,
-        placement: 'bottom',
-        title:  'Search for <strong class="primary">Business Names</strong> like "<strong class="info">Pangea Bakery</strong>"<br />' +
-                'Search for <strong class="primary">Business Categories</strong> like "<strong class="info">restaurant</strong>"<br />',
-        html: true
-    });
+    // ENABLE CALLBACK FOR SHOW AND HIDE ON BOOTSTRAP TOOLTIPS AND POPOVERS
+    var tmpPopoverShow = $.fn.popover.Constructor.prototype.show;
+    $.fn.popover.Constructor.prototype.show = function () {
+        tmpPopoverShow.call(this);
+        if (this.options.callbackShow) {
+            this.options.callbackShow();
+        }
+    };
+    var tmpPopoverHide = $.fn.popover.Constructor.prototype.hide;
+    $.fn.popover.Constructor.prototype.hide = function () {
+        tmpPopoverHide.call(this);
+        if (this.options.callbackHide) {
+            this.options.callbackHide();
+        }
+    };
+    var tmpTooltipShow = $.fn.tooltip.Constructor.prototype.show;
+    $.fn.tooltip.Constructor.prototype.show = function () {
+        tmpTooltipShow.call(this);
+        if (this.options.callbackShow) {
+            this.options.callbackShow();
+        }
+    };
+    var tmpTooltipHide = $.fn.tooltip.Constructor.prototype.hide;
+    $.fn.tooltip.Constructor.prototype.hide = function () {
+        tmpTooltipHide.call(this);
+        if (this.options.callbackHide) {
+            this.options.callbackHide();
+        }
+    };
 
-    $('#near').tooltip({
+
+    // NAVBAR SEARCH HELP/TIPS
+    $('#help-search').popover({
         show: true,
         placement: 'bottom',
-        title:  'Search near <strong class="primary">City</strong> or <strong class="primary">State</strong> or <strong class="primary">Zip</strong><br />' +
-                'Ex. <strong class="info">San Diego</strong> or <strong class="info">Ca</strong> or <strong class="info">92101</strong>',
-        html: true
+        title: 'Search Tips',
+        content:    'Search for <strong class="primary">Business Names</strong> like "<strong class="info">Pangea Bakery</strong>"<br />' +
+                    'Search for <strong class="primary">Business Categories</strong> like "<strong class="info">restaurant</strong>"<br /><hr />'+
+                    'Search near <strong class="primary">City</strong> or <strong class="primary">State</strong> or <strong class="primary">Zip</strong><br />' +
+                    'Ex. <strong class="info">San Diego</strong> or <strong class="info">Ca</strong> or <strong class="info">92101</strong>',
+        html: true,
+        callbackShow: function() {
+            $('.biz-info-two #map').slideToggle();
+        },
+        callbackHide: function() {
+            $('.biz-info-two #map').slideToggle();
+        }
     });
 
     $('#term, #near').on('click', function(){

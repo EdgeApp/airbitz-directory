@@ -41,6 +41,21 @@
   padding-left: 15px;
   padding-right: 15px;
 }
+#navbar-search #help-search {
+  position: relative;
+  top: 7px;
+  left: -5px;
+  color: #4CB7F3;
+}
+#navbar-search .popover {
+  left: 327.5;
+  font-size: 12px;
+  max-width: 500px;
+}
+#navbar-search .popover hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 .typeahead,
 .tt-query,
 .tt-hint {
@@ -235,6 +250,12 @@ body .top-bg {
   .main-content .featurette-heading {
     margin-top: 120px;
   }
+}
+.main-content .biz-info-header .admin-edit {
+  position: absolute;
+  right: 15px;
+  top: 25px;
+  z-index: 9999;
 }
 .main-content .biz-info-one {
   margin-bottom: 30px;
