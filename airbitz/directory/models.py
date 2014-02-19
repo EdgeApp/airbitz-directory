@@ -39,6 +39,20 @@ def lookupChoice(value, choices):
             return s
     return None
 
+def lookupSocialIcon(social_type):
+    if social_type == 'facebook':
+        social_type = 'facebook'
+    elif social_type == 'foursquare':
+        social_type = 'foursquare'
+    elif social_type == 'yelp':
+        social_type = 'comments'
+    elif social_type == 'osm':
+        social_type = 'globe'
+    else:
+        social_type = 'link'
+    return 'fa-' + social_type
+
+
 class Category(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=2500, blank=True, null=True)
@@ -114,6 +128,10 @@ class SocialId(models.Model):
     @property
     def lookupType(self):
         return lookupChoice(self.social_type, SOCIAL_TYPES)
+
+    @property
+    def social_icon(self):
+        return lookupSocialIcon(self.social_type);
 
 class Sliver(ResizeToFit):
     def __init__(self, width=None, height=None, sliverSize=None):
