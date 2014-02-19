@@ -36,6 +36,7 @@ $(function() {
     // NAVBAR SEARCH HELP/TIPS
     $('#help-search').popover({
         show: true,
+        trigger: 'hover',
         placement: 'bottom',
         title: 'Search Tips',
         content:    'Search for <strong class="primary">Business Names</strong> like "<strong class="info">Pangea Bakery</strong>"<br />' +

@@ -28,10 +28,12 @@
             </div>
         </div>
 
-        <div class="interaction-buttons col-md-6">
-            <a class="btn btn-lg btn-default pull-right" href="#"><span class="fa fa-thumbs-down"></span></a>
-            <a class="btn btn-lg btn-default pull-right" href="#" style="margin-right: 10px;"><span class="fa fa-thumbs-up"></span></a>
-            <a class="btn btn-lg btn-primary pull-right" href="#" style="margin-right: 10px;"><span class="fa fa-star"></span> Review</a>
+        <div class="biz-social-buttons col-md-6">
+            {% for s in biz.socialid_set.all %}
+                <a class="btn btn-inverse" href="{{ s.social_url }}" target="_blank">
+                    <i class="fa fa-2x {{ s.social_icon }}" data-toggle="tooltip" data-placement="bottom" title="{{ s.social_type }}"></i>
+                </a>
+            {% endfor %}
         </div>
 
     </div>

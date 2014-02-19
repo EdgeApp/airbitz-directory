@@ -265,6 +265,14 @@ body .top-bg {
     margin-bottom: 0;
   }
 }
+@media (min-width: 992px) {
+  .main-content .biz-social-buttons {
+    text-align: right;
+  }
+}
+.main-content .biz-social-buttons .btn {
+  margin-bottom: 5px;
+}
 .main-content .biz-info-two .biz-details .dl-horizontal dt {
   width: 75px;
 }
