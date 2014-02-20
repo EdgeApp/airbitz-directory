@@ -55,6 +55,12 @@
                         {{ biz.admin3_name }}
                     </div>
 
+                    {% if biz.phone %}
+                    <div class="biz-phone single-line">
+                        {{ biz.phone }}
+                    </div>
+                    {% endif %}
+
                     {% if biz.website %}
                     <div class="biz-website single-line">
                         <a target="_blank" href="{{ biz.website }}" title="{{ biz.website }}">{{ biz.website }}</a>
@@ -81,7 +87,7 @@
 
                 <div class="panel-footer text-center">
                     <div class="btn-group" style="">
-                        <button class="btn btn-primary" href="#"><span class="fa fa-upload"></span> Add Photo</button>
+                        <button class="btn btn-primary" href="#"><span class="fa fa-picture-o"></span> Submit Photo</button>
                         <button class="btn btn-primary" href="#"><span class="fa fa-share"></span> Share</button>
                     </div>
                 </div>
@@ -91,6 +97,37 @@
 
 
         <div class="biz-info-three col-md-8">
+
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <thead>
+                        <td></td>
+                    {% for h in biz.businesshours_set.all %}
+                        <td>{{ h.lookupDayOfWeek }}</td>
+                    {% endfor %}
+                    </thead>
+
+                    <tr>
+                        <td>Open</td>
+                    {% for h in biz.businesshours_set.all %}
+                        <td>
+                            <span class="label label-info">{{ h.hourStart }}</span>
+                        </td>
+                    {% endfor %}
+                    </tr>
+
+                    <tr>
+                        <td>Close</td>
+                    {% for h in biz.businesshours_set.all %}
+                        <td>
+                            <span class="label label-default">{{ h.hourEnd }}</span>
+                        </td>
+                    {% endfor %}
+                    </tr>
+                </table>
+            </div>
+
+
 
             {% if imgs %}
             <div class="biz-gallery row" style="margin-bottom: 30px;">

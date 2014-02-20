@@ -273,6 +273,9 @@ body .top-bg {
 .main-content .biz-social-buttons .btn {
   margin-bottom: 5px;
 }
+.main-content .biz-info-two .biz-details .dl-horizontal {
+  margin: 15px 0;
+}
 .main-content .biz-info-two .biz-details .dl-horizontal dt {
   width: 75px;
 }
