@@ -22,7 +22,7 @@
 
                 <div class="categories col-xs-12">
                     {% for c in biz.categories.all %}
-                        <span class="label label-default">{{c.name}}</span>
+                        <span class="label label-primary">{{c.name}}</span>
                     {% endfor %}
                 </div>
             </div>
@@ -47,13 +47,17 @@
                     </div>
                 </div>
                 <div class="biz-details panel-body">
-                    <h4>{{ biz.name }}</h4>
 
-                    {{ biz.pretty_address }}
+                    <div class="biz-address-street">
+                        {{ biz.address }}
+                    </div>
+                    <div class="biz-address-city">
+                        {{ biz.admin3_name }}
+                    </div>
 
                     {% if biz.website %}
-                    <div>
-                        <a target="_blank" href="{{ biz.website }}">{{ biz.website|truncatechars:100 }}</a>
+                    <div class="biz-website single-line">
+                        <a class="" target="_blank" href="{{ biz.website }}">{{ biz.website }}</a>
                     </div>
                     {% endif %}
 
@@ -74,11 +78,11 @@
                         </p>
                     {% endif %}
                 </div>
+
                 <div class="panel-footer text-center">
                     <div class="btn-group" style="">
                         <button class="btn btn-primary" href="#"><span class="fa fa-upload"></span> Add Photo</button>
                         <button class="btn btn-primary" href="#"><span class="fa fa-share"></span> Share</button>
-                        <button class="btn btn-primary" href="#"><span class="fa fa-bookmark"></span> Bookmark</button>
                     </div>
                 </div>
             </div>
@@ -110,14 +114,7 @@
     {% if nearby %}
 
     <div class="row">
-        <h3 style="margin-top: 60px;">Nearby Businesses Accepting Bitcoin</h3>
-        <div class="col-xs-12 well well-sm">
-            <div class="btn-group">
-                <a href="#" id="list" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-th-list"></span> List</a>
-                <a href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span> Grid</a>
-            </div>
-        </div>
+        <h3 class="col-xs-12 well well-sm" style="margin-top: 60px;"><i class="fa fa-map-marker"></i> Nearby Businesses Accepting Bitcoin</h3>
     </div>
 
     <div id="results-grid" class="list-group row">
@@ -139,7 +136,7 @@
                         <h3 class="single-line group inner list-group-item-heading">{{ nbiz.name }}</h3>
                         <div class="biz-categories">
                             {% for c in biz.categories.all %}
-                                <span class="label label-default">{{c.name}}</span>
+                                <span class="label label-primary">{{c.name}}</span>
                             {% endfor %}
                         </div>
                         <div class="biz-description group inner list-group-item-text">
