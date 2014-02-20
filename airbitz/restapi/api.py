@@ -57,7 +57,7 @@ def searchDirectory(term=None, location=None, \
                     geolocation=None, geobounds=None, \
                     radius=None, category=None, sort=0):
     qs = Business.objects.filter(status='PUB').distinct()
-    origin = None
+    origin = DEFAULT_POINT
     if term:
         qs = qs.filter(Q(name__icontains=term)
                      | Q(description__icontains=term)

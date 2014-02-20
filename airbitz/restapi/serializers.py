@@ -27,6 +27,13 @@ class LastUpdated(serializers.Field):
         m = Category.objects.all().aggregate(Max('modified'))
         return m['modified__max']
 
+class DistanceField(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        if obj.distance:
+            return obj.distance.m
+        else:
+            return None
+
 class LastUpdatedSerializer(pagination.PaginationSerializer):
     last_updated = LastUpdated(source='*')
 
@@ -76,6 +83,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
     state = serializers.CharField(source='admin1_code')
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
+    distance = DistanceField(source='*')
     has_bitcoin_discount = serializers.CharField(source='has_bitcoin_discount')
     location = PointField()
 
@@ -94,7 +102,9 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
                   'state', 
                   'postalcode',
                   'country',
-                  'location', )
+                  'location', 
+                  'distance', 
+                  )
 
 class PaginatedMiniBizSerializer(pagination.PaginationSerializer):
     class Meta:
