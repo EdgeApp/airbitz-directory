@@ -57,38 +57,5 @@ $(function() {
     });
 
 
-    $('.single-line').dotdotdot({
-        height: parseInt( $('.biz-name').css('line-height'), 10) * 1, //this is the line height
-        ellipsis: ' ...',
-        wrap: 'letter',
-        watch: true,
-    });
-
-    // hide the long text areas for search results this will standarize their height
-    $('.results-grid .biz-description').dotdotdot({
-        height: parseInt( $('.biz-description').css('line-height'), 10) * 5, //this is the line height
-        ellipsis: ' ...',
-        wrap: 'word',
-        watch: true,
-        after: '.view-details'
-    });
-
-    $('.results-map-list .biz-description').dotdotdot({
-        height: parseInt( $('.biz-name').css('line-height'), 10) * 2, //this is the line height
-        ellipsis: ' ...',
-        wrap: 'letter',
-        watch: true,
-    });
-
-
-
-    // hide but make description expandable on biz info page
-    $('.biz-info-two .biz-description').readmore({
-        maxHeight: parseInt( $('.biz-description').css('line-height'), 10) * 5 //this is the line height
-    });
-
-
-
-
 
 });
