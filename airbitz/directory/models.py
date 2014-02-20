@@ -95,6 +95,9 @@ class Business(models.Model):
     center = models.PointField(blank=True, null=True)
     objects = models.GeoManager()
 
+    def __unicode__(self):
+        return u'%s (id=%s)' % (self.name, self.pk)
+
     @property
     def lookupStatus(self):
         return lookupChoice(self.status, STATUS_CHOICES)
