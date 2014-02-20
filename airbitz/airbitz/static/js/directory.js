@@ -12,21 +12,30 @@ $(function() {
 
 
     // SEARCH AND NEARBY GRID
+    $('.results-map-list .biz-address-street').dotdotdot({
+        height: parseInt( $('.results-map-list .biz-address-street').css('line-height'), 10) * 1, //this is the line height
+        ellipsis: ' ...',
+        wrap: 'letter',
+        watch: true
+    });
+
+    $('.results-map-list .biz-description').dotdotdot({
+        height: parseInt( $('.results-map-list .biz-description').css('line-height'), 10) * 3, //this is the line height
+        ellipsis: ' ...',
+        wrap: 'letter',
+        watch: true
+    });
+
+
 
     // hide the long text areas for search results this will standarize their height
     $('.results-grid .biz-description').dotdotdot({
-        height: parseInt( $('.biz-description').css('line-height'), 10) * 5, //this is the line height
+        height: parseInt( $('.results-grid .biz-description').css('line-height'), 10) * 5, //this is the line height
         ellipsis: ' ...',
         wrap: 'word',
         watch: true
     });
 
-    $('.results-map-list .biz-description').dotdotdot({
-        height: parseInt( $('.biz-name').css('line-height'), 10) * 2, //this is the line height
-        ellipsis: ' ...',
-        wrap: 'letter',
-        watch: true
-    });
 
 
 
@@ -41,7 +50,7 @@ $(function() {
     });
 
 
-    $('.biz-address-street').dotdotdot({
+    $('.biz-info-two .biz-address-street').dotdotdot({
         height: parseInt( $('.biz-address-street').css('line-height'), 10) * 2, //this is the line height
         ellipsis: ' ...',
         wrap: 'letter',

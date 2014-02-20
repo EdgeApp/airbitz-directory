@@ -307,17 +307,20 @@ body .top-bg {
     height: 600px;
   }
 }
+.results-map-list {
+  min-height: 600px;
+}
 .results-map-list.row {
   margin-left: 0px;
   margin-right: 0px;
 }
 .results-map-list .search-title {
   margin-top: 0;
+  margin-bottom: 20px;
 }
 .results-map-list .result-list-item {
-  margin-bottom: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
 }
 .results-map-list .biz-discount {
   position: absolute;
@@ -330,7 +333,8 @@ body .top-bg {
   margin-right: 10px;
   margin-bottom: 10px;
   background: white;
-  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
 }
 .results-map-list .biz-img:hover {
   transition: 0.3s ease;
@@ -370,14 +374,17 @@ body .top-bg {
   }
 }
 .results-map-list .biz-meta {
-  margin: 4px 0 2px 0;
+  margin: 7px 0;
 }
-.results-map-list .biz-meta .biz-location .biz-address {
+.results-map-list .biz-meta .biz-location .biz-address-street {
+  display: inline-block;
+  width: 300px;
   letter-spacing: -1px;
   margin-left: 0px;
   color: #555555;
 }
 .results-map-list .biz-meta .biz-location .biz-distance {
+  display: inline-block;
   position: absolute;
   right: 0;
   color: #a94442;

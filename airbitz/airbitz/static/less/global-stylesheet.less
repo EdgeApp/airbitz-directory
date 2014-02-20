@@ -215,6 +215,14 @@ body {
 
         .biz-details {
 
+            .biz-address-street {
+
+            }
+
+            .biz-address.city {
+
+            }
+
             .dl-horizontal {
 
                 dt {
@@ -288,6 +296,8 @@ body {
 
 
 .results-map-list {
+    min-height: 600px;
+
     &.row {
         margin-left: 0px;
         margin-right: 0px;
@@ -295,12 +305,12 @@ body {
 
     .search-title {
         margin-top: 0;
+        margin-bottom: 20px;
     }
 
     .result-list-item {
-        margin-bottom: 15px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #ddd;
+        padding: 20px 0;
+        border-top: 1px solid #ddd;
     }
 
     .biz-discount {
@@ -314,9 +324,8 @@ body {
         height: 150px;
         margin-right: 10px;
         margin-bottom: 10px;
-//        .border-radius();
         background: white;
-        box-shadow: 0 0px 10px rgba(0,0,0,.7);
+        .box-shadow(0 0px 10px rgba(0,0,0,.5));
 
         &:hover {
             .transition(.3s ease);
@@ -350,7 +359,7 @@ body {
     }
 
     .biz-meta {
-        margin: 4px 0 2px 0;
+        margin: 7px 0;
 
         .biz-categories {
 
@@ -361,12 +370,15 @@ body {
         }
         .biz-location {
 
-            .biz-address {
+            .biz-address-street {
+                display: inline-block;
+                width: 300px;
                 letter-spacing: -1px;
                 margin-left: 0px;
                 color: @gray;
             }
             .biz-distance {
+                display: inline-block;
                 position: absolute;
                 right: 0;
                 color: @alert-danger-text;

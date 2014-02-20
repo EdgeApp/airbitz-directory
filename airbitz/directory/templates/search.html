@@ -9,7 +9,7 @@
         <div class="col-sm-6">
             <h1 class="search-title hidden-xs hidden-sm row">Bitcoin Business Search Results</h1>
             <h1 class="search-title visible-xs visible-sm row">Search Results</h1>
-            <hr />
+
             {% for biz in results %}
                 <div class="result-list-item row" >
                     {% if biz.has_bitcoin_discount > 0 %}
@@ -38,11 +38,9 @@
 
                         {% if biz.address %}
                             <div class="biz-location">
-                                <span class="biz-address"><i class="fa fa-map-marker"></i> {{ biz.address }}</span>
+                                <span class="biz-address-street"><i class="fa fa-map-marker"></i> {{ biz.address }}</span>
                                 {% if biz.distance %}
-                                    <span class="biz-distance"><i class="fa fa-crosshairs"></i> {{ biz.distance }}</span> {# NEED TO GET VIEW TO CALC DISTANCE SOMEHOW? #}
-                                {% else %}
-                                    <span class="biz-distance"><i class="fa fa-crosshairs"></i> 10.54mi</span> {# TEMP FILLER #}
+                                    <span class="biz-distance"><i class="fa fa-crosshairs"></i> {{ biz.distance.mi|floatformat:2 }}mi</span>
                                 {% endif %}
                             </div>
                         {% else %}
@@ -71,17 +69,8 @@
     </div>
 
 
-    <div class="row">
-        <div class="well well-sm" style="margin-top: 230px;">
-            <div class="btn-group">
-                <a href="#" id="list" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-th-list"></span> List</a>
-                <a href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span> Grid</a>
-            </div>
-        </div>
-    </div>
 
-    <div class="results-grid list-group row">
+    <div class="results-grid list-group row" style="padding-top: 230px;">
 
     {% for biz in results %}
         <div class="biz-result item col-xs-12 col-sm-6 col-md-4">
