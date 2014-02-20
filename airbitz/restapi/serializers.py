@@ -34,7 +34,10 @@ class PointField(fields.Field):
     type_name = 'PointField'
 
     def field_to_native(self, obj, field_name):
-        return {'latitude': obj.center.y, 'longitude': obj.center.x}
+        if obj.center:
+            return {'latitude': obj.center.y, 'longitude': obj.center.x}
+        else:
+            return None
 
 class BoundingBoxField(fields.Field):
     type_name = 'BoundingBoxField'
