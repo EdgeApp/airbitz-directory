@@ -46,6 +46,7 @@
             <div class="panel panel-default">
                 <div class="panel-image">
                     <div id="map" class="img-responsive" style="width: 750px; height: 150px">
+                        <a class="get-directions btn btn-danger" target="_blank" href="https://maps.google.com/maps?saddr=current+location&daddr={{ biz.name|urlencode }}+{{ biz.address|urlencode }}+{{ biz.admin3_name|urlencode }}+{{ biz.admin1_code|urlencode }}">Get Directions</a>
                     </div>
                 </div>
                 <div class="biz-details panel-body">
@@ -105,7 +106,7 @@
                     <thead>
                         <td></td>
                     {% for h in biz.businesshours_set.all %}
-                        <td>{{ h.lookupDayOfWeek }}</td>
+                        <td>{{ h.lookupDayOfWeek|slice:"3" }}</td>
                     {% endfor %}
                     </thead>
 
@@ -209,10 +210,21 @@
     {{ block.super }}
     <script type="text/javascript">
         $(function() {
-            var json = [
-                { lat: {{ biz.center.y }}, lon: {{ biz.center.x }} },
-            ];
-            AB.addMap($('#map'), 16, {{ biz.center.y }}, {{ biz.center.x }}, json);
+{#            var json = [#}
+{#                { lat: {{ biz.center.y }}, lon: {{ biz.center.x }} },#}
+{#            ];#}
+{#            AB.addMap($('#map'), 16, {{ biz.center.y }}, {{ biz.center.x }}, json);#}
+
+            var mapUrl = GMaps.staticMapURL({
+                size: [720, 150],
+                lat: {{ biz.center.y }},
+                lng: {{ biz.center.x }},
+                markers: [
+                    { lat: {{ biz.center.y }}, lng: {{ biz.center.x }} }
+                ]
+            });
+            $('<img/>').attr('src', mapUrl).prependTo('#map');
+
         });
     </script>
 {% endblock %}

@@ -200,7 +200,7 @@ PIPELINE_JS = {
     },
     'directory': {
         'source_filenames': (
-            'extras/raty-master/lib/jquery.raty.js',
+            'extras/gmaps/gmaps.js',
             'js/directory.js',
         ),
         'output_filename': 'js/directory.js',

@@ -4,6 +4,10 @@
   border: #eee;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+  border: none;
+}
 .navbar-inverse .navbar-brand {
   padding: 0;
 }
@@ -272,6 +276,23 @@ body .top-bg {
 }
 .main-content .biz-social-buttons .btn {
   margin-bottom: 5px;
+}
+.main-content .biz-info-two .panel .panel-image {
+  overflow: hidden;
+}
+.main-content .biz-info-two .panel .panel-image #map {
+  position: relative;
+}
+.main-content .biz-info-two .panel .panel-image #map img {
+  position: relative;
+  top: 62px;
+  left: 50%;
+  margin: -320px;
+}
+.main-content .biz-info-two .panel .panel-image #map .get-directions {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 .main-content .biz-info-two .biz-details .dl-horizontal {
   margin: 15px 0;
