@@ -46,6 +46,7 @@
           return d.results; 
         },
         queryTokenizer: Bloodhound.tokenizers.whitespace,
+        minLength: 0,
         remote: {
           url: '/api/v1/autocomplete-business/?term=%QUERY',
           replace: function (url, uriEncodedQuery) {
@@ -65,7 +66,7 @@
       });
       engine.initialize();
       selector.typeahead({
-        minLength: 1,
+        minLength: 0,
         highlight: true
       }, {
           displaykey: 'name',
@@ -98,6 +99,7 @@
       var engine = new Bloodhound({
         datumTokenizer: function(d) { return d.results; },
         queryTokenizer: Bloodhound.tokenizers.whitespace,
+        minLength: 0,
         remote: {
           url: '/api/v1/autocomplete-location/?term=%QUERY',
           filter: function(data) {
@@ -110,7 +112,7 @@
       });
       engine.initialize();
       selector.typeahead({
-        minLength: 1,
+        minLength: 0,
         highlight: true
       }, [ {
         displaykey: 'text',
