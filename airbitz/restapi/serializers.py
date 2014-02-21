@@ -84,7 +84,6 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
     distance = DistanceField(source='*')
-    has_bitcoin_discount = serializers.CharField(source='has_bitcoin_discount')
     location = PointField()
 
     class Meta:
@@ -104,6 +103,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
                   'country',
                   'location', 
                   'distance', 
+                  'has_bitcoin_discount', 
                   )
 
 class PaginatedMiniBizSerializer(pagination.PaginationSerializer):
