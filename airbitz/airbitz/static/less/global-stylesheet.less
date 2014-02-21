@@ -213,9 +213,56 @@ body {
 
     .biz-info-two {
 
+        .panel {
+
+            .panel-image {
+                overflow: hidden;
+
+                #map {
+                    position: relative;
+
+                    img {
+                        position: relative;
+                        top: 62px;
+                        left: 50%;
+                        margin: -320px;
+                    }
+
+                    .get-directions {
+                        position: absolute;
+                        bottom: 5px;
+                        right: 5px;
+                    }
+                }
+            }
+        }
         .biz-details {
 
+            .biz-address-street {
+
+                margin-right: 10px;
+            }
+
+            .biz-address-city {
+
+                margin-right: 10px;
+            }
+
+            .biz-address-state {
+
+            }
+
+            .biz-phone {
+                float: left;
+            }
+
+            .biz-website {
+                float: right;
+            }
+
             .dl-horizontal {
+                clear: both;
+                margin: 15px 0;
 
                 dt {
                     width: 75px;
@@ -288,6 +335,8 @@ body {
 
 
 .results-map-list {
+    min-height: 600px;
+
     &.row {
         margin-left: 0px;
         margin-right: 0px;
@@ -295,12 +344,12 @@ body {
 
     .search-title {
         margin-top: 0;
+        margin-bottom: 20px;
     }
 
     .result-list-item {
-        margin-bottom: 15px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #ddd;
+        padding: 20px 0;
+        border-top: 1px solid #ddd;
     }
 
     .biz-discount {
@@ -314,9 +363,8 @@ body {
         height: 150px;
         margin-right: 10px;
         margin-bottom: 10px;
-//        .border-radius();
         background: white;
-        box-shadow: 0 0px 10px rgba(0,0,0,.7);
+        .box-shadow(0 0px 10px rgba(0,0,0,.5));
 
         &:hover {
             .transition(.3s ease);
@@ -350,7 +398,7 @@ body {
     }
 
     .biz-meta {
-        margin: 4px 0 2px 0;
+        margin: 7px 0;
 
         .biz-categories {
 
@@ -361,12 +409,15 @@ body {
         }
         .biz-location {
 
-            .biz-address {
+            .biz-address-street {
+                display: inline-block;
+                width: 300px;
                 letter-spacing: -1px;
                 margin-left: 0px;
                 color: @gray;
             }
             .biz-distance {
+                display: inline-block;
                 position: absolute;
                 right: 0;
                 color: @alert-danger-text;

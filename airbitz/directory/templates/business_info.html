@@ -22,7 +22,7 @@
 
                 <div class="categories col-xs-12">
                     {% for c in biz.categories.all %}
-                        <span class="label label-default">{{c.name}}</span>
+                        <span class="label label-primary">{{c.name}}</span>
                     {% endfor %}
                 </div>
             </div>
@@ -30,9 +30,11 @@
 
         <div class="biz-social-buttons col-md-6">
             {% for s in biz.socialid_set.all %}
-                <a class="btn btn-inverse" href="{{ s.social_url }}" target="_blank">
-                    <i class="fa fa-2x {{ s.social_icon }}" data-toggle="tooltip" data-placement="bottom" title="{{ s.social_type }}"></i>
+                {% if s.social_type != "osm" %}
+                <a class="btn btn-primary" href="{{ s.social_url }}" target="_blank">
+                    <i class="fa {{ s.social_icon }}" data-toggle="tooltip" data-placement="bottom" title="{{ s.social_type }}"></i> {{ s.social_type|title }}
                 </a>
+                {% endif %}
             {% endfor %}
         </div>
 
@@ -44,16 +46,28 @@
             <div class="panel panel-default">
                 <div class="panel-image">
                     <div id="map" class="img-responsive" style="width: 750px; height: 150px">
+                        <a class="get-directions btn btn-danger" target="_blank" href="https://maps.google.com/maps?saddr=current+location&daddr={{ biz.name|urlencode }}+{{ biz.address|urlencode }}+{{ biz.admin3_name|urlencode }}+{{ biz.admin1_code|urlencode }}">Get Directions</a>
                     </div>
                 </div>
                 <div class="biz-details panel-body">
-                    <h4>{{ biz.name }}</h4>
 
-                    {{ biz.pretty_address }}
+                    <div class="biz-address-street" title="{{ biz.address }}">
+                        {{ biz.address }}
+                    </div>
+
+                    <div class="biz-address-city-state">
+                        {{ biz.admin3_name }}, {{ biz.admin1_code }}
+                    </div>
+
+                    {% if biz.phone %}
+                    <div class="biz-phone single-line">
+                        <a href="tel:{{ biz.phone }}">{{ biz.phone }}</a>
+                    </div>
+                    {% endif %}
 
                     {% if biz.website %}
-                    <div>
-                        <a target="_blank" href="{{ biz.website }}">{{ biz.website|truncatechars:100 }}</a>
+                    <div class="biz-website single-line">
+                        <a target="_blank" href="{{ biz.website }}" title="{{ biz.website }}">{{ biz.website }}</a>
                     </div>
                     {% endif %}
 
@@ -74,11 +88,11 @@
                         </p>
                     {% endif %}
                 </div>
+
                 <div class="panel-footer text-center">
                     <div class="btn-group" style="">
-                        <button class="btn btn-primary" href="#"><span class="fa fa-upload"></span> Add Photo</button>
+                        <button class="btn btn-primary" href="#"><span class="fa fa-picture-o"></span> Submit Photo</button>
                         <button class="btn btn-primary" href="#"><span class="fa fa-share"></span> Share</button>
-                        <button class="btn btn-primary" href="#"><span class="fa fa-bookmark"></span> Bookmark</button>
                     </div>
                 </div>
             </div>
@@ -87,6 +101,37 @@
 
 
         <div class="biz-info-three col-md-8">
+
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <thead>
+                        <td></td>
+                    {% for h in biz.businesshours_set.all %}
+                        <td>{{ h.lookupDayOfWeek|slice:"3" }}</td>
+                    {% endfor %}
+                    </thead>
+
+                    <tr>
+                        <td>Open</td>
+                    {% for h in biz.businesshours_set.all %}
+                        <td>
+                            <span class="label label-info">{{ h.hourStart }}</span>
+                        </td>
+                    {% endfor %}
+                    </tr>
+
+                    <tr>
+                        <td>Close</td>
+                    {% for h in biz.businesshours_set.all %}
+                        <td>
+                            <span class="label label-default">{{ h.hourEnd }}</span>
+                        </td>
+                    {% endfor %}
+                    </tr>
+                </table>
+            </div>
+
+
 
             {% if imgs %}
             <div class="biz-gallery row" style="margin-bottom: 30px;">
@@ -110,14 +155,7 @@
     {% if nearby %}
 
     <div class="row">
-        <h3 style="margin-top: 60px;">Nearby Businesses Accepting Bitcoin</h3>
-        <div class="col-xs-12 well well-sm">
-            <div class="btn-group">
-                <a href="#" id="list" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-th-list"></span> List</a>
-                <a href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span> Grid</a>
-            </div>
-        </div>
+        <h2 class="col-xs-12" style="margin: 60px 0 30px 0;"><i class="fa fa-map-marker"></i> Nearby Businesses Accepting Bitcoin</h2>
     </div>
 
     <div id="results-grid" class="list-group row">
@@ -139,7 +177,7 @@
                         <h3 class="single-line group inner list-group-item-heading">{{ nbiz.name }}</h3>
                         <div class="biz-categories">
                             {% for c in biz.categories.all %}
-                                <span class="label label-default">{{c.name}}</span>
+                                <span class="label label-primary">{{c.name}}</span>
                             {% endfor %}
                         </div>
                         <div class="biz-description group inner list-group-item-text">
@@ -173,10 +211,21 @@
     {{ block.super }}
     <script type="text/javascript">
         $(function() {
-            var json = [
-                { lat: {{ biz.center.y }}, lon: {{ biz.center.x }} },
-            ];
-            AB.addMap($('#map'), 16, {{ biz.center.y }}, {{ biz.center.x }}, json);
+{#            var json = [#}
+{#                { lat: {{ biz.center.y }}, lon: {{ biz.center.x }} },#}
+{#            ];#}
+{#            AB.addMap($('#map'), 16, {{ biz.center.y }}, {{ biz.center.x }}, json);#}
+
+            var mapUrl = GMaps.staticMapURL({
+                size: [720, 150],
+                lat: {{ biz.center.y }},
+                lng: {{ biz.center.x }},
+                markers: [
+                    { lat: {{ biz.center.y }}, lng: {{ biz.center.x }} }
+                ]
+            });
+            $('<img/>').attr('src', mapUrl).prependTo('#map');
+
         });
     </script>
 {% endblock %}

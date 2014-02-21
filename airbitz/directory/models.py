@@ -41,16 +41,14 @@ def lookupChoice(value, choices):
 
 def lookupSocialIcon(social_type):
     if social_type == 'facebook':
-        social_type = 'facebook'
+        social_icon = 'fa-facebook'
     elif social_type == 'foursquare':
-        social_type = 'foursquare'
+        social_icon = 'fa-foursquare'
     elif social_type == 'yelp':
-        social_type = 'comments'
-    elif social_type == 'osm':
-        social_type = 'globe'
+        social_icon = 'fa-comments'
     else:
-        social_type = 'link'
-    return 'fa-' + social_type
+        social_icon = 'link'
+    return social_icon
 
 
 class Category(models.Model):
