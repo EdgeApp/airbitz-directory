@@ -45,10 +45,8 @@ $(function() {
                     'Ex. <strong class="info">San Diego</strong> or <strong class="info">Ca</strong> or <strong class="info">92101</strong>',
         html: true,
         callbackShow: function() {
-            $('.biz-info-two #map').slideToggle();
         },
         callbackHide: function() {
-            $('.biz-info-two #map').slideToggle();
         }
     });
 

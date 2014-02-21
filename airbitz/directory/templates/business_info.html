@@ -54,13 +54,14 @@
                     <div class="biz-address-street" title="{{ biz.address }}">
                         {{ biz.address }}
                     </div>
-                    <div class="biz-address-city">
-                        {{ biz.admin3_name }}
+
+                    <div class="biz-address-city-state">
+                        {{ biz.admin3_name }}, {{ biz.admin1_code }}
                     </div>
 
                     {% if biz.phone %}
                     <div class="biz-phone single-line">
-                        {{ biz.phone }}
+                        <a href="tel:{{ biz.phone }}">{{ biz.phone }}</a>
                     </div>
                     {% endif %}
 

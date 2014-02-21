@@ -294,7 +294,20 @@ body .top-bg {
   bottom: 5px;
   right: 5px;
 }
+.main-content .biz-info-two .biz-details .biz-address-street {
+  margin-right: 10px;
+}
+.main-content .biz-info-two .biz-details .biz-address-city {
+  margin-right: 10px;
+}
+.main-content .biz-info-two .biz-details .biz-phone {
+  float: left;
+}
+.main-content .biz-info-two .biz-details .biz-website {
+  float: right;
+}
 .main-content .biz-info-two .biz-details .dl-horizontal {
+  clear: both;
   margin: 15px 0;
 }
 .main-content .biz-info-two .biz-details .dl-horizontal dt {
