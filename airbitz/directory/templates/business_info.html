@@ -30,9 +30,11 @@
 
         <div class="biz-social-buttons col-md-6">
             {% for s in biz.socialid_set.all %}
-                <a class="btn btn-inverse" href="{{ s.social_url }}" target="_blank">
-                    <i class="fa fa-2x {{ s.social_icon }}" data-toggle="tooltip" data-placement="bottom" title="{{ s.social_type }}"></i>
+                {% if s.social_type != "osm" %}
+                <a class="btn btn-primary" href="{{ s.social_url }}" target="_blank">
+                    <i class="fa {{ s.social_icon }}" data-toggle="tooltip" data-placement="bottom" title="{{ s.social_type }}"></i> {{ s.social_type|title }}
                 </a>
+                {% endif %}
             {% endfor %}
         </div>
 
