@@ -1,7 +1,8 @@
 from django.contrib.gis.geos import Point
-from django.core.paginator import Paginator
-from django.db.models import Q
 from django.core.exceptions import ValidationError
+from django.core.paginator import Paginator
+from django.db.models import Count
+from django.db.models import Q
 from rest_framework import fields
 from rest_framework import pagination
 from rest_framework import serializers
@@ -149,6 +150,7 @@ class AdminBusinessView(ListCreateAPIView):
                 c = cols[int(s)]
                 l.append(self.formatDir(c, d))
             q = q.order_by(*l)
+        q = q.annotate(ccount=Count('categories'))
         print q.query
         return q
 
