@@ -49,10 +49,6 @@ http {
             alias <%=@home%>/static/;
         }
 
-        location /static/admin/ {
-            root <%=@home%>/airbitz/ENV/lib/python2.7/site-packages/django/contrib/admin;
-        }
-
         location /media/ {
             alias <%=@home%>/media/;
         }
