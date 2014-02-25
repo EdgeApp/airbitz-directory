@@ -14,7 +14,7 @@ from rest_framework.response import Response
 import logging
 
 from directory.models import Business, BusinessHours, Category, SocialId
-from restapi.api import querySetAddLocation
+from restapi.api import ApiProcess
 
 log=logging.getLogger("airbitz." + __name__)
 
@@ -141,7 +141,8 @@ class AdminBusinessView(ListCreateAPIView):
                        | Q(categories__name__icontains=search))
             q = q.distinct()
         if location:
-            (q, _) = querySetAddLocation(q, location)
+            a = ApiProcess()
+            (q, _) = a.querySetAddLocation(q, location)
         if bizStatus:
             q = q.filter(status=bizStatus)
         if sorts:

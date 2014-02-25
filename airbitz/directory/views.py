@@ -6,7 +6,7 @@ from django.template import RequestContext
 
 from directory.models import Business, BusinessImage
 from airbitz.settings import GOOGLE_MAP_KEY
-from restapi import api
+from restapi.api import ApiProcess
 
 SEARCH_LIMIT = 20
 DISTANCE_LIMIT_KILOMETERS = 20
@@ -23,11 +23,12 @@ def landing(request):
     return render_to_response('landing.html', RequestContext(request, context))
 
 def business_search(request):
+    a = ApiProcess()
     term = request.GET.get('term', None)
     category = request.GET.get('category', None)
     ll = request.GET.get('ll', None)
     near = request.GET.get('near', None)
-    results = api.searchDirectory(term=term, location=near, geolocation=ll, category=category)
+    results = a.searchDirectory(term=term, location=near, geolocation=ll, category=category)
     context = {
         'results': results[:20],
         'mapkey': GOOGLE_MAP_KEY

@@ -4,16 +4,19 @@ from directory.models import Business, Category
 
 class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
-    admin1_code = indexes.CharField(model_attr='admin1_code', null=True)
-    admin2_name = indexes.CharField(model_attr='admin2_name', null=True)
-    admin3_name = indexes.CharField(model_attr='admin3_name', null=True)
-    admin3_name = indexes.CharField(model_attr='admin3_name', null=True)
-    country = indexes.CharField(model_attr='country', null=True)
+    name = indexes.CharField(model_attr='name', boost=1.25)
+    description = indexes.CharField(model_attr='description')
+    categories = indexes.MultiValueField(boost=1.125)
+    location = indexes.LocationField(model_attr='center', null=True)
 
     has_physical_business = indexes.BooleanField(model_attr='has_physical_business', null=True)
     has_online_business = indexes.BooleanField(model_attr='has_online_business', null=True)
+    has_bitcoin_discount = indexes.DecimalField(model_attr='has_online_business', null=True)
 
     content_auto = indexes.EdgeNgramField(model_attr='name')
+
+    def prepare_categories(self, obj):
+        return [category.name for category in obj.categories.all()]
 
     def get_model(self):
         return Business

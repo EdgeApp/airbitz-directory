@@ -20,7 +20,7 @@ end
 %w{python-dev python-virtualenv libncurses5-dev 
    libgeos-dev libgeos-3.2.2 libgdal1-1.7.0 
    vim git libtiff4-dev libjpeg8-dev zlib1g-dev 
-   libfreetype6-dev liblcms1-dev libwebp-dev unzip
+   libfreetype6-dev liblcms1-dev libwebp-dev unzip libpq-dev
    geoip-bin geoip-database geoip-database-contrib}.each do |pkg|
   package pkg do
     action :install

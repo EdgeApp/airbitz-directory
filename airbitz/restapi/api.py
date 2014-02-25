@@ -1,6 +1,5 @@
 from django.contrib.gis.geos import Point, Polygon
-from django.contrib.gis.measure import D
-from django.db.models import Q
+# from haystack.inputs import AltParser
 from haystack.query import SearchQuerySet, SQ
 from haystack.inputs import Clean
 
@@ -8,14 +7,33 @@ import logging
 import subprocess
 
 from directory.models import Business, Category
-from location.models import GeoNameZip, LocationString
+from location.models import GeoNameZip, OsmRelation
 
 log=logging.getLogger("airbitz." + __name__)
 
 DEFAULT_POINT=Point((-117.124603, 33.028400))
-RADIUS_DEFAULT=40000
+DEFAULT_RADIUS=40000
 DEFAULT_IP='24.152.191.12'
 DEFAULT_LOC_STRING='San Francisco, CA'
+
+def autocompleteSerialize(row):
+    if row.model.__name__ == 'Business':
+        return { 'type': 'business', 'bizId': row.pk, 'text': row.content_auto }
+    else:
+        return { 'type': 'category', 'text': row.content_auto }
+
+def wildcardFormat(term):
+    return WildCard(term)
+
+def isWebOnly(location):
+    return location.lower() == 'web only'
+
+def isOnWebOnly(location):
+    return location.lower() == 'on the web'
+
+def isCurrentLocation(location):
+    return location.lower() == 'current location'
+
 
 class WildCard(Clean):
     input_type_name = 'wildcard'
@@ -51,154 +69,151 @@ def toInt(request, key, default):
         log.warn(e)
         raise AirbitzApiException('Unable to handle request. Error with {0} format.'.format(key))
     return default
-        
 
-def searchDirectory(term=None, location=None, \
-                    geolocation=None, geobounds=None, \
-                    radius=None, category=None, sort=0):
-    qs = Business.objects.filter(status='PUB').distinct()
-    origin = DEFAULT_POINT
-    if term:
-        qs = qs.filter(Q(name__icontains=term)
-                     | Q(description__icontains=term)
-                     | Q(categories__name__icontains=term))
-    qs = querySetAddCategories(qs, category)
-    (qs, dloc) = querySetAddLocation(qs, location)
-    print location, dloc
-    if dloc['point']:
-        origin = dloc['point']
-    (qs, lloc) = querySetAddGeoLocation(qs, geolocation, radius=radius)
-    if lloc:
-        origin = lloc
-    if geobounds:
-        d = parseGeoBounds(geobounds)
-        geom = Polygon.from_bbox((d['minlon'], d['minlat'], d['maxlon'], d['maxlat']))
-        qs = qs.filter(center__contained=geom)
-    if origin:
-        qs = qs.distance(origin)
-    if sort == 0:
-        qs = qs.order_by('-has_bitcoin_discount', 'name')
-    elif sort == 1 and origin:
-        qs = qs.order_by('distance')
-    print qs.query
-    return qs
-
-def querySetAddCategories(qs, category):
-    if not category:
-        return qs
-
-    f = None
-    for cterm in category.split(","):
-        q = Q(categories__name=cterm)
-        if not f:
-            f = q
+class Location(object):
+    def __init__(self, location):
+        self.location = location
+        self.bounding = None
+        self.point = DEFAULT_POINT
+        if self.location:
+            self.filter_web_only = self.location.lower() == 'web only'
+            self.filter_on_web = self.location.lower() == 'on the web'
+            self.filter_current_location =  self.location.lower() == 'current location'
         else:
-            f = f | q
-    return qs.filter(f)
+            self.filter_web_only = False
+            self.filter_on_web = False
+            self.filter_current_location = False
 
-def autocompleteBusiness(term=None, location=None, geolocation=None):
-    sqs = SearchQuerySet()
-    if term:
-        formatted = wildcardFormat(term)
-        sqs = sqs.filter(content_auto=formatted)
-    if location: 
-        fits = SQ(django_ct='directory.business')
-        d = parseLocationString(location)
-        if d['current_location']:
+    def isWebOnly(self):
+        return self.filter_web_only
+
+    def isOnWebOnly(self):
+        return self.filter_on_web
+
+    def isCurrentLocation(self):
+        return self.filter_current_location
+
+class ApiProcess(object):
+    def __init__(self):
+        self.point = DEFAULT_POINT
+
+    def userLocation(self):
+        return self.point
+
+    def searchDirectory(self, term=None, location=None, geolocation=None, 
+                        geobounds=None, radius=None, category=None, sort=0):
+        sqs = SearchQuerySet().models(Business)
+        if term:
+            formatted = wildcardFormat(term)
+            sqs = sqs.filter(SQ(categories=term) 
+                           | SQ(categories=formatted) 
+                           | SQ(name=term) 
+                           | SQ(name=formatted) 
+                           | SQ(description=term))
+        sqs = self.searchAddGeoLocation(sqs, geolocation)
+        sqs = self.querySetAddCategories(sqs, category)
+        l = self.parseLocationString(location)
+        if l.isCurrentLocation():
             pass
-        elif d['web_only']:
-            fits = fits & SQ(has_online_business=True) & SQ(has_physical_business=False)
-        elif d['on_web']:
-            fits = fits & SQ(has_online_business=True)
+        elif l.isWebOnly():
+            sqs = sqs.filter(SQ(has_online_business=True) & SQ(has_physical_business=False))
+        elif l.isOnWebOnly():
+            sqs = sqs.filter(SQ(has_online_business=True))
+        sqs = sqs.distance('location', self.userLocation())
+        if sort == 0:
+            sqs = sqs.order_by('-has_bitcoin_discount', 'name')
+        elif sort == 1:
+            sqs = sqs.order_by('distance')
+        if geobounds:
+            d = self.parseGeoBounds(geobounds)
+            l.bounding = Polygon.from_bbox((d['minlon'], d['minlat'], d['maxlon'], d['maxlat']))
+        if l and l.bounding:
+            sqs = self.boundSearchQuery(sqs, l)
+
+        ids = [s.pk for s in sqs]
+        newqs = Business.objects.filter(pk__in=ids).distance(self.userLocation())
+        return newqs
+
+    def autocompleteBusiness(self, term=None, location=None, geolocation=None):
+        sqs = SearchQuerySet()
+        l = self.parseLocationString(location)
+        if term:
+            formatted = wildcardFormat(term)
+            sqs = sqs.filter(content_auto=formatted)
+        if location: 
+            fits = SQ(django_ct='directory.business')
+            if l.isCurrentLocation():
+                pass
+            elif l.isWebOnly():
+                fits = fits & SQ(has_online_business=True) & SQ(has_physical_business=False)
+            elif l.isOnWebOnly():
+                fits = fits & SQ(has_online_business=True)
         else:
-            if d['admin2_name']:
-                fits = fits & (SQ(admin2_name=d['admin2_name'])
-                            | SQ(admin3_name=d['admin2_name']))
-            if d['admin1_code']:
-                fits = fits & SQ(admin1_code=d['admin1_code'])
-            if d['country']:
-                fits = fits & SQ(country=d['country'])
-    else:
-        fits = SQ(django_ct='directory.business')
-    fits = (fits) | SQ(django_ct='directory.category')
-    sqs = searchAddGeoLocation(sqs, geolocation)
-    sqs = sqs.filter(fits).models(Business, Category)
-    sqs = sqs[:10]
-    return [autocompleteSerialize(result) for result in sqs]
+            fits = SQ(django_ct='directory.business')
+        fits = (fits) | SQ(django_ct='directory.category')
+        sqs = self.searchAddGeoLocation(sqs, geolocation)
+        sqs = sqs.filter(fits).models(Business, Category)
+        if l and l.bounding:
+            sqs = self.boundSearchQuery(sqs, l)
+        else:
+            sqs = sqs[:10]
+        return [autocompleteSerialize(result) for result in sqs]
 
-def autocompleteSerialize(row):
-    if row.model.__name__ == 'Business':
-        return { 'type': 'business', 'bizId': row.pk, 'text': row.content_auto }
-    else:
-        return { 'type': 'category', 'text': row.content_auto }
+    def boundSearchQuery(self, sqs, l):
+        newsqs = []
+        for s in sqs:
+            if s.model.__name__ == 'Business':
+                if s.location and l.bounding.contains(s.location):
+                    newsqs.append(s)
+            else:
+                newsqs.append(s)
+        return newsqs
 
-def autocompleteLocation(term=None, geolocation=None, ip=None):
-    sqs = SearchQuerySet().models(LocationString)
-    if term:
-        formatted = wildcardFormat(term)
-        sqs = sqs.filter(content_auto=formatted)
-    sqs = searchAddGeoLocation(sqs, geolocation)
-    sqs = sqs[:10]
-    return [result.content_auto for result in sqs]
+    def autocompleteLocation(self, term=None, geolocation=None, ip=None):
+        sqs = SearchQuerySet().models(OsmRelation)
+        if term:
+            formatted = wildcardFormat(term)
+            sqs = sqs.filter(content_auto=formatted)
+        sqs = self.searchAddGeoLocation(sqs, geolocation)
+        sqs = sqs.order_by('distance')
+        sqs = sqs[:10]
+        return [result.content_auto for result in sqs]
 
-def wildcardFormat(term):
-    return WildCard(term)
+    def querySetAddCategories(self, sqs, category):
+        if not category:
+            return sqs
+        f = None
+        for cterm in category.split(","):
+            q = SQ(categories=cterm)
+            if not f:
+                f = q
+            else:
+                f = f | q
+        return sqs.filter(f)
 
-def isWebOnly(location):
-    return location.lower() == 'web only'
+    def searchAddGeoLocation(self, sqs, geolocation):
+        if geolocation:
+            d = parseGeoLocation(geolocation)
+            origin = Point(d['lon'], d['lat'])
+            return sqs.distance('location', origin)
+        else:
+            return sqs.distance('location', self.userLocation())
 
-def isOnWebOnly(location):
-    return location.lower() == 'on the web'
+    def parseLocationString(self, location):
+        l = Location(location)
+        if not location:
+            return l
+        if l.isCurrentLocation() or l.isOnWebOnly() or l.isWebOnly():
+            return l
 
-def isCurrentLocation(location):
-    return location.lower() == 'current location'
-
-def searchAddGeoLocation(sqs, geolocation):
-    if geolocation:
-        d = parseGeoLocation(geolocation)
-        origin = Point(d['lon'], d['lat'])
-        return sqs.distance('location', origin).order_by('distance')
-    else:
-        # XXX: Biased this to san diego, need to bias by IP
-        return sqs.distance('location', DEFAULT_POINT).order_by('distance')
-
-def querySetAddLocation(qs, location):
-    d = parseLocationString(location)
-    if d['current_location']:
-        return (qs, d)
-    elif d['web_only']:
-        qs = qs.filter(has_online_business=True, has_physical_business=False)
-        return (qs, d)
-    elif d['on_web']:
-        qs = qs.filter(has_online_business=True)
-        return (qs, d)
-    if not d['country'] \
-            and not d['admin1_code'] \
-            and not d['admin2_name'] \
-            and not ['admin3_name']:
-        # If no country found, then return empty results
-        qs = qs.filter(pk=0)
-        return (qs, d)
-    if d['admin2_name']:
-        qs = qs.filter(Q(admin2_name=d['admin2_name']) 
-                     | Q(admin3_name=d['admin2_name']))
-    if d['admin1_code']:
-        qs = qs.filter(admin1_code=d['admin1_code'])
-    if d['country']:
-        qs = qs.filter(country=d['country'])
-    if d['postalcode']:
-        qs = qs.filter(postalcode=d['postalcode'])
-    return (qs, d)
-
-def querySetAddGeoLocation(qs, geolocation, radius=RADIUS_DEFAULT):
-    radius = max(radius, 1)
-    origin = None
-    if geolocation:
-        d = parseGeoLocation(geolocation)
-        origin = Point(d['lon'], d['lat'])
-        if radius:
-            qs = qs.filter(center__distance_lt=(origin, D(m=radius)))
-    return (qs, origin)
+        formatted = wildcardFormat(location)
+        sqs = SearchQuerySet().models(OsmRelation).filter(content_auto=formatted)
+        sqs = sqs.distance('location', self.userLocation()).order_by('distance')[:1]
+        if len(sqs) > 0:
+            obj = sqs[0].object
+            l.bounding = obj.geom
+            l.point = obj.centroid
+        return l
 
 def getRequestIp(request):
     if request.META.has_key('HTTP_X_REAL_IP'):
@@ -222,80 +237,6 @@ def suggestNearText(ip, geolocation=None):
             return processGeoIp(ip)
     else:
         return processGeoIp(ip)
-
-def parseLocationString(location):
-    d = {
-        'current_location': False,
-        'web_only': False,
-        'on_web': False,
-        'admin1_code': None,
-        'admin2_name': None,
-        'admin3_name': None,
-        'country': None,
-        'point': None,
-        'postalcode': None,
-    }
-    if not location:
-        return d
-    if isCurrentLocation(location):
-        d['current_location'] = True
-        return d
-
-    if isOnWebOnly(location):
-        d['on_web'] = True
-        return d
-
-    if isWebOnly(location):
-        d['web_only'] = True
-        return d
-
-    formatted = wildcardFormat(location)
-    sqs = SearchQuerySet().filter(content_auto=formatted)
-    sqs = sqs.distance('location', DEFAULT_POINT).order_by('distance')[:1]
-    if len(sqs) > 0:
-        d['admin1_code'] = sqs[0].admin1_code
-        d['admin2_name'] = sqs[0].admin2_name
-        d['country'] = sqs[0].country_code
-    else:
-        values = map(lambda x : x.strip(), location.split(","))
-        values.reverse()
-        for v in values:
-            v = v.strip()
-            if not d['postalcode']:
-                r = GeoNameZip.objects.filter(postalcode=v)[:1]
-                if r:
-                    d['postalcode'] = r[0].postalcode
-                    d['admin3_name'] = r[0].place_name
-                    d['admin2_name'] = r[0].admin_name2
-                    d['admin1_code'] = r[0].admin_code1
-                    d['country'] = r[0].country
-                    d['point'] = Point(r[0].center.y, r[0].center.x)
-                    continue
-            if not d['admin1_code']:
-                r = GeoNameZip.objects.filter(Q(admin_code1=v) | Q(admin_name1=v))[:1]
-                if r:
-                    d['admin1_code'] = r[0].admin_code1
-                    d['country'] = r[0].country
-                    continue
-            if not d['admin2_name']:
-                r = GeoNameZip.objects.filter(Q(admin_code2=v) | Q(admin_name2=v))[:1]
-                if r:
-                    d['admin3_name'] = r[0].place_name
-                    d['admin2_name'] = r[0].admin_name2
-                    d['admin1_code'] = r[0].admin_code1
-                    d['point'] = Point(r[0].center.y, r[0].center.x)
-                    d['country'] = r[0].country
-                    continue
-            if not d['admin3_name']:
-                r = GeoNameZip.objects.filter(place_name=v)[:1]
-                if r:
-                    d['admin3_name'] = r[0].place_name
-                    d['admin2_name'] = r[0].admin_name2
-                    d['admin1_code'] = r[0].admin_code1
-                    d['point'] = Point(r[0].center.y, r[0].center.x)
-                    d['country'] = r[0].country
-                    continue
-    return d
 
 def parseGeoLocation(ll):
     vals = ll.split(",")

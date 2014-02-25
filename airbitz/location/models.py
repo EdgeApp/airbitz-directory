@@ -16,6 +16,14 @@ class LocationString(models.Model):
     center = models.PointField(null=True)
     objects = models.GeoManager()
 
+class OsmRelation(models.Model):
+    osm_id = models.BigIntegerField()
+    admin_level = models.SmallIntegerField()
+    name = models.CharField(max_length=2000)
+    geom = models.GeometryField(null=False)
+    centroid = models.PointField(null=False)
+    objects = models.GeoManager()
+
 class GeoName(models.Model):
     geonameid = models.IntegerField(unique=True)
     name = models.CharField(max_length=200)

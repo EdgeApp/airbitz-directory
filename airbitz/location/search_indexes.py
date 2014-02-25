@@ -1,6 +1,6 @@
 from haystack import indexes
 
-from location.models import LocationString
+from location.models import LocationString, OsmRelation
 
 class LocationStringIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
@@ -20,6 +20,15 @@ class LocationStringIndex(indexes.SearchIndex, indexes.Indexable):
 
     def get_model(self):
         return LocationString
+
+
+class OsmRelationIndex(indexes.SearchIndex, indexes.Indexable):
+    text = indexes.CharField(document=True, use_template=True)
+    content_auto = indexes.EdgeNgramField(model_attr='name')
+    location = indexes.LocationField(model_attr='centroid', null=True)
+
+    def get_model(self):
+        return OsmRelation
 
 
 
