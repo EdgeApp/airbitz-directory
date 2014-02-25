@@ -11,6 +11,34 @@ from restapi import api
 SEARCH_LIMIT = 20
 DISTANCE_LIMIT_KILOMETERS = 20
 
+
+WEEKDAYS = (
+    ('sunday', 'Sun'),
+    ('monday', 'Mon'),
+    ('tuesday', 'Tue'),
+    ('wednesday', 'Wed'),
+    ('thursday', 'Thu'),
+    ('friday', 'Fri'),
+    ('saturday', 'Sat'),
+)
+
+
+def get_biz_hours(biz):
+    days_hours = biz.businesshours_set.all()
+
+    week_of_hours = {}
+
+    for weekday in WEEKDAYS:
+        # print weekday[0], weekday[1]
+        week_of_hours[weekday[1]] = ''
+
+        for dh in days_hours:
+            if dh.dayOfWeek == weekday[0]:
+                # matched on the day of week so add the hours to that dict key
+                week_of_hours[weekday[1]] = [dh.hourStart, dh.hourEnd]
+
+    return week_of_hours
+
 def get_biz(request, *args, **kwargs):
     biz = get_object_or_404(Business, **kwargs)
     if request.user.is_superuser or biz.status == 'PUB':
@@ -48,7 +76,9 @@ def business_info(request, bizId):
         'biz': biz,
         'imgs': imgs,
         'nearby': nearby,
-        'mapkey': GOOGLE_MAP_KEY
+        'mapkey': GOOGLE_MAP_KEY,
+        'biz_hours': get_biz_hours(biz),
+        'weekdays': WEEKDAYS
     }
     return render_to_response('business_info.html', RequestContext(request, context))
 

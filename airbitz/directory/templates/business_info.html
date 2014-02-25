@@ -102,31 +102,63 @@
 
         <div class="biz-info-three col-md-8">
 
-            <div class="table-responsive">
+            <div class="biz-hours table-responsive">
                 <table class="table table-condensed">
                     <thead>
                         <td></td>
-                    {% for h in biz.businesshours_set.all %}
-                        <td>{{ h.lookupDayOfWeek|slice:"3" }}</td>
+                    {% for day in weekdays %}
+                        <td><strong>{{ day.1 }}</strong></td>
                     {% endfor %}
                     </thead>
 
                     <tr>
                         <td>Open</td>
-                    {% for h in biz.businesshours_set.all %}
                         <td>
-                            <span class="label label-info">{{ h.hourStart }}</span>
+                            <span class="label label-info">{{ biz_hours.Sun.0 }}</span>
                         </td>
-                    {% endfor %}
+                        <td>
+                            <span class="label label-info">{{ biz_hours.Mon.0 }}</span>
+                        </td>
+                        <td>
+                            <span class="label label-info">{{ biz_hours.Tue.0 }}</span>
+                        </td>
+                        <td>
+                            <span class="label label-info">{{ biz_hours.Wed.0 }}</span>
+                        </td>
+                        <td>
+                            <span class="label label-info">{{ biz_hours.Thu.0 }}</span>
+                        </td>
+                        <td>
+                            <span class="label label-info">{{ biz_hours.Fri.0 }}</span>
+                        </td>
+                        <td>
+                            <span class="label label-info">{{ biz_hours.Sat.0 }}</span>
+                        </td>
                     </tr>
 
                     <tr>
                         <td>Close</td>
-                    {% for h in biz.businesshours_set.all %}
                         <td>
-                            <span class="label label-default">{{ h.hourEnd }}</span>
+                            <span class="label label-default">{{ biz_hours.Sun.1 }}</span>
                         </td>
-                    {% endfor %}
+                        <td>
+                            <span class="label label-default">{{ biz_hours.Mon.1 }}</span>
+                        </td>
+                        <td>
+                            <span class="label label-default">{{ biz_hours.Tue.1 }}</span>
+                        </td>
+                        <td>
+                            <span class="label label-default">{{ biz_hours.Wed.1 }}</span>
+                        </td>
+                        <td>
+                            <span class="label label-default">{{ biz_hours.Thu.1 }}</span>
+                        </td>
+                        <td>
+                            <span class="label label-default">{{ biz_hours.Fri.1 }}</span>
+                        </td>
+                        <td>
+                            <span class="label label-default">{{ biz_hours.Sat.1 }}</span>
+                        </td>
                     </tr>
                 </table>
             </div>
