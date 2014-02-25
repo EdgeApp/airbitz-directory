@@ -8,9 +8,12 @@ from directory.models import Business, BusinessHours, \
                              SocialId
 from location.models import GeoNameZip
 
-class ProfileImageField(serializers.Field):
+class SizedImageField(serializers.Field):
     def field_to_native(self, obj, field_name):
-        image = obj.landing_image
+        if field_name == 'landing_image':
+            image = obj.landing_image
+        else:
+            image = obj
         if image:
             return {
                 'image': image.mobile_photo.url,
@@ -22,10 +25,27 @@ class ProfileImageField(serializers.Field):
         else:
             return {}
 
+class MobileUrl(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        return obj.mobile_photo.url
+
+class MobileHeight(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        return obj.mobile_photo.height
+
+class MobileWidth(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        return obj.mobile_photo.width
+
+class MobileThumbnail(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        return obj.mobile_thumbnail.url
+
 class LastUpdated(serializers.Field):
     def field_to_native(self, obj, field_name):
         m = Category.objects.all().aggregate(Max('modified'))
         return m['modified__max']
+
 
 class DistanceField(serializers.Field):
     def field_to_native(self, obj, field_name):
@@ -53,12 +73,15 @@ class BoundingBoxField(fields.Field):
         return {'x': 0.0, 'y': 0.0, 'height': 0.25, 'width': 1.0}
 
 class BusinessImageSerializer(serializers.ModelSerializer):
-    image = serializers.CharField(source='get_absolute_url', read_only=True)
+    image = MobileUrl(source='*')
+    height = MobileHeight(source='*')
+    width = MobileWidth(source='*')
+    thumbnail = MobileThumbnail(source='*')
     bounding_box = BoundingBoxField()
 
     class Meta:
         model = BusinessImage
-        fields = ('image', 'height', 'width', 'bounding_box',)
+        fields = ('image', 'height', 'width', 'thumbnail', 'bounding_box',)
 
 class BusinessHoursSerializer(serializers.ModelSerializer):
     class Meta:
@@ -79,7 +102,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
     bizId = serializers.Field(source='pk')
     categories = CategorySerializer(source='categories')
     social = SocialSerializer(source='socialid_set')
-    profile_image = ProfileImageField(source='landing_image')
+    profile_image = SizedImageField(source='landing_image')
     state = serializers.CharField(source='admin1_code')
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
