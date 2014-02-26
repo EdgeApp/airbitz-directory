@@ -135,9 +135,15 @@
         {} ];
         
         $(function() {
-            if (json.length > 0) {
-                AB.addMap($('#map'), 5, json[0].lat, json[0].lon, json);
-            }
+        {% if searchLocation %}
+            AB.addMap($('#map'), 5, {{ searchLocation.point.y }}, {{ searchLocation.point.x }}, json);
+        {% elif userLocation %}
+            AB.addMap($('#map'), 5, {{ userLocation.y }}, {{ userLocation.x }}, json);
+        {% else %}
+        if (json.length > 0) {
+            AB.addMap($('#map'), 5, json[0].lat, json[0].lon, json);
+        }
+        {% endif %}
         });
     </script>
 {% endblock %}

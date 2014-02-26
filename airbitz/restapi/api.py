@@ -96,9 +96,13 @@ class Location(object):
 class ApiProcess(object):
     def __init__(self):
         self.point = DEFAULT_POINT
+        self.location = None
 
     def userLocation(self):
         return self.point
+
+    def searchLocation(self):
+        return self.location
 
     def searchDirectory(self, term=None, location=None, geolocation=None, 
                         geobounds=None, radius=None, category=None, sort=0):
@@ -112,12 +116,12 @@ class ApiProcess(object):
                            | SQ(description=term))
         sqs = self.searchAddGeoLocation(sqs, geolocation)
         sqs = self.querySetAddCategories(sqs, category)
-        l = self.parseLocationString(location)
-        if l.isCurrentLocation():
+        self.location = self.parseLocationString(location)
+        if self.location.isCurrentLocation():
             pass
-        elif l.isWebOnly():
+        elif self.location.isWebOnly():
             sqs = sqs.filter(SQ(has_online_business=True) & SQ(has_physical_business=False))
-        elif l.isOnWebOnly():
+        elif self.location.isOnWebOnly():
             sqs = sqs.filter(SQ(has_online_business=True))
         sqs = sqs.distance('location', self.userLocation())
         if sort == 0:
@@ -126,9 +130,9 @@ class ApiProcess(object):
             sqs = sqs.order_by('distance')
         if geobounds:
             d = self.parseGeoBounds(geobounds)
-            l.bounding = Polygon.from_bbox((d['minlon'], d['minlat'], d['maxlon'], d['maxlat']))
-        if l and l.bounding:
-            sqs = self.boundSearchQuery(sqs, l)
+            self.location.bounding = Polygon.from_bbox((d['minlon'], d['minlat'], d['maxlon'], d['maxlat']))
+        if self.location and self.location.bounding:
+            sqs = self.boundSearchQuery(sqs, self.location)
 
         ids = [s.pk for s in sqs]
         newqs = Business.objects.filter(pk__in=ids).distance(self.userLocation())

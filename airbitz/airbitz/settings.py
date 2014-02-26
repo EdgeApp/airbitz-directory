@@ -138,6 +138,13 @@ STATIC_ROOT = os.path.join(os.environ['HOME'], 'static')
 STATICFILES_DIRS = (
     os.path.join(SITE_ROOT, 'static/'),
 )
+if not DEBUG:
+    PIPELINE_ENABLED=True
+    PIPELINE_AUTO = False
+    PIPELINE_VERSION = True
+else:
+    PIPELINE_ENABLED=False
+
 PIPELINE_CSS = {
     'global': {
         'source_filenames': (

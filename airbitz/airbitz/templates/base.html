@@ -108,6 +108,7 @@
         {% block javascript %}
             <script type="text/javascript">
                 $(function() {
+                    AB.setup();
                     AB.addLocationSearch($('#near'));
                     AB.addPlaceSearch($('#term'));
                 });

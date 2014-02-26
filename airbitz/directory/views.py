@@ -31,7 +31,9 @@ def business_search(request):
     results = a.searchDirectory(term=term, location=near, geolocation=ll, category=category)
     context = {
         'results': results[:20],
-        'mapkey': GOOGLE_MAP_KEY
+        'mapkey': GOOGLE_MAP_KEY,
+        'userLocation': a.userLocation(),
+        'searchLocation': a.searchLocation()
     }
     return render_to_response('search.html', RequestContext(request, context))
 

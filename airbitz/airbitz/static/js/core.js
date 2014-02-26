@@ -1,8 +1,42 @@
+/* TODO: replace with modernizr */
+function supports_html5_storage() {
+  try {
+    return 'localStorage' in window && window['localStorage'] !== null;
+  } catch (e) {
+    return false;
+  }
+}
+
 (function() {
   var root = this;
   var AB = root.AB = {};
 
+  AB.now = function() {
+    return (new Date()).getTime();
+  }
+  AB.setNear = function() {
+    var n = $('#near').val();
+    if (n) {
+      localStorage.setItem("near", n);
+      localStorage.setItem("nearDate", AB.now());
+    }
+  };
+  AB.getNear = function() {
+      var near = localStorage.getItem("near");
+      var then = localStorage.getItem("nearDate");
+      if (near && then && AB.now() - then < 1000 * 60) {
+        return near;
+      } else {
+        return null;
+      }
+  };
   AB.setup = function() {
+    if (supports_html5_storage()) {
+      var near = AB.getNear()
+      if (near) {
+        $('#near').val(near);
+      }
+    }
     $.ajaxSetup({
         crossDomain: false,
         beforeSend: function(xhr, settings) {
@@ -13,74 +47,76 @@
     });
   };
   AB.addMap = function(selector, zoom, lat, lon, markers) {
-      function initialize() {
-          var mapOptions = {
-              center: new google.maps.LatLng(lat, lon),
-              zoom: zoom,
-              disableDefaultUI: true,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-          var bounds = new google.maps.LatLngBounds();
-          var map = new google.maps.Map(selector[0], mapOptions);
-          for (var i = 0; i < markers.length; ++i) {
-              var m = markers[i];
-              if (m.lat && m.lon) {
-                var loc = new google.maps.LatLng(m.lat, m.lon);
-                var marker = new google.maps.Marker({
-                    position: loc,
-                    map: map
-                });
-                bounds.extend(loc);
-              }
-          }
-          map.fitBounds(bounds);
-          map.panToBounds(bounds); 
+    function initialize() {
+      var mapOptions = {
+        center: new google.maps.LatLng(lat, lon),
+        zoom: zoom,
+        disableDefaultUI: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var bounds = new google.maps.LatLngBounds();
+      var map = new google.maps.Map(selector[0], mapOptions);
+      for (var i = 0; i < markers.length; ++i) {
+        var m = markers[i];
+        if (m.lat && m.lon) {
+          var loc = new google.maps.LatLng(m.lat, m.lon);
+          var marker = new google.maps.Marker({
+              position: loc,
+              map: map
+          });
+          bounds.extend(loc);
+        }
       }
-      google.maps.event.addDomListener(window, 'load', initialize);
-      return map;
+      map.fitBounds(bounds);
+      map.panToBounds(bounds); 
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+    return map;
   };
   AB.addPlaceSearch = function(selector) {
-      var engine = new Bloodhound({
-        name: 'business',
-        datumTokenizer: function(d) {
-          return d.results; 
-        },
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        minLength: 0,
-        remote: {
-          url: '/api/v1/autocomplete-business/?term=%QUERY',
-          replace: function (url, uriEncodedQuery) {
-              q = url.replace(/%QUERY/, uriEncodedQuery)
-              if ($('#near').val()) {
-                  q += "&near=" + encodeURIComponent($('#near').val());
-              }
-              return q;
-          },
-          filter: function(data) {
-            return data.results.map(function(e, i) {
-                return { type: e.type, name: e.text, value: e.text, id: e.bizId };
-            });
-          },
-          rateLimitWait: 100
-        }
-      });
-      engine.initialize();
-      selector.typeahead({
-        minLength: 0,
-        highlight: true
-      }, {
-          displaykey: 'name',
-          name: 'business',
-          source: engine.ttAdapter(),
-          template: function(datum) {
-              return '<p>' + datum.name + '</p>';
+    var engine = new Bloodhound({
+      name: 'business',
+      datumTokenizer: function(d) {
+        return d.results; 
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      minLength: 0,
+      remote: {
+        url: '/api/v1/autocomplete-business/?term=%QUERY',
+        replace: function (url, uriEncodedQuery) {
+          q = url.replace(/%QUERY/, uriEncodedQuery)
+          if ($('#near').val()) {
+              q += "&near=" + encodeURIComponent($('#near').val());
           }
-      });
-      selector.on('typeahead:selected', function (object, datum) {
-        if (datum.type === 'business' && datum.id) {
-          location.href = '/biz/' + datum.id;
-        }
-      });
+          return q;
+        },
+        filter: function(data) {
+          return data.results.map(function(e, i) {
+              return { type: e.type, name: e.text, value: e.text, id: e.bizId };
+          });
+        },
+        rateLimitWait: 100
+      }
+    });
+    engine.initialize();
+    selector.typeahead({
+      minLength: 0,
+      hint: false,
+      highlight: true
+    }, {
+      displaykey: 'name',
+      name: 'business',
+      source: engine.ttAdapter(),
+      template: function(datum) {
+          return '<p>' + datum.name + '</p>';
+      }
+    });
+    selector.on('typeahead:selected', function (object, datum) {
+      AB.setNear();
+      if (datum.type === 'business' && datum.id) {
+        location.href = '/biz/' + datum.id;
+      }
+    });
   };
   AB.addLocationSearch = function(selector, locSelector) {
       var values = ['On the Web', 'Current Location'];
@@ -113,6 +149,7 @@
       engine.initialize();
       selector.typeahead({
         minLength: 0,
+        hint: false,
         highlight: true
       }, [ {
         displaykey: 'text',
@@ -130,7 +167,8 @@
         }
       }]);
       selector.on('typeahead:selected', function (object, datum) {
-          $(this).val(data.text);
+        AB.setNear();
+        $(this).val(data.text);
       });
   };
   var Util = AB.Util = {
