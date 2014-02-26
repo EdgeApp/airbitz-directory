@@ -210,6 +210,10 @@ class BusinessHours(models.Model):
             s += ' - %s' % time_format(self.hourEnd)
         return s
 
+    def __unicode__(self):
+        return u'%s (day=%s)' % (self.business, self.dayOfWeek)
+
+
 class BusinessAdmin(admin.ModelAdmin):
     pass
 

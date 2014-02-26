@@ -2,6 +2,7 @@
 {% load imagekit %}
 {% load humanize %}
 {% load compressed %}
+{% load ab_custom_tags %}
 
 {% block title%}{{ biz.name }}{% endblock %}
 
@@ -25,6 +26,7 @@
                         <span class="label label-primary">{{c.name}}</span>
                     {% endfor %}
                 </div>
+
             </div>
         </div>
 
@@ -44,47 +46,71 @@
 
         <div class="biz-info-two col-sm-12 col-md-4">
             <div class="panel panel-default">
+
+                {% if biz.address %}
                 <div class="panel-image">
                     <div id="map" class="img-responsive" style="width: 750px; height: 150px">
-                        <a class="get-directions btn btn-danger" target="_blank" href="https://maps.google.com/maps?saddr=current+location&daddr={{ biz.name|urlencode }}+{{ biz.address|urlencode }}+{{ biz.admin3_name|urlencode }}+{{ biz.admin1_code|urlencode }}">Get Directions</a>
+                        <a class="get-directions btn btn-danger" target="_blank" href="https://maps.google.com/maps?saddr=current+location&daddr={{ biz.name|urlencode }}+
+                        {% if biz.address %}
+                            {{ biz.address|urlencode }}+{{ biz.admin3_name|urlencode }}+{{ biz.admin1_code|urlencode }}
+                        {% elif biz.center.y and biz.center.x %}
+                            loc:{{ biz.center.y|urlencode }}+{{ biz.center.x|urlencode }}
+                        {% endif %}
+                        ">Get Directions</a>
                     </div>
                 </div>
+                
+                {% elif biz.landing_image.image %}
+                <div class="panel-image">
+                    <div class="biz-img">
+                         {% thumbnail '400x250' biz.landing_image.image -- class="biz-img img-responsive group list-group-image" %}
+                    </div>
+                </div>
+                {% endif %}
+
+
+
+
                 <div class="biz-details panel-body">
+                    <div class="biz-type">
+                        {% if biz.has_physical_business %}<span class="label label-success">Local Business</span>{% endif %}
+                        {% if biz.has_online_business %}<span class="label label-success">Online Business</span>{% endif %}
+                    </div>
 
+                    {% if biz.has_bitcoin_discount > 0 %}
+                    <div class="biz-btc-discount">
+                        <h4><i class="fa fa-bitcoin"></i> {{ biz.has_bitcoin_discount|decimal_to_percent }} Bitcoin Discount</h4>
+                    </div>
+                    {% endif %}
+
+                    {% if biz.address %}
                     <div class="biz-address-street" title="{{ biz.address }}">
-                        {{ biz.address }}
+                        <i class="fa fa-map-marker"></i> {{ biz.address }}
                     </div>
+                    {% endif %}
 
+                    {% if biz.admin3_name %}
                     <div class="biz-address-city-state">
-                        {{ biz.admin3_name }}, {{ biz.admin1_code }}
+                        {{ biz.admin3_name }}, {{ biz.admin1_code }} {{ biz.postalcode }}
                     </div>
+                    {% endif %}
 
                     {% if biz.phone %}
                     <div class="biz-phone single-line">
-                        <a href="tel:{{ biz.phone }}">{{ biz.phone }}</a>
+                        <i class="fa fa-phone"></i> <a href="tel:{{ biz.phone }}">{{ biz.phone }}</a>
                     </div>
                     {% endif %}
 
                     {% if biz.website %}
                     <div class="biz-website single-line">
-                        <a target="_blank" href="{{ biz.website }}" title="{{ biz.website }}">{{ biz.website }}</a>
+                        <i class="fa fa-link"></i> <a target="_blank" href="{{ biz.website }}" title="{{ biz.website }}">{{ biz.website }}</a>
                     </div>
                     {% endif %}
 
-                    <dl class="dl-horizontal">
-
-                        <dt>Local:</dt>
-                        <dd>{{ biz.has_physical_business|yesno:"Yes,No" }} </dd>
-
-                        <dt>Online:</dt>
-                        <dd>{{ biz.has_online_business|yesno:"Yes,No" }} </dd>
-
-                        <dt>Discount:</dt>
-                        <dd>{{ biz.has_bitcoin_discount }} </dd>
-                    </dl>
                     {% if biz.description %}
+                    <hr />
                         <p class="biz-description">
-                            {{ biz.description }}
+                            {{ biz.description|urlizetrunc:40|linebreaksbr }}
                         </p>
                     {% endif %}
                 </div>
@@ -208,7 +234,7 @@
                     <div class="caption">
                         <h3 class="single-line group inner list-group-item-heading">{{ nbiz.name }}</h3>
                         <div class="biz-categories">
-                            {% for c in biz.categories.all %}
+                            {% for c in nbiz.categories.all %}
                                 <span class="label label-primary">{{c.name}}</span>
                             {% endfor %}
                         </div>

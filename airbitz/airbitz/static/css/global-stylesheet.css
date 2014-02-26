@@ -280,6 +280,10 @@ body .top-bg {
 .main-content .biz-info-two .panel .panel-image {
   overflow: hidden;
 }
+.main-content .biz-info-two .panel .panel-image .biz-img {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
 .main-content .biz-info-two .panel .panel-image #map {
   position: relative;
 }
@@ -294,17 +298,11 @@ body .top-bg {
   bottom: 5px;
   right: 5px;
 }
-.main-content .biz-info-two .biz-details .biz-address-street {
-  margin-right: 10px;
+.main-content .biz-info-two .biz-details .biz-type {
+  margin-bottom: 5px;
 }
-.main-content .biz-info-two .biz-details .biz-address-city {
-  margin-right: 10px;
-}
-.main-content .biz-info-two .biz-details .biz-phone {
-  float: left;
-}
-.main-content .biz-info-two .biz-details .biz-website {
-  float: right;
+.main-content .biz-info-two .biz-details .biz-address-city-state {
+  padding-left: 10px;
 }
 .main-content .biz-info-two .biz-details .dl-horizontal {
   clear: both;
@@ -317,6 +315,9 @@ body .top-bg {
   .main-content .biz-info-two .biz-details .dl-horizontal dd {
     margin-left: 85px;
   }
+}
+.main-content .biz-info-three .biz-hours td {
+  width: 100px;
 }
 .main-content .biz-info-three .biz-gallery .biz-gallery-item img {
   margin-top: 15px;

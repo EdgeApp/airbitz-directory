@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load imagekit %}
 {% load compressed %}
+{% load ab_custom_tags %}
 
 {% block title %}Search{% endblock title %}
 
@@ -13,7 +14,7 @@
             {% for biz in results %}
                 <div class="result-list-item row" >
                     {% if biz.has_bitcoin_discount > 0 %}
-                        <span class="biz-discount label label-info" title="Discount for Bitcoin"><i class="fa fa-bitcoin"></i> {{ biz.has_bitcoin_discount|floatformat:0 }}%</span>
+                        <span class="biz-discount label label-success" title="Discount for Bitcoin"><i class="fa fa-bitcoin"></i> {{ biz.has_bitcoin_discount|decimal_to_percent }} Discount</span>
                     {% endif %}
                     <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">
                     {% if biz.landing_image %}
