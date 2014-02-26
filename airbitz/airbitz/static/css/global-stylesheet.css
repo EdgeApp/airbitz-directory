@@ -73,6 +73,13 @@
   border-radius: 2px;
   outline: none;
 }
+.twitter-typeahead .tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #2291cf;
+}
+.tt-dataset-always {
+  color: #2291cf;
+}
 .twitter-typeahead .tooltip-inner,
 .twitter-typeahead .popover {
   white-space: pre;
