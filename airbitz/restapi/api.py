@@ -296,7 +296,6 @@ def processGeoCounty(row):
         v = row.strip().split(",")
         lat, lon = float(v[4]), float(v[5])
         origin = Point(lon, lat)
-        print origin
         rs = GeoNameZip.objects.all().distance(origin).order_by('distance')[:1]
         if rs:
             s = "{0}, {1}".format(rs[0].admin_name2, rs[0].admin_code1)

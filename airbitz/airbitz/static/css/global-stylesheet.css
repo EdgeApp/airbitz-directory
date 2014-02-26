@@ -118,6 +118,10 @@
   font-size: 18px;
   line-height: 24px;
 }
+.twitter-typeahead .tt-suggestion.tt-cursor {
+    color: #fff;
+    background-color: #0097cf;
+}
 .twitter-typeahead .tt-suggestion.tt-is-under-cursor {
   color: #fff;
   background-color: #0097cf;

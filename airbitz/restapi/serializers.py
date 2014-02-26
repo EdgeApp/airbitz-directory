@@ -10,10 +10,7 @@ from location.models import GeoNameZip
 
 class SizedImageField(serializers.Field):
     def field_to_native(self, obj, field_name):
-        if field_name == 'landing_image':
-            image = obj.landing_image
-        else:
-            image = obj
+        image = obj.landing_image
         if image:
             return {
                 'image': image.mobile_photo.url,
