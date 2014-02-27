@@ -6,6 +6,6 @@ if [[ -e /etc/profile.d/environment_vars.sh ]]; then
 fi
 
 echo "Rebuilding"
-python $HOME/airbitz/ENV/airbitz/manage.py update_index directory
+python $HOME/airbitz/ENV/airbitz/manage.py update_index --batch-size 100 --remove directory
 echo "Rebuilding finished"
 
