@@ -446,6 +446,10 @@ body .top-bg {
   position: relative;
   background: #fff;
 }
+.results-grid .search-title {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
 .results-grid .item.list-group-item {
   margin-left: -15px;
   margin-right: -15px;

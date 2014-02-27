@@ -6,6 +6,25 @@
 {% block title %}Search{% endblock title %}
 
 {% block body %}
+    {% if request.GET.near == 'On the Web' %}
+    <div class="results-grid list-group row">
+        <div class="col-sm-12">
+            <h1 class="search-title hidden-xs hidden-sm">Bitcoin Businesses On the Web</h1>
+            <h1 class="search-title visible-xs visible-sm">Search Results</h1>
+            <hr />
+        </div>
+
+        {% block result_grid_items %}
+            {% for rbiz in results %}
+                {% include '_result_grid_item.html' %}
+            {% empty %}
+                <p>No results found.</p>
+            {% endfor %}
+        {% endblock result_grid_items %}
+    </div><!-- /.results-grid -->
+
+    {% else %}
+
     <div class="results-map-list row">
         <div class="col-sm-6">
             <h1 class="search-title hidden-xs hidden-sm row">Bitcoin Business Search Results</h1>
@@ -69,18 +88,7 @@
         </div>
     </div>
 
-
-
-    <div class="results-grid list-group row" style="padding-top: 230px;">
-        {% block result_grid_items %}
-            {% for rbiz in results %}
-                {% include '_result_grid_item.html' %}
-            {% empty %}
-                <p>No results found.</p>
-            {% endfor %}
-        {% endblock result_grid_items %}
-    </div><!-- /.results-grid -->
-
+    {% endif %}
 
 
 {% endblock %}

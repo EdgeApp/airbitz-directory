@@ -47,7 +47,8 @@
         <div class="biz-info-two col-sm-12 col-md-4">
             <div class="panel panel-default">
 
-                {% if biz.address %}
+                {% if biz.address or biz.center.x %}
+
                 <div class="panel-image">
                     <div id="map" class="img-responsive" style="width: 750px; height: 150px">
                         <a class="get-directions btn btn-danger" target="_blank" href="https://maps.google.com/maps?saddr=current+location&daddr={{ biz.name|urlencode }}+
@@ -59,17 +60,16 @@
                         ">Get Directions</a>
                     </div>
                 </div>
-                
+
                 {% elif biz.landing_image.image %}
+
                 <div class="panel-image">
                     <div class="biz-img">
                          {% thumbnail '400x250' biz.landing_image.image -- class="biz-img img-responsive group list-group-image" %}
                     </div>
                 </div>
+
                 {% endif %}
-
-
-
 
                 <div class="biz-details panel-body">
                     <div class="biz-type">
