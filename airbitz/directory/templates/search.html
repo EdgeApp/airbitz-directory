@@ -72,49 +72,14 @@
 
 
     <div class="results-grid list-group row" style="padding-top: 230px;">
-
-    {% for biz in results %}
-        <div class="biz-result item col-xs-12 col-sm-6 col-md-4">
-            <div class="thumbnail">
-                <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">
-                {% if biz.landing_image %}
-                    {% thumbnail '400x250' biz.landing_image.image -- class="biz-img img-responsive group list-group-image" %}
-                {% else %}
-                    <img data-src="holder.js/358x250/sky" class="biz-img img-responsive group list-group-image">
-                {% endif %}
-                </a>
-                <div class="caption">
-                    <h3 class="biz-name single-line group inner list-group-item-heading" title="{{ biz.name }}">{{ biz.name }}</h3>
-                    <div class="biz-categories">
-                        {% for c in biz.categories.all %}
-                            <span class="label label-default">{{c.name}}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="biz-description group inner list-group-item-text">
-                        {% if biz.description %}
-                            {{ biz.description }}
-                        {% else %}
-                            Description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% empty %}
-        <p>No results found.</p>
-    {% endfor %}
-
-
+        {% block result_grid_items %}
+            {% for rbiz in results %}
+                {% include '_result_grid_item.html' %}
+            {% empty %}
+                <p>No results found.</p>
+            {% endfor %}
+        {% endblock result_grid_items %}
     </div><!-- /.results-grid -->
-
-
-
-
-
-
-
-
 
 
 

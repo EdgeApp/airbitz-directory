@@ -1,0 +1,33 @@
+{% load imagekit %}
+
+<div class="biz-result item col-xs-12 col-sm-6 col-md-4">
+    {% if was_search|yesno == 'no' %}
+        <div class="single-line"><strong>{{ rbiz.distance.mi|floatformat:2 }} mi</strong> from {{ biz.name }}</div>
+    {% endif %}
+
+    <div class="thumbnail">
+        <a href="{% url 'business_info' rbiz.id %}" title="{{ rbiz.name }}">
+        {% if rbiz.landing_image %}
+            {% thumbnail '400x250' rbiz.landing_image.image -- class="biz-img img-responsive group list-group-image" %}
+        {% else %}
+            <img data-src="holder.js/358x250/sky" class="biz-img img-responsive group list-group-image">
+        {% endif %}
+        </a>
+        <div class="caption">
+            <h3 class="biz-name single-line group inner list-group-item-heading" title="{{ rbiz.name }}">{{ rbiz.name }}</h3>
+            <div class="biz-categories">
+                {% for c in rbiz.categories.all %}
+                    <span class="label label-primary">{{c.name}}</span>
+                {% endfor %}
+            </div>
+            <div class="biz-description group inner list-group-item-text">
+                {% if rbiz.description %}
+                    {{ rbiz.description }}
+                {% else %}
+                    Description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
