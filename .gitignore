@@ -15,3 +15,6 @@ airbitz/media
 *-ck.js
 
 business_images
+
+# Ignore postgres database dumps
+*.dump
