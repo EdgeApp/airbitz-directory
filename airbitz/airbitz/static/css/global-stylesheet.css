@@ -502,6 +502,10 @@ body .top-bg {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
+.biz-result .biz-name {
+  font-weight: 300;
+  letter-spacing: -1px;
+}
 .biz-result .biz-img {
   min-height: 224px;
   border-top-right-radius: 5px;

@@ -210,51 +210,18 @@
     </div>
 
 
-    {% if nearby %}
+    {% if results %}
+        <div class="row">
+            <h2 class="col-xs-12" style="margin: 60px 0 30px 0;"><i class="fa fa-map-marker"></i> Nearby Businesses Accepting Bitcoin</h2>
+        </div>
 
-    <div class="row">
-        <h2 class="col-xs-12" style="margin: 60px 0 30px 0;"><i class="fa fa-map-marker"></i> Nearby Businesses Accepting Bitcoin</h2>
-    </div>
-
-    <div id="results-grid" class="list-group row">
-
-        <div class="clearfix"></div>
-        {% for nbiz in nearby %}
-
-            <div class="item col-xs-6 col-md-4">
-                <div><b>{{ nbiz.distance.mi|floatformat:2 }} mi</b> from {{ biz.name }}</div>
-                <div class="thumbnail">
-                    <a href="{% url 'business_info' nbiz.id %}" title="{{ nbiz.name }}">
-                    {% if nbiz.landing_image %}
-                        {% thumbnail '358x250' nbiz.landing_image.image -- class="img-responsive group list-group-image" %}
-                    {% else %}
-                        <img data-src="holder.js/358x250/sky" class="img-responsive group list-group-image">
-                    {% endif %}
-                    </a>
-                    <div class="caption">
-                        <h3 class="single-line group inner list-group-item-heading">{{ nbiz.name }}</h3>
-                        <div class="biz-categories">
-                            {% for c in nbiz.categories.all %}
-                                <span class="label label-primary">{{c.name}}</span>
-                            {% endfor %}
-                        </div>
-                        <div class="biz-description group inner list-group-item-text">
-                            {% if nbiz.description %}
-                                {{ nbiz.description }}
-                            {% else %}
-                                Description coming soon.
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        {% endfor %}
-
-    </div>
-
-
-
+        <div id="" class="results-grid list-group row">
+            {% for rbiz in results %}
+                {% block result_grid_items %}
+                    {% include '_result_grid_item.html' %}
+                {% endblock result_grid_items %}
+            {% endfor %}
+        </div>
     {% endif %}
 
 {% endblock %}

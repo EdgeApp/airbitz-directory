@@ -58,7 +58,8 @@ def business_search(request):
     results = api.searchDirectory(term=term, location=near, geolocation=ll, category=category)
     context = {
         'results': results[:20],
-        'mapkey': GOOGLE_MAP_KEY
+        'mapkey': GOOGLE_MAP_KEY,
+        'was_search': True
     }
     return render_to_response('search.html', RequestContext(request, context))
 
@@ -75,10 +76,11 @@ def business_info(request, bizId):
     context = {
         'biz': biz,
         'imgs': imgs,
-        'nearby': nearby,
+        'results': nearby,
         'mapkey': GOOGLE_MAP_KEY,
         'biz_hours': get_biz_hours(biz),
-        'weekdays': WEEKDAYS
+        'weekdays': WEEKDAYS,
+        'was_search': False
     }
     return render_to_response('business_info.html', RequestContext(request, context))
 
