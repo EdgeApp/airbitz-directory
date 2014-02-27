@@ -11,6 +11,34 @@ from restapi.api import ApiProcess
 SEARCH_LIMIT = 20
 DISTANCE_LIMIT_KILOMETERS = 20
 
+
+WEEKDAYS = (
+    ('sunday', 'Sun'),
+    ('monday', 'Mon'),
+    ('tuesday', 'Tue'),
+    ('wednesday', 'Wed'),
+    ('thursday', 'Thu'),
+    ('friday', 'Fri'),
+    ('saturday', 'Sat'),
+)
+
+
+def get_biz_hours(biz):
+    days_hours = biz.businesshours_set.all()
+
+    week_of_hours = {}
+
+    for weekday in WEEKDAYS:
+        # print weekday[0], weekday[1]
+        week_of_hours[weekday[1]] = ''
+
+        for dh in days_hours:
+            if dh.dayOfWeek == weekday[0]:
+                # matched on the day of week so add the hours to that dict key
+                week_of_hours[weekday[1]] = [dh.hourStart, dh.hourEnd]
+
+    return week_of_hours
+
 def get_biz(request, *args, **kwargs):
     biz = get_object_or_404(Business, **kwargs)
     if request.user.is_superuser or biz.status == 'PUB':
@@ -34,7 +62,8 @@ def business_search(request):
         'results': results[:20],
         'mapkey': GOOGLE_MAP_KEY,
         'userLocation': a.userLocation(),
-        'searchLocation': a.searchLocation()
+        'searchLocation': a.searchLocation(),
+        'was_search': True
     }
     return render_to_response('search.html', RequestContext(request, context))
 
@@ -51,8 +80,11 @@ def business_info(request, bizId):
     context = {
         'biz': biz,
         'imgs': imgs,
-        'nearby': nearby,
-        'mapkey': GOOGLE_MAP_KEY
+        'results': nearby,
+        'mapkey': GOOGLE_MAP_KEY,
+        'biz_hours': get_biz_hours(biz),
+        'weekdays': WEEKDAYS,
+        'was_search': False
     }
     return render_to_response('business_info.html', RequestContext(request, context))
 

@@ -193,7 +193,6 @@ body {
     }
 
     .biz-info-one {
-
         margin-bottom: 30px;
 
         @media(min-width: @screen-md){
@@ -218,6 +217,10 @@ body {
             .panel-image {
                 overflow: hidden;
 
+                .biz-img {
+                    .border-top-radius(5px);
+                }
+
                 #map {
                     position: relative;
 
@@ -237,27 +240,21 @@ body {
             }
         }
         .biz-details {
+            .biz-type {
+                margin-bottom: 5px;
+            }
 
             .biz-address-street {
-
-                margin-right: 10px;
             }
 
-            .biz-address-city {
-
-                margin-right: 10px;
-            }
-
-            .biz-address-state {
-
+            .biz-address-city-state {
+                padding-left: 10px;
             }
 
             .biz-phone {
-                float: left;
             }
 
             .biz-website {
-                float: right;
             }
 
             .dl-horizontal {
@@ -279,23 +276,19 @@ body {
 
     .biz-info-three {
 
-        .biz-gallery {
+        .biz-hours {
+            td {
+                width: 100px;
+            }
+        }
 
-//            &:hover {
-//                box-shadow: 0 0px 5px rgba(0,0,0,.3);
-//                .transform( scale(1.1));
-//                .transition();
-//            }
+        .biz-gallery {
 
             .biz-gallery-item {
 
                 img {
                     margin-top: 15px;
 
-                    img {
-
-
-                    }
                     @media(min-width: @screen-md-min){
                         &.col-md-4:nth-child(n+4) {
                             margin-top: 15px;
@@ -444,10 +437,13 @@ body {
     position: relative;     // TEMP for map to go behind the results at bottom
     background: #fff;       // TEMP
 
+    .search-title {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
     .item.list-group-item {
-
         .make-row();
-
         float: none;
         width: 100%;
         background-color: #fff;
@@ -457,13 +453,9 @@ body {
             background: #eee;
         }
         .thumbnail {
-
             background: none;
-
         }
         .list-group-image {
-
-
             margin-right: 10px;
 
             .thumbnail {
@@ -498,6 +490,10 @@ body {
         .border-radius();
     }
 
+    .biz-name {
+        font-weight: 300;
+        letter-spacing: -1px;
+    }
     .biz-img {
         min-height: 224px;
         .border-top-radius(5px);

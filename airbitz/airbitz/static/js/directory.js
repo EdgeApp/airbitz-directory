@@ -3,13 +3,16 @@
 $(function() {
 
     // ALL DIRECTORY PAGES
-    $('.single-line').dotdotdot({
-        height: parseInt( $('.single-line').css('line-height'), 10) * 1, //this is the line height
-        ellipsis: ' ...',
-        wrap: 'letter',
-        watch: true
+    $('.single-line').each(function(){
+        var lines = 1;
+        var lineHeight = $(this).css('line-height');
+        $(this).dotdotdot({
+            height: parseInt( lineHeight, 10) * lines, //this is the line height
+            ellipsis: ' ...',
+            wrap: 'letter',
+            watch: true
+        });
     });
-
 
     // SEARCH AND NEARBY GRID
     $('.results-map-list .biz-address-street').dotdotdot({
