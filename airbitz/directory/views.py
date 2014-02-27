@@ -28,7 +28,8 @@ def business_search(request):
     category = request.GET.get('category', None)
     ll = request.GET.get('ll', None)
     near = request.GET.get('near', None)
-    results = a.searchDirectory(term=term, location=near, geolocation=ll, category=category)
+    results = a.searchDirectory(term=term, location=near, \
+                                geolocation=ll, category=category)
     context = {
         'results': results[:20],
         'mapkey': GOOGLE_MAP_KEY,

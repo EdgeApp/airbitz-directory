@@ -1,4 +1,4 @@
-from restapi.api import suggestNearByRequest
+from restapi.api import ApiProcess
 
 def near(request):
     nearText = None
@@ -7,7 +7,8 @@ def near(request):
     else:
         nearText = request.session.get('nearText', None) 
         if not nearText: 
-            nearText = suggestNearByRequest(request)
+            a = ApiProcess()
+            nearText = a.suggestNearByRequest(request)
     request.session['nearText'] = nearText
     return { 'near': nearText }
 

@@ -7,7 +7,7 @@ import logging
 import subprocess
 
 from directory.models import Business, Category
-from location.models import GeoNameZip, OsmRelation
+from location.models import OsmRelation
 
 log=logging.getLogger("airbitz." + __name__)
 
@@ -197,7 +197,7 @@ class ApiProcess(object):
 
     def searchAddGeoLocation(self, sqs, geolocation):
         if geolocation:
-            d = parseGeoLocation(geolocation)
+            d = self.parseGeoLocation(geolocation)
             origin = Point(d['lon'], d['lat'])
             return sqs.distance('location', origin)
         else:
@@ -210,103 +210,106 @@ class ApiProcess(object):
         if l.isCurrentLocation() or l.isOnWebOnly() or l.isWebOnly():
             return l
 
-        formatted = wildcardFormat(location)
-        sqs = SearchQuerySet().models(OsmRelation).filter(content_auto=formatted)
-        sqs = sqs.distance('location', self.userLocation()).order_by('distance')[:1]
+        # formatted = wildcardFormat(location)
+        sqs = SearchQuerySet().models(OsmRelation).filter(content_auto=location)
+        sqs = sqs[:1]
         if len(sqs) > 0:
             obj = sqs[0].object
+            print '********', obj.name
             l.bounding = obj.geom
             l.point = obj.centroid
         return l
 
-def getRequestIp(request):
-    if request.META.has_key('HTTP_X_REAL_IP'):
-        ip = request.META['HTTP_X_REAL_IP']
-    else:
-        ip = request.META['REMOTE_ADDR']
-    return ip
-
-def suggestNearByRequest(request, geolocation=None):
-    ip = getRequestIp(request)
-    return suggestNearText(ip, geolocation)
-
-def suggestNearText(ip, geolocation=None):
-    if geolocation:
-        d = parseGeoLocation(geolocation)
-        origin = Point((d['lon'], d['lat']))
-        qs = GeoNameZip.objects.all().distance(origin).order_by('distance')[:1]
-        if len(qs) > 0:
-            return "{0}, {1}".format(qs[0].admin_name2, qs[0].admin_code1)
+    def getRequestIp(self, request):
+        if request.META.has_key('HTTP_X_REAL_IP'):
+            ip = request.META['HTTP_X_REAL_IP']
         else:
-            return processGeoIp(ip)
-    else:
-        return processGeoIp(ip)
+            ip = request.META['REMOTE_ADDR']
+        return ip
 
-def parseGeoLocation(ll):
-    vals = ll.split(",")
-    try:
-        return {
-            'lat': float(vals[0]),
-            'lon': float(vals[1])
-        }
-    except Exception as e:
-        log.warn(e)
-        raise AirbitzApiException('Unable to parse geographic location.')
+    def suggestNearByRequest(self, request, geolocation=None):
+        ip = self.getRequestIp(request)
+        return self.suggestNearText(ip, geolocation)
 
-def parseGeoBounds(bounds):
-    try:
-        (sw,ne) = bounds.split("|")
-        sw = sw.split(",")
-        ne = ne.split(",")
-        return {
-            'minlat': float(sw[0]),
-            'minlon': float(sw[1]),
-            'maxlat': float(ne[0]),
-            'maxlon': float(ne[1]),
-        }
-    except Exception as e:
-        log.warn(e)
-        raise AirbitzApiException('Unable to parse geographic bounds.')
+    def suggestNearText(self, ip, geolocation=None):
+        if geolocation:
+            d = self.parseGeoLocation(geolocation)
+            origin = Point((d['lon'], d['lat']))
+            qs = OsmRelation.objects.filter(admin_level__lte=6).distance(origin)\
+                                    .order_by('distance', '-admin_level')[:1]
+            if len(qs) > 0:
+                return "{0}".format(qs[0].name)
+            else:
+                return self.processGeoIp(ip)
+        else:
+            return self.processGeoIp(ip)
 
-def processGeoIp(ip):
-    if ip in ("10.0.2.2", "127.0.0.1"):
-        ip = localToPublicIp()
-    proc = subprocess.Popen(['geoiplookup', ip], stdout=subprocess.PIPE)
-    data = proc.stdout.read()
-    for line in data.split('\n'):
-        row = line.split(':')
-        if len(row) == 2:
-            data = None
-            (k, v) = (row[0], row[1])
-            if k.__contains__("City"):
-                data = processGeoCounty(v)
-            if data:
-                return data
-    return DEFAULT_LOC_STRING
+    def parseGeoLocation(self, ll):
+        vals = ll.split(",")
+        try:
+            return {
+                'lat': float(vals[0]),
+                'lon': float(vals[1])
+            }
+        except Exception as e:
+            log.warn(e)
+            raise AirbitzApiException('Unable to parse geographic location.')
 
-def localToPublicIp():
-    """ This should only be called during development """
-    URL='http://www.networksecuritytoolkit.org/nst/tools/ip.php'
-    try:
-        import urllib
-        return urllib.urlopen(URL).read().strip()
-    except:
-        log.warn('unable to look up ip')
-    # Just return a default IP
-    return DEFAULT_IP
-    
-def processGeoCounty(row):
-    try:
-        v = row.strip().split(",")
-        lat, lon = float(v[4]), float(v[5])
-        origin = Point(lon, lat)
-        rs = GeoNameZip.objects.all().distance(origin).order_by('distance')[:1]
-        if rs:
-            s = "{0}, {1}".format(rs[0].admin_name2, rs[0].admin_code1)
-            print s
-            return s
-    except Exception as e:
-        print e
-        log.warn(e)
-    return None
+    def parseGeoBounds(self, bounds):
+        try:
+            (sw,ne) = bounds.split("|")
+            sw = sw.split(",")
+            ne = ne.split(",")
+            return {
+                'minlat': float(sw[0]),
+                'minlon': float(sw[1]),
+                'maxlat': float(ne[0]),
+                'maxlon': float(ne[1]),
+            }
+        except Exception as e:
+            log.warn(e)
+            raise AirbitzApiException('Unable to parse geographic bounds.')
+
+    def processGeoIp(self, ip):
+        if ip in ("10.0.2.2", "127.0.0.1"):
+            ip = self.localToPublicIp()
+        proc = subprocess.Popen(['geoiplookup', ip], stdout=subprocess.PIPE)
+        data = proc.stdout.read()
+        for line in data.split('\n'):
+            row = line.split(':')
+            if len(row) == 2:
+                data = None
+                (k, v) = (row[0], row[1])
+                if k.__contains__("City"):
+                    data = self.processGeoCounty(v)
+                if data:
+                    return data
+        return DEFAULT_LOC_STRING
+
+    def localToPublicIp(self):
+        """ This should only be called during development """
+        URL='http://www.networksecuritytoolkit.org/nst/tools/ip.php'
+        try:
+            import urllib
+            return urllib.urlopen(URL).read().strip()
+        except:
+            log.warn('unable to look up ip')
+        # Just return a default IP
+        return DEFAULT_IP
+        
+    def processGeoCounty(self, row):
+        try:
+            v = row.strip().split(",")
+            lat, lon = float(v[4]), float(v[5])
+            origin = Point(lon, lat)
+            rs = OsmRelation.objects.filter(admin_level__lte=6).distance(origin)\
+                                    .order_by('distance', '-admin_level')[:1]
+            if rs:
+                s = "{0}".format(rs[0].name)
+                print s
+                return s
+        except Exception as e:
+            print e
+            log.warn(e)
+        return None
 
