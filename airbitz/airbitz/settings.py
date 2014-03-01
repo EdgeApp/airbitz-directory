@@ -13,7 +13,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DB_HOST = 'localhost'
 
-prod_usernames = ('bitz', )
+prod_usernames = ('bitz', 'root', )
 DEBUG = os.environ.get('USER') not in prod_usernames
 
 # Quick-start development settings - unsuitable for production
