@@ -51,18 +51,18 @@ def landing(request):
     return render_to_response('landing.html', RequestContext(request, context))
 
 def business_search(request):
-    a = ApiProcess()
     term = request.GET.get('term', None)
     category = request.GET.get('category', None)
     ll = request.GET.get('ll', None)
     near = request.GET.get('near', None)
-    results = a.searchDirectory(term=term, location=near, \
-                                geolocation=ll, category=category)
+
+    a = ApiProcess(locationStr=near, ll=ll)
+    results = a.searchDirectory(term=term, category=category)
     context = {
         'results': results[:20],
         'mapkey': GOOGLE_MAP_KEY,
         'userLocation': a.userLocation(),
-        'searchLocation': a.searchLocation(),
+        'searchLocation': a.location,
         'was_search': True
     }
     return render_to_response('search.html', RequestContext(request, context))

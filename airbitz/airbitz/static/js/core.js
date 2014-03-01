@@ -46,7 +46,7 @@ function supports_html5_storage() {
         }
     });
   };
-  AB.addMap = function(selector, zoom, lat, lon, markers) {
+  AB.addMap = function(selector, zoom, lat, lon, markers, polygon) {
     function initialize() {
       var mapOptions = {
         center: new google.maps.LatLng(lat, lon),
@@ -55,6 +55,7 @@ function supports_html5_storage() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       var bounds = new google.maps.LatLngBounds();
+      var poly;
       var map = new google.maps.Map(selector[0], mapOptions);
       for (var i = 0; i < markers.length; ++i) {
         var m = markers[i];
@@ -67,11 +68,30 @@ function supports_html5_storage() {
           bounds.extend(loc);
         }
       }
+      if (polygon) {
+        var coords = [];
+        for (var i = 0; i < polygon.length; ++i) {
+          var m = polygon[i];
+          if (m.lat && m.lon) {
+            var loc = new google.maps.LatLng(m.lat, m.lon);
+            coords.push(loc)
+            bounds.extend(loc);
+          }
+        }
+        poly = new google.maps.Polygon({
+          paths: coords,
+          strokeColor: '#003399',
+          strokeOpacity: 0.5,
+          strokeWeight: 2,
+          fillColor: '#336699',
+          fillOpacity: 0.35
+        });
+        poly.setMap(map)
+      }
       map.fitBounds(bounds);
       map.panToBounds(bounds); 
     }
     google.maps.event.addDomListener(window, 'load', initialize);
-    return map;
   };
   AB.addPlaceSearch = function(selector) {
     var engine = new Bloodhound({

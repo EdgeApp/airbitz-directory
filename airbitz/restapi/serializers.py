@@ -104,6 +104,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
     distance = DistanceField(source='*')
+    bounded = serializers.BooleanField()
     location = PointField()
 
     class Meta:

@@ -68,13 +68,13 @@ class SearchView(generics.ListAPIView):
         term = self.request.QUERY_PARAMS.get('term', None)
         near = self.request.QUERY_PARAMS.get('near', None)
         ll = self.request.QUERY_PARAMS.get('ll', None)
-        a = api.ApiProcess()
-        radius = api.toInt(self.request, 'radius', api.DEFAULT_RADIUS)
+        radius = api.toInt(self.request, 'radius', None)
         bounds = self.request.QUERY_PARAMS.get('bounds', None)
         category = self.request.QUERY_PARAMS.get('category', None)
         sort = api.toInt(self.request, 'sort', None)
-        return a.searchDirectory(term=term, location=near, \
-                                   geolocation=ll, geobounds=bounds, \
+
+        a = api.ApiProcess(locationStr=near, ll=ll)
+        return a.searchDirectory(term=term, geobounds=bounds, \
                                    radius=radius, category=category, sort=sort)
 
 
@@ -94,9 +94,8 @@ class AutoCompleteBusiness(APIView):
         term = self.request.QUERY_PARAMS.get('term', None)
         near = self.request.QUERY_PARAMS.get('near', None)
         ll = self.request.QUERY_PARAMS.get('ll', None)
-        a = api.ApiProcess()
-        results = a.autocompleteBusiness(term=term, location=near, \
-                                         geolocation=ll)[:DEFAULT_PAGE_SIZE]
+        a = api.ApiProcess(locationStr=near, ll=ll)
+        results = a.autocompleteBusiness(term=term)[:DEFAULT_PAGE_SIZE]
         return Response({ 'results':  results })
 
 
@@ -114,8 +113,9 @@ class AutoCompleteLocation(APIView):
     def get(self, request, *args, **kwargs):
         term = self.request.QUERY_PARAMS.get('term', None)
         ll = self.request.QUERY_PARAMS.get('ll', None)
-        a = api.ApiProcess()
-        results = a.autocompleteLocation(term=term, geolocation=ll)[:DEFAULT_PAGE_SIZE]
+        ip = api.getRequestIp(request)
+        a = api.ApiProcess(ll=ll, ip=ip)
+        results = a.autocompleteLocation(term=term)[:DEFAULT_PAGE_SIZE]
         return Response({ 'results':  results })
 
 
@@ -131,7 +131,8 @@ class LocationSuggest(APIView):
 
     def get(self, request, *args, **kwargs):
         ll = self.request.QUERY_PARAMS.get('ll', None)
-        a = api.ApiProcess()
-        results = a.suggestNearByRequest(request, geolocation=ll)[:DEFAULT_PAGE_SIZE]
+        ip = api.getRequestIp(request)
+        a = api.ApiProcess(ll=ll, ip=ip)
+        results = a.suggestNearByRequest(request)[:DEFAULT_PAGE_SIZE]
         return Response({ 'near':  results })
 

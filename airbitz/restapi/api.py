@@ -1,8 +1,9 @@
 from django.contrib.gis.geos import Point, Polygon
-# from haystack.inputs import AltParser
+from django.contrib.gis.measure import Distance
 from haystack.query import SearchQuerySet, SQ
 from haystack.inputs import Clean
 
+import math
 import logging
 import subprocess
 
@@ -11,10 +12,13 @@ from location.models import OsmRelation
 
 log=logging.getLogger("airbitz." + __name__)
 
-DEFAULT_POINT=Point((-117.124603, 33.028400))
-DEFAULT_RADIUS=40000
-DEFAULT_IP='24.152.191.12'
-DEFAULT_LOC_STRING='San Francisco, CA'
+DEF_POINT=Point((-117.124603, 33.028400))
+DEF_RADIUS_M=Distance(mi=100).m
+DEF_IP='24.152.191.12'
+DEF_LOC_STR='San Francisco, CA'
+
+EARTHS_MEAN_RADIUS=6371000
+DEG_TO_M=(EARTHS_MEAN_RADIUS * math.pi) / 180.0
 
 def autocompleteSerialize(row):
     if row.model.__name__ == 'Business':
@@ -25,15 +29,29 @@ def autocompleteSerialize(row):
 def wildcardFormat(term):
     return WildCard(term)
 
-def isWebOnly(location):
-    return location.lower() == 'web only'
+def parseGeoLocation(self, ll):
+    vals = ll.split(",")
+    try:
+        return Point(float(vals[1]), float(vals[1]))
+    except Exception as e:
+        log.warn(e)
+        raise AirbitzApiException('Unable to parse geographic location.')
 
-def isOnWebOnly(location):
-    return location.lower() == 'on the web'
-
-def isCurrentLocation(location):
-    return location.lower() == 'current location'
-
+def parseGeoBounds(self, bounds):
+    try:
+        (sw,ne) = bounds.split("|")
+        sw = sw.split(",")
+        ne = ne.split(",")
+        box = {
+            'minlat': float(sw[0]),
+            'minlon': float(sw[1]),
+            'maxlat': float(ne[0]),
+            'maxlon': float(ne[1]),
+        }
+        return Polygon.from_bbox(box)
+    except Exception as e:
+        log.warn(e)
+        raise AirbitzApiException('Unable to parse geographic bounds.')
 
 class WildCard(Clean):
     input_type_name = 'wildcard'
@@ -71,121 +89,160 @@ def toInt(request, key, default):
     return default
 
 class Location(object):
-    def __init__(self, location):
-        self.location = location
+    """ Takes location data and determines bounding box 
+        and centroid to use during the searches 
+        """
+    def __init__(self, locationStr=None, ll=None, ip=None):
+        self.locationStr = locationStr
         self.bounding = None
-        self.point = DEFAULT_POINT
-        if self.location:
-            self.filter_web_only = self.location.lower() == 'web only'
-            self.filter_on_web = self.location.lower() == 'on the web'
-            self.filter_current_location =  self.location.lower() == 'current location'
+        # Start by IP Lookup to find point
+        if ip:
+            self.point = processGeoIp(ip)
+        else:
+            self.point = DEF_POINT
+        self.admin_level = 4
+        if self.locationStr:
+            self.filter_web_only = self.locationStr.lower() == 'web only'
+            self.filter_on_web = self.locationStr.lower() == 'on the web'
+            self.filter_current_location = self.locationStr.lower() == 'current location'
         else:
             self.filter_web_only = False
             self.filter_on_web = False
             self.filter_current_location = False
+        if not self.isCurrentLocation() and not self.isOnWeb() and locationStr:
+            sqs = SearchQuerySet().models(OsmRelation).filter(content_auto=locationStr)
+            sqs = sqs[:1]
+            if len(sqs) > 0:
+                obj = sqs[0].object
+                self.bounding = obj.geom
+                self.point = obj.centroid
+                self.admin_level = obj.admin_level
+
+        if ll:
+            geoloc = parseGeoLocation(ll)
+            if geoloc:
+                if (self.bounding and self.bounding.contains(geoloc)) or not self.bounding:
+                    self.point = geoloc;
 
     def isWebOnly(self):
         return self.filter_web_only
 
-    def isOnWebOnly(self):
+    def isOnWeb(self):
         return self.filter_on_web
 
     def isCurrentLocation(self):
         return self.filter_current_location
 
 class ApiProcess(object):
-    def __init__(self):
-        self.point = DEFAULT_POINT
-        self.location = None
+    def __init__(self, locationStr=None, ll=None, ip=None):
+        self.location = Location(locationStr=locationStr, ll=ll, ip=ip)
 
     def userLocation(self):
-        return self.point
+        return self.location.point
 
-    def searchLocation(self):
-        return self.location
+    def isExactCategory(self, term):
+        return Category.objects.filter(name=term).exists()
 
-    def searchDirectory(self, term=None, location=None, geolocation=None, 
-                        geobounds=None, radius=None, category=None, sort=0):
+    def searchDirectory(self, term=None, geobounds=None, radius=None, category=None, sort=None):
         sqs = SearchQuerySet().models(Business)
         if term:
             formatted = wildcardFormat(term)
             sqs = sqs.filter(SQ(categories=term) 
-                           | SQ(categories=formatted) 
                            | SQ(name=term) 
                            | SQ(name=formatted) 
                            | SQ(description=term))
-        sqs = self.searchAddGeoLocation(sqs, geolocation)
-        sqs = self.querySetAddCategories(sqs, category)
-        self.location = self.parseLocationString(location)
-        if self.location.isCurrentLocation():
-            pass
-        elif self.location.isWebOnly():
+        if category:
+            sqs = self.querySetAddCategories(sqs, category)
+        if self.isExactCategory(term):
+            sqs = sqs.filter(categories=term)
+        if self.location.isWebOnly():
             sqs = sqs.filter(SQ(has_online_business=True) & SQ(has_physical_business=False))
-        elif self.location.isOnWebOnly():
+        elif self.location.isOnWeb():
             sqs = sqs.filter(SQ(has_online_business=True))
-        sqs = sqs.distance('location', self.userLocation())
-        if sort == 0:
-            sqs = sqs.order_by('-has_bitcoin_discount', 'name')
-        elif sort == 1:
+        if self.location.isOnWeb():
+            sqs = sqs.order_by('-score', '-has_bitcoin_discount')
+            sqs = sqs.load_all()
+        else:
+            sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
-        if geobounds:
-            d = self.parseGeoBounds(geobounds)
-            self.location.bounding = Polygon.from_bbox((d['minlon'], d['minlat'], d['maxlon'], d['maxlat']))
-        if self.location and self.location.bounding:
-            sqs = self.boundSearchQuery(sqs, self.location)
+            sqs = sqs.load_all()
+            sqs = self.__geolocation_filter__(sqs, geobounds)
+        return [s.object for s in sqs]
 
-        ids = [s.pk for s in sqs]
-        newqs = Business.objects.filter(pk__in=ids).distance(self.userLocation())
-        return newqs
+    def __geolocation_filter__(self, sqs, geobounds):
+        geopoly = None
+        if geobounds:
+            geopoly = self.parseGeoBounds(geobounds)
+        newsqs = []
+        for s in sqs:
+            s.object.distance = s.distance
+            if s.location:
+                if self.location.bounding:
+                    if self.location.bounding.contains(s.location):
+                        s.object.bounded = True
+                        self.__append_if_within__(newsqs, s, geopoly)
+                    else:
+                        if self.location.bounding.distance(s.location) * DEG_TO_M <= DEF_RADIUS_M:
+                            s.object.bounded = False
+                            self.__append_if_within__(newsqs, s, geopoly)
+                else:
+                    if self.userLocation().distance(s.location) * DEG_TO_M <= DEF_RADIUS_M:
+                        s.object.bounded = False
+                        self.__append_if_within__(newsqs, s, geopoly)
+        return newsqs 
+
+    def __append_if_within__(self, ls, obj, poly):
+        if poly:
+            if poly.contains(obj.location):
+                ls.append(obj)
+        else:
+            ls.append(obj)
 
     def autocompleteBusiness(self, term=None, location=None, geolocation=None):
         sqs = SearchQuerySet()
-        l = self.parseLocationString(location)
         if term:
             formatted = wildcardFormat(term)
             sqs = sqs.filter(content_auto=formatted)
         if location: 
             fits = SQ(django_ct='directory.business')
-            if l.isCurrentLocation():
-                pass
-            elif l.isWebOnly():
+            if self.location.isWebOnly():
                 fits = fits & SQ(has_online_business=True) & SQ(has_physical_business=False)
-            elif l.isOnWebOnly():
+            elif self.location.isOnWeb():
                 fits = fits & SQ(has_online_business=True)
         else:
             fits = SQ(django_ct='directory.business')
         fits = (fits) | SQ(django_ct='directory.category')
-        sqs = self.searchAddGeoLocation(sqs, geolocation)
+        sqs = sqs.distance('location', self.userLocation())
+        # XXX: sqs = sqs.dwithin('location', self.userLocation(), DEF_RADIUS_M)
         sqs = sqs.filter(fits).models(Business, Category)
-        if l and l.bounding:
-            sqs = self.boundSearchQuery(sqs, l)
+        if self.location and self.location.bounding:
+            sqs = self.boundSearchQuery(sqs, self.location)
         else:
             sqs = sqs[:10]
         return [autocompleteSerialize(result) for result in sqs]
 
-    def boundSearchQuery(self, sqs, l):
+    def boundSearchQuery(self, sqs, loc):
         newsqs = []
         for s in sqs:
             if s.model.__name__ == 'Business':
-                if s.location and l.bounding.contains(s.location):
+                if s.location and loc.bounding.contains(s.location):
                     newsqs.append(s)
             else:
                 newsqs.append(s)
         return newsqs
 
-    def autocompleteLocation(self, term=None, geolocation=None, ip=None):
+    def autocompleteLocation(self, term=None):
         sqs = SearchQuerySet().models(OsmRelation)
         if term:
             formatted = wildcardFormat(term)
             sqs = sqs.filter(content_auto=formatted)
-        sqs = self.searchAddGeoLocation(sqs, geolocation)
+        sqs = sqs.distance('location', self.userLocation())
+        # XXX: sqs = sqs.dwithin('location', self.userLocation(), DEF_RADIUS_M)
         sqs = sqs.order_by('distance')
         sqs = sqs[:10]
         return [result.content_auto for result in sqs]
 
     def querySetAddCategories(self, sqs, category):
-        if not category:
-            return sqs
         f = None
         for cterm in category.split(","):
             q = SQ(categories=cterm)
@@ -195,121 +252,76 @@ class ApiProcess(object):
                 f = f | q
         return sqs.filter(f)
 
-    def searchAddGeoLocation(self, sqs, geolocation):
-        if geolocation:
-            d = self.parseGeoLocation(geolocation)
-            origin = Point(d['lon'], d['lat'])
-            return sqs.distance('location', origin)
-        else:
-            return sqs.distance('location', self.userLocation())
-
-    def parseLocationString(self, location):
-        l = Location(location)
-        if not location:
-            return l
-        if l.isCurrentLocation() or l.isOnWebOnly() or l.isWebOnly():
-            return l
-
-        # formatted = wildcardFormat(location)
-        sqs = SearchQuerySet().models(OsmRelation).filter(content_auto=location)
-        sqs = sqs[:1]
-        if len(sqs) > 0:
-            obj = sqs[0].object
-            print '********', obj.name
-            l.bounding = obj.geom
-            l.point = obj.centroid
-        return l
-
-    def getRequestIp(self, request):
-        if request.META.has_key('HTTP_X_REAL_IP'):
-            ip = request.META['HTTP_X_REAL_IP']
-        else:
-            ip = request.META['REMOTE_ADDR']
-        return ip
-
     def suggestNearByRequest(self, request, geolocation=None):
-        ip = self.getRequestIp(request)
+        ip = getRequestIp(request)
         return self.suggestNearText(ip, geolocation)
 
     def suggestNearText(self, ip, geolocation=None):
         if geolocation:
-            d = self.parseGeoLocation(geolocation)
-            origin = Point((d['lon'], d['lat']))
+            origin = parseGeoLocation(geolocation)
             qs = OsmRelation.objects.filter(admin_level__lte=6).distance(origin)\
                                     .order_by('distance', '-admin_level')[:1]
             if len(qs) > 0:
                 return "{0}".format(qs[0].name)
             else:
-                return self.processGeoIp(ip)
+                return ipToLocationString(ip)
         else:
-            return self.processGeoIp(ip)
+            return ipToLocationString(ip)
 
-    def parseGeoLocation(self, ll):
-        vals = ll.split(",")
-        try:
-            return {
-                'lat': float(vals[0]),
-                'lon': float(vals[1])
-            }
-        except Exception as e:
-            log.warn(e)
-            raise AirbitzApiException('Unable to parse geographic location.')
 
-    def parseGeoBounds(self, bounds):
-        try:
-            (sw,ne) = bounds.split("|")
-            sw = sw.split(",")
-            ne = ne.split(",")
-            return {
-                'minlat': float(sw[0]),
-                'minlon': float(sw[1]),
-                'maxlat': float(ne[0]),
-                'maxlon': float(ne[1]),
-            }
-        except Exception as e:
-            log.warn(e)
-            raise AirbitzApiException('Unable to parse geographic bounds.')
+def getRequestIp(request):
+    if request.META.has_key('HTTP_X_REAL_IP'):
+        ip = request.META['HTTP_X_REAL_IP']
+    else:
+        ip = request.META['REMOTE_ADDR']
+    return ip
 
-    def processGeoIp(self, ip):
-        if ip in ("10.0.2.2", "127.0.0.1"):
-            ip = self.localToPublicIp()
-        proc = subprocess.Popen(['geoiplookup', ip], stdout=subprocess.PIPE)
-        data = proc.stdout.read()
-        for line in data.split('\n'):
-            row = line.split(':')
-            if len(row) == 2:
-                data = None
-                (k, v) = (row[0], row[1])
-                if k.__contains__("City"):
-                    data = self.processGeoCounty(v)
-                if data:
-                    return data
-        return DEFAULT_LOC_STRING
-
-    def localToPublicIp(self):
-        """ This should only be called during development """
-        URL='http://www.networksecuritytoolkit.org/nst/tools/ip.php'
+def ipToLocationString(ip):
+    point = processGeoIp(ip)
+    if point:
         try:
-            import urllib
-            return urllib.urlopen(URL).read().strip()
-        except:
-            log.warn('unable to look up ip')
-        # Just return a default IP
-        return DEFAULT_IP
-        
-    def processGeoCounty(self, row):
-        try:
-            v = row.strip().split(",")
-            lat, lon = float(v[4]), float(v[5])
-            origin = Point(lon, lat)
-            rs = OsmRelation.objects.filter(admin_level__lte=6).distance(origin)\
+            rs = OsmRelation.objects.filter(admin_level__lte=6).distance(point)\
                                     .order_by('distance', '-admin_level')[:1]
             if rs:
-                s = "{0}".format(rs[0].name)
-                print s
-                return s
+                return "{0}".format(rs[0].name)
         except Exception as e:
-            print e
             log.warn(e)
-        return None
+    return DEF_LOC_STR
+
+def processGeoIp(ip):
+    if ip in ("10.0.2.2", "127.0.0.1"):
+        ip = localToPublicIp()
+    proc = subprocess.Popen(['geoiplookup', ip], stdout=subprocess.PIPE)
+    data = proc.stdout.read()
+    for line in data.split('\n'):
+        row = line.split(':')
+        if len(row) == 2:
+            data = None
+            (k, v) = (row[0], row[1])
+            if k.__contains__("City"):
+                data = processRow(v)
+            if data:
+                return data
+    return None
+
+def localToPublicIp():
+    """ This should only be called during development """
+    URL='http://www.networksecuritytoolkit.org/nst/tools/ip.php'
+    try:
+        import urllib
+        return urllib.urlopen(URL).read().strip()
+    except:
+        log.warn('unable to look up ip')
+    # Just return a default IP
+    return DEF_IP
+    
+def processRow(row):
+    try:
+        v = row.strip().split(",")
+        lat, lon = float(v[4]), float(v[5])
+        return Point(lon, lat)
+    except Exception as e:
+        print e
+        log.warn(e)
+    return None
 

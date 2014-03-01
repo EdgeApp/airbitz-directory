@@ -4,9 +4,9 @@ from directory.models import Business, Category
 
 class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
-    name = indexes.CharField(model_attr='name', boost=1.25)
+    name = indexes.CharField(model_attr='name', boost=1.2)
     description = indexes.CharField(model_attr='description')
-    categories = indexes.MultiValueField(boost=1.125)
+    categories = indexes.MultiValueField()
     location = indexes.LocationField(model_attr='center', null=True)
 
     has_physical_business = indexes.BooleanField(model_attr='has_physical_business', null=True)
@@ -14,6 +14,17 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     has_bitcoin_discount = indexes.DecimalField(model_attr='has_online_business', null=True)
 
     content_auto = indexes.EdgeNgramField(model_attr='name')
+
+    def prepare(self, obj):
+        data = super(BusinessIndex, self).prepare(obj)
+        minLevel = [c.level for c in obj.categories.all()]
+        if minLevel == 1:
+            data['boost'] = 1.1
+        elif minLevel == 2:
+            data['boost'] = 1.05
+        elif minLevel == 3:
+            data['boost'] = 1.0255
+        return data
 
     def prepare_categories(self, obj):
         return [category.name for category in obj.categories.all()]
