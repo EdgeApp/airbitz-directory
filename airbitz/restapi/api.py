@@ -95,6 +95,7 @@ class Location(object):
     def __init__(self, locationStr=None, ll=None, ip=None):
         self.locationStr = locationStr
         self.bounding = None
+        self.point = DEF_POINT
         # Start by IP Lookup to find point
         if ip:
             self.point = processGeoIp(ip)
