@@ -29,10 +29,10 @@ def autocompleteSerialize(row):
 def wildcardFormat(term):
     return WildCard(term)
 
-def parseGeoLocation(self, ll):
+def parseGeoLocation(ll):
     vals = ll.split(",")
     try:
-        return Point(float(vals[1]), float(vals[1]))
+        return Point(float(vals[1]), float(vals[0]))
     except Exception as e:
         log.warn(e)
         raise AirbitzApiException('Unable to parse geographic location.')
@@ -93,6 +93,7 @@ class Location(object):
         and centroid to use during the searches 
         """
     def __init__(self, locationStr=None, ll=None, ip=None):
+        self.ip = ip
         self.locationStr = locationStr
         self.bounding = None
         self.point = DEF_POINT
@@ -256,21 +257,17 @@ class ApiProcess(object):
                 f = f | q
         return sqs.filter(f)
 
-    def suggestNearByRequest(self, request, geolocation=None):
-        ip = getRequestIp(request)
-        return self.suggestNearText(ip, geolocation)
-
-    def suggestNearText(self, ip, geolocation=None):
-        if geolocation:
-            origin = parseGeoLocation(geolocation)
-            qs = OsmRelation.objects.filter(admin_level__lte=6).distance(origin)\
-                                    .order_by('distance', '-admin_level')[:1]
-            if len(qs) > 0:
-                return "{0}".format(qs[0].name)
-            else:
-                return ipToLocationString(ip)
+    def suggestNearText(self):
+        point = self.userLocation()
+        print point
+        qs = OsmRelation.objects.filter(admin_level__lte=6).distance(point)\
+                                .order_by('distance', '-admin_level')[:1]
+        if len(qs) > 0:
+            return "{0}".format(qs[0].name)
+        elif self.ip:
+            return ipToLocationString(self.ip)
         else:
-            return ipToLocationString(ip)
+            return DEF_LOC_STR
 
 
 def getRequestIp(request):
