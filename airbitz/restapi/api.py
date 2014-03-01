@@ -98,7 +98,7 @@ class Location(object):
         # Start by IP Lookup to find point
         if ip:
             self.point = processGeoIp(ip)
-        else:
+        if not self.point:
             self.point = DEF_POINT
         self.admin_level = 4
         if self.locationStr:
