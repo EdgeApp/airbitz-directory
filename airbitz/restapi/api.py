@@ -115,9 +115,12 @@ class Location(object):
             if len(sqs) > 0:
                 obj = sqs[0].object
                 self.bounding = obj.geom
-                self.point = obj.centroid
+                if not self.bounding.contains(self.point):
+                    self.point = obj.centroid
+                    print 'Using centroid'
+                else:
+                    print 'NOT Using centroid'
                 self.admin_level = obj.admin_level
-
         if ll:
             geoloc = parseGeoLocation(ll)
             if geoloc:
