@@ -129,7 +129,7 @@ if DEBUG:
     MEDIA_URL = '/media/'
 else:
     MEDIA_ROOT = os.path.join(os.environ['HOME'], 'media')
-    MEDIA_URL = 'http://www.airbitz.co/media/'
+    MEDIA_URL = '/media/'
 
 
 STATIC_URL = '/static/'
