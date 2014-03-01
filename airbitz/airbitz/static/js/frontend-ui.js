@@ -2,6 +2,9 @@
 
 $(function() {
 
+    // custom holder theme for missing images
+    Holder.add_theme("ab-blue", { background: "#428bca", foreground: "white", size: 12}).run();
+
     // ENABLE CALLBACK FOR SHOW AND HIDE ON BOOTSTRAP TOOLTIPS AND POPOVERS
     var tmpPopoverShow = $.fn.popover.Constructor.prototype.show;
     $.fn.popover.Constructor.prototype.show = function () {

@@ -392,6 +392,8 @@ body .top-bg {
   -ms-transition: 0.3s ease;
   -o-transition: 0.3s ease;
   box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
+  outline: 3px solid #999999;
+  outline-offset: -3px;
 }
 @media (max-width: 992px) {
   .results-map-list .biz-img {
@@ -454,49 +456,6 @@ body .top-bg {
   margin-top: 0;
   margin-bottom: 20px;
 }
-.results-grid .item.list-group-item {
-  margin-left: -15px;
-  margin-right: -15px;
-  float: none;
-  width: 100%;
-  background-color: #fff;
-  margin-bottom: 10px;
-}
-.results-grid .item.list-group-item:before,
-.results-grid .item.list-group-item:after {
-  content: " ";
-  display: table;
-}
-.results-grid .item.list-group-item:after {
-  clear: both;
-}
-.results-grid .item.list-group-item:nth-of-type(odd):hover,
-.results-grid .item.list-group-item:hover {
-  background: #eee;
-}
-.results-grid .item.list-group-item .thumbnail {
-  background: none;
-}
-.results-grid .item.list-group-item .list-group-image {
-  margin-right: 10px;
-}
-.results-grid .item.list-group-item .list-group-image .thumbnail {
-  margin-bottom: 0px;
-}
-.results-grid .item.list-group-item .caption {
-  padding: 9px 9px 0px 9px;
-}
-.results-grid .item.list-group-item:before,
-.results-grid .item.list-group-item:after {
-  display: table;
-  content: " ";
-}
-.results-grid .item.list-group-item img {
-  float: left;
-}
-.results-grid .item.list-group-item:after {
-  clear: both;
-}
 .biz-result .glyphicon {
   margin-right: 5px;
 }
@@ -514,10 +473,28 @@ body .top-bg {
   font-weight: 300;
   letter-spacing: -1px;
 }
+.biz-result .biz-name a {
+  color: #333;
+}
+.biz-result .biz-name a:hover {
+  text-decoration: none;
+  color: #2291cf;
+  -webkit-transition: 0.5s ease;
+  -moz-transition: 0.5s ease;
+  -ms-transition: 0.5s ease;
+  -o-transition: 0.5s ease;
+}
 .biz-result .biz-img {
   min-height: 224px;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
+}
+.biz-result .biz-img:hover {
+  transition: 0.3s ease;
+  -webkit-transition: 0.3s ease;
+  -moz-transition: 0.3s ease;
+  -ms-transition: 0.3s ease;
+  -o-transition: 0.3s ease;
 }
 .biz-result .biz-categories {
   height: 25px;

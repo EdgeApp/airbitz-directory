@@ -10,11 +10,13 @@
         {% if rbiz.landing_image %}
             {% thumbnail '400x250' rbiz.landing_image.image -- class="biz-img img-responsive group list-group-image" %}
         {% else %}
-            <img data-src="holder.js/358x250/sky" class="biz-img img-responsive group list-group-image">
+            <img data-src="holder.js/358x224/ab-blue/text:{{ rbiz.name }}" class="biz-img img-responsive group list-group-image">
         {% endif %}
         </a>
         <div class="caption">
-            <h3 class="biz-name single-line group inner list-group-item-heading" title="{{ rbiz.name }}">{{ rbiz.name }}</h3>
+            <h3 class="biz-name single-line group inner list-group-item-heading" title="{{ rbiz.name }}">
+                <a href="{% url 'business_info' rbiz.id %}" title="{{ rbiz.name }}">{{ rbiz.name }}</a>
+            </h3>
             <div class="biz-categories">
                 {% for c in rbiz.categories.all %}
                     <span class="label label-primary">{{c.name}}</span>
