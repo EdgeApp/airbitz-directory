@@ -9,7 +9,7 @@ def near(request):
         if not nearText: 
             ip = api.getRequestIp(request)
             a = api.ApiProcess(ip=ip)
-            nearText = a.suggestNearText(request)
+            nearText = a.suggestNearText()
     request.session['nearText'] = nearText
     return { 'near': nearText }
 
