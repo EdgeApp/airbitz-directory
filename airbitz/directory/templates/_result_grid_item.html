@@ -7,11 +7,13 @@
 
     <div class="thumbnail">
         <a href="{% url 'business_info' rbiz.id %}" title="{{ rbiz.name }}">
-        {% if rbiz.landing_image %}
-            {% thumbnail '400x250' rbiz.landing_image.image -- class="biz-img img-responsive group list-group-image" %}
-        {% else %}
-            <img data-src="holder.js/358x224/ab-blue/text:{{ rbiz.name }}" class="biz-img img-responsive group list-group-image">
-        {% endif %}
+            <div class="thumb-bg">
+                {% if rbiz.landing_image %}
+                    <img class="biz-img img-responsive group list-group-image" src="{{ MEDIA_URL }}{{ rbiz.landing_image.image }}" alt="{{ rbiz.name }}"/>
+                {% else %}
+                    <img data-src="holder.js/358x160/ab-blue/text:{{ rbiz.name }}" class="biz-img img-responsive group list-group-image">
+                {% endif %}
+            </div>
         </a>
         <div class="caption">
             <h3 class="biz-name single-line group inner list-group-item-heading" title="{{ rbiz.name }}">

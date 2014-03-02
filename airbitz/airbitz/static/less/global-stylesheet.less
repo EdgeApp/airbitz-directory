@@ -277,6 +277,8 @@ body {
     .biz-info-three {
 
         .biz-hours {
+            margin-bottom: 30px;
+
             td {
                 width: 100px;
             }
@@ -284,15 +286,12 @@ body {
 
         .biz-gallery {
 
-            .biz-gallery-item {
+            .biz-gallery-image {
+                margin-bottom: 15px;
 
-                img {
-                    margin-top: 15px;
-
-                    @media(min-width: @screen-md-min){
-                        &.col-md-4:nth-child(n+4) {
-                            margin-top: 15px;
-                        }
+                @media(min-width: @screen-md-min){
+                    &.col-md-4:nth-child(n+4) {
+                        margin-top: 15px;
                     }
                 }
             }
@@ -452,6 +451,22 @@ body {
         margin-bottom: 20px;
         padding: 0px;
         .border-radius();
+
+        .thumb-bg {
+            height: 224px;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .biz-img {
+            max-width: 100%;
+            margin: 0 auto;
+            .border-top-radius(5px);
+
+            &:hover {
+                .transition(.3s ease);
+            }
+        }
     }
 
     .biz-name {
@@ -469,21 +484,12 @@ body {
         }
     }
 
-    .biz-img {
-        min-height: 224px;
-        .border-top-radius(5px);
-
-        &:hover {
-            .transition(.3s ease);
-        }
-    }
-
     .biz-categories {
         height: 25px;
         line-height: 20px;
     }
 
-    .list-group-item-text {
+    .biz-description {
         height: 90px;
         margin: 0 0 4px;
     }
@@ -491,6 +497,22 @@ body {
 
 
 
+
+// MASONRY VERSION
+.biz-result {
+    .thumbnail {
+        margin-bottom: 40px;
+
+        .thumb-bg {
+            height: auto;
+        }
+    }
+    .biz-description {
+        height: auto;
+    }
+
+
+}
 
 
 
