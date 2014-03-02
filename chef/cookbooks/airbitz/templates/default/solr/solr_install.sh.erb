@@ -3,7 +3,7 @@
 FILE=solr-4.6.0
 ARCHIVE=$FILE.zip
 if [[ ! -f ${ARCHIVE} ]]; then
-    wget http://mirrors.sonic.net/apache/lucene/solr/4.6.0/${ARCHIVE}
+    wget http://archive.apache.org/dist/lucene/solr/4.6.0/${ARCHIVE}
     unzip ${ARCHIVE}
 fi
 cd $FILE/example/
