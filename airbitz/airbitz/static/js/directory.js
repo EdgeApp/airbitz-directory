@@ -62,4 +62,8 @@ $(function() {
 
 
 
+    var $containerResults = $('.results-grid').masonry({
+        itemSelector: '.biz-result'
+    });
+
 });

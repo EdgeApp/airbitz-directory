@@ -7,12 +7,14 @@
 
 {% block body %}
     {% if request.GET.near == 'On the Web' %}
-    <div class="results-grid list-group row">
+    <div class="row">
         <div class="col-sm-12">
             <h1 class="search-title hidden-xs hidden-sm">Bitcoin Businesses On the Web</h1>
             <h1 class="search-title visible-xs visible-sm">Search Results</h1>
             <hr />
         </div>
+    </div>
+    <div class="results-grid list-group row">
 
         {% block result_grid_items %}
             {% for rbiz in results %}
