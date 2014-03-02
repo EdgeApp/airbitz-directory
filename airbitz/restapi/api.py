@@ -264,8 +264,8 @@ class ApiProcess(object):
                                 .order_by('distance', '-admin_level')[:1]
         if len(qs) > 0:
             return "{0}".format(qs[0].name)
-        elif self.ip:
-            return ipToLocationString(self.ip)
+        elif self.location.ip:
+            return ipToLocationString(self.location.ip)
         else:
             return DEF_LOC_STR
 

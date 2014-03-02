@@ -30,10 +30,13 @@ def login_user(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active and isManager(user):
+        if user is not None and user.is_active:
+            if isManager(user):
                 login(request, user)
                 return HttpResponseRedirect(reverse('mgmt_dashboard'))
+            else:
+                login(request, user)
+                return HttpResponseRedirect(reverse('landing'))
         else:
             messages.error(request, 'Authentication failed!')
 
