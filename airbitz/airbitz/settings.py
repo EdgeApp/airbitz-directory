@@ -128,7 +128,7 @@ if DEBUG:
     MEDIA_ROOT = os.path.join(os.environ['HOME'], 'media')
     MEDIA_URL = '/media/'
 else:
-    MEDIA_ROOT = os.path.join(os.environ['HOME'], 'media')
+    MEDIA_ROOT = os.path.join('/home/bitz/', 'media')
     MEDIA_URL = '/media/'
 
 
