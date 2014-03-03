@@ -93,6 +93,8 @@ WSGI_APPLICATION = 'airbitz.wsgi.application'
 if not DEBUG:
     ALLOWED_HOSTS = [
             'admin.airbitz.co',
+            'api.airbitz.co',
+            'demo.airbitz.co',
             'airbitz.co']
 
 if os.environ.has_key('DATABASE_HOST'):
