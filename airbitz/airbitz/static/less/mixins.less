@@ -83,3 +83,10 @@
 	background-image: -ms-linear-gradient(left, @startColor, @endColor);
 	background-image: -o-linear-gradient(left, @startColor, @endColor);
 }
+
+.background-cover(@cover: cover) {
+    -webkit-background-size: @cover;
+    -moz-background-size: @cover;
+    -o-background-size: @cover;
+    background-size: @cover;
+}
