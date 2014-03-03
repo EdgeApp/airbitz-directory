@@ -185,6 +185,27 @@ def business_edit(request, bizId=None, formclass=None):
     })
 
 @user_passes_test(isManager, login_url=LOGIN_URL)
+def business_copy(request, bizId):
+    biz = get_object_or_404(Business, pk=bizId)
+    categories = biz.categories.all()
+    socials = biz.socialid_set.all()
+    hours = biz.businesshours_set.all()
+
+    biz.pk = None
+    biz.save()
+    for c in categories:
+        biz.categories.add(c)
+    for s in socials:
+        s.pk = None
+        s.business = biz
+        s.save()
+    for h in hours:
+        h.pk = None
+        h.business = biz
+        h.save()
+    return HttpResponseRedirect(reverse('mgmt_biz_view', args=(biz.id, )))
+
+@user_passes_test(isManager, login_url=LOGIN_URL)
 def business_view(request, bizId):
     biz = get_object_or_404(Business, pk=bizId)
     hours = BusinessHours.objects.filter(business=biz)

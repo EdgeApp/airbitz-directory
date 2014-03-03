@@ -7,8 +7,7 @@ from rest_framework import fields
 from rest_framework import pagination
 from rest_framework import serializers
 from rest_framework import status
-from rest_framework.generics import ListAPIView, ListCreateAPIView, \
-                                    RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 

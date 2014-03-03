@@ -20,5 +20,13 @@
 
     {% block bizbody %}
     {% endblock bizbody %}
+
+    <div class="row">
+        <hr />
+        <div class="col-sm-12">
+            <a class="btn btn-primary" href="{% url 'mgmt_biz_copy' biz.id %}">Copy Business</a>
+        </div>
+    </div>
+    <br />
 {% endblock body %}
 
