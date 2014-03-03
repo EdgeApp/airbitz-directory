@@ -7,7 +7,8 @@ from rest_framework import fields
 from rest_framework import pagination
 from rest_framework import serializers
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView, \
+                                    RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
@@ -130,6 +131,7 @@ class AdminBusinessView(ListCreateAPIView):
     def get_queryset(self):
         search = self.request.QUERY_PARAMS.get('sSearch', None)
         location = self.request.QUERY_PARAMS.get('location', None)
+        bounds = self.request.QUERY_PARAMS.get('bounds', None)
         bizStatus = self.request.QUERY_PARAMS.get('status', None)
         cols = self.paramArray('mDataProp_', self.request)
         sorts = self.paramArray('iSortCol_', self.request)
@@ -146,6 +148,9 @@ class AdminBusinessView(ListCreateAPIView):
                 q = q.filter(center__within=a.location.bounding)
         if bizStatus:
             q = q.filter(status=bizStatus)
+        if bounds:
+            poly = api.parseGeoBounds(bounds)
+            q = q.filter(center__within=poly)
         if sorts:
             l = []
             for (s, d) in zip(sorts, dirs):

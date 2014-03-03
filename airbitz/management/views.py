@@ -56,6 +56,13 @@ def dashboard(request):
     return render_to_response('mgmt_dashboard.html', RequestContext(request, context))
 
 @user_passes_test(isManager, login_url=LOGIN_URL)
+def map(request):
+    context = {
+        'STATUS_CHOICES': STATUS_CHOICES
+    }
+    return render_to_response('mgmt_map_view.html', RequestContext(request, context))
+
+@user_passes_test(isManager, login_url=LOGIN_URL)
 def category_list(request):
     results = Category.objects.all()
     context = {

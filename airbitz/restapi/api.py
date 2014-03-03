@@ -37,7 +37,7 @@ def parseGeoLocation(ll):
         log.warn(e)
         raise AirbitzApiException('Unable to parse geographic location.')
 
-def parseGeoBounds(self, bounds):
+def parseGeoBounds(bounds):
     try:
         (sw,ne) = bounds.split("|")
         sw = sw.split(",")
@@ -48,9 +48,10 @@ def parseGeoBounds(self, bounds):
             'maxlat': float(ne[0]),
             'maxlon': float(ne[1]),
         }
-        return Polygon.from_bbox(box)
+        return Polygon.from_bbox((box['minlon'], box['minlat'], box['maxlon'], box['maxlat']))
     except Exception as e:
         log.warn(e)
+        print e
         raise AirbitzApiException('Unable to parse geographic bounds.')
 
 class WildCard(Clean):
@@ -177,7 +178,7 @@ class ApiProcess(object):
     def __geolocation_filter__(self, sqs, geobounds):
         geopoly = None
         if geobounds:
-            geopoly = self.parseGeoBounds(geobounds)
+            geopoly = parseGeoBounds(geobounds)
         newsqs = []
         for s in sqs:
             s.object.distance = s.distance

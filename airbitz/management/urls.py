@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     url(r'^tag/delete/(?P<tagId>\d+)/$', 'management.views.image_tag_delete', name='mgmt_image_tag_delete'),
 
     url(r'^dashboard/$', 'management.views.dashboard', name='mgmt_dashboard'),
+    url(r'^map/$', 'management.views.map', name='mgmt_map'),
     url(r'^biz/import/$', 'management.views.business_import', name='mgmt_biz_import'),
     url(r'^biz/view/(?P<bizId>\d+)/main$', 'management.views.business_view', name='mgmt_biz_view'),
     url(r'^biz/add/$', 'management.views.business_base_edit', name='mgmt_biz_add'),
