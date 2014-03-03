@@ -14,7 +14,7 @@ from rest_framework.response import Response
 import logging
 
 from directory.models import Business, BusinessHours, Category, SocialId
-from restapi.api import ApiProcess
+from restapi import api
 
 log=logging.getLogger("airbitz." + __name__)
 
@@ -141,8 +141,9 @@ class AdminBusinessView(ListCreateAPIView):
                        | Q(categories__name__icontains=search))
             q = q.distinct()
         if location:
-            a = ApiProcess()
-            (q, _) = a.querySetAddLocation(q, location)
+            a = api.ApiProcess(locationStr=location)
+            if a.location.bounding:
+                q = q.filter(center__within=a.location.bounding)
         if bizStatus:
             q = q.filter(status=bizStatus)
         if sorts:
@@ -152,7 +153,6 @@ class AdminBusinessView(ListCreateAPIView):
                 l.append(self.formatDir(c, d))
             q = q.order_by(*l)
         q = q.annotate(ccount=Count('categories'))
-        print q.query
         return q
 
 class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
