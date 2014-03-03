@@ -62,8 +62,19 @@ $(function() {
 
 
 
-    var $containerResults = $('.results-grid').masonry({
-        itemSelector: '.biz-result'
+});
+
+
+
+// wait for everything to resize and load then call masonry
+jQuery(window).on('load', function(){
+    var $ = jQuery;
+
+
+    var $container = $('.results-grid').masonry({
+        itemSelector: '.biz-result',
+        opacity: 1,
+        transform: 'scale(1)'
     });
 
 });
