@@ -22,6 +22,10 @@ class SizedImageField(serializers.Field):
         else:
             return {}
 
+class ImageTagsField(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        return [t.name for t in obj.tags.all()]
+
 class MobileUrl(serializers.Field):
     def field_to_native(self, obj, field_name):
         return obj.mobile_photo.url
@@ -75,10 +79,11 @@ class BusinessImageSerializer(serializers.ModelSerializer):
     width = MobileWidth(source='*')
     thumbnail = MobileThumbnail(source='*')
     bounding_box = BoundingBoxField()
+    tags = ImageTagsField(source='*')
 
     class Meta:
         model = BusinessImage
-        fields = ('image', 'height', 'width', 'thumbnail', 'bounding_box',)
+        fields = ('image', 'height', 'width', 'thumbnail', 'bounding_box', 'tags', )
 
 class BusinessHoursSerializer(serializers.ModelSerializer):
     class Meta:
