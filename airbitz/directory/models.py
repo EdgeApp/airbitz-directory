@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.gis.db import models
+from django.core.files.base import ContentFile
 from django.core.files.base import File
 from django.utils.formats import time_format
 from imagekit.models import ImageSpecField
@@ -173,6 +174,23 @@ class BusinessImage(models.Model):
         img.image_url = img_url
         img.business_id = bizId
         img.image.save(os.path.basename(img_url), File(open(result[0])))
+        img.save()
+        return img
+
+    def duplicate(self, biz):
+        tags = self.tags.all()
+
+        img = BusinessImage()
+        f = ContentFile(self.image.read())
+        f.name = self.image.name
+        img.image = f
+        img.height = self.height
+        img.width = self.width
+        img.business = biz
+        img.save()
+
+        for t in tags:
+            img.tags.add(t)
         img.save()
         return img
 
