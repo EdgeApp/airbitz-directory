@@ -24,9 +24,20 @@
     <div class="row">
         <hr />
         <div class="col-sm-12">
-            <a class="btn btn-primary" href="{% url 'mgmt_biz_copy' biz.id %}">Copy Business</a>
+            <a id="mgmt_biz_copy" class="btn btn-primary" href="javascript:void(0)">Copy Business</a>
         </div>
     </div>
     <br />
 {% endblock body %}
 
+{% block javascript %}
+    <script type="text/javascript">
+    $(function() {
+        $('#mgmt_biz_copy').click(function() {
+            if (confirm('Are you sure you want to copy this place?')) {
+                location.href = '{% url 'mgmt_biz_copy' biz.id %}'
+            }
+        });
+    });
+    </script>
+{% endblock javascript %}

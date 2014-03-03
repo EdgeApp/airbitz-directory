@@ -190,6 +190,7 @@ def business_copy(request, bizId):
     categories = biz.categories.all()
     socials = biz.socialid_set.all()
     hours = biz.businesshours_set.all()
+    images = biz.businessimage_set.all()
 
     biz.pk = None
     biz.save()
@@ -203,6 +204,8 @@ def business_copy(request, bizId):
         h.pk = None
         h.business = biz
         h.save()
+    for i in images:
+        i.duplicate(biz)
     return HttpResponseRedirect(reverse('mgmt_biz_view', args=(biz.id, )))
 
 @user_passes_test(isManager, login_url=LOGIN_URL)
