@@ -4,10 +4,6 @@
   border: #eee;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-.navbar-inverse .navbar-collapse,
-.navbar-inverse .navbar-form {
-  border: none;
-}
 .navbar-inverse .navbar-brand {
   padding: 0;
 }
@@ -124,10 +120,6 @@
   padding: 3px 20px;
   font-size: 18px;
   line-height: 24px;
-}
-.twitter-typeahead .tt-suggestion.tt-cursor {
-    color: #fff;
-    background-color: #0097cf;
 }
 .twitter-typeahead .tt-suggestion.tt-is-under-cursor {
   color: #fff;
@@ -358,6 +350,14 @@ body .top-bg {
     width: 570px;
     height: 600px;
   }
+}
+.map-container #map .map-marker-name {
+  font: "Open Sans";
+  font-size: 18px;
+  font-weight: 400;
+}
+.map-container #map .map-marker-cat {
+  margin-right: 4px;
 }
 .results-map-list {
   min-height: 600px;

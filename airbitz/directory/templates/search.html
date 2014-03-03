@@ -104,11 +104,21 @@
 {% block javascript %}
     {{ block.super }}
     <script type="text/javascript">
-        var json = [
+
+        var markersJSON = [
         {% for biz in results %}
-            { lat: {{ biz.center.y }}, lon: {{ biz.center.x }} },
+            {   lat: {{ biz.center.y }},
+                lon: {{ biz.center.x }},
+                name: "{{ biz.name }}",
+                cats: '{% for c in biz.categories.all %}<span class="map-marker-cat label label-primary">{{c.name}}</span>{% empty %}<span class="label label-warning">Uncategorized</span>{% endfor %}',
+                address: '{{ biz.address }}',
+                url: '{% url 'business_info' biz.id %}'
+            },
         {% endfor %}
         {} ];
+
+        var json = markersJSON;
+
         $(function() {
         {% if searchLocation %}
             var polygon = [

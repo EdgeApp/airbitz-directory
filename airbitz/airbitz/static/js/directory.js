@@ -71,7 +71,7 @@ jQuery(window).on('load', function(){
     var $ = jQuery;
 
 
-    var $container = $('.results-grid').masonry({
+    $('.results-grid').masonry({
         itemSelector: '.biz-result',
         opacity: 1,
         transform: 'scale(1)'

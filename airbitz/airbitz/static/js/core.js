@@ -7,6 +7,21 @@ function supports_html5_storage() {
   }
 }
 
+function getMapMarkerContent(marker, markerJSON) {
+    for (var i = 0; i < markerJSON.length; i++ ) {
+        var m = markerJSON[i];
+
+        if (marker.getTitle() === m.name) {
+            var html =  '<strong class="map-marker-name">' + m.name + '</strong><br />' +
+                        m.cats + '<br />' +
+                        '<a href="' + m.url + '">View Listing</a><br />' +
+                        '<span>' + m.address + '</span>';
+        }
+    }
+    return html;
+}
+
+
 (function() {
   var root = this;
   var AB = root.AB = {};
@@ -57,14 +72,31 @@ function supports_html5_storage() {
       var bounds = new google.maps.LatLngBounds();
       var poly;
       var map = new google.maps.Map(selector[0], mapOptions);
+
+      var infowindow = new google.maps.InfoWindow();
+
       for (var i = 0; i < markers.length; ++i) {
         var m = markers[i];
+
         if (m.lat && m.lon) {
           var loc = new google.maps.LatLng(m.lat, m.lon);
           var marker = new google.maps.Marker({
               position: loc,
-              map: map
+              map: map,
+              title: m.name,
+              animation: google.maps.Animation.DROP // TODO: ran out of time - https://developers.google.com/maps/documentation/javascript/examples/marker-animations-iteration
           });
+
+          google.maps.event.addListener(marker, 'click', function(e) {
+            infowindow.setContent(getMapMarkerContent(this, markers));
+            infowindow.open(map, this);
+          });
+
+          google.maps.event.addListener(marker, 'mouseover', function(e) {
+            infowindow.setContent(getMapMarkerContent(this, markers));
+            infowindow.open(map, this);
+          });
+
           bounds.extend(loc);
         }
       }
