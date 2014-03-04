@@ -50,7 +50,7 @@ class LastUpdated(serializers.Field):
 
 class DistanceField(serializers.Field):
     def field_to_native(self, obj, field_name):
-        if obj.distance:
+        if hasattr(obj, 'distance') and obj.distance:
             return obj.distance.m
         else:
             return None
