@@ -47,6 +47,14 @@
                     top: 62px;
                     left: 50%;
                     margin: -320px;
+
+                    @media
+                    (-webkit-min-device-pixel-ratio: 2),
+                    (min-resolution: 192dpi) {
+                        /* Retina-specific stuff here */
+                        width: 640px;
+                        height: 150px;
+                    }
                 }
 
                 .get-directions {
@@ -66,28 +74,13 @@
         }
 
         .biz-address-city-state {
-            padding-left: 10px;
+            padding-left: 12px;
         }
 
         .biz-phone {
         }
 
         .biz-website {
-        }
-
-        .dl-horizontal {
-            clear: both;
-            margin: 15px 0;
-
-            dt {
-                width: 75px;
-            }
-            dd {
-
-                @media(min-width: @screen-sm-min) {
-                    margin-left: 85px;
-                }
-            }
         }
     }
 }

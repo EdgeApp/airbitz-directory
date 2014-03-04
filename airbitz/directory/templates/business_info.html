@@ -236,13 +236,8 @@
     {{ block.super }}
     <script type="text/javascript">
         $(function() {
-{#            var json = [#}
-{#                { lat: {{ biz.center.y }}, lon: {{ biz.center.x }} },#}
-{#            ];#}
-{#            AB.addMap($('#map'), 16, {{ biz.center.y }}, {{ biz.center.x }}, json);#}
-
             var mapUrl = GMaps.staticMapURL({
-                size: [720, 150],
+                size: [640, 150],
                 lat: {{ biz.center.y }},
                 lng: {{ biz.center.x }},
                 markers: [
@@ -250,7 +245,6 @@
                 ]
             });
             $('<img/>').attr('src', mapUrl).prependTo('#map');
-
         });
     </script>
 {% endblock %}

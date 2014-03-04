@@ -297,6 +297,13 @@ body .top-bg {
   left: 50%;
   margin: -320px;
 }
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .biz-info-two .panel .panel-image #map img {
+    /* Retina-specific stuff here */
+    width: 640px;
+    height: 150px;
+  }
+}
 .biz-info-two .panel .panel-image #map .get-directions {
   position: absolute;
   bottom: 5px;
@@ -306,19 +313,7 @@ body .top-bg {
   margin-bottom: 5px;
 }
 .biz-info-two .biz-details .biz-address-city-state {
-  padding-left: 10px;
-}
-.biz-info-two .biz-details .dl-horizontal {
-  clear: both;
-  margin: 15px 0;
-}
-.biz-info-two .biz-details .dl-horizontal dt {
-  width: 75px;
-}
-@media (min-width: 768px) {
-  .biz-info-two .biz-details .dl-horizontal dd {
-    margin-left: 85px;
-  }
+  padding-left: 12px;
 }
 .biz-info-three .biz-hours {
   margin-bottom: 30px;
