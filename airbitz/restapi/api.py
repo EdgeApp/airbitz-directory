@@ -229,7 +229,7 @@ class ApiProcess(object):
             fits = SQ(django_ct='directory.business')
         fits = (fits) | SQ(django_ct='directory.category')
         sqs = sqs.filter(fits).models(Business, Category)
-        if not self.location.isOnWeb() and self.location.isWebOnly():
+        if not self.location.isOnWeb() and not self.location.isWebOnly():
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.dwithin('location', self.userLocation(), DEF_RADIUS)
         if self.location and self.location.bounding:
