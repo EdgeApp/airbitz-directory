@@ -134,7 +134,7 @@
                 {% endfor %}
             {% endfor %}
             {} ];
-            AB.addMap($('#map'), 5, {{ searchLocation.point.y }}, {{ searchLocation.point.x }}, json, polygon);
+            AB.addMap($('#map'), 5, {{ searchLocation.sortPoint.y }}, {{ searchLocation.sortPoint.x }}, json, polygon);
         {% elif userLocation %}
             AB.addMap($('#map'), 5, {{ userLocation.y }}, {{ userLocation.x }}, json);
         {% else %}
