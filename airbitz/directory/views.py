@@ -66,11 +66,12 @@ def business_search(request):
     term = request.GET.get('term', None)
     category = request.GET.get('category', None)
     ll = request.GET.get('ll', None)
-    near = request.GET.get('near', None)
+    location = request.GET.get('location', None)
     ip = api.getRequestIp(request)
-    a = api.ApiProcess(locationStr=near, ll=ll, ip=ip)
+    a = api.ApiProcess(locationStr=location, ll=ll, ip=ip)
     results = a.searchDirectory(term=term, category=category)
 
+    request.session['nearText'] = location
     paginator = Paginator(results, 10)
     print 'PAGE RANGE', paginator.page_range
 

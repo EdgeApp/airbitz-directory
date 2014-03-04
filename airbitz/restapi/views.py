@@ -66,14 +66,14 @@ class SearchView(generics.ListAPIView):
 
     def get_queryset(self):
         term = self.request.QUERY_PARAMS.get('term', None)
-        near = self.request.QUERY_PARAMS.get('near', None)
+        location = self.request.QUERY_PARAMS.get('location', None)
         ll = self.request.QUERY_PARAMS.get('ll', None)
         radius = api.toInt(self.request, 'radius', None)
         bounds = self.request.QUERY_PARAMS.get('bounds', None)
         category = self.request.QUERY_PARAMS.get('category', None)
         sort = api.toInt(self.request, 'sort', None)
 
-        a = api.ApiProcess(locationStr=near, ll=ll)
+        a = api.ApiProcess(locationStr=location, ll=ll)
         return a.searchDirectory(term=term, geobounds=bounds, \
                                    radius=radius, category=category, sort=sort)
 
@@ -92,9 +92,9 @@ class AutoCompleteBusiness(APIView):
 
     def get(self, request, *args, **kwars):
         term = self.request.QUERY_PARAMS.get('term', None)
-        near = self.request.QUERY_PARAMS.get('near', None)
+        location = self.request.QUERY_PARAMS.get('location', None)
         ll = self.request.QUERY_PARAMS.get('ll', None)
-        a = api.ApiProcess(locationStr=near, ll=ll)
+        a = api.ApiProcess(locationStr=location, ll=ll)
         results = a.autocompleteBusiness(term=term)[:DEFAULT_PAGE_SIZE]
         return Response({ 'results':  results })
 

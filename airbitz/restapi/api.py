@@ -13,7 +13,7 @@ from location.models import OsmRelation
 log=logging.getLogger("airbitz." + __name__)
 
 DEF_POINT=Point((-117.124603, 33.028400))
-DEF_RADIUS_M=Distance(mi=100).m
+DEF_RADIUS=Distance(mi=100)
 DEF_IP='24.152.191.12'
 DEF_LOC_STR='San Francisco, CA'
 
@@ -147,7 +147,10 @@ class ApiProcess(object):
         return self.location.point
 
     def isExactCategory(self, term):
-        return Category.objects.filter(name=term).exists()
+        if term:
+            return Category.objects.filter(name__iexact=term).exists()
+        else: 
+            return False
 
     def searchDirectory(self, term=None, geobounds=None, radius=None, category=None, sort=None):
         sqs = SearchQuerySet().models(Business)
@@ -166,16 +169,19 @@ class ApiProcess(object):
         elif self.location.isOnWeb():
             sqs = sqs.filter(SQ(has_online_business=True))
         if self.location.isOnWeb():
-            sqs = sqs.order_by('-score', '-has_bitcoin_discount')
+            if not term:
+                sqs = sqs.order_by('-has_bitcoin_discount', '-score')
+            else:
+                sqs = sqs.order_by('-score')
             sqs = sqs.load_all()
         else:
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
             sqs = sqs.load_all()
-            sqs = self.__geolocation_filter__(sqs, geobounds)
+            sqs = self.__geolocation_filter__(sqs, geobounds, radius)
         return [s.object for s in sqs]
 
-    def __geolocation_filter__(self, sqs, geobounds):
+    def __geolocation_filter__(self, sqs, geobounds, radius):
         geopoly = None
         if geobounds:
             geopoly = parseGeoBounds(geobounds)
@@ -183,19 +189,26 @@ class ApiProcess(object):
         for s in sqs:
             s.object.distance = s.distance
             if s.location:
-                if self.location.bounding:
-                    if self.location.bounding.contains(s.location):
-                        s.object.bounded = True
-                        self.__append_if_within__(newsqs, s, geopoly)
-                    else:
-                        if self.location.bounding.distance(s.location) * DEG_TO_M <= DEF_RADIUS_M:
-                            s.object.bounded = False
-                            self.__append_if_within__(newsqs, s, geopoly)
+                if self.location.bounding and self.location.bounding.contains(s.location):
+                    s.object.bounded = True
+                    self.__append_if_within__(newsqs, s, geopoly)
                 else:
-                    if self.userLocation().distance(s.location) * DEG_TO_M <= DEF_RADIUS_M:
-                        s.object.bounded = False
-                        self.__append_if_within__(newsqs, s, geopoly)
-        return newsqs 
+                    newsqs.append(s)
+
+        newsqs2 = []
+        loc = self.userLocation()
+        if not radius:
+            radius = DEF_RADIUS.m
+        for s in newsqs:
+            if not s.location:
+                newsqs2.append(s)
+            elif geopoly and loc.distance(s.location) * DEG_TO_M <= radius:
+                s.object.bounded = False
+                self.__append_if_within__(newsqs2, s, geopoly)
+            elif loc.distance(s.location) * DEG_TO_M <= radius:
+                s.object.bounded = False
+                newsqs2.append(s)
+        return newsqs2 
 
     def __append_if_within__(self, ls, obj, poly):
         if poly:
@@ -218,13 +231,15 @@ class ApiProcess(object):
         else:
             fits = SQ(django_ct='directory.business')
         fits = (fits) | SQ(django_ct='directory.category')
-        sqs = sqs.distance('location', self.userLocation())
-        # XXX: sqs = sqs.dwithin('location', self.userLocation(), DEF_RADIUS_M)
         sqs = sqs.filter(fits).models(Business, Category)
+        if self.userLocation():
+            sqs = sqs.distance('location', self.userLocation())
+            sqs = sqs.dwithin('location', self.userLocation(), DEF_RADIUS)
         if self.location and self.location.bounding:
             sqs = self.boundSearchQuery(sqs, self.location)
-        else:
-            sqs = sqs[:10]
+        if self.location.isOnWeb() or self.location.isWebOnly():
+            sqs = sqs.order_by('-has_bitcoin_discount')
+        sqs = sqs[:10]
         return [autocompleteSerialize(result) for result in sqs]
 
     def boundSearchQuery(self, sqs, loc):
@@ -243,7 +258,6 @@ class ApiProcess(object):
             formatted = wildcardFormat(term)
             sqs = sqs.filter(content_auto=formatted)
         sqs = sqs.distance('location', self.userLocation())
-        # XXX: sqs = sqs.dwithin('location', self.userLocation(), DEF_RADIUS_M)
         sqs = sqs.order_by('distance')
         sqs = sqs[:10]
         return [result.content_auto for result in sqs]

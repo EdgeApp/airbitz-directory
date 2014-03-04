@@ -18,13 +18,13 @@ urlpatterns = patterns('',
     (r'^api/v1/', include('restapi.urls')),
     (r'^mgmt/', include('management.urls')),
     (r'^mgmt/', include(mgmtapi, namespace='management')),
+    url(r'^docs/', include('rest_framework_swagger.urls')),
     (r'^', include('directory.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
 
 if settings.DEBUG:
     urlpatterns += patterns('',
-        url(r'^docs/', include('rest_framework_swagger.urls')),
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
            'document_root': settings.MEDIA_ROOT}))
 

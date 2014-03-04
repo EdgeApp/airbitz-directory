@@ -2,8 +2,8 @@ from restapi import api
 
 def near(request):
     nearText = None
-    if request.GET.get('near', None):
-        nearText = request.GET.get('near', None)
+    if request.GET.get('location', None):
+        nearText = request.GET.get('location', None)
     else:
         nearText = request.session.get('nearText', None) 
         if not nearText: 
@@ -11,5 +11,5 @@ def near(request):
             a = api.ApiProcess(ip=ip)
             nearText = a.suggestNearText()
     request.session['nearText'] = nearText
-    return { 'near': nearText }
+    return { 'location': nearText }
 
