@@ -38,6 +38,8 @@ def parseGeoLocation(ll):
         raise AirbitzApiException('Unable to parse geographic location.')
 
 def parseGeoBounds(bounds):
+    if not bounds:
+        return None
     try:
         (sw,ne) = bounds.split("|")
         sw = sw.split(",")
@@ -102,7 +104,7 @@ class Location(object):
         # Start by IP Lookup to find point
         if ip:
             self.sortPoint = processGeoIp(ip)
-            self.userPoint = self.sortPoint
+            self.userPoint = self.sortPoint.clone()
         if not self.sortPoint:
             self.sortPoint = DEF_POINT
             self.userPoint = DEF_POINT
@@ -127,9 +129,9 @@ class Location(object):
         if ll:
             geoloc = parseGeoLocation(ll)
             if geoloc:
+                self.userPoint = geoloc;
                 if (self.bounding and self.bounding.contains(geoloc)) or not self.bounding:
                     self.sortPoint = geoloc;
-                    self.userPoint = geoloc;
 
     def isWebOnly(self):
         return self.filter_web_only
@@ -155,6 +157,7 @@ class ApiProcess(object):
 
     def searchDirectory(self, term=None, geobounds=None, radius=None, category=None, sort=None):
         sqs = SearchQuerySet().models(Business)
+        geopoly = parseGeoBounds(geobounds)
         if term:
             formatted = wildcardFormat(term)
             sqs = sqs.filter(SQ(categories=term) 
@@ -179,42 +182,46 @@ class ApiProcess(object):
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
             sqs = sqs.load_all()
-            sqs = self.__geolocation_filter__(sqs, geobounds, radius)
+            sqs = self.__geolocation_filter__(sqs, geopoly, radius)
         return [s.object for s in sqs]
 
-    def __geolocation_filter__(self, sqs, geobounds, radius):
-        geopoly = None
-        if geobounds:
-            geopoly = parseGeoBounds(geobounds)
+    def __geolocation_filter__(self, sqs, geopoly, radius):
         newsqs = []
-        for s in sqs:
-            s.object.distance = s.distance
-            if s.location:
-                s.object.distance = Distance(m=s.location.distance(self.location.userPoint) * DEG_TO_M)
-                if self.location.bounding and self.location.bounding.contains(s.location):
-                    s.object.bounded = True
-                    self.__append_if_within__(newsqs, s, geopoly)
-                else:
-                    newsqs.append(s)
-
-        newsqs2 = []
-        loc = self.userLocation()
-        if not radius:
-            radius = DEF_RADIUS.m
-        for s in newsqs:
-            if not s.location:
-                newsqs2.append(s)
-            elif geopoly and loc.distance(s.location) * DEG_TO_M <= radius:
+        if self.location.bounding:
+            # Do we have a bounding box?
+            for s in sqs:
+                s.object.distance = s.distance
                 s.object.bounded = False
-                self.__append_if_within__(newsqs2, s, geopoly)
-            elif loc.distance(s.location) * DEG_TO_M <= radius:
+                if s.location:
+                    s.object.distance = Distance(m=s.location.distance(self.location.userPoint) * DEG_TO_M)
+                    s.object.sortDistance = Distance(m=s.location.distance(self.location.sortPoint) * DEG_TO_M)
+                    if self.location.bounding and self.location.bounding.contains(s.location):
+                        # Its within the bounding box 
+                        s.object.bounded = True
+                        self.__append_if_within__(newsqs, s, poly=geopoly, radius=radius)
+                    else:
+                        # Outside of bounding, but within the DEF_RADIUS
+                        if self.location.bounding.distance(s.location) * DEG_TO_M <= DEF_RADIUS.m:
+                            self.__append_if_within__(newsqs, s, poly=geopoly, radius=radius)
+            return newsqs
+        else:
+            if not radius:
+                radius = DEF_RADIUS.m
+            for s in sqs:
+                s.object.distance = s.distance
                 s.object.bounded = False
-                newsqs2.append(s)
-        return newsqs2 
+                if s.location:
+                    s.object.distance = Distance(m=s.location.distance(self.location.userPoint) * DEG_TO_M)
+                    s.object.sortDistance = Distance(m=s.location.distance(self.location.sortPoint) * DEG_TO_M)
+                    self.__append_if_within__(newsqs, s, poly=geopoly, radius=radius)
+            return newsqs
 
-    def __append_if_within__(self, ls, obj, poly):
+    def __append_if_within__(self, ls, obj, poly=None, radius=None):
         if poly:
             if poly.contains(obj.location):
+                ls.append(obj)
+        elif radius:
+            if obj.object.sortDistance.m < radius:
                 ls.append(obj)
         else:
             ls.append(obj)

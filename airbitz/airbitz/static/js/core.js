@@ -47,7 +47,7 @@ function getMapMarkerContent(marker, markerJSON) {
       }
   };
   AB.setup = function() {
-    if (supports_html5_storage()) {
+    if (false && supports_html5_storage()) {
       var loc = AB.getNear()
       if (loc) {
         $('#location').val(loc);
