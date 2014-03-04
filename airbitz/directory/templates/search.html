@@ -2,10 +2,12 @@
 {% load imagekit %}
 {% load compressed %}
 {% load ab_custom_tags %}
+{% load bootstrap_pagination %}
 
 {% block title %}Search{% endblock title %}
 
 {% block body %}
+
     {% if request.GET.near == 'On the Web' %}
     <div class="row">
         <div class="col-sm-12">
@@ -84,8 +86,11 @@
             {% endfor %}
         </div>
         <div class="map-container hidden-xs col-sm-6">
-            <div data-spy="affix" data-offset-top="0" data-offset-bottom="200">
+            <div data-spy="affix" data-offset-top="0">
                 <div id="map"></div>
+            </div>
+            <div class="pagination-container text-center" data-spy="affix" data-offset-top="0">
+                {% bootstrap_paginate page_obj range=10 %}
             </div>
         </div>
     </div>
@@ -136,6 +141,35 @@
             AB.addMap($('#map'), 5, json[0].lat, json[0].lon, json);
         }
         {% endif %}
+        });
+
+
+
+
+{#        console.log(markersJSON);#}
+
+        for (var i = 0; i < markersJSON.length; ++i) {
+            var m = markersJSON[i];
+            if (m.lat && m.lon) {
+{#                console.log(m.lat + ', ' + m.lon)#}
+            }
+        }
+
+        $("#map2").height("500px").gmap3({
+            map: {
+                options: {
+                    center: [{{ userLocation.y }},{{ userLocation.x }}],
+                    zoom: 10,
+                    disableDefaultUI: true,
+                }
+            },
+
+
+
+            marker: {
+                latLng:[json[0].lat,json[0].lon]
+            }
+
         });
     </script>
 {% endblock %}

@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from airbitz.settings import GOOGLE_MAP_KEY
 from directory.models import Business, BusinessImage
@@ -69,12 +70,24 @@ def business_search(request):
     ip = api.getRequestIp(request)
     a = api.ApiProcess(locationStr=near, ll=ll, ip=ip)
     results = a.searchDirectory(term=term, category=category)
+
+    paginator = Paginator(results, 10)
+    print 'PAGE RANGE', paginator.page_range
+
+    if request.GET.get('page'):
+        page = request.GET.get('page')
+    else:
+        page = 1
+
+    results = paginator.page(page)
+
     context = {
-        'results': results[:20],
+        'results': results,
         'mapkey': GOOGLE_MAP_KEY,
         'userLocation': a.userLocation(),
         'searchLocation': a.location,
-        'was_search': True
+        'was_search': True,
+        'page_obj': paginator.page(page)
     }
     return render_to_response('search.html', RequestContext(request, context))
 

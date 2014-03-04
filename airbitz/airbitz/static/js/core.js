@@ -1,3 +1,4 @@
+/*jshint devel:true */
 /* TODO: replace with modernizr */
 function supports_html5_storage() {
   try {
@@ -107,16 +108,16 @@ function getMapMarkerContent(marker, markerJSON) {
           if (m.lat && m.lon) {
             var loc = new google.maps.LatLng(m.lat, m.lon);
             coords.push(loc)
-            bounds.extend(loc);
+//            bounds.extend(loc);
           }
         }
         poly = new google.maps.Polygon({
           paths: coords,
           strokeColor: '#003399',
-          strokeOpacity: 0.5,
+          strokeOpacity: 0.25,
           strokeWeight: 2,
           fillColor: '#336699',
-          fillOpacity: 0.35
+          fillOpacity: 0.15
         });
         poly.setMap(map)
       }
