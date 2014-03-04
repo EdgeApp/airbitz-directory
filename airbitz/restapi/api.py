@@ -97,12 +97,15 @@ class Location(object):
         self.ip = ip
         self.locationStr = locationStr
         self.bounding = None
-        self.point = DEF_POINT
+        self.sortPoint = DEF_POINT
+        self.userPoint = DEF_POINT
         # Start by IP Lookup to find point
         if ip:
-            self.point = processGeoIp(ip)
-        if not self.point:
-            self.point = DEF_POINT
+            self.sortPoint = processGeoIp(ip)
+            self.userPoint = self.sortPoint
+        if not self.sortPoint:
+            self.sortPoint = DEF_POINT
+            self.userPoint = DEF_POINT
         self.admin_level = 4
         if self.locationStr:
             self.filter_web_only = self.locationStr.lower() == 'web only'
@@ -118,17 +121,15 @@ class Location(object):
             if len(sqs) > 0:
                 obj = sqs[0].object
                 self.bounding = obj.geom
-                if not self.bounding.contains(self.point):
-                    self.point = obj.centroid
-                    print 'Using centroid'
-                else:
-                    print 'NOT Using centroid'
+                if not self.bounding.contains(self.sortPoint):
+                    self.sortPoint = obj.centroid
                 self.admin_level = obj.admin_level
         if ll:
             geoloc = parseGeoLocation(ll)
             if geoloc:
                 if (self.bounding and self.bounding.contains(geoloc)) or not self.bounding:
-                    self.point = geoloc;
+                    self.sortPoint = geoloc;
+                    self.userPoint = geoloc;
 
     def isWebOnly(self):
         return self.filter_web_only
@@ -144,7 +145,7 @@ class ApiProcess(object):
         self.location = Location(locationStr=locationStr, ll=ll, ip=ip)
 
     def userLocation(self):
-        return self.location.point
+        return self.location.sortPoint
 
     def isExactCategory(self, term):
         if term:
@@ -189,6 +190,7 @@ class ApiProcess(object):
         for s in sqs:
             s.object.distance = s.distance
             if s.location:
+                s.object.distance = Distance(m=s.location.distance(self.location.userPoint) * DEG_TO_M)
                 if self.location.bounding and self.location.bounding.contains(s.location):
                     s.object.bounded = True
                     self.__append_if_within__(newsqs, s, geopoly)
@@ -274,7 +276,6 @@ class ApiProcess(object):
 
     def suggestNearText(self):
         point = self.userLocation()
-        print point
         qs = OsmRelation.objects.filter(admin_level__lte=6).distance(point)\
                                 .order_by('distance', '-admin_level')[:1]
         if len(qs) > 0:
