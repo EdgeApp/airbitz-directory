@@ -3,6 +3,7 @@ Markdown==2.3.1
 PIL==1.1.7
 South==0.8.4
 Unipath==1.0
+Werkzeug==0.9.4
 argparse==1.2.1
 django-appconf==0.6
 django-crispy-forms==1.4.0
@@ -18,6 +19,7 @@ foursquare==2013.12.17
 futures==2.1.5
 geopy==0.98.2
 gunicorn==18.0
+ipython==1.2.1
 pilkit==1.1.6
 psycopg2==2.5.2
 pysolr==3.1.0
