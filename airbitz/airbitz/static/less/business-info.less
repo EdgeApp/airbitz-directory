@@ -1,0 +1,110 @@
+
+// BUSINESS INFO SINGLE LISTING PAGES
+.biz-info-header {
+
+    .admin-edit {
+        position: absolute;
+        right: 15px;
+        top: 25px;
+        z-index: 9999;
+    }
+}
+
+.biz-info-one {
+    margin-bottom: 30px;
+
+    @media(min-width: @screen-md){
+        margin-bottom: 0;
+    }
+}
+
+.biz-social-buttons {
+
+    @media(min-width: @screen-md) {
+        text-align: right
+    }
+    .btn {
+        margin-bottom: 5px;
+    }
+}
+
+.biz-info-two {
+
+    .panel {
+
+        .panel-image {
+            overflow: hidden;
+
+            .biz-img {
+                .border-top-radius(5px);
+            }
+
+            #map {
+                position: relative;
+
+                img {
+                    position: relative;
+                    top: 62px;
+                    left: 50%;
+                    margin: -320px;
+
+                    @media
+                    (-webkit-min-device-pixel-ratio: 2),
+                    (min-resolution: 192dpi) {
+                        /* Retina-specific stuff here */
+                        width: 640px;
+                        height: 150px;
+                    }
+                }
+
+                .get-directions {
+                    position: absolute;
+                    bottom: 5px;
+                    right: 5px;
+                }
+            }
+        }
+    }
+    .biz-details {
+        .biz-type {
+            margin-bottom: 5px;
+        }
+
+        .biz-address-street {
+        }
+
+        .biz-address-city-state {
+            padding-left: 12px;
+        }
+
+        .biz-phone {
+        }
+
+        .biz-website {
+        }
+    }
+}
+
+.biz-info-three {
+
+    .biz-hours {
+        margin-bottom: 30px;
+
+        td {
+            width: 100px;
+        }
+    }
+
+    .biz-gallery {
+
+        .biz-gallery-image {
+            margin-bottom: 15px;
+
+            @media(min-width: @screen-md-min){
+                &.col-md-4:nth-child(n+4) {
+                    margin-top: 15px;
+                }
+            }
+        }
+    }
+}
