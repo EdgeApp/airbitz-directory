@@ -144,33 +144,5 @@
         {% endif %}
         });
 
-
-
-
-{#        console.log(markersJSON);#}
-
-        for (var i = 0; i < markersJSON.length; ++i) {
-            var m = markersJSON[i];
-            if (m.lat && m.lon) {
-{#                console.log(m.lat + ', ' + m.lon)#}
-            }
-        }
-
-        $("#map2").height("500px").gmap3({
-            map: {
-                options: {
-                    center: [{{ userLocation.y }},{{ userLocation.x }}],
-                    zoom: 10,
-                    disableDefaultUI: true,
-                }
-            },
-
-
-
-            marker: {
-                latLng:[json[0].lat,json[0].lon]
-            }
-
-        });
     </script>
 {% endblock %}
