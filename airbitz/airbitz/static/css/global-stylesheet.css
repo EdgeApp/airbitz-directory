@@ -259,78 +259,78 @@ body .top-bg {
     margin-top: 120px;
   }
 }
-.main-content .biz-info-header .admin-edit {
+.biz-info-header .admin-edit {
   position: absolute;
   right: 15px;
   top: 25px;
   z-index: 9999;
 }
-.main-content .biz-info-one {
+.biz-info-one {
   margin-bottom: 30px;
 }
 @media (min-width: 992px) {
-  .main-content .biz-info-one {
+  .biz-info-one {
     margin-bottom: 0;
   }
 }
 @media (min-width: 992px) {
-  .main-content .biz-social-buttons {
+  .biz-social-buttons {
     text-align: right;
   }
 }
-.main-content .biz-social-buttons .btn {
+.biz-social-buttons .btn {
   margin-bottom: 5px;
 }
-.main-content .biz-info-two .panel .panel-image {
+.biz-info-two .panel .panel-image {
   overflow: hidden;
 }
-.main-content .biz-info-two .panel .panel-image .biz-img {
+.biz-info-two .panel .panel-image .biz-img {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
-.main-content .biz-info-two .panel .panel-image #map {
+.biz-info-two .panel .panel-image #map {
   position: relative;
 }
-.main-content .biz-info-two .panel .panel-image #map img {
+.biz-info-two .panel .panel-image #map img {
   position: relative;
   top: 62px;
   left: 50%;
   margin: -320px;
 }
-.main-content .biz-info-two .panel .panel-image #map .get-directions {
+.biz-info-two .panel .panel-image #map .get-directions {
   position: absolute;
   bottom: 5px;
   right: 5px;
 }
-.main-content .biz-info-two .biz-details .biz-type {
+.biz-info-two .biz-details .biz-type {
   margin-bottom: 5px;
 }
-.main-content .biz-info-two .biz-details .biz-address-city-state {
+.biz-info-two .biz-details .biz-address-city-state {
   padding-left: 10px;
 }
-.main-content .biz-info-two .biz-details .dl-horizontal {
+.biz-info-two .biz-details .dl-horizontal {
   clear: both;
   margin: 15px 0;
 }
-.main-content .biz-info-two .biz-details .dl-horizontal dt {
+.biz-info-two .biz-details .dl-horizontal dt {
   width: 75px;
 }
 @media (min-width: 768px) {
-  .main-content .biz-info-two .biz-details .dl-horizontal dd {
+  .biz-info-two .biz-details .dl-horizontal dd {
     margin-left: 85px;
   }
 }
-.main-content .biz-info-three .biz-hours {
+.biz-info-three .biz-hours {
   margin-bottom: 30px;
 }
-.main-content .biz-info-three .biz-hours td {
+.biz-info-three .biz-hours td {
   width: 100px;
 }
-.main-content .biz-info-three .biz-gallery .biz-gallery-image {
+.biz-info-three .biz-gallery .biz-gallery-image {
   margin-bottom: 15px;
 }
 @media (min-width: 992px) {
-  .main-content .biz-info-three .biz-gallery .biz-gallery-image.col-md-4:nth-child(n+4) {
+  .biz-info-three .biz-gallery .biz-gallery-image.col-md-4:nth-child(n+4) {
     margin-top: 15px;
   }
 }
@@ -352,7 +352,7 @@ body .top-bg {
 @media (min-width: 1200px) {
   .location-search-info .map-container #map {
     width: 570px;
-    height: 600px;
+    height: 525px;
   }
 }
 .location-search-info .map-container #map .map-marker-name {
@@ -381,7 +381,7 @@ body .top-bg {
   margin-bottom: 20px;
 }
 .results-map-list .result-list-item {
-  padding: 20px 0;
+  padding: 12px 0;
   border-top: 1px solid #ddd;
 }
 .results-map-list .biz-discount {
@@ -393,7 +393,6 @@ body .top-bg {
   width: 150px;
   height: 150px;
   margin-right: 10px;
-  margin-bottom: 10px;
   background: white;
   -webkit-box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
@@ -460,10 +459,6 @@ body .top-bg {
   .results-map-list .biz-description {
     clear: both;
   }
-}
-.results-grid {
-  position: relative;
-  background: #fff;
 }
 .results-grid .search-title {
   margin-top: 0;

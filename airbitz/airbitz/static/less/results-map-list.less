@@ -1,0 +1,143 @@
+// SEARCH STUFF
+.location-search-info {
+
+    .map-container {
+        top: 150px;
+
+        #map {
+
+            @media(min-width: @screen-sm-min) {
+                width: 360px;
+                height: 400px;
+            }
+            @media(min-width: @screen-md-min) {
+                width: 470px;
+                height: 400px;
+            }
+            @media(min-width: @screen-lg-min) {
+                width: 570px;
+                height: 525px;
+            }
+
+            .map-marker-name {
+                font: "Open Sans";
+                font-size: 18px;
+                font-weight: 400;
+            }
+            .map-marker-cat {
+                margin-right: 4px;
+            }
+        }
+    }
+
+
+    .pagination-container {
+        top: 60px;
+
+        .pagination {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.results-map-list {
+    min-height: 600px;
+
+    &.row {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .search-title {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    .result-list-item {
+        padding: 12px 0;
+        border-top: 1px solid #ddd;
+    }
+
+    .biz-discount {
+        position: absolute;
+        cursor: pointer;
+    }
+
+    .biz-img {
+        float: left;
+        width: 150px;
+        height: 150px;
+        margin-right: 10px;
+        background: white;
+        .box-shadow(0 0px 10px rgba(0,0,0,.5));
+
+        &:hover {
+            .transition(.3s ease);
+            box-shadow: 0 0px 10px rgba(0,0,0,.1);
+            outline: 3px solid @gray-light;
+            outline-offset: -3px;
+        }
+        @media(max-width: @screen-md-min) {
+            width: 110px;
+            height: 110px;
+        }
+    }
+
+    .biz-name {
+        font-weight: 300;
+        letter-spacing: -1.25px;
+        margin: 0;
+
+        a {
+            color: #333;
+
+            &:hover {
+                text-decoration: none;
+                color: @brand-primary;
+                .transition();
+            }
+        }
+        @media(max-width: @screen-md-min) {
+            margin-bottom: 10px;
+            letter-spacing: 0px;
+            font-size: 20px;
+        }
+    }
+
+    .biz-meta {
+        margin: 7px 0;
+
+        .biz-categories {
+
+            @media(min-width: @screen-md-min) {
+            }
+            @media(min-width: @screen-sm-min) {
+            }
+        }
+        .biz-location {
+
+            .biz-address-street {
+                display: inline-block;
+                width: 300px;
+                letter-spacing: -1px;
+                margin-left: 0px;
+                color: @gray;
+            }
+            .biz-distance {
+                display: inline-block;
+                position: absolute;
+                right: 0;
+                color: @alert-danger-text;
+            }
+        }
+    }
+
+    .biz-description {
+        line-height: 18px;
+
+        @media(max-width: @screen-md-min) {
+            clear: both;
+        }
+    }
+
+}

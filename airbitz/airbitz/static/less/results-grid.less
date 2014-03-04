@@ -1,0 +1,76 @@
+
+.results-grid {
+
+    .search-title {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+}
+
+.biz-result {
+
+    .glyphicon { margin-right:5px; }
+    .thumbnail {
+        margin-bottom: 20px;
+        padding: 0px;
+        .border-radius();
+
+        .thumb-bg {
+            height: 224px;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .biz-img {
+            max-width: 100%;
+            margin: 0 auto;
+            .border-top-radius(5px);
+
+            &:hover {
+                .transition(.3s ease);
+            }
+        }
+    }
+
+    .biz-name {
+        font-weight: 300;
+        letter-spacing: -1px;
+
+        a {
+            color: #333;
+
+            &:hover {
+                text-decoration: none;
+                color: @brand-primary;
+                .transition();
+            }
+        }
+    }
+
+    .biz-categories {
+        height: 25px;
+        line-height: 20px;
+    }
+
+    .biz-description {
+        height: 90px;
+        margin: 0 0 4px;
+    }
+}
+
+
+
+
+// MASONRY VERSION
+.biz-result {
+    .thumbnail {
+        margin-bottom: 40px;
+
+        .thumb-bg {
+            height: auto;
+        }
+    }
+    .biz-description {
+        height: auto;
+    }
+}
