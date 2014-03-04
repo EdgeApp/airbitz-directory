@@ -72,13 +72,18 @@ def business_search(request):
     results = a.searchDirectory(term=term, category=category)
 
     request.session['nearText'] = location
-    paginator = Paginator(results, 10)
-    print 'PAGE RANGE', paginator.page_range
+    results_per_page = 10
+    paginator = Paginator(results, results_per_page)
 
     if request.GET.get('page'):
         page = request.GET.get('page')
     else:
         page = 1
+
+    results_info = {
+        'total': len(results),
+        'results_per_page': results_per_page,
+    }
 
     results = paginator.page(page)
 
@@ -88,7 +93,8 @@ def business_search(request):
         'userLocation': a.userLocation(),
         'searchLocation': a.location,
         'was_search': True,
-        'page_obj': paginator.page(page)
+        'page_obj': paginator.page(page),
+        'results_info': results_info,
     }
     return render_to_response('search.html', RequestContext(request, context))
 

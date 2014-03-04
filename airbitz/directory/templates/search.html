@@ -13,8 +13,10 @@
         <div class="col-sm-12">
             <h1 class="search-title hidden-xs hidden-sm">Bitcoin Businesses On the Web</h1>
             <h1 class="search-title visible-xs visible-sm">Search Results</h1>
-            <hr style="margin-bottom: 7px;" />
-            {% bootstrap_paginate page_obj range=10 %}
+            {% bootstrap_paginate page_obj range=15 %}
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-sm-12"><strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_per_page }}</strong> Shown on Page</div>
+            </div>
         </div>
     </div>
     <div class="results-grid list-group row">
@@ -86,12 +88,20 @@
                 <p>No results found.</p>
             {% endfor %}
         </div>
-        <div class="map-container hidden-xs col-sm-6">
-            <div data-spy="affix" data-offset-top="0">
+        <div class="location-search-info hidden-xs col-sm-6">
+            <div class="map-container" data-spy="affix" data-offset-top="0">
                 <div id="map"></div>
             </div>
-            <div class="pagination-container text-center" data-spy="affix" data-offset-top="0">
-                {% bootstrap_paginate page_obj range=10 %}
+            <div class="pagination-container" data-spy="affix" data-offset-top="0">
+                <div class="row">
+                    <div class="col-sm-12">
+                    {% bootstrap_paginate page_obj range=10 %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12"><strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_per_page }}</strong> Shown on Map</div>
+                </div>
+
             </div>
         </div>
     </div>

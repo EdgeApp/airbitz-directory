@@ -48,9 +48,11 @@ body {
 
     .top-bg {
         display: none;
+
         @media(min-width: @screen-md) {
             display: block;
             position: absolute;
+            top: 0;
             width: 100%;
             height: 390px;
             border-bottom: 2px solid #F8F8F0;
@@ -306,48 +308,46 @@ body {
 
 
 // SEARCH STUFF
-.map-container {
+.location-search-info {
 
-    #map {
+    .map-container {
+        top: 150px;
 
-        @media(min-width: @screen-sm-min) {
-            width: 360px;
-            height: 400px;
-        }
-        @media(min-width: @screen-md-min) {
-            width: 470px;
-            height: 400px;
-        }
-        @media(min-width: @screen-lg-min) {
-            width: 570px;
-            height: 600px;
-        }
+        #map {
 
-        .map-marker-name {
-            font: "Open Sans";
-            font-size: 18px;
-            font-weight: 400;
-        }
-        .map-marker-cat {
-            margin-right: 4px;
+            @media(min-width: @screen-sm-min) {
+                width: 360px;
+                height: 400px;
+            }
+            @media(min-width: @screen-md-min) {
+                width: 470px;
+                height: 400px;
+            }
+            @media(min-width: @screen-lg-min) {
+                width: 570px;
+                height: 600px;
+            }
+
+            .map-marker-name {
+                font: "Open Sans";
+                font-size: 18px;
+                font-weight: 400;
+            }
+            .map-marker-cat {
+                margin-right: 4px;
+            }
         }
     }
 
-    .pagination-container {
-        top: 670px;
 
-        @media(min-width: @screen-sm-min) {
-            top: 500px;
-        }
-        @media(min-width: @screen-md-min) {
-            top: 470px;
-        }
-        @media(min-width: @screen-lg-min) {
-            top: 670px;
+    .pagination-container {
+        top: 60px;
+
+        .pagination {
+            margin-bottom: 0;
         }
     }
 }
-
 
 .results-map-list {
     min-height: 600px;
