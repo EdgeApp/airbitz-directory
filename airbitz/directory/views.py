@@ -71,6 +71,7 @@ def business_search(request):
     a = api.ApiProcess(locationStr=near, ll=ll, ip=ip)
     results = a.searchDirectory(term=term, category=category)
 
+    request.session['nearText'] = near
     paginator = Paginator(results, 10)
     print 'PAGE RANGE', paginator.page_range
 
