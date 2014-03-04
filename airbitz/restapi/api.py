@@ -13,7 +13,7 @@ from location.models import OsmRelation
 log=logging.getLogger("airbitz." + __name__)
 
 DEF_POINT=Point((-117.124603, 33.028400))
-DEF_RADIUS_M=Distance(mi=100).m
+DEF_RADIUS=Distance(mi=100)
 DEF_IP='24.152.191.12'
 DEF_LOC_STR='San Francisco, CA'
 
@@ -195,7 +195,7 @@ class ApiProcess(object):
         newsqs2 = []
         loc = self.userLocation()
         if not radius:
-            radius = DEF_RADIUS_M
+            radius = DEF_RADIUS.m
         for s in newsqs:
             if not s.location:
                 newsqs2.append(s)
@@ -228,13 +228,17 @@ class ApiProcess(object):
         else:
             fits = SQ(django_ct='directory.business')
         fits = (fits) | SQ(django_ct='directory.category')
-        sqs = sqs.distance('location', self.userLocation())
-        # XXX: sqs = sqs.dwithin('location', self.userLocation(), DEF_RADIUS_M)
         sqs = sqs.filter(fits).models(Business, Category)
+        if not self.location.isOnWeb() and self.location.isWebOnly():
+            sqs = sqs.distance('location', self.userLocation())
+            sqs = sqs.dwithin('location', self.userLocation(), DEF_RADIUS)
         if self.location and self.location.bounding:
             sqs = self.boundSearchQuery(sqs, self.location)
+        if self.location.isOnWeb() or self.location.isWebOnly():
+            sqs = sqs.order_by('-has_bitcoin_discount')
         else:
-            sqs = sqs[:10]
+            sqs = sqs.order_by('distance')
+        sqs = sqs[:10]
         return [autocompleteSerialize(result) for result in sqs]
 
     def boundSearchQuery(self, sqs, loc):
@@ -253,7 +257,6 @@ class ApiProcess(object):
             formatted = wildcardFormat(term)
             sqs = sqs.filter(content_auto=formatted)
         sqs = sqs.distance('location', self.userLocation())
-        # XXX: sqs = sqs.dwithin('location', self.userLocation(), DEF_RADIUS_M)
         sqs = sqs.order_by('distance')
         sqs = sqs[:10]
         return [result.content_auto for result in sqs]
