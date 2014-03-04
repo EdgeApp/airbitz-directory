@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'imagekit',
     'pipeline',
     'crispy_forms',
+    'bootstrap_pagination',
     'rest_framework',
     'south',
 

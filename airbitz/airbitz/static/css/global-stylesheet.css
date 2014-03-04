@@ -359,6 +359,24 @@ body .top-bg {
 .map-container #map .map-marker-cat {
   margin-right: 4px;
 }
+.map-container .pagination-container {
+  top: 670px;
+}
+@media (min-width: 768px) {
+  .map-container .pagination-container {
+    top: 500px;
+  }
+}
+@media (min-width: 992px) {
+  .map-container .pagination-container {
+    top: 470px;
+  }
+}
+@media (min-width: 1200px) {
+  .map-container .pagination-container {
+    top: 670px;
+  }
+}
 .results-map-list {
   min-height: 600px;
 }
