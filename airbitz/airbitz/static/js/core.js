@@ -31,26 +31,26 @@ function getMapMarkerContent(marker, markerJSON) {
     return (new Date()).getTime();
   }
   AB.setNear = function() {
-    var n = $('#near').val();
+    var n = $('#location').val();
     if (n) {
-      localStorage.setItem("near", n);
+      localStorage.setItem("location", n);
       localStorage.setItem("nearDate", AB.now());
     }
   };
   AB.getNear = function() {
-      var near = localStorage.getItem("near");
+      var loc = localStorage.getItem("location");
       var then = localStorage.getItem("nearDate");
-      if (near && then && AB.now() - then < 1000 * 60) {
-        return near;
+      if (loc && then && AB.now() - then < 1000 * 60) {
+        return loc;
       } else {
         return null;
       }
   };
   AB.setup = function() {
     if (supports_html5_storage()) {
-      var near = AB.getNear()
-      if (near) {
-        $('#near').val(near);
+      var loc = AB.getNear()
+      if (loc) {
+        $('#location').val(loc);
       }
     }
     $.ajaxSetup({
@@ -138,8 +138,8 @@ function getMapMarkerContent(marker, markerJSON) {
         url: '/api/v1/autocomplete-business/?term=%QUERY',
         replace: function (url, uriEncodedQuery) {
           q = url.replace(/%QUERY/, uriEncodedQuery)
-          if ($('#near').val()) {
-              q += "&near=" + encodeURIComponent($('#near').val());
+          if ($('#location').val()) {
+              q += "&location=" + encodeURIComponent($('#location').val());
           }
           return q;
         },

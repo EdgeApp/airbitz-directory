@@ -59,7 +59,7 @@
                                 <input id="term" tabindex=1" name="term" type="text" class="typeahead form-control" placeholder="Business or Category" value="{{ request.GET.term }}"autocomplete="off">
                             </div>
                             <div class="form-group">
-                                <input id="near" tabindex="2" name="near" type="text" class="typeahead form-control" placeholder="City..." autocomplete="off" value="{{ near }}">
+                                <input id="location" tabindex="2" name="location" type="text" class="typeahead form-control" placeholder="City..." autocomplete="off" value="{{ location }}">
                             </div>
                             <button tabindex="3" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
                         </form>
@@ -104,7 +104,7 @@
             <script type="text/javascript">
                 $(function() {
                     AB.setup();
-                    AB.addLocationSearch($('#near'));
+                    AB.addLocationSearch($('#location'));
                     AB.addPlaceSearch($('#term'));
                 });
             </script>
