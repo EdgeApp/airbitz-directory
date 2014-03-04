@@ -164,6 +164,7 @@ body .top-bg {
   body .top-bg {
     display: block;
     position: absolute;
+    top: 0;
     width: 100%;
     height: 390px;
     border-bottom: 2px solid #F8F8F0;
@@ -333,49 +334,40 @@ body .top-bg {
     margin-top: 15px;
   }
 }
+.location-search-info .map-container {
+  top: 150px;
+}
 @media (min-width: 768px) {
-  .map-container #map {
+  .location-search-info .map-container #map {
     width: 360px;
     height: 400px;
   }
 }
 @media (min-width: 992px) {
-  .map-container #map {
+  .location-search-info .map-container #map {
     width: 470px;
     height: 400px;
   }
 }
 @media (min-width: 1200px) {
-  .map-container #map {
+  .location-search-info .map-container #map {
     width: 570px;
     height: 600px;
   }
 }
-.map-container #map .map-marker-name {
+.location-search-info .map-container #map .map-marker-name {
   font: "Open Sans";
   font-size: 18px;
   font-weight: 400;
 }
-.map-container #map .map-marker-cat {
+.location-search-info .map-container #map .map-marker-cat {
   margin-right: 4px;
 }
-.map-container .pagination-container {
-  top: 670px;
+.location-search-info .pagination-container {
+  top: 60px;
 }
-@media (min-width: 768px) {
-  .map-container .pagination-container {
-    top: 500px;
-  }
-}
-@media (min-width: 992px) {
-  .map-container .pagination-container {
-    top: 470px;
-  }
-}
-@media (min-width: 1200px) {
-  .map-container .pagination-container {
-    top: 670px;
-  }
+.location-search-info .pagination-container .pagination {
+  margin-bottom: 0;
 }
 .results-map-list {
   min-height: 600px;
