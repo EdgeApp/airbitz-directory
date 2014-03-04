@@ -104,7 +104,7 @@ class Location(object):
         # Start by IP Lookup to find point
         if ip:
             self.sortPoint = processGeoIp(ip)
-            self.userPoint = self.sortPoint.clone()
+            self.userPoint = self.sortPoint
         if not self.sortPoint:
             self.sortPoint = DEF_POINT
             self.userPoint = DEF_POINT
