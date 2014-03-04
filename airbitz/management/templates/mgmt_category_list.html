@@ -49,8 +49,8 @@
                                         <tr>
                                             <td><a class="pull-right btn-sm btn btn-default" href="{% url 'mgmt_category_edit' cat.id %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                                             <td>{{ cat.name }}</td>
-                                            <td>{{ cat.level }}</td>
-                                            <td>{{ cat.description }} </td>
+                                            <td>{{ cat.level|default:'1000' }}</td>
+                                            <td>{{ cat.description|default:'' }} </td>
                                             <td><a class="pull-right btn-sm btn btn-danger" href="{% url 'mgmt_category_delete' cat.id %}"><span class="glyphicon glyphicon-trash"></span></a></td>
                                         </tr>
                                     {% empty %}
@@ -73,7 +73,6 @@
     {% compressed_js 'dataTables' %}
 {% endblock javascript_headers %}
 
-
 {% block javascript %}
     {{ block.super }}
     <script type="text/javascript">
@@ -84,6 +83,13 @@
                             [10, 25, 50, 100, 500, "All"]],
             "iDisplayLength": 10,
             "aaSorting": [[ 2, "asc" ]],
+            "aoColumns": [
+                null,
+                null,
+                { "sType": 'numeric' },
+                null,
+                null
+            ]
             // "bStateSave": true,
         });
     });

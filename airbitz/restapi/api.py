@@ -166,16 +166,17 @@ class ApiProcess(object):
         elif self.location.isOnWeb():
             sqs = sqs.filter(SQ(has_online_business=True))
         if self.location.isOnWeb():
-            sqs = sqs.order_by('-score', '-has_bitcoin_discount')
+            print 'got here....'
+            sqs = sqs.order_by('-has_bitcoin_discount', '-score')
             sqs = sqs.load_all()
         else:
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
             sqs = sqs.load_all()
-            sqs = self.__geolocation_filter__(sqs, geobounds)
+            sqs = self.__geolocation_filter__(sqs, geobounds, radius)
         return [s.object for s in sqs]
 
-    def __geolocation_filter__(self, sqs, geobounds):
+    def __geolocation_filter__(self, sqs, geobounds, radius):
         geopoly = None
         if geobounds:
             geopoly = parseGeoBounds(geobounds)
@@ -183,19 +184,27 @@ class ApiProcess(object):
         for s in sqs:
             s.object.distance = s.distance
             if s.location:
-                if self.location.bounding:
-                    if self.location.bounding.contains(s.location):
-                        s.object.bounded = True
-                        self.__append_if_within__(newsqs, s, geopoly)
-                    else:
-                        if self.location.bounding.distance(s.location) * DEG_TO_M <= DEF_RADIUS_M:
-                            s.object.bounded = False
-                            self.__append_if_within__(newsqs, s, geopoly)
+                if self.location.bounding and self.location.bounding.contains(s.location):
+                    s.object.bounded = True
+                    self.__append_if_within__(newsqs, s, geopoly)
                 else:
-                    if self.userLocation().distance(s.location) * DEG_TO_M <= DEF_RADIUS_M:
+                    newsqs.append(s)
+        if geopoly or radius:
+            newsqs2 = []
+            for s in newsqs:
+                if not s.location:
+                    newsqs2.append(s)
+                elif geopoly or radius:
+                    loc = self.userLocation()
+                    if geopoly and loc.distance(s.location) * DEG_TO_M <= DEF_RADIUS_M:
                         s.object.bounded = False
-                        self.__append_if_within__(newsqs, s, geopoly)
-        return newsqs 
+                        self.__append_if_within__(newsqs2, s, geopoly)
+                    elif radius and loc.distance(s.location) * DEG_TO_M <= Distance(m=radius).m:
+                        s.object.bounded = False
+                        newsqs2.append(s)
+            return newsqs2 
+        else:
+            return newsqs
 
     def __append_if_within__(self, ls, obj, poly):
         if poly:

@@ -11,19 +11,15 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
 
     has_physical_business = indexes.BooleanField(model_attr='has_physical_business', null=True)
     has_online_business = indexes.BooleanField(model_attr='has_online_business', null=True)
-    has_bitcoin_discount = indexes.DecimalField(model_attr='has_online_business', null=True)
+    has_bitcoin_discount = indexes.DecimalField(model_attr='has_bitcoin_discount', null=True)
 
     content_auto = indexes.EdgeNgramField(model_attr='name')
 
     def prepare(self, obj):
         data = super(BusinessIndex, self).prepare(obj)
-        minLevel = [c.level for c in obj.categories.all()]
-        if minLevel == 1:
-            data['boost'] = 1.1
-        elif minLevel == 2:
-            data['boost'] = 1.05
-        elif minLevel == 3:
-            data['boost'] = 1.0255
+        minLevel = min([c.level for c in obj.categories.all()], 0)
+        if minLevel >= 1:
+            data['boost'] = (1.0 + (1.0 / minLevel))
         return data
 
     def prepare_categories(self, obj):
