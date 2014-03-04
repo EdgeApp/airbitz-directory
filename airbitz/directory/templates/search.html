@@ -13,7 +13,8 @@
         <div class="col-sm-12">
             <h1 class="search-title hidden-xs hidden-sm">Bitcoin Businesses On the Web</h1>
             <h1 class="search-title visible-xs visible-sm">Search Results</h1>
-            <hr />
+            <hr style="margin-bottom: 7px;" />
+            {% bootstrap_paginate page_obj range=10 %}
         </div>
     </div>
     <div class="results-grid list-group row">
