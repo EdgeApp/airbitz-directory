@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'bootstrap_pagination',
     'rest_framework',
     'south',
+    'rest_framework_swagger',
 
     'restapi',
     'location',
@@ -62,7 +63,6 @@ INSTALLED_APPS = (
 )
 if DEBUG:
     INSTALLED_APPS += (
-        'rest_framework_swagger',
         'django_extensions',
     )
 
