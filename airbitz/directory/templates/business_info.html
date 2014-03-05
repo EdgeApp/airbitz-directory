@@ -236,15 +236,16 @@
     {{ block.super }}
     <script type="text/javascript">
         $(function() {
-            var mapUrl = GMaps.staticMapURL({
                 size: [640, 150],
+            var mapImgUrl = GMaps.staticMapURL({
                 lat: {{ biz.center.y }},
                 lng: {{ biz.center.x }},
                 markers: [
                     { lat: {{ biz.center.y }}, lng: {{ biz.center.x }} }
                 ]
             });
-            $('<img/>').attr('src', mapUrl).prependTo('#map');
+
+            $('<img/>').attr('src', mapImgUrl).prependTo('#map');
         });
     </script>
 {% endblock %}

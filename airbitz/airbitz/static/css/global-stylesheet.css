@@ -350,13 +350,45 @@ body .top-bg {
     height: 525px;
   }
 }
-.location-search-info .map-container #map .map-marker-name {
+.location-search-info .map-container #map .map-marker-popup {
+  max-width: 300px;
+}
+.location-search-info .map-container #map .map-marker-popup .map-marker-image {
+  float: left;
+  width: 65px;
+  height: 65px;
+  margin-right: 10px;
+}
+.location-search-info .map-container #map .map-marker-popup .map-marker-info {
+  float: left;
+  max-width: 215px;
+  height: 65px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.location-search-info .map-container #map .map-marker-popup .map-marker-name {
   font: "Open Sans";
   font-size: 18px;
   font-weight: 400;
 }
-.location-search-info .map-container #map .map-marker-cat {
+.location-search-info .map-container #map .map-marker-popup .map-marker-links a {
+  margin-top: 0;
+}
+.location-search-info .map-container #map .map-marker-popup .map-marker-address {
+  line-height: 12px;
+}
+.location-search-info .map-container #map .map-marker-popup .map-marker-categories {
+  float: left;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.location-search-info .map-container #map .map-marker-popup .map-marker-categories .map-marker-cat {
+  float: left;
   margin-right: 4px;
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 11px;
 }
 .location-search-info .pagination-container {
   top: 60px;

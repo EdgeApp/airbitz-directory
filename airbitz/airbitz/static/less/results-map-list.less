@@ -19,13 +19,49 @@
                 height: 525px;
             }
 
-            .map-marker-name {
-                font: "Open Sans";
-                font-size: 18px;
-                font-weight: 400;
-            }
-            .map-marker-cat {
-                margin-right: 4px;
+            .map-marker-popup {
+                max-width: 300px;
+
+                .map-marker-image {
+                    float: left;
+                    width: 65px;
+                    height: 65px;
+                    margin-right: 10px;
+                }
+                .map-marker-info {
+                    float: left;
+                    max-width: 215px;
+                    height: 65px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+                .map-marker-name {
+                    font: "Open Sans";
+                    font-size: 18px;
+                    font-weight: 400;
+                }
+                .map-marker-links {
+                    a {
+                        margin-top: 0;
+                    }
+                }
+                .map-marker-address {
+                    line-height: 12px;
+                }
+                .map-marker-categories {
+                    float: left;
+                    width: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+
+                    .map-marker-cat {
+                        float: left;
+                        margin-right: 4px;
+                        margin-top: 4px;
+                        font-size: 11px;
+                        line-height: 11px;
+                    }
+                }
             }
         }
     }
