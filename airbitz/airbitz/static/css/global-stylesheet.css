@@ -158,7 +158,13 @@ body {
   font: 14px/24px "Open Sans", Helvetica, Arial, sans-serif;
 }
 body .top-bg {
+  z-index: -1;
   display: none;
+  -webkit-filter: blur(35px);
+  -moz-filter: blur(35px);
+  -o-filter: blur(35px);
+  -ms-filter: blur(35px);
+  filter: blur(35px);
 }
 @media (min-width: 992px) {
   body .top-bg {
@@ -166,10 +172,17 @@ body .top-bg {
     position: absolute;
     top: 0;
     width: 100%;
-    height: 390px;
+    height: 700px;
     border-bottom: 2px solid #F8F8F0;
     background: #F5F5F0;
   }
+}
+body .main-content {
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-box-shadow: 0 0 0 2px #ffffff;
+  box-shadow: 0 0 0 2px #ffffff;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 .main-content {
   /* CUSTOMIZE THE CAROUSEL
@@ -281,6 +294,10 @@ body .top-bg {
 .biz-social-buttons .btn {
   margin-bottom: 5px;
 }
+.biz-info-two .panel {
+  -webkit-box-shadow: 0 0 0 2px #ffffff;
+  box-shadow: 0 0 0 2px #ffffff;
+}
 .biz-info-two .panel .panel-image {
   overflow: hidden;
 }
@@ -320,6 +337,8 @@ body .top-bg {
 }
 .biz-info-three .biz-hours td {
   width: 100px;
+  border-color: white;
+  border-width: 2px;
 }
 .biz-info-three .biz-gallery .biz-gallery-image {
   margin-bottom: 15px;
