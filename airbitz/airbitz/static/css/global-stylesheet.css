@@ -355,8 +355,8 @@ body .top-bg {
 }
 .location-search-info .map-container #map .map-marker-popup .map-marker-image {
   float: left;
-  width: 65px;
-  height: 65px;
+  max-width: 65px;
+  max-height: 65px;
   margin-right: 10px;
 }
 .location-search-info .map-container #map .map-marker-popup .map-marker-info {
