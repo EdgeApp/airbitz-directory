@@ -30,6 +30,15 @@
         {% endblock result_grid_items %}
     </div><!-- /.results-grid -->
 
+    <div class="row">
+        <div class="col-sm-12">
+            {% bootstrap_paginate page_obj range=15 %}
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-sm-12"><strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_per_page }}</strong> Shown on Page</div>
+            </div>
+        </div>
+    </div>
+
     {% else %}
 
     <div class="results-map-list row">
