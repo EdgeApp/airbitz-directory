@@ -269,6 +269,11 @@ body .main-content {
     margin-top: 120px;
   }
 }
+.biz-info-header .biz-name {
+  letter-spacing: -1.5px;
+  font-size: 42px;
+  font-weight: 300;
+}
 .biz-info-header .admin-edit {
   position: absolute;
   right: 15px;
@@ -422,6 +427,8 @@ body .main-content {
 .results-map-list .search-title {
   margin-top: 0;
   margin-bottom: 20px;
+  font-weight: 900;
+  color: #333333;
 }
 .results-map-list .result-list-item {
   padding: 12px 0;
@@ -462,7 +469,7 @@ body .main-content {
   margin: 0;
 }
 .results-map-list .biz-name a {
-  color: #333;
+  color: #333333;
 }
 .results-map-list .biz-name a:hover {
   text-decoration: none;
@@ -502,6 +509,9 @@ body .main-content {
   .results-map-list .biz-description {
     clear: both;
   }
+}
+.results-header h2 {
+  font-weight: 900;
 }
 .results-header .icon-bitcoin-map {
   width: 80px;
@@ -544,7 +554,7 @@ body .main-content {
   -o-transition: 0.3s ease;
 }
 .biz-result .biz-name {
-  font-weight: 300;
+  font-weight: 900;
   letter-spacing: -1px;
 }
 .biz-result .biz-name a {

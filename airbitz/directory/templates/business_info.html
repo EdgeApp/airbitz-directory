@@ -12,7 +12,7 @@
 
     <div class="row" style="margin-bottom: 30px;">
         <div class="biz-info-header col-xs-12">
-            <h1 clas="biz-name">{{ biz.name }}</h1>
+            <h1 class="biz-name">{{ biz.name }}</h1>
             {% if user.is_superuser %}
                 <a class="admin-edit pull-right btn btn-danger btn-sm" href="{% url 'mgmt_biz_view' biz.id %}">Edit</a>
             {% endif %}
