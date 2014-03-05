@@ -1,28 +1,25 @@
 @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
-.navbar-inverse {
-  background-color: #2291cf;
+.navbar-ab {
+  background-color: white;
   border: #eee;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-.navbar-inverse .navbar-brand {
+.navbar-ab .navbar-brand {
   padding: 0;
 }
-.navbar-inverse .navbar-brand .logo {
-  height: 50px;
+.navbar-ab .navbar-brand .logo {
+  height: 40px;
+  margin-top: 5px;
   margin-left: 15px;
 }
-.navbar-inverse .navbar-nav > .active a,
-.navbar-inverse .navbar-nav > .active > a:hover,
-.navbar-inverse .navbar-nav > .active > a:focus {
-  background-color: rgba(0, 0, 0, 0.2);
+.navbar-ab .navbar-nav > li > a {
+  color: #2291cf;
 }
-.navbar-inverse .navbar-nav > li > a {
-  color: #eee;
-}
-.navbar-inverse .navbar-nav > .open > a,
-.navbar-inverse .navbar-nav > .open > a:hover,
-.navbar-inverse .navbar-nav > .open > a:focus {
+.navbar-ab .navbar-nav > .open > a,
+.navbar-ab .navbar-nav > .open > a:hover,
+.navbar-ab .navbar-nav > .open > a:focus {
   background: #80c341;
+  color: white;
 }
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
 .navbar-wrapper {
@@ -45,7 +42,7 @@
   position: relative;
   top: 7px;
   left: -5px;
-  color: #4CB7F3;
+  color: #999999;
 }
 #navbar-search .popover {
   left: 327.5;

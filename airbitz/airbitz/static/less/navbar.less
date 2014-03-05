@@ -3,8 +3,8 @@
 // --------------------------------------------------
 
 
-.navbar-inverse {
-    background-color: @ab-blue;
+.navbar-ab {
+    background-color: white;
     border: #eee;
     box-shadow: 0 0 10px rgba(0,0,0,.5);
 
@@ -12,7 +12,8 @@
         padding: 0;
 
         .logo {
-            height: 50px;
+            height: 40px;
+            margin-top: 5px;
             margin-left: 15px;
         }
     }
@@ -20,16 +21,17 @@
     .navbar-nav > .active a,
     .navbar-nav > .active > a:hover,
     .navbar-nav > .active > a:focus {
-        background-color: rgba(0,0,0,.2);
+//        background-color: rgba(0,0,0,.7);
     }
     .navbar-nav > li > a {
-        color: #eee;
+        color: @ab-blue;
     }
 
     .navbar-nav > .open > a,
     .navbar-nav > .open > a:hover,
     .navbar-nav > .open > a:focus {
         background: @ab-green;
+        color: white;
     }
 }
 
@@ -62,7 +64,7 @@
         position: relative;
         top: 7px;
         left: -5px;
-        color: #4CB7F3;
+        color: @gray-light;
     }
     .popover {
         left: 327.5;
