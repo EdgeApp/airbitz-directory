@@ -320,15 +320,23 @@ body .main-content {
 }
 .biz-info-two .panel .panel-image #map img {
   position: relative;
-  top: 62px;
   left: 50%;
-  margin: -320px;
+  top: 150px;
+  margin: -630px;
+  zoom: .5;
 }
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+@media (max-width: 992px) {
+  .biz-info-two .panel .panel-image #map img {
+    zoom: 1;
+    top: 75px;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192ddpx) {
   .biz-info-two .panel .panel-image #map img {
     /* Retina-specific stuff here */
     width: 630px;
     height: 300px;
+    margin: -315px;
   }
 }
 .biz-info-two .panel .panel-image #map .get-directions {
@@ -376,6 +384,17 @@ body .main-content {
   .biz-info-three .biz-gallery .biz-gallery-item .biz-gallery-img.col-md-4:nth-child(n+4) {
     margin-top: 15px;
   }
+}
+.results-header h2 {
+  font-weight: 900;
+  margin: 60px 0 30px 0;
+}
+.results-header .icon-bitcoin-map {
+  width: 80px;
+}
+.results-area .search-title {
+  margin: 0;
+  font-weight: 900;
 }
 .location-search-info .map-container {
   top: 150px;
@@ -537,16 +556,6 @@ body .main-content {
   .results-map-list .biz-description {
     clear: both;
   }
-}
-.results-header h2 {
-  font-weight: 900;
-}
-.results-header .icon-bitcoin-map {
-  width: 80px;
-}
-.results-area .search-title {
-  margin: 0;
-  font-weight: 900;
 }
 .biz-result .glyphicon {
   margin-right: 5px;

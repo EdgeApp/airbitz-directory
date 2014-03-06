@@ -217,7 +217,8 @@
 
     {% if results %}
         <div class="results-header row">
-            <h2 class="col-xs-12" style="margin: 60px 0 30px 0;"><img class="icon-bitcoin-map" src="{{ STATIC_URL }}img/icon-bitcoin-map.png" /> Nearby Businesses Accepting Bitcoin</h2>
+            <h2 class="col-xs-12 hidden-xs hidden-sm"><img class="icon-bitcoin-map" src="{{ STATIC_URL }}img/icon-bitcoin-map.png" /> Nearby Businesses Accepting Bitcoin</h2>
+            <h2 class="col-xs-12 visible-xs visible-sm"><img class="icon-bitcoin-map" src="{{ STATIC_URL }}img/icon-bitcoin-map.png" /> Nearby Businesses</h2>
         </div>
 
         <div id="" class="results-grid list-group row">
@@ -242,6 +243,7 @@
     <script type="text/javascript">
         $(function() {
             var mapImgUrl = GMaps.staticMapURL({
+                scale: 2,
                 lat: {{ biz.center.y }},
                 lng: {{ biz.center.x }},
                 markers: [
