@@ -20,6 +20,7 @@ class OsmRelation(models.Model):
     osm_id = models.BigIntegerField()
     admin_level = models.SmallIntegerField()
     name = models.CharField(max_length=2000)
+    country_code = models.CharField(max_length=20)
     geom = models.GeometryField(null=False)
     centroid = models.PointField(null=False)
     objects = models.GeoManager()
