@@ -9,26 +9,28 @@
 {% block body %}
 
     {% if request.GET.location == 'On the Web' %}
-    <div class="row">
-        <div class="col-sm-12">
-            <h1 class="search-title hidden-xs hidden-sm">Bitcoin Businesses On the Web</h1>
-            <h1 class="search-title visible-xs visible-sm">Search Results</h1>
-            {% bootstrap_paginate page_obj range=15 %}
-            <div class="row" style="margin-bottom: 20px;">
-                <div class="col-sm-12"><strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_per_page }}</strong> Shown on Page</div>
+    <div class="results-area">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="search-title hidden-xs hidden-sm">Bitcoin Businesses On the Web</h1>
+                <h1 class="search-title visible-xs visible-sm">Search Results</h1>
+                {% bootstrap_paginate page_obj range=15 %}
+                <div class="row" style="margin-bottom: 20px;">
+                    <div class="col-sm-12"><strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_per_page }}</strong> Shown on Page</div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="results-grid list-group row">
 
-        {% block result_grid_items %}
-            {% for rbiz in results %}
-                {% include '_result_grid_item.html' %}
-            {% empty %}
-                <p>No results found.</p>
-            {% endfor %}
-        {% endblock result_grid_items %}
-    </div><!-- /.results-grid -->
+        <div class="results-grid list-group row">
+            {% block result_grid_items %}
+                {% for rbiz in results %}
+                    {% include '_result_grid_item.html' %}
+                {% empty %}
+                    <p>No results found.</p>
+                {% endfor %}
+            {% endblock result_grid_items %}
+        </div>
+    </div><!-- /.results-area -->
 
     <div class="row">
         <div class="col-sm-12">

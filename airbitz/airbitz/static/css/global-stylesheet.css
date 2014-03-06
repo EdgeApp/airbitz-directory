@@ -1,4 +1,9 @@
 @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+.navbar-admin .btn {
+  position: relative;
+  top: 10px;
+  margin: 0 15px;
+}
 .navbar-ab {
   background-color: white;
   border: #eee;
@@ -272,13 +277,13 @@ body .main-content {
 .biz-info-header .biz-name {
   letter-spacing: -1.5px;
   font-size: 42px;
-  font-weight: 300;
+  font-weight: 900;
 }
-.biz-info-header .admin-edit {
+.biz-info-header .social-share {
   position: absolute;
   right: 15px;
   top: 25px;
-  z-index: 9999;
+  z-index: 1;
 }
 .biz-info-one {
   margin-bottom: 30px;
@@ -464,7 +469,8 @@ body .main-content {
   }
 }
 .results-map-list .biz-name {
-  font-weight: 300;
+  font-size: 24px;
+  font-weight: 900;
   letter-spacing: -1.25px;
   margin: 0;
 }
@@ -516,9 +522,10 @@ body .main-content {
 .results-header .icon-bitcoin-map {
   width: 80px;
 }
-.results-grid .search-title {
+.results-area .search-title {
   margin-top: 0;
   margin-bottom: 20px;
+  font-weight: 900;
 }
 .biz-result .glyphicon {
   margin-right: 5px;
