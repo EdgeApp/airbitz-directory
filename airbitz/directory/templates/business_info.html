@@ -200,12 +200,12 @@
             <div class="biz-gallery row" style="margin-bottom: 30px;">
                 {% for img in imgs %}
                     {% if img.image %}
-                        <a rel="biz-images" class="swipebox biz-gallery-item" href="{{ img.url }}">
-                            {% thumbnail '400x300' img.image as th %}
-                            <img src="{{ th.url}} " style="height: {{ th.height }}; width: {{ th.width }}" class="img-responsive col-sm-6 col-md-4">
+                        <a rel="biz-images" class="biz-gallery-item swipebox" href="{{ img.url }}">
+                            {% generateimage 'ab:gallerythumb' source=img.image as th %}
+                            <div class="biz-gallery-img col-sm-6 col-md-4">
+                                <img src="{{ th.url}} " class="img-responsive">
+                            </div>
                         </a>
-                    {% else %}
-                        <img data-src="holder.js/400x300/sky" class="img-responsive">
                     {% endif %}
                 {% endfor %}
             </div>
