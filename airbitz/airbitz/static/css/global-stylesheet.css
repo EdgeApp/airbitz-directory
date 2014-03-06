@@ -327,8 +327,8 @@ body .main-content {
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .biz-info-two .panel .panel-image #map img {
     /* Retina-specific stuff here */
-    width: 640px;
-    height: 150px;
+    width: 630px;
+    height: 300px;
   }
 }
 .biz-info-two .panel .panel-image #map .get-directions {
@@ -345,10 +345,14 @@ body .main-content {
 .biz-info-three .biz-hours {
   margin-bottom: 30px;
 }
-.biz-info-three .biz-hours td {
+.biz-info-three .biz-hours table td {
   width: 100px;
-  border-color: white;
   border-width: 2px;
+}
+@media (min-width: 992px) {
+  .biz-info-three .biz-hours table td {
+    border-color: white;
+  }
 }
 .biz-info-three .biz-gallery .biz-gallery-item .biz-gallery-img {
   margin-bottom: 30px;
@@ -356,6 +360,7 @@ body .main-content {
 .biz-info-three .biz-gallery .biz-gallery-item .biz-gallery-img img {
   -webkit-box-shadow: 0 0 5px #333333;
   box-shadow: 0 0 5px #333333;
+  width: 100%;
 }
 .biz-info-three .biz-gallery .biz-gallery-item .biz-gallery-img img:hover {
   transition: 0.3s ease;

@@ -202,7 +202,7 @@
                     {% if img.image %}
                         <a rel="biz-images" class="biz-gallery-item swipebox" href="{{ img.url }}">
                             {% generateimage 'ab:gallerythumb' source=img.image as th %}
-                            <div class="biz-gallery-img col-sm-6 col-md-4">
+                            <div class="biz-gallery-img col-xs-12 col-sm-6 col-md-4">
                                 <img src="{{ th.url}} " class="img-responsive">
                             </div>
                         </a>

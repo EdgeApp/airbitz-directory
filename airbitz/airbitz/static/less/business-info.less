@@ -59,8 +59,8 @@
                     (-webkit-min-device-pixel-ratio: 2),
                     (min-resolution: 192dpi) {
                         /* Retina-specific stuff here */
-                        width: 640px;
-                        height: 150px;
+                        width: 1260px/2;
+                        height: 600px/2;
                     }
                 }
 
@@ -97,10 +97,16 @@
     .biz-hours {
         margin-bottom: 30px;
 
-        td {
-            width: 100px;
-            border-color: white;
-            border-width: 2px;
+        table {
+
+            td {
+                width: 100px;
+                border-width: 2px;
+
+                @media(min-width: @screen-md-min) {
+                    border-color: white;
+                }
+            }
         }
     }
 
@@ -113,6 +119,7 @@
 
                 img {
                     .box-shadow(0 0 5px @gray-dark);
+                    width: 100%;
 
                     &:hover {
                         .transition(.3s ease);
@@ -120,7 +127,7 @@
                         .box-shadow(0 0 10px @gray-dark);
                     }
                 }
-                @media(min-width: @screen-md-min){
+                @media(min-width: @screen-md-min) {
                     &.col-md-4:nth-child(n+4) {
                         margin-top: 15px;
                     }
