@@ -162,6 +162,7 @@ PIPELINE_CSS = {
     'management': {
         'source_filenames': (
             'extras/select2/select2.css',
+            'css/global-management.css',
         ),
         'output_filename': 'css/management.css',
         'extra_context': {

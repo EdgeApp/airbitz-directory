@@ -1,13 +1,19 @@
 {% extends 'base.html' %}
 
+{% block admin_buttons %}
+    {{ block.super }}
+    <a class="btn btn-primary pull-right" href="{% url 'business_info' biz.id %}" style="margin-left: 5px;" title="View Business Listing">
+        <i class="fa fa-file-o"></i> View</a>
+    <a id="mgmt_biz_copy" class="btn btn-success pull-right" href="javascript:void(0)" title="Copy Business Listing">
+        <i class="fa fa-copy"></i> Copy</a>
+{% endblock admin_buttons %}
+
 {% block body %}
-    <div class="row">
-        <div class="col-sm-12">
-            <a class="pull-left btn btn-default" href="{% url 'mgmt_dashboard' %}">Back to Dashboard</a>
-            <a class="pull-right btn btn-primary" href="{% url 'business_info' biz.id %}">Web View</a>
-        </div>
+
+    <div class="admin-heads-up row">
+        <h1 class="biz-name col-sm-12">{{ biz.name }}</h1>
     </div>
-    <hr />
+
     <div class="row">
         <div class="col-sm-12">
             <ul class="nav nav-tabs">
@@ -21,13 +27,6 @@
     {% block bizbody %}
     {% endblock bizbody %}
 
-    <div class="row">
-        <hr />
-        <div class="col-sm-12">
-            <a id="mgmt_biz_copy" class="btn btn-primary" href="javascript:void(0)">Copy Business</a>
-        </div>
-    </div>
-    <br />
 {% endblock body %}
 
 {% block javascript %}
