@@ -5,8 +5,8 @@
 
 {% block head %}
     {{ block.super }}
-    {% compressed_css 'management' %}
     {% compressed_css 'dataTables' %}
+    {% compressed_css 'management' %}
     <style>
         .panel-tabbed {
             border-top: 0px;
@@ -17,6 +17,7 @@
 {% endblock head %}
 
 {% block search %}
+    {{ block.super }}
 {% endblock search %}
 
 {% block body %}

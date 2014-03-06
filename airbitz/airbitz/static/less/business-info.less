@@ -2,11 +2,17 @@
 // BUSINESS INFO SINGLE LISTING PAGES
 .biz-info-header {
 
-    .admin-edit {
+    .biz-name {
+        letter-spacing: -1.5px;
+        font-size: 42px;
+        font-weight: 900;
+    }
+
+    .social-share {
         position: absolute;
         right: 15px;
         top: 25px;
-        z-index: 9999;
+        z-index: 1;
     }
 }
 
@@ -31,6 +37,7 @@
 .biz-info-two {
 
     .panel {
+        .box-shadow(0 0 0 2px white);
 
         .panel-image {
             overflow: hidden;
@@ -92,17 +99,31 @@
 
         td {
             width: 100px;
+            border-color: white;
+            border-width: 2px;
         }
     }
 
     .biz-gallery {
 
-        .biz-gallery-image {
-            margin-bottom: 15px;
+        .biz-gallery-item {
 
-            @media(min-width: @screen-md-min){
-                &.col-md-4:nth-child(n+4) {
-                    margin-top: 15px;
+            .biz-gallery-img {
+                margin-bottom: 30px;
+
+                img {
+                    .box-shadow(0 0 5px @gray-dark);
+
+                    &:hover {
+                        .transition(.3s ease);
+                        outline: 5px solid @gray-lighter;
+                        .box-shadow(0 0 10px @gray-dark);
+                    }
+                }
+                @media(min-width: @screen-md-min){
+                    &.col-md-4:nth-child(n+4) {
+                        margin-top: 15px;
+                    }
                 }
             }
         }

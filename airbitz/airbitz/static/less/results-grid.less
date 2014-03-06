@@ -1,9 +1,18 @@
+.results-header {
 
-.results-grid {
+    h2 {
+        font-weight: 900;
+    }
+    .icon-bitcoin-map {
+        width: 80px;
+    }
+}
+
+.results-area {
 
     .search-title {
-        margin-top: 0;
-        margin-bottom: 20px;
+        margin: 0;
+        font-weight: 900;
     }
 }
 
@@ -17,23 +26,25 @@
 
         .thumb-bg {
             height: 224px;
+            max-height: 650px;
             background: white;
             position: relative;
             overflow: hidden;
-        }
-        .biz-img {
-            max-width: 100%;
-            margin: 0 auto;
-            .border-top-radius(5px);
 
-            &:hover {
-                .transition(.3s ease);
+            .biz-img {
+                width: 100%;
+                margin: 0 auto;
+                .border-top-radius(5px);
+
+                &:hover {
+                    .transition(.3s ease);
+                }
             }
         }
     }
 
     .biz-name {
-        font-weight: 300;
+        font-weight: 900;
         letter-spacing: -1px;
 
         a {

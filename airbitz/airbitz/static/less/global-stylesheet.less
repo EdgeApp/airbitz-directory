@@ -22,17 +22,24 @@ body {
     font: 14px/24px "Open Sans", Helvetica, Arial, sans-serif;
 
     .top-bg {
+        z-index: -1;
         display: none;
+        .blur-all(35px);
 
         @media(min-width: @screen-md) {
             display: block;
             position: absolute;
             top: 0;
             width: 100%;
-            height: 390px;
+            height: 700px;
             border-bottom: 2px solid #F8F8F0;
             background: #F5F5F0;
         }
+    }
+    .main-content {
+        background: rgba(255,255,255,.7);
+        .box-shadow(0 0 0 2px white);
+        .border-top-radius(5px);
     }
 } // body
 

@@ -77,4 +77,10 @@ jQuery(window).on('load', function(){
         transform: 'scale(1)'
     });
 
+    $('.biz-gallery').masonry({
+        itemSelector: '.biz-gallery-img',
+        opacity: 1,
+        transform: 'scale(1)'
+    });
+
 });

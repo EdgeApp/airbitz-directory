@@ -1,9 +1,16 @@
 {% extends 'mgmt_biz_base.html' %}
 {% load imagekit %}
+{% load compressed %}
 
 {% block title%} {{ biz.name }} - Images {% endblock %}
 
+{% block head %}
+    {{ block.super }}
+    {% compressed_css 'management' %}
+{% endblock head %}
+
 {% block search %}
+    {{ block.super }}
 {% endblock search %}
 
 {% block bizbody %}

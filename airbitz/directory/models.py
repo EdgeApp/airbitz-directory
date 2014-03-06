@@ -3,6 +3,7 @@ from django.contrib.gis.db import models
 from django.core.files.base import ContentFile
 from django.core.files.base import File
 from django.utils.formats import time_format
+from imagekit import ImageSpec, register
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, ResizeToFit
 import os
@@ -145,6 +146,12 @@ class Sliver(ResizeToFit):
         processor = ResizeToFill(width=self.width, height=self.sliverSize)
         return processor.process(img)
 
+class GalleryThumbnail(ImageSpec):
+    processors = [ResizeToFit(260,400)]
+    format = 'JPEG'
+    options = {'quality': 80}
+
+register.generator('ab:gallerythumb', GalleryThumbnail)
 
 class BusinessImage(models.Model):
     image = models.ImageField(upload_to='business_images', 

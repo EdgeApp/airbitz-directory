@@ -6,16 +6,22 @@
 
 {% block title%}{{ biz.name }}{% endblock %}
 
-{% block top_bg %}<div class="top-bg">&nbsp;</div>{% endblock %}
+{% block top_bg %}<div class="top-bg blur-all" style="background: url('{{ biz.landing_image.image.url }}')top center;">&nbsp;</div>{% endblock %}
+
+{% block admin_buttons %}
+    {{ block.super }}
+    {% if user.is_superuser %}
+        <a class="admin-edit btn btn-danger pull-right" href="{% url 'mgmt_biz_view' biz.id %}"><i class="fa fa-edit"></i> Edit</a>
+    {% endif %}
+{% endblock admin_buttons %}
 
 {% block body %}
 
+
     <div class="row" style="margin-bottom: 30px;">
         <div class="biz-info-header col-xs-12">
-            <h1 clas="biz-name">{{ biz.name }}</h1>
-            {% if user.is_superuser %}
-                <a class="admin-edit pull-right btn btn-danger btn-sm" href="{% url 'mgmt_biz_view' biz.id %}">Edit</a>
-            {% endif %}
+            <h1 class="biz-name">{{ biz.name }}</h1>
+            <button class="social-share btn btn-success pull-right" href="#"><span class="fa fa-share"></span> Share</button>
         </div>
 
         <div class="biz-info-one col-md-6">
@@ -33,7 +39,7 @@
         <div class="biz-social-buttons col-md-6">
             {% for s in biz.socialid_set.all %}
                 {% if s.social_type != "osm" %}
-                <a class="btn btn-primary" href="{{ s.social_url }}" target="_blank">
+                <a class="btn btn-default" href="{{ s.social_url }}" target="_blank">
                     <i class="fa {{ s.social_icon }}" data-toggle="tooltip" data-placement="bottom" title="{{ s.social_type }}"></i> {{ s.social_type|title }}
                 </a>
                 {% endif %}
@@ -115,12 +121,11 @@
                     {% endif %}
                 </div>
 
-                <div class="panel-footer text-center">
-                    <div class="btn-group" style="">
-                        <button class="btn btn-primary" href="#"><span class="fa fa-picture-o"></span> Submit Photo</button>
-                        <button class="btn btn-primary" href="#"><span class="fa fa-share"></span> Share</button>
-                    </div>
-                </div>
+{#                <div class="panel-footer text-center">#}
+{#                    <div class="btn-group" style="">#}
+{#                        <button class="btn btn-default" href="#"><span class="fa fa-picture-o"></span> Submit Photo</button>#}
+{#                    </div>#}
+{#                </div>#}
             </div>
         </div>
 
@@ -138,7 +143,7 @@
                     </thead>
 
                     <tr>
-                        <td>Open</td>
+                        <td><strong>Open</strong></td>
                         <td>
                             <span class="label label-info">{{ biz_hours.Sun.0 }}</span>
                         </td>
@@ -163,7 +168,7 @@
                     </tr>
 
                     <tr>
-                        <td>Close</td>
+                        <td><strong>Close</strong></td>
                         <td>
                             <span class="label label-default">{{ biz_hours.Sun.1 }}</span>
                         </td>
@@ -195,12 +200,12 @@
             <div class="biz-gallery row" style="margin-bottom: 30px;">
                 {% for img in imgs %}
                     {% if img.image %}
-                        <a rel="biz-images" class="swipebox biz-gallery-item" href="{{ img.url }}">
-                            {% thumbnail '400x300' img.image as th %}
-                            <img src="{{ th.url}} " style="height: {{ th.height }}; width: {{ th.width }}" class="img-responsive col-sm-6 col-md-4">
+                        <a rel="biz-images" class="biz-gallery-item swipebox" href="{{ img.url }}">
+                            {% generateimage 'ab:gallerythumb' source=img.image as th %}
+                            <div class="biz-gallery-img col-sm-6 col-md-4">
+                                <img src="{{ th.url}} " class="img-responsive">
+                            </div>
                         </a>
-                    {% else %}
-                        <img data-src="holder.js/400x300/sky" class="img-responsive">
                     {% endif %}
                 {% endfor %}
             </div>
@@ -211,8 +216,8 @@
 
 
     {% if results %}
-        <div class="row">
-            <h2 class="col-xs-12" style="margin: 60px 0 30px 0;"><i class="fa fa-map-marker"></i> Nearby Businesses Accepting Bitcoin</h2>
+        <div class="results-header row">
+            <h2 class="col-xs-12" style="margin: 60px 0 30px 0;"><img class="icon-bitcoin-map" src="{{ STATIC_URL }}img/icon-bitcoin-map.png" /> Nearby Businesses Accepting Bitcoin</h2>
         </div>
 
         <div id="" class="results-grid list-group row">
@@ -236,15 +241,15 @@
     {{ block.super }}
     <script type="text/javascript">
         $(function() {
-            var mapUrl = GMaps.staticMapURL({
-                size: [640, 150],
+            var mapImgUrl = GMaps.staticMapURL({
                 lat: {{ biz.center.y }},
                 lng: {{ biz.center.x }},
                 markers: [
                     { lat: {{ biz.center.y }}, lng: {{ biz.center.x }} }
                 ]
             });
-            $('<img/>').attr('src', mapUrl).prependTo('#map');
+
+            $('<img/>').attr('src', mapImgUrl).prependTo('#map');
         });
     </script>
 {% endblock %}

@@ -90,3 +90,11 @@
     -o-background-size: @cover;
     background-size: @cover;
 }
+
+.blur-all(@radius: 25px) {
+    -webkit-filter: blur(@radius);
+    -moz-filter: blur(@radius);
+    -o-filter: blur(@radius);
+    -ms-filter: blur(@radius);
+    filter: blur(@radius);
+}

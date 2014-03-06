@@ -13,10 +13,15 @@ function getMapMarkerContent(marker, markerJSON) {
         var m = markerJSON[i];
 
         if (marker.getTitle() === m.name) {
-            var html =  '<strong class="map-marker-name">' + m.name + '</strong><br />' +
-                        m.cats + '<br />' +
-                        '<a href="' + m.url + '">View Listing</a><br />' +
-                        '<span>' + m.address + '</span>';
+            var html =  '<div class="map-marker-popup">' +
+                            '<div class="map-marker-image"><a href="' + m.url + '">' + m.img + '</a></div>' +
+                            '<div class="map-marker-info single-line">' +
+                                '<div class="map-marker-name">' + m.name + '</div>' +
+                                '<div class="map-marker-address">' + m.address + '</div>' +
+                                '<div class="map-marker-links"><a href="' + m.url + '">View Listing</a></div>' +
+                            '</div>' +
+                            '<div class="map-marker-categories">' + m.cats + '</div>' +
+                        '</div>';
         }
     }
     return html;

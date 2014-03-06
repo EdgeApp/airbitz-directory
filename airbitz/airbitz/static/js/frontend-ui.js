@@ -53,10 +53,10 @@ $(function() {
         }
     });
 
-    $('#term, #near').on('click', function(){
-        $('.tooltip').hide();
-    });
 
+    $('.navbar-admin .close').on('click', function() {
+        $(this).parents().eq(3).fadeOut();
+    });
 
 
 });
