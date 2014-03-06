@@ -25,7 +25,12 @@
 {% endblock head %}
 
 {% block search %}
+    {{ block.super }}
 {% endblock search %}
+
+{% block admin_buttons %}
+    {{ block.super }}
+{% endblock admin_buttons %}
 
 {% block bizbody %}
 <div id="bizapp">
