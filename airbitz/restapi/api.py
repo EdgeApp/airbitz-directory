@@ -12,6 +12,7 @@ from location.models import OsmRelation
 
 log=logging.getLogger("airbitz." + __name__)
 
+DEF_COUNTRY="US"
 DEF_POINT=Point((-117.124603, 33.028400))
 DEF_RADIUS=Distance(mi=100)
 DEF_IP='24.152.191.12'
@@ -101,6 +102,7 @@ class Location(object):
         self.bounding = None
         self.sortPoint = DEF_POINT
         self.userPoint = DEF_POINT
+        self.userCountry = DEF_COUNTRY
         # Start by IP Lookup to find point
         if ip:
             self.sortPoint = processGeoIp(ip)
@@ -108,6 +110,7 @@ class Location(object):
         if not self.sortPoint:
             self.sortPoint = DEF_POINT
             self.userPoint = DEF_POINT
+            self.userCountry = DEF_COUNTRY
         self.admin_level = 4
         if self.locationStr:
             self.filter_web_only = self.locationStr.lower() == 'web only'
@@ -117,6 +120,10 @@ class Location(object):
             self.filter_web_only = False
             self.filter_on_web = False
             self.filter_current_location = False
+        if self.isOnWeb():
+            qs = OsmRelation.objects.filter(admin_level=2, geom__contains=self.userPoint)
+            if len(qs) > 0:
+                self.userCountry = qs[0].country_code
         if not self.isCurrentLocation() and not self.isOnWeb() and locationStr:
             sqs = SearchQuerySet().models(OsmRelation).filter(content_auto=locationStr)
             sqs = sqs[:1]
@@ -132,6 +139,7 @@ class Location(object):
                 self.userPoint = geoloc;
                 if (self.bounding and self.bounding.contains(geoloc)) or not self.bounding:
                     self.sortPoint = geoloc;
+
 
     def isWebOnly(self):
         return self.filter_web_only
@@ -178,12 +186,23 @@ class ApiProcess(object):
             else:
                 sqs = sqs.order_by('-score')
             sqs = sqs.load_all()
+            sqs = self.__filer_on_web__(sqs)
         else:
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
             sqs = sqs.load_all()
             sqs = self.__geolocation_filter__(sqs, geopoly, radius)
         return [s.object for s in sqs]
+
+    def __filer_on_web__(self, sqs):
+        inCountry = []
+        outCountry = []
+        for s in sqs:
+            if s.object.country == self.location.userCountry:
+                inCountry.append(s)
+            else:
+                outCountry.append(s)
+        return inCountry + outCountry
 
     def __geolocation_filter__(self, sqs, geopoly, radius):
         newsqs = []
