@@ -72,7 +72,11 @@ def business_search(request):
     results = a.searchDirectory(term=term, category=category)
 
     request.session['nearText'] = location
-    results_per_page = 10
+    if location == 'On the Web':
+        results_per_page = 30
+    else:
+        results_per_page = 10
+
     paginator = Paginator(results, results_per_page)
 
     if request.GET.get('page'):

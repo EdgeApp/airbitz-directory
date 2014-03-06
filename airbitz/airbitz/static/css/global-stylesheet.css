@@ -154,6 +154,9 @@
 .label {
   font-weight: normal;
 }
+.pagination {
+  margin-bottom: 0;
+}
 body {
   margin: 0;
   padding-top: 75px;
@@ -523,8 +526,7 @@ body .main-content {
   width: 80px;
 }
 .results-area .search-title {
-  margin-top: 0;
-  margin-bottom: 20px;
+  margin: 0;
   font-weight: 900;
 }
 .biz-result .glyphicon {
