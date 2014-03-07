@@ -157,6 +157,7 @@ class AdminBusinessView(ListCreateAPIView):
                 l.append(self.formatDir(c, d))
             q = q.order_by(*l)
         q = q.annotate(ccount=Count('categories'))
+        print q.query
         return q
 
 class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
