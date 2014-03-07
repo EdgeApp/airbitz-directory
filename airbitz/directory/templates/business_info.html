@@ -57,13 +57,7 @@
 
                 <div class="panel-image">
                     <div id="map" class="img-responsive" style="width: 750px; height: 150px">
-                        <a class="get-directions btn btn-danger" target="_blank" href="https://maps.google.com/maps?saddr=current+location&daddr={{ biz.name|urlencode }}+
-                        {% if biz.address %}
-                            {{ biz.address|urlencode }}+{{ biz.admin3_name|urlencode }}+{{ biz.admin1_code|urlencode }}
-                        {% elif biz.center.y and biz.center.x %}
-                            loc:{{ biz.center.y|urlencode }}+{{ biz.center.x|urlencode }}
-                        {% endif %}
-                        ">Get Directions</a>
+                        <a class="get-directions btn btn-danger" target="_blank" href="{{ directions_url }}">Get Directions</a>
                     </div>
                 </div>
 
