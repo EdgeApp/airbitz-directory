@@ -128,7 +128,7 @@ class Business(models.Model):
         if self.address:
             destination = str(self.name)+ ' ' + str(self.address) + ' ' + str(self.admin3_name) + ' ' + str(self.admin1_code)
         elif lat and lon:
-            destination = 'loc:' + str(lat) + '+' + str(lon)
+            destination = 'loc:' + str(lat) + ' ' + str(lon)
         else:
             destination = self.name
         return gmaps_url + urlquote_plus(destination)
