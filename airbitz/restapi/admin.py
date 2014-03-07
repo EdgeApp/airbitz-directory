@@ -129,7 +129,7 @@ class AdminBusinessView(ListCreateAPIView):
 
     def get_queryset(self):
         search = self.request.QUERY_PARAMS.get('sSearch', None)
-        location = self.request.QUERY_PARAMS.get('location', None)
+        location = self.request.QUERY_PARAMS.get('adminLocation', None)
         bounds = self.request.QUERY_PARAMS.get('bounds', None)
         bizStatus = self.request.QUERY_PARAMS.get('status', None)
         cols = self.paramArray('mDataProp_', self.request)
@@ -157,7 +157,6 @@ class AdminBusinessView(ListCreateAPIView):
                 l.append(self.formatDir(c, d))
             q = q.order_by(*l)
         q = q.annotate(ccount=Count('categories'))
-        print q.query
         return q
 
 class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):

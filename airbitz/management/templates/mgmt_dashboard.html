@@ -48,7 +48,7 @@
                                     {% endfor %}
                                 </select>
                                 <label for="status">Location</label>
-                                <input id="location" type="text">
+                                <input id="adminLocation" type="text">
                                 <button class="btn btn-default btn-sm" id="refresh">Refresh</button>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
             $('#status').val(localStorage.getItem('mgmt_status'));
         }
         if (localStorage.getItem('mgmt_location')) {
-            $('#location').val(localStorage.getItem('mgmt_location'));
+            $('#adminLocation').val(localStorage.getItem('mgmt_location'));
         }
         var tableUrl = "/mgmt/api/biz/";
         var oTable = $('.dataTableCustom').dataTable({
@@ -109,7 +109,7 @@
             if (st && st !== 'ALL') {
                 aoData.push({ "name": "status", "value": st });
             }
-            aoData.push({ "name": "location", "value": $('#location').val() });
+            aoData.push({ "name": "adminLocation", "value": $('#adminLocation').val() });
             $.getJSON(sSource, aoData, function (json) { 
                 fnCallback(json)
             });
@@ -168,7 +168,7 @@
             localStorage.setItem('mgmt_status', $(this).val());
             oTable._fnAjaxUpdate();
         });
-        $('#location').keyup(function() {
+        $('#adminLocation').keyup(function() {
             localStorage.setItem('mgmt_location', $(this).val());
             oTable._fnAjaxUpdate();
         });
