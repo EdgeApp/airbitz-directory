@@ -110,9 +110,9 @@ def get_directions_url(biz):
     lon = biz.center.x
 
     if biz.address:
-        destination = str(biz.name) + str(biz.address) + str(biz.admin3_name) + str(biz.admin1_code)
+        destination = str(biz.name)+ '+' + str(biz.address) + '+' + str(biz.admin3_name) + '+' + str(biz.admin1_code)
     elif lat and lon:
-        destination = 'loc:' + str(lat) + ' ' + str(lon)
+        destination = 'loc:' + str(lat) + '+' + str(lon)
     else:
         destination = biz.name
 
