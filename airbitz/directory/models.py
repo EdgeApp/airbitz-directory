@@ -3,6 +3,7 @@ from django.contrib.gis.db import models
 from django.core.files.base import ContentFile
 from django.core.files.base import File
 from django.utils.formats import time_format
+from django.utils.http import urlquote_plus
 from imagekit import ImageSpec, register
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, ResizeToFit
@@ -117,6 +118,20 @@ class Business(models.Model):
             if len(s) > 0: s+= ', '
             s += self.admin1_code 
         return s
+
+    @property
+    def gmap_directions_url(self):
+        gmaps_url = 'https://maps.google.com/maps?saddr=current+location&daddr='
+        lat = self.center.y
+        lon = self.center.x
+
+        if self.address:
+            destination = str(self.name)+ ' ' + str(self.address) + ' ' + str(self.admin3_name) + ' ' + str(self.admin1_code)
+        elif lat and lon:
+            destination = 'loc:' + str(lat) + '+' + str(lon)
+        else:
+            destination = self.name
+        return gmaps_url + urlquote_plus(destination)
         
 
     def save(self, *args, **kwargs):

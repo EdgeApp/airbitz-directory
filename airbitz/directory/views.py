@@ -4,8 +4,7 @@ from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.utils.http import urlquote_plus
+from django.core.paginator import Paginator
 
 from airbitz.settings import GOOGLE_MAP_KEY
 from directory.models import Business, BusinessImage
@@ -104,21 +103,6 @@ def business_search(request):
     return render_to_response('search.html', RequestContext(request, context))
 
 
-def get_directions_url(biz):
-    gmaps_url = 'https://maps.google.com/maps?saddr=current+location&daddr='
-    lat = biz.center.y
-    lon = biz.center.x
-
-    if biz.address:
-        destination = str(biz.name)+ '+' + str(biz.address) + '+' + str(biz.admin3_name) + '+' + str(biz.admin1_code)
-    elif lat and lon:
-        destination = 'loc:' + str(lat) + '+' + str(lon)
-    else:
-        destination = biz.name
-
-    return gmaps_url + urlquote_plus(destination)
-
-
 @user_passes_test(isAllowed, login_url=COMING_SOON, redirect_field_name=None)
 def business_info(request, bizId):
     biz = get_biz(request, pk=bizId)
@@ -138,7 +122,6 @@ def business_info(request, bizId):
         'biz_hours': get_biz_hours(biz),
         'weekdays': WEEKDAYS,
         'was_search': False,
-        'directions_url': get_directions_url(biz)
     }
     return render_to_response('business_info.html', RequestContext(request, context))
 

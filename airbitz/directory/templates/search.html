@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load imagekit %}
 {% load compressed %}
-{% load ab_custom_tags %}
 {% load bootstrap_pagination %}
 
 {% block title %}Search{% endblock title %}
@@ -48,56 +47,14 @@
             <h1 class="search-title hidden-xs hidden-sm row">Bitcoin Business Search Results</h1>
             <h1 class="search-title visible-xs visible-sm row">Search Results</h1>
 
-            {% for biz in results %}
-                <div class="result-list-item row" >
-                    {% if biz.has_bitcoin_discount > 0 %}
-                        <span class="biz-discount label label-success" title="Discount for Bitcoin"><i class="fa fa-bitcoin"></i> {{ biz.has_bitcoin_discount|decimal_to_percent }} Discount</span>
-                    {% endif %}
-                    <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">
-                    {% if biz.landing_image %}
-                        {% thumbnail '150x150' biz.landing_image.image -- class="biz-img" %}
-                    {% else %}
-                        <img data-src="holder.js/150x150/ab-blue/text:{{ biz.name }}" class="biz-img">
-                    {% endif %}
-                    </a>
+            {% block results_list_items %}
+                {% for biz in results %}
+                    {% include '_result_list_item.html' %}
+                {% empty %}
+                    <p>No results found.</p>
+                {% endfor %}
+            {% endblock results_list_items %}
 
-                    <h2 class="biz-name single-line" title="{{ biz.name }}">
-                        <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">{{ biz.name }}</a>
-                    </h2>
-
-                    <div class="biz-meta">
-                        <div class="biz-categories">
-                            {% for c in biz.categories.all %}
-                                <span class="label label-primary">{{c.name}}</span>
-                            {% empty %}
-                                <span class="label label-warning">Uncategorized</span>
-                            {% endfor %}
-                        </div>
-
-                        {% if biz.address %}
-                            <div class="biz-location">
-                                <span class="biz-address-street"><i class="fa fa-map-marker"></i> {{ biz.address }}</span>
-                                {% if biz.distance %}
-                                    <span class="biz-distance"><i class="fa fa-crosshairs"></i> {{ biz.distance.mi|floatformat:2 }}mi</span>
-                                {% endif %}
-                            </div>
-                        {% else %}
-                            <br />
-                        {% endif %}
-                    </div>
-
-                    <div class="biz-description">
-                        {% if biz.description %}
-                            {{ biz.description }}
-                        {% else %}
-                            Description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                        {% endif %}
-                    </div>
-                </div>
-            {% empty %}
-                <p>No results found.</p>
-            {% endfor %}
         </div>
         <div class="location-search-info hidden-xs col-sm-6">
             <div class="map-container" data-spy="affix" data-offset-top="0">

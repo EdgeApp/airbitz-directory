@@ -1,0 +1,57 @@
+{% load imagekit %}
+{% load ab_custom_tags %}
+
+<div class="result-list-item row" >
+    {% if biz.has_bitcoin_discount > 0 %}
+        <span class="biz-discount label label-success" title="Discount for Bitcoin"><i class="fa fa-bitcoin"></i> {{ biz.has_bitcoin_discount|decimal_to_percent }} Discount</span>
+    {% endif %}
+    <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">
+    {% if biz.landing_image %}
+        {% thumbnail '150x150' biz.landing_image.image -- class="biz-img" %}
+    {% else %}
+        <img data-src="holder.js/150x150/ab-blue/text:{{ biz.name }}" class="biz-img">
+    {% endif %}
+    </a>
+
+    <h2 class="biz-name single-line" title="{{ biz.name }}">
+        <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">{{ biz.name }}</a>
+    </h2>
+
+    <div class="biz-meta">
+        <div class="biz-categories">
+            {% for c in biz.categories.all %}
+                <span class="label label-primary">{{c.name}}</span>
+            {% empty %}
+                <span class="label label-warning">Uncategorized</span>
+            {% endfor %}
+        </div>
+
+        {% if biz.gmap_directions_url %}
+            <div class="biz-location">
+                {% if biz.address %}
+                    <span class="biz-address-street"><i class="fa fa-map-marker"></i> {{ biz.address }}</span>
+                {% endif %}
+                {% if biz.gmap_directions_url %}
+                    &nbsp;
+                    <a class="btn btn-xs btn-danger pull-right" href="{{ biz.gmap_directions_url }}" target="_blank" title="Get Directions to {{ biz.name }}">
+                        {% if biz.distance %}
+                            <i class="fa fa-crosshairs"></i> {{ biz.distance.mi|floatformat:2 }}mi
+                        {% else %}
+                            Directions
+                        {% endif %}
+                    </a>
+                {% endif %}
+            </div>
+        {% else %}
+            <br />
+        {% endif %}
+    </div>
+
+    <div class="biz-description">
+        {% if biz.description %}
+            {{ biz.description }}
+        {% else %}
+            No description available at this time.
+        {% endif %}
+    </div>
+</div>
