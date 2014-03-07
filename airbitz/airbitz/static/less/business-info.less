@@ -50,17 +50,26 @@
                 position: relative;
 
                 img {
-                    position: relative;
-                    top: 62px;
-                    left: 50%;
-                    margin: -320px;
+                    @map-width: 1260px;
+                    @map-height: 600px;
 
+                    position: relative;
+                    left: 50%;
+                    top: @map-height/4;
+                    margin: (@map-width/2)*-1;
+                    zoom: .5;
+                    
+                    @media(max-width: @screen-md) {
+                        zoom: 1;
+                        top: @map-height/8;
+                    }
                     @media
                     (-webkit-min-device-pixel-ratio: 2),
-                    (min-resolution: 192dpi) {
+                    (min-resolution: 192ddpx) {
                         /* Retina-specific stuff here */
-                        width: 640px;
-                        height: 150px;
+                        width: @map-width/2;
+                        height: @map-height/2;
+                        margin: (@map-width/4)*-1;
                     }
                 }
 
@@ -97,10 +106,16 @@
     .biz-hours {
         margin-bottom: 30px;
 
-        td {
-            width: 100px;
-            border-color: white;
-            border-width: 2px;
+        table {
+
+            td {
+                width: 100px;
+                border-width: 2px;
+
+                @media(min-width: @screen-md-min) {
+                    border-color: white;
+                }
+            }
         }
     }
 
@@ -113,6 +128,7 @@
 
                 img {
                     .box-shadow(0 0 5px @gray-dark);
+                    width: 100%;
 
                     &:hover {
                         .transition(.3s ease);
@@ -120,12 +136,24 @@
                         .box-shadow(0 0 10px @gray-dark);
                     }
                 }
-                @media(min-width: @screen-md-min){
+                @media(min-width: @screen-md-min) {
                     &.col-md-4:nth-child(n+4) {
                         margin-top: 15px;
                     }
                 }
             }
         }
+    }
+}
+
+// NEARBY
+.results-header {
+
+    h2 {
+        font-weight: 900;
+        margin: 60px 0 30px 0;
+    }
+    .icon-bitcoin-map {
+        width: 80px;
     }
 }
