@@ -188,6 +188,7 @@ class ApiProcess(object):
             sqs = sqs.load_all()
             sqs = self.__filer_on_web__(sqs)
         else:
+            sqs = sqs.filter(SQ(has_physical_business=True))
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
             sqs = sqs.load_all()
