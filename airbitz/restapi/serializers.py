@@ -86,6 +86,7 @@ class BusinessImageSerializer(serializers.ModelSerializer):
         fields = ('image', 'height', 'width', 'thumbnail', 'bounding_box', 'tags', )
 
 class BusinessHoursSerializer(serializers.ModelSerializer):
+    dayOfWeek = serializers.CharField(source='lookupDayOfWeek')
     class Meta:
         model = BusinessHours
         fields = ('dayOfWeek','hourStart', 'hourEnd', )
