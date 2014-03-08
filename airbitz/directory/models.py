@@ -7,6 +7,7 @@ from django.utils.http import urlquote_plus
 from imagekit import ImageSpec, register
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, ResizeToFit
+from pilkit.processors import Adjust, MakeOpaque
 import os
 import urllib
 
@@ -167,6 +168,17 @@ class GalleryThumbnail(ImageSpec):
     options = {'quality': 80}
 
 register.generator('ab:gallerythumb', GalleryThumbnail)
+
+# TODO: Tried to get a guassian blur to work server side (ideal solution) but couldn't figure out how to add other processors
+class TopBgBlurred(ImageSpec):
+    processors = ProcessorPipeline = ([
+        Adjust(sharpness=0.5),
+        MakeOpaque()
+    ])
+    format = 'JPEG'
+    options = {'quality': 80}
+
+register.generator('ab:topbgblurred', TopBgBlurred)
 
 class BusinessImage(models.Model):
     image = models.ImageField(upload_to='business_images', 

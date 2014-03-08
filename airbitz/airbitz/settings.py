@@ -212,6 +212,7 @@ PIPELINE_JS = {
         'source_filenames': (
             'extras/gmaps/gmaps.js',
             'extras/masonry/masonry.pkgd.min.js',
+            'extras/blur.js/blur.js',
             'js/directory.js',
         ),
         'output_filename': 'js/directory.js',

@@ -6,7 +6,12 @@
 
 {% block title%}{{ biz.name }}{% endblock %}
 
-{% block top_bg %}<div class="top-bg blur-all" style="background: url('{{ biz.landing_image.image.url }}')top center;">&nbsp;</div>{% endblock %}
+{% block top_bg %}
+    {% if biz.landing_image %}
+        {% generateimage 'ab:topbgblurred' source=biz.landing_image.image as topbg %}
+    {% endif %}
+        <div class="top-bg" style="{% if biz.landing_image %}background: url('{{ topbg.url }}');{% endif %}display: none;">&nbsp;</div>
+{% endblock %}
 
 {% block admin_buttons %}
     {{ block.super }}

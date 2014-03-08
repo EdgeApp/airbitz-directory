@@ -62,6 +62,19 @@ $(function() {
 
 
 
+
+    $('.top-bg').blurjs({
+        source: '.top-bg',
+        radius: 35,
+        overlay: '',
+        offset: {
+            x: 0,
+            y: 0
+        },
+        cache: true
+    });
+
+
 });
 
 
@@ -83,4 +96,5 @@ jQuery(window).on('load', function(){
         transform: 'scale(1)'
     });
 
+    $('.top-bg').fadeIn(800);
 });
