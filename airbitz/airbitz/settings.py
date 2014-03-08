@@ -184,6 +184,7 @@ PIPELINE_JS = {
         'source_filenames': (
             'js/jquery-1.9.1.min.js',
             'bootstrap/js/bootstrap.min.js',
+            'js/modernizr.js',
             'js/core.js',
             'js/holder.js',
             'js/typeahead.bundle.js',
