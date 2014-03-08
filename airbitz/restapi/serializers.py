@@ -3,9 +3,8 @@ from rest_framework import fields
 from rest_framework import pagination
 from rest_framework import serializers
 
-from directory.models import Business, BusinessHours, \
-                             BusinessImage, Category, \
-                             SocialId
+from directory.models import Business, BusinessImage, \
+                             Category, SocialId
 from location.models import GeoNameZip
 
 class SizedImageField(serializers.Field):
@@ -21,6 +20,19 @@ class SizedImageField(serializers.Field):
             }
         else:
             return {}
+
+class HoursField(serializers.Field):
+    def serial(self, obj):
+        return {
+            'dayOfWeek': obj.lookupDayOfWeek,
+            'hourStart': obj.hourStart,
+            'hourEnd': obj.hourEnd 
+        }
+
+    def field_to_native(self, obj, field_name):
+        ls = obj.businesshours_set.all()
+        ls = sorted(ls, lambda x, y: x.lookupDayNumber - y.lookupDayNumber) 
+        return [self.serial(t) for t in ls]
 
 class ImageTagsField(serializers.Field):
     def field_to_native(self, obj, field_name):
@@ -85,12 +97,6 @@ class BusinessImageSerializer(serializers.ModelSerializer):
         model = BusinessImage
         fields = ('image', 'height', 'width', 'thumbnail', 'bounding_box', 'tags', )
 
-class BusinessHoursSerializer(serializers.ModelSerializer):
-    dayOfWeek = serializers.CharField(source='lookupDayOfWeek')
-    class Meta:
-        model = BusinessHours
-        fields = ('dayOfWeek','hourStart', 'hourEnd', )
-
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
@@ -143,7 +149,7 @@ class BusinessSerializer(serializers.ModelSerializer):
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
     images = BusinessImageSerializer(source='businessimage_set')
-    hours = BusinessHoursSerializer(source='businesshours_set')
+    hours = HoursField(source='*')
     categories = CategorySerializer(source='categories')
     social = SocialSerializer(source='socialid_set')
     location = PointField()

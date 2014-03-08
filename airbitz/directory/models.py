@@ -43,6 +43,12 @@ def lookupChoice(value, choices):
             return s
     return None
 
+def lookupIndex(value, choices):
+    for (i,(k,v)) in enumerate(choices):
+        if k == value:
+            return i
+    return 8
+
 def lookupSocialIcon(social_type):
     if social_type == 'facebook':
         social_icon = 'fa-facebook'
@@ -254,6 +260,10 @@ class BusinessHours(models.Model):
     @property
     def lookupDayOfWeek(self):
         return lookupChoice(self.dayOfWeek, DAY_OF_WEEK_CHOICES)
+
+    @property
+    def lookupDayNumber(self):
+        return lookupIndex(self.dayOfWeek, DAY_OF_WEEK_CHOICES)
 
     def format(self):
         s = ''
