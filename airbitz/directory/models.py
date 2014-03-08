@@ -123,8 +123,10 @@ class Business(models.Model):
     @property
     def gmap_directions_url(self):
         gmaps_url = 'https://maps.google.com/maps?saddr=current+location&daddr='
-        lat = self.center.y
-        lon = self.center.x
+        if self.center:
+            lat, lon = self.center.y, self.center.x
+        else:
+            lat, lon = None, None
 
         if self.address:
             destination = str(self.name)+ ' ' + str(self.address) + ' ' + str(self.admin3_name) + ' ' + str(self.admin1_code)
