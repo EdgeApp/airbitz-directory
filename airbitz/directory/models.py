@@ -129,7 +129,7 @@ class Business(models.Model):
             lat, lon = None, None
 
         if self.address:
-            destination = str(self.name)+ ' ' + str(self.address) + ' ' + str(self.admin3_name) + ' ' + str(self.admin1_code)
+            destination = str(self.address) + ' ' + str(self.admin3_name) + ' ' + str(self.admin1_code)
         elif lat and lon:
             destination = 'loc:' + str(lat) + ' ' + str(lon)
         else:
