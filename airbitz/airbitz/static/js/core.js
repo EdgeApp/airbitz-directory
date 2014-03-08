@@ -18,7 +18,8 @@ function getMapMarkerContent(marker, markerJSON) {
                             '<div class="map-marker-info single-line">' +
                                 '<div class="map-marker-name">' + m.name + '</div>' +
                                 '<div class="map-marker-address">' + m.address + '</div>' +
-                                '<div class="map-marker-links"><a href="' + m.url + '">View Listing</a></div>' +
+                                '<div class="map-marker-links"><a href="' + m.url + '">View Listing</a> | ' +
+                                    '<a href="' + m.directions_url + '" target="_blank">Get Directions</a></div>' +
                             '</div>' +
                             '<div class="map-marker-categories">' + m.cats + '</div>' +
                         '</div>';

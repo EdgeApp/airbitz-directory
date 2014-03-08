@@ -184,6 +184,7 @@ PIPELINE_JS = {
         'source_filenames': (
             'js/jquery-1.9.1.min.js',
             'bootstrap/js/bootstrap.min.js',
+            'js/modernizr.js',
             'js/core.js',
             'js/holder.js',
             'js/typeahead.bundle.js',
@@ -212,6 +213,7 @@ PIPELINE_JS = {
         'source_filenames': (
             'extras/gmaps/gmaps.js',
             'extras/masonry/masonry.pkgd.min.js',
+            'extras/blur.js/blur.js',
             'js/directory.js',
         ),
         'output_filename': 'js/directory.js',

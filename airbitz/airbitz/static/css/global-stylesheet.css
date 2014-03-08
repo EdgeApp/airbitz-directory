@@ -164,22 +164,20 @@ body {
 }
 body .top-bg {
   z-index: -1;
-  display: none;
-  -webkit-filter: blur(35px);
-  -moz-filter: blur(35px);
-  -o-filter: blur(35px);
-  -ms-filter: blur(35px);
-  filter: blur(35px);
 }
 @media (min-width: 992px) {
   body .top-bg {
-    display: block;
     position: absolute;
     top: 0;
+    -webkit-filter: blur(25px);
+    -moz-filter: blur(25px);
+    -o-filter: blur(25px);
+    -ms-filter: blur(25px);
+    filter: blur(25px);
     width: 100%;
     height: 700px;
-    border-bottom: 2px solid #F8F8F0;
-    background: #F5F5F0;
+    background: #2291cf;
+    background-size: cover !important;
   }
 }
 body .main-content {
