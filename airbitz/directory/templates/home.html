@@ -1,3 +1,6 @@
+{% load compressed %}
+
+
 
 <!DOCTYPE html>
 <!--[if IE 6]>
@@ -94,7 +97,7 @@
 
 		.woocommerce .star-rating span:before, .woocommerce-page .star-rating span:before { color: #80c341 !important; }
 
-		.et-search-form, .nav li ul, .et_mobile_menu, .footer-widget li:before, .et_pb_pricing li:before { border-color: #80c341; }
+{#		.et-search-form, .nav li ul, .et_mobile_menu, .footer-widget li:before, .et_pb_pricing li:before { border-color: #80c341; }#}
 
 		#main-footer { background-color: #2e2e2e; }
 
@@ -105,8 +108,67 @@
 	h1, h2, h3, h4, h5, h6 { font-family: 'Source Sans Pro', Helvetica, Arial, Lucida, sans-serif; }body, input, textarea, select { font-family: 'Source Sans Pro', Helvetica, Arial, Lucida, sans-serif; }	</style>
 	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
 <!-- All in one Favicon 4.3 --><link rel="icon" href="{{ STATIC_URL }}wp/assets/favicon.png" type="image/png"/>
+
+    {% block head %}
+        {% compressed_css 'global' %}
+        {% compressed_css 'home' %}
+    {% endblock head %}
+
 </head>
 <body class="home page page-id-145 page-template-default et_fixed_nav et_pb_pagebuilder_layout et_right_sidebar unknown et_includes_sidebar">
+
+
+        <nav class="navbar navbar-ab navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{% url 'landing' %}">
+                        <img class="logo" src="{{ STATIC_URL }}img/logo-nav.png" alt="airBitz" />
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="http://airbitz.co/team/" class="active">Team</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Directory <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Categories</li>
+                                <li><a href="#">All Businesses</a></li>
+                                <li><a href="#">Food and Drink</a></li>
+                                <li><a href="#">Local Events</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Submit Info</li>
+                                <li><a href="#">List a Business</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    {% block search %}
+                    <form id="navbar-search" name="search" class="navbar-form text-center" role="search" method="get" action="{% url 'search' %}">
+                        <i id="help-search" class="fa fa-2x fa-question-circle"></i>
+                        <div class="form-group">
+                            <input id="term" tabindex=1" name="term" type="text" class="typeahead form-control" placeholder="Business or Category" value="{{ request.GET.term }}"autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input id="location" tabindex="2" name="location" type="text" class="typeahead form-control" placeholder="City..." autocomplete="off" value="{{ location }}">
+                        </div>
+                        <button tabindex="3" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                    </form>
+                    {% endblock search %}
+                </div><!-- /.navbar-collapse -->
+            </div>
+        </nav>
+
+
+
+
+
 	<header id="main-header">
 		<div class="container clearfix">
 					<a href="index.html">
@@ -358,11 +420,6 @@ Bitcoin Businesses at Your Fingertips.</p>
 							<span>Google</span>
 						</a>
 					</li>
-																	<li class="et-social-icon et-social-rss">
-						<a href="comments/feed/index.html">
-							<span>RSS</span>
-						</a>
-					</li>
 								</ul>
 
 				<p id="footer-info">
@@ -380,6 +437,19 @@ var et_custom = {"ajaxurl":"http:\/\/airbitz.co\/wp-admin\/admin-ajax.php","et_l
 /* ]]> */
 </script>
 <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-content/themes/Divi/js/custom.js?ver=1.0'></script>
+
+
+
+    {% compressed_js 'core' %}
+    <script type="text/javascript">
+        $(function() {
+            AB.setup();
+            AB.addLocationSearch($('#location'));
+            AB.addPlaceSearch($('#term'));
+        });
+    </script>
+
+
 </body>
 </html>
 <!-- Localized -->

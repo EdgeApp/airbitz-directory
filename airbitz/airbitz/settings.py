@@ -159,6 +159,15 @@ PIPELINE_CSS = {
             'media': 'screen,projection',
         },
     },
+    'home': {
+        'source_filenames': (
+            'css/home.css',
+        ),
+        'output_filename': 'css/home.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
     'management': {
         'source_filenames': (
             'extras/select2/select2.css',

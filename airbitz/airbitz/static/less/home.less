@@ -1,0 +1,48 @@
+@import "../bootstrap/less/variables.less";
+@import "../bootstrap/less/mixins.less";
+
+
+// STATIC HOME PAGE WORDPRESS CONVERSION OVERRIDES
+
+body {
+    padding-top: 0 !important;
+    margin-top: 0;
+
+    header {
+        display: none;
+    }
+
+    .navbar {
+        font-size: 14px;
+
+        .typeahead, .tt-query, .tt-hint {
+            padding: 8px 12px;
+        }
+    }
+
+    .navbar-ab .navbar-nav > li > a {
+        color: #2291CF !important;
+    }
+    .navbar-nav>li>a {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    footer {
+        #footer-bottom {
+            #et-social-icons {
+                margin-top: 5px;
+
+                a {
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (min-width: @screen-lg) {
+        margin-top: -80px;
+    }
+}

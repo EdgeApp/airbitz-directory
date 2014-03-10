@@ -5,6 +5,7 @@ urlpatterns = patterns('',
     url(r'^coming_soon$', 'directory.views.coming_soon', name='coming_soon'),
     url(r'^search$', 'directory.views.business_search', name='search'),
     url(r'^biz/(?P<bizId>\d+)/$', 'directory.views.business_info', name='business_info'),
+    url(r'^home2/$', 'directory.views.home_v2', name='home_v2'),
     url(r'^home/$', 'directory.views.home', name='home'),
     url(r'^$', 'directory.views.landing', name='landing'),
 )
