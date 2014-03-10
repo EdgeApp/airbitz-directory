@@ -246,7 +246,7 @@ def business_image_edit(request, bizId, imgId=None):
         if form.is_valid():
             form.save()
             messages.success(request, 'Changes Saved')
-            return HttpResponseRedirect(reverse('mgmt_biz_image_view', args=(biz.id, )))
+            return HttpResponseRedirect(reverse('mgmt_biz_view', args=(biz.id, )))
         else:
             for field, errors in form.errors.items():
                 for error in errors:
@@ -269,9 +269,9 @@ def business_image_link(request, bizId):
         form = BizImageLinkForm(request.POST)
         if form.is_valid():
             try:
-                img = BusinessImage.create_from_url(biz.id, request.POST['url'])
+                BusinessImage.create_from_url(biz.id, request.POST['url'])
                 messages.success(request, 'Image Saved')
-                return HttpResponseRedirect(reverse('mgmt_biz_image_edit', args=(biz.id, img.id)))
+                return HttpResponseRedirect(reverse('mgmt_biz_view', args=(biz.id, )))
             except:
                 messages.error(request, 'Unable to save record.')
         else:

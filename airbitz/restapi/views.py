@@ -1,6 +1,11 @@
+from django.contrib.auth.models import User
+from rest_framework import authentication as auth
+from rest_framework import permissions as perm
+from rest_framework import exceptions
 from rest_framework import generics, filters
 from rest_framework.response import Response 
 from rest_framework.views import APIView
+
 import logging
 
 from directory.models import Business, BusinessImage, Category
@@ -10,6 +15,17 @@ from restapi import serializers
 log=logging.getLogger("airbitz." + __name__)
 
 DEFAULT_PAGE_SIZE=20
+
+class DemoAuthentication(auth.BaseAuthentication):
+    def authenticate(self, request):
+        try:
+            user = User.objects.get(username='demodan')
+        except User.DoesNotExist:
+            raise exceptions.AuthenticationFailed('No such user')
+        return (user, None)
+
+PERMS=(DemoAuthentication, auth.TokenAuthentication, auth.SessionAuthentication,)
+AUTH=(perm.IsAuthenticated, )
 
 class InternalOrderFilter(filters.OrderingFilter):
     ordering_param = 'sort'
@@ -26,6 +42,8 @@ class CategoryView(generics.ListAPIView):
     pagination_serializer_class = serializers.LastUpdatedSerializer
     filter_backends = (InternalOrderFilter,)
     ordering_fields = ('name', 'level')
+    authentication_classes = PERMS
+    permission_classes = AUTH
 
 class BusinessView(generics.RetrieveAPIView):
     """
@@ -34,6 +52,8 @@ class BusinessView(generics.RetrieveAPIView):
     serializer_class = serializers.BusinessSerializer
     queryset = Business.objects.filter(status='PUB')
     pk_url_kwarg = 'bizId'
+    authentication_classes = PERMS
+    permission_classes = AUTH
 
 
 class PhotosView(generics.ListAPIView):
@@ -42,6 +62,8 @@ class PhotosView(generics.ListAPIView):
     """
     model = BusinessImage
     serializer_class = serializers.BusinessImageSerializer
+    authentication_classes = PERMS
+    permission_classes = AUTH
 
 
 class SearchView(generics.ListAPIView):
@@ -63,6 +85,8 @@ class SearchView(generics.ListAPIView):
     paginate_by = DEFAULT_PAGE_SIZE
     paginate_by_param = 'page_size'
     max_paginate_by = 50
+    authentication_classes = PERMS
+    permission_classes = AUTH
 
     def get_queryset(self):
         term = self.request.QUERY_PARAMS.get('term', None)
@@ -86,8 +110,8 @@ class AutoCompleteBusiness(APIView):
         location -- Location string such as "San Diego, CA"
         ll   -- Latitude,Longitude 
     """
-    permission_classes = []
-    authentication_classes = []
+    authentication_classes = PERMS
+    permission_classes = AUTH
     model = Business
 
     def get(self, request, *args, **kwars):
@@ -106,8 +130,8 @@ class AutoCompleteLocation(APIView):
         term -- The location string to autocomplete
         ll   -- Latitude,Longitude 
     """
-    permission_classes = []
-    authentication_classes = []
+    authentication_classes = PERMS
+    permission_classes = AUTH
     model = Business
 
     def get(self, request, *args, **kwargs):
@@ -127,6 +151,8 @@ class LocationSuggest(APIView):
         If lat/lon aren't provided, then this method falls back to using the IP
         address.
     """
+    authentication_classes = PERMS
+    permission_classes = AUTH
     model = Business
 
     def get(self, request, *args, **kwargs):

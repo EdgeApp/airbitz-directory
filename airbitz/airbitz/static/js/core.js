@@ -140,6 +140,15 @@ function getMapMarkerContent(marker, markerJSON) {
       },
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       minLength: 0,
+      limit: 10,
+      prefetch: {
+        url: '/api/v1/autocomplete-business/?term=%QUERY',
+        filter: function(data) {
+          return data.results.map(function(e, i) {
+              return { type: e.type, name: e.text, value: e.text, id: e.bizId };
+          });
+        }
+      },
       remote: {
         url: '/api/v1/autocomplete-business/?term=%QUERY',
         replace: function (url, uriEncodedQuery) {
@@ -195,6 +204,14 @@ function getMapMarkerContent(marker, markerJSON) {
         datumTokenizer: function(d) { return d.results; },
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         minLength: 0,
+        prefetch: {
+          url: '/api/v1/autocomplete-location/?term=%QUERY',
+          filter: function(data) {
+            return data.results.map(function(s, i) {
+                return { text: s, value: s };
+            });
+          }
+        },
         remote: {
           url: '/api/v1/autocomplete-location/?term=%QUERY',
           filter: function(data) {
