@@ -30,8 +30,6 @@
 
 {% block admin_buttons %}
     {{ block.super }}
-    <a class="btn btn-default pull-right" href="{% url 'mgmt_biz_view' biz.id %}">Data</a>
-    <a class="btn btn-default pull-right" href="{% url 'mgmt_biz_image_view' biz.id %}">Images</a>
 {% endblock admin_buttons %}
 
 {% block bizbody %}
