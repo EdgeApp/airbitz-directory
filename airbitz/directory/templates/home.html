@@ -154,7 +154,7 @@
                     <form id="navbar-search" name="search" class="navbar-form text-center" role="search" method="get" action="{% url 'search' %}">
                         <i id="help-search" class="fa fa-2x fa-question-circle"></i>
                         <div class="form-group">
-                            <input id="term" tabindex=1" name="term" type="text" class="typeahead form-control" placeholder="Business or Category" value="{{ request.GET.term }}"autocomplete="off">
+                            <input id="term" tabindex="1" name="term" type="text" class="typeahead form-control" placeholder="Business or Category" value="{{ request.GET.term }}"autocomplete="off">
                         </div>
                         <div class="form-group">
                             <input id="location" tabindex="2" name="location" type="text" class="typeahead form-control" placeholder="City..." autocomplete="off" value="{{ location }}">
