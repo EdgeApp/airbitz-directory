@@ -9,24 +9,11 @@
 {% endblock admin_buttons %}
 
 {% block body %}
-
     <div class="admin-heads-up row">
         <h1 class="biz-name col-sm-12">{{ biz.name }}</h1>
     </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <ul class="nav nav-tabs">
-                <li {{ tab_main }}><a href="{% url 'mgmt_biz_view' biz.id %}">Data</a></li>
-                <li {{ tab_images }}><a href="{% url 'mgmt_biz_image_view' biz.id %}">Images</a></li>
-            </ul>
-        </div>
-    </div>
-    <br />
-
     {% block bizbody %}
     {% endblock bizbody %}
-
 {% endblock body %}
 
 {% block javascript %}

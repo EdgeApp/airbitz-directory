@@ -103,6 +103,8 @@ class Business(models.Model):
     categories = models.ManyToManyField(Category, blank=True, null=True)
     landing_image = models.ForeignKey('BusinessImage', null=True, blank=True, 
                                       on_delete=models.SET_NULL, related_name='landing_image_business')
+    mobile_landing_image = models.ForeignKey('BusinessImage', null=True, blank=True, 
+                                      on_delete=models.SET_NULL, related_name='mobile_landing_image')
 
     has_physical_business = models.BooleanField(default=False) # Brick and Mortar?
     has_online_business = models.BooleanField(default=False)
