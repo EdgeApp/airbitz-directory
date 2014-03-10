@@ -30,6 +30,8 @@
             <div class="biz-location">
                 {% if biz.address %}
                     <span class="biz-address-street"><i class="fa fa-map-marker"></i> {{ biz.address }}</span>
+                {% elif biz.admin3_name %}
+                    <span class="biz-address-city"><i class="fa fa-map-marker"></i> {{ biz.admin3_name }}</span>
                 {% endif %}
                 {% if biz.gmap_directions_url %}
                     &nbsp;
