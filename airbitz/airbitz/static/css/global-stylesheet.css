@@ -4,6 +4,10 @@
   top: 10px;
   margin: 0 15px;
 }
+.navbar-admin .btn.close {
+  top: -2px;
+  right: -15px;
+}
 .navbar-ab {
   background-color: white;
   border: #eee;
