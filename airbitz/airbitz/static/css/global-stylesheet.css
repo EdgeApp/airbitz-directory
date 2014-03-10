@@ -478,8 +478,20 @@ body .main-content {
   padding: 12px 0;
   border-top: 1px solid #ddd;
 }
+.results-map-list .item-container {
+  height: 150px;
+}
+.results-map-list .item-container:hover {
+  transition: 0.3s ease;
+  -webkit-transition: 0.3s ease;
+  -moz-transition: 0.3s ease;
+  -ms-transition: 0.3s ease;
+  -o-transition: 0.3s ease;
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.15);
+}
 .results-map-list .biz-discount {
   position: absolute;
+  left: 0;
   cursor: pointer;
 }
 .results-map-list .biz-img {
@@ -490,16 +502,6 @@ body .main-content {
   background: white;
   -webkit-box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
-}
-.results-map-list .biz-img:hover {
-  transition: 0.3s ease;
-  -webkit-transition: 0.3s ease;
-  -moz-transition: 0.3s ease;
-  -ms-transition: 0.3s ease;
-  -o-transition: 0.3s ease;
-  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
-  outline: 3px solid #999999;
-  outline-offset: -3px;
 }
 @media (max-width: 992px) {
   .results-map-list .biz-img {
