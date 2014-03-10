@@ -66,9 +66,19 @@ class AdminHoursSerializer(serializers.ModelSerializer):
         model = BusinessHours
         fields = ('id', 'dayOfWeek','hourStart', 'hourEnd', )
 
+class AdminBizImageSerializer(serializers.ModelSerializer):
+    id = fields.IntegerField();
+    mobile_photo = fields.CharField(source='mobile_photo.url')
+    width = fields.IntegerField(source='mobile_photo.width')
+    height = fields.IntegerField(source='mobile_photo.height')
+    class Meta:
+        model = BusinessHours
+        fields = ('id', 'mobile_photo', 'height', 'width', )
+
 class AdminBizSerializer(serializers.ModelSerializer):
     categories = AdminCategorySerializer(source='categories', many=True)
     hours = AdminHoursSerializer(source='businesshours_set', many=True)
+    images = AdminBizImageSerializer(source='businessimage_set', many=True)
     social = AdminSocialSerializer(source='socialid_set', many=True)
     center = AdminPointField(source='center', required=False)
 
@@ -256,6 +266,28 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
                 socialList.append(serial.data)
             request.DATA['social'] = socialList
 
+    def __update_images__(self, request):
+        if request.DATA.has_key('images'):
+            imgs = self.object.businessimage_set.all()
+            delimg = dict((c.id, c) for c in imgs)
+            print delimg
+            for c in request.DATA['images']:
+                print c
+                if not c.has_key('id'):
+                    continue
+                if delimg.has_key(c['id']):
+                    delimg.pop(c['id'])
+            for i in delimg.itervalues():
+                print 'deleting ', i
+                i.delete()
+
+            imgList = []
+            self.object = Business.objects.get(id=self.object.id)
+            for s in self.object.businessimage_set.all():
+                serial = AdminBizImageSerializer(s)
+                imgList.append(serial.data)
+            request.DATA['images'] = imgList
+
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         self.object = self.get_object_or_none()
@@ -276,6 +308,7 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
         self.__update_cats__(request)
         self.__update_hours__(request)
         self.__update_social__(request)
+        self.__update_images__(request)
         if serializer.is_valid():
             try:
                 self.pre_save(serializer.object)

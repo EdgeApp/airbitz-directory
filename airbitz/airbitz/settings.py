@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'bootstrap_pagination',
     'rest_framework',
+    'rest_framework.authtoken',
     'south',
     'rest_framework_swagger',
 
@@ -243,9 +244,11 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
     'DEFAULT_RENDERER_CLASSES': (
-        # 'rest_framework.renderers.BrowsableAPIRenderer',
         'rest_framework.renderers.JSONRenderer',
-        #'rest_framework_csv.renderers.CSVRenderer',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
     'PAGINATE_BY': 20
 }

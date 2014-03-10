@@ -12,7 +12,7 @@
             margin-left: auto;
             margin-right: auto;
             position: fixed;
-            top: 60px; 
+            top: 60px;
             width: 80%;
             z-index: 100000;
             box-shadow: 1px 1px 2px #DDD;
@@ -37,8 +37,7 @@
     <form>
     <div class="row">
         <div class="col-sm-12">
-            <div class="alertsdiv">
-            </div>
+            <div class="alertsdiv"></div>
         </div>
     </div>
     <div class="row">
@@ -52,6 +51,8 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-default">
+                <input type="hidden" name="landing_image" id="landing_image" value="{{ biz.landing_image_id|default:"" }}" />
+                <input type="hidden" name="mobile_landing_image" id="mobile_landing_image" value="{{ biz.mobile_landing_image_id|default:"" }}" />
                 <div class="panel-heading"></div>
                 <div class="panel-body">
                     <div class="row">
@@ -66,7 +67,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Name:</label>
-                                <input type="text" class="form-control" id="name" name="name" 
+                                <input type="text" class="form-control" id="name" name="name"
                                        value="{{ biz.name }}" required />
                             </div>
                             <div>
@@ -85,14 +86,14 @@
                             </div>
                             <div>
                                 <label for="phone">Phone:</label>
-                                <input type="tel" class="form-control" id="phone" name="phone" 
-                                       value="{{ biz.phone|default:"" }}" 
+                                <input type="tel" class="form-control" id="phone" name="phone"
+                                       value="{{ biz.phone|default:"" }}"
                                        parsley-trigger="change" parsley-type="phone" />
                             </div>
                             <div>
                                 <label for="website">Website:</label>
-                                <input type="url" class="form-control" id="website" name="website" 
-                                       value="{{ biz.website }}" 
+                                <input type="url" class="form-control" id="website" name="website"
+                                       value="{{ biz.website }}"
                                        parsley-trigger="change" parsley-type="url" />
                             </div>
                             <div class="form-horizontal">
@@ -105,8 +106,8 @@
                             </div>
                             <div>
                                 <label for="has_bitcoin_discount">Bitcoin Discount:</label>
-                                <input type="number" class="form-control" id="has_bitcoin_discount" name="has_bitcoin_discount" 
-                                       value="{{ biz.has_bitcoin_discount }}" 
+                                <input type="number" class="form-control" id="has_bitcoin_discount" name="has_bitcoin_discount"
+                                       value="{{ biz.has_bitcoin_discount }}"
                                        parsley-trigger="change" parsley-type="number" />
                             </div>
                         </div>
@@ -124,9 +125,9 @@
                     <a class="btn btn-sm btn-default pull-right" href="{% url 'mgmt_biz_social_edit' biz.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
                 </div>
                 <div class="panel-body">
-                    <table class="table table-striped">                    
+                    <table class="table table-striped">
                         <tbody></tbody>
-                    </table>                    
+                    </table>
                 </div>
             </div>
             <div class="panel panel-default" id="hours-list">
@@ -193,14 +194,29 @@
             </div>
         </div>
     </div>
-        <div class="row">
-            <div class="col-sm-12" style="text-align: center; padding-bottom: 10px;">
-                <div class="btn-group">
-                    <a class="save btn btn-success">Save</a>
-                    <a class="btn btn-default" href="{% url 'mgmt_biz_edit' biz.id %}">Edit</a>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default" id="social-list">
+                <div class="panel-heading">IMAGES
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-default btn-sm" href="{% url 'mgmt_biz_image_link' biz.id %}">From Link</a>
+                        <a class="btn btn-default btn-sm" href="{% url 'mgmt_biz_image_add' biz.id %}">From Desktop</a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div id="images-list" class="thumbnails"></div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12" style="text-align: center; padding-bottom: 10px;">
+            <div class="btn-group">
+                <a class="save btn btn-success">Save</a>
+                <a class="btn btn-default" href="{% url 'mgmt_biz_edit' biz.id %}">Edit</a>
+            </div>
+        </div>
+    </div>
     </form>
 </div>
 {% endblock %}
@@ -215,7 +231,7 @@
     {{ block.super }}
     <script id="hours-row" type="text/x-handlebars-template">
         <td>
-            <input type="hidden" name="id" 
+            <input type="hidden" name="id"
                    value="{% templatetag openvariable %} id {% templatetag closevariable %}">
             <select name="dayOfWeek">
                 <option value="sunday">Sunday</option>
@@ -226,13 +242,13 @@
                 <option value="friday">Friday</option>
                 <option value="saturday">Saturday</option>
             </select>
-        </td> 
+        </td>
         <td>
-            <input type="text" name="hourStart" class="form-control" 
+            <input type="text" name="hourStart" class="form-control"
                    value="{% templatetag openvariable %} hourStart {% templatetag closevariable %}"/>
         </td>
         <td>
-            <input type="text" name="hourEnd" class="form-control" 
+            <input type="text" name="hourEnd" class="form-control"
                    value="{% templatetag openvariable %} hourEnd {% templatetag closevariable %}"/>
         </td>
         <td><button class="destroy btn btn-sm btn-default delete"><span class=" glyphicon glyphicon-trash"></span></button></td>
@@ -241,13 +257,13 @@
     <script id="social-row" type="text/x-handlebars-template">
         <td>
             <div class="col-sm-12">
-                <input type="text" name="social_url" class="form-control" 
-                       parsley-trigger="change" parsley-type="url" 
+                <input type="text" name="social_url" class="form-control"
+                       parsley-trigger="change" parsley-type="url"
                        value="{% templatetag openvariable %} social_url {% templatetag closevariable %}"/>
             </div>
         </td>
         <td>
-            <input type="hidden" name="id" 
+            <input type="hidden" name="id"
                    value="{% templatetag openvariable %} id {% templatetag closevariable %}">
             <select name="social_type">
                 <option value="osm">Open Street Map</option>
@@ -264,13 +280,32 @@
         </td>
     </script>
 
+    <script id="images-row" type="text/x-handlebars-template">
+        <div class="col-xs-6 col-md-3">
+            <input type="hidden" name="id"
+                   value="{% templatetag openvariable %} this.id {% templatetag closevariable %}">
+            <img class="img-thumbnail" src="{% templatetag openvariable %} this.mobile_photo {% templatetag closevariable %}" />
+            <div class="bottom-overlay">
+                <div class="row">
+                    <button class="btn btn-default pull-left select-image" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}" >Web <i class="icon-ok"></i></button>
+                    &nbsp;
+                    <button class="btn btn-default pull-left select-mobile-image" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}" >Mobile <i class="icon-ok"></i></button>
+                    &nbsp;
+                    <span class="image-delete btn btn-danger btn-link pull-right" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}"><span class="glyphicon glyphicon-trash"></span></span>
+                    &nbsp;
+                    <a class="btn btn-default btn-link pull-right" href="/mgmt/biz/view/{{ biz.id }}/images/edit/{% templatetag openvariable %} this.id {% templatetag closevariable %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                </div>
+            </div>
+        </div>
+    </script>
+
     <script>
         $(function() {
             var ifEmpty = function(s) {
                 return (s === null || s === '') ? null : s;
             };
             var DAYS_OF_WEEK = [
-                "sunday", "monday", "tuesday", "wednesday", 
+                "sunday", "monday", "tuesday", "wednesday",
                 "thursday", "friday", "saturday"
             ];
             var Business = Backbone.Model.extend({
@@ -286,6 +321,37 @@
             });
             var biz = new Business({id: {{ biz.id }} });
             biz.fetch()
+
+            var ImageView = Backbone.View.extend({
+                events: {
+                    "click .select-image":  "selectWebImage",
+                    "click .select-mobile-image":  "selectMobileImage",
+                    "click .image-delete":  "deleteImage"
+                },
+                tagName:  "div",
+                template: Handlebars.compile($('#images-row').html()),
+                initialize: function() { },
+                render: function(data) {
+                    this.data = data;
+                    this.$el.html(this.template(data));
+                    return this;
+                },
+                selectWebImage: function() {
+                    $('.select-image').removeAttr("disabled");
+                    this.$el.find('.select-image').attr("disabled", "disabled");
+                    $('#landing_image').val(this.data.id);
+                },
+                selectMobileImage: function() {
+                    $('.select-mobile-image').removeAttr("disabled");
+                    this.$el.find('.select-mobile-image').attr("disabled", "disabled");
+                    $('#mobile_landing_image').val(this.data.id);
+                },
+                deleteImage: function() {
+                    if (confirm('Are you sure you want to delete this image?')) {
+                        this.$el.remove();
+                    };
+                }
+            });
 
             var SocialView = Backbone.View.extend({
                 events: {
@@ -375,6 +441,9 @@
                 addToSocial: function(row) {
                     $("#social-list tbody:last").append(row);
                 },
+                addToImage: function(row) {
+                    $("#images-list").append(row);
+                },
                 render: function() {
                     var that = this;
                     var hours = biz.get("hours");
@@ -397,7 +466,21 @@
                         var view = new SocialView();
                         that.addToSocial(view.render(m).el);
                     });
-                    $('#bizapp form').parsley();
+
+                    $("#images-list").html('');
+                    var images = biz.get("images");
+                    $.map(images, function(m) {
+                        var view = new ImageView();
+                        that.addToImage(view.render(m).el);
+                    });
+                    var landImage = $('#landing_image').val();
+                    if (landImage) {
+                        $('.select-image[data-image-id="' + landImage + '"]').attr("disabled", "disabled");
+                    }
+                    var mobileImage = $('#mobile_landing_image').val();
+                    if (mobileImage) {
+                        $('.select-mobile-image[data-image-id="' + mobileImage + '"]').attr("disabled", "disabled");
+                    }
                 },
                 addHours: function() {
                     var data = {};
@@ -411,7 +494,7 @@
                     this.addToSocial(view.render({}).el);
                     view.$el.find('input[name="social_url"]').focus();
                 },
-                saveBusiness: function() { 
+                saveBusiness: function() {
                     $('#bizapp form').parsley('validate');
                     if (!$('#bizapp form').parsley('isValid')) {
                         this.flash('alert-danger', 'Errors exist in form! Please correct!');
@@ -421,6 +504,8 @@
                     obj['name'] = $('#name').val();
                     obj['description'] = $('#description').val();
                     obj['status'] = $('#status').select2('val');
+                    obj['landing_image'] = $('#landing_image').val();
+                    obj['mobile_landing_image'] = $('#mobile_landing_image').val();
                     obj['phone'] = $('#phone').val();
                     obj['website'] = $('#website').val();
                     obj['has_physical_business'] = $('#has_physical_business').is(':checked');
@@ -455,9 +540,15 @@
                             'hourEnd': ifEmpty($(this).find('input[name="hourEnd"]').val())
                         }
                     }).toArray();
+                    var images = $('#images-list div').map(function(i, e) {
+                        return {
+                            'id': parseInt($(this).find('input[name="id"]').val() || 0)
+                        };
+                    }).toArray();
                     obj['categories'] = cats;
                     obj['social'] = social;
                     obj['hours'] = hours;
+                    obj['images'] = images;
                     biz.set(obj);
 
                     $('.save').html('Updating...');
@@ -475,7 +566,7 @@
                 },
                 flash: function(classes, msg) {
                     var $d = $('<div class="floatingAlert alert-dismissable alert ' + classes + '">' +
-                                msg + 
+                                msg +
                              '</div>');
                     $('.alertsdiv').html($d);
                     $d.delay(2000).fadeOut("slow", function() {
@@ -494,7 +585,7 @@
                     return { id: m.id, text: m.name };
                 });
                 var startId = 0;
-                $('#categories').select2({ 
+                $('#categories').select2({
                     width: '100%',
                     multiple: true,
                     data : d,
@@ -503,8 +594,8 @@
                     }
                 });
             });
-            $('#status').select2({ 
-                width: '200px' 
+            $('#status').select2({
+                width: '200px'
             }).select2('val', '{{ biz.status }}');
 
             var app = new AppView();
@@ -530,14 +621,12 @@
                 var state = $('#admin1_code').val();
                 var zip = $('#postalcode').val();
                 var self = jQuery(this);
-                console.log(origText);
                 if (!address || !city || !state || !zip) {
                     alert("Missing address fields. Unable to geocode address.");
                     return false;
                 }
                 var address = address + ',' + city + ',' + state + ',' + zip
                 var geocoder = new google.maps.Geocoder();
-                console.log(address);
                 geocoder.geocode({'address': address}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var loc = results[0].geometry;
