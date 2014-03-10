@@ -44,8 +44,8 @@ $(function() {
         title: 'Search Tips',
         content:    'Search for <strong class="primary">Business Names</strong> like "<strong class="info">Pangea Bakery</strong>"<br />' +
                     'Search for <strong class="primary">Business Categories</strong> like "<strong class="info">restaurant</strong>"<br /><hr />'+
-                    'Search near <strong class="primary">City</strong> or <strong class="primary">State</strong> or <strong class="primary">Zip</strong><br />' +
-                    'Ex. <strong class="info">San Diego</strong> or <strong class="info">Ca</strong> or <strong class="info">92101</strong>',
+                    'Search near <strong class="primary">City</strong> or <strong class="primary">State</strong><br />' +
+                    'Ex. <strong class="info">San Diego</strong> or <strong class="info">Ca</strong>',
         html: true,
         callbackShow: function() {
         },
