@@ -57,6 +57,9 @@ def isAllowed(user):
 def coming_soon(request):
     return render_to_response('coming_soon.html', RequestContext(request, {}))
 
+def home(request):
+    return render_to_response('home.html', RequestContext(request, {}))
+
 @user_passes_test(isAllowed, login_url=COMING_SOON, redirect_field_name=None)
 def landing(request):
     return render_to_response('landing.html', RequestContext(request, {}))
