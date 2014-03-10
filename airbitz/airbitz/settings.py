@@ -206,6 +206,13 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/core.js',
     },
+    'home': {
+        'source_filenames': (
+            'extras/ajaxchimp/jquery.ajaxchimp.js',
+            'js/home.js',
+        ),
+        'output_filename': 'js/home.js',
+    },
     'management': {
         'source_filenames': (
             'js/jquery.hotkeys.js',

@@ -112,6 +112,7 @@
     {% block head %}
         {% compressed_css 'global' %}
         {% compressed_css 'home' %}
+        {% compressed_js 'home' %}
     {% endblock head %}
 
 </head>
@@ -169,46 +170,7 @@
 
 
 
-	<header id="main-header">
-		<div class="container clearfix">
-					<a href="index.html">
-				<img src="{{ STATIC_URL }}wp/assets/img/logo-300px.png" alt="Airbitz" id="logo" />
-			</a>
 
-
-                <div class='gf_browser_unknown gform_wrapper simple-email-capture_wrapper' id='gform_wrapper_3' ><form method='post' enctype='multipart/form-data'  id='gform_3' class='simple-email-capture' action='/'>
-                        <div class='gform_body'>
-                            <ul id='gform_fields_3' class='gform_fields top_label description_below'><li id='field_3_1' class='gfield    clear_field           gfield_contains_required' ><label class='gfield_label' for='input_3_1'>Email<span class='gfield_required'>*</span></label><div class='ginput_container'><input name='input_1' id='input_3_1' type='email' value='Email Address' class='medium'     /></div></li><li id='field_3_2' class='gfield    gform_validation_container' ><label class='gfield_label' for='input_3_2'>Email</label><div class='ginput_container'><input name='input_2' id='input_3_2' type='text' value='' autocomplete='off'/></div><div class='gfield_description'>This field is for validation purposes and should be left unchanged.</div></li>
-                            </ul></div>
-        <div class='gform_footer top_label'> <input type='submit' id='gform_submit_button_3' class='button gform_button' value='Get Notified'  onclick='if(window["gf_submitting_3"]){return false;}  if( !jQuery("#gform_3")[0].checkValidity || jQuery("#gform_3")[0].checkValidity()){window["gf_submitting_3"]=true;} '/>
-            <input type='hidden' class='gform_hidden' name='is_submit_3' value='1' />
-            <input type='hidden' class='gform_hidden' name='gform_submit' value='3' />
-            <input type='hidden' class='gform_hidden' name='gform_unique_id' value='' />
-            <input type='hidden' class='gform_hidden' name='state_3' value='WyJhOjA6e30iLCIyN2M4YzI3NzMwNjZjZjE3OWIxMzc0YTZlZTJlMDIzNSJd' />
-            <input type='hidden' class='gform_hidden' name='gform_target_page_number_3' id='gform_target_page_number_3' value='0' />
-            <input type='hidden' class='gform_hidden' name='gform_source_page_number_3' id='gform_source_page_number_3' value='1' />
-            <input type='hidden' name='gform_field_values' value='' />
-
-        </div>
-                        </form>
-                        </div><script type='text/javascript'> jQuery(document).ready(function(){jQuery(document).trigger('gform_post_render', [3, 1]) } ); </script>
-			<div id="et-top-navigation">
-				<nav id="top-menu-nav">
-				<ul id="top-menu" class="nav"><li id="menu-item-175" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-145 current_page_item menu-item-175"><a href="index.html" >Home</a></li>
-<li id="menu-item-167" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-167"><a href="team/index.html" >Team</a></li>
-</ul>				</nav>
-
-				<div id="et_top_search">
-					<span id="et_search_icon"></span>
-					<form role="search" method="get" class="et-search-form et-hidden" action="http://airbitz.co/">
-					<input type="search" class="et-search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />					</form>
-				</div>
-
-				<ul id="top-menu" class="mobile-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-145 current_page_item menu-item-175"><a href="index.html" >Home</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-167"><a href="team/index.html" >Team</a></li>
-</ul><div id="et_mobile_nav_menu"><a href="#" class="mobile_nav closed"><span class="mobile_menu_bar"></span></a></div>			</div> <!-- #et-top-navigation -->
-		</div> <!-- .container -->
-	</header> <!-- #main-header -->
 <div id="main-content">
 
 
@@ -234,24 +196,26 @@
 <p class="slide-text">Bitcoin Made Safe, Simple, and Secure.<br>
 Bitcoin Businesses at Your Fingertips.</p>
 
-                <div class='gf_browser_unknown gform_wrapper simple-email-capture_wrapper' id='gform_wrapper_1' ><a id='gf_1' name='gf_1' class='gform_anchor' ></a><form method='post' enctype='multipart/form-data' target='gform_ajax_frame_1' id='gform_1' class='simple-email-capture' action='/#gf_1'>
-                        <div class='gform_body'>
-                            <ul id='gform_fields_1' class='gform_fields top_label description_below'><li id='field_1_1' class='gfield    clear_field           gfield_contains_required' ><label class='gfield_label' for='input_1_1'>Email<span class='gfield_required'>*</span></label><div class='ginput_container'><input name='input_1' id='input_1_1' type='email' value='Email Address' class='medium'  tabindex='1'   /></div></li><li id='field_1_2' class='gfield    gform_validation_container' ><label class='gfield_label' for='input_1_2'>Phone</label><div class='ginput_container'><input name='input_2' id='input_1_2' type='text' value='' autocomplete='off'/></div><div class='gfield_description'>This field is for validation purposes and should be left unchanged.</div></li>
-                            </ul></div>
-        <div class='gform_footer top_label'> <input type='submit' id='gform_submit_button_1' class='button gform_button' value='Get Notified' tabindex='2' onclick='if(window["gf_submitting_1"]){return false;}  if( !jQuery("#gform_1")[0].checkValidity || jQuery("#gform_1")[0].checkValidity()){window["gf_submitting_1"]=true;} '/><input type='hidden' name='gform_ajax' value='form_id=1&amp;title=&amp;description=&amp;tabindex=1' />
-            <input type='hidden' class='gform_hidden' name='is_submit_1' value='1' />
-            <input type='hidden' class='gform_hidden' name='gform_submit' value='1' />
-            <input type='hidden' class='gform_hidden' name='gform_unique_id' value='' />
-            <input type='hidden' class='gform_hidden' name='state_1' value='WyJhOjA6e30iLCIyN2M4YzI3NzMwNjZjZjE3OWIxMzc0YTZlZTJlMDIzNSJd' />
-            <input type='hidden' class='gform_hidden' name='gform_target_page_number_1' id='gform_target_page_number_1' value='0' />
-            <input type='hidden' class='gform_hidden' name='gform_source_page_number_1' id='gform_source_page_number_1' value='1' />
-            <input type='hidden' name='gform_field_values' value='' />
 
-        </div>
-                        </form>
-                        </div>
-                <iframe style='display:none;width:0px;height:0px;' src='about:blank' name='gform_ajax_frame_1' id='gform_ajax_frame_1'></iframe>
-                <script type='text/javascript'>jQuery(document).ready(function($){gformInitSpinner( 1, '{{ STATIC_URL }}wp/wp-content/plugins/gravityforms/images/spinner.gif' );jQuery('#gform_ajax_frame_1').load( function(){var contents = jQuery(this).contents().find('*').html();var is_postback = contents.indexOf('GF_AJAX_POSTBACK') >= 0;if(!is_postback){return;}var form_content = jQuery(this).contents().find('#gform_wrapper_1');var is_redirect = contents.indexOf('gformRedirect(){') >= 0;var is_form = !(form_content.length <= 0 || is_redirect);if(is_form){jQuery('#gform_wrapper_1').html(form_content.html());jQuery(document).scrollTop(jQuery('#gform_wrapper_1').offset().top);if(window['gformInitDatepicker']) {gformInitDatepicker();}if(window['gformInitPriceFields']) {gformInitPriceFields();}var current_page = jQuery('#gform_source_page_number_1').val();gformInitSpinner( 1, '{{ STATIC_URL }}wp/wp-content/plugins/gravityforms/images/spinner.gif' );jQuery(document).trigger('gform_page_loaded', [1, current_page]);window['gf_submitting_1'] = false;}else if(!is_redirect){var confirmation_content = jQuery(this).contents().find('#gforms_confirmation_message').html();if(!confirmation_content){confirmation_content = contents;}setTimeout(function(){jQuery('#gform_wrapper_1').replaceWith('<' + 'div id=\'gforms_confirmation_message\' class=\'gform_confirmation_message_1\'' + '>' + confirmation_content + '<' + '/div' + '>');jQuery(document).scrollTop(jQuery('#gforms_confirmation_message').offset().top);jQuery(document).trigger('gform_confirmation_loaded', [1]);window['gf_submitting_1'] = false;}, 50);}else{jQuery('#gform_1').append(contents);if(window['gformRedirect']) {gformRedirect();}}jQuery(document).trigger('gform_post_render', [1, current_page]);} );} );</script><script type='text/javascript'> jQuery(document).ready(function(){jQuery(document).trigger('gform_post_render', [1, 1]) } ); </script>
+
+    <div class="row">
+        <form id="email-signup-form" class="form" role="form">
+            <div class="form-group">
+                <div class="col-sm-12 col-md-10 col-md-offset-1">
+                    <label for="inputEmail" class="control-label">Email Address</label>
+                    <input type="email" class="form-control input-lg" id="inputEmail" placeholder="Your Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12 col-md-10 col-md-offset-1">
+                    <button type="submit" class="btn btn-lg btn-success btn-block">Sign Up for Launch</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
 </div>
 
 				</div> <!-- .et_pb_slide_description -->
