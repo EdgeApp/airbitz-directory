@@ -195,6 +195,7 @@ PIPELINE_JS = {
             'js/jquery-1.9.1.min.js',
             'bootstrap/js/bootstrap.min.js',
             'js/modernizr.js',
+            'js/enquire.js',
             'js/core.js',
             'js/holder.js',
             'js/typeahead.bundle.js',
@@ -205,6 +206,14 @@ PIPELINE_JS = {
             'js/frontend-ui.js'
         ),
         'output_filename': 'js/core.js',
+    },
+    'home': {
+        'source_filenames': (
+            'extras/ajaxchimp/jquery.ajaxchimp.js',
+            'js/frontend-ui.js'
+            'js/home.js',
+        ),
+        'output_filename': 'js/home.js',
     },
     'management': {
         'source_filenames': (

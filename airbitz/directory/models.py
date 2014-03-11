@@ -139,7 +139,7 @@ class Business(models.Model):
 
     @property
     def gmap_directions_url(self):
-        gmaps_url = 'https://maps.google.com/maps?saddr=current+location&daddr='
+        gmaps_url = 'https://maps.google.com/maps?saddr=my+location&daddr='
         if self.center:
             lat, lon = self.center.y, self.center.x
         else:

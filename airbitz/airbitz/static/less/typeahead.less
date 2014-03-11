@@ -29,11 +29,11 @@
         text-align: left;
     }
 
-    #term {
+    .term {
         width: 200px;
     }
-    
-    #near {
+
+    .location {
         width: 200px;
     }
     
@@ -68,6 +68,12 @@
         -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
          -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
               box-shadow: 0 5px 10px rgba(0,0,0,.2);
+
+        @media (max-width: @screen-sm) {
+            width: 275px;
+            height: 175px;
+            overflow: scroll;
+        }
     }
 
     .tt-suggestion {
