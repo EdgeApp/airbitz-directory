@@ -144,7 +144,7 @@
                 var b = map.getBounds();
                 var ne = b.getNorthEast();
                 var sw = b.getSouthWest();
-                var param = sw.k + ',' + sw.A + '|' + ne.k + ',' + ne.A;
+                var param = sw.lat() + ',' + sw.lng() + '|' + ne.lat() + ',' + ne.lng();
                 aoData.push({ "name": "bounds", "value": param });
             }
             aoData.push({ "name": "location", "value": $('#location').val() });
