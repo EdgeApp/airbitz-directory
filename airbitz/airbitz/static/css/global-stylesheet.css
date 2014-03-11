@@ -493,6 +493,11 @@ body .main-content {
   -o-transition: 0.3s ease;
   box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.15);
 }
+@media (max-width: 992px) {
+  .results-map-list .item-container {
+    height: auto;
+  }
+}
 .results-map-list .biz-discount {
   position: absolute;
   left: 0;
@@ -542,7 +547,6 @@ body .main-content {
 }
 .results-map-list .biz-meta .biz-location .biz-address-street {
   display: inline-block;
-  width: 300px;
   letter-spacing: -1px;
   margin-left: 0px;
   color: #555555;
@@ -559,6 +563,7 @@ body .main-content {
 @media (max-width: 992px) {
   .results-map-list .biz-description {
     clear: both;
+    padding-top: 10px;
   }
 }
 .biz-result .glyphicon {

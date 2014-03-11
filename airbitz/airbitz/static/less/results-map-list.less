@@ -112,6 +112,9 @@
             .transition(.3s ease);
             box-shadow: 0 0 0 5px rgba(0,0,0,.15);
         }
+        @media(max-width: @screen-md-min) {
+            height: auto;
+        }
     }
 
     .biz-discount {
@@ -170,7 +173,6 @@
 
             .biz-address-street {
                 display: inline-block;
-                width: 300px;
                 letter-spacing: -1px;
                 margin-left: 0px;
                 color: @gray;
@@ -189,6 +191,7 @@
 
         @media(max-width: @screen-md-min) {
             clear: both;
+            padding-top: 10px;
         }
     }
 
