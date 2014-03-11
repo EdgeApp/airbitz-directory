@@ -144,8 +144,6 @@
                 var b = map.getBounds();
                 var ne = b.getNorthEast();
                 var sw = b.getSouthWest();
-            console.log(ne);
-            console.log(sw);
                 var param = sw.k + ',' + sw.A + '|' + ne.k + ',' + ne.A;
                 aoData.push({ "name": "bounds", "value": param });
             }
