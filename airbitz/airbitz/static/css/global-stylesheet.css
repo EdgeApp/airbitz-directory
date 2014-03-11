@@ -30,6 +30,7 @@
 #nav-mobile .navbar-form {
   float: right;
   padding: 0;
+  margin-right: 15px;
   border-bottom: none;
 }
 #nav-mobile .navbar-form #mobile-submit {
@@ -170,6 +171,13 @@
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 768px) {
+  .twitter-typeahead .tt-dropdown-menu {
+    width: 275px;
+    height: 175px;
+    overflow: scroll;
+  }
 }
 .twitter-typeahead .tt-suggestion {
   padding: 3px 20px;
