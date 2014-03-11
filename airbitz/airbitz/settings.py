@@ -210,6 +210,7 @@ PIPELINE_JS = {
     'home': {
         'source_filenames': (
             'extras/ajaxchimp/jquery.ajaxchimp.js',
+            'js/frontend-ui.js'
             'js/home.js',
         ),
         'output_filename': 'js/home.js',
