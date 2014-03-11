@@ -184,6 +184,11 @@ body .top-bg {
     background-size: cover !important;
   }
 }
+@media (min-width: 768px) {
+  body .top-bg {
+    display: none;
+  }
+}
 body .main-content {
   background: rgba(255, 255, 255, 0.7);
   -webkit-box-shadow: 0 0 0 2px #ffffff;
