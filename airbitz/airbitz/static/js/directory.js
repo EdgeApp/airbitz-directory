@@ -1,5 +1,8 @@
 /*jshint devel:true */
 
+var screen_lg = "screen and (min-width: 992px)";
+
+
 $(function() {
 
     // ALL DIRECTORY PAGES
@@ -61,18 +64,21 @@ $(function() {
     });
 
 
-
-
-    $('.top-bg').blurjs({
-        source: '.top-bg',
-        radius: 35,
-        overlay: '',
-        offset: {
-            x: 0,
-            y: 0
-        },
-        cache: true
+    // only blur bg on larger screens
+    enquire.register(screen_lg, function() {
+        $('.top-bg').blurjs({
+            source: '.top-bg',
+            radius: 35,
+            overlay: '',
+            offset: {
+                x: 0,
+                y: 0
+            },
+            cache: false // keep false because browser localstorage quota limits get hit
+        });
     });
+
+
 
 
 });
@@ -96,5 +102,10 @@ jQuery(window).on('load', function(){
         transform: 'scale(1)'
     });
 
-    $('.top-bg').fadeIn(800);
+
+    // only load bg on larger screens
+    enquire.register(screen_lg, function() {
+        $('.top-bg').fadeIn(800);
+    });
+
 });
