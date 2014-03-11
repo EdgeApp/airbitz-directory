@@ -59,4 +59,22 @@ $(function() {
     });
 
 
+    $('body').on('click', '#nav-mobile .form-group.term', function() {
+        $('#nav-mobile #mobile-nav-close').slideDown();
+        $('#nav-mobile .form-group.location').slideDown();
+        $('#nav-mobile #mobile-submit').slideDown();
+        $('body').css('margin-top', '30px');
+    });
+
+
+    $('body').on('click', '#nav-mobile #mobile-nav-close', function() {
+        $('#nav-mobile #mobile-nav-close').hide();
+        $('#nav-mobile .form-group.location').slideUp();
+        $('#nav-mobile #mobile-submit').slideUp();
+        $('body').css('margin-top', '0');
+    });
+
+
+
+
 });

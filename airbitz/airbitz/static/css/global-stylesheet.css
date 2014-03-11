@@ -8,6 +8,55 @@
   top: -2px;
   right: -15px;
 }
+#nav-mobile {
+  background-color: white;
+  border: #eee;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+#nav-mobile .logo {
+  height: 20px;
+}
+#nav-mobile .navbar-header {
+  width: 60px;
+  float: left;
+}
+#nav-mobile .navbar-header #mobile-nav-close {
+  display: none;
+  position: relative;
+  top: 0px;
+  left: 18px;
+  padding: 2px 6px;
+}
+#nav-mobile .navbar-form {
+  float: right;
+  padding: 0;
+  border-bottom: none;
+}
+#nav-mobile .navbar-form #mobile-submit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+}
+#nav-mobile .navbar-form .form-group .twitter-typeahead .term,
+#nav-mobile .navbar-form .form-group .twitter-typeahead .location {
+  width: 275px;
+}
+@media (min-width: 768px) {
+  #nav-mobile .navbar-form .form-group {
+    margin-bottom: 5px !important;
+  }
+}
+#nav-mobile .navbar-form .form-group.location {
+  display: none;
+}
+@media (max-width: 768px) {
+  #nav-mobile .navbar-form {
+    padding-right: 15px;
+  }
+}
 .navbar-ab {
   background-color: white;
   border: #eee;
@@ -88,10 +137,10 @@
   max-width: none;
   text-align: left;
 }
-.twitter-typeahead #term {
+.twitter-typeahead .term {
   width: 200px;
 }
-.twitter-typeahead #near {
+.twitter-typeahead .location {
   width: 200px;
 }
 .twitter-typeahead .typeahead {
@@ -548,7 +597,10 @@ body .main-content {
   }
 }
 .results-map-list .biz-meta {
-  margin: 7px 0;
+  margin: 6px 0;
+}
+.results-map-list .biz-meta .biz-location {
+  margin-top: 8px;
 }
 .results-map-list .biz-meta .biz-location .biz-address-street {
   display: inline-block;
