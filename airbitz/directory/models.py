@@ -300,8 +300,8 @@ class BusinessImage(models.Model):
     web_photo_y2 = models.PositiveIntegerField(blank=True, null=True)
 
     web_photo = ImageSpecField(source='image', id='ab:image:web_crop')
-    mobile_photo = ImageSpecField(source='image', id='ab:image:mobile_crop')
-
+    # mobile_photo = ImageSpecField(source='image', id='ab:image:mobile_crop')
+    mobile_photo = ImageSpecField(source='image', processors=[ResizeToFit(320, 600)])
     mobile_thumbnail = ImageSpecField(source='mobile_photo',
                               processors=[Sliver(320, 600, 100)],
                               format='JPEG',
