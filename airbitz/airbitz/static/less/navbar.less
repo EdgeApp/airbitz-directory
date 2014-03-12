@@ -22,56 +22,70 @@
     border: #eee;
     box-shadow: 0 0 10px rgba(0,0,0,.5);
 
-    .logo {
-        height: 20px;
+    #mobile-nav-close {
+
+        position: absolute;
+        top: 0px;
+        left: -50px;
+//        padding: 2px 6px;
     }
     .navbar-header {
         width: 60px;
         float: left;
-        
-        #mobile-nav-close {
-            display: none;
-            position: relative;
-            top: 0px;
-            left: 18px;
-            padding: 2px 6px;
+
+        .logo {
+            height: 20px;
         }
     }
-    .navbar-form {
-        float: right;
-        padding: 0;
-        margin-right: 15px;
-        border-bottom: none;
 
-        #mobile-submit {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 1px;
-            width: 1px;
-            opacity: 0;
-        }
-        .form-group {
-            .twitter-typeahead {
-                .term, .location {
-                    width: 275px;
+    .mobile-search-form {
+        position: relative;
+        float: left;
+        width: auto;
+        margin-left: 15px;
+        padding: 0 15px;
+
+        .navbar-form {
+            float: right;
+            padding: 2px 0 0 0;
+            border-bottom: none;
+            border-top: none;
+
+            #mobile-submit {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 1px;
+                width: 1px;
+                opacity: 0;
+            }
+            .form-group {
+                position: relative;
+
+                .twitter-typeahead {
+                    .term, .location {
+                        width: 180px;
+                    }
+                }
+                @media (min-width: @screen-sm) {
+                    margin-bottom: 5px !important;
                 }
             }
-            @media (min-width: @screen-sm) {
-                margin-bottom: 5px !important;
-            }
-        }
-        .form-group.term {
+            .form-group.term {
 
-        }
-        .form-group.location {
-            display: none;
-        }
-        @media (max-width: @screen-sm) {
-            padding-right: 15px;
+            }
+            .form-group.location {
+                display: none;
+            }
         }
     }
 
+    #navbar-collapse-1 {
+
+        @media (max-width: @screen-sm) {
+            width: 100%;
+        }
+    }
 }
 
 
