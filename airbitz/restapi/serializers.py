@@ -9,7 +9,7 @@ from location.models import GeoNameZip
 
 class SizedImageField(serializers.Field):
     def field_to_native(self, obj, field_name):
-        image = obj.landing_image
+        image = obj.mobile_landing_image
         if image:
             return {
                 'image': image.mobile_photo.url,
@@ -111,7 +111,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
     bizId = serializers.Field(source='pk')
     categories = CategorySerializer(source='categories')
     social = SocialSerializer(source='socialid_set')
-    profile_image = SizedImageField(source='landing_image')
+    profile_image = SizedImageField(source='*')
     state = serializers.CharField(source='admin1_code')
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
