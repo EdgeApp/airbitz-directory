@@ -65,6 +65,10 @@ class PhotosView(generics.ListAPIView):
     authentication_classes = PERMS
     permission_classes = AUTH
 
+    def get_queryset(self):
+        bizId = int(self.kwargs['bizId'])
+        return BusinessImage.objects.filter(business=bizId)
+
 
 class SearchView(generics.ListAPIView):
     """
