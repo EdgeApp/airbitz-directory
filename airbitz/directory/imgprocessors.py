@@ -34,7 +34,7 @@ register.generator('ab:gallerythumb', GalleryThumbnail)
 DEF_WEB_W, DEF_WEB_H = 300, 300
 DEF_MOB_W, DEF_MOB_H = 640, 320
 DEF_ADMIN_PROC=ResizeToFit(800, 800, upscale=False, mat_color="#FFF")
-DEF_MOBILE_PROC=ResizeToFit(640, 1136, mat_color=(255, 255, 255, 255))
+DEF_MOBILE_PROC=ResizeToFit(640, 1136, upscale=False)
 
 class ResizeWebToDimensions(object):
     def __init__(self, obj, imgid, x1, y1, x2, y2):
