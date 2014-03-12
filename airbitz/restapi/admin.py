@@ -68,12 +68,27 @@ class AdminHoursSerializer(serializers.ModelSerializer):
 
 class AdminBizImageSerializer(serializers.ModelSerializer):
     id = fields.IntegerField();
-    mobile_photo = fields.CharField(source='mobile_photo.url')
-    width = fields.IntegerField(source='mobile_photo.width')
-    height = fields.IntegerField(source='mobile_photo.height')
+    image = fields.CharField(source='admin_photo.url')
+    width = fields.IntegerField(source='admin_photo.width')
+    height = fields.IntegerField(source='admin_photo.height')
+
+    mobile_photo_x1 = fields.CharField(source='mobile_photo_x1', required=False)
+    mobile_photo_y1 = fields.CharField(source='mobile_photo_y1', required=False)
+    mobile_photo_x2 = fields.CharField(source='mobile_photo_x2', required=False)
+    mobile_photo_y2 = fields.CharField(source='mobile_photo_y2', required=False)
+
+    web_photo_x1 = fields.CharField(source='web_photo_x1', required=False)
+    web_photo_y1 = fields.CharField(source='web_photo_y1', required=False)
+    web_photo_x2 = fields.CharField(source='web_photo_x2', required=False)
+    web_photo_y2 = fields.CharField(source='web_photo_y2', required=False)
+
     class Meta:
         model = BusinessHours
-        fields = ('id', 'mobile_photo', 'height', 'width', )
+        fields = ('id', 'image', 'height', 'width', 
+                  'mobile_photo_x1', 'mobile_photo_y1', 
+                  'mobile_photo_x2', 'mobile_photo_y2',
+                  'web_photo_x1', 'web_photo_y1', 
+                  'web_photo_x2', 'web_photo_y2',  )
 
 class AdminBizSerializer(serializers.ModelSerializer):
     categories = AdminCategorySerializer(source='categories', many=True)
@@ -272,11 +287,23 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
             delimg = dict((c.id, c) for c in imgs)
             print delimg
             for c in request.DATA['images']:
-                print c
+                #print c
                 if not c.has_key('id'):
                     continue
                 if delimg.has_key(c['id']):
-                    delimg.pop(c['id'])
+                    i = delimg.pop(c['id'])
+                    i.mobile_photo_x1 = int(c['mobile_photo_x1'] or 0)
+                    i.mobile_photo_y1 = int(c['mobile_photo_y1'] or 0)
+                    i.mobile_photo_x2 = int(c['mobile_photo_x2'] or 320)
+                    i.mobile_photo_y2 = int(c['mobile_photo_y2'] or 640)
+                    i.web_photo_x1 = int(c['web_photo_x1'] or 0)
+                    i.web_photo_y1 = int(c['web_photo_y1'] or 0)
+                    i.web_photo_x2 = int(c['web_photo_x2'] or 300)
+                    i.web_photo_y2 = int(c['web_photo_y2'] or 300)
+                    i.save()
+                    i.mobile_photo.generate()
+                    i.web_photo.generate()
+
             for i in delimg.itervalues():
                 print 'deleting ', i
                 i.delete()

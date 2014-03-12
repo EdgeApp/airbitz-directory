@@ -1,0 +1,2 @@
+format: html
+template: ./templates/default.html

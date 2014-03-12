@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
+{% load compressed %}
 {% load crispy_forms_tags %}
 
 {% block title%} {{ biz.name }} {% endblock %}
+
+{% block head %}
+    {{ block.super }}
+    {% compressed_css 'management' %}
+{% endblock head %}
 
 {% block body %}
     <div class="row">
@@ -19,6 +25,29 @@
     <div class="panel panel-default">
         <div class="panel-heading">{{ title }}</div>
         <div class="panel-body" style="margin: 0 10px">
+            {% if img %}
+                <div class="row">
+                    <div class="col-6-sm">
+                        <img src="{{ MEDIA_URL }}{{ img.mobile_photo }}" />
+                    </div>
+                    <div class="col-6-sm">
+                        <div id="preview" style="width: 200px; height: 100px; overflow: hidden;">
+                            <img src="{{ MEDIA_URL }}{{ img.mobile_photo }}" style="width: 200px; height: 100px;" />
+                        </div>
+                        <div>
+                            <div>
+                            X1: <div id="x1"></div>, Y1: <div id="y1"></div>
+                            </div>
+                            <div>
+                            X2: <div id="x2"></div>, Y2: <div id="y2"></div>
+                            </div>
+                            <div>
+                            Height: <div id="height"></div>, Width: <div id="width"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
             {% if helper %}
                 {% crispy form helper %}
             {% else %}
@@ -28,11 +57,42 @@
     </div>
 {% endblock %}
 
-{% block javascript %}
+{% block javascript_headers %}
     {{ block.super }}
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    {% compressed_js 'management' %}
+{% endblock javascript_headers %}
+
+{% block javascript %}
+    {{ block.super }}
     <script type="text/javascript">
         $(function() {
+            function preview(img, selection) {
+                if (!selection.width || !selection.height) {
+                    return;
+                }
+                var scaleX = 100 / selection.width;
+                var scaleY = 100 / selection.height;
+
+                $('#preview img').css({
+                    width: Math.round(scaleX * 300),
+                    height: Math.round(scaleY * 300),
+                    marginLeft: -Math.round(scaleX * selection.x1),
+                    marginTop: -Math.round(scaleY * selection.y1)
+                });
+
+                $('#x1').html(selection.x1);
+                $('#y1').html(selection.y1);
+                $('#x2').html(selection.x2);
+                $('#y2').html(selection.y2);
+                $('#width').html(selection.width);
+                $('#height').html(selection.height);    
+            }
+            $('img').imgAreaSelect({
+                handles: true,
+                aspectRatio: '4:3',
+                onSelectChange: preview
+            });
             $('.geocode-address').click(function() {
                 var self = $(this);
                 var origText = self.html();

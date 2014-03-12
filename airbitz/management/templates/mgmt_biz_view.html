@@ -21,6 +21,13 @@
             color: red;
             font-weight: bold;
         }
+        .modal-dialog {
+            width: 1000px;
+        }
+
+        .modal-body {
+                max-width: 1000px;
+        }
     </style>
 {% endblock head %}
 
@@ -284,16 +291,47 @@
         <div class="col-xs-6 col-md-3">
             <input type="hidden" name="id"
                    value="{% templatetag openvariable %} this.id {% templatetag closevariable %}">
-            <img class="img-thumbnail" src="{% templatetag openvariable %} this.mobile_photo {% templatetag closevariable %}" />
+            <img class="img-thumbnail" src="{% templatetag openvariable %} this.image {% templatetag closevariable %}" />
             <div class="bottom-overlay">
                 <div class="row">
-                    <button class="btn btn-default pull-left select-image" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}" >Web <i class="icon-ok"></i></button>
+                    <span class="image-crop btn pull-left btn-primary btn-link" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}"><span class="glyphicon glyphicon-wrench"></span></span>
                     &nbsp;
-                    <button class="btn btn-default pull-left select-mobile-image" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}" >Mobile <i class="icon-ok"></i></button>
+                    <button class="btn btn-default pull-left select-image" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}" >Web</i></button>
                     &nbsp;
+                    <button class="btn btn-default pull-left select-mobile-image" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}" >Mobile</i></button>
+
                     <span class="image-delete btn btn-danger btn-link pull-right" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}"><span class="glyphicon glyphicon-trash"></span></span>
                     &nbsp;
                     <a class="btn btn-default btn-link pull-right" href="/mgmt/biz/view/{{ biz.id }}/images/edit/{% templatetag openvariable %} this.id {% templatetag closevariable %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                </div>
+            </div>
+        </div>
+        <div id="{% templatetag openvariable %} this.id {% templatetag closevariable %}-modal" class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h4> Web </h4>
+                                <img class="img-web" style="width: 400px; height: 400px" src="{% templatetag openvariable %} this.image {% templatetag closevariable %}" />
+                                <input type="hidden" readonly class="web_photo_x1" value="{% templatetag openvariable %} web_photo_x1 {% templatetag closevariable %}"/>
+                                <input type="hidden" readonly class="web_photo_y1" value="{% templatetag openvariable %} web_photo_y1 {% templatetag closevariable %}"/>
+                                <input type="hidden" readonly class="web_photo_x2" value="{% templatetag openvariable %} web_photo_x2 {% templatetag closevariable %}"/>
+                                <input type="hidden" readonly class="web_photo_y2" value="{% templatetag openvariable %} web_photo_y2 {% templatetag closevariable %}"/>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4> Mobile </h4>
+                                <img class="img-mobile" style="width: 400px; height: 400px" src="{% templatetag openvariable %} this.image {% templatetag closevariable %}" />
+                                <input type="hidden" class="mobile_photo_x1" value="{% templatetag openvariable %} mobile_photo_x1 {% templatetag closevariable %}"/>
+                                <input type="hidden" class="mobile_photo_y1" value="{% templatetag openvariable %} mobile_photo_y1 {% templatetag closevariable %}"/>
+                                <input type="hidden" class="mobile_photo_x2" value="{% templatetag openvariable %} mobile_photo_x2 {% templatetag closevariable %}"/>
+                                <input type="hidden" class="mobile_photo_y2" value="{% templatetag openvariable %} mobile_photo_y2 {% templatetag closevariable %}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="modal-close btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -326,7 +364,9 @@
                 events: {
                     "click .select-image":  "selectWebImage",
                     "click .select-mobile-image":  "selectMobileImage",
-                    "click .image-delete":  "deleteImage"
+                    "click .image-delete":  "deleteImage",
+                    "click .image-crop":  "cropImage",
+                    "click .modal-close":  "modalClose"
                 },
                 tagName:  "div",
                 template: Handlebars.compile($('#images-row').html()),
@@ -335,6 +375,32 @@
                     this.data = data;
                     this.$el.html(this.template(data));
                     return this;
+                },
+
+                webPreview: function(img, selection) {
+                    if (!selection.width || !selection.height) {
+                        return;
+                    }
+                    var scaleX = 100 / selection.width;
+                    var scaleY = 100 / selection.height;
+
+                    console.log(this.$el.html());
+                    this.$el.find('.web_photo_x1').val(selection.x1 * 2.0);
+                    this.$el.find('.web_photo_y1').val(selection.y1 * 2.0);
+                    this.$el.find('.web_photo_x2').val(selection.x2 * 2.0);
+                    this.$el.find('.web_photo_y2').val(selection.y2 * 2.0);
+                },
+
+                mobilePreview: function(img, selection) {
+                    if (!selection.width || !selection.height) {
+                        return;
+                    }
+                    var scaleX = 100 / selection.width;
+                    var scaleY = 100 / selection.height;
+                    this.$el.find('.mobile_photo_x1').val(selection.x1 * 2.0);
+                    this.$el.find('.mobile_photo_y1').val(selection.y1 * 2.0);
+                    this.$el.find('.mobile_photo_x2').val(selection.x2 * 2.0);
+                    this.$el.find('.mobile_photo_y2').val(selection.y2 * 2.0);
                 },
                 selectWebImage: function() {
                     $('.select-image').removeAttr("disabled");
@@ -350,6 +416,59 @@
                     if (confirm('Are you sure you want to delete this image?')) {
                         this.$el.remove();
                     };
+                },
+                cropImage: function() {
+                    var that = this;
+                    var w = this.$el.find('.img-web').imgAreaSelect({
+                        instance: true,
+                        handles: true,
+                        show: true,
+                        aspectRatio: '1:1',
+                        onInit: function(img, selection) {
+                            that.webPreview(img, selection);
+                        },
+                        onSelectChange: function(img, selection) {
+                            that.webPreview(img, selection);
+                        }
+                    });
+                    setTimeout(function() {
+                        w.setSelection(
+                            that.data.web_photo_x1 / 2.0, that.data.web_photo_y1 / 2.0,
+                            that.data.web_photo_x2 / 2.0, that.data.web_photo_y2 / 2.0, 
+                            true);
+                        w.update();
+                        that.webPreview(w, w.getSelection(true));
+                    }, 500);
+
+                    var m = this.$el.find('.img-mobile').imgAreaSelect({
+                        instance: true,
+                        handles: true,
+                        show: true,
+                        aspectRatio: '1:2',
+                        onSelectChange: function(img, selection) {
+                            that.mobilePreview(img, selection);
+                        }
+                    });
+                    setTimeout(function() {
+                        m.setSelection(
+                            that.data.mobile_photo_x1 / 2.0, that.data.mobile_photo_y1 / 2.0,
+                            that.data.mobile_photo_x2 / 2.0, that.data.mobile_photo_y2 / 2.0, 
+                            true);
+                        m.update();
+                        that.mobilePreview(m, m.getSelection(true));
+                    }, 500);
+
+                    $('#' + this.data.id + '-modal').modal('show');
+                },
+                modalClose: function() {
+                    $('#' + this.data.id + '-modal').modal('hide');
+
+                    this.$el.find('.img-web').imgAreaSelect({ 
+                        'remove': true
+                    });
+                    this.$el.find('.img-mobile').imgAreaSelect({
+                        'remove': true
+                    });
                 }
             });
 
@@ -426,7 +545,6 @@
 
             var AppView = Backbone.View.extend({
                 el: $("#bizapp"),
-                hoursViews: {},
                 events: {
                     "click .save":  "saveBusiness",
                     "click .hours-add": "addHours",
@@ -542,9 +660,18 @@
                     }).toArray();
                     var images = $('#images-list div').map(function(i, e) {
                         return {
-                            'id': parseInt($(this).find('input[name="id"]').val() || 0)
+                            'id': parseInt($(this).find('input[name="id"]').val() || 0),
+                            'mobile_photo_x1': $(this).find('.mobile_photo_x1').val() || null,
+                            'mobile_photo_y1': $(this).find('.mobile_photo_y1').val() || null,
+                            'mobile_photo_x2': $(this).find('.mobile_photo_x2').val() || null,
+                            'mobile_photo_y2': $(this).find('.mobile_photo_y2').val() || null,
+                            'web_photo_x1': $(this).find('.web_photo_x1').val() || null,
+                            'web_photo_y1': $(this).find('.web_photo_y1').val() || null,
+                            'web_photo_x2': $(this).find('.web_photo_x2').val() || null,
+                            'web_photo_y2': $(this).find('.web_photo_y2').val() || null
                         };
                     }).toArray();
+                    console.log(images);
                     obj['categories'] = cats;
                     obj['social'] = social;
                     obj['hours'] = hours;

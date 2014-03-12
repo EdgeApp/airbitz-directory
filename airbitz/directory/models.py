@@ -9,7 +9,8 @@ from django.utils.formats import time_format
 from django.utils.http import urlquote_plus
 from imagekit import ImageSpec, register
 from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFill, ResizeToFit
+from imagekit.processors import ResizeToFill, ResizeToFit, Crop
+from imagekit.utils import get_field_info
 from pilkit.processors import Adjust, MakeOpaque
 from rest_framework.authtoken.models import Token
 import os
@@ -181,6 +182,17 @@ class Sliver(ResizeToFit):
         processor = ResizeToFill(width=self.width, height=self.sliverSize)
         return processor.process(img)
 
+class ResizeToDimensions(Crop):
+    def __init__(self, obj):
+        self.obj = obj
+
+    def process(self, img):
+        obj = self.obj
+        crop = Crop(x=obj.mobile_photo_x1, y=obj.mobile_photo_y1, 
+                    width=obj.mobile_photo_x2 - obj.mobile_photo_x1,
+                    height=obj.mobile_photo_y2 - obj.mobile_photo_y1)
+        return crop.process(img)
+
 class GalleryThumbnail(ImageSpec):
     processors = [ResizeToFit(260,400)]
     format = 'JPEG'
@@ -199,23 +211,105 @@ class TopBgBlurred(ImageSpec):
 
 register.generator('ab:topbgblurred', TopBgBlurred)
 
+DEFAULT_PROCESSOR=ResizeToFit(800, 800, upscale=False, mat_color="#FFF")
+
+class ResizeWebToDimensions(object):
+    def __init__(self, imgid, x1, y1, x2, y2):
+        self.imgid = imgid
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+
+    def process(self, img):
+        obj = BusinessImage.objects.get(id=self.imgid)
+        if obj.web_photo_x1 and obj.web_photo_y1:
+            x, y = obj.web_photo_x1, obj.web_photo_y1
+            width = obj.web_photo_x2 - obj.web_photo_x1
+            height = obj.web_photo_y2 - obj.web_photo_y1
+        else:
+            x, y = 0, 0
+            width, height = 320, 640
+        return img.crop((x, y, x + width, y + height))
+
+class WebCrop(ImageSpec):
+    format = 'JPEG'
+    options = {'quality': 60}
+
+    @property
+    def processors(self):
+        model, _ = get_field_info(self.source)
+        r = ResizeWebToDimensions(model.id, 
+                model.web_photo_x1, model.web_photo_y1,
+                model.web_photo_x2, model.web_photo_y2)
+        return [DEFAULT_PROCESSOR, r]
+
+class ResizeMobileToDimensions(object):
+    def __init__(self, imgid, x1, y1, x2, y2):
+        self.imgid = imgid
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+
+    def process(self, img):
+        obj = BusinessImage.objects.get(id=self.imgid)
+        if obj.mobile_photo_x1 and obj.mobile_photo_y1:
+            x, y = obj.mobile_photo_x1, obj.mobile_photo_y1
+            width = obj.mobile_photo_x2 - obj.mobile_photo_x1
+            height = obj.mobile_photo_y2 - obj.mobile_photo_y1
+        else:
+            x, y = 0, 0
+            width, height = 320, 640
+        return img.crop((x, y, x + width, y + height))
+
+class MobileCrop(ImageSpec):
+    format = 'JPEG'
+    options = {'quality': 60}
+
+    @property
+    def processors(self):
+        model, _ = get_field_info(self.source)
+        r = ResizeMobileToDimensions(model.id, 
+                model.mobile_photo_x1, model.mobile_photo_y1,
+                model.mobile_photo_x2, model.mobile_photo_y2)
+        return [DEFAULT_PROCESSOR, r]
+
+register.generator('ab:image:web_crop', WebCrop)
+register.generator('ab:image:mobile_crop', MobileCrop)
+
 class BusinessImage(models.Model):
     image = models.ImageField(upload_to='business_images', 
                               max_length=5000, 
                               height_field='height', 
                               width_field='width')
-    mobile_photo = ImageSpecField(source='image',
-                              processors=[ResizeToFit(320, 600)],
-                              format='JPEG',
-                              options={'quality': 60})
-    mobile_thumbnail = ImageSpecField(source='image',
-                              processors=[Sliver(320, 600, 100)],
+    admin_photo = ImageSpecField(source='image',
+                              processors=[DEFAULT_PROCESSOR],
                               format='JPEG',
                               options={'quality': 60})
     business = models.ForeignKey(Business, null=False)
 
+    mobile_photo_x1 = models.PositiveIntegerField(blank=True, null=True)
+    mobile_photo_y1 = models.PositiveIntegerField(blank=True, null=True)
+    mobile_photo_x2 = models.PositiveIntegerField(blank=True, null=True)
+    mobile_photo_y2 = models.PositiveIntegerField(blank=True, null=True)
+
+    web_photo_x1 = models.PositiveIntegerField(blank=True, null=True)
+    web_photo_y1 = models.PositiveIntegerField(blank=True, null=True)
+    web_photo_x2 = models.PositiveIntegerField(blank=True, null=True)
+    web_photo_y2 = models.PositiveIntegerField(blank=True, null=True)
+
+    web_photo = ImageSpecField(source='image', id='ab:image:web_crop')
+    mobile_photo = ImageSpecField(source='image', id='ab:image:mobile_crop')
+
+    mobile_thumbnail = ImageSpecField(source='mobile_photo',
+                              processors=[Sliver(320, 600, 100)],
+                              format='JPEG',
+                              options={'quality': 60})
+
     height = models.PositiveIntegerField(null=True)
     width = models.PositiveIntegerField(null=True)
+
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField(ImageTag, blank=True, null=True)

@@ -173,6 +173,7 @@ PIPELINE_CSS = {
         'source_filenames': (
             'extras/select2/select2.css',
             'css/global-management.css',
+            'extras/jquery.imgareaselect-0.9.10/css/imgareaselect-default.css',
         ),
         'output_filename': 'css/management.css',
         'extra_context': {
@@ -225,6 +226,7 @@ PIPELINE_JS = {
             'js/moment.min.js',
             'js/parsley.js',
             'extras/select2/select2.js',
+            'extras/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.min.js',
         ),
         'output_filename': 'js/management.js',
     },

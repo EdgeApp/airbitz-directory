@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="navbar navbar-primary navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="report.html">Directory API Documentation</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+<h4 id="unauthenticated-search">Unauthenticated Search</h4>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://localhost:8000/api/v1/search/?term=Spirit </code></pre>
+<pre><code>{
+  &quot;detail&quot;: &quot;Authentication credentials were not provided.&quot;
+}</code></pre>
+<h4 id="authenticated-search">Authenticated Search</h4>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://localhost:8000/api/v1/search/?term=Spirit \
+     <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
+<pre><code>{
+  &quot;count&quot;: 1, 
+  &quot;previous&quot;: null, 
+  &quot;results&quot;: [
+    {
+      &quot;website&quot;: &quot;http://spiritositaliandiner.com/&quot;, 
+      &quot;city&quot;: &quot;Carlsbad&quot;, 
+      &quot;bizId&quot;: 605, 
+      &quot;distance&quot;: 27955.142059072547, 
+      &quot;country&quot;: &quot;US&quot;, 
+      &quot;address&quot;: &quot;2508 El Camino Real&quot;, 
+      &quot;profile_image&quot;: {
+        &quot;width&quot;: 320, 
+        &quot;image&quot;: &quot;/media/CACHE/images/business_images/367391_Z57ol0WnBxS85w_zd4ZugUNfrMAGReINWmt_O0_VQ98/f4093f12e112ed8bca137a0d8c286f88.jpg&quot;, 
+        &quot;bounding_box&quot;: {
+          &quot;y&quot;: 0.0, 
+          &quot;x&quot;: 0.0, 
+          &quot;height&quot;: 0.25, 
+          &quot;width&quot;: 1.0
+        }, 
+        &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/367391_Z57ol0WnBxS85w_zd4ZugUNfrMAGReINWmt_O0_VQ98/f3c6a8b0dee80faf0671b00b06193853.jpg&quot;, 
+        &quot;height&quot;: 600
+      }, 
+      &quot;has_bitcoin_discount&quot;: &quot;0.000&quot;, 
+      &quot;county&quot;: &quot;San Diego&quot;, 
+      &quot;phone&quot;: &quot;760-720-7111&quot;, 
+      &quot;state&quot;: &quot;CA&quot;, 
+      &quot;location&quot;: {
+        &quot;latitude&quot;: 33.1801628, 
+        &quot;longitude&quot;: -117.3250359
+      }, 
+      &quot;social&quot;: [
+        {
+          &quot;social_id&quot;: &quot;2512385427&quot;, 
+          &quot;social_url&quot;: &quot;&quot;, 
+          &quot;social_type&quot;: &quot;osm&quot;
+        }, 
+        {
+          &quot;social_id&quot;: &quot;SpiritosItalianDiner&quot;, 
+          &quot;social_url&quot;: &quot;https://www.facebook.com/SpiritosItalianDiner&quot;, 
+          &quot;social_type&quot;: &quot;facebook&quot;
+        }, 
+        {
+          &quot;social_id&quot;: &quot;spiritos-italian-diner-carlsbad&quot;, 
+          &quot;social_url&quot;: &quot;http://www.yelp.com/biz/spiritos-italian-diner-carlsbad&quot;, 
+          &quot;social_type&quot;: &quot;yelp&quot;
+        }, 
+        {
+          &quot;social_id&quot;: &quot;4ada7455f964a520bb2221e3&quot;, 
+          &quot;social_url&quot;: &quot;https://foursquare.com/v/spiritos-italian-diner-carlsbad-ca/4ada7455f964a520bb2221e3&quot;, 
+          &quot;social_type&quot;: &quot;foursquare&quot;
+        }
+      ], 
+      &quot;postalcode&quot;: &quot;92008&quot;, 
+      &quot;categories&quot;: [
+        {
+          &quot;name&quot;: &quot;Restaurants &amp; Food Trucks&quot;, 
+          &quot;level&quot;: 1
+        }
+      ], 
+      &quot;name&quot;: &quot;Spirito&#39;s Italian Diner&quot;
+    }
+  ], 
+  &quot;next&quot;: null
+}</code></pre>
+<h4 id="location-suggest">Location Suggest</h4>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://localhost:8000/api/v1/location-suggest/ \
+     <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
+<pre><code>{
+  &quot;near&quot;: &quot;San Diego County, CA&quot;
+}</code></pre>
+<h4 id="categories">Categories</h4>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://localhost:8000/api/v1/categories/?term=Spirit \
+     <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
+<pre><code>{
+  &quot;count&quot;: 133, 
+  &quot;previous&quot;: null, 
+  &quot;last_updated&quot;: &quot;2014-03-11T04:38:37.173Z&quot;, 
+  &quot;results&quot;: [
+    {
+      &quot;name&quot;: &quot;Insurance&quot;, 
+      &quot;level&quot;: null
+    }, 
+    {
+      &quot;name&quot;: &quot;Printing Services&quot;, 
+      &quot;level&quot;: null
+    }, 
+    {
+      &quot;name&quot;: &quot;Fabrics &amp; Textiles&quot;, 
+      &quot;level&quot;: null
+    }, 
+    {
+      &quot;name&quot;: &quot;Nurseries &amp; Gardening&quot;, 
+      &quot;level&quot;: null
+    }, 
+    {
+      &quot;name&quot;: &quot;Outdoor Gear&quot;, 
+      &quot;level&quot;: null
+    }, 
+    {
+      &quot;name&quot;: &quot;Groceries&quot;, 
+      &quot;level&quot;: 5
+    }, 
+    {
+      &quot;name&quot;: &quot;Massage&quot;, 
+      &quot;level&quot;: 6
+    }, 
+    {
+      &quot;name&quot;: &quot;Dentists&quot;, 
+      &quot;level&quot;: 7
+    }, 
+    {
+      &quot;name&quot;: &quot;Entertainment&quot;, 
+      &quot;level&quot;: 9
+    }, 
+    {
+      &quot;name&quot;: &quot;Equipment Rentals&quot;, 
+      &quot;level&quot;: null
+    }, 
+    {
+      &quot;name&quot;: &quot;Photography&quot;, 
+      &quot;level&quot;: 13
+    }, 
+    {
+      &quot;name&quot;: &quot;Automotive&quot;, 
+      &quot;level&quot;: 14
+    }, 
+    {
+      &quot;name&quot;: &quot;Web Services&quot;, 
+      &quot;level&quot;: null
+    }, 
+    {
+      &quot;name&quot;: &quot;Yoga&quot;, 
+      &quot;level&quot;: null
+    }, 
+    {
+      &quot;name&quot;: &quot;Bicycles&quot;, 
+      &quot;level&quot;: null
+    }, 
+    {
+      &quot;name&quot;: &quot;Art&quot;, 
+      &quot;level&quot;: null
+    }, 
+    {
+      &quot;name&quot;: &quot;Gas &amp; Service Station&quot;, 
+      &quot;level&quot;: null
+    }, 
+    {
+      &quot;name&quot;: &quot;Music&quot;, 
+      &quot;level&quot;: null
+    }, 
+    {
+      &quot;name&quot;: &quot;Computers&quot;, 
+      &quot;level&quot;: null
+    }, 
+    {
+      &quot;name&quot;: &quot;Office Space&quot;, 
+      &quot;level&quot;: null
+    }
+  ], 
+  &quot;next&quot;: &quot;http://localhost:8000/api/v1/categories/?term=Spirit&amp;page=2&quot;
+}</code></pre>
+<h4 id="autocomplete-location">Autocomplete Location</h4>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://localhost:8000/api/v1/autocomplete-location/?term=San \
+     <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
+<pre><code>{
+  &quot;results&quot;: [
+    &quot;San Marcos, CA, USA&quot;, 
+    &quot;San Clemente, CA, USA&quot;, 
+    &quot;San Diego, CA, USA&quot;, 
+    &quot;San Juan Capistrano, CA, USA&quot;, 
+    &quot;Santee, CA, USA&quot;, 
+    &quot;San Diego County, CA, USA&quot;, 
+    &quot;Rancho Santa Margarita, CA, USA&quot;, 
+    &quot;Santa Ana, CA, USA&quot;, 
+    &quot;San Bernardino, CA, USA&quot;, 
+    &quot;Santa Fe Springs, CA, USA&quot;
+  ]
+}</code></pre>
+<h4 id="autocomplete-business">Autocomplete Business</h4>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://localhost:8000/api/v1/autocomplete-business/?term=Ares \
+     <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
+<pre><code>{
+  &quot;results&quot;: [
+    {
+      &quot;text&quot;: &quot;Ares Armor&quot;, 
+      &quot;type&quot;: &quot;business&quot;, 
+      &quot;bizId&quot;: &quot;45&quot;
+    }
+  ]
+}</code></pre>
+<h4 id="business">Business</h4>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://localhost:8000/api/v1/business/605/ \
+     <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
+<pre><code>{
+  &quot;website&quot;: &quot;http://spiritositaliandiner.com/&quot;, 
+  &quot;city&quot;: &quot;Carlsbad&quot;, 
+  &quot;description&quot;: &quot;Home made with love - thin crust pizza, fresh salads and ravioli to die for! The Spirito Family invite you to join them for food from the heart.  We are very proud to have been featured on Diners, Drive-ins and Dives with Guy Fieri on August 12th 2013. &quot;, 
+  &quot;has_online_business&quot;: false, 
+  &quot;country&quot;: &quot;US&quot;, 
+  &quot;address&quot;: &quot;2508 El Camino Real&quot;, 
+  &quot;hours&quot;: [
+    {
+      &quot;dayOfWeek&quot;: &quot;Sunday&quot;, 
+      &quot;hourStart&quot;: &quot;12:00:00&quot;, 
+      &quot;hourEnd&quot;: &quot;20:00:00&quot;
+    }, 
+    {
+      &quot;dayOfWeek&quot;: &quot;Tuesday&quot;, 
+      &quot;hourStart&quot;: &quot;12:00:00&quot;, 
+      &quot;hourEnd&quot;: &quot;20:00:00&quot;
+    }, 
+    {
+      &quot;dayOfWeek&quot;: &quot;Wednesday&quot;, 
+      &quot;hourStart&quot;: &quot;12:00:00&quot;, 
+      &quot;hourEnd&quot;: &quot;20:00:00&quot;
+    }, 
+    {
+      &quot;dayOfWeek&quot;: &quot;Thursday&quot;, 
+      &quot;hourStart&quot;: &quot;12:00:00&quot;, 
+      &quot;hourEnd&quot;: &quot;20:00:00&quot;
+    }, 
+    {
+      &quot;dayOfWeek&quot;: &quot;Friday&quot;, 
+      &quot;hourStart&quot;: &quot;12:00:00&quot;, 
+      &quot;hourEnd&quot;: &quot;20:00:00&quot;
+    }, 
+    {
+      &quot;dayOfWeek&quot;: &quot;Saturday&quot;, 
+      &quot;hourStart&quot;: &quot;12:00:00&quot;, 
+      &quot;hourEnd&quot;: &quot;20:00:00&quot;
+    }
+  ], 
+  &quot;name&quot;: &quot;Spirito&#39;s Italian Diner&quot;, 
+  &quot;county&quot;: &quot;San Diego&quot;, 
+  &quot;phone&quot;: &quot;760-720-7111&quot;, 
+  &quot;state&quot;: &quot;CA&quot;, 
+  &quot;has_physical_business&quot;: true, 
+  &quot;location&quot;: {
+    &quot;latitude&quot;: 33.1801628, 
+    &quot;longitude&quot;: -117.3250359
+  }, 
+  &quot;social&quot;: [
+    {
+      &quot;social_id&quot;: &quot;2512385427&quot;, 
+      &quot;social_url&quot;: &quot;&quot;, 
+      &quot;social_type&quot;: &quot;osm&quot;
+    }, 
+    {
+      &quot;social_id&quot;: &quot;SpiritosItalianDiner&quot;, 
+      &quot;social_url&quot;: &quot;https://www.facebook.com/SpiritosItalianDiner&quot;, 
+      &quot;social_type&quot;: &quot;facebook&quot;
+    }, 
+    {
+      &quot;social_id&quot;: &quot;spiritos-italian-diner-carlsbad&quot;, 
+      &quot;social_url&quot;: &quot;http://www.yelp.com/biz/spiritos-italian-diner-carlsbad&quot;, 
+      &quot;social_type&quot;: &quot;yelp&quot;
+    }, 
+    {
+      &quot;social_id&quot;: &quot;4ada7455f964a520bb2221e3&quot;, 
+      &quot;social_url&quot;: &quot;https://foursquare.com/v/spiritos-italian-diner-carlsbad-ca/4ada7455f964a520bb2221e3&quot;, 
+      &quot;social_type&quot;: &quot;foursquare&quot;
+    }
+  ], 
+  &quot;images&quot;: [
+    {
+      &quot;tags&quot;: [], 
+      &quot;image&quot;: &quot;/media/CACHE/images/business_images/367391_Z57ol0WnBxS85w_zd4ZugUNfrMAGReINWmt_O0_VQ98/f4093f12e112ed8bca137a0d8c286f88.jpg&quot;, 
+      &quot;height&quot;: 600, 
+      &quot;width&quot;: 320, 
+      &quot;bounding_box&quot;: {
+        &quot;y&quot;: 0.0, 
+        &quot;x&quot;: 0.0, 
+        &quot;height&quot;: 0.25, 
+        &quot;width&quot;: 1.0
+      }, 
+      &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/367391_Z57ol0WnBxS85w_zd4ZugUNfrMAGReINWmt_O0_VQ98/f3c6a8b0dee80faf0671b00b06193853.jpg&quot;
+    }, 
+    {
+      &quot;tags&quot;: [], 
+      &quot;image&quot;: &quot;/media/CACHE/images/business_images/11376671_AsnWmsiDSDFS-GBv3b8x_ABXkCcfNUNvrTWVRGL_jno/00de34095718ed2cb36d1f577e9676d5.jpg&quot;, 
+      &quot;height&quot;: 600, 
+      &quot;width&quot;: 320, 
+      &quot;bounding_box&quot;: {
+        &quot;y&quot;: 0.0, 
+        &quot;x&quot;: 0.0, 
+        &quot;height&quot;: 0.25, 
+        &quot;width&quot;: 1.0
+      }, 
+      &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/11376671_AsnWmsiDSDFS-GBv3b8x_ABXkCcfNUNvrTWVRGL_jno/38715070518976994b74d56bf42c0082.jpg&quot;
+    }, 
+    {
+      &quot;tags&quot;: [], 
+      &quot;image&quot;: &quot;/media/CACHE/images/business_images/Screenshot_2014-03-07_at_4.41.33_PM/b595c9c2548ad81caae8bb03c653e64a.jpg&quot;, 
+      &quot;height&quot;: 156, 
+      &quot;width&quot;: 154, 
+      &quot;bounding_box&quot;: {
+        &quot;y&quot;: 0.0, 
+        &quot;x&quot;: 0.0, 
+        &quot;height&quot;: 0.25, 
+        &quot;width&quot;: 1.0
+      }, 
+      &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/Screenshot_2014-03-07_at_4.41.33_PM/4a33510c46cf8a3664b9e9b1bc40507b.jpg&quot;
+    }, 
+    {
+      &quot;tags&quot;: [], 
+      &quot;image&quot;: &quot;/media/CACHE/images/business_images/11376671_fnuPEXOGp-Ol_OUd5vVOxWz6I5AOHM2wiuPVYeYk0Ro/073b9db0655c3a72c8117123e64eceba.jpg&quot;, 
+      &quot;height&quot;: 600, 
+      &quot;width&quot;: 320, 
+      &quot;bounding_box&quot;: {
+        &quot;y&quot;: 0.0, 
+        &quot;x&quot;: 0.0, 
+        &quot;height&quot;: 0.25, 
+        &quot;width&quot;: 1.0
+      }, 
+      &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/11376671_fnuPEXOGp-Ol_OUd5vVOxWz6I5AOHM2wiuPVYeYk0Ro/7a53b1808221e0e05fef57fe972f1ae9.jpg&quot;
+    }
+  ], 
+  &quot;postalcode&quot;: &quot;92008&quot;, 
+  &quot;has_bitcoin_discount&quot;: &quot;0.000&quot;, 
+  &quot;categories&quot;: [
+    {
+      &quot;name&quot;: &quot;Restaurants &amp; Food Trucks&quot;, 
+      &quot;level&quot;: 1
+    }
+  ], 
+  &quot;bizId&quot;: 605
+}</code></pre>
+</div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="templates/js/bootstrap.min.js"></script>
+</body>
+</html>

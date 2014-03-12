@@ -1,0 +1,52 @@
+
+```{r, echo=F}
+opts_chunk$set(echo=F, warning=F, message=F, tidy=F, comment='')
+```
+
+#### Unauthenticated Search
+```{r, engine='bash', echo=TRUE}
+curl -X GET http://localhost:8000/api/v1/search/?term=Spirit | ./split_curl.py
+```
+
+#### Authenticated Search
+
+```{r, engine='bash', echo=TRUE}
+curl -X GET http://localhost:8000/api/v1/search/?term=Spirit \
+     -H "Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc" | ./split_curl.py
+```
+
+#### Location Suggest
+
+```{r, engine='bash', echo=TRUE}
+curl -X GET http://localhost:8000/api/v1/location-suggest/ \
+     -H "Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc" | ./split_curl.py
+```
+
+#### Categories
+
+```{r, engine='bash', echo=TRUE}
+curl -X GET http://localhost:8000/api/v1/categories/?term=Spirit \
+     -H "Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc" | ./split_curl.py
+```
+
+#### Autocomplete Location
+
+```{r, engine='bash', echo=TRUE}
+curl -X GET http://localhost:8000/api/v1/autocomplete-location/?term=San \
+     -H "Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc" | ./split_curl.py
+```
+
+#### Autocomplete Business
+
+```{r, engine='bash', echo=TRUE}
+curl -X GET http://localhost:8000/api/v1/autocomplete-business/?term=Ares \
+     -H "Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc" | ./split_curl.py
+```
+
+#### Business
+
+```{r, engine='bash', echo=TRUE}
+curl -X GET http://localhost:8000/api/v1/business/605/ \
+     -H "Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc" | ./split_curl.py
+```
+
