@@ -24,7 +24,7 @@ class DemoAuthentication(auth.BaseAuthentication):
             raise exceptions.AuthenticationFailed('No such user')
         return (user, None)
 
-PERMS=(DemoAuthentication, auth.TokenAuthentication, auth.SessionAuthentication,)
+PERMS=(auth.TokenAuthentication, auth.SessionAuthentication,)
 AUTH=(perm.IsAuthenticated, )
 
 class InternalOrderFilter(filters.OrderingFilter):
