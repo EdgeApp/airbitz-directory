@@ -9,19 +9,20 @@ function supports_html5_storage() {
 }
 
 function getMapMarkerContent(marker, m) {
-    var html =  '<div class="map-marker-popup">' +
-                    '<div class="map-marker-image"><a href="' + m.url + '">' + m.img + '</a></div>' +
-                    '<div class="map-marker-info single-line">' +
-                        '<div class="map-marker-name">' + m.name + '</div>' +
-                        '<div class="map-marker-address">' + m.address + '</div>' +
-                        '<div class="map-marker-links"><a href="' + m.url + '">View Listing</a> | ' +
-                            '<a href="' + m.directions_url + '" target="_blank">Get Directions</a></div>' +
-                    '</div>' +
-                    '<div class="map-marker-categories">' + m.cats + '</div>' +
-                '</div>';
+    var html = 
+      '<div class="map-marker-popup">' +
+        '<div class="map-marker-image"><a href="' + m.url + '">' + m.img + '</a></div>' +
+        '<div class="map-marker-info single-line">' +
+          '<div class="map-marker-name">' + m.name + '</div>' +
+          '<div class="map-marker-address">' + m.address + '</div>' +
+          '<div class="map-marker-links"><a href="' + m.url + '">View Listing</a> | ' +
+              '<a href="' + m.directions_url + '" target="_blank">Get Directions</a>' + 
+          '</div>' +
+        '</div>' +
+        '<div class="map-marker-categories">' + m.cats + '</div>' +
+      '</div>';
     return html;
 }
-
 
 (function() {
   var root = this;
