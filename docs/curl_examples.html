@@ -45,12 +45,12 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </div>
 <div class="container">
 <h4 id="unauthenticated-search">Unauthenticated Search</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://localhost:8000/api/v1/search/?term=Spirit </code></pre>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://api.airbitz.co/api/v1/search/?term=Spirit </code></pre>
 <pre><code>{
   &quot;detail&quot;: &quot;Authentication credentials were not provided.&quot;
 }</code></pre>
 <h4 id="authenticated-search">Authenticated Search</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://localhost:8000/api/v1/search/?term=Spirit \
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://api.airbitz.co/api/v1/search/?term=Spirit \
      <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
 <pre><code>{
   &quot;count&quot;: 1, 
@@ -64,16 +64,16 @@ code > span.er { color: #ff0000; font-weight: bold; }
       &quot;country&quot;: &quot;US&quot;, 
       &quot;address&quot;: &quot;2508 El Camino Real&quot;, 
       &quot;profile_image&quot;: {
-        &quot;width&quot;: 320, 
-        &quot;image&quot;: &quot;/media/CACHE/images/business_images/367391_Z57ol0WnBxS85w_zd4ZugUNfrMAGReINWmt_O0_VQ98/f4093f12e112ed8bca137a0d8c286f88.jpg&quot;, 
+        &quot;width&quot;: 640, 
+        &quot;image&quot;: &quot;/media/CACHE/images/business_images/367391_Z57ol0WnBxS85w_zd4ZugUNfrMAGReINWmt_O0_VQ98/41c27b52f82564daf9508a3d1bb3b5d3.jpg&quot;, 
         &quot;bounding_box&quot;: {
           &quot;y&quot;: 0.0, 
           &quot;x&quot;: 0.0, 
           &quot;height&quot;: 0.25, 
           &quot;width&quot;: 1.0
         }, 
-        &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/367391_Z57ol0WnBxS85w_zd4ZugUNfrMAGReINWmt_O0_VQ98/f3c6a8b0dee80faf0671b00b06193853.jpg&quot;, 
-        &quot;height&quot;: 600
+        &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/367391_Z57ol0WnBxS85w_zd4ZugUNfrMAGReINWmt_O0_VQ98/922ea32caf45928054c3e81d16271078.jpg&quot;, 
+        &quot;height&quot;: 480
       }, 
       &quot;has_bitcoin_discount&quot;: &quot;0.000&quot;, 
       &quot;county&quot;: &quot;San Diego&quot;, 
@@ -85,14 +85,9 @@ code > span.er { color: #ff0000; font-weight: bold; }
       }, 
       &quot;social&quot;: [
         {
-          &quot;social_id&quot;: &quot;2512385427&quot;, 
-          &quot;social_url&quot;: &quot;&quot;, 
-          &quot;social_type&quot;: &quot;osm&quot;
-        }, 
-        {
-          &quot;social_id&quot;: &quot;SpiritosItalianDiner&quot;, 
-          &quot;social_url&quot;: &quot;https://www.facebook.com/SpiritosItalianDiner&quot;, 
-          &quot;social_type&quot;: &quot;facebook&quot;
+          &quot;social_id&quot;: &quot;4ada7455f964a520bb2221e3&quot;, 
+          &quot;social_url&quot;: &quot;https://foursquare.com/v/spiritos-italian-diner-carlsbad-ca/4ada7455f964a520bb2221e3&quot;, 
+          &quot;social_type&quot;: &quot;foursquare&quot;
         }, 
         {
           &quot;social_id&quot;: &quot;spiritos-italian-diner-carlsbad&quot;, 
@@ -100,9 +95,14 @@ code > span.er { color: #ff0000; font-weight: bold; }
           &quot;social_type&quot;: &quot;yelp&quot;
         }, 
         {
-          &quot;social_id&quot;: &quot;4ada7455f964a520bb2221e3&quot;, 
-          &quot;social_url&quot;: &quot;https://foursquare.com/v/spiritos-italian-diner-carlsbad-ca/4ada7455f964a520bb2221e3&quot;, 
-          &quot;social_type&quot;: &quot;foursquare&quot;
+          &quot;social_id&quot;: &quot;SpiritosItalianDiner&quot;, 
+          &quot;social_url&quot;: &quot;https://www.facebook.com/SpiritosItalianDiner&quot;, 
+          &quot;social_type&quot;: &quot;facebook&quot;
+        }, 
+        {
+          &quot;social_id&quot;: &quot;2512385427&quot;, 
+          &quot;social_url&quot;: &quot;&quot;, 
+          &quot;social_type&quot;: &quot;osm&quot;
         }
       ], 
       &quot;postalcode&quot;: &quot;92008&quot;, 
@@ -118,18 +118,18 @@ code > span.er { color: #ff0000; font-weight: bold; }
   &quot;next&quot;: null
 }</code></pre>
 <h4 id="location-suggest">Location Suggest</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://localhost:8000/api/v1/location-suggest/ \
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://api.airbitz.co/api/v1/location-suggest/ \
      <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
 <pre><code>{
   &quot;near&quot;: &quot;San Diego County, CA&quot;
 }</code></pre>
 <h4 id="categories">Categories</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://localhost:8000/api/v1/categories/?term=Spirit \
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://api.airbitz.co/api/v1/categories/?term=Spirit \
      <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
 <pre><code>{
-  &quot;count&quot;: 133, 
+  &quot;count&quot;: 140, 
   &quot;previous&quot;: null, 
-  &quot;last_updated&quot;: &quot;2014-03-11T04:38:37.173Z&quot;, 
+  &quot;last_updated&quot;: &quot;2014-03-12T22:51:09.533Z&quot;, 
   &quot;results&quot;: [
     {
       &quot;name&quot;: &quot;Insurance&quot;, 
@@ -212,19 +212,19 @@ code > span.er { color: #ff0000; font-weight: bold; }
       &quot;level&quot;: null
     }
   ], 
-  &quot;next&quot;: &quot;http://localhost:8000/api/v1/categories/?term=Spirit&amp;page=2&quot;
+  &quot;next&quot;: &quot;http://api.airbitz.co/api/v1/categories/?term=Spirit&amp;page=2&quot;
 }</code></pre>
 <h4 id="autocomplete-location">Autocomplete Location</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://localhost:8000/api/v1/autocomplete-location/?term=San \
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://api.airbitz.co/api/v1/autocomplete-location/?term=San \
      <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
 <pre><code>{
   &quot;results&quot;: [
     &quot;San Marcos, CA, USA&quot;, 
-    &quot;San Clemente, CA, USA&quot;, 
-    &quot;San Diego, CA, USA&quot;, 
-    &quot;San Juan Capistrano, CA, USA&quot;, 
     &quot;Santee, CA, USA&quot;, 
+    &quot;San Diego, CA, USA&quot;, 
     &quot;San Diego County, CA, USA&quot;, 
+    &quot;San Clemente, CA, USA&quot;, 
+    &quot;San Juan Capistrano, CA, USA&quot;, 
     &quot;Rancho Santa Margarita, CA, USA&quot;, 
     &quot;Santa Ana, CA, USA&quot;, 
     &quot;San Bernardino, CA, USA&quot;, 
@@ -232,7 +232,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   ]
 }</code></pre>
 <h4 id="autocomplete-business">Autocomplete Business</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://localhost:8000/api/v1/autocomplete-business/?term=Ares \
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://api.airbitz.co/api/v1/autocomplete-business/?term=Ares \
      <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
 <pre><code>{
   &quot;results&quot;: [
@@ -244,7 +244,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   ]
 }</code></pre>
 <h4 id="business">Business</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://localhost:8000/api/v1/business/605/ \
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://api.airbitz.co/api/v1/business/605/ \
      <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
 <pre><code>{
   &quot;website&quot;: &quot;http://spiritositaliandiner.com/&quot;, 
@@ -296,14 +296,9 @@ code > span.er { color: #ff0000; font-weight: bold; }
   }, 
   &quot;social&quot;: [
     {
-      &quot;social_id&quot;: &quot;2512385427&quot;, 
-      &quot;social_url&quot;: &quot;&quot;, 
-      &quot;social_type&quot;: &quot;osm&quot;
-    }, 
-    {
-      &quot;social_id&quot;: &quot;SpiritosItalianDiner&quot;, 
-      &quot;social_url&quot;: &quot;https://www.facebook.com/SpiritosItalianDiner&quot;, 
-      &quot;social_type&quot;: &quot;facebook&quot;
+      &quot;social_id&quot;: &quot;4ada7455f964a520bb2221e3&quot;, 
+      &quot;social_url&quot;: &quot;https://foursquare.com/v/spiritos-italian-diner-carlsbad-ca/4ada7455f964a520bb2221e3&quot;, 
+      &quot;social_type&quot;: &quot;foursquare&quot;
     }, 
     {
       &quot;social_id&quot;: &quot;spiritos-italian-diner-carlsbad&quot;, 
@@ -311,41 +306,33 @@ code > span.er { color: #ff0000; font-weight: bold; }
       &quot;social_type&quot;: &quot;yelp&quot;
     }, 
     {
-      &quot;social_id&quot;: &quot;4ada7455f964a520bb2221e3&quot;, 
-      &quot;social_url&quot;: &quot;https://foursquare.com/v/spiritos-italian-diner-carlsbad-ca/4ada7455f964a520bb2221e3&quot;, 
-      &quot;social_type&quot;: &quot;foursquare&quot;
+      &quot;social_id&quot;: &quot;SpiritosItalianDiner&quot;, 
+      &quot;social_url&quot;: &quot;https://www.facebook.com/SpiritosItalianDiner&quot;, 
+      &quot;social_type&quot;: &quot;facebook&quot;
+    }, 
+    {
+      &quot;social_id&quot;: &quot;2512385427&quot;, 
+      &quot;social_url&quot;: &quot;&quot;, 
+      &quot;social_type&quot;: &quot;osm&quot;
     }
   ], 
   &quot;images&quot;: [
     {
       &quot;tags&quot;: [], 
-      &quot;image&quot;: &quot;/media/CACHE/images/business_images/367391_Z57ol0WnBxS85w_zd4ZugUNfrMAGReINWmt_O0_VQ98/f4093f12e112ed8bca137a0d8c286f88.jpg&quot;, 
-      &quot;height&quot;: 600, 
-      &quot;width&quot;: 320, 
+      &quot;image&quot;: &quot;/media/CACHE/images/business_images/11376671_AsnWmsiDSDFS-GBv3b8x_ABXkCcfNUNvrTWVRGL_jno/3396560ad3c054a70984689ec106fcc9.jpg&quot;, 
+      &quot;height&quot;: 853, 
+      &quot;width&quot;: 640, 
       &quot;bounding_box&quot;: {
         &quot;y&quot;: 0.0, 
         &quot;x&quot;: 0.0, 
         &quot;height&quot;: 0.25, 
         &quot;width&quot;: 1.0
       }, 
-      &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/367391_Z57ol0WnBxS85w_zd4ZugUNfrMAGReINWmt_O0_VQ98/f3c6a8b0dee80faf0671b00b06193853.jpg&quot;
+      &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/11376671_AsnWmsiDSDFS-GBv3b8x_ABXkCcfNUNvrTWVRGL_jno/68cb9791c976823795bb4379d95bff2b.jpg&quot;
     }, 
     {
       &quot;tags&quot;: [], 
-      &quot;image&quot;: &quot;/media/CACHE/images/business_images/11376671_AsnWmsiDSDFS-GBv3b8x_ABXkCcfNUNvrTWVRGL_jno/00de34095718ed2cb36d1f577e9676d5.jpg&quot;, 
-      &quot;height&quot;: 600, 
-      &quot;width&quot;: 320, 
-      &quot;bounding_box&quot;: {
-        &quot;y&quot;: 0.0, 
-        &quot;x&quot;: 0.0, 
-        &quot;height&quot;: 0.25, 
-        &quot;width&quot;: 1.0
-      }, 
-      &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/11376671_AsnWmsiDSDFS-GBv3b8x_ABXkCcfNUNvrTWVRGL_jno/38715070518976994b74d56bf42c0082.jpg&quot;
-    }, 
-    {
-      &quot;tags&quot;: [], 
-      &quot;image&quot;: &quot;/media/CACHE/images/business_images/Screenshot_2014-03-07_at_4.41.33_PM/b595c9c2548ad81caae8bb03c653e64a.jpg&quot;, 
+      &quot;image&quot;: &quot;/media/CACHE/images/business_images/Screenshot_2014-03-07_at_4.41.33_PM/da622823b8b16000522c6a0e03a41f63.png&quot;, 
       &quot;height&quot;: 156, 
       &quot;width&quot;: 154, 
       &quot;bounding_box&quot;: {
@@ -354,20 +341,33 @@ code > span.er { color: #ff0000; font-weight: bold; }
         &quot;height&quot;: 0.25, 
         &quot;width&quot;: 1.0
       }, 
-      &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/Screenshot_2014-03-07_at_4.41.33_PM/4a33510c46cf8a3664b9e9b1bc40507b.jpg&quot;
+      &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/Screenshot_2014-03-07_at_4.41.33_PM/2eb80989612653455d871a3c369ac875.jpg&quot;
     }, 
     {
       &quot;tags&quot;: [], 
-      &quot;image&quot;: &quot;/media/CACHE/images/business_images/11376671_fnuPEXOGp-Ol_OUd5vVOxWz6I5AOHM2wiuPVYeYk0Ro/073b9db0655c3a72c8117123e64eceba.jpg&quot;, 
-      &quot;height&quot;: 600, 
-      &quot;width&quot;: 320, 
+      &quot;image&quot;: &quot;/media/CACHE/images/business_images/11376671_fnuPEXOGp-Ol_OUd5vVOxWz6I5AOHM2wiuPVYeYk0Ro/6a1fc9732b019a93ebb42d8bd5632e92.jpg&quot;, 
+      &quot;height&quot;: 853, 
+      &quot;width&quot;: 640, 
       &quot;bounding_box&quot;: {
         &quot;y&quot;: 0.0, 
         &quot;x&quot;: 0.0, 
         &quot;height&quot;: 0.25, 
         &quot;width&quot;: 1.0
       }, 
-      &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/11376671_fnuPEXOGp-Ol_OUd5vVOxWz6I5AOHM2wiuPVYeYk0Ro/7a53b1808221e0e05fef57fe972f1ae9.jpg&quot;
+      &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/11376671_fnuPEXOGp-Ol_OUd5vVOxWz6I5AOHM2wiuPVYeYk0Ro/d1bef658cf5c92de00e6740db7845fd7.jpg&quot;
+    }, 
+    {
+      &quot;tags&quot;: [], 
+      &quot;image&quot;: &quot;/media/CACHE/images/business_images/367391_Z57ol0WnBxS85w_zd4ZugUNfrMAGReINWmt_O0_VQ98/41c27b52f82564daf9508a3d1bb3b5d3.jpg&quot;, 
+      &quot;height&quot;: 480, 
+      &quot;width&quot;: 640, 
+      &quot;bounding_box&quot;: {
+        &quot;y&quot;: 0.0, 
+        &quot;x&quot;: 0.0, 
+        &quot;height&quot;: 0.25, 
+        &quot;width&quot;: 1.0
+      }, 
+      &quot;thumbnail&quot;: &quot;/media/CACHE/images/business_images/367391_Z57ol0WnBxS85w_zd4ZugUNfrMAGReINWmt_O0_VQ98/3ae9f18a701abc3b6ffc93ec859cf1c7.jpg&quot;
     }
   ], 
   &quot;postalcode&quot;: &quot;92008&quot;, 
