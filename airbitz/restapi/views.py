@@ -24,7 +24,26 @@ class DemoAuthentication(auth.BaseAuthentication):
             raise exceptions.AuthenticationFailed('No such user')
         return (user, None)
 
-PERMS=(auth.TokenAuthentication, auth.SessionAuthentication,)
+class BetterTokenAuthentication(auth.TokenAuthentication):
+    def authenticate(self, request):
+        if request.QUERY_PARAMS.has_key('api_key'):
+            token = request.QUERY_PARAMS.get('api_key')
+            return self.authenticate_credentials(token)
+
+        a = auth.get_authorization_header(request).split()
+        if not a or a[0].lower() != b'token':
+            return None
+
+        if len(a) == 1:
+            msg = 'Invalid token header. No credentials provided.'
+            raise exceptions.AuthenticationFailed(msg)
+        elif len(a) > 2:
+            msg = 'Invalid token header. Token string should not contain spaces.'
+            raise exceptions.AuthenticationFailed(msg)
+
+        return self.authenticate_credentials(a[1])
+
+PERMS=(BetterTokenAuthentication, auth.SessionAuthentication,)
 AUTH=(perm.IsAuthenticated, )
 
 class InternalOrderFilter(filters.OrderingFilter):
@@ -35,6 +54,7 @@ class CategoryView(generics.ListAPIView):
         Retrieve business categories. 
 
         sort -- which field sort by, either 'name' or 'level'
+        api_key -- API Key
     """
     model = Category
     serializer_class = serializers.CategorySerializer
@@ -48,6 +68,8 @@ class CategoryView(generics.ListAPIView):
 class BusinessView(generics.RetrieveAPIView):
     """
         Retrieve detailed information about a business.
+
+        api_key -- API Key
     """
     serializer_class = serializers.BusinessSerializer
     queryset = Business.objects.filter(status='PUB')
@@ -59,6 +81,8 @@ class BusinessView(generics.RetrieveAPIView):
 class PhotosView(generics.ListAPIView):
     """ 
         Retrieve photos related to a business.
+
+        api_key -- API Key
     """
     model = BusinessImage
     serializer_class = serializers.BusinessImageSerializer
@@ -83,6 +107,7 @@ class SearchView(generics.ListAPIView):
         page_size -- How many businesses each page, defaults to 20, max of 50 
         page -- Which page of data to return 
         sort --  0: default, best match. 1: sort based off distance
+        api_key -- API Key
     """
     queryset = Business.objects.all()
     serializer_class = serializers.MiniBusinessSerializer
@@ -113,6 +138,7 @@ class AutoCompleteBusiness(APIView):
         term     -- The term to autocomplete
         location -- Location string such as "San Diego, CA"
         ll   -- Latitude,Longitude 
+        api_key -- API Key
     """
     authentication_classes = PERMS
     permission_classes = AUTH
@@ -133,6 +159,7 @@ class AutoCompleteLocation(APIView):
 
         term -- The location string to autocomplete
         ll   -- Latitude,Longitude 
+        api_key -- API Key
     """
     authentication_classes = PERMS
     permission_classes = AUTH
@@ -151,6 +178,7 @@ class LocationSuggest(APIView):
     """
         Suggests a default location based on the IP address and lat/lon.
         ll -- Latitude,Longitude 
+        api_key -- API Key
 
         If lat/lon aren't provided, then this method falls back to using the IP
         address.
