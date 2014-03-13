@@ -9,22 +9,16 @@ function supports_html5_storage() {
 }
 
 function getMapMarkerContent(marker, markerJSON) {
-    for (var i = 0; i < markerJSON.length; i++ ) {
-        var m = markerJSON[i];
-
-        if (marker.getTitle() === m.name) {
-            var html =  '<div class="map-marker-popup">' +
-                            '<div class="map-marker-image"><a href="' + m.url + '">' + m.img + '</a></div>' +
-                            '<div class="map-marker-info single-line">' +
-                                '<div class="map-marker-name">' + m.name + '</div>' +
-                                '<div class="map-marker-address">' + m.address + '</div>' +
-                                '<div class="map-marker-links"><a href="' + m.url + '">View Listing</a> | ' +
-                                    '<a href="' + m.directions_url + '" target="_blank">Get Directions</a></div>' +
-                            '</div>' +
-                            '<div class="map-marker-categories">' + m.cats + '</div>' +
-                        '</div>';
-        }
-    }
+    var html =  '<div class="map-marker-popup">' +
+                    '<div class="map-marker-image"><a href="' + m.url + '">' + m.img + '</a></div>' +
+                    '<div class="map-marker-info single-line">' +
+                        '<div class="map-marker-name">' + m.name + '</div>' +
+                        '<div class="map-marker-address">' + m.address + '</div>' +
+                        '<div class="map-marker-links"><a href="' + m.url + '">View Listing</a> | ' +
+                            '<a href="' + m.directions_url + '" target="_blank">Get Directions</a></div>' +
+                    '</div>' +
+                    '<div class="map-marker-categories">' + m.cats + '</div>' +
+                '</div>';
     return html;
 }
 
@@ -95,12 +89,12 @@ function getMapMarkerContent(marker, markerJSON) {
           });
 
           google.maps.event.addListener(marker, 'click', function(e) {
-            infowindow.setContent(getMapMarkerContent(this, markers));
+            infowindow.setContent(getMapMarkerContent(this, m));
             infowindow.open(map, this);
           });
 
           google.maps.event.addListener(marker, 'mouseover', function(e) {
-            infowindow.setContent(getMapMarkerContent(this, markers));
+            infowindow.setContent(getMapMarkerContent(this, m));
             infowindow.open(map, this);
           });
 
