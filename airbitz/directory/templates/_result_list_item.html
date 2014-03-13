@@ -8,7 +8,7 @@
         {% endif %}
         <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">
         {% if biz.landing_image %}
-            {% thumbnail '150x150' biz.landing_image.image -- class="biz-img" %}
+            {% thumbnail '150x150' biz.landing_image.web_photo -- class="biz-img" %}
         {% else %}
             <img data-src="holder.js/150x150/ab-blue/text:{{ biz.name }}" class="biz-img">
         {% endif %}

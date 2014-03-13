@@ -9,7 +9,7 @@
         <a href="{% url 'business_info' rbiz.id %}" title="{{ rbiz.name }}">
             <div class="thumb-bg">
                 {% if rbiz.landing_image %}
-                    <img class="biz-img img-responsive group list-group-image" src="{{ MEDIA_URL }}{{ rbiz.landing_image.image }}" alt="{{ rbiz.name }}"/>
+                    <img class="biz-img img-responsive group list-group-image" src="{{ rbiz.landing_image.web_photo.url }}" alt="{{ rbiz.name }}"/>
                 {% else %}
                     <img data-src="holder.js/358x160/ab-blue/text:{{ rbiz.name }}" class="biz-img img-responsive group list-group-image">
                 {% endif %}
