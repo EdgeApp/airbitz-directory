@@ -287,6 +287,12 @@ HAYSTACK_CONNECTIONS = {
         'INCLUDE_SPELLING': True
     },
 }
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'helo@airbitz.co'
+EMAIL_HOST_PASSWORD = 'abhello!1'
+EMAIL_PORT = 465
+ADMINS=(('Damian', 'damian@airbitz.co'), ('Tim', 'tim@airbitz.co'))
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
