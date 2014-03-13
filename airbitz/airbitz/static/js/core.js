@@ -88,13 +88,14 @@ function getMapMarkerContent(marker, m) {
               animation: google.maps.Animation.DROP // TODO: ran out of time - https://developers.google.com/maps/documentation/javascript/examples/marker-animations-iteration
           });
 
+          var ref = m;
           google.maps.event.addListener(marker, 'click', function(e) {
-            infowindow.setContent(getMapMarkerContent(this, m));
+            infowindow.setContent(getMapMarkerContent(this, ref));
             infowindow.open(map, this);
           });
 
           google.maps.event.addListener(marker, 'mouseover', function(e) {
-            infowindow.setContent(getMapMarkerContent(this, m));
+            infowindow.setContent(getMapMarkerContent(this, ref));
             infowindow.open(map, this);
           });
 
