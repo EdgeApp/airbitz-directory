@@ -8,7 +8,7 @@ function supports_html5_storage() {
   }
 }
 
-function getMapMarkerContent(marker, markerJSON) {
+function getMapMarkerContent(marker, m) {
     var html =  '<div class="map-marker-popup">' +
                     '<div class="map-marker-image"><a href="' + m.url + '">' + m.img + '</a></div>' +
                     '<div class="map-marker-info single-line">' +
