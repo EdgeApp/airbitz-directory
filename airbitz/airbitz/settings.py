@@ -141,7 +141,7 @@ STATIC_ROOT = os.path.join(os.environ['HOME'], 'static')
 STATICFILES_DIRS = (
     os.path.join(SITE_ROOT, 'static/'),
 )
-if DEBUG:
+if True or DEBUG:
     PIPELINE_ENABLED=False
 else:
     PIPELINE_ENABLED=True
