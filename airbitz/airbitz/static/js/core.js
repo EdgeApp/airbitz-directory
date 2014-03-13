@@ -76,9 +76,7 @@ function getMapMarkerContent(marker, m) {
 
       var infowindow = new google.maps.InfoWindow();
 
-      for (var i = 0; i < markers.length; ++i) {
-        var m = markers[i];
-
+      $.each(markers, function(i, m) {
         if (m.lat && m.lon) {
           var loc = new google.maps.LatLng(m.lat, m.lon);
           var marker = new google.maps.Marker({
@@ -101,7 +99,7 @@ function getMapMarkerContent(marker, m) {
 
           bounds.extend(loc);
         }
-      }
+      });
       if (polygon) {
         var coords = [];
         for (var i = 0; i < polygon.length; ++i) {
