@@ -11,7 +11,10 @@ body.home {
     }
 
     padding-top: 0 !important;
-    margin-top: 0;
+
+    @media (min-width: @screen-sm) {
+        margin-top: -60px !important;
+    }
 
     header {
         display: none;
@@ -40,14 +43,23 @@ body.home {
 
     // CONTENT AREA
     #top-slider {
-        .et_pb_slide_description {
-            h2 {
 
+        .et_pb_container {
+
+            .et_pb_slide_image {
+                display: none;
             }
         }
+
         .et_pb_slide_content {
+            .airbitz-slide-logo {
+                margin-bottom: 20px;
+            }
             #bitcoin-logo {
-                margin-top: 30px;
+
+            }
+            h2 {
+                margin: 0;
             }
 
             .slide-text {
