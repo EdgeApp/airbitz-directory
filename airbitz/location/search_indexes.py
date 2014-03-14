@@ -25,6 +25,7 @@ class LocationStringIndex(indexes.SearchIndex, indexes.Indexable):
 class OsmRelationIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     content_auto = indexes.EdgeNgramField(model_attr='name')
+    osm_id = indexes.CharField(model_attr='osm_id', null=True)
     location = indexes.LocationField(model_attr='centroid', null=True)
 
     def get_model(self):
