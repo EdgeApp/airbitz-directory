@@ -60,6 +60,7 @@ function getMapMarkerContent(marker, m) {
             if (!AB.Util.csrfSafeMethod(settings.type)) {
                 xhr.setRequestHeader("X-CSRFToken", $('meta[name="csrf-token"]').attr('content'));
             }
+            xhr.setRequestHeader("Authorization", "Token 0ccff150ed4633136f04eab2d8454d928e6ff584");
         }
     });
   };
