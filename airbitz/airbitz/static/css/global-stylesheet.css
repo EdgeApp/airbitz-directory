@@ -397,23 +397,8 @@ body .main-content {
 .biz-info-two .panel .panel-image #map img {
   position: relative;
   left: 50%;
-  top: 150px;
-  margin: -630px;
-  zoom: .5;
-}
-@media (max-width: 992px) {
-  .biz-info-two .panel .panel-image #map img {
-    zoom: 1;
-    top: 75px;
-  }
-}
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192ddpx) {
-  .biz-info-two .panel .panel-image #map img {
-    /* Retina-specific stuff here */
-    width: 630px;
-    height: 300px;
-    margin: -315px;
-  }
+  top: 75px;
+  margin: -315px;
 }
 .biz-info-two .panel .panel-image #map .get-directions {
   position: absolute;

@@ -50,27 +50,27 @@
                 position: relative;
 
                 img {
-                    @map-width: 1260px;
-                    @map-height: 600px;
+                    @map-width: 1260px/2;
+                    @map-height: 600px/2;
 
                     position: relative;
                     left: 50%;
                     top: @map-height/4;
                     margin: (@map-width/2)*-1;
-                    zoom: .5;
-                    
-                    @media(max-width: @screen-md) {
-                        zoom: 1;
-                        top: @map-height/8;
-                    }
-                    @media
-                    (-webkit-min-device-pixel-ratio: 2),
-                    (min-resolution: 192ddpx) {
-                        /* Retina-specific stuff here */
-                        width: @map-width/2;
-                        height: @map-height/2;
-                        margin: (@map-width/4)*-1;
-                    }
+//                    zoom: .5;
+
+//                    @media(max-width: @screen-md) {
+//                        zoom: 1;
+//                        top: @map-height/8;
+//                    }
+//                    @media
+//                    (-webkit-min-device-pixel-ratio: 2),
+//                    (min-resolution: 192ddpx) {
+//                        /* Retina-specific stuff here */
+//                        width: @map-width/2;
+//                        height: @map-height/2;
+//                        margin: (@map-width/4)*-1;
+//                    }
                 }
 
                 .get-directions {

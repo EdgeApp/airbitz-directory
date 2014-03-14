@@ -55,7 +55,7 @@
 
     <div class="row">
 
-        <div class="biz-info-two col-sm-12 col-md-4">
+        <div class="biz-info-two col-sm-8 col-md-4">
             <div class="panel panel-default">
 
                 {% if biz.address or biz.center.x %}
@@ -242,7 +242,7 @@
     <script type="text/javascript">
         $(function() {
             var mapImgUrl = GMaps.staticMapURL({
-                scale: 2,
+                scale: 1,
                 lat: {{ biz.center.y }},
                 lng: {{ biz.center.x }},
                 markers: [
