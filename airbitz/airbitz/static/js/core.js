@@ -127,20 +127,20 @@ function getMapMarkerContent(marker, m) {
     google.maps.event.addDomListener(window, 'load', initialize);
   };
   AB.addPlaceSearch = function(selector) {
+    var loc = $('#location').val();
     var engine = new Bloodhound({
       name: 'business',
-      datumTokenizer: function(d) {
-        return d.results; 
-      },
+      datumTokenizer: function(d) { return d; },
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       minLength: 0,
       limit: 10,
       prefetch: {
-        url: '/api/v1/autocomplete-business/?term=%QUERY',
+        url: '/api/v1/category-suggest/?location=' + encodeURIComponent($('#location').val()),
         filter: function(data) {
-          return data.results.map(function(e, i) {
-              return { type: e.type, name: e.text, value: e.text, id: e.bizId };
+          var m = $.map(data.results, function(e, i) {
+              return { type: e.type, name: e.text, value: e.text };
           });
+          return m;
         }
       },
       remote: {
@@ -148,12 +148,12 @@ function getMapMarkerContent(marker, m) {
         replace: function (url, uriEncodedQuery) {
           q = url.replace(/%QUERY/, uriEncodedQuery)
           if ($('#location').val()) {
-              q += "&location=" + encodeURIComponent($('#location').val());
+              q += "&location=" + encodeURIComponent(loc);
           }
           return q;
         },
         filter: function(data) {
-          return data.results.map(function(e, i) {
+          return $.map(data.results, function(e, i) {
               return { type: e.type, name: e.text, value: e.text, id: e.bizId };
           });
         },
@@ -166,6 +166,7 @@ function getMapMarkerContent(marker, m) {
       hint: false,
       highlight: true
     }, {
+      minLength: 0,
       displaykey: 'name',
       name: 'business',
       source: engine.ttAdapter(),
@@ -195,17 +196,9 @@ function getMapMarkerContent(marker, m) {
       });
       local.initialize();
       var engine = new Bloodhound({
-        datumTokenizer: function(d) { return d.results; },
+        datumTokenizer: function(d) { return d; }, 
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         minLength: 0,
-        prefetch: {
-          url: '/api/v1/autocomplete-location/?term=%QUERY',
-          filter: function(data) {
-            return data.results.map(function(s, i) {
-                return { text: s, value: s };
-            });
-          }
-        },
         remote: {
           url: '/api/v1/autocomplete-location/?term=%QUERY',
           filter: function(data) {

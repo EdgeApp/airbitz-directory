@@ -174,6 +174,27 @@ class AutoCompleteLocation(APIView):
         return Response({ 'results':  results })
 
 
+class CategorySuggest(APIView):
+    """
+        Suggests a default category listing
+        ll -- Latitude,Longitude 
+        api_key -- API Key
+
+        If lat/lon aren't provided, then this method falls back to using the IP
+        address.
+    """
+    authentication_classes = PERMS
+    permission_classes = AUTH
+    model = Business
+
+    def get(self, request, *args, **kwars):
+        location = self.request.QUERY_PARAMS.get('location', None)
+        ll = self.request.QUERY_PARAMS.get('ll', None)
+        a = api.ApiProcess(locationStr=location, ll=ll)
+        results = a.suggestNearCategories()[:DEFAULT_PAGE_SIZE]
+        return Response({ 'results':  results })
+
+
 class LocationSuggest(APIView):
     """
         Suggests a default location based on the IP address and lat/lon.

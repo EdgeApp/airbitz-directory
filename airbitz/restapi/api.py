@@ -303,6 +303,28 @@ class ApiProcess(object):
                 f = f | q
         return sqs.filter(f)
 
+    def suggestNearCategories(self):
+        sqs = SearchQuerySet().models(Business)
+        if self.location.isWebOnly():
+            sqs = sqs.filter(has_online_business=True, has_physical_business=False)
+        elif self.location.isOnWeb():
+            sqs = sqs.filter(has_online_business=True)
+        else:
+            sqs = sqs.filter(has_physical_business=True)
+            sqs = sqs.distance('location', self.userLocation())
+            if self.location and self.location.bounding:
+                sqs = self.boundSearchQuery(sqs, self.location)
+            else:
+                sqs = sqs.dwithin('location', self.userLocation(), DEF_RADIUS)
+
+        res, d = [], {}
+        for s in sqs:
+            for c in s.categories:
+                if not d.has_key(c):
+                    res.append({ 'type': 'category', 'text': c })
+                    d[c] = True
+        return res
+
     def suggestNearText(self):
         point = self.userLocation()
         qs = OsmRelation.objects.filter(admin_level__lte=6).distance(point)\
