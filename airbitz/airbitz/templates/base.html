@@ -15,7 +15,6 @@
 
             <link rel="icon" type="image/png" href="{{ STATIC_URL }}img/favicon.ico">
             {% compressed_css 'global' %}
-            {% google_analytics %}
         {% endblock head %}
     </head>
     <body>
@@ -127,6 +126,8 @@
             // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
             UserVoice.push(['autoprompt', {}]);
             </script>
+
+            {% google_analytics %}
         {% endblock javascript %}
     </body>
 </html>
