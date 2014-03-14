@@ -194,7 +194,7 @@ PIPELINE_CSS = {
 PIPELINE_JS = {
     'core': {
         'source_filenames': (
-            'js/jquery-1.9.1.min.js',
+            'js/jquery-1.11.0.min.js',
             'bootstrap/js/bootstrap.min.js',
             'js/modernizr.js',
             'js/enquire.js',
@@ -211,7 +211,7 @@ PIPELINE_JS = {
     },
     'home': {
         'source_filenames': (
-            'js/jquery-1.9.1.min.js',
+            'js/jquery-1.11.0.min.js',
             'extras/ajaxchimp/jquery.ajaxchimp.js',
             'js/frontend-ui.js',
             'js/home-ui.js',
