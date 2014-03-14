@@ -1,7 +1,8 @@
 from django.contrib.gis.geos import Point, Polygon
 from django.contrib.gis.measure import Distance
-from haystack.query import SearchQuerySet, SQ
+from django.db.models import Count
 from haystack.inputs import Clean
+from haystack.query import SearchQuerySet, SQ
 
 import math
 import logging
@@ -304,25 +305,25 @@ class ApiProcess(object):
         return sqs.filter(f)
 
     def suggestNearCategories(self):
-        sqs = SearchQuerySet().models(Business)
+        qs = Business.objects.values('categories__name', 'categories__level')\
+                             .annotate(dcount=Count('id'))
         if self.location.isWebOnly():
-            sqs = sqs.filter(has_online_business=True, has_physical_business=False)
+            qs = qs.filter(has_online_business=True, has_physical_business=False)
         elif self.location.isOnWeb():
-            sqs = sqs.filter(has_online_business=True)
+            qs = qs.filter(has_online_business=True)
         else:
-            sqs = sqs.filter(has_physical_business=True)
-            sqs = sqs.distance('location', self.userLocation())
-            if self.location and self.location.bounding:
-                sqs = self.boundSearchQuery(sqs, self.location)
-            else:
-                sqs = sqs.dwithin('location', self.userLocation(), DEF_RADIUS)
+            qs = qs.filter(has_physical_business=True)
+            geom = self.userLocation() #.extend(DEF_RADIUS)
+            print geom
+            qs = qs.filter(center__distance_lt=(geom, DEF_RADIUS))
 
+        qs = qs.order_by('categories__level')
         res, d = [], {}
-        for s in sqs:
-            for c in s.categories:
-                if not d.has_key(c):
-                    res.append({ 'type': 'category', 'text': c })
-                    d[c] = True
+        for r in qs:
+            c = r['categories__name']
+            if not d.has_key(c):
+                res.append({ 'type': 'category', 'text': c })
+                d[c] = True
         return res
 
     def suggestNearText(self):

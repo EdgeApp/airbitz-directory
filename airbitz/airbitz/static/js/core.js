@@ -32,7 +32,7 @@ function getMapMarkerContent(marker, m) {
     return (new Date()).getTime();
   }
   AB.setNear = function() {
-    var n = $('#location').val();
+    var n = $('input.location').val() || '';
     if (n) {
       localStorage.setItem("location", n);
       localStorage.setItem("nearDate", AB.now());
@@ -51,7 +51,7 @@ function getMapMarkerContent(marker, m) {
     if (false && supports_html5_storage()) {
       var loc = AB.getNear()
       if (loc) {
-        $('#location').val(loc);
+        $('input.location').val(loc);
       }
     }
     $.ajaxSetup({
@@ -127,7 +127,7 @@ function getMapMarkerContent(marker, m) {
     google.maps.event.addDomListener(window, 'load', initialize);
   };
   AB.addPlaceSearch = function(selector) {
-    var loc = $('#location').val();
+    var loc = $('input.location').val() || '';
     var engine = new Bloodhound({
       name: 'business',
       datumTokenizer: function(d) { return d; },
@@ -135,7 +135,7 @@ function getMapMarkerContent(marker, m) {
       minLength: 0,
       limit: 10,
       prefetch: {
-        url: '/api/v1/category-suggest/?location=' + encodeURIComponent($('#location').val()),
+        url: '/api/v1/category-suggest/?location=' + encodeURIComponent(loc),
         filter: function(data) {
           var m = $.map(data.results, function(e, i) {
               return { type: e.type, name: e.text, value: e.text };
@@ -147,7 +147,7 @@ function getMapMarkerContent(marker, m) {
         url: '/api/v1/autocomplete-business/?term=%QUERY',
         replace: function (url, uriEncodedQuery) {
           q = url.replace(/%QUERY/, uriEncodedQuery)
-          if ($('#location').val()) {
+          if ($('input.location').val()) {
               q += "&location=" + encodeURIComponent(loc);
           }
           return q;
