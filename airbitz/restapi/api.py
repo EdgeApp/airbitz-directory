@@ -18,6 +18,8 @@ DEF_RADIUS=Distance(mi=100)
 DEF_IP='24.152.191.12'
 DEF_LOC_STR='San Francisco, CA'
 
+CURRENT_LOCATION='Current Location'
+
 EARTHS_MEAN_RADIUS=6371000
 DEG_TO_M=(EARTHS_MEAN_RADIUS * math.pi) / 180.0
 
@@ -115,7 +117,7 @@ class Location(object):
         if self.locationStr:
             self.filter_web_only = self.locationStr.lower() == 'web only'
             self.filter_on_web = self.locationStr.lower() == 'on the web'
-            self.filter_current_location = self.locationStr.lower() == 'current location'
+            self.filter_current_location = self.locationStr.lower() == CURRENT_LOCATION.lower()
         else:
             self.filter_web_only = False
             self.filter_on_web = False
