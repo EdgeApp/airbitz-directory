@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'south',
     'rest_framework_swagger',
+    'analytical',
 
     'restapi',
     'location',
@@ -312,3 +313,11 @@ LOGGING = {
         },
     },
 }
+
+# GOOGLE ANALYTICS
+if DEBUG:
+    # bogus id unless in production to prevent analytics pollution
+    # GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-11111111-11'
+    GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-47697034-1'
+else:
+    GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-47697034-1'
