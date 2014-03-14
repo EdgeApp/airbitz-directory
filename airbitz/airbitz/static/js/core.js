@@ -231,7 +231,7 @@ function getMapMarkerContent(marker, m) {
       }]);
       selector.on('typeahead:selected', function (object, datum) {
         AB.setNear();
-        $(this).val(data.text);
+        $(this).val(datum.text);
       });
   };
   var Util = AB.Util = {
