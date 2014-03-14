@@ -124,9 +124,10 @@ class Location(object):
             self.filter_on_web = False
             self.filter_current_location = False
         if self.isOnWeb():
-            qs = OsmRelation.objects.filter(admin_level=2, geom__contains=self.userPoint)
-            if len(qs) > 0:
-                self.userCountry = qs[0].country_code
+            pass
+            # qs = OsmRelation.objects.filter(admin_level=2, geom__contains=self.userPoint)
+            # if len(qs) > 0:
+            #     self.userCountry = qs[0].country_code
         if not self.isCurrentLocation() and not self.isOnWeb() and locationStr:
             sqs = SearchQuerySet().models(OsmRelation).filter(content_auto=locationStr)
             sqs = sqs[:1]
