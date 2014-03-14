@@ -45,12 +45,12 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </div>
 <div class="container">
 <h4 id="unauthenticated-search">Unauthenticated Search</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://api.airbitz.co/api/v1/search/?term=Spirit </code></pre>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET https://api.airbitz.co/api/v1/search/?term=Spirit </code></pre>
 <pre><code>{
   &quot;detail&quot;: &quot;Authentication credentials were not provided.&quot;
 }</code></pre>
 <h4 id="authenticated-search">Authenticated Search</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://api.airbitz.co/api/v1/search/?term=Spirit \
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET https://api.airbitz.co/api/v1/search/?term=Spirit \
      <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
 <pre><code>{
   &quot;count&quot;: 1, 
@@ -118,18 +118,18 @@ code > span.er { color: #ff0000; font-weight: bold; }
   &quot;next&quot;: null
 }</code></pre>
 <h4 id="location-suggest">Location Suggest</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://api.airbitz.co/api/v1/location-suggest/ \
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET https://api.airbitz.co/api/v1/location-suggest/ \
      <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
 <pre><code>{
   &quot;near&quot;: &quot;San Diego County, CA&quot;
 }</code></pre>
 <h4 id="categories">Categories</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://api.airbitz.co/api/v1/categories/?term=Spirit \
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET https://api.airbitz.co/api/v1/categories/?term=Spirit \
      <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
 <pre><code>{
-  &quot;count&quot;: 140, 
+  &quot;count&quot;: 139, 
   &quot;previous&quot;: null, 
-  &quot;last_updated&quot;: &quot;2014-03-12T22:51:09.533Z&quot;, 
+  &quot;last_updated&quot;: &quot;2014-03-13T22:32:48.005Z&quot;, 
   &quot;results&quot;: [
     {
       &quot;name&quot;: &quot;Insurance&quot;, 
@@ -212,10 +212,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
       &quot;level&quot;: null
     }
   ], 
-  &quot;next&quot;: &quot;http://api.airbitz.co/api/v1/categories/?term=Spirit&amp;page=2&quot;
+  &quot;next&quot;: &quot;https://api.airbitz.co/api/v1/categories/?term=Spirit&amp;page=2&quot;
 }</code></pre>
 <h4 id="autocomplete-location">Autocomplete Location</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://api.airbitz.co/api/v1/autocomplete-location/?term=San \
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET https://api.airbitz.co/api/v1/autocomplete-location/?term=San \
      <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
 <pre><code>{
   &quot;results&quot;: [
@@ -232,7 +232,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   ]
 }</code></pre>
 <h4 id="autocomplete-business">Autocomplete Business</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://api.airbitz.co/api/v1/autocomplete-business/?term=Ares \
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET https://api.airbitz.co/api/v1/autocomplete-business/?term=Ares \
      <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
 <pre><code>{
   &quot;results&quot;: [
@@ -244,7 +244,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   ]
 }</code></pre>
 <h4 id="business">Business</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET http://api.airbitz.co/api/v1/business/605/ \
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -X GET https://api.airbitz.co/api/v1/business/605/ \
      <span class="kw">-H</span> <span class="st">&quot;Authorization: Token b24805c59bf8ded704c659de3aa1be966f3065bc&quot;</span> </code></pre>
 <pre><code>{
   &quot;website&quot;: &quot;http://spiritositaliandiner.com/&quot;, 
