@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import user_passes_test
 from django.contrib.gis.measure import D
 from django.db.models import Q
 from django.http import Http404
@@ -49,22 +48,12 @@ def get_biz(request, *args, **kwargs):
     else:
         raise Http404
 
-COMING_SOON='/coming_soon'
-
-def isAllowed(user):
-    return user.is_authenticated()
-
-def coming_soon(request):
-    return render_to_response('coming_soon.html', RequestContext(request, {}))
-
-@user_passes_test(isAllowed, login_url='/', redirect_field_name=None)
 def home_v2(request):
     return render_to_response('home-v2.html', RequestContext(request, {}))
 
 def landing(request):
     return render_to_response('home.html', RequestContext(request, {}))
 
-@user_passes_test(isAllowed, login_url=COMING_SOON, redirect_field_name=None)
 def business_search(request):
     term = request.GET.get('term', None)
     category = request.GET.get('category', None)
@@ -112,7 +101,6 @@ def business_search(request):
     return render_to_response('search.html', RequestContext(request, context))
 
 
-@user_passes_test(isAllowed, login_url=COMING_SOON, redirect_field_name=None)
 def business_info(request, bizId):
     biz = get_biz(request, pk=bizId)
     imgs = BusinessImage.objects.filter(business=biz)
