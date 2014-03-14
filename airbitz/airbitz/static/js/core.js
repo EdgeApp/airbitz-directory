@@ -195,17 +195,22 @@ function getMapMarkerContent(marker, m) {
         })
       });
       local.initialize();
+      var locFilter = function(data) {
+        return data.results.map(function(s, i) {
+            return { text: s, value: s };
+        });
+      };
       var engine = new Bloodhound({
         datumTokenizer: function(d) { return d; }, 
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         minLength: 0,
+        prefetch: {
+          url: '/api/v1/autocomplete-location/',
+          filter: locFilter
+        },
         remote: {
           url: '/api/v1/autocomplete-location/?term=%QUERY',
-          filter: function(data) {
-            return data.results.map(function(s, i) {
-                return { text: s, value: s };
-            });
-          },
+          filter: locFilter,
           rateLimitWait: 100
         }
       });
@@ -231,7 +236,7 @@ function getMapMarkerContent(marker, m) {
       }]);
       selector.on('typeahead:selected', function (object, datum) {
         AB.setNear();
-        $(this).val(data.text);
+        $(this).val(datum.text);
       });
   };
   var Util = AB.Util = {

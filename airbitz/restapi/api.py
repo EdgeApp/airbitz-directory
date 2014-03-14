@@ -9,7 +9,7 @@ import logging
 import subprocess
 
 from directory.models import Business, Category
-from location.models import OsmRelation
+from location.models import OsmRelation, OsmBoundary
 
 log=logging.getLogger("airbitz." + __name__)
 
@@ -124,24 +124,45 @@ class Location(object):
             self.filter_on_web = False
             self.filter_current_location = False
         if self.isOnWeb():
-            qs = OsmRelation.objects.filter(admin_level=2, geom__contains=self.userPoint)
-            if len(qs) > 0:
-                self.userCountry = qs[0].country_code
+            pass
+            # qs = OsmRelation.objects.filter(admin_level=2, geom__contains=self.userPoint)
+            # if len(qs) > 0:
+            #     self.userCountry = qs[0].country_code
         if not self.isCurrentLocation() and not self.isOnWeb() and locationStr:
             sqs = SearchQuerySet().models(OsmRelation).filter(content_auto=locationStr)
             sqs = sqs[:1]
             if len(sqs) > 0:
                 obj = sqs[0].object
-                self.bounding = obj.geom
-                if not self.bounding.contains(self.sortPoint):
+                self.bounding = OsmBoundary.objects.filter(osm_id=int(obj.osm_id))
+                if not self.boundingContains(self.sortPoint):
                     self.sortPoint = obj.centroid
                 self.admin_level = obj.admin_level
         if ll:
             geoloc = parseGeoLocation(ll)
             if geoloc:
                 self.userPoint = geoloc;
-                if (self.bounding and self.bounding.contains(geoloc)) or not self.bounding:
+                if not self.bounding or self.boundingContains(geoloc):
                     self.sortPoint = geoloc;
+
+    @property
+    def hasBounding(self):
+        return self.bounding is not None
+
+    def boundingContains(self, location):
+        if not self.hasBounding:
+            return False
+        for b in self.bounding:
+            if b.geom.contains(location):
+                return True
+        return False
+
+    def boundingExpandedContains(self, location):
+        if not self.hasBounding:
+            return False
+        for b in self.bounding:
+            if b.geom.distance(location) * DEG_TO_M <= DEF_RADIUS.m:
+                return True
+        return False
 
 
     def isWebOnly(self):
@@ -210,7 +231,7 @@ class ApiProcess(object):
 
     def __geolocation_filter__(self, sqs, geopoly, radius):
         newsqs = []
-        if self.location.bounding:
+        if self.location.hasBounding:
             # Do we have a bounding box?
             for s in sqs:
                 s.object.distance = s.distance
@@ -218,14 +239,13 @@ class ApiProcess(object):
                 if s.location:
                     s.object.distance = Distance(m=s.location.distance(self.location.userPoint) * DEG_TO_M)
                     s.object.sortDistance = Distance(m=s.location.distance(self.location.sortPoint) * DEG_TO_M)
-                    if self.location.bounding and self.location.bounding.contains(s.location):
+                    if self.location.boundingContains(s.location):
                         # Its within the bounding box 
                         s.object.bounded = True
                         self.__append_if_within__(newsqs, s, poly=geopoly, radius=radius)
-                    else:
+                    elif self.location.boundingExpandedContains(s.location):
                         # Outside of bounding, but within the DEF_RADIUS
-                        if self.location.bounding.distance(s.location) * DEG_TO_M <= DEF_RADIUS.m:
-                            self.__append_if_within__(newsqs, s, poly=geopoly, radius=radius)
+                        self.__append_if_within__(newsqs, s, poly=geopoly, radius=radius)
             return newsqs
         else:
             if not radius:
@@ -278,8 +298,10 @@ class ApiProcess(object):
         newsqs = []
         for s in sqs:
             if s.model.__name__ == 'Business':
-                if s.location and loc.bounding.contains(s.location):
-                    newsqs.append(s)
+                for b in loc.bounding:
+                    if s.location and b.geom.contains(s.location):
+                        newsqs.append(s)
+                        break
             else:
                 newsqs.append(s)
         return newsqs

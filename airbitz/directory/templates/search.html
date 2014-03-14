@@ -109,7 +109,7 @@
         {% if searchLocation %}
             var polygon = [
             {% for l in searchLocation.bounding %}
-                {% for p in l %}
+                {% for p in l.geom %}
                     { lat: {{ p.1 }}, lon: {{ p.0 }} },
                 {% endfor %}
             {% endfor %}

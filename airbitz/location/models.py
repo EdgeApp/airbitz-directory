@@ -17,12 +17,17 @@ class LocationString(models.Model):
     objects = models.GeoManager()
 
 class OsmRelation(models.Model):
-    osm_id = models.BigIntegerField()
+    osm_id = models.BigIntegerField(db_index=True)
     admin_level = models.SmallIntegerField()
     name = models.CharField(max_length=2000)
     country_code = models.CharField(max_length=20)
-    geom = models.GeometryField(null=False)
+    geom = models.GeometryField(null=True)
     centroid = models.PointField(null=False)
+    objects = models.GeoManager()
+
+class OsmBoundary(models.Model):
+    osm_id = models.BigIntegerField(db_index=True)
+    geom = models.GeometryField(null=False)
     objects = models.GeoManager()
 
 class GeoName(models.Model):
