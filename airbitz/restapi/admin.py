@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.db.models import Count
 from django.db.models import Q
+from rest_framework import authentication as auth
 from rest_framework import fields
 from rest_framework import pagination
 from rest_framework import serializers
@@ -19,6 +20,8 @@ from restapi import api
 log=logging.getLogger("airbitz." + __name__)
 
 DEFAULT_PAGE_SIZE=20
+
+PERMS=(auth.SessionAuthentication,)
 
 class EchoField(fields.Field):
     type_name = 'EchoField'
@@ -104,12 +107,14 @@ class AdminCategory(ListCreateAPIView):
     serializer_class = AdminCategorySerializer
     filter_fields = ('name', )
     permission_classes = (IsAdminUser,)
+    authentication_classes = PERMS
     model = Category
     paginate_by = 1000
 
 class AdminCategoryDetail(RetrieveUpdateDestroyAPIView):
     serializer_class = AdminCategorySerializer
     permission_classes = (IsAdminUser,)
+    authentication_classes = PERMS
     model = Category
 
 class DataTablePaginate(Paginator):
@@ -131,6 +136,7 @@ class DataTablePaginate(Paginator):
 class AdminBusinessView(ListCreateAPIView):
     serializer_class = AdminBizSerializer
     permission_classes = (IsAdminUser,)
+    authentication_classes = PERMS
     model = Business
     paginate_by_param = 'iDisplayLength'
     page_kwarg = 'iDisplayStart'
@@ -187,6 +193,7 @@ class AdminBusinessView(ListCreateAPIView):
 class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
     serializer_class = AdminBizSerializer
     permission_classes = (IsAdminUser,)
+    authentication_classes = PERMS
     model = Business
 
     def __update_cats__(self, request):
