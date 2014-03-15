@@ -759,8 +759,9 @@
                         var loc = results[0].geometry;
                         latestResult = results[0];
                         var g = latestResult.geometry.location;
-                        $('#latitude').val(g.d.toFixed(7));
-                        $('#longitude').val(g.e.toFixed(7));
+                        console.log(g);
+                        $('#latitude').val(g.lat().toFixed(7));
+                        $('#longitude').val(g.lng().toFixed(7));
                     } else {
                         alert('Unable to find lat/lon from ' + address);
                     }
