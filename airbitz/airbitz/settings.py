@@ -320,6 +320,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
+            'formatter': 'verbose',
             'filename': '/tmp/django-app.log',
         },
         'mail_admins': {

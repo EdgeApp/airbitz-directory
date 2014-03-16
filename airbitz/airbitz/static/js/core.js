@@ -109,7 +109,6 @@ function getMapMarkerContent(marker, m) {
           if (m.lat && m.lon) {
             var loc = new google.maps.LatLng(m.lat, m.lon);
             coords.push(loc)
-//            bounds.extend(loc);
           }
         }
         poly = new google.maps.Polygon({
@@ -122,8 +121,10 @@ function getMapMarkerContent(marker, m) {
         });
         poly.setMap(map)
       }
-      map.fitBounds(bounds);
-      map.panToBounds(bounds); 
+      if (markers && markers.length > 1) {
+        map.fitBounds(bounds);
+        map.panToBounds(bounds); 
+      }
     }
     google.maps.event.addDomListener(window, 'load', initialize);
   };
