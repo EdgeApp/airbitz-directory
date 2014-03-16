@@ -4,6 +4,7 @@ import logging
 log=logging.getLogger()
 
 def near(request):
+    print request.META
     log.info(request.META)
     nearText = None
     if request.GET.has_key('location'):

@@ -302,26 +302,40 @@ ADMINS=(('Damian', 'damian@airbitz.co'), ('Tim', 'tim@airbitz.co'))
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': '/tmp/django-debug.log',
+    'formatters': {
+        'simple': {
+            'format': '%(levelname)s %(message)s'
         },
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        },
+        'verbose':    {
+            'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        }
     },
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': '/tmp/django-app.log',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'requests':  {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'verbose',
+            'filename': '/tmp/django-request.log'
+        },
+    },
     'loggers': {
         'django.request': {
-            'handlers': ['file'],
+            'handlers': ['requests'],
             'level': 'INFO',
             'propagate': True,
         },
