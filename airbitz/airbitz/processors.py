@@ -1,7 +1,7 @@
 from restapi import api
 import logging
 
-log=logging.getLogger()
+log=logging.getLogger(__name__)
 
 def near(request):
     print request.META
