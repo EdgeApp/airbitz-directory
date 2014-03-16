@@ -220,6 +220,15 @@ class BusinessImage(models.Model):
         img.image = f
         img.height = self.height
         img.width = self.width
+        img.mobile_photo_x1 = self.mobile_photo_x1
+        img.mobile_photo_y1 = self.mobile_photo_y1
+        img.mobile_photo_x2 = self.mobile_photo_x2
+        img.mobile_photo_y2 = self.mobile_photo_y2
+        img.web_photo_x1 = self.web_photo_x1
+        img.web_photo_y1 = self.web_photo_y1
+        img.web_photo_x2 = self.web_photo_x2
+        img.web_photo_y2 = self.web_photo_y2
+
         img.business = biz
         img.save()
 
