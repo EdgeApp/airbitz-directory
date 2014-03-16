@@ -142,6 +142,9 @@ STATIC_ROOT = os.path.join(os.environ['HOME'], 'static')
 STATICFILES_DIRS = (
     os.path.join(SITE_ROOT, 'static/'),
 )
+if DEBUG:
+    USE_X_FORWARDED_HOST=True
+
 if True or DEBUG:
     PIPELINE_ENABLED=False
 else:
