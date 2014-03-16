@@ -4,8 +4,6 @@ import logging
 log=logging.getLogger(__name__)
 
 def near(request):
-    print request.META
-    log.info(request.META)
     nearText = None
     if request.GET.has_key('location'):
         nearText = request.GET.get('location', None) or api.CURRENT_LOCATION

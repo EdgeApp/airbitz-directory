@@ -361,13 +361,7 @@ class ApiProcess(object):
 
 
 def getRequestIp(request):
-    if request.META.has_key('HTTP_X_FORWARDED_FOR'):
-        ip = request.META['HTTP_X_FORWARDED_FOR']
-    elif request.META.has_key('HTTP_X_REAL_IP'):
-        ip = request.META['HTTP_X_REAL_IP']
-    else:
-        ip = request.META['REMOTE_ADDR']
-    return ip
+    return request.META['REMOTE_ADDR']
 
 def ipToLocationString(ip):
     point = processGeoIp(ip)
