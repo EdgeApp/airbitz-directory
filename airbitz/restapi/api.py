@@ -408,7 +408,10 @@ def processRow(row):
         lat, lon = float(v[4]), float(v[5])
         return Point(lon, lat)
     except Exception as e:
-        print e
-        log.warn(e)
+        try:
+            lat, lon = float(v[5]), float(v[6])
+            return Point(lon, lat)
+        except:
+            log.warn(e)
     return None
 
