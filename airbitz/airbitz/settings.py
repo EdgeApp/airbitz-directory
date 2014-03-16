@@ -142,7 +142,7 @@ STATIC_ROOT = os.path.join(os.environ['HOME'], 'static')
 STATICFILES_DIRS = (
     os.path.join(SITE_ROOT, 'static/'),
 )
-if DEBUG:
+if not DEBUG:
     USE_X_FORWARDED_HOST=True
 
 if True or DEBUG:
