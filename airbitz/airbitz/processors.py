@@ -1,6 +1,10 @@
 from restapi import api
+import logging
+
+log=logging.getLogger()
 
 def near(request):
+    log.info(request.META)
     nearText = None
     if request.GET.has_key('location'):
         nearText = request.GET.get('location', None) or api.CURRENT_LOCATION
