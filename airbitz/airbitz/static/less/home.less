@@ -63,24 +63,50 @@ body.home {
             }
 
             .slide-text {
+                margin-bottom: 0;
+
                 @media only screen and (max-width: 767px) {
                     text-align: center !important;
                 }
             }
+            .currently-available {
+                color: #0066cc;
+                margin-top: 0;
+                margin-bottom: 10px;
+            }
             #email-signup-form {
 
                 label {
+                    text-align: center;
                     width: 100%;
                     padding: 3px 7px;
-                    text-align: left;
+                    text-align: center;
+                    font-size: 14px;
+                    font-weight: 400;
                     border-radius: 5px;
-                    background: rgba(255, 255, 255, 0.7);
+                    background: rgba(255, 255, 255, 0.9);
+                    text-transform: capitalize;
                 }
             }
         }
     }
 
+    #bottom-slider {
 
+        .et_pb_slide_content {
+            padding: 15px 0px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.9);
+
+        }
+        .et_pb_slide_description {
+            h2 {
+                font-size: 36px;
+                font-weight: 600;
+            }
+        }
+    }
 
 
 
