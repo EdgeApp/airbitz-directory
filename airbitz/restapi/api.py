@@ -57,7 +57,6 @@ def parseGeoBounds(bounds):
         return Polygon.from_bbox((box['minlon'], box['minlat'], box['maxlon'], box['maxlat']))
     except Exception as e:
         log.warn(e)
-        print e
         raise AirbitzApiException('Unable to parse geographic bounds.')
 
 class WildCard(Clean):
@@ -336,7 +335,6 @@ class ApiProcess(object):
         else:
             qs = qs.filter(has_physical_business=True)
             geom = self.userLocation() #.extend(DEF_RADIUS)
-            print geom
             qs = qs.filter(center__distance_lt=(geom, DEF_RADIUS))
 
         qs = qs.order_by('categories__level')
@@ -350,15 +348,13 @@ class ApiProcess(object):
 
     def suggestNearText(self):
         point = self.userLocation()
-        qs = OsmRelation.objects.filter(admin_level__lte=6).distance(point)\
-                                .order_by('distance', '-admin_level')[:1]
-        if len(qs) > 0:
-            return "{0}".format(qs[0].name)
+        nearText = nearTextFromPoint(point)
+        if nearText:
+            return nearText
         elif self.location.ip:
             return ipToLocationString(self.location.ip)
         else:
             return DEF_LOC_STR
-
 
 def getRequestIp(request):
     return request.META['REMOTE_ADDR']
@@ -366,14 +362,19 @@ def getRequestIp(request):
 def ipToLocationString(ip):
     point = processGeoIp(ip)
     if point:
-        try:
-            rs = OsmRelation.objects.filter(admin_level__lte=6).distance(point)\
-                                    .order_by('distance', '-admin_level')[:1]
-            if rs:
-                return "{0}".format(rs[0].name)
-        except Exception as e:
-            log.warn(e)
+        return nearTextFromPoint(point)
     return DEF_LOC_STR
+
+def nearTextFromPoint(point):
+    try:
+        ids = [r.osm_id for r in OsmBoundary.objects.filter(geom__contains=point)]
+        rs = OsmRelation.objects.filter(admin_level__lte=6, osm_id__in=ids).distance(point)\
+                                .order_by('distance', '-admin_level')[:1]
+        if rs:
+            return "{0}".format(rs[0].name)
+    except Exception as e:
+        log.warn(e)
+    return None
 
 def processGeoIp(ip):
     if ip in ("10.0.2.2", "127.0.0.1"):
