@@ -4,6 +4,19 @@ $HOME=node[:airbitz][:app][:home]
 $USER=node[:airbitz][:app][:user]
 $GROUP=node[:airbitz][:app][:group]
 
+package "npm" do
+  action :install
+end
+
+script "install_yuglify" do
+  interpreter "bash"
+  creates "/usr/local/bin/yuglify"
+  code <<-EOH
+    npm config set registry http://registry.npmjs.org/
+    npm -g install yuglify
+  EOH
+end
+
 package "nginx" do
   action :install
 end
