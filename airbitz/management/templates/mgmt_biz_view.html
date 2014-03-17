@@ -459,10 +459,15 @@
                     }, 500);
 
                     $('#' + this.data.id + '-modal').modal('show');
+                    $('#' + this.data.id + '-modal').on('hide.bs.modal', function (e) {
+                        that.imgSelectClose();
+                    })
                 },
                 modalClose: function() {
                     $('#' + this.data.id + '-modal').modal('hide');
-
+                    this.imgSelectClose();
+                },
+                imgSelectClose: function() {
                     this.$el.find('.img-web').imgAreaSelect({ 
                         'remove': true
                     });
