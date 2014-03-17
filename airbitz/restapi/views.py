@@ -69,13 +69,20 @@ class BusinessView(generics.RetrieveAPIView):
     """
         Retrieve detailed information about a business.
 
+        ll -- latitude,longitude
         api_key -- API Key
     """
     serializer_class = serializers.BusinessSerializer
-    queryset = Business.objects.filter(status='PUB')
     pk_url_kwarg = 'bizId'
     authentication_classes = PERMS
     permission_classes = AUTH
+
+    def get_queryset(self):
+        bizId = int(self.kwargs['bizId'])
+        ll = self.request.QUERY_PARAMS.get('ll', None)
+        a = api.ApiProcess(ll=ll)
+        return Business.objects.distance(a.userLocation())\
+                               .filter(id=bizId, status='PUB')
 
 
 class PhotosView(generics.ListAPIView):

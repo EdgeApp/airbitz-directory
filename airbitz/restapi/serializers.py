@@ -153,6 +153,7 @@ class BusinessSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(source='categories')
     social = SocialSerializer(source='socialid_set')
     location = PointField()
+    distance = DistanceField(source='*')
 
     class Meta:
         model = Business
@@ -174,6 +175,7 @@ class BusinessSerializer(serializers.ModelSerializer):
                   'has_physical_business', 
                   'has_online_business',
                   'has_bitcoin_discount', 
+                  'distance', 
                   'location', )
 
 
