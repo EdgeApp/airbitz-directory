@@ -1,39 +1,84 @@
+from django.db import connection
+from django.contrib.gis.geos import GEOSGeometry
 from django.core.management import BaseCommand
-from django.contrib.gis.geos import Point
 
-from location.models import OsmRelation
+from location.models import OsmRelation, OsmBoundary
 
 import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
+def empty(s):
+    if not s:
+        return True
+    if isinstance(s, str) and len(s.trim()) == 0:
+        return True
+    else:
+        return False
+
 class Command(BaseCommand):
+    inserts = 0
+    updates = 0
+    skips = 0
+
     def handle(self, *args, **options):
-        with open(args[0]) as f:
-            for line in f:
-                values = line.split('\t')
-                # Only load Admin and city, or villages
-                if values[6] not in ('A', 'P'):
-                    continue
-                geo, created = GeoName.objects.get_or_create(
-                    geonameid=values[0],
-                )
-                geo.name = values[1]
-                geo.asciiname = values[2]
-                geo.alternatenames = values[3]
-                geo.center = Point(float(values[5]), float(values[4]))
-                geo.feature_class = values[6]
-                geo.feature_code = values[7]
-                geo.country_code = values[8]
-                geo.cc2 = values[9]
-                geo.admin1_code = values[10]
-                geo.admin2_code = values[11]
-                geo.admin3_code = values[12]
-                geo.admin4_code = values[13]
-                # geo.population = values[14]
-                # geo.elevation = values[15]
-                # geo.dem = values[16]
-                geo.timezone = values[17]
-                geo.modification_date = values[18]
-                geo.save()
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT osm_id, admin_level, 
+                pretty_name, country_code, 
+                st_astext(centroid) 
+            FROM carto_relation
+            WHERE admin_level IS NOT NULL
+              AND centroid IS NOT NULL
+              AND name IS NOT NULL
+        """)
+        for row in cursor.fetchall():
+            res = self.updateOrCreateRelation(row[0], row[1], \
+                                              row[2], row[3], \
+                                              row[4])
+            if res:
+                self.updateOrCreateArea(row[0])
+
+        print "Inserts: ", self.inserts
+        print "Updates: ", self.updates
+        print "Skips: ", self.skips
+            
+    def updateOrCreateRelation(self, osm_id, admin_level, name, country_code, centroid):
+        if empty(name) or empty(admin_level) or empty(centroid):
+            self.skips = self.skips + 1
+            return False
+        c = GEOSGeometry(centroid, srid=900913)
+        c.transform(4326)
+        try:
+            obj = OsmRelation.objects.get(osm_id=osm_id)
+        except OsmRelation.DoesNotExist:
+            obj = OsmRelation.objects.create(osm_id=osm_id, \
+                                             admin_level=admin_level, \
+                                             name=name, \
+                                             country_code=country_code, \
+                                             centroid=c)
+            self.inserts = self.inserts + 1
+        else:
+            self.updates = self.updates + 1
+            obj.admin_level = admin_level
+            obj.name = name
+            obj.country_code = country_code
+            obj.centroid = c
+            obj.save()
+        return True
+
+
+    def updateOrCreateArea(self, osm_id):
+        cursor = connection.cursor()
+        OsmBoundary.objects.filter(osm_id=osm_id).delete()
+        cursor.execute("""
+            SELECT st_astext(geom) 
+            FROM carto_areas
+            WHERE geom IS NOT NULL
+              AND relation_id = %s
+        """, [osm_id])
+        for row in cursor.fetchall():
+            geom = GEOSGeometry(row[0], srid=900913)
+            geom.transform(4326)
+            OsmBoundary.objects.create(osm_id=osm_id, geom=geom)
 
