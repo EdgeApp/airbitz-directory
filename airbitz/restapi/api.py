@@ -412,11 +412,11 @@ def processRow(row):
     try:
         v = row.strip().split(",")
         lat, lon = float(v[4]), float(v[5])
-        return Point(lon, lat, srid=DEF_SRID)
+        return Point(lon, lat)
     except Exception as e:
         try:
             lat, lon = float(v[5]), float(v[6])
-            return Point(lon, lat, srid=DEF_SRID)
+            return Point(lon, lat)
         except:
             log.warn(e)
     return None
