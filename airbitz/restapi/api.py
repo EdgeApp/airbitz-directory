@@ -217,11 +217,7 @@ class ApiProcess(object):
             sqs = sqs.order_by('distance')
             sqs = sqs.load_all()
             sqs = self.__geolocation_filter__(sqs, geopoly, radius)
-        return [self.__better_distance__(s) for s in sqs]
-
-    def __better_distance__(self, s):
-        s.object.distance = Distance(m=self.userLocation().distance(s.location) * DEG_TO_M)
-        return s.object
+        return [s for s in sqs]
 
     def __filer_on_web__(self, sqs):
         inCountry = []
