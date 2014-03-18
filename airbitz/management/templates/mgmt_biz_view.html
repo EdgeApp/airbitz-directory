@@ -273,7 +273,9 @@
             <input type="hidden" name="id"
                    value="{% templatetag openvariable %} id {% templatetag closevariable %}">
             <select name="social_type">
-                <option value="osm">Open Street Map</option>
+                {% for s in SOCIAL_TYPES %}
+                    <option value="{{ s.0 }}">{{ s.1 }} </option>
+                {% endfor %}
                 <option value="foursquare">Foursquare</option>
                 <option value="facebook">Facebook</option>
                 <option value="yelp">Yelp</option>

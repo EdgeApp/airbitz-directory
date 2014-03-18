@@ -40,7 +40,10 @@ DAY_OF_WEEK_CHOICES = (
 SOCIAL_TYPES = (
     ("facebook", "Faceboook"),
     ("foursquare", "Foursquare"),
+    ("google_plus", "Google+"),
+    ("linkedin", "LinkedIn"),
     ("osm", "Open Street Map"),
+    ("twitter", "Twitter+"),
     ("yelp", "Yelp"),
 )
 

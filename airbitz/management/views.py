@@ -9,7 +9,7 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from directory.models import STATUS_CHOICES, \
+from directory.models import STATUS_CHOICES, SOCIAL_TYPES, \
                              Category, ImageTag, \
                              Business, BusinessImage, \
                              BusinessHours, SocialId
@@ -215,6 +215,7 @@ def business_view(request, bizId):
     social = SocialId.objects.filter(business=biz)
     context = {
         'STATUS_CHOICES': STATUS_CHOICES,
+        'SOCIAL_TYPES': SOCIAL_TYPES,
         'biz': biz,
         'hours': hours,
         'social': social,
