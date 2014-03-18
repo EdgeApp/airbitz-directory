@@ -283,13 +283,14 @@ class ApiProcess(object):
             fits = SQ(django_ct='directory.business')
         fits = (fits) | SQ(django_ct='directory.category')
         sqs = sqs.filter(fits).models(Business, Category)
-        # if self.userLocation():
-        #     sqs = sqs.distance('location', self.userLocation())
-        #     sqs = sqs.dwithin('location', self.userLocation(), DEF_RADIUS)
-        if self.location and self.location.bounding:
-            sqs = self.boundSearchQuery(sqs, self.location)
         if self.location.isOnWeb() or self.location.isWebOnly():
             sqs = sqs.order_by('-has_bitcoin_discount')
+        else:
+            if self.location and self.location.bounding:
+                sqs = self.boundSearchQuery(sqs, self.location)
+            # if self.userLocation():
+            #     sqs = sqs.distance('location', self.userLocation())
+            #     sqs = sqs.dwithin('location', self.userLocation(), DEF_RADIUS)
         sqs = sqs[:10]
         return [autocompleteSerialize(result) for result in sqs]
 
