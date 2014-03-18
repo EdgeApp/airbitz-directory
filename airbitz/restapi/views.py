@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User
+from django.contrib.gis.measure import Distance
 from rest_framework import authentication as auth
-from rest_framework import permissions as perm
 from rest_framework import exceptions
 from rest_framework import generics, filters
+from rest_framework import permissions as perm
 from rest_framework.response import Response 
 from rest_framework.views import APIView
 
@@ -79,11 +80,22 @@ class BusinessView(generics.RetrieveAPIView):
 
     def get_queryset(self):
         bizId = int(self.kwargs['bizId'])
-        ll = self.request.QUERY_PARAMS.get('ll', None)
-        a = api.ApiProcess(ll=ll)
-        return Business.objects.distance(a.userLocation())\
-                               .filter(id=bizId, status='PUB')
+        return Business.objects.filter(id=bizId, status='PUB')
 
+    def retrieve(self, request, *args, **kwargs):
+        """
+        Rather than use GeoDjago distance() function we calculate it manaully
+        because it uses st_distance_sphere/st_distance_spheriod instead of
+        st_distance. Classic!
+        """
+        self.object = self.get_object()
+        if self.object.center:
+            ll = self.request.QUERY_PARAMS.get('ll', None)
+            a = api.ApiProcess(ll=ll)
+            distance = Distance(m=a.userLocation().distance(self.object.center) * api.DEG_TO_M)
+            setattr(self.object, 'distance', distance)
+        serializer = self.get_serializer(self.object)
+        return Response(serializer.data)
 
 class PhotosView(generics.ListAPIView):
     """ 

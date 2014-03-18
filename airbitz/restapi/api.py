@@ -13,6 +13,7 @@ from location.models import OsmRelation, OsmBoundary
 
 log=logging.getLogger("airbitz." + __name__)
 
+DEF_SRID=4326
 DEF_COUNTRY="US"
 DEF_POINT=Point((-117.124603, 33.028400))
 DEF_RADIUS=Distance(mi=100)
@@ -216,7 +217,11 @@ class ApiProcess(object):
             sqs = sqs.order_by('distance')
             sqs = sqs.load_all()
             sqs = self.__geolocation_filter__(sqs, geopoly, radius)
-        return [s.object for s in sqs]
+        return [self.__better_distance__(s) for s in sqs]
+
+    def __better_distance__(self, s):
+        s.object.distance = Distance(m=self.userLocation().distance(s.location) * DEG_TO_M)
+        return s.object
 
     def __filer_on_web__(self, sqs):
         inCountry = []
@@ -411,11 +416,11 @@ def processRow(row):
     try:
         v = row.strip().split(",")
         lat, lon = float(v[4]), float(v[5])
-        return Point(lon, lat)
+        return Point(lon, lat, srid=DEF_SRID)
     except Exception as e:
         try:
             lat, lon = float(v[5]), float(v[6])
-            return Point(lon, lat)
+            return Point(lon, lat, srid=DEF_SRID)
         except:
             log.warn(e)
     return None
