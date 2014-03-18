@@ -137,7 +137,7 @@ function getMapMarkerContent(marker, m) {
       minLength: 0,
       limit: 10,
       prefetch: {
-        url: '/api/v1/category-suggest/?location=' + encodeURIComponent(loc),
+        url: '/api/v1/autocomplete-business/?location=' + encodeURIComponent(loc),
         filter: function(data) {
           var m = $.map(data.results, function(e, i) {
               return { type: e.type, name: e.text, value: e.text };

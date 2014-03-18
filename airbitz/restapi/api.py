@@ -269,6 +269,9 @@ class ApiProcess(object):
             ls.append(obj)
 
     def autocompleteBusiness(self, term=None, location=None, geolocation=None):
+        if not term:
+            return self.suggestNearCategories()
+
         sqs = SearchQuerySet()
         if term:
             formatted = wildcardFormat(term)
