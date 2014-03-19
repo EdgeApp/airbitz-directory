@@ -75,6 +75,15 @@ $(function() {
     });
 
 
+    if(!bowser.ipad){
+        $('.top-bg').css({
+            '-webkit-filter': 'blur(25px)',
+            '-moz-filter': 'blur(25px)',
+            '-o-filter': 'blur(25px)',
+            '-ms-filter': 'blur(25px)',
+            'filter': 'blur(25px)'
+        });
+    }
 
 
 });

@@ -2,6 +2,23 @@
 // Customize Navbar
 // --------------------------------------------------
 
+
+.navbar {
+    font-size: 14px;
+
+    .navbar-nav > li > a {
+        color: @brand-primary;
+    }
+    .navbar-nav>li>a {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+    .typeahead, .tt-query, .tt-hint {
+        padding: 8px 12px;
+    }
+}
+
+
 .navbar-admin {
 
     .btn {
@@ -83,6 +100,7 @@
     #navbar-collapse-1 {
 
         @media (max-width: @screen-sm) {
+            clear: both;
             width: 100%;
         }
     }
