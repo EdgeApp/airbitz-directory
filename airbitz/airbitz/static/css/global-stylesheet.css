@@ -1,4 +1,19 @@
 @import url("https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+.navbar {
+  font-size: 14px;
+}
+.navbar .navbar-nav > li > a {
+  color: #2291cf;
+}
+.navbar .navbar-nav > li > a {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.navbar .typeahead,
+.navbar .tt-query,
+.navbar .tt-hint {
+  padding: 8px 12px;
+}
 .navbar-admin .btn {
   position: relative;
   top: 10px;
@@ -63,6 +78,7 @@
 }
 @media (max-width: 768px) {
   #nav-mobile #navbar-collapse-1 {
+    clear: both;
     width: 100%;
   }
 }
@@ -249,11 +265,6 @@ body .top-bg {
   body .top-bg {
     position: absolute;
     top: 0;
-    -webkit-filter: blur(25px);
-    -moz-filter: blur(25px);
-    -o-filter: blur(25px);
-    -ms-filter: blur(25px);
-    filter: blur(25px);
     width: 100%;
     height: 700px;
     background: #2291cf;

@@ -203,6 +203,7 @@ PIPELINE_JS = {
             'js/jquery-1.11.0.min.js',
             'bootstrap/js/bootstrap.min.js',
             'js/modernizr.js',
+            'js/bowser.js',
             'js/enquire.js',
             'js/core.js',
             'js/holder.js',
