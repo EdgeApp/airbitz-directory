@@ -1,5 +1,6 @@
 from restapi import api
 import logging
+import settings
 
 log=logging.getLogger(__name__)
 
@@ -15,4 +16,10 @@ def near(request):
             nearText = a.suggestNearText()
     request.session['nearText'] = nearText
     return { 'location': nearText }
+
+
+def debug(request):
+    return {
+        'DEBUG': settings.DEBUG,
+    }
 
