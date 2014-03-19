@@ -236,10 +236,17 @@ function getMapMarkerContent(marker, m) {
           return datum.text;
         }
       }]);
-      selector.on('typeahead:selected', function (object, datum) {
+      var updatePlace = function() {
         AB.setNear();
+        $('input.term').typeahead('destroy');
+        AB.addPlaceSearch($('input.term'));
+      };
+      selector.on('typeahead:selected', function (object, datum) {
         $(this).val(datum.text);
+        updatePlace();
       });
+      selector.change(updatePlace);
+      selector.blur(updatePlace);
   };
   var Util = AB.Util = {
       csrfSafeMethod: function(method) {

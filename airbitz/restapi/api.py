@@ -1,6 +1,5 @@
 from django.contrib.gis.geos import Point, Polygon
 from django.contrib.gis.measure import Distance
-from django.db.models import Count
 from haystack.inputs import Clean
 from haystack.query import SearchQuerySet, SQ
 
@@ -30,6 +29,18 @@ def autocompleteSerialize(row):
         return { 'type': 'business', 'bizId': row.pk, 'text': row.content_auto }
     else:
         return { 'type': 'category', 'text': row.content_auto }
+
+def autocompleteSuggSerialize(row, used):
+    if row.categories is None and not used.has_key(row.content_auto):
+        used[row.content_auto] = True
+        return { 'type': 'business', 'bizId': row.pk, 'text': row.content_auto }
+    else:
+        for c in row.categories:
+            if used.has_key(c):
+                continue
+            used[c] = True
+            return { 'type': 'category', 'text': c }
+    return None
 
 def wildcardFormat(term):
     return WildCard(term)
@@ -331,25 +342,20 @@ class ApiProcess(object):
         return sqs.filter(f)
 
     def suggestNearCategories(self):
-        qs = Business.objects.values('categories__name', 'categories__level')\
-                             .annotate(dcount=Count('id'))
+        sqs = SearchQuerySet().models(Business)
         if self.location.isWebOnly():
-            qs = qs.filter(has_online_business=True, has_physical_business=False)
+            sqs = sqs.filter(has_online_business=True, has_physical_business=False)
         elif self.location.isOnWeb():
-            qs = qs.filter(has_online_business=True)
+            sqs = sqs.filter(has_online_business=True)
         else:
-            qs = qs.filter(has_physical_business=True)
-            geom = self.userLocation() #.extend(DEF_RADIUS)
-            qs = qs.filter(center__distance_lt=(geom, DEF_RADIUS))
+            sqs = sqs.filter(has_physical_business=True)
 
-        qs = qs.order_by('categories__level')
-        res, d = [], {}
-        for r in qs:
-            c = r['categories__name']
-            if not d.has_key(c):
-                res.append({ 'type': 'category', 'text': c })
-                d[c] = True
-        return res
+        if self.location and self.location.bounding:
+            sqs = self.boundSearchQuery(sqs, self.location)
+
+        used = {}
+        sqs = [autocompleteSuggSerialize(s, used) for s in sqs]
+        return filter(lambda x : x is not None, sqs)[:10]
 
     def suggestNearText(self):
         point = self.userLocation()
