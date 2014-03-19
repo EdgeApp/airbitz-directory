@@ -88,6 +88,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     "django.contrib.messages.context_processors.messages",
     'airbitz.processors.near',
+    'airbitz.processors.debug',
 )
 
 ROOT_URLCONF = 'airbitz.urls'

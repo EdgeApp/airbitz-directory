@@ -243,7 +243,9 @@
         $(function() {
             var mapImgUrl = GMaps.staticMapURL({
                 scale: 1,
+            {% if not DEBUG %}
                 key: '{{ mapkey }}',
+            {% endif %}
                 lat: {{ biz.center.y }},
                 lng: {{ biz.center.x }},
                 markers: [
