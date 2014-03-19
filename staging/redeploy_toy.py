@@ -66,7 +66,7 @@ class Redeploy:
             (cin, cout) = (p.stdin, p.stdout)
             cin.write("cd %s\n" % home)
             cin.write("source %s/.bashrc 1>>/tmp/redeploy_toy.log 2>&1\n" % home)
-            cin.write("source quick_sticks.sh 1>>/tmp/redeploy_toy.log 2>&1\n")
+            cin.write("source quick_bitz.sh 1>>/tmp/redeploy_toy.log 2>&1\n")
             cin.write("source /etc/profile.d/environment_vars.sh 1>>/tmp/redeploy_toy.log 2>&1\n")
             if production:
                 print 'Pulling Deploy'
