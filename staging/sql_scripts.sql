@@ -3,14 +3,3 @@ FROM directory_geonamezip z, directory_business b
 WHERE b.center @ ST_Expand(z.center, 0.05)
   AND b.name ilike 'Spirito%'
 
--- Update postalcode, country and state for all places based of of lat/lon
-UPDATE directory_business AS b
-  set postalcode = z.postalcode,
-      country = z.country,
-      admin2_name = z.admin_name2,
-      admin1_code = z.admin_code1
-FROM location_geonamezip AS z
-WHERE b.center @ ST_Expand(z.center, 0.05)
-
-UPDATE location_geonamezip 
-set admin_name2 = replace(admin_name2, ' County', '');
