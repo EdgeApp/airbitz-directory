@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Stopping gunicorn_django processes"
-killall gunicorn_django
+killall gunicorn
 echo "Processes stopped."
 
 source $HOME/airbitz/ENV/bin/activate
