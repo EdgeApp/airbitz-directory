@@ -10,7 +10,6 @@ fi
 
 LOGFILE=/tmp/gunicorn.log
 NUM_WORKERS=4
-echo ""
 echo "Starting gunicorn"
 gunicorn airbitz.wsgi:application  -w $NUM_WORKERS --log-file=$LOGFILE 2>>$LOGFILE
 echo "Gunicorn started. Logs can be found at $LOGFILE"
