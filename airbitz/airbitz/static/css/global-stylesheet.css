@@ -76,7 +76,7 @@
 #nav-mobile .mobile-search-form .navbar-form .form-group.location {
   display: none;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #nav-mobile #navbar-collapse-1 {
     clear: both;
     width: 100%;
