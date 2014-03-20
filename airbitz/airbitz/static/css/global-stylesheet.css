@@ -438,6 +438,9 @@ body .main-content {
 .biz-info-two .biz-details .biz-address-city-state {
   padding-left: 12px;
 }
+.biz-info-two .biz-description {
+  opacity: 0;
+}
 .biz-info-three .biz-hours {
   margin-bottom: 30px;
 }
@@ -647,6 +650,7 @@ body .main-content {
   color: #a94442;
 }
 .results-map-list .biz-description {
+  opacity: 0;
   line-height: 18px;
 }
 @media (max-width: 992px) {
@@ -708,6 +712,7 @@ body .main-content {
   line-height: 20px;
 }
 .biz-result .biz-description {
+  opacity: 0;
   height: 90px;
   margin: 0 0 4px;
 }

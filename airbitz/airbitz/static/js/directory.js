@@ -32,6 +32,8 @@ $(function() {
         watch: true
     });
 
+    $('.results-map-list .biz-description').css({'opacity': 1}); // hidden until dotdotdot runs then we show...so text isn't overflowing
+
 
 
     // hide the long text areas for search results this will standarize their height
@@ -42,6 +44,7 @@ $(function() {
         watch: true
     });
 
+    $('.results-grid .biz-description').css({'opacity': 1}); // hidden until dotdotdot runs then we show...so text isn't overflowing
 
 
 
@@ -54,6 +57,8 @@ $(function() {
     $('.biz-info-two .biz-description').readmore({
         maxHeight: parseInt( $('.biz-info-two .biz-description').css('line-height'), 10) * 5 //this is the line height
     });
+
+    $('.biz-info-two .biz-description').css({'opacity': 1}); // hidden until readmore runs then we show...so text isn't overflowing
 
 
     $('.biz-info-two .biz-address-street').dotdotdot({
