@@ -1,0 +1,92 @@
+/* Set the fixed height of the footer here */
+#footer {
+    height: 60px;
+    margin-top: 60px;
+    padding: 20px 0;
+    background-color: @ab-blue;
+    color: #fff;
+    border-top: 2px solid #eee;
+    font-size: 18px;
+    font-weight: 400;
+
+    a {
+        display: inline-block;
+        position: relative;
+        transition: color 300ms ease 0s;
+        text-decoration: none;
+        color: white;
+
+        &:hover {
+            color: @gray-darker;
+            text-decoration: none;
+        }
+    }
+
+    ul.social-icons {
+        float: right;
+        padding: 0;
+
+        li.social-icon {
+            display: inline-block;
+            margin-left: 20px;
+            
+            .social-text {
+                @media (max-width: @screen-md) {
+                    display: none;
+                }
+            }
+        }
+        @media (max-width: @screen-xs) {
+            float: none;
+            text-align: center;
+        }
+    }
+    @media (max-width: @screen-sm) {
+        height: auto;
+    }
+
+    .site-copy-info {
+        float: left;
+        @media (max-width: @screen-sm) {
+            font-size: 14px;
+        }
+        @media (max-width: @screen-xs) {
+            float: none;
+            text-align: center;
+        }
+    }
+}
+
+
+
+footer#main-footer {
+    display: block;
+    padding: 15px 0 5px;
+    background-color: transparent;
+    @media only screen and ( min-width: 979px ) {
+        padding-top: 60px;
+    }
+
+    #footer-bottom {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 99999;
+        background-color: @ab-blue;
+        background-color: rgba(34, 145, 207, 1);
+
+        @media only screen and ( max-width: 980px ) {
+            position: static;
+        }
+        #footer-info {
+            color: #fff;
+
+            a {
+                color: #fff;
+            }
+        }
+        .et-social-icon a {
+            color: #fff;
+        }
+    }
+}

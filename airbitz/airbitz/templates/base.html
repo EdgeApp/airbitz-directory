@@ -65,12 +65,12 @@
         </div><!-- /#wrap -->
 
         {% block footer %}
-            <div id="footer">
-                <div class="container">
-                    <p class="text-center">&copy; {% now "Y" %} - AirBitz</p>
-                </div>
-            </div>
+
         {% endblock footer %}
+
+
+        {% include '_footer_main.html' %}
+
 
         {% block javascript_headers %}
             {% compressed_js 'core' %}

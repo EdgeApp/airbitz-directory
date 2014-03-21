@@ -1,0 +1,59 @@
+{% block footer %}
+
+{#    <footer id="main-footer">#}
+{#        <div id="footer-bottom">#}
+{#            <div class="container clearfix">#}
+{#                <ul id="et-social-icons">#}
+{#                    <li class="et-social-icon et-social-facebook">#}
+{#                        <a href="https://www.facebook.com/airbitz">#}
+{#                            <span>Facebook</span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li class="et-social-icon et-social-twitter">#}
+{#                        <a href="https://twitter.com/airbitz">#}
+{#                            <span>Twitter</span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li class="et-social-icon et-social-google">#}
+{#                        <a href="https://plus.google.com/118173667510609425617" rel="publisher">#}
+{#                            <span>Google</span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                </ul>#}
+{##}
+{#                <p id="footer-info">#}
+{#                    &copy; AirBitz {% now "Y" %} | <a href="https://airbitz.co" title="Secure Bitcoin Wallet">Secure Bitcoin Wallet</a>#}
+{#                </p>#}
+{#            </div>	<!-- .container -->#}
+{#        </div>#}
+{#    </footer> <!-- #main-footer -->#}
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="social-icons">
+                        <li class="social-icon">
+                            <a href="https://www.facebook.com/airbitz">
+                                <i class="fa fa-facebook-square"></i> <span class="social-text">Facebook</span>
+                            </a>
+                        </li>
+                        <li class="social-icon">
+                            <a href="https://twitter.com/airbitz">
+                                <i class="fa fa-twitter-square"></i> <span class="social-text">Twitter</span>
+                            </a>
+                        </li>
+                        <li class="social-icon">
+                            <a href="https://plus.google.com/118173667510609425617" rel="publisher">
+                                <i class="fa fa-google-plus-square"></i> <span class="social-text">Google</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="site-copy-info">
+                        &copy; {% now "Y" %} | AirBitz Inc | <a href="{{ request.get_absolute_url }}" title="Secure Bitcoin Wallet">Secure Bitcoin Wallet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock footer %}
