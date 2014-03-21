@@ -43,7 +43,7 @@ SOCIAL_TYPES = (
     ("google_plus", "Google+"),
     ("linkedin", "LinkedIn"),
     ("osm", "Open Street Map"),
-    ("twitter", "Twitter+"),
+    ("twitter", "Twitter"),
     ("yelp", "Yelp"),
 )
 
