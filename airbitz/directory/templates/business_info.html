@@ -45,7 +45,7 @@
             {% for s in biz.socialid_set.all %}
                 {% if s.social_type != "osm" %}
                 <a class="btn btn-default" href="{{ s.social_url }}" target="_blank">
-                    <i class="fa {{ s.social_icon }}" data-toggle="tooltip" data-placement="bottom" title="{{ s.social_type }}"></i> {{ s.social_type|title }}
+                    <i class="fa {{ s.social_icon }}" data-toggle="tooltip" data-placement="bottom" title="{{ s.social_type }}"></i> {{ s.social_type|replace:"/_/ "|title }}
                 </a>
                 {% endif %}
             {% endfor %}
@@ -144,50 +144,92 @@
                     <tr>
                         <td><strong>Open</strong></td>
                         <td>
-                            <span class="label label-info">{{ biz_hours.Sun.0 }}</span>
+                            {% if biz_hours.Sun.0 != None %}
+                                <span class="label label-info">{{ biz_hours.Sun.0 }}</span>
+                            {% else %}
+                                <span class="label label-danger">Closed</span>
+                            {% endif %}
                         </td>
                         <td>
-                            <span class="label label-info">{{ biz_hours.Mon.0 }}</span>
+                            {% if biz_hours.Mon.0 != None %}
+                                <span class="label label-info">{{ biz_hours.Mon.0 }}</span>
+                            {% else %}
+                                <span class="label label-danger">Closed</span>
+                            {% endif %}
                         </td>
                         <td>
-                            <span class="label label-info">{{ biz_hours.Tue.0 }}</span>
+                            {% if biz_hours.Tue.0 != None %}
+                                <span class="label label-info">{{ biz_hours.Tue.0 }}</span>
+                            {% else %}
+                                <span class="label label-danger">Closed</span>
+                            {% endif %}
                         </td>
                         <td>
-                            <span class="label label-info">{{ biz_hours.Wed.0 }}</span>
+                            {% if biz_hours.Wed.0 != None %}
+                                <span class="label label-info">{{ biz_hours.Wed.0 }}</span>
+                            {% else %}
+                                <span class="label label-danger">Closed</span>
+                            {% endif %}
                         </td>
                         <td>
-                            <span class="label label-info">{{ biz_hours.Thu.0 }}</span>
+                            {% if biz_hours.Thu.0 != None %}
+                                <span class="label label-info">{{ biz_hours.Thu.0 }}</span>
+                            {% else %}
+                                <span class="label label-danger">Closed</span>
+                            {% endif %}
                         </td>
                         <td>
-                            <span class="label label-info">{{ biz_hours.Fri.0 }}</span>
+                            {% if biz_hours.Fri.0 != None %}
+                                <span class="label label-info">{{ biz_hours.Fri.0 }}</span>
+                            {% else %}
+                                <span class="label label-danger">Closed</span>
+                            {% endif %}
                         </td>
                         <td>
-                            <span class="label label-info">{{ biz_hours.Sat.0 }}</span>
+                            {% if biz_hours.Sat.0 != None %}
+                                <span class="label label-info">{{ biz_hours.Sat.0 }}</span>
+                            {% else %}
+                                <span class="label label-danger">Closed</span>
+                            {% endif %}
                         </td>
                     </tr>
 
                     <tr>
                         <td><strong>Close</strong></td>
                         <td>
-                            <span class="label label-default">{{ biz_hours.Sun.1 }}</span>
+                            {% if biz_hours.Sun.1 != None %}
+                                <span class="label label-default">{{ biz_hours.Sun.1 }}</span>
+                            {% endif %}
                         </td>
                         <td>
-                            <span class="label label-default">{{ biz_hours.Mon.1 }}</span>
+                            {% if biz_hours.Mon.1 != None %}
+                                <span class="label label-default">{{ biz_hours.Mon.1 }}</span>
+                            {% endif %}
                         </td>
                         <td>
-                            <span class="label label-default">{{ biz_hours.Tue.1 }}</span>
+                            {% if biz_hours.Tue.1 != None %}
+                                <span class="label label-default">{{ biz_hours.Tue.1 }}</span>
+                            {% endif %}
                         </td>
                         <td>
-                            <span class="label label-default">{{ biz_hours.Wed.1 }}</span>
+                            {% if biz_hours.Wed.1 != None %}
+                                <span class="label label-default">{{ biz_hours.Wed.1 }}</span>
+                            {% endif %}
                         </td>
                         <td>
-                            <span class="label label-default">{{ biz_hours.Thu.1 }}</span>
+                            {% if biz_hours.Thu.1 != None %}
+                                <span class="label label-default">{{ biz_hours.Thu.1 }}</span>
+                            {% endif %}
                         </td>
                         <td>
-                            <span class="label label-default">{{ biz_hours.Fri.1 }}</span>
+                            {% if biz_hours.Fri.1 != None %}
+                                <span class="label label-default">{{ biz_hours.Fri.1 }}</span>
+                            {% endif %}
                         </td>
                         <td>
-                            <span class="label label-default">{{ biz_hours.Sat.1 }}</span>
+                            {% if biz_hours.Sat.1 != None %}
+                                <span class="label label-default">{{ biz_hours.Sat.1 }}</span>
+                            {% endif %}
                         </td>
                     </tr>
                 </table>
