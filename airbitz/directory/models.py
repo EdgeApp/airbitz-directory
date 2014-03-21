@@ -66,6 +66,12 @@ def lookupSocialIcon(social_type):
         social_icon = 'fa-foursquare'
     elif social_type == 'yelp':
         social_icon = 'fa-comments'
+    elif social_type == 'google_plus':
+        social_icon = 'fa-google-plus'
+    elif social_type == 'twitter':
+        social_icon = 'fa-twitter'
+    elif social_type == 'linkedin':
+        social_icon = 'fa-linkedin'
     else:
         social_icon = 'link'
     return social_icon
