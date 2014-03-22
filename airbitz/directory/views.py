@@ -32,12 +32,12 @@ def get_biz_hours(biz):
     week_of_hours = {}
 
     for weekday in WEEKDAYS:
-        # print weekday[0], weekday[1]
         week_of_hours[weekday[1]] = ''
 
         for dh in days_hours:
             if dh.dayOfWeek == weekday[0]: # matched on the day of week so add the hours to that dict key
-                if dh.hourStart == midnight and dh.hourEnd == None: # if matched this day was open 24hr
+                if (dh.hourStart == midnight and dh.hourEnd == None) \
+                    or (dh.hourStart == None and dh.hourEnd == None): # if matched this day was open 24hr
                     week_of_hours[weekday[1]] = ['Open 24hr', None]
                 else:
                     week_of_hours[weekday[1]] = [dh.hourStart, dh.hourEnd]
