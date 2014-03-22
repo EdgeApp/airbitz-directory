@@ -396,9 +396,14 @@
 .biz-info-three .biz-hours {
   margin-bottom: 30px;
 }
+.biz-info-three .biz-hours table thead {
+  background: #eee;
+}
 .biz-info-three .biz-hours table td {
   width: 100px;
-  border-width: 2px;
+  border-width: 1px;
+  border-color: #eee;
+  text-align: center;
 }
 @media (min-width: 992px) {
   .biz-info-three .biz-hours table td {

@@ -2,6 +2,50 @@
 
 var screen_lg = "screen and (min-width: 992px)";
 
+function getDayOfWeek(day){
+    // if no day is given use today
+    day = typeof day === 'undefined' ? day = new Date().getDay() : day;
+    switch (day)
+    {
+        case 0:
+            name = 'Sunday';
+            index = 0;
+            break;
+        case 1:
+            name = 'Monday';
+            index = 1;
+            break;
+        case 2:
+            name = 'Tuesday';
+            index = 2;
+            break;
+        case 3:
+            name = 'Wednesday';
+            index = 3;
+            break;
+        case 4:
+            name = 'Thursday';
+            index = 4;
+            break;
+        case 5:
+            name = 'Friday';
+            index = 5;
+            break;
+        case 6:
+            name = 'Saturday';
+            index = 6;
+            break;
+    }
+    day = {
+        'name': name,
+        'index': index,
+        'short': name.substring(0,3)
+    }
+    return day;
+}
+
+var dayName = getDayOfWeek();
+
 
 $(function() {
 
@@ -113,4 +157,8 @@ jQuery(window).on('load', function(){
         $('.top-bg').fadeIn(800);
     });
 
+    // get day of week and find the correct column and highlight it
+    $('.biz-hours').find('col:eq(' + dayName['index'] + ')').css(
+        {'border': '2px solid #2291CF'}
+    );
 });
