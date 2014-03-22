@@ -158,7 +158,7 @@ jQuery(window).on('load', function(){
     });
 
     // get day of week and find the correct column and highlight it
-    $('.biz-hours').find('col:eq(' + dayName['index'] + ')').css(
+    $('.biz-hours').find('col:eq(' + (dayName['index'] + 1) + ')').css(
         {'border': '2px solid #2291CF'}
     );
 });
