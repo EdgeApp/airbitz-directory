@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.gis.measure import D
 from django.db.models import Q
 from django.http import Http404
@@ -27,7 +28,7 @@ WEEKDAYS = (
 
 def get_biz_hours(biz):
     days_hours = biz.businesshours_set.all()
-
+    midnight = datetime.time(0,0,0)
     week_of_hours = {}
 
     for weekday in WEEKDAYS:
@@ -35,9 +36,11 @@ def get_biz_hours(biz):
         week_of_hours[weekday[1]] = ''
 
         for dh in days_hours:
-            if dh.dayOfWeek == weekday[0]:
-                # matched on the day of week so add the hours to that dict key
-                week_of_hours[weekday[1]] = [dh.hourStart, dh.hourEnd]
+            if dh.dayOfWeek == weekday[0]: # matched on the day of week so add the hours to that dict key
+                if dh.hourStart == midnight and dh.hourEnd == None: # if matched this day was open 24hr
+                    week_of_hours[weekday[1]] = ['Open 24hr', None]
+                else:
+                    week_of_hours[weekday[1]] = [dh.hourStart, dh.hourEnd]
 
     return week_of_hours
 
