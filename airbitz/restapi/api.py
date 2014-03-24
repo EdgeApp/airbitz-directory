@@ -31,16 +31,21 @@ def autocompleteSerialize(row):
         return { 'type': 'category', 'text': row.content_auto }
 
 def autocompleteSuggSerialize(row, used):
-    if row.categories is None and not used.has_key(row.content_auto):
+    res = []
+    if not used.has_key(row.content_auto):
         used[row.content_auto] = True
-        return { 'type': 'business', 'bizId': row.pk, 'text': row.content_auto }
-    else:
-        for c in row.categories:
-            if used.has_key(c):
-                continue
-            used[c] = True
-            return { 'type': 'category', 'text': c }
-    return None
+        res.append({ 'type': 'business', 'bizId': row.pk, 'text': row.content_auto })
+
+    for c in row.categories:
+        if used.has_key(c):
+            continue
+        used[c] = True
+        res.append({ 'type': 'category', 'text': c })
+        return res
+    return res
+
+def flatten(ls):
+    return [item for sublist in ls for item in sublist]
 
 def wildcardFormat(term):
     return WildCard(term)
@@ -349,12 +354,13 @@ class ApiProcess(object):
             sqs = sqs.filter(has_online_business=True)
         else:
             sqs = sqs.filter(has_physical_business=True)
+        sqs = sqs.order_by('-has_bitcoin_discount')
 
         if self.location and self.location.bounding:
             sqs = self.boundSearchQuery(sqs, self.location)
 
         used = {}
-        sqs = [autocompleteSuggSerialize(s, used) for s in sqs]
+        sqs = flatten([autocompleteSuggSerialize(s, used) for s in sqs])
         return filter(lambda x : x is not None, sqs)[:10]
 
     def suggestNearText(self):
