@@ -31,6 +31,8 @@ GOOGLE_MAP_KEY = 'AIzaSyBMrEE7BCy4O7DPHEdUmz0Sa8DoGQc-tXk'
 FS_CLIENT_ID='JYRB30J3V1EVKVTIKFOZQ1NZ4Z5CVL2WYCJUEIBABTDFIHFJ'
 FS_CLIENT_SECRET='HQCHFV2B5SPZUUPTADYHYZRYNYZH0NG4LM3FUKNWFSP0UU4Y'
 
+SESSION_EXPIRY=60 * 60
+
 # Application definition
 SITE_ROOT = os.path.dirname(__file__)
 TEMPLATE_DIRS = (
@@ -76,6 +78,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'pipeline.middleware.MinifyHTMLMiddleware',
+    'airbitz.middleware.SessionExpiry',
     'airbitz.middleware.SetRemoteAddr',
 )
 TEMPLATE_CONTEXT_PROCESSORS = (
