@@ -182,6 +182,9 @@ function getMapMarkerContent(marker, m) {
         location.href = '/biz/' + datum.id;
       }
     });
+    selector.click(function() {
+      $(this).select();
+    });
   };
   AB.addLocationSearch = function(selector, locSelector) {
       var values = ['On the Web', 'Current Location'];
@@ -244,6 +247,9 @@ function getMapMarkerContent(marker, m) {
       selector.on('typeahead:selected', function (object, datum) {
         $(this).val(datum.text);
         updatePlace();
+      });
+      selector.click(function() {
+        $(this).select();
       });
       selector.change(updatePlace);
       selector.blur(updatePlace);
