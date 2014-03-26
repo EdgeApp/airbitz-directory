@@ -75,14 +75,14 @@
     <div id="area-info" class="col-sm-4 hidden-temp">
         <h2 style="margin-top: 0;">Current Regions Covered</h2>
 
-    {% if DEBUG %}
-        {{ active_regions }}<br /><br /><br />
-        {% for region in active_regions %}
-            {% if 'US-' in region %}
-                {{ region.name }} {# TODO: why you not work #}
-            {% endif %}
-        {% endfor %}
-    {% endif %}
+{#    {% if DEBUG %}#}
+{#        {{ active_regions }}<br /><br /><br />#}
+{#        {% for region in active_regions %}#}
+{#            {% if 'US-' in region %}#}
+{#                {{ region.name }} {# TODO: why you not work #}
+{#            {% endif %}#}
+{#        {% endfor %}#}
+{#    {% endif %}#}
 
         <h3>United States</h3>
         <ul>
