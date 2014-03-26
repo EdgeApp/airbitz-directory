@@ -147,8 +147,8 @@ $(function() {
 
     var $regionSignupForm = $('#region-signup-form');
     if($regionSignupForm) {
-        $('#region-signup-form').ajaxChimp({
-            url: 'https://airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=2bed7ec87c'
+        $regionSignupForm.ajaxChimp({
+            url: 'https://airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=b7bd36890d'
         });
     }
 
