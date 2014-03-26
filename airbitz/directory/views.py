@@ -25,6 +25,26 @@ WEEKDAYS = (
     ('saturday', 'Sat'),
 )
 
+# ISO_3166 Region codes http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+# these correspond to jvectormaps
+ACTIVE_REGIONS = {
+    'US-CA': {'name': 'California',
+              'search': 'California, USA'},
+    'US-TX': {'name': 'Texas',
+              'search': 'Texas, USA'},
+    'US-NY': {'name': 'New York',
+              'search': 'New York, USA'},
+    'US-HI': {'name': 'Hawaii',
+              'search': 'Hawaii, USA'},
+    'US-NJ': {'name': 'New Jersey',
+              'search': 'New Jersey, USA'},
+    'US-GA': {'name': 'Georgia',
+              'search': 'Georgia, USA'},
+    'CA-ON': {'name': 'Ontario',
+              'search': 'Ontario, CAN'},
+}
+
+
 
 def get_biz_hours(biz):
     days_hours = biz.businesshours_set.all()
@@ -100,6 +120,7 @@ def business_search(request):
         'was_search': True,
         'page_obj': paginator.page(page_num),
         'results_info': results_info,
+        'active_regions': ACTIVE_REGIONS,
     }
     return render_to_response('search.html', RequestContext(request, context))
 

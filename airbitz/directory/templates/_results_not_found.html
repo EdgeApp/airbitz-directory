@@ -1,0 +1,124 @@
+<div class="row hidden-temp">
+
+    <div class="col-sm-8">
+        <h3 style="margin-top: 0;">Unfortunately we have not collected any listings in that area yet.</h3>
+        <h3>Below are the areas we have <span class="label label-primary">covered</span>.</h3>
+        <h3>Click any region not covered to request it ASAP.</h3>
+    </div>
+
+    <div class="col-sm-4">
+        <h3 style="margin-top: 0;">Know a business that takes Bitcoin?</h3>
+        <a class="btn btn-lg btn-success" href="https://go.airbitz.co/submit-business/" target="_blank">Get a Business Listed</a>
+    </div>
+
+</div>
+
+<div class="row regions-covered">
+
+    <div id="area-map" class="col-sm-8">
+
+
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">United States</a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+              <div class="panel-body">
+
+                    <div id="vmap-us" style="width: 100%; height: 400px;">
+                        <div class="temp-placeholder">
+                            <h2>Oh No! You got us.</h2>
+                            <img style="width: 100%;" class="img-responsive" src="http://www.badhaven.com/wp-content/uploads/2012/02/picard-facepalm.jpg" alt="We are sorry." />
+                        </div>
+                    </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Canada</a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+              <div class="panel-body">
+
+                    <div class="vmap" id="vmap-ca" style="width: 100%; height: 400px;"></div>
+
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Europe</a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+              <div class="panel-body">
+
+                  <div id="vmap-eu" style="width: 100%; height: 400px;"></div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    </div>
+
+
+    <div id="area-info" class="col-sm-4 hidden-temp">
+        <h2 style="margin-top: 0;">Current Regions Covered</h2>
+
+    {% if DEBUG %}
+        {{ active_regions }}<br /><br /><br />
+        {% for region in active_regions %}
+            {% if 'US-' in region %}
+                {{ region.name }} {# TODO: why you not work #}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+        <h3>United States</h3>
+        <ul>
+            <li>California</li>
+            <li>Hawaii</li>
+            <li>New York</li>
+            <li>Georgia</li>
+            <li>Texas</li>
+            <li>New Jersey</li>
+        </ul>
+
+        <h3>Canada</h3>
+        <ul>
+            <li>Ontario</li>
+        </ul>
+    </div>
+
+
+    <div id="area-form" class="col-sm-4 hidden">
+        <form id="region-signup-form" role="form">
+            <h3>Request Area <span id="area-request" class="label label-info"></span></h3>
+            <div class="form-group">
+                <label for="inputEmail" class="control-label"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Sign up to get notified</label>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Your Email">
+                <input type="hidden" id="area-request-input" name="REGION" value="">
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    <input disabled="true" type="checkbox" checked="checked"> Email me when Bitcoin businesses are available in this area!
+                </label>
+            </div>
+            <button type="submit" class="btn btn-info">Request Now</button>
+            <button id="cancelEmail" class="btn btn-link" href="#">Cancel</button>
+        </form>
+    </div>
+
+
+</div>

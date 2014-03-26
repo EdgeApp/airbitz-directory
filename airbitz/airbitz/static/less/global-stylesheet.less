@@ -71,6 +71,45 @@ body {
 
 
 
+// SEARCH NOT FOUND
+.hidden-temp {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+}
+.temp-placeholder {
+    h2 {
+        color: white;
+        position: absolute;
+        left: 60px;
+    }
+}
+.regions-covered {
+    margin-top: 20px;
+
+    .panel-body {
+        padding: 0;
+    }
+}
+.hover-region-name {
+    color: white;
+}
+.hover-click-text {
+    color: @brand-primary;
+}
+
+
+// JVECORMAP
+.jvectormap-zoomin, .jvectormap-zoomout {
+    width: 16px;
+    height: 16px;
+    background: @brand-primary;
+    font-size: 14px;
+}
+
+
+
+
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; visibility: visible; }
