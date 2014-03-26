@@ -143,7 +143,7 @@ $(function() {
             '-ms-transition': 'all 2s ease-in',
             'transition': 'all 2s ease-in',
         });
-    }, 500);
+    }, 1500);
 
     var $regionSignupForm = $('#region-signup-form');
     if($regionSignupForm) {
