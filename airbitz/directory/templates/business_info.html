@@ -2,6 +2,7 @@
 {% load imagekit %}
 {% load humanize %}
 {% load compressed %}
+{% load absolute %}
 {% load ab_custom_tags %}
 
 {% block title %}{{ biz.name }} - {% if biz.admin3_name %}{{ biz.admin3_name }} {% endif %}Bitcoin{% endblock title %}
@@ -16,7 +17,7 @@
 
 {% block og_title %}{{ biz.name }} - {% if biz.admin3_name %}{{ biz.admin3_name }} {% endif %}Accepts Bitcoin{% endblock og_title %}
 {% block og_description %}{{ biz.description }}{% endblock og_description %}
-{% block og_image %}{{ request.build_absolute_uri }}static/img/og-business.jpg{% endblock og_image %}
+{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-business.jpg{% endblock og_image %}
 
 
 {% block top_bg %}

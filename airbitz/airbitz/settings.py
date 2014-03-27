@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'south',
     'rest_framework_swagger',
     'analytical',
+    'absolute',
 
     'restapi',
     'location',
@@ -92,6 +93,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     'airbitz.processors.near',
     'airbitz.processors.debug',
+    'absolute.context_processors.absolute'
 )
 
 ROOT_URLCONF = 'airbitz.urls'
