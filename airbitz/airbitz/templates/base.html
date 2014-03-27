@@ -25,14 +25,14 @@
                     <meta property="og:type" content="{% block og_type %}Article{% endblock og_type %}">
                     <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock og_url %}">
                     <meta property="og:image" content="{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock og_image %}">
-                    <meta property="og:site_name" content="{% block og_site_name %}Airbitz Bitcoin Wallet & Directory{% endblock og_site_name %}">
+                    <meta property="og:site_name" content="{% block og_site_name %}Airbitz{% endblock og_site_name %}">
             {#        <meta property="fb:admins" content="{% block og_fb_admins %}{% endblock og_fb_admins %}">#}
                 {% endblock og_meta %}
 
                 {% block twitter_meta %}
                     <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock twitter_card %}">
                     <meta name="twitter:site" content="{% block twitter_site %}@airbitz{% endblock twitter_site %}">
-                    <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet & Directory{% endblock twitter_title %}">
+                    <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet and Directory{% endblock twitter_title %}">
                     <meta name="twitter:description" content="{% block twitter_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock twitter_description %}">
                     <meta name="twitter:creator" content="{% block twitter_creator %}@airbitz{% endblock twitter_creator %}">
                     <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock twitter_image_src %}">
