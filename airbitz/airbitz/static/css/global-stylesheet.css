@@ -337,6 +337,10 @@
   font-size: 42px;
   font-weight: 900;
 }
+.biz-info-header .biz-region {
+  font-weight: 300;
+  color: #555555;
+}
 .biz-info-header .social-share {
   position: absolute;
   right: 15px;

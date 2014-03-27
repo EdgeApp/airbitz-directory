@@ -4,7 +4,7 @@
 {% load compressed %}
 {% load ab_custom_tags %}
 
-{% block title%}{{ biz.name }}{% endblock %}
+{% block title %}{{ biz.name }} - {% if biz.admin3_name %}{{ biz.admin3_name }} {% endif %}Bitcoin{% endblock title %}
 
 {% block top_bg %}
     {% if biz.landing_image %}
@@ -25,7 +25,7 @@
 
     <div class="row" style="margin-bottom: 30px;">
         <div class="biz-info-header col-xs-12">
-            <h1 class="biz-name">{{ biz.name }}</h1>
+            <h1 class="biz-name">{{ biz.name }} <span class="biz-region">({{ biz.admin3_name }})</span></h1>
 {#            <button class="social-share btn btn-success pull-right" href="#"><span class="fa fa-share"></span> Share</button>#}
         </div>
 
