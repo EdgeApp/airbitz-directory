@@ -5,6 +5,19 @@
 {% load ab_custom_tags %}
 
 {% block title %}{{ biz.name }} - {% if biz.admin3_name %}{{ biz.admin3_name }} {% endif %}Bitcoin{% endblock title %}
+{% block meta_description %}{{ biz.description }}{% endblock meta_description %}
+{% block meta_news_keywords %}{{ biz.admin3_name }} Bitcoin Business, Accepts Bitcoin,
+    {% spaceless %}
+    {% for c in biz.categories.all %}
+        {{c.name}},
+    {% endfor %}
+    {% endspaceless %}
+{% endblock meta_news_keywords %}
+
+{% block og_title %}{{ biz.name }} - {% if biz.admin3_name %}{{ biz.admin3_name }} {% endif %}Accepts Bitcoin{% endblock og_title %}
+{% block og_description %}{{ biz.description }}{% endblock og_description %}
+{% block og_image %}{{ request.build_absolute_uri }}static/img/og-business.jpg{% endblock og_image %}
+
 
 {% block top_bg %}
     {% if biz.landing_image %}
