@@ -19,8 +19,9 @@
 {% block og_description %}
     {% spaceless %}
     {% if biz.has_bitcoin_discount %}Offering a {{ biz.has_bitcoin_discount|decimal_to_percent }} Bitcoin Discount: {% endif %}
-    {{ biz.description }}{% endblock og_description %}
+    {{ biz.description }}
     {% endspaceless %}
+{% endblock og_description %}
 {% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-business.jpg{% endblock og_image %}
 
 
