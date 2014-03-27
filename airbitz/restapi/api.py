@@ -350,11 +350,14 @@ class ApiProcess(object):
         sqs = SearchQuerySet().models(Business)
         if self.location.isWebOnly():
             sqs = sqs.filter(has_online_business=True, has_physical_business=False)
+            sqs = sqs.order_by('-has_bitcoin_discount')
         elif self.location.isOnWeb():
             sqs = sqs.filter(has_online_business=True)
+            sqs = sqs.order_by('-has_bitcoin_discount')
         else:
             sqs = sqs.filter(has_physical_business=True)
-        sqs = sqs.order_by('-has_bitcoin_discount')
+            sqs = sqs.distance('location', self.userLocation())
+            sqs = sqs.order_by('distance')
 
         if self.location and self.location.bounding:
             sqs = self.boundSearchQuery(sqs, self.location)
