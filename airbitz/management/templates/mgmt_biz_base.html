@@ -13,6 +13,11 @@
 
 {% block body %}
     <div class="admin-heads-up row">
+    {% if DEBUG %}
+        <div class="col-sm-12">
+            <span class="label label-danger">WARNING NOT PRODUCTION</span>
+        </div>
+    {% endif %}
         <h1 class="biz-name col-sm-12">{{ biz.name }}</h1>
     </div>
     {% block bizbody %}
