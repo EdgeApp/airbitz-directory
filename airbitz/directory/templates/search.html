@@ -30,8 +30,6 @@
             {% block result_grid_items %}
                 {% for rbiz in results %}
                     {% include '_result_grid_item.html' %}
-                {% empty %}
-                    {% include '_results_not_found.html' %}
                 {% endfor %}
             {% endblock result_grid_items %}
         </div>
