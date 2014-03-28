@@ -44,7 +44,7 @@
 
     <div class="row" style="margin-bottom: 30px;">
         <div class="biz-info-header col-xs-12">
-            <h1 class="biz-name">{{ biz.name }} <span class="biz-region">({{ biz.admin3_name }})</span></h1>
+            <h1 class="biz-name">{{ biz.name }}{% if biz.admin3_name %} <span class="biz-region">({{ biz.admin3_name }})</span>{% endif %}</h1>
 {#            <button class="social-share btn btn-success pull-right" href="#"><span class="fa fa-share"></span> Share</button>#}
         </div>
 
@@ -160,7 +160,7 @@
                         <a rel="biz-images" class="biz-gallery-item swipebox" href="{{ img.url }}">
                             {% generateimage 'ab:gallerythumb' source=img.image as th %}
                             <div class="biz-gallery-img col-xs-12 col-sm-6 col-md-4">
-                                <img src="{{ th.url}} " class="img-responsive">
+                                <img src="{{ th.url}} " class="img-responsive" alt="{{ biz.name }}{% if biz.admin3_name %} {{ biz.admin3_name }}{% endif %}" title="{{ biz.name }}{% if biz.admin3_name %} {{ biz.admin3_name }}{% endif %}">
                             </div>
                         </a>
                     {% endif %}
