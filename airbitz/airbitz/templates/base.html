@@ -39,6 +39,8 @@
                     <meta name="twitter:domain" content="{% block twitter_domain %}{{ request.META.HTTP_HOST }}{% endblock twitter_domain %}">
                     <meta name="twitter:url" content="{% block twitter_url %}{{ request.build_absolute_uri }}{% endblock twitter_url %}">
                     <meta name="twitter:author" content="{% block twitter_author %}@airbitz{% endblock twitter_author %}">
+                    <meta name="twitter:app:id:iphone" content="{% block twitter_app_id_iphone %}id843536046{% endblock twitter_app_id_iphone %}">
+                    <meta name="twitter:app:id:ipad" content="{% block twitter_app_id_ipad %}id843536046{% endblock twitter_app_id_ipad %}">
                 {% endblock twitter_meta %}
 
             {% endblock head_seo_social %}
