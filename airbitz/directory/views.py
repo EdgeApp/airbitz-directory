@@ -40,6 +40,14 @@ ACTIVE_REGIONS = {
               'search': 'New Jersey, USA'},
     'US-GA': {'name': 'Georgia',
               'search': 'Georgia, USA'},
+    'US-IL': {'name': 'Illinois',
+              'search': 'Illinois, USA'},
+    'US-UT': {'name': 'Utah',
+              'search': 'Utah, USA'},
+    'US-NV': {'name': 'Nevada',
+              'search': 'Nevada, USA'},
+    'US-CO': {'name': 'Colorado',
+              'search': 'Colorado, USA'},
     'CA-ON': {'name': 'Ontario',
               'search': 'Ontario, CAN'},
 }
@@ -75,7 +83,10 @@ def home_v2(request):
     return render_to_response('home-v2.html', RequestContext(request, {}))
 
 def landing(request):
-    return render_to_response('home.html', RequestContext(request, {}))
+    context = {
+        'active_regions': ACTIVE_REGIONS,
+    }
+    return render_to_response('home.html', RequestContext(request, context))
 
 def business_search(request):
     term = request.GET.get('term', None)

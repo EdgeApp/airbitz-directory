@@ -152,8 +152,15 @@
                                                 Bitcoin Made Safe, Simple, and Secure.<br>
                                                 Bitcoin Businesses at Your Fingertips.
                                             </p>
-                                            <p class="currently-available slide-text">
-                                                <i class="fa fa-map-marker"></i> Currently Available in <span id="simple-secure-bitcoin" class="dynamo" data-lines="New York,Texas,Hawaii">California</span>
+
+                                            <div class="currently-available slide-text">
+                                                <i class="fa fa-map-marker"></i> Currently Available in:<br />
+                                            </div>
+
+                                            <p class="marquee available-regions slide-text">
+                                                {% for region, info in active_regions.items %}
+                                                    <a href="search?location={{ info.search }}"><span class="label label-primary">{{ info.name }}</span></a>
+                                                {% endfor %}
                                             </p>
 
                                             <div class="row">
