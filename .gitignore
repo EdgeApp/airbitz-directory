@@ -12,6 +12,7 @@ airbitz/media
 *.idea
 
 # codekit
+config.codekit
 *-ck.js
 
 business_images
