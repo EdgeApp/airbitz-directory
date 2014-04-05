@@ -140,20 +140,7 @@
 				        <div class="et_pb_slide et_pb_slide_with_image et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#dbe9ef;background-image:url({{ STATIC_URL }}wp/assets/img/sd-skyline-cropped-overlay.jpg);'>
 			                <div class="et_pb_container clearfix">
 				                <div class="et_pb_slide_image">
-                                    <div class="ab-app-cta">
-                                        <div class="app-slide ab-app-android">
-                                            <a class="app-install" href="#">
-                                                <img src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
-                                            </a>
-                                            <img class="app-screenshot" src="{{ STATIC_URL }}wp/assets/img/android-bitcoin-wallet-directory.png" alt="Bitcoin Wallet for Android" />
-                                        </div>
-                                        <div class="app-slide ab-app-iphone">
-                                            <a class="app-install" href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8">
-                                                <img class="" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
-                                            </a>
-                                            <img class="app-screenshot" src="{{ STATIC_URL }}wp/assets/img/iphone-bitcoin-wallet-directory.png" alt="Bitcoin Wallet for iPhone" />
-                                        </div>
-                                    </div>
+                                    {% include '_home_app_install_cta.html' %}
                                 </div>
 				                <div class="et_pb_slide_description">
 					                <div class="et_pb_slide_content">
@@ -209,26 +196,14 @@
 		</section>
 
 		</div> <!-- .et_pb_section --><div class="et_pb_section" style='background-color:#ffffff;'>
-			<div class="et_pb_row">
-			<div class="et_pb_column et_pb_column_4_4">
 
-                <div id="app_view" class="ab-app-cta">
-                    <div class="app-slide ab-app-android">
-                        <a class="app-install" href="#">
-                            <img src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
-                        </a>
-                        <img class="app-screenshot" src="{{ STATIC_URL }}wp/assets/img/android-bitcoin-wallet-directory.png" alt="Bitcoin Wallet for Android" />
-                    </div>
-                    <div class="app-slide ab-app-iphone">
-                        <a class="app-install" href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8">
-                            <img class="" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
-                        </a>
-                        <img class="app-screenshot" src="{{ STATIC_URL }}wp/assets/img/iphone-bitcoin-wallet-directory.png" alt="Bitcoin Wallet for iPhone" />
-                    </div>
-                </div>
+        <div class="et_pb_row">
+            <div class="et_pb_column et_pb_column_4_4">
+                {% include '_home_app_install_cta.html' %}
+            </div> <!-- .et_pb_column -->
+        </div> <!-- .et_pb_row -->
 
-		</div> <!-- .et_pb_column -->
-		</div> <!-- .et_pb_row --><div class="et_pb_row">
+        <div class="et_pb_row">
 			<div class="et_pb_column et_pb_column_1_4">
 			<div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
 			<div class="et_pb_blurb_content">

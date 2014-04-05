@@ -24,10 +24,12 @@ jQuery(function($) {
         duplicated: true
     });
 
-    $('.app-screenshot').hover(function(){
-        $(this).siblings('.app-install').addClass('animated pulse infinite');
+    $('.app-install').hover(function(){
+        $(this).find('.app-store').addClass('animated pulse infinite');
+        $(this).find('.app-screenshot').addClass('animated pulse');
     }, function(){
-        $(this).siblings('.app-install').removeClass('animated pulse infinite');
+        $(this).find('.app-store').removeClass('animated pulse infinite');
+        $(this).find('.app-screenshot').removeClass('animated pulse');
     });
 
 });
