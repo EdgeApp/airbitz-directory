@@ -175,6 +175,7 @@ PIPELINE_CSS = {
     },
     'home': {
         'source_filenames': (
+            'css/animate.css',
             'css/home.css',
         ),
         'output_filename': 'css/home.css',
@@ -214,7 +215,6 @@ PIPELINE_JS = {
             'js/core.js',
             'js/holder.js',
             'js/typeahead.bundle.js',
-            'extras/dynamo/dynamo.js',
             'extras/jQuery.dotdotdot-master/src/js/jquery.dotdotdot.min.js',
             'extras/Readmore.js-master/readmore.min.js',
             'extras/colorbox-master/jquery.colorbox-min.js',

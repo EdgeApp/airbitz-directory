@@ -24,4 +24,10 @@ jQuery(function($) {
         duplicated: true
     });
 
+    $('.app-screenshot').hover(function(){
+        $(this).siblings('.app-install').addClass('animated pulse infinite');
+    }, function(){
+        $(this).siblings('.app-install').removeClass('animated pulse infinite');
+    });
+
 });

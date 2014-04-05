@@ -34,6 +34,34 @@ body.home header {
 body.home .navbar .logo {
   max-width: none;
 }
+body.home .ab-app-cta {
+  height: 550px;
+}
+body.home .ab-app-cta .app-slide {
+  width: 50%;
+  float: left;
+  margin: 0 auto;
+  text-align: center;
+}
+body.home .ab-app-cta .app-slide .app-install {
+  display: block;
+  margin-bottom: 20px;
+  text-align: center;
+}
+body.home .ab-app-cta .app-slide img.app-screenshot {
+  max-height: 500px;
+}
+@media (max-width: 768px) {
+  body.home .ab-app-cta .app-slide img.app-screenshot {
+    max-height: 375px;
+  }
+}
+@media (max-width: 768px) {
+  body.home .ab-app-cta .app-slide {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
 body.home #top-slider .et_pb_container .et_pb_slide_image {
   display: none;
   top: 240px;
