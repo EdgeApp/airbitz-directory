@@ -31,9 +31,40 @@ body.home {
 
 
 
+    // APP DOWNLOAD CALL TO ACTION
+    .ab-app-cta {
+        height: 550px;
+
+        .app-slide {
+            width: 50%;
+            float: left;
+            margin: 0 auto;
+            text-align: center;
+
+            .app-install {
+                display: block;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            img.app-screenshot {
+                max-height: 500px;
+                
+                @media(max-width: @screen-sm) {
+                    max-height: 375px;
+                }
+            }
+
+            @media(max-width: @screen-sm) {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    }
 
     // CONTENT AREA
     #top-slider {
+
+
 
         .et_pb_container {
 
