@@ -2,9 +2,40 @@
 {% load imagekit %}
 {% load humanize %}
 {% load compressed %}
+{% load absolute %}
 {% load ab_custom_tags %}
 
+
+
 {% block title %}{{ biz.name }} - {% if biz.admin3_name %}{{ biz.admin3_name }} {% endif %}Bitcoin{% endblock title %}
+{% block meta_description %}{{ biz.description }}{% endblock meta_description %}
+{% block meta_news_keywords %}{{ biz.admin3_name }} Bitcoin Business, Accepts Bitcoin,
+    {% spaceless %}
+    {% for c in biz.categories.all %}
+        {{c.name}},
+    {% endfor %}
+    {% endspaceless %}
+{% endblock meta_news_keywords %}
+
+{% block og_title %}{{ biz.name }}, {% if biz.admin3_name %}{{ biz.admin3_name }} {% endif %}Accepts Bitcoin{% endblock og_title %}
+{% block og_description %}
+    {% spaceless %}
+    {% if biz.has_bitcoin_discount %}Offering a {{ biz.has_bitcoin_discount|decimal_to_percent }} Bitcoin Discount: {% endif %}
+    {{ biz.description }}
+    {% endspaceless %}
+{% endblock og_description %}
+{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-business.jpg{% endblock og_image %}
+
+{% block twitter_title %}{{ biz.name }}, {% if biz.admin3_name %}{{ biz.admin3_name }} {% endif %}Accepts Bitcoin{% endblock twitter_title %}
+{% block twitter_description %}
+    {% spaceless %}
+    {% if biz.has_bitcoin_discount %}Offering a {{ biz.has_bitcoin_discount|decimal_to_percent }} Bitcoin Discount: {% endif %}
+    {{ biz.description }}
+    {% endspaceless %}
+{% endblock twitter_description %}
+{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-business.jpg{% endblock twitter_image_src %}
+
+
 
 {% block top_bg %}
     {% if biz.landing_image %}
@@ -25,8 +56,7 @@
 
     <div class="row" style="margin-bottom: 30px;">
         <div class="biz-info-header col-xs-12">
-            <h1 class="biz-name">{{ biz.name }} <span class="biz-region">({{ biz.admin3_name }})</span></h1>
-{#            <button class="social-share btn btn-success pull-right" href="#"><span class="fa fa-share"></span> Share</button>#}
+            <h1 class="biz-name">{{ biz.name }}{% if biz.admin3_name %} <span class="biz-region">({{ biz.admin3_name }})</span>{% endif %}</h1>
         </div>
 
         <div class="biz-info-one col-md-6">
@@ -141,7 +171,7 @@
                         <a rel="biz-images" class="biz-gallery-item swipebox" href="{{ img.url }}">
                             {% generateimage 'ab:gallerythumb' source=img.image as th %}
                             <div class="biz-gallery-img col-xs-12 col-sm-6 col-md-4">
-                                <img src="{{ th.url}} " class="img-responsive">
+                                <img src="{{ th.url}} " class="img-responsive" alt="{{ biz.name }}{% if biz.admin3_name %} {{ biz.admin3_name }}{% endif %}" title="{{ biz.name }}{% if biz.admin3_name %} {{ biz.admin3_name }}{% endif %}">
                             </div>
                         </a>
                     {% endif %}

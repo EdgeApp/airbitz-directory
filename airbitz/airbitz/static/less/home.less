@@ -104,7 +104,6 @@ body.home {
             }
             .available-regions {
                 overflow: hidden;
-                margin-top: 5px;
 
                 a {
                     &:hover {
@@ -161,15 +160,22 @@ body.home {
 
 
 
-    footer {
-        #footer-bottom {
-            #et-social-icons {
-                margin-top: 5px;
+    #footer {
+        color: @gray-darker;
+        a {
+            color: @brand-primary;
+            &:hover {
+                color: black;
+                text-decoration: underline;
+            }
+        }
 
-                a {
-                    &:hover {
-                        text-decoration: none;
-                    }
+        .social-icons {
+            margin-top: 5px;
+
+            a {
+                &:hover {
+                    text-decoration: none;
                 }
             }
         }

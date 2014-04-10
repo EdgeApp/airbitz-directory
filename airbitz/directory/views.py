@@ -53,6 +53,7 @@ ACTIVE_REGIONS = {
 }
 
 
+
 def get_biz_hours(biz):
     days_hours = biz.businesshours_set.all()
     midnight = datetime.time(0,0,0)
@@ -130,6 +131,7 @@ def business_search(request):
         'was_search': True,
         'page_obj': paginator.page(page_num),
         'results_info': results_info,
+        'active_regions': ACTIVE_REGIONS,
     }
     return render_to_response('search.html', RequestContext(request, context))
 
