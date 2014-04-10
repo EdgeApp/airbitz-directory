@@ -14,16 +14,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DB_HOST = 'localhost'
 
 prod_usernames = ('bitz', 'root', )
+staging_usernames = ('devbitz', )
+
 DEBUG = os.environ.get('USER') not in prod_usernames
+STAGING = os.environ.get('USER') not in staging_usernames
+PRODUCTION = not DEBUG and not STAGING
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'vjhh1t5!3t69w%ytjq5+@u12hh)(qme(&kkxzdmf%gy*&x4cur'
-
-if DEBUG:
-    TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 GOOGLE_MAP_KEY = 'AIzaSyBMrEE7BCy4O7DPHEdUmz0Sa8DoGQc-tXk'
@@ -152,12 +153,12 @@ STATICFILES_DIRS = (
 if not DEBUG:
     USE_X_FORWARDED_HOST=True
 
-if DEBUG:
-    PIPELINE_ENABLED=False
-else:
+if PRODUCTION or STAGING:
     PIPELINE_ENABLED=True
     PIPELINE_AUTO = False
     PIPELINE_VERSION = True
+else:
+    PIPELINE_ENABLED=False
 
 PIPELINE_CSS = {
     'global': {
