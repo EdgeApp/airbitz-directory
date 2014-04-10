@@ -143,8 +143,7 @@ else:
     MEDIA_ROOT = os.path.join('/home/bitz/', 'media')
     MEDIA_URL = '/media/'
 
-
-# STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.environ['HOME'], 'static')
 STATICFILES_DIRS = (
@@ -153,7 +152,7 @@ STATICFILES_DIRS = (
 if not DEBUG:
     USE_X_FORWARDED_HOST=True
 
-if True or DEBUG:
+if DEBUG:
     PIPELINE_ENABLED=False
 else:
     PIPELINE_ENABLED=True
