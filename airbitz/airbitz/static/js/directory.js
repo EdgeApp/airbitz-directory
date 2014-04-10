@@ -130,6 +130,28 @@ $(function() {
 
 
 
+    // NO RESULTS
+    setTimeout( function(){
+        $('.temp-placeholder').slideUp('slow');
+        $('.hidden-temp').css({
+            'position': 'static',
+            'visibility': 'visible',
+            'opacity': '1',
+            '-webkit-transition': 'all 2s ease-in',
+            '-moz-transition': 'all 2s ease-in',
+            '-o-transition': 'all 2s ease-in',
+            '-ms-transition': 'all 2s ease-in',
+            'transition': 'all 2s ease-in',
+        });
+    }, 1500);
+
+    var $regionSignupForm = $('#region-signup-form');
+    if($regionSignupForm) {
+        $regionSignupForm.ajaxChimp({
+            url: 'https://airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=b7bd36890d'
+        });
+    }
+
 });
 
 

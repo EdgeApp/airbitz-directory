@@ -1,5 +1,6 @@
 {% load compressed %}
 {% load google_analytics %}
+{% load absolute %}
 
 <!doctype html>
 <html>
@@ -22,22 +23,24 @@
                     <meta property="og:title" content="{% block og_title %}Airbitz Bitcoin Wallet and Directory{% endblock og_title %}">
                     <meta property="og:description" content="{% block og_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock og_description %}">
                     <meta property="og:type" content="{% block og_type %}Article{% endblock og_type %}">
-                    <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{{ object.get_absolute_url }}{% endblock og_url %}">
-                    <meta property="og:image" content="{% block og_image %}{{ request.build_absolute_uri }}static/img/og-home.jpg{% endblock og_image %}">
-                    <meta property="og:site_name" content="{% block og_site_name %}Airbitz{% endblock og_site_name %}">
+                    <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock og_url %}">
+                    <meta property="og:image" content="{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock og_image %}">
+                    <meta property="og:site_name" content="{% block og_site_name %}Airbitz Bitcoin Wallet & Directory{% endblock og_site_name %}">
             {#        <meta property="fb:admins" content="{% block og_fb_admins %}{% endblock og_fb_admins %}">#}
                 {% endblock og_meta %}
 
                 {% block twitter_meta %}
                     <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock twitter_card %}">
                     <meta name="twitter:site" content="{% block twitter_site %}@airbitz{% endblock twitter_site %}">
-                    <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet and Directory{% endblock twitter_title %}">
+                    <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet & Directory{% endblock twitter_title %}">
                     <meta name="twitter:description" content="{% block twitter_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock twitter_description %}">
                     <meta name="twitter:creator" content="{% block twitter_creator %}@airbitz{% endblock twitter_creator %}">
-                    <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ request.build_absolute_uri }}static/img/og-home.jpg{% endblock twitter_image_src %}">
+                    <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock twitter_image_src %}">
                     <meta name="twitter:domain" content="{% block twitter_domain %}{{ request.META.HTTP_HOST }}{% endblock twitter_domain %}">
-                    <meta name="twitter:url" content="{% block twitter_url %}{{ request.build_absolute_uri }}{{ object.get_absolute_url }}{% endblock twitter_url %}">
+                    <meta name="twitter:url" content="{% block twitter_url %}{{ request.build_absolute_uri }}{% endblock twitter_url %}">
                     <meta name="twitter:author" content="{% block twitter_author %}@airbitz{% endblock twitter_author %}">
+                    <meta name="twitter:app:id:iphone" content="{% block twitter_app_id_iphone %}id843536046{% endblock twitter_app_id_iphone %}">
+                    <meta name="twitter:app:id:ipad" content="{% block twitter_app_id_ipad %}id843536046{% endblock twitter_app_id_ipad %}">
                 {% endblock twitter_meta %}
 
             {% endblock head_seo_social %}
@@ -65,6 +68,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12">
+                        {% if DEBUG %}
+                            <span style="margin-top: 20px;" class="label label-danger pull-left">WARNING NOT PRODUCTION</span>
+                        {% endif %}
                         <button type="button" class="close btn btn-link" aria-hidden="true" title="Hide Admin Bar"><i class="fa fa-times-circle-o"></i></button>
                         <a class="btn btn-default" href="{% url 'mgmt_dashboard' %}"><i class="fa fa-th-large"></i> Dashboard</a>
                         {% block admin_buttons %}{% endblock admin_buttons %}
@@ -158,6 +164,10 @@
             </script>
 
             {% google_analytics %}
+
+            <!-- AddThis Pro BEGIN -->
+            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53347e5a6a7094df"></script>
+            <!-- AddThis Pro END -->
         {% endblock javascript %}
     </body>
 </html>

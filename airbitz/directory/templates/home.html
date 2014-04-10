@@ -1,4 +1,5 @@
 {% load compressed %}
+{% load absolute %}
 
 
 
@@ -31,8 +32,8 @@
             <meta property="og:title" content="{% block og_title %}Airbitz Bitcoin Wallet and Directory{% endblock og_title %}">
             <meta property="og:description" content="{% block og_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock og_description %}">
             <meta property="og:type" content="{% block og_type %}Article{% endblock og_type %}">
-            <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{{ object.get_absolute_url }}{% endblock og_url %}">
-            <meta property="og:image" content="{% block og_image %}{{ request.build_absolute_uri }}static/img/og-home.jpg{% endblock og_image %}">
+            <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock og_url %}">
+            <meta property="og:image" content="{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock og_image %}">
             <meta property="og:site_name" content="{% block og_site_name %}Airbitz{% endblock og_site_name %}">
     {#        <meta property="fb:admins" content="{% block og_fb_admins %}{% endblock og_fb_admins %}">#}
         {% endblock og_meta %}
@@ -43,9 +44,9 @@
             <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet and Directory{% endblock twitter_title %}">
             <meta name="twitter:description" content="{% block twitter_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock twitter_description %}">
             <meta name="twitter:creator" content="{% block twitter_creator %}@airbitz{% endblock twitter_creator %}">
-            <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ request.build_absolute_uri }}static/img/og-home.jpg{% endblock twitter_image_src %}">
+            <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock twitter_image_src %}">
             <meta name="twitter:domain" content="{% block twitter_domain %}{{ request.META.HTTP_HOST }}{% endblock twitter_domain %}">
-            <meta name="twitter:url" content="{% block twitter_url %}{{ request.build_absolute_uri }}{{ object.get_absolute_url }}{% endblock twitter_url %}">
+            <meta name="twitter:url" content="{% block twitter_url %}{{ request.build_absolute_uri }}{% endblock twitter_url %}">
             <meta name="twitter:author" content="{% block twitter_author %}@airbitz{% endblock twitter_author %}">
         {% endblock twitter_meta %}
 
@@ -140,20 +141,7 @@
 				        <div class="et_pb_slide et_pb_slide_with_image et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#dbe9ef;background-image:url({{ STATIC_URL }}wp/assets/img/sd-skyline-cropped-overlay.jpg);'>
 			                <div class="et_pb_container clearfix">
 				                <div class="et_pb_slide_image">
-                                    <div class="ab-app-cta">
-                                        <div class="app-slide ab-app-android">
-                                            <a class="app-install" href="#">
-                                                <img src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
-                                            </a>
-                                            <img class="app-screenshot" src="{{ STATIC_URL }}wp/assets/img/android-bitcoin-wallet-directory.png" alt="Bitcoin Wallet for Android" />
-                                        </div>
-                                        <div class="app-slide ab-app-iphone">
-                                            <a class="app-install" href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8">
-                                                <img class="" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
-                                            </a>
-                                            <img class="app-screenshot" src="{{ STATIC_URL }}wp/assets/img/iphone-bitcoin-wallet-directory.png" alt="Bitcoin Wallet for iPhone" />
-                                        </div>
-                                    </div>
+                                    {% include '_home_app_install_cta.html' %}
                                 </div>
 				                <div class="et_pb_slide_description">
 					                <div class="et_pb_slide_content">
@@ -209,26 +197,14 @@
 		</section>
 
 		</div> <!-- .et_pb_section --><div class="et_pb_section" style='background-color:#ffffff;'>
-			<div class="et_pb_row">
-			<div class="et_pb_column et_pb_column_4_4">
 
-                <div id="app_view" class="ab-app-cta">
-                    <div class="app-slide ab-app-android">
-                        <a class="app-install" href="#">
-                            <img src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
-                        </a>
-                        <img class="app-screenshot" src="{{ STATIC_URL }}wp/assets/img/android-bitcoin-wallet-directory.png" alt="Bitcoin Wallet for Android" />
-                    </div>
-                    <div class="app-slide ab-app-iphone">
-                        <a class="app-install" href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8">
-                            <img class="" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
-                        </a>
-                        <img class="app-screenshot" src="{{ STATIC_URL }}wp/assets/img/iphone-bitcoin-wallet-directory.png" alt="Bitcoin Wallet for iPhone" />
-                    </div>
-                </div>
+        <div class="et_pb_row">
+            <div class="et_pb_column et_pb_column_4_4">
+                {% include '_home_app_install_cta.html' %}
+            </div> <!-- .et_pb_column -->
+        </div> <!-- .et_pb_row -->
 
-		</div> <!-- .et_pb_column -->
-		</div> <!-- .et_pb_row --><div class="et_pb_row">
+        <div class="et_pb_row">
 			<div class="et_pb_column et_pb_column_1_4">
 			<div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
 			<div class="et_pb_blurb_content">

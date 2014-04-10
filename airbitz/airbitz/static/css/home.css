@@ -40,16 +40,15 @@ body.home .ab-app-cta .app-slide {
   margin: 0 auto;
   text-align: center;
 }
-body.home .ab-app-cta .app-slide .app-install {
-  display: block;
+body.home .ab-app-cta .app-slide .app-install .app-store {
   margin-bottom: 20px;
   text-align: center;
 }
-body.home .ab-app-cta .app-slide img.app-screenshot {
+body.home .ab-app-cta .app-slide .app-install .app-screenshot {
   max-height: 500px;
 }
 @media (max-width: 768px) {
-  body.home .ab-app-cta .app-slide img.app-screenshot {
+  body.home .ab-app-cta .app-slide .app-install .app-screenshot {
     max-height: 375px;
   }
 }
@@ -84,7 +83,6 @@ body.home #top-slider .et_pb_slide_content .currently-available {
 }
 body.home #top-slider .et_pb_slide_content .available-regions {
   overflow: hidden;
-  margin-top: 5px;
 }
 body.home #top-slider .et_pb_slide_content .available-regions a:hover {
   text-decoration: none;
@@ -120,10 +118,20 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   font-size: 36px;
   font-weight: 600;
 }
-body.home footer #footer-bottom #et-social-icons {
+body.home #footer {
+  color: #222222;
+}
+body.home #footer a {
+  color: #428bca;
+}
+body.home #footer a:hover {
+  color: black;
+  text-decoration: underline;
+}
+body.home #footer .social-icons {
   margin-top: 5px;
 }
-body.home footer #footer-bottom #et-social-icons a:hover {
+body.home #footer .social-icons a:hover {
   text-decoration: none;
 }
 @media (min-width: 1200px) {

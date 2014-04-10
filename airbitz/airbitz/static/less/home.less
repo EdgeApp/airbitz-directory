@@ -41,23 +41,28 @@ body.home {
             margin: 0 auto;
             text-align: center;
 
+            
             .app-install {
-                display: block;
-                margin-bottom: 20px;
-                text-align: center;
-            }
-            img.app-screenshot {
-                max-height: 500px;
-                
-                @media(max-width: @screen-sm) {
-                    max-height: 375px;
+
+                .app-store {
+                    margin-bottom: 20px;
+                    text-align: center;
                 }
+                .app-screenshot {
+                    max-height: 500px;
+                    
+                    @media(max-width: @screen-sm) {
+                        max-height: 375px;
+                    }
+                }
+
             }
 
             @media(max-width: @screen-sm) {
                 width: 100%;
                 margin-bottom: 20px;
             }
+
         }
     }
 
@@ -99,7 +104,6 @@ body.home {
             }
             .available-regions {
                 overflow: hidden;
-                margin-top: 5px;
 
                 a {
                     &:hover {
@@ -156,15 +160,22 @@ body.home {
 
 
 
-    footer {
-        #footer-bottom {
-            #et-social-icons {
-                margin-top: 5px;
+    #footer {
+        color: @gray-darker;
+        a {
+            color: @brand-primary;
+            &:hover {
+                color: black;
+                text-decoration: underline;
+            }
+        }
 
-                a {
-                    &:hover {
-                        text-decoration: none;
-                    }
+        .social-icons {
+            margin-top: 5px;
+
+            a {
+                &:hover {
+                    text-decoration: none;
                 }
             }
         }

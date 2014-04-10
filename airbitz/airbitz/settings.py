@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'south',
     'rest_framework_swagger',
     'analytical',
+    'absolute',
 
     'restapi',
     'location',
@@ -92,6 +93,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     'airbitz.processors.near',
     'airbitz.processors.debug',
+    'absolute.context_processors.absolute'
 )
 
 ROOT_URLCONF = 'airbitz.urls'
@@ -163,6 +165,7 @@ PIPELINE_CSS = {
         'source_filenames': (
             'bootstrap/css/bootstrap.css',
             'extras/swipebox-master/source/swipebox.css',
+            'extras/jvectormap/jquery-jvectormap.css',
             'css/global-stylesheet.css',
         ),
         'output_filename': 'css/global.css',
@@ -247,8 +250,13 @@ PIPELINE_JS = {
     'directory': {
         'source_filenames': (
             'extras/gmaps/gmaps.js',
+            'extras/jvectormap/jquery-jvectormap.js',
+            'extras/jvectormap/maps/jquery-jvectormap-us-aea-en.js',
+            'extras/jvectormap/maps/jquery-jvectormap-ca-lcc-en.js',
+            'extras/jvectormap/maps/jquery-jvectormap-europe-mill-en.js',
             'extras/masonry/masonry.pkgd.min.js',
             'extras/blur.js/blur.js',
+            'extras/ajaxchimp/jquery.ajaxchimp.js',
             'js/directory.js',
         ),
         'output_filename': 'js/directory.js',
