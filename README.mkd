@@ -5,7 +5,7 @@
 1. [Vagrant 1.4.x][vagrantdownload]
 1. Clone airbitz.
 
-        git clone git@github.com:paullinator/airbitz-directory.git
+    git clone git@github.com:paullinator/airbitz-directory.git
 
 
 ### Start it up
@@ -61,4 +61,3 @@ Start dev server
     local> vagrant up --provider=digital_ocean
 
 [vagrantdownload]: http://www.vagrantup.com/downloads.html
-
