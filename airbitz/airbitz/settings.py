@@ -13,12 +13,21 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DB_HOST = 'localhost'
 
-prod_usernames = ('bitz', 'root', )
+local_usernames = ('vagrant', )
 staging_usernames = ('devbitz', )
+prod_usernames = ('bitz', 'root', )
 
-DEBUG = os.environ.get('USER') not in prod_usernames
-STAGING = os.environ.get('USER') not in staging_usernames
-PRODUCTION = not DEBUG and not STAGING
+LOCAL = os.environ.get('USER') in local_usernames
+STAGING = os.environ.get('USER') in staging_usernames
+PRODUCTION = os.environ.get('USER') in prod_usernames
+
+DEBUG = not PRODUCTION # EVERYTHING BUT PRODUCTION IS DEBUG
+
+if DEBUG:
+    print 'DEBUG:', DEBUG
+    print 'LOCAL:', LOCAL
+    print 'STAGING:', STAGING
+    print 'PRODUCTION:', PRODUCTION
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -153,12 +162,12 @@ STATICFILES_DIRS = (
 if not DEBUG:
     USE_X_FORWARDED_HOST=True
 
-if PRODUCTION or STAGING:
+if PRODUCTION or STAGING or LOCAL:
+    PIPELINE_ENABLED=False
+else:
     PIPELINE_ENABLED=True
     PIPELINE_AUTO = False
     PIPELINE_VERSION = True
-else:
-    PIPELINE_ENABLED=False
 
 PIPELINE_CSS = {
     'global': {
