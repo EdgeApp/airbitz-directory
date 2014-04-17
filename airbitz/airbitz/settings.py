@@ -22,6 +22,7 @@ STAGING = os.environ.get('USER') in staging_usernames
 PRODUCTION = os.environ.get('USER') in prod_usernames
 
 DEBUG = not PRODUCTION # EVERYTHING BUT PRODUCTION IS DEBUG
+TEMPLATE_DEBUG = DEBUG
 
 if DEBUG:
     print 'DEBUG:', DEBUG
@@ -154,7 +155,6 @@ else:
     MEDIA_ROOT = os.path.join('/home/bitz/', 'media')
     MEDIA_URL = '/media/'
 
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.environ['HOME'], 'static')
 STATICFILES_DIRS = (
@@ -163,11 +163,11 @@ STATICFILES_DIRS = (
 if not DEBUG:
     USE_X_FORWARDED_HOST=True
 
-PIPELINE_DISABLE_WRAPPER = True
-
-if PRODUCTION or STAGING or LOCAL:
+if True or PRODUCTION or STAGING or LOCAL:
     PIPELINE_ENABLED=False
 else:
+    STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+    PIPELINE_DISABLE_WRAPPER = True
     PIPELINE_ENABLED=True
     PIPELINE_AUTO = False
     PIPELINE_VERSION = True
