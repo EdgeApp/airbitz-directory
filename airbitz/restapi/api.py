@@ -25,6 +25,28 @@ CURRENT_LOCATION='Current Location'
 EARTHS_MEAN_RADIUS=6371000
 DEG_TO_M=(EARTHS_MEAN_RADIUS * math.pi) / 180.0
 
+def googleNearby(loc):
+    payload = {
+        'sensor': 'false',
+        'latlng': "{0},{1}".format(loc.y, loc.x), 
+        'key': settings.GOOGLE_SERVER_KEY,
+    }
+    url = 'https://maps.googleapis.com/maps/api/geocode/json'
+    res = requests.get(url, params=payload).json()
+    if res.has_key('results'):
+        f = res['results'][0]
+        m = {}
+        for c in f['address_components']:
+            for t in c['types']:
+                m[t] = {"short": c['short_name'], "long": c['long_name']}
+    if m.has_key('locality') \
+        and m.has_key('administrative_area_level_1') \
+        and m.has_key('country'):
+        return "{0}, {1}, {2}".format(m['locality']['long'],
+                                      m['administrative_area_level_1']['short'],
+                                      m['country']['long'])
+    return None
+
 def googleAutocomplete(txt, loc=None):
     payload = {
         'sensor': 'false',
@@ -415,9 +437,7 @@ def ipToLocationString(ip):
 
 def nearTextFromPoint(point):
     try:
-        rs = googleAutocomplete(None, point)
-        if rs and rs.has_key('predictions') and len(rs['predictions']) > 0:
-            return "{0}".format(rs['predictions'][0]['description'])
+        return googleNearby(point)
     except Exception as e:
         log.warn(e)
     return None
