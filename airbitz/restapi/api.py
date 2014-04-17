@@ -6,9 +6,10 @@ from haystack.query import SearchQuerySet, SQ
 import math
 import logging
 import subprocess
+import requests
+from airbitz import settings
 
 from directory.models import Business, Category
-from location.models import OsmRelation, OsmBoundary
 
 log=logging.getLogger("airbitz." + __name__)
 
@@ -23,6 +24,45 @@ CURRENT_LOCATION='Current Location'
 
 EARTHS_MEAN_RADIUS=6371000
 DEG_TO_M=(EARTHS_MEAN_RADIUS * math.pi) / 180.0
+
+def googleAutocomplete(txt, loc=None):
+    payload = {
+        'sensor': 'false',
+        'input': txt, 
+        'types': '(cities)',
+        'key': settings.GOOGLE_SERVER_KEY,
+    }
+    if loc:
+        payload['location'] = "{0},{1}".format(loc.x, loc.y)
+    url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json'
+    return requests.get(url, params=payload).json()
+
+def googlePlaceDetails(ref):
+    payload = {
+        'reference': ref,
+        'sensor': 'false',
+        'key': settings.GOOGLE_SERVER_KEY
+    }
+    url = 'https://maps.googleapis.com/maps/api/place/details/json'
+    return requests.get(url, params=payload).json()
+
+def googleDetailsToBounding(ref):
+    details = googlePlaceDetails(ref)
+    loc = details['result']['geometry']['location']
+    point = Point((loc['lng'], loc['lat']))
+    viewport = details['result']['geometry']['viewport']
+    sw = viewport['southwest']
+    ne = viewport['northeast']
+    box = {
+        'minlat': float(sw['lat']),
+        'minlon': float(sw['lng']),
+        'maxlat': float(ne['lat']),
+        'maxlon': float(ne['lng']),
+    }
+    bounding = Polygon.from_bbox((box['minlon'], box['minlat'], box['maxlon'], box['maxlat']))
+    # Expand bounding box
+    bounding = bounding.buffer(DEG_TO_M <= DEF_RADIUS.m) 
+    return (point, bounding)
 
 def autocompleteSerialize(row):
     if row.model.__name__ == 'Business':
@@ -141,18 +181,16 @@ class Location(object):
             self.filter_current_location = False
         if self.isOnWeb():
             pass
-            # qs = OsmRelation.objects.filter(admin_level=2, geom__contains=self.userPoint)
-            # if len(qs) > 0:
-            #     self.userCountry = qs[0].country_code
         if not self.isCurrentLocation() and not self.isOnWeb() and locationStr:
-            sqs = SearchQuerySet().models(OsmRelation).filter(content_auto=locationStr)
-            sqs = sqs[:1]
-            if len(sqs) > 0:
-                obj = sqs[0].object
-                self.bounding = OsmBoundary.objects.filter(osm_id=int(obj.osm_id))
+            res = googleAutocomplete(locationStr, None)
+            res = res['predictions']
+            if len(res) > 0:
+                r = res[0]
+                ref = r['reference']
+                (centroid, bounding) = googleDetailsToBounding(ref)
+                self.bounding = bounding
                 if not self.boundingContains(self.sortPoint):
-                    self.sortPoint = obj.centroid
-                self.admin_level = obj.admin_level
+                    self.sortPoint = centroid
         if ll:
             geoloc = parseGeoLocation(ll)
             if geoloc:
@@ -167,17 +205,15 @@ class Location(object):
     def boundingContains(self, location):
         if not self.hasBounding:
             return False
-        for b in self.bounding:
-            if b.geom.contains(location):
-                return True
+        if self.bounding.contains(location):
+            return True
         return False
 
     def boundingExpandedContains(self, location):
         if not self.hasBounding:
             return False
-        for b in self.bounding:
-            if b.geom.distance(location) * DEG_TO_M <= DEF_RADIUS.m:
-                return True
+        if self.bounding.distance(location) * DEG_TO_M <= DEF_RADIUS.m:
+            return True
         return False
 
 
@@ -318,23 +354,15 @@ class ApiProcess(object):
         newsqs = []
         for s in sqs:
             if s.model.__name__ == 'Business':
-                for b in loc.bounding:
-                    if s.location and b.geom.contains(s.location):
-                        newsqs.append(s)
-                        break
+                if loc.bounding and s.location and loc.bounding.contains(s.location):
+                    newsqs.append(s)
             else:
                 newsqs.append(s)
         return newsqs
 
     def autocompleteLocation(self, term=None):
-        sqs = SearchQuerySet().models(OsmRelation)
-        if term:
-            formatted = wildcardFormat(term)
-            sqs = sqs.filter(content_auto=formatted)
-        sqs = sqs.distance('location', self.userLocation())
-        sqs = sqs.order_by('distance')
-        sqs = sqs[:10]
-        return [result.content_auto for result in sqs]
+        res = googleAutocomplete(term, self.userLocation())
+        return [r['description'] for r in res['predictions']]
 
     def querySetAddCategories(self, sqs, category):
         f = None
@@ -387,11 +415,9 @@ def ipToLocationString(ip):
 
 def nearTextFromPoint(point):
     try:
-        ids = [r.osm_id for r in OsmBoundary.objects.filter(geom__contains=point)]
-        rs = OsmRelation.objects.filter(admin_level__lte=6, osm_id__in=ids).distance(point)\
-                                .order_by('distance', '-admin_level')[:1]
-        if rs:
-            return "{0}".format(rs[0].name)
+        rs = googleAutocomplete(None, point)
+        if rs and rs.has_key('predictions') and len(rs['predictions']) > 0:
+            return "{0}".format(rs['predictions'][0]['description'])
     except Exception as e:
         log.warn(e)
     return None
