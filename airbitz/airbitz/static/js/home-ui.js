@@ -34,6 +34,9 @@ jQuery(function($) {
     });
 
 
-
+    $('#region-other-area-form').on('click', function(){
+        $('#general-signup').addClass('animated fadeOut');
+        $('#area-form').addClass('animated fadeOut');
+    });
 
 });

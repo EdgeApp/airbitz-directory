@@ -131,64 +131,66 @@
             <div class="et_pb_section et_pb_fullwidth_section" style='background-color:#2291cf;'>
 			    <div id="top-slider" class="et_pb_slider">
 			        <div class="et_pb_slides">
-				        <div class="et_pb_slide et_pb_slide_with_image et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#dbe9ef;background-image:url({{ STATIC_URL }}wp/assets/img/sd-skyline-cropped-overlay.jpg);'>
+{#				        <div class="et_pb_slide et_pb_slide_with_image et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#dbe9ef; background-image:url({{ STATIC_URL }}wp/assets/img/sd-skyline-cropped-overlay.jpg);'>#}
+				        <div class="et_pb_slide et_pb_slide_with_image et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#dbe9ef; background-image:url({{ STATIC_URL }}img/skyline-airbitz.jpg);'>
 			                <div class="et_pb_container clearfix">
 				                <div class="et_pb_slide_image">
 {#                                    {% include '_home_app_install_cta.html' %}#}
 
 
+                                    <div class="region-areas">
+                                        <h3 class="area-heading heading-clean">Click an area to search or request</h3>
 
+                                        <!-- Tab nav -->
+                                        <ul class="nav nav-tabs">
+                                          <li class="active"><a href="#region-us" data-toggle="tab">United States</a></li>
+                                          <li><a href="#region-ca" data-toggle="tab">Canada</a></li>
+                                          <li><a href="#region-eu" data-toggle="tab">Europe</a></li>
+                                          <li><a href="#region-other" id="region-other-area-form" data-toggle="tab">Other Regions</a></li>
+                                        </ul><!-- ./nav-tabs -->
 
-        <div class="regions-available panel-group" id="accordion">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">United States</a>
-              </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
-              <div class="panel-body">
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="region-us">
+                                                <div id="vmap-us" style="width: 510px; height: 500px;"></div>
+                                            </div><!-- ./tab-pane -->
 
-                    <div id="vmap-us" style="width: 510px; height: 400px;"></div>
+                                            <div class="tab-pane" id="region-ca">
+                                                <div class="vmap" id="vmap-ca" style="width: 510px; height: 500px;"></div>
+                                            </div><!-- ./tab-pane -->
 
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Canada</a>
-              </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse">
-              <div class="panel-body">
+                                            <div class="tab-pane" id="region-eu">
+                                                <div id="vmap-eu" style="width: 510px; height: 500px;"></div>
+                                            </div><!-- ./tab-pane -->
 
-                    <div class="vmap" id="vmap-ca" style="width: 510px; height: 400px;"></div>
+                                            <div class="tab-pane" id="region-other">
 
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Europe</a>
-              </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse">
-              <div class="panel-body">
+                                                <div id="other-area-form" class="text-left row">
+                                                    <form id="region-signup-form" class="col-sm-12" role="form">
+                                                        <h3><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Hear About Bitcoin Businesses Launching</h3>
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label for="inputEmailRegion" class="control-label">Email address</label>
+                                                                <input type="email" id="inputEmailRegion" class="inputEmail form-control" placeholder="Your Email">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="other-area-request-input" class="control-label">Your Region</label>
+                                                                <input type="text" id="other-area-request-input" class="form-control" name="REGION" placeholder="Bejing, China or Moscow, Russia ..etc">
+                                                            </div>
+                                                        </div>
 
-                  <div id="vmap-eu" style="width: 510px; height: 400px;"></div>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input disabled="true" type="checkbox" checked="checked"> Notify me when this area is covered!
+                                                            </label>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-info">Request Now</button>
+                                                    </form>
+                                                </div>
 
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
+                                            </div><!-- ./tab-pane -->
+                                        </div><!-- ./tab-content -->
+                                    </div><!-- ./region-areas -->
 
                                 </div>
 				                <div class="et_pb_slide_description">
@@ -200,8 +202,6 @@
                                             Bitcoin Made Safe, Simple, and Secure.<br>
                                             Bitcoin Businesses at Your Fingertips.
                                         </p>
-
-
 
                                         <div id="area-form" class="row hidden">
                                             <form id="region-signup-form" class="col-sm-12" role="form">
@@ -228,7 +228,7 @@
                                             <form id="email-signup-form" class="form" role="form">
                                                 <div class="form-group">
                                                     <div class="col-sm-12">
-                                                        <label for="inputEmailWallet" class="control-label"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Sign up for wallet launch announcement!</label>
+                                                        <label for="inputEmailWallet" class="control-label"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Sign up here for wallet launch</label>
                                                         <input type="email" class="inputEmail form-control input-lg" id="inputEmailWallet" placeholder="Your Email">
                                                     </div>
                                                 </div>
@@ -457,9 +457,9 @@
 
         var vmapOptions = {
             map: '',
-            backgroundColor: '#ddd',
-            stroke: '#999999',
-            color: '#ffffff',
+            backgroundColor: 'transparent',
+            stroke: '#80c341',
+            color: '#fff',
             hoverColor: '#22bbcf',
             selectedColor: '#2299cf',
             colors: {
@@ -486,8 +486,9 @@
         $('#vmap-us, #vmap-ca, #vmap-eu').bind('regionClick.jvectormap', function(event, label, region){
             if( checkActive(label) ){   // regionClick is not active or upcoming
                 console.log('OK REQUEST ' + label);
-                $('#general-signup').addClass('hidden');
-                $('#area-form').removeClass('hidden');
+                $('#general-signup').addClass('animated fadeOut');
+                $('#area-form').removeClass('hidden fadeOut');
+                $('#area-form').addClass('animated fadeIn');
                 $('#area-request').html(label).hide().fadeIn('slow');
                 $('#area-request-input').val(label);
                 $.ajaxSetup({ crossDomain: true });

@@ -66,11 +66,36 @@ body.home {
     }
 
     // CONTENT AREA
+    .area-heading {
+        margin-top: 0;
+        font-size: 28px;
+    }
 
-    .regions-available {
-
-        .panel-body {
+    .region-areas {
+        text-align: left;
+        
+        .nav.nav-tabs {
+            margin-left: 0;
             padding: 0;
+
+            .active a {
+                color: #ffffff;
+                background: @brand-primary;
+                border-color: @brand-primary;
+            }
+        }
+
+        #other-area-form.row {
+            padding: 15px 0;
+            margin: 0;
+        }
+        #other-area-form {
+            padding: 0;
+            background: rgba(255, 255, 255, .7);
+
+            h3 {
+                margin-top: 0px;
+            }
         }
     }
 
@@ -88,11 +113,15 @@ body.home {
         }
     }
 
+
     #top-slider {
 
-
+        .et_pb_slide_with_image .et_pb_slide_description {
+            padding-bottom: 0;
+        }
 
         .et_pb_container {
+            min-height: 1000px;
 
             .et_pb_slide_image {
                 display: none;
@@ -155,7 +184,7 @@ body.home {
                     background: rgba(255, 255, 255, 0.9);
                     text-transform: capitalize;
                 }
-                #inputEmail {
+                #inputEmailWallet {
                     text-align: center;
                 }
             }

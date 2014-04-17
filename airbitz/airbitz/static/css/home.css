@@ -58,8 +58,32 @@ body.home .ab-app-cta .app-slide .app-install .app-screenshot {
     margin-bottom: 20px;
   }
 }
-body.home .regions-available .panel-body {
+body.home .area-heading {
+  margin-top: 0;
+  font-size: 28px;
+}
+body.home .region-areas {
+  text-align: left;
+}
+body.home .region-areas .nav.nav-tabs {
+  margin-left: 0;
   padding: 0;
+}
+body.home .region-areas .nav.nav-tabs .active a {
+  color: #ffffff;
+  background: #428bca;
+  border-color: #428bca;
+}
+body.home .region-areas #other-area-form.row {
+  padding: 15px 0;
+  margin: 0;
+}
+body.home .region-areas #other-area-form {
+  padding: 0;
+  background: rgba(255, 255, 255, 0.7);
+}
+body.home .region-areas #other-area-form h3 {
+  margin-top: 0px;
 }
 body.home #area-form.row {
   margin-top: 15px;
@@ -72,6 +96,12 @@ body.home #area-form {
 }
 body.home #area-form h3 {
   margin-top: 0px;
+}
+body.home #top-slider .et_pb_slide_with_image .et_pb_slide_description {
+  padding-bottom: 0;
+}
+body.home #top-slider .et_pb_container {
+  min-height: 1000px;
 }
 body.home #top-slider .et_pb_container .et_pb_slide_image {
   display: none;
@@ -121,7 +151,7 @@ body.home #top-slider .et_pb_slide_content #email-signup-form label {
   background: rgba(255, 255, 255, 0.9);
   text-transform: capitalize;
 }
-body.home #top-slider .et_pb_slide_content #email-signup-form #inputEmail {
+body.home #top-slider .et_pb_slide_content #email-signup-form #inputEmailWallet {
   text-align: center;
 }
 body.home #bottom-slider .et_pb_slide_content {
