@@ -237,9 +237,11 @@ PIPELINE_JS = {
     },
     'home': {
         'source_filenames': (
-            'js/jquery-1.11.0.min.js',
+            'extras/jvectormap/jquery-jvectormap.js',
+            'extras/jvectormap/maps/jquery-jvectormap-us-aea-en.js',
+            'extras/jvectormap/maps/jquery-jvectormap-ca-lcc-en.js',
+            'extras/jvectormap/maps/jquery-jvectormap-europe-mill-en.js',
             'extras/ajaxchimp/jquery.ajaxchimp.js',
-            'js/frontend-ui.js',
             'js/home-ui.js',
         ),
         'output_filename': 'js/home.js',
