@@ -22,6 +22,7 @@ STAGING = os.environ.get('USER') in staging_usernames
 PRODUCTION = os.environ.get('USER') in prod_usernames
 
 DEBUG = not PRODUCTION # EVERYTHING BUT PRODUCTION IS DEBUG
+TEMPLATE_DEBUG = DEBUG
 
 if DEBUG:
     print 'DEBUG:', DEBUG
@@ -165,7 +166,7 @@ if not DEBUG:
 
 PIPELINE_DISABLE_WRAPPER = True
 
-if PRODUCTION or STAGING or LOCAL:
+if True or PRODUCTION or STAGING or LOCAL:
     PIPELINE_ENABLED=False
 else:
     PIPELINE_ENABLED=True
