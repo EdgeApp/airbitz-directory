@@ -1,9 +1,16 @@
 /*jshint devel:true */
 
+function afterEmailSubmission(resp){
+    if (resp.result === 'success') {
+        $('#inputEmail').val('');
+    }
+}
+
 jQuery(function($) {
 
     $('#email-signup-form').ajaxChimp({
-        url: 'https://airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=b7bd36890d'
+        url: 'https://airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=b7bd36890d',
+        callback: afterEmailSubmission
     });
 
     setTimeout(function(){
