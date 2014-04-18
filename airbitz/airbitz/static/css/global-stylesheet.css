@@ -445,11 +445,11 @@
   width: 80px;
 }
 .results-area .search-title {
-  margin: 0;
+  margin-bottom: 10px;
   font-weight: 900;
 }
 .location-search-info .map-container {
-  top: 150px;
+  top: 90px;
 }
 @media (min-width: 768px) {
   .location-search-info .map-container #map {
@@ -524,7 +524,7 @@
 }
 .results-map-list .search-title {
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-weight: 900;
   color: #333333;
 }
