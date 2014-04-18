@@ -904,3 +904,6 @@ body .main-content {
     visibility: visible;
   }
 }
+.uv-popover-tail {
+  display: none;
+}

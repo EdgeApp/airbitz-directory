@@ -139,10 +139,10 @@
 
 
                                     <div class="region-areas">
-                                        <h3 class="area-heading heading-clean">Click to Search or Request Businesses</h3>
+                                        <h3 class="area-heading heading-clean">Click to Search or Request Regions</h3>
 
                                         <!-- Tab nav -->
-                                        <ul class="nav nav-tabs">
+                                        <ul class="region-tabs nav nav-tabs">
                                           <li class="active"><a href="#region-us" data-toggle="tab">United States</a></li>
                                           <li><a href="#region-ca" data-toggle="tab">Canada</a></li>
                                           <li><a href="#region-eu" data-toggle="tab">Europe</a></li>
@@ -185,6 +185,7 @@
                                                             </label>
                                                         </div>
                                                         <button type="submit" class="btn btn-info">Request Now</button>
+                                                        <button id="cancelOther" type="button" class="btn btn-danger">Cancel</button>
                                                     </form>
                                                 </div>
 
@@ -203,7 +204,7 @@
                                             Bitcoin Businesses at Your Fingertips.
                                         </p>
 
-                                        <div id="area-form" class="row hidden">
+                                        <div id="area-form" class="row">
                                             <form id="region-signup-form" class="col-sm-12" role="form">
                                                 <h3>Request Area <span id="area-request" class="label label-info"></span></h3>
                                                 <div class="form-group">
@@ -218,24 +219,24 @@
                                                     </label>
                                                 </div>
                                                 <button type="submit" class="btn btn-info">Request Now</button>
-                                                <button id="cancelEmail" class="btn btn-danger" href="#">Cancel</button>
+                                                <button id="cancelEmail" class="btn btn-danger">Cancel</button>
                                             </form>
                                         </div>
 
 
 
                                         <div id="general-signup" class="row">
+                                            <div class="app-install col-sm-12 text-center">
+                                                <img class="app-store" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
+                                                <img class="app-store" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
+                                            </div>
                                             <form id="email-signup-form" class="form" role="form">
                                                 <div class="form-group">
-                                                    <div class="col-sm-12">
-                                                        <label for="inputEmailWallet" class="control-label"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Sign up here for wallet launch</label>
-                                                        <input type="email" class="inputEmail form-control input-lg" id="inputEmailWallet" placeholder="Your Email">
-                                                    </div>
+                                                    <label for="inputEmailWallet" class="control-label"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Sign up here for wallet launch</label>
+                                                    <input type="email" class="inputEmail form-control input-lg" id="inputEmailWallet" placeholder="Your Email">
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="col-sm-12">
-                                                        <button type="submit" class="btn btn-lg btn-success btn-block">Sign Up for Wallet Launch</button>
-                                                    </div>
+                                                    <button type="submit" class="btn btn-lg btn-success btn-block">Sign Up for Wallet Launch</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -486,9 +487,7 @@
         $('#vmap-us, #vmap-ca, #vmap-eu').bind('regionClick.jvectormap', function(event, label, region){
             if( checkActive(label) ){   // regionClick is not active or upcoming
                 console.log('OK REQUEST ' + label);
-                $('#general-signup').addClass('animated fadeOut');
-                $('#area-form').removeClass('hidden fadeOut');
-                $('#area-form').addClass('animated fadeIn');
+                showRegionSignup();
                 $('#area-request').html(label).hide().fadeIn('slow');
                 $('#area-request-input').val(label);
                 $.ajaxSetup({ crossDomain: true });
@@ -508,13 +507,6 @@
                 var regionName = $(label[0]).html();
                 label.html('<span class="hover-region-name">' + regionName + '</span> <span class="hover-click-text">Click to Query</span>')
             }
-        });
-
-
-        $('#cancelEmail').on('click', function(e){
-            e.preventDefault();
-            $('#general-signup').toggleClass('hidden');
-            $('#area-form').toggleClass('hidden');
         });
 
 

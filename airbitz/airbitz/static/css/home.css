@@ -58,6 +58,17 @@ body.home .ab-app-cta .app-slide .app-install .app-screenshot {
     margin-bottom: 20px;
   }
 }
+body.home #general-signup .app-install {
+  margin-bottom: 15px;
+}
+body.home #general-signup .app-install img:first-child {
+  margin-right: 30px;
+}
+@media (max-width: 992px) {
+  body.home #general-signup .app-install img:first-child {
+    margin: 0;
+  }
+}
 body.home .area-heading {
   margin-top: 0;
   font-size: 28px;
@@ -86,15 +97,14 @@ body.home .region-areas #other-area-form h3 {
   margin-top: 0px;
 }
 body.home #area-form.row {
+  display: none;
   margin-top: 15px;
   margin: 0 10px;
-}
-body.home #area-form {
   padding: 10px;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 5px;
 }
-body.home #area-form h3 {
+body.home #area-form.row h3 {
   margin-top: 0px;
 }
 body.home #top-slider .et_pb_slide_with_image .et_pb_slide_description {
@@ -107,12 +117,27 @@ body.home #top-slider .et_pb_container .et_pb_slide_image {
   display: none;
   top: 240px;
 }
+@media (max-width: 992px) {
+  body.home #top-slider .et_pb_container .et_pb_slide_image {
+    top: 140px;
+  }
+}
+@media (max-width: 480px) {
+  body.home #top-slider .et_pb_container {
+    width: 320px;
+  }
+}
 body.home #top-slider .et_pb_slide_content .airbitz-slide-logo {
   margin-bottom: 20px;
 }
 body.home #top-slider .et_pb_slide_content h2 {
   margin: 0;
   font-size: 36px;
+}
+@media (max-width: 1200px) {
+  body.home #top-slider .et_pb_slide_content h2 {
+    font-size: 30px;
+  }
 }
 body.home #top-slider .et_pb_slide_content .slide-text {
   margin-bottom: 20px;
@@ -141,7 +166,13 @@ body.home #top-slider .et_pb_slide_content .available-regions .label:hover {
   background: white;
   text-decoration: none;
 }
-body.home #top-slider .et_pb_slide_content #email-signup-form label {
+body.home #top-slider .et_pb_slide_content #email-signup-form {
+  margin: 0 25px;
+}
+body.home #top-slider .et_pb_slide_content #email-signup-form .form-group {
+  margin-bottom: 5px;
+}
+body.home #top-slider .et_pb_slide_content #email-signup-form .form-group label {
   width: 100%;
   padding: 3px 7px;
   text-align: center;
@@ -151,7 +182,7 @@ body.home #top-slider .et_pb_slide_content #email-signup-form label {
   background: rgba(255, 255, 255, 0.9);
   text-transform: capitalize;
 }
-body.home #top-slider .et_pb_slide_content #email-signup-form #inputEmailWallet {
+body.home #top-slider .et_pb_slide_content #email-signup-form .form-group #inputEmailWallet {
   text-align: center;
 }
 body.home #bottom-slider .et_pb_slide_content {

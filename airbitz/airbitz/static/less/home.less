@@ -34,7 +34,6 @@ body.home {
     }
 
 
-
     // APP DOWNLOAD CALL TO ACTION
     .ab-app-cta {
         height: 550px;
@@ -70,6 +69,23 @@ body.home {
     }
 
     // CONTENT AREA
+
+    #general-signup {
+
+        .app-install {
+            margin-bottom: 15px;
+            
+            img:first-child {
+                margin-right: 30px;
+
+                @media (max-width: @screen-md) {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+
     .area-heading {
         margin-top: 0;
         font-size: 28px;
@@ -104,10 +120,9 @@ body.home {
     }
 
     #area-form.row {
+        display: none;
         margin-top: 15px;
         margin: 0 10px;
-    }
-    #area-form {
         padding: 10px;
         background: rgba(255, 255, 255, .7);
         border-radius: 5px;
@@ -130,6 +145,14 @@ body.home {
             .et_pb_slide_image {
                 display: none;
                 top: 240px;
+
+                @media (max-width: @screen-md) {
+                    top: 140px;
+                }
+            }
+
+            @media (max-width: @screen-xs ) {
+                width: 320px;
             }
         }
 
@@ -143,6 +166,10 @@ body.home {
             h2 {
                 margin: 0;
                 font-size: 36px;
+
+                @media (max-width: @screen-lg) {
+                    font-size: 30px;
+                }
             }
             .slide-text {
                 margin-bottom: 20px;
@@ -176,20 +203,25 @@ body.home {
             }
 
             #email-signup-form {
+                margin: 0 25px;
 
-                label {
-                    text-align: center;
-                    width: 100%;
-                    padding: 3px 7px;
-                    text-align: center;
-                    font-size: 14px;
-                    font-weight: 400;
-                    border-radius: 5px;
-                    background: rgba(255, 255, 255, 0.9);
-                    text-transform: capitalize;
-                }
-                #inputEmailWallet {
-                    text-align: center;
+                .form-group {
+                    margin-bottom: 5px;
+
+                    label {
+                        text-align: center;
+                        width: 100%;
+                        padding: 3px 7px;
+                        text-align: center;
+                        font-size: 14px;
+                        font-weight: 400;
+                        border-radius: 5px;
+                        background: rgba(255, 255, 255, 0.9);
+                        text-transform: capitalize;
+                    }
+                    #inputEmailWallet {
+                        text-align: center;
+                    }
                 }
             }
         }

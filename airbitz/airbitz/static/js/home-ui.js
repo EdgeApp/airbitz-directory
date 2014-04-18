@@ -6,6 +6,16 @@ function afterEmailSubmission(resp){
     }
 }
 
+function showRegionSignup() {
+    $('#general-signup').hide();
+    $('#area-form').removeClass('fadeOut').addClass('animated fadeIn').show();
+}
+
+function hideGeneralSignup() {
+    $('#general-signup').removeClass('fadeOut').addClass('animated fadeIn').show();
+}
+
+
 jQuery(function($) {
 
     $('#email-signup-form').ajaxChimp({
@@ -34,9 +44,23 @@ jQuery(function($) {
     });
 
 
+
+
+    $('#cancelEmail').on('click', function(e){
+        e.preventDefault();
+        hideGeneralSignup();
+        $('#area-form').hide();
+    });
+
+    $('#cancelOther').on('click', function(e){
+        e.preventDefault();
+        hideGeneralSignup();
+        $('.region-tabs a:first').tab('show');
+    });
+
     $('#region-other-area-form').on('click', function(){
-        $('#general-signup').addClass('animated fadeOut');
-        $('#area-form').addClass('animated fadeOut');
+        $('#general-signup').hide();
+        $('#area-form').addClass('animated fadeOut').hide();
     });
 
 });
