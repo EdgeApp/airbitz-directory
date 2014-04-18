@@ -57,6 +57,15 @@
                 {% endfor %}
             {% endblock results_list_items %}
 
+            <div class="row">
+                <div class="col-sm-12">
+                {% bootstrap_paginate page_obj range=10 %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12"><strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_per_page }}</strong> Shown on Map</div>
+            </div>
+
         </div>
         <div class="location-search-info hidden-xs col-sm-6">
             <div class="map-container" data-spy="affix" data-offset-top="0">
