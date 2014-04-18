@@ -72,6 +72,7 @@ INSTALLED_APPS = (
     'rest_framework_swagger',
     'analytical',
     'absolute',
+    'clear_cache',
 
     'restapi',
     'location',
