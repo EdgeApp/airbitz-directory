@@ -82,7 +82,8 @@ def googleAutocomplete(txt, loc=None, filtered=True):
         'key': settings.GOOGLE_SERVER_KEY,
     }
     if loc:
-        payload['location'] = "{0},{1}".format(loc.x, loc.y)
+        payload['location'] = "{0},{1}".format(loc.y, loc.x)
+        payload['radius'] = "50000" # Max google search radius
     url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json'
     return cacheRequest(url, payload)
 
