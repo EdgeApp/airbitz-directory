@@ -32,12 +32,10 @@ def cacheRequest(url, params):
     prepped = req.prepare()
     res = cache.get(prepped.url)
     if res:
-        print 'Using ', prepped.url
         return res
     else:
         res = s.send(prepped).json()
         cache.set(prepped.url, res, 60 * 60)
-        print 'Caching ', prepped.url
         return res
 
 def googleNearby(loc):
@@ -62,11 +60,11 @@ def googleNearby(loc):
                                       m['country']['long'])
     return None
 
-def googleAutocomplete(txt, loc=None):
+def googleAutocomplete(txt, loc=None, filtered=True):
     payload = {
         'sensor': 'false',
         'input': txt, 
-        'types': '(cities)',
+        'types': '(regions)',
         'key': settings.GOOGLE_SERVER_KEY,
     }
     if loc:
