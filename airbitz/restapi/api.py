@@ -1,12 +1,13 @@
 from django.contrib.gis.geos import Point, Polygon
 from django.contrib.gis.measure import Distance
+from django.core.cache import cache
 from haystack.inputs import Clean
 from haystack.query import SearchQuerySet, SQ
+from requests import Session, Request
 
 import math
 import logging
 import subprocess
-import requests
 from airbitz import settings
 
 from directory.models import Business, Category
@@ -25,6 +26,20 @@ CURRENT_LOCATION='Current Location'
 EARTHS_MEAN_RADIUS=6371000
 DEG_TO_M=(EARTHS_MEAN_RADIUS * math.pi) / 180.0
 
+def cacheRequest(url, params):
+    s = Session()
+    req = Request('GET', url, params=params)
+    prepped = req.prepare()
+    res = cache.get(prepped.url)
+    if res:
+        print 'Using ', prepped.url
+        return res
+    else:
+        res = s.send(prepped).json()
+        cache.set(prepped.url, res, 60 * 60)
+        print 'Caching ', prepped.url
+        return res
+
 def googleNearby(loc):
     payload = {
         'sensor': 'false',
@@ -32,7 +47,7 @@ def googleNearby(loc):
         'key': settings.GOOGLE_SERVER_KEY,
     }
     url = 'https://maps.googleapis.com/maps/api/geocode/json'
-    res = requests.get(url, params=payload).json()
+    res = cacheRequest(url, payload)
     if res.has_key('results'):
         f = res['results'][0]
         m = {}
@@ -57,7 +72,7 @@ def googleAutocomplete(txt, loc=None):
     if loc:
         payload['location'] = "{0},{1}".format(loc.x, loc.y)
     url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json'
-    return requests.get(url, params=payload).json()
+    return cacheRequest(url, payload)
 
 def googlePlaceDetails(ref):
     payload = {
@@ -66,7 +81,7 @@ def googlePlaceDetails(ref):
         'key': settings.GOOGLE_SERVER_KEY
     }
     url = 'https://maps.googleapis.com/maps/api/place/details/json'
-    return requests.get(url, params=payload).json()
+    return cacheRequest(url, payload)
 
 def googleDetailsToBounding(ref):
     details = googlePlaceDetails(ref)

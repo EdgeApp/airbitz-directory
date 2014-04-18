@@ -4,8 +4,10 @@ $HOME=node[:airbitz][:app][:home]
 $USER=node[:airbitz][:app][:user]
 $GROUP=node[:airbitz][:app][:group]
 
-package "npm" do
-  action :install
+["npm", "redis-server"].each do |app|
+  package "#{app}" do
+    action :install
+  end
 end
 
 script "install_yuglify" do
