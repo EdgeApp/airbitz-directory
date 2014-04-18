@@ -5,11 +5,12 @@ from haystack.inputs import Clean
 from haystack.query import SearchQuerySet, SQ
 from requests import Session, Request
 
-import math
+import difflib
 import logging
+import math
 import subprocess
-from airbitz import settings
 
+from airbitz import settings
 from directory.models import Business, Category
 
 log=logging.getLogger("airbitz." + __name__)
@@ -32,13 +33,24 @@ def cacheRequest(url, params):
     prepped = req.prepare()
     res = cache.get(prepped.url)
     if res:
-        print 'Using ', prepped.url
         return res
     else:
         res = s.send(prepped).json()
         cache.set(prepped.url, res, 60 * 60)
-        print 'Caching ', prepped.url
         return res
+
+def googleBestMatch(txt, loc=None):
+    res = googleAutocomplete(txt, loc)
+    if len(res['predictions']) == 0:
+        return None
+    ls = []
+    for row in res['predictions']:
+        ratio = difflib.SequenceMatcher(None, row['description'], txt).ratio()
+        ls.append((ratio, row))
+    # Sort desc by accuracy 1 is perfect match
+    ls.sort(lambda (x1, x2), (y1, y2): int(y1 * 100) - int(x1 * 100))
+    # Return most accurate
+    return ls[0][1]
 
 def googleNearby(loc):
     payload = {
@@ -62,11 +74,11 @@ def googleNearby(loc):
                                       m['country']['long'])
     return None
 
-def googleAutocomplete(txt, loc=None):
+def googleAutocomplete(txt, loc=None, filtered=True):
     payload = {
         'sensor': 'false',
         'input': txt, 
-        'types': '(cities)',
+        'types': '(regions)',
         'key': settings.GOOGLE_SERVER_KEY,
     }
     if loc:
@@ -219,11 +231,9 @@ class Location(object):
         if self.isOnWeb():
             pass
         if not self.isCurrentLocation() and not self.isOnWeb() and locationStr:
-            res = googleAutocomplete(locationStr, None)
-            res = res['predictions']
-            if len(res) > 0:
-                r = res[0]
-                ref = r['reference']
+            res = googleBestMatch(locationStr, self.userPoint)
+            if res:
+                ref = res['reference']
                 (centroid, bounding) = googleDetailsToBounding(ref)
                 self.bounding = bounding
                 if not self.boundingContains(self.sortPoint):
