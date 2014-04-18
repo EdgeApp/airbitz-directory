@@ -71,8 +71,8 @@ body.home .region-areas .nav.nav-tabs {
 }
 body.home .region-areas .nav.nav-tabs .active a {
   color: #ffffff;
-  background: #428bca;
-  border-color: #428bca;
+  background: #2291cf;
+  border-color: #2291cf;
 }
 body.home .region-areas #other-area-form.row {
   padding: 15px 0;
@@ -125,7 +125,7 @@ body.home #top-slider .et_pb_slide_content .slide-text {
 body.home #top-slider .et_pb_slide_content .currently-available {
   margin: 0;
   font-weight: normal;
-  color: #428bca;
+  color: #2291cf;
 }
 body.home #top-slider .et_pb_slide_content .available-regions {
   overflow: hidden;
@@ -137,7 +137,7 @@ body.home #top-slider .et_pb_slide_content .available-regions .label {
   line-height: 42px;
 }
 body.home #top-slider .et_pb_slide_content .available-regions .label:hover {
-  color: #428bca;
+  color: #2291cf;
   background: white;
   text-decoration: none;
 }
@@ -168,7 +168,7 @@ body.home #footer {
   color: #222222;
 }
 body.home #footer a {
-  color: #428bca;
+  color: #2291cf;
 }
 body.home #footer a:hover {
   color: black;
