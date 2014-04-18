@@ -163,7 +163,8 @@ def business_search(request):
                        (paginator.count - results_per_page * (page_num - 1)))
     results_info = {
         'total': paginator.count,
-        'results_per_page': results_left
+        'results_left': results_left,
+        'results_per_page': results_per_page
     }
 
     context = {
