@@ -1,118 +1,23 @@
 from django.contrib.gis.geos import Point, Polygon
 from django.contrib.gis.measure import Distance
-from django.core.cache import cache
 from haystack.inputs import Clean
 from haystack.query import SearchQuerySet, SQ
-from requests import Session, Request
 
-import difflib
 import logging
-import math
 import subprocess
 
-from airbitz import settings
 from directory.models import Business, Category
+import locapi
 
 log=logging.getLogger("airbitz." + __name__)
 
 DEF_SRID=4326
 DEF_COUNTRY="US"
 DEF_POINT=Point((-117.124603, 33.028400))
-DEF_RADIUS=Distance(mi=100)
 DEF_IP='24.152.191.12'
 DEF_LOC_STR='San Francisco, CA'
 
 CURRENT_LOCATION='Current Location'
-
-EARTHS_MEAN_RADIUS=6371000
-DEG_TO_M=(EARTHS_MEAN_RADIUS * math.pi) / 180.0
-
-def cacheRequest(url, params):
-    s = Session()
-    req = Request('GET', url, params=params)
-    prepped = req.prepare()
-    res = cache.get(prepped.url)
-    if res:
-        return res
-    else:
-        res = s.send(prepped).json()
-        cache.set(prepped.url, res, 60 * 60)
-        return res
-
-def googleBestMatch(txt, loc=None):
-    res = googleAutocomplete(txt, loc)
-    if len(res['predictions']) == 0:
-        return None
-    ls = []
-    for row in res['predictions']:
-        ratio = difflib.SequenceMatcher(None, row['description'], txt).ratio()
-        ls.append((ratio, row))
-    # Sort desc by accuracy 1 is perfect match
-    ls.sort(lambda (x1, x2), (y1, y2): int(y1 * 100) - int(x1 * 100))
-    # Return most accurate
-    return ls[0][1]
-
-def googleNearby(loc):
-    payload = {
-        'sensor': 'false',
-        'latlng': "{0},{1}".format(loc.y, loc.x), 
-        'key': settings.GOOGLE_SERVER_KEY,
-    }
-    url = 'https://maps.googleapis.com/maps/api/geocode/json'
-    res = cacheRequest(url, payload)
-    if res.has_key('results'):
-        f = res['results'][0]
-        m = {}
-        for c in f['address_components']:
-            for t in c['types']:
-                m[t] = {"short": c['short_name'], "long": c['long_name']}
-    if m.has_key('locality') \
-        and m.has_key('administrative_area_level_1') \
-        and m.has_key('country'):
-        return "{0}, {1}, {2}".format(m['locality']['long'],
-                                      m['administrative_area_level_1']['short'],
-                                      m['country']['long'])
-    return None
-
-def googleAutocomplete(txt, loc=None, filtered=True):
-    payload = {
-        'sensor': 'false',
-        'input': txt, 
-        'types': '(regions)',
-        'key': settings.GOOGLE_SERVER_KEY,
-    }
-    if loc:
-        payload['location'] = "{0},{1}".format(loc.y, loc.x)
-        payload['radius'] = "50000" # Max google search radius
-    url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json'
-    return cacheRequest(url, payload)
-
-def googlePlaceDetails(ref):
-    payload = {
-        'reference': ref,
-        'sensor': 'false',
-        'key': settings.GOOGLE_SERVER_KEY
-    }
-    url = 'https://maps.googleapis.com/maps/api/place/details/json'
-    return cacheRequest(url, payload)
-
-def googleDetailsToBounding(ref):
-    details = googlePlaceDetails(ref)
-    loc = details['result']['geometry']['location']
-    point = Point((loc['lng'], loc['lat']))
-    viewport = details['result']['geometry']['viewport']
-    sw = viewport['southwest']
-    ne = viewport['northeast']
-    box = {
-        'minlat': float(sw['lat']),
-        'minlon': float(sw['lng']),
-        'maxlat': float(ne['lat']),
-        'maxlon': float(ne['lng']),
-    }
-    bounding = Polygon.from_bbox((box['minlon'], box['minlat'], box['maxlon'], box['maxlat']))
-    # Expand bounding box
-    bounding = bounding.buffer(DEG_TO_M <= DEF_RADIUS.m) 
-    return (point, bounding)
 
 def autocompleteSerialize(row):
     if row.model.__name__ == 'Business':
@@ -232,10 +137,10 @@ class Location(object):
         if self.isOnWeb():
             pass
         if not self.isCurrentLocation() and not self.isOnWeb() and locationStr:
-            res = googleBestMatch(locationStr, self.userPoint)
+            res = locapi.googleBestMatch(locationStr, self.userPoint)
             if res:
                 ref = res['reference']
-                (centroid, bounding) = googleDetailsToBounding(ref)
+                (centroid, bounding) = locapi.googleDetailsToBounding(ref)
                 self.bounding = bounding
                 if not self.boundingContains(self.sortPoint):
                     self.sortPoint = centroid
@@ -260,7 +165,7 @@ class Location(object):
     def boundingExpandedContains(self, location):
         if not self.hasBounding:
             return False
-        if self.bounding.distance(location) * DEG_TO_M <= DEF_RADIUS.m:
+        if self.bounding.distance(location) * locapi.DEG_TO_M <= locapi.DEF_RADIUS.m:
             return True
         return False
 
@@ -337,8 +242,8 @@ class ApiProcess(object):
                 s.object.distance = s.distance
                 s.object.bounded = False
                 if s.location:
-                    s.object.distance = Distance(m=s.location.distance(self.location.userPoint) * DEG_TO_M)
-                    s.object.sortDistance = Distance(m=s.location.distance(self.location.sortPoint) * DEG_TO_M)
+                    s.object.distance = Distance(m=s.location.distance(self.location.userPoint) * locapi.DEG_TO_M)
+                    s.object.sortDistance = Distance(m=s.location.distance(self.location.sortPoint) * locapi.DEG_TO_M)
                     if self.location.boundingContains(s.location):
                         # Its within the bounding box 
                         s.object.bounded = True
@@ -349,13 +254,13 @@ class ApiProcess(object):
             return newsqs
         else:
             if not radius:
-                radius = DEF_RADIUS.m
+                radius = locapi.DEF_RADIUS.m
             for s in sqs:
                 s.object.distance = s.distance
                 s.object.bounded = False
                 if s.location:
-                    s.object.distance = Distance(m=s.location.distance(self.location.userPoint) * DEG_TO_M)
-                    s.object.sortDistance = Distance(m=s.location.distance(self.location.sortPoint) * DEG_TO_M)
+                    s.object.distance = Distance(m=s.location.distance(self.location.userPoint) * locapi.DEG_TO_M)
+                    s.object.sortDistance = Distance(m=s.location.distance(self.location.sortPoint) * locapi.DEG_TO_M)
                     self.__append_if_within__(newsqs, s, poly=geopoly, radius=radius)
             return newsqs
 
@@ -409,8 +314,11 @@ class ApiProcess(object):
         return newsqs
 
     def autocompleteLocation(self, term=None):
-        res = googleAutocomplete(term, self.userLocation())
-        return [r['description'] for r in res['predictions']]
+        if term:
+            res = locapi.googleAutocomplete(term, self.userLocation())
+            return [r['description'] for r in res['predictions']]
+        else:
+            return locapi.nearbyPlaces(self.userLocation())
 
     def querySetAddCategories(self, sqs, category):
         f = None
@@ -463,7 +371,7 @@ def ipToLocationString(ip):
 
 def nearTextFromPoint(point):
     try:
-        return googleNearby(point)
+        return locapi.googleNearby(point)
     except Exception as e:
         log.warn(e)
     return None
