@@ -95,6 +95,10 @@ body.home .region-areas .region-tabs .active a {
   background: #2291cf;
   border-color: #2291cf;
 }
+body.home .region-areas .region-tabs li {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
 body.home .region-areas .region-tabs li a {
   padding: 5px 9px;
   background: #eee;
