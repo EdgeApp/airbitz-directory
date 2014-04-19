@@ -13,7 +13,7 @@ EARTHS_MEAN_RADIUS=6371000
 DEG_TO_M=(EARTHS_MEAN_RADIUS * math.pi) / 180.0
 HOP=Distance(mi=5)
 
-def locRound(loc):
+def locRound(loc, precision=3):
     """
     By rounding lat/lng we are able to better cache results. The following is a
     list of degrees to miles so we can see how precision would affect accuracy.
@@ -26,8 +26,8 @@ def locRound(loc):
     Distance(m=0.0001 * DEG_TO_M).mi = 0.006909332413987235
     """
     l = loc.clone()
-    l.x = round(l.x, 3)
-    l.y = round(l.y, 3)
+    l.x = round(l.x, precision)
+    l.y = round(l.y, precision)
     return l
 
 def locRoundedKey(loc):
@@ -86,7 +86,8 @@ def nearbyPlaces(loc):
     res = cache.get(key)
     if res:
         return res
-    ps = buildNearbyPoints(loc)
+    nloc = locRound(loc, precision=2)
+    ps = buildNearbyPoints(nloc)
     rs = geocodeNearbyPoints(ps)
     rs.sort(lambda (p1, r1), (p2, r2): int(p1.distance(p2) * DEG_TO_M))
     rs = [r for p, r in rs]
