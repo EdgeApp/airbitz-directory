@@ -97,6 +97,8 @@ body.home .region-areas .region-tabs .active a {
 }
 body.home .region-areas .region-tabs li a {
   padding: 5px 9px;
+  background: #eee;
+  border-color: #eee;
 }
 body.home .region-areas #other-area-form.row {
   padding: 15px 0;
