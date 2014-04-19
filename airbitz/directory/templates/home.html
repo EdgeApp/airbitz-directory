@@ -152,15 +152,15 @@
                                         <!-- Tab panes -->
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="region-us">
-                                                <div id="vmap-us" style="width: 510px; height: 500px;"></div>
+                                                <div class="vmap" id="vmap-us"></div>
                                             </div><!-- ./tab-pane -->
 
                                             <div class="tab-pane" id="region-ca">
-                                                <div class="vmap" id="vmap-ca" style="width: 510px; height: 500px;"></div>
+                                                <div class="vmap" id="vmap-ca"></div>
                                             </div><!-- ./tab-pane -->
 
                                             <div class="tab-pane" id="region-eu">
-                                                <div id="vmap-eu" style="width: 510px; height: 500px;"></div>
+                                                <div class="vmap" id="vmap-eu"></div>
                                             </div><!-- ./tab-pane -->
 
                                             <div class="tab-pane" id="region-other">
@@ -196,9 +196,12 @@
                                 </div>
 				                <div class="et_pb_slide_description">
                                     <div class="et_pb_slide_content">
-                                        <img class="alignnone airbitz-slide-logo" alt="airbits logo" src="{{ STATIC_URL }}wp/assets/img/airbitz-slide-logo-fadeout.png"> <img class="alignnone" id="bitcoin-logo" alt="bitcoin" src="{{ STATIC_URL }}wp/assets/img/bitcoin-icon-logo_white-bg.png" width="128" height="128">
-                                        <h2>Bitcoin Business Directory</h2>
-                                        <h2>+ Bitcoin Wallet <em style="color: #777">(Avail Soon)</em></h2>
+                                        <img class="alignnone airbitz-slide-logo" alt="airbits logo" src="{{ STATIC_URL }}wp/assets/img/airbitz-slide-logo-fadeout.png">
+                                        <div class="bitcoin-directory-wallet row">
+                                            <img class="alignnone" id="bitcoin-logo" alt="bitcoin" src="{{ STATIC_URL }}wp/assets/img/bitcoin-icon-logo_white-bg.png" width="128" height="128">
+                                            <h2>Bitcoin Business Directory</h2>
+                                            <h2>+ Bitcoin Wallet <em style="color: #777">(Avail Soon)</em></h2>
+                                        </div>
                                         <p class="slide-text">
                                             Bitcoin Made Safe, Simple, and Secure.<br>
                                             Bitcoin Businesses at Your Fingertips.

@@ -86,15 +86,19 @@ body.home {
     }
 
 
-    .area-heading {
-        margin-top: 0;
-        font-size: 28px;
-    }
 
     .region-areas {
         text-align: left;
-        
-        .nav.nav-tabs {
+
+        h3.area-heading {
+            margin-top: 0;
+            font-size: 28px;
+
+            @media (max-size: @screen-md) {
+                font-size: 20px;
+            }
+        }
+        .region-tabs {
             margin-left: 0;
             padding: 0;
 
@@ -103,8 +107,12 @@ body.home {
                 background: @brand-primary;
                 border-color: @brand-primary;
             }
+            li {
+                a {
+                    padding: 5px 9px;
+                }
+            }
         }
-
         #other-area-form.row {
             padding: 15px 0;
             margin: 0;
@@ -151,24 +159,41 @@ body.home {
                 }
             }
 
-            @media (max-width: @screen-xs ) {
-                width: 320px;
+            .vmap {
+                width: 510px;
+                height: 500px;
+                
+                @media (max-width: @screen-md) {
+                    width: 360px;
+                    height: 360px;
+                }
+            }
+            .et_pb_slide_with_image
+            .et_pb_slide_description,
+            .et_pb_slide_video {
+                width: 46%;
+            }
+            @media (max-width: @screen-md ) {
+                width: 90%;
             }
         }
 
         .et_pb_slide_content {
+
             .airbitz-slide-logo {
                 margin-bottom: 20px;
             }
-            #bitcoin-logo {
+            .bitcoin-directory-wallet {
+                width: 500px;
+                margin: 0 auto;
 
-            }
-            h2 {
-                margin: 0;
-                font-size: 36px;
+                h2 {
+                    margin: 0;
+                    font-size: 36px;
 
-                @media (max-width: @screen-lg) {
-                    font-size: 30px;
+                    @media (max-width: @screen-lg) {
+                        font-size: 30px;
+                    }
                 }
             }
             .slide-text {

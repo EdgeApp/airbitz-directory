@@ -69,21 +69,29 @@ body.home #general-signup .app-install img:first-child {
     margin: 0;
   }
 }
-body.home .area-heading {
-  margin-top: 0;
-  font-size: 28px;
-}
 body.home .region-areas {
   text-align: left;
 }
-body.home .region-areas .nav.nav-tabs {
+body.home .region-areas h3.area-heading {
+  margin-top: 0;
+  font-size: 28px;
+}
+@media (max-size: 992px) {
+  body.home .region-areas h3.area-heading {
+    font-size: 20px;
+  }
+}
+body.home .region-areas .region-tabs {
   margin-left: 0;
   padding: 0;
 }
-body.home .region-areas .nav.nav-tabs .active a {
+body.home .region-areas .region-tabs .active a {
   color: #ffffff;
   background: #2291cf;
   border-color: #2291cf;
+}
+body.home .region-areas .region-tabs li a {
+  padding: 5px 9px;
 }
 body.home .region-areas #other-area-form.row {
   padding: 15px 0;
@@ -122,20 +130,38 @@ body.home #top-slider .et_pb_container .et_pb_slide_image {
     top: 140px;
   }
 }
-@media (max-width: 480px) {
+body.home #top-slider .et_pb_container .vmap {
+  width: 510px;
+  height: 500px;
+}
+@media (max-width: 992px) {
+  body.home #top-slider .et_pb_container .vmap {
+    width: 360px;
+    height: 360px;
+  }
+}
+body.home #top-slider .et_pb_container .et_pb_slide_with_image .et_pb_slide_description,
+body.home #top-slider .et_pb_container .et_pb_slide_video {
+  width: 46%;
+}
+@media (max-width: 992px) {
   body.home #top-slider .et_pb_container {
-    width: 320px;
+    width: 90%;
   }
 }
 body.home #top-slider .et_pb_slide_content .airbitz-slide-logo {
   margin-bottom: 20px;
 }
-body.home #top-slider .et_pb_slide_content h2 {
+body.home #top-slider .et_pb_slide_content .bitcoin-directory-wallet {
+  width: 500px;
+  margin: 0 auto;
+}
+body.home #top-slider .et_pb_slide_content .bitcoin-directory-wallet h2 {
   margin: 0;
   font-size: 36px;
 }
 @media (max-width: 1200px) {
-  body.home #top-slider .et_pb_slide_content h2 {
+  body.home #top-slider .et_pb_slide_content .bitcoin-directory-wallet h2 {
     font-size: 30px;
   }
 }
