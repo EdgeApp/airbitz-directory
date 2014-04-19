@@ -11,7 +11,7 @@ from airbitz import settings
 DEF_RADIUS=Distance(mi=100)
 EARTHS_MEAN_RADIUS=6371000
 DEG_TO_M=(EARTHS_MEAN_RADIUS * math.pi) / 180.0
-HOP=Distance(mi=10)
+HOP=Distance(mi=5)
 
 def locRound(loc):
     """
