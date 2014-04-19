@@ -72,18 +72,17 @@ body.home #general-signup .app-install img:first-child {
 body.home .region-areas {
   text-align: left;
 }
-body.home .region-areas h3.area-heading {
+body.home .region-areas .area-heading {
   margin-top: 0;
-  font-size: 28px;
 }
-@media (max-size: 992px) {
-  body.home .region-areas h3.area-heading {
+@media (min-width: 768px) {
+  body.home .region-areas .area-heading {
     font-size: 20px;
   }
 }
-@media (max-width: 768px) {
-  body.home .region-areas h3.area-heading {
-    font-size: 24px;
+@media (min-width: 992px) {
+  body.home .region-areas .area-heading {
+    font-size: 28px;
   }
 }
 body.home .region-areas .region-tabs {

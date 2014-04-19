@@ -90,15 +90,14 @@ body.home {
     .region-areas {
         text-align: left;
 
-        h3.area-heading {
+        .area-heading {
             margin-top: 0;
-            font-size: 28px;
 
-            @media (max-size: @screen-md) {
+            @media (min-width: @screen-sm) {
                 font-size: 20px;
             }
-            @media (max-width: @screen-sm) {
-                font-size: 24px;
+            @media (min-width: @screen-md) {
+                font-size: 28px;
             }
         }
         .region-tabs {
