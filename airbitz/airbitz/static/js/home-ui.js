@@ -33,17 +33,16 @@ jQuery(function($) {
 
     setTimeout(function(){
         $('.et_pb_slide_image').show();
+        $('#general-signup .app-install').addClass('animated slideInRight');
     },1250);
 
-    $('.app-install').hover(function(){
+    $('.ab-app-cta .app-install').hover(function(){
         $(this).find('.app-store').addClass('animated pulse infinite');
         $(this).find('.app-screenshot').addClass('animated pulse');
     }, function(){
         $(this).find('.app-store').removeClass('animated pulse infinite');
         $(this).find('.app-screenshot').removeClass('animated pulse');
     });
-
-
 
 
     $('#cancelEmail').on('click', function(e){

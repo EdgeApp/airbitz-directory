@@ -143,10 +143,10 @@
 
                                         <!-- Tab nav -->
                                         <ul class="region-tabs nav nav-tabs">
-                                          <li class="active"><a href="#region-us" data-toggle="tab">United States</a></li>
+                                          <li class="active"><a href="#region-us" data-toggle="tab">U.S.</a></li>
                                           <li><a href="#region-ca" data-toggle="tab">Canada</a></li>
                                           <li><a href="#region-eu" data-toggle="tab">Europe</a></li>
-                                          <li><a href="#region-other" id="region-other-area-form" data-toggle="tab">Other Regions</a></li>
+                                          <li><a href="#region-other" id="region-other-area-form" data-toggle="tab">Other</a></li>
                                         </ul><!-- ./nav-tabs -->
 
                                         <!-- Tab panes -->
@@ -229,9 +229,13 @@
 
 
                                         <div id="general-signup" class="row">
-                                            <div class="app-install col-sm-12 text-center">
-                                                <img class="app-store" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
-                                                <img class="app-store" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
+                                            <div class="app-install col-sm-12 text-center animated fadeOut">
+                                                <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
+                                                    <img class="app-store" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
+                                                </a>
+                                                <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
+                                                    <img class="app-store" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
+                                                </a>
                                             </div>
                                             <form id="email-signup-form" class="form" role="form">
                                                 <div class="form-group">
