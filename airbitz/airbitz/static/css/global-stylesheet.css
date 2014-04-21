@@ -868,6 +868,9 @@ body .main-content {
 .hover-click-text {
   color: #2291cf;
 }
+.hover-request-text {
+  color: #80c341;
+}
 .jvectormap-zoomin,
 .jvectormap-zoomout {
   width: 16px;

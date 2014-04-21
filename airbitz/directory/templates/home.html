@@ -509,10 +509,11 @@
 
         $('#vmap-us, #vmap-ca, #vmap-eu').bind('labelShow.jvectormap', function(event, label, code){
             if( checkActive(code) ){    // regionHover is not active or upcoming
-                label.html('<span class="hover-click-text">Click to Request</span> ' + $(label[0]).html());
+                var regionName = $(label[0]).html();
+                label.html('<span class="hover-region-name">' + regionName + '</span><br /><span class="hover-request-text">Click to Request</span>');
             } else {
                 var regionName = $(label[0]).html();
-                label.html('<span class="hover-region-name">' + regionName + '</span> <span class="hover-click-text">Click to Query</span>')
+                label.html('<span class="hover-region-name">' + regionName + '</span><br /><span class="hover-click-text">Click to Query</span>')
             }
         });
 

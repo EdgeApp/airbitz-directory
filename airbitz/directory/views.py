@@ -86,6 +86,8 @@ ACTIVE_REGIONS = {
               'search': 'Iowa, United States'},
     'US-KS': {'name': 'Kansas',
               'search': 'Kansas, United States'},
+    'US-WY': {'name': 'Wyoming',
+              'search': 'Wyoming, United States'},
 
     'CA-ON': {'name': 'Ontario',
               'search': 'Ontario, Canada'},
