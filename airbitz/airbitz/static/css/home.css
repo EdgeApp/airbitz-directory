@@ -62,7 +62,7 @@ body.home #general-signup .app-install {
   margin-bottom: 15px;
 }
 body.home #general-signup .app-install img:first-child {
-  margin-right: 30px;
+  margin: 0 10px;
 }
 @media (max-width: 992px) {
   body.home #general-signup .app-install img:first-child {
