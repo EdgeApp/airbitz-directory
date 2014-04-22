@@ -143,10 +143,10 @@
 
                                         <!-- Tab nav -->
                                         <ul class="region-tabs nav nav-pills">
-                                          <li class="active"><a href="#region-us" data-toggle="tab">U.S.</a></li>
-                                          <li><a href="#region-ca" data-toggle="tab">Canada</a></li>
-                                          <li><a href="#region-eu" data-toggle="tab">Europe</a></li>
-                                          <li><a href="#region-other" id="region-other-area-form" data-toggle="tab">Other</a></li>
+                                          <li class="active tab-button" id="button-region-us"><a href="#region-us" data-toggle="tab">U.S.</a></li>
+                                          <li><a class="tab-button" id="button-region-ca" href="#region-ca" data-toggle="tab">Canada</a></li>
+                                          <li><a class="tab-button" id="button-region-eu" href="#region-eu" data-toggle="tab">Europe</a></li>
+                                          <li><a class="tab-button" id="button-region-other" href="#region-other" id="region-other-area-form" data-toggle="tab">Other</a></li>
                                         </ul><!-- ./nav-tabs -->
 
                                         <!-- Tab panes -->
@@ -165,7 +165,7 @@
 
                                             <div class="tab-pane" id="region-other">
 
-                                                <div id="other-area-form" class="text-left row">
+                                                <div id="other-area-form" class="animated text-left row">
                                                     <form id="region-signup-form" class="col-sm-12" role="form">
                                                         <h3><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Hear About Bitcoin Businesses Launching</h3>
                                                         <div class="form-group">
@@ -207,7 +207,7 @@
                                             Bitcoin Businesses at Your Fingertips.
                                         </p>
 
-                                        <div id="area-form" class="row">
+                                        <div id="area-form" class="animated row">
                                             <form id="region-signup-form" class="col-sm-12" role="form">
                                                 <h3>Request Area <span id="area-request" class="label label-info"></span></h3>
                                                 <div class="form-group">
@@ -228,13 +228,13 @@
 
 
 
-                                        <div id="general-signup" class="row">
+                                        <div id="general-signup" class="animated row">
                                             <div class="app-install col-sm-12 text-center animated fadeOut">
                                                 <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
-                                                    <img class="app-store" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
+                                                    <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
                                                 </a>
                                                 <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
-                                                    <img class="app-store" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
+                                                    <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
                                                 </a>
                                             </div>
                                             <form id="email-signup-form" class="form" role="form">

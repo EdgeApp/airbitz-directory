@@ -8,11 +8,15 @@ function afterEmailSubmission(resp){
 
 function showRegionSignup() {
     $('#general-signup').hide();
-    $('#area-form').removeClass('fadeOut').addClass('animated fadeIn').show();
+    $('#area-form').removeClass('fadeOut').addClass('fadeIn').show();
+}
+
+function showGeneralSignup() {
+    $('#general-signup').removeClass('fadeOut').addClass('fadeIn').show();
 }
 
 function hideGeneralSignup() {
-    $('#general-signup').removeClass('fadeOut').addClass('animated fadeIn').show();
+    $('#general-signup').removeClass('fadeIn').addClass('fadeOut').hide();
 }
 
 
@@ -33,33 +37,41 @@ jQuery(function($) {
 
     setTimeout(function(){
         $('.et_pb_slide_image').show();
-        $('#general-signup .app-install').addClass('animated slideInRight');
+        $('#general-signup .app-install').addClass('slideInRight');
     },1250);
 
     $('.ab-app-cta .app-install').hover(function(){
-        $(this).find('.app-store').addClass('animated pulse infinite');
-        $(this).find('.app-screenshot').addClass('animated pulse');
+        $(this).find('.app-store').addClass('pulse infinite');
+        $(this).find('.app-screenshot').addClass('pulse');
     }, function(){
-        $(this).find('.app-store').removeClass('animated pulse infinite');
-        $(this).find('.app-screenshot').removeClass('animated pulse');
+        $(this).find('.app-store').removeClass('pulse infinite');
+        $(this).find('.app-screenshot').removeClass('pulse');
     });
 
 
     $('#cancelEmail').on('click', function(e){
         e.preventDefault();
-        hideGeneralSignup();
+        showGeneralSignup();
         $('#area-form').hide();
     });
 
     $('#cancelOther').on('click', function(e){
         e.preventDefault();
-        hideGeneralSignup();
+        showGeneralSignup();
         $('.region-tabs a:first').tab('show');
     });
 
-    $('#region-other-area-form').on('click', function(){
-        $('#general-signup').hide();
-        $('#area-form').addClass('animated fadeOut').hide();
+    $('#button-region-other').on('click', function(){
+        hideGeneralSignup();
+        $('#area-form').addClass('fadeOut').hide();
     });
+
+    $('.region-tabs .tab-button:not(#button-region-other)').on('click', function(){
+        showGeneralSignup();
+        $('#area-form').addClass('fadeOut').hide();
+        console.log('SHOW GENERAL')
+    });
+
+
 
 });
