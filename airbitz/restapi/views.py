@@ -11,6 +11,7 @@ import logging
 
 from directory.models import Business, BusinessImage, Category
 from restapi import api
+from restapi import locapi
 from restapi import serializers 
 
 log=logging.getLogger("airbitz." + __name__)
@@ -92,7 +93,7 @@ class BusinessView(generics.RetrieveAPIView):
         if self.object.center:
             ll = self.request.QUERY_PARAMS.get('ll', None)
             a = api.ApiProcess(ll=ll)
-            distance = Distance(m=a.userLocation().distance(self.object.center) * api.DEG_TO_M)
+            distance = Distance(m=a.userLocation().distance(self.object.center) * locapi.DEG_TO_M)
             setattr(self.object, 'distance', distance)
         serializer = self.get_serializer(self.object)
         return Response(serializer.data)
