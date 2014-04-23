@@ -34,6 +34,13 @@ jQuery(function($) {
             callback: afterEmailSubmission
         });
     }
+    var $regionSignupFormOther = $('#region-signup-form-other');
+    if($regionSignupFormOther) {
+        $regionSignupFormOther.ajaxChimp({
+            url: 'https://airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=b7bd36890d',
+            callback: afterEmailSubmission
+        });
+    }
 
     setTimeout(function(){
         $('.et_pb_slide_image').show();
