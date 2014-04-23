@@ -117,6 +117,9 @@ class Business(models.Model):
     has_online_business = models.BooleanField(default=False)
     has_bitcoin_discount = models.DecimalField(default=0.0, decimal_places=3, max_digits=5)
 
+    contact1_email = models.EmailField(blank=True)
+    contact2_email = models.EmailField(blank=True)
+
     # PostGis fields
     center = models.PointField(blank=True, null=True)
     objects = models.GeoManager()
