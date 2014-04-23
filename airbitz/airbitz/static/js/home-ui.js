@@ -3,6 +3,7 @@
 function afterEmailSubmission(resp){
     if (resp.result === 'success') {
         $('.inputEmail').val('');
+        $('.inputText').val('');
     }
 }
 
