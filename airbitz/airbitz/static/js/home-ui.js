@@ -69,7 +69,6 @@ jQuery(function($) {
     $('.region-tabs .tab-button:not(#button-region-other)').on('click', function(){
         showGeneralSignup();
         $('#area-form').addClass('fadeOut').hide();
-        console.log('SHOW GENERAL')
     });
 
 
