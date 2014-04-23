@@ -93,7 +93,7 @@
                             </div>
                             <div>
                                 <label for="phone">Phone:</label>
-                                <input type="tel" class="form-control" id="phone" name="phone"
+                                <input type="text" class="form-control" id="phone" name="phone"
                                        value="{{ biz.phone|default:"" }}" />
                             </div>
                             <div>
@@ -195,6 +195,21 @@
                             <input type="text" style="width: 150px" class="form-control" id="longitude" name="longitude" value="{{ biz.center.x }}" />
                             <button class="btn btn-default geocode-address">Lookup Lat/Lon</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">BIZ CONTACT</div>
+                <div class="panel-body">
+                    <div>
+                        <label for="contact1_email">Contact 1:</label>
+                        <input type="text" class="form-control" id="contact1_email" name="contact1_email"
+                                value="{{ biz.contact1_email|default:"" }}" />
+                    </div>
+                    <div>
+                        <label for="contact2_email">Contact 2:</label>
+                        <input type="text" class="form-control" id="contact2_email" name="contact2_email"
+                                value="{{ biz.contact2_email|default:"" }}" />
                     </div>
                 </div>
             </div>
@@ -631,6 +646,8 @@
                     obj['landing_image'] = $('#landing_image').val();
                     obj['mobile_landing_image'] = $('#mobile_landing_image').val();
                     obj['phone'] = $('#phone').val();
+                    obj['contact1_email'] = $('#contact1_email').val();
+                    obj['contact2_email'] = $('#contact2_email').val();
                     obj['website'] = $('#website').val();
                     obj['has_physical_business'] = $('#has_physical_business').is(':checked');
                     obj['has_online_business'] = $('#has_online_business').is(':checked');

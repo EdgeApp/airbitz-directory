@@ -103,18 +103,18 @@ def googleNearby(loc):
     }
     url = 'https://maps.googleapis.com/maps/api/geocode/json'
     res = cacheRequest(url, payload)
-    if res.has_key('results'):
+    if res.has_key('results') and len(res['results']) > 0:
         f = res['results'][0]
         m = {}
         for c in f['address_components']:
             for t in c['types']:
                 m[t] = {"short": c['short_name'], "long": c['long_name']}
-    if m.has_key('locality') \
-        and m.has_key('administrative_area_level_1') \
-        and m.has_key('country'):
-        return "{0}, {1}, {2}".format(m['locality']['long'],
-                                      m['administrative_area_level_1']['short'],
-                                      m['country']['long'])
+        if m.has_key('locality') \
+            and m.has_key('administrative_area_level_1') \
+            and m.has_key('country'):
+            return "{0}, {1}, {2}".format(m['locality']['long'],
+                                        m['administrative_area_level_1']['short'],
+                                        m['country']['long'])
     return None
 
 def googleAutocomplete(txt, loc=None, filtered=True):

@@ -15,7 +15,7 @@ DEF_SRID=4326
 DEF_COUNTRY="US"
 DEF_POINT=Point((-117.124603, 33.028400))
 DEF_IP='24.152.191.12'
-DEF_LOC_STR='San Francisco, CA'
+DEF_LOC_STR='San Francisco, CA, United States'
 
 CURRENT_LOCATION='Current Location'
 
@@ -355,10 +355,11 @@ class ApiProcess(object):
         nearText = nearTextFromPoint(point)
         if nearText:
             return nearText
-        elif self.location.ip:
-            return ipToLocationString(self.location.ip)
-        else:
-            return DEF_LOC_STR
+        if self.location.ip:
+            nearText = ipToLocationString(self.location.ip)
+        if nearText:
+            return nearText
+        return DEF_LOC_STR
 
 def getRequestIp(request):
     return request.META['REMOTE_ADDR']
