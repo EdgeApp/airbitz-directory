@@ -457,6 +457,7 @@
 
 
         var activeRegions = {{ active_regions|safe }}
+        $.ajaxSetup({ crossDomain: true });
 
         function checkActive(region) {
 {#            return (activeRegions.indexOf(region) == -1);#}
@@ -497,7 +498,6 @@
                 showRegionSignup();
                 $('#area-request').html(label).hide().fadeIn('slow');
                 $('#area-request-input').val(label);
-                $.ajaxSetup({ crossDomain: true });
             } else {
                 var urlLocation = activeRegions[label]['search'];
 {#                var urlTerm = '{{ request.GET.term }}';#}
