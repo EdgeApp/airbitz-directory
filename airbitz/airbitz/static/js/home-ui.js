@@ -3,6 +3,7 @@
 function afterEmailSubmission(resp){
     if (resp.result === 'success') {
         $('.inputEmail').val('');
+        $('.inputText').val('');
     }
 }
 
@@ -30,6 +31,13 @@ jQuery(function($) {
     var $regionSignupForm = $('#region-signup-form');
     if($regionSignupForm) {
         $regionSignupForm.ajaxChimp({
+            url: 'https://airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=b7bd36890d',
+            callback: afterEmailSubmission
+        });
+    }
+    var $regionSignupFormOther = $('#region-signup-form-other');
+    if($regionSignupFormOther) {
+        $regionSignupFormOther.ajaxChimp({
             url: 'https://airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=b7bd36890d',
             callback: afterEmailSubmission
         });
@@ -69,7 +77,6 @@ jQuery(function($) {
     $('.region-tabs .tab-button:not(#button-region-other)').on('click', function(){
         showGeneralSignup();
         $('#area-form').addClass('fadeOut').hide();
-        console.log('SHOW GENERAL')
     });
 
 

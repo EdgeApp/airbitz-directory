@@ -166,7 +166,7 @@
                                             <div class="tab-pane" id="region-other">
 
                                                 <div id="other-area-form" class="animated text-left row">
-                                                    <form id="region-signup-form" class="col-sm-12" role="form">
+                                                    <form id="region-signup-form-other" class="col-sm-12" role="form">
                                                         <h3><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Hear About Bitcoin Businesses Launching</h3>
                                                         <div class="form-group">
                                                             <div class="form-group">
@@ -175,7 +175,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="other-area-request-input" class="control-label">Your Region</label>
-                                                                <input type="text" id="other-area-request-input" class="form-control" name="REGION" placeholder="Bejing, China or Moscow, Russia ..etc">
+                                                                <input type="text" id="other-area-request-input" class="inputText form-control" name="REGION" placeholder="Bejing, China or Moscow, Russia ..etc">
                                                             </div>
                                                         </div>
 
@@ -457,6 +457,7 @@
 
 
         var activeRegions = {{ active_regions|safe }}
+        $.ajaxSetup({ crossDomain: true });
 
         function checkActive(region) {
 {#            return (activeRegions.indexOf(region) == -1);#}
@@ -497,7 +498,6 @@
                 showRegionSignup();
                 $('#area-request').html(label).hide().fadeIn('slow');
                 $('#area-request-input').val(label);
-                $.ajaxSetup({ crossDomain: true });
             } else {
                 var urlLocation = activeRegions[label]['search'];
 {#                var urlTerm = '{{ request.GET.term }}';#}
