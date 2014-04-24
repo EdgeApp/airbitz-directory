@@ -140,9 +140,11 @@ class Location(object):
             res = locapi.googleBestMatch(locationStr, self.userPoint)
             if res:
                 ref = res['reference']
-                (centroid, bounding) = locapi.googleDetailsToBounding(ref)
+                (centroid, bounding, admin) = locapi.googleDetailsToBounding(ref)
+                self.admin = admin
                 self.bounding = bounding
                 if not self.boundingContains(self.sortPoint):
+                    print centroid
                     self.sortPoint = centroid
         if ll:
             geoloc = parseGeoLocation(ll)
@@ -218,6 +220,8 @@ class ApiProcess(object):
             sqs = self.__filer_on_web__(sqs)
         else:
             sqs = sqs.filter(SQ(has_physical_business=True))
+            if self.location.admin and self.location.admin.has_key('administrative_area_level_1'):
+                sqs = sqs.filter(admin1_code=self.location.admin['administrative_area_level_1']['short'])
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
             sqs = sqs.load_all()

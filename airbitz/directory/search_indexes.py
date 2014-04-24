@@ -6,6 +6,10 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     name = indexes.CharField(model_attr='name', boost=1.2)
     description = indexes.CharField(model_attr='description')
+    country = indexes.CharField(model_attr='country')
+    admin1_code = indexes.CharField(model_attr='admin1_code')
+    admin2_name = indexes.CharField(model_attr='admin2_name')
+
     categories = indexes.MultiValueField()
     location = indexes.LocationField(model_attr='center', null=True)
 
