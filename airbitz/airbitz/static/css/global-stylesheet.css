@@ -391,8 +391,13 @@
 .biz-info-two .biz-details .biz-type {
   margin-bottom: 5px;
 }
-.biz-info-two .biz-details .biz-address-city-state {
-  padding-left: 12px;
+.biz-info-two .biz-details .biz-address-marker-icon {
+  margin-left: -13px;
+}
+.biz-info-two .biz-details .biz-address-street,
+.biz-info-two .biz-details .biz-address-city-state,
+.biz-info-two .biz-details .biz-address-country {
+  padding-left: 15px;
 }
 .biz-info-two .biz-description {
   opacity: 0;
