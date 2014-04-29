@@ -114,6 +114,7 @@ class Location(object):
         self.ip = ip
         self.locationStr = locationStr
         self.bounding = None
+        self.admin = None
         self.sortPoint = DEF_POINT
         self.userPoint = DEF_POINT
         self.userCountry = DEF_COUNTRY
