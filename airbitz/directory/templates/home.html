@@ -23,7 +23,7 @@
     {% block head_seo_social %}
 
         {% block seo_meta %}
-            <title>{% block title %}Bitcoin Wallet and Business Directory{% endblock title %} | Airbitz</title>
+            <title>{% block title %}Bitcoin Wallet, Map, and Business Directory{% endblock title %} | Airbitz</title>
             <meta name="description" content="{% block meta_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock meta_description %}">
             <meta name="news_keywords" content="{% block meta_news_keywords %}Local Bitcoin Business,Bitcoin Food,Bitcoin Friendly Business{% endblock meta_news_keywords %}">
         {% endblock seo_meta %}
@@ -80,20 +80,10 @@
     <link rel='stylesheet' id='divi-fonts-css'  href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,700,800%7CRaleway:400,200,100,500,700,800,900&subset=latin,latin-ext' type='text/css' media='all' />
     <link rel='stylesheet' id='et-gf-source-sans-pro-css'  href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic&subset=latin,latin-ext' type='text/css' media='all' />
     <link rel='stylesheet' id='divi-style-css'  href='{{ STATIC_URL }}wp/wp-content/themes/airbitz/style-ver=3.8.1.css' type='text/css' media='all' />
-{#    <link rel='stylesheet' id='gforms_reset_css-css'  href='{{ STATIC_URL }}wp/wp-content/plugins/gravityforms/css/formreset-ver=1.8.3.css' type='text/css' media='all' />#}
-{#    <link rel='stylesheet' id='gforms_datepicker_css-css'  href='{{ STATIC_URL }}wp/wp-content/plugins/gravityforms/css/datepicker-ver=1.8.3.css' type='text/css' media='all' />#}
-{#    <link rel='stylesheet' id='gforms_formsmain_css-css'  href='{{ STATIC_URL }}wp/wp-content/plugins/gravityforms/css/formsmain-ver=1.8.3.css' type='text/css' media='all' />#}
-{#    <link rel='stylesheet' id='gforms_ready_class_css-css'  href='{{ STATIC_URL }}wp/wp-content/plugins/gravityforms/css/readyclass-ver=1.8.3.css' type='text/css' media='all' />#}
-{#    <link rel='stylesheet' id='gforms_browsers_css-css'  href='{{ STATIC_URL }}wp/wp-content/plugins/gravityforms/css/browsers-ver=1.8.3.css' type='text/css' media='all' />#}
+
     <link rel='stylesheet' id='et-shortcodes-css-css'  href='{{ STATIC_URL }}wp/wp-content/themes/Divi/epanel/shortcodes/css/shortcodes-ver=3.0.css' type='text/css' media='all' />
     <link rel='stylesheet' id='et-shortcodes-responsive-css-css'  href='{{ STATIC_URL }}wp/wp-content/themes/Divi/epanel/shortcodes/css/shortcodes_responsive-ver=3.0.css' type='text/css' media='all' />
-    <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-includes/js/jquery/jquery.js?ver=1.10.2'></script>
-    <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
-    <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-content/themes/airbitz/js/custom-script.js?ver=3.8.1'></script>
-{#    <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-includes/js/comment-reply.min.js?ver=3.8.1'></script>#}
-{#    <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-content/plugins/gravityforms/js/jquery.json-1.3.js?ver=1.8.3'></script>#}
-{#    <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-content/plugins/gravityforms/js/jquery.placeholders.2.1.1.min.js?ver=1.8.3'></script>#}
-{#    <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-content/plugins/gravityforms/js/gravityforms.js?ver=1.8.3'></script>#}
+
     <link rel="EditURI" type="application/rsd+xml" title="RSD" href="xmlrpc-rsd.php.html" />
     <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{{ STATIC_URL }}wp/wp-includes/wlwmanifest.xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
@@ -121,8 +111,11 @@
     {% block head %}
         {% compressed_css 'global' %}
         {% compressed_css 'home' %}
+        {% compressed_js 'core' %}
         {% compressed_js 'home' %}
     {% endblock head %}
+
+{#    <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-content/themes/airbitz/js/custom-script.js?ver=3.8.1'></script>#}
 
 </head>
 <body class="home page page-id-145 page-template-default et_fixed_nav et_pb_pagebuilder_layout et_right_sidebar unknown et_includes_sidebar">
@@ -138,54 +131,129 @@
             <div class="et_pb_section et_pb_fullwidth_section" style='background-color:#2291cf;'>
 			    <div id="top-slider" class="et_pb_slider">
 			        <div class="et_pb_slides">
-				        <div class="et_pb_slide et_pb_slide_with_image et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#dbe9ef;background-image:url({{ STATIC_URL }}wp/assets/img/sd-skyline-cropped-overlay.jpg);'>
+{#				        <div class="et_pb_slide et_pb_slide_with_image et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#dbe9ef; background-image:url({{ STATIC_URL }}wp/assets/img/sd-skyline-cropped-overlay.jpg);'>#}
+				        <div class="et_pb_slide et_pb_slide_with_image et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#dbe9ef; background-image:url({{ STATIC_URL }}img/skyline-airbitz.jpg);'>
 			                <div class="et_pb_container clearfix">
 				                <div class="et_pb_slide_image">
-                                    {% include '_home_app_install_cta.html' %}
+{#                                    {% include '_home_app_install_cta.html' %}#}
+
+
+                                    <div class="region-areas">
+                                        <h3 class="area-heading heading-clean">Click to Search or Request Regions</h3>
+
+                                        <!-- Tab nav -->
+                                        <ul class="region-tabs nav nav-pills">
+                                          <li class="active tab-button" id="button-region-us"><a href="#region-us" data-toggle="tab">U.S.</a></li>
+                                          <li><a class="tab-button" id="button-region-ca" href="#region-ca" data-toggle="tab">Canada</a></li>
+                                          <li><a class="tab-button" id="button-region-eu" href="#region-eu" data-toggle="tab">Europe</a></li>
+                                          <li><a class="tab-button" id="button-region-other" href="#region-other" id="region-other-area-form" data-toggle="tab">Other</a></li>
+                                        </ul><!-- ./nav-tabs -->
+
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="region-us">
+                                                <div class="vmap" id="vmap-us"></div>
+                                            </div><!-- ./tab-pane -->
+
+                                            <div class="tab-pane" id="region-ca">
+                                                <div class="vmap" id="vmap-ca"></div>
+                                            </div><!-- ./tab-pane -->
+
+                                            <div class="tab-pane" id="region-eu">
+                                                <div class="vmap" id="vmap-eu"></div>
+                                            </div><!-- ./tab-pane -->
+
+                                            <div class="tab-pane" id="region-other">
+
+                                                <div id="other-area-form" class="animated text-left row">
+                                                    <form id="region-signup-form-other" class="col-sm-12" role="form">
+                                                        <h3><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Hear About Bitcoin Businesses Launching</h3>
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label for="inputEmailRegion" class="control-label">Email address</label>
+                                                                <input type="email" id="inputEmailRegion" class="inputEmail form-control" placeholder="Your Email">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="other-area-request-input" class="control-label">Your Region</label>
+                                                                <input type="text" id="other-area-request-input" class="inputText form-control" name="REGION" placeholder="Bejing, China or Moscow, Russia ..etc">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input disabled="true" type="checkbox" checked="checked"> Notify me when this area is covered!
+                                                            </label>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-info">Request Now</button>
+                                                        <button id="cancelOther" type="button" class="btn btn-danger">Cancel</button>
+                                                    </form>
+                                                </div>
+
+                                            </div><!-- ./tab-pane -->
+                                        </div><!-- ./tab-content -->
+                                    </div><!-- ./region-areas -->
+
                                 </div>
 				                <div class="et_pb_slide_description">
-					                <div class="et_pb_slide_content">
+                                    <div class="et_pb_slide_content">
+                                        <img class="alignnone airbitz-slide-logo" alt="airbits logo" src="{{ STATIC_URL }}wp/assets/img/airbitz-slide-logo-fadeout.png">
+                                        <div class="bitcoin-directory-wallet row">
+                                            <img class="alignnone" id="bitcoin-logo" alt="bitcoin" src="{{ STATIC_URL }}wp/assets/img/bitcoin-icon-logo_white-bg.png" width="128" height="128">
+                                            <h2>Bitcoin Business Directory</h2>
+                                            <h2>+ Bitcoin Wallet <em style="color: #777">(Avail Soon)</em></h2>
+                                        </div>
+                                        <p class="slide-text">
+                                            Bitcoin Made Safe, Simple, and Secure.<br>
+                                            Bitcoin Businesses at Your Fingertips.
+                                        </p>
 
-                                        <div class="et_pb_slide_content">
-                                            <img class="alignnone airbitz-slide-logo" alt="airbits logo" src="{{ STATIC_URL }}wp/assets/img/airbitz-slide-logo-fadeout.png"> <img class="alignnone" id="bitcoin-logo" alt="bitcoin" src="{{ STATIC_URL }}wp/assets/img/bitcoin-icon-logo_white-bg.png" width="128" height="128">
-                                            <h2>Secure Bitcoin Wallet</h2>
-                                            <h2>+ Business Directory</h2>
-                                            <p class="slide-text">
-                                                Bitcoin Made Safe, Simple, and Secure.<br>
-                                                Bitcoin Businesses at Your Fingertips.
-                                            </p>
+                                        <div id="area-form" class="animated row">
+                                            <form id="region-signup-form" class="col-sm-12" role="form">
+                                                <h3>Request Area <span id="area-request" class="label label-info"></span></h3>
+                                                <div class="form-group">
+                                                    <label for="inputEmailRegion" class="control-label"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Hear About Bitcoin Businesses in Your Area</label>
+                                                    <input type="email" id="inputEmailRegion" class="inputEmail form-control" placeholder="Your Email">
+                                                    <input type="hidden" id="area-request-input" name="REGION" value="">
+                                                </div>
 
-                                            <div class="currently-available slide-text">
-                                                <i class="fa fa-map-marker"></i> Currently Available in:<br />
-                                            </div>
-
-                                            <p class="marquee available-regions slide-text">
-                                                {% for region, info in active_regions.items %}
-                                                    <a href="search?location={{ info.search }}"><span class="label label-primary">{{ info.name }}</span></a>
-                                                {% endfor %}
-                                            </p>
-
-                                            <div class="row">
-                                                <form id="email-signup-form" class="form" role="form">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <label for="inputEmail" class="control-label"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Sign up to get notified when we come to your area</label>
-                                                            <input type="email" class="form-control input-lg" id="inputEmail" placeholder="Your Email">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <button type="submit" class="btn btn-lg btn-success btn-block">Sign Up for Launch</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input disabled="true" type="checkbox" checked="checked"> Notify me when this area is covered!
+                                                    </label>
+                                                </div>
+                                                <button type="submit" class="btn btn-info">Request Now</button>
+                                                <button id="cancelEmail" class="btn btn-danger">Cancel</button>
+                                            </form>
                                         </div>
 
-				</div> <!-- .et_pb_slide_description -->
-			</div> <!-- .et_pb_container -->
 
-		</div> <!-- .et_pb_slide -->
+
+                                        <div id="general-signup" class="animated row">
+                                            <div class="app-install col-sm-12 text-center animated fadeOut">
+                                                <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
+                                                    <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
+                                                </a>
+                                                <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
+                                                    <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
+                                                </a>
+                                            </div>
+                                            <form id="email-signup-form" class="form" role="form">
+                                                <div class="form-group">
+                                                    <label for="inputEmailWallet" class="control-label"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Sign up here for wallet launch</label>
+                                                    <input type="email" class="inputEmail form-control input-lg" id="inputEmailWallet" placeholder="Your Email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-lg btn-success btn-block">Sign Up for Wallet Launch</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+
+
+				                    </div> <!-- .et_pb_slide_content -->
+			                    </div> <!-- .et_pb_slide_description -->
+
+		</div> <!-- .et_pb_container -->
 
 			</div> <!-- .et_pb_slides -->
 		</div> <!-- .et_pb_slider -->
@@ -198,7 +266,7 @@
 
 		</div> <!-- .et_pb_section --><div class="et_pb_section" style='background-color:#ffffff;'>
 
-        <div class="hidden-md hidden-lg et_pb_row">
+        <div class="et_pb_row">
             <div class="et_pb_column et_pb_column_4_4">
                 {% include '_home_app_install_cta.html' %}
             </div> <!-- .et_pb_column -->
@@ -275,7 +343,7 @@
 			<div class="et_pb_column et_pb_column_4_4">
 			<div class="et_pb_text et_pb_bg_layout_light et_pb_text_align_left">
 
-		<h2>Bitcoin Wallet App</h2>
+		<h2>Bitcoin Wallet App <em style="color: #777">(Will be Available Soon)</em></h2>
 		<p>The airBitz mobile digital wallet is a decentralized, secure, private, synchronized, and backed up Bitcoin wallet.  A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:</p>
 
 		<div id="wallet-icon" class="app-icon-image">
@@ -328,65 +396,134 @@
 
 <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-content/themes/Divi/js/jquery.fitvids.js?ver=1.0'></script>
 <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-content/themes/Divi/js/waypoints.min.js?ver=1.0'></script>
-<script type='text/javascript'>
-    /* <![CDATA[ */
-    var et_custom = {"ajaxurl":"http:\/\/airbitz.co\/wp-admin\/admin-ajax.php","et_load_nonce":"5c4b819c37","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","fill":"Fill","field":"field","invalid":"Invalid email","captcha":"Captcha"};
-    /* ]]> */
-</script>
+
 <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-content/themes/Divi/js/custom.js?ver=1.0'></script>
 
-    {% compressed_js 'core' %}
+
     <script type="text/javascript">
-        $(function() {
-            AB.setup();
-            AB.addLocationSearch($('input.location'));
-            AB.addPlaceSearch($('input.term'));
+    $(function() {
+        AB.setup();
+        AB.addLocationSearch($('input.location'));
+        AB.addPlaceSearch($('input.term'));
+
+
+        // Include the UserVoice JavaScript SDK (only needed once on a page)
+        UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/sf1HfQGz9aR6JlwkmTvKbQ.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+
+        //
+        // UserVoice Javascript SDK developer documentation:
+        // https://www.uservoice.com/o/javascript-sdk
+        //
+
+        // Set colors
+        UserVoice.push(['set', {
+          accent_color: '#448dd6',
+          trigger_color: 'white',
+          trigger_background_color: '#6aba2e'
+        }]);
+
+        // Identify the user and pass traits
+        // To enable, replace sample data with actual user traits and uncomment the line
+        UserVoice.push(['identify', {
+          //email:      'john.doe@example.com', // User’s email address
+          //name:       'John Doe', // User’s real name
+          //created_at: 1364406966, // Unix timestamp for the date the user signed up
+          //id:         123, // Optional: Unique id of the user (if set, this should not change)
+          //type:       'Owner', // Optional: segment your users by type
+          //account: {
+          //  id:           123, // Optional: associate multiple users with a single account
+          //  name:         'Acme, Co.', // Account name
+          //  created_at:   1364406966, // Unix timestamp for the date the account was created
+          //  monthly_rate: 9.99, // Decimal; monthly rate of the account
+          //  ltv:          1495.00, // Decimal; lifetime value of the account
+          //  plan:         'Enhanced' // Plan name for the account
+          //}
+        }]);
+
+        // Add default trigger to the bottom-right corner of the window:
+        UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-right' }]);
+
+        // Or, use your own custom trigger:
+        //UserVoice.push(['addTrigger', '#id', { mode: 'contact' }]);
+
+        // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
+        UserVoice.push(['autoprompt', {}]);
+
+
+
+
+
+
+
+
+        var activeRegions = {{ active_regions|safe }}
+        $.ajaxSetup({ crossDomain: true });
+
+        function checkActive(region) {
+{#            return (activeRegions.indexOf(region) == -1);#}
+            return typeof activeRegions[region] == 'undefined';
+        }
+
+        var vmapOptions = {
+            map: '',
+            backgroundColor: 'transparent',
+            stroke: '#80c341',
+            color: '#fff',
+            hoverColor: '#22bbcf',
+            selectedColor: '#2299cf',
+            colors: {
+                {% for region in active_regions %}
+                    '{{ region }}': '#2299cf',
+                {% endfor %}
+            }
+        }
+
+        // set up map options
+        var vmapUS = $.extend(true, {}, vmapOptions);
+        vmapUS.map = 'us_aea_en'
+        var vmapCA = $.extend(true, {}, vmapOptions);
+        vmapCA.map = 'ca_lcc_en';
+        var vmapEU = $.extend(true, {}, vmapOptions);
+        vmapEU.map = 'europe_mill_en';
+
+        // initialize maps
+        $('#vmap-us').vectorMap(vmapUS);
+        $('#vmap-ca').vectorMap(vmapCA);
+        $('#vmap-eu').vectorMap(vmapEU);
+
+
+        $('#vmap-us, #vmap-ca, #vmap-eu').bind('regionClick.jvectormap', function(event, label, region){
+            if( checkActive(label) ){   // regionClick is not active or upcoming
+                console.log('OK REQUEST ' + label);
+                showRegionSignup();
+                $('#area-request').html(label).hide().fadeIn('slow');
+                $('#area-request-input').val(label);
+            } else {
+                var urlLocation = activeRegions[label]['search'];
+{#                var urlTerm = '{{ request.GET.term }}';#}
+{#                var searchUrl = 'search?term=' + encodeURI(urlTerm) + '&location=' + urlLocation;#}
+                var searchUrl = 'search?location=' + urlLocation;
+                window.location = searchUrl;
+            }
         });
-    </script>
+
+        $('#vmap-us, #vmap-ca, #vmap-eu').bind('labelShow.jvectormap', function(event, label, code){
+            if( checkActive(code) ){    // regionHover is not active or upcoming
+                var regionName = $(label[0]).html();
+                label.html('<span class="hover-region-name">' + regionName + '</span><br /><span class="hover-request-text">Click to Request</span>');
+            } else {
+                var regionName = $(label[0]).html();
+                label.html('<span class="hover-region-name">' + regionName + '</span><br /><span class="hover-click-text">Click to Query</span>')
+            }
+        });
 
 
-    <script>
-    // Include the UserVoice JavaScript SDK (only needed once on a page)
-    UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/sf1HfQGz9aR6JlwkmTvKbQ.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
 
-    //
-    // UserVoice Javascript SDK developer documentation:
-    // https://www.uservoice.com/o/javascript-sdk
-    //
 
-    // Set colors
-    UserVoice.push(['set', {
-      accent_color: '#448dd6',
-      trigger_color: 'white',
-      trigger_background_color: '#6aba2e'
-    }]);
 
-    // Identify the user and pass traits
-    // To enable, replace sample data with actual user traits and uncomment the line
-    UserVoice.push(['identify', {
-      //email:      'john.doe@example.com', // User’s email address
-      //name:       'John Doe', // User’s real name
-      //created_at: 1364406966, // Unix timestamp for the date the user signed up
-      //id:         123, // Optional: Unique id of the user (if set, this should not change)
-      //type:       'Owner', // Optional: segment your users by type
-      //account: {
-      //  id:           123, // Optional: associate multiple users with a single account
-      //  name:         'Acme, Co.', // Account name
-      //  created_at:   1364406966, // Unix timestamp for the date the account was created
-      //  monthly_rate: 9.99, // Decimal; monthly rate of the account
-      //  ltv:          1495.00, // Decimal; lifetime value of the account
-      //  plan:         'Enhanced' // Plan name for the account
-      //}
-    }]);
 
-    // Add default trigger to the bottom-right corner of the window:
-    UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-right' }]);
 
-    // Or, use your own custom trigger:
-    //UserVoice.push(['addTrigger', '#id', { mode: 'contact' }]);
-
-    // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
-    UserVoice.push(['autoprompt', {}]);
+    });
     </script>
 
 

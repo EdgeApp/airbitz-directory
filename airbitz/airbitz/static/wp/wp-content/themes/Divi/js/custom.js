@@ -486,7 +486,7 @@
 					$slide_container = $slide.find( '.et_pb_container' ),
 					max_height = 0;
 
-				$slide_container.css( 'min-height', 0 );
+//				$slide_container.css( 'min-height', 0 );
 
 				$slide.each( function() {
 					var $this_el = $(this),
@@ -496,7 +496,7 @@
 						max_height = height;
 				} );
 
-				$slide_container.css( 'min-height', max_height );
+//				$slide_container.css( 'min-height', max_height );
 			} );
 		}
 		et_fix_slider_height();

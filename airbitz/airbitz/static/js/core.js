@@ -69,6 +69,7 @@ function getMapMarkerContent(marker, m) {
       var mapOptions = {
         center: new google.maps.LatLng(lat, lon),
         zoom: zoom,
+        maxZoom: 16,
         disableDefaultUI: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };

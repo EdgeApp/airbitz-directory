@@ -13,17 +13,28 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DB_HOST = 'localhost'
 
+local_usernames = ('vagrant', )
+staging_usernames = ('devbitz', )
 prod_usernames = ('bitz', 'root', )
-DEBUG = os.environ.get('USER') not in prod_usernames
+
+LOCAL = os.environ.get('USER') in local_usernames
+STAGING = os.environ.get('USER') in staging_usernames
+PRODUCTION = os.environ.get('USER') in prod_usernames
+
+DEBUG = not PRODUCTION # EVERYTHING BUT PRODUCTION IS DEBUG
+TEMPLATE_DEBUG = DEBUG
+
+if DEBUG:
+    print 'DEBUG:', DEBUG
+    print 'LOCAL:', LOCAL
+    print 'STAGING:', STAGING
+    print 'PRODUCTION:', PRODUCTION
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'vjhh1t5!3t69w%ytjq5+@u12hh)(qme(&kkxzdmf%gy*&x4cur'
-
-if DEBUG:
-    TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 GOOGLE_MAP_KEY = 'AIzaSyBMrEE7BCy4O7DPHEdUmz0Sa8DoGQc-tXk'
@@ -61,6 +72,7 @@ INSTALLED_APPS = (
     'rest_framework_swagger',
     'analytical',
     'absolute',
+    'clear_cache',
 
     'restapi',
     'location',
@@ -149,8 +161,6 @@ else:
     MEDIA_ROOT = os.path.join('/home/bitz/', 'media')
     MEDIA_URL = '/media/'
 
-
-# STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.environ['HOME'], 'static')
 STATICFILES_DIRS = (
@@ -159,9 +169,11 @@ STATICFILES_DIRS = (
 if not DEBUG:
     USE_X_FORWARDED_HOST=True
 
-if True or DEBUG:
+if True or PRODUCTION or STAGING or LOCAL:
     PIPELINE_ENABLED=False
 else:
+    STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+    PIPELINE_DISABLE_WRAPPER = True
     PIPELINE_ENABLED=True
     PIPELINE_AUTO = False
     PIPELINE_VERSION = True
@@ -231,10 +243,11 @@ PIPELINE_JS = {
     },
     'home': {
         'source_filenames': (
-            'js/jquery-1.11.0.min.js',
+            'extras/jvectormap/jquery-jvectormap.js',
+            'extras/jvectormap/maps/jquery-jvectormap-us-aea-en.js',
+            'extras/jvectormap/maps/jquery-jvectormap-ca-lcc-en.js',
+            'extras/jvectormap/maps/jquery-jvectormap-europe-mill-en.js',
             'extras/ajaxchimp/jquery.ajaxchimp.js',
-            'extras/jquery.marquee/jquery.marquee.min.js',
-            'js/frontend-ui.js',
             'js/home-ui.js',
         ),
         'output_filename': 'js/home.js',
