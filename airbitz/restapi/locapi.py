@@ -77,7 +77,7 @@ def geocodeNearbyPoints(ps):
         if r and not rm.has_key(r):
             rs.append((p, r))
             rm[r] = 1
-        if len(rs) > 10:
+        if len(rs) > 4:
             break
     return rs
 
