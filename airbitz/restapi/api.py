@@ -156,13 +156,13 @@ class Location(object):
 
     def admin1(self):
         if self.admin and self.admin.has_key('administrative_area_level_1'):
-            return locapi.admin1Map(self.admin['administrative_area_level_1']['short'])
+            return locapi.admin1Map(self.admin['administrative_area_level_1']['short_name'])
         else:
             return None
 
     def country(self):
         if self.admin and self.admin.has_key('country'):
-            return locapi.countryMap(self.admin['country']['short'])
+            return locapi.countryMap(self.admin['country']['short_name'])
         else:
             return None
 
