@@ -235,7 +235,7 @@ class ApiProcess(object):
             sqs = sqs.filter(SQ(has_physical_business=True))
             if self.location.country():
                 sqs = sqs.filter(country=self.location.country())
-                if self.location.country():
+                if self.location.admin1():
                     sqs = sqs.filter(admin1_code=self.location.admin1())
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
