@@ -33,13 +33,15 @@ def get_regions_list(region):
     if region == 'EU-':
         for region_code, data in ACTIVE_REGIONS.items():
             if '-' not in region_code:
-                regions.append(data['name'])
+                # regions.append(data['name'])
+                regions.append( (data['name'], data['search']) )
     else:
         for region_code, data in ACTIVE_REGIONS.items():
             if region in region_code:
-                regions.append(data['name'])
+                # regions.append(data['name'])
+                regions.append( (data['name'], data['search']) )
 
-    regions.sort()
+    regions.sort(key=lambda data: data[0])
     return regions
 
 def get_biz_hours(biz):
