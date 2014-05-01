@@ -154,6 +154,18 @@ class Location(object):
                 if not self.bounding or self.boundingContains(geoloc):
                     self.sortPoint = geoloc;
 
+    def admin1(self):
+        if self.admin and self.admin.has_key('administrative_area_level_1'):
+            return locapi.admin1Map(self.admin['administrative_area_level_1']['short'])
+        else:
+            return None
+
+    def country(self):
+        if self.admin and self.admin.has_key('country'):
+            return locapi.countryMap(self.admin['country']['short'])
+        else:
+            return None
+
     @property
     def hasBounding(self):
         return self.bounding is not None
@@ -221,8 +233,9 @@ class ApiProcess(object):
             sqs = self.__filer_on_web__(sqs)
         else:
             sqs = sqs.filter(SQ(has_physical_business=True))
-            if self.location.admin and self.location.admin.has_key('administrative_area_level_1'):
-                sqs = sqs.filter(admin1_code=self.location.admin['administrative_area_level_1']['short'])
+            if self.location.admin1() and self.location.country():
+                sqs = sqs.filter(admin1_code=self.location.admin1(),
+                                 country=self.location.country())
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
             sqs = sqs.load_all()
