@@ -58,6 +58,10 @@
 
 	<script type="text/javascript">
 		document.documentElement.className = 'js';
+
+        // FOR REGION MAP
+        var activeRegions = {{ active_regions|safe }}
+        var allRegions = {{ all_regions|safe }}
 	</script>
 
     <script type="text/javascript">//<![CDATA[
@@ -448,79 +452,6 @@
 
         // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
         UserVoice.push(['autoprompt', {}]);
-
-
-
-
-
-
-
-
-        var activeRegions = {{ active_regions|safe }}
-        $.ajaxSetup({ crossDomain: true });
-
-        function checkActive(region) {
-{#            return (activeRegions.indexOf(region) == -1);#}
-            return typeof activeRegions[region] == 'undefined';
-        }
-
-        var vmapOptions = {
-            map: '',
-            backgroundColor: 'transparent',
-            stroke: '#80c341',
-            color: '#fff',
-            hoverColor: '#22bbcf',
-            selectedColor: '#2299cf',
-            colors: {
-                {% for region in active_regions %}
-                    '{{ region }}': '#2299cf',
-                {% endfor %}
-            }
-        }
-
-        // set up map options
-        var vmapUS = $.extend(true, {}, vmapOptions);
-        vmapUS.map = 'us_aea_en'
-        var vmapCA = $.extend(true, {}, vmapOptions);
-        vmapCA.map = 'ca_lcc_en';
-        var vmapEU = $.extend(true, {}, vmapOptions);
-        vmapEU.map = 'europe_mill_en';
-
-        // initialize maps
-        $('#vmap-us').vectorMap(vmapUS);
-        $('#vmap-ca').vectorMap(vmapCA);
-        $('#vmap-eu').vectorMap(vmapEU);
-
-
-        $('#vmap-us, #vmap-ca, #vmap-eu').bind('regionClick.jvectormap', function(event, label, region){
-            if( checkActive(label) ){   // regionClick is not active or upcoming
-                console.log('OK REQUEST ' + label);
-                showRegionSignup();
-                $('#area-request').html(label).hide().fadeIn('slow');
-                $('#area-request-input').val(label);
-            } else {
-                var urlLocation = activeRegions[label]['search'];
-{#                var urlTerm = '{{ request.GET.term }}';#}
-{#                var searchUrl = 'search?term=' + encodeURI(urlTerm) + '&location=' + urlLocation;#}
-                var searchUrl = 'search?location=' + urlLocation;
-                window.location = searchUrl;
-            }
-        });
-
-        $('#vmap-us, #vmap-ca, #vmap-eu').bind('labelShow.jvectormap', function(event, label, code){
-            if( checkActive(code) ){    // regionHover is not active or upcoming
-                var regionName = $(label[0]).html();
-                label.html('<span class="hover-region-name">' + regionName + '</span><br /><span class="hover-request-text">Click to Request</span>');
-            } else {
-                var regionName = $(label[0]).html();
-                label.html('<span class="hover-region-name">' + regionName + '</span><br /><span class="hover-click-text">Click to Query</span>')
-            }
-        });
-
-
-
-
-
 
 
     });

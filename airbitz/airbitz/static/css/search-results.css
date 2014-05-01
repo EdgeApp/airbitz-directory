@@ -1,0 +1,78 @@
+body {
+  background-color: #dbe9ef;
+  background-image: url(/static/img/skyline-airbitz.jpg);
+  background-attachment: fixed;
+}
+.region-areas {
+  text-align: left;
+}
+@media (min-width: 768px) {
+  .region-areas .area-heading {
+    font-size: 20px;
+  }
+}
+@media (min-width: 992px) {
+  .region-areas .area-heading {
+    font-size: 28px;
+  }
+}
+.region-areas #other-area-form {
+  margin: 50px 0;
+  padding: 0;
+}
+.region-areas #other-area-form h3 {
+  margin-top: 10px;
+}
+.region-tabs {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+.region-tabs .active a {
+  color: #ffffff;
+  background: #2291cf;
+  border-color: #2291cf;
+}
+.region-tabs li {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+.region-tabs li a {
+  padding: 5px 9px;
+}
+.region-tabs li a:hover {
+  color: #ffffff;
+  background: #2291cf;
+  border-color: #2291cf;
+}
+.area-list {
+  margin: 50px 0;
+}
+.area-list .tab-content {
+  padding-top: 10px;
+}
+#area-form {
+  display: none;
+  margin-top: 50px;
+  padding: 10px;
+  border-radius: 5px;
+}
+#area-form h3 {
+  margin-top: 0px;
+}
+.vmap {
+  width: 750px;
+  height: 650px;
+}
+@media (max-width: 1200px) {
+  .vmap {
+    width: 617px;
+    height: 360px;
+  }
+}
+@media (max-width: 992px) {
+  .vmap {
+    width: 470px;
+    height: 360px;
+  }
+}

@@ -7,19 +7,6 @@ function afterEmailSubmission(resp){
     }
 }
 
-function showRegionSignup() {
-    $('#general-signup').hide();
-    $('#area-form').removeClass('fadeOut').addClass('fadeIn').show();
-}
-
-function showGeneralSignup() {
-    $('#general-signup').removeClass('fadeOut').addClass('fadeIn').show();
-}
-
-function hideGeneralSignup() {
-    $('#general-signup').removeClass('fadeIn').addClass('fadeOut').hide();
-}
-
 
 jQuery(function($) {
 
@@ -27,21 +14,6 @@ jQuery(function($) {
         url: 'https://airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=b7bd36890d',
         callback: afterEmailSubmission
     });
-
-    var $regionSignupForm = $('#region-signup-form');
-    if($regionSignupForm) {
-        $regionSignupForm.ajaxChimp({
-            url: 'https://airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=b7bd36890d',
-            callback: afterEmailSubmission
-        });
-    }
-    var $regionSignupFormOther = $('#region-signup-form-other');
-    if($regionSignupFormOther) {
-        $regionSignupFormOther.ajaxChimp({
-            url: 'https://airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=b7bd36890d',
-            callback: afterEmailSubmission
-        });
-    }
 
     setTimeout(function(){
         $('.et_pb_slide_image').show();
@@ -55,30 +27,6 @@ jQuery(function($) {
         $(this).find('.app-store').removeClass('pulse infinite');
         $(this).find('.app-screenshot').removeClass('pulse');
     });
-
-
-    $('#cancelEmail').on('click', function(e){
-        e.preventDefault();
-        showGeneralSignup();
-        $('#area-form').hide();
-    });
-
-    $('#cancelOther').on('click', function(e){
-        e.preventDefault();
-        showGeneralSignup();
-        $('.region-tabs a:first').tab('show');
-    });
-
-    $('#button-region-other').on('click', function(){
-        hideGeneralSignup();
-        $('#area-form').addClass('fadeOut').hide();
-    });
-
-    $('.region-tabs .tab-button:not(#button-region-other)').on('click', function(){
-        showGeneralSignup();
-        $('#area-form').addClass('fadeOut').hide();
-    });
-
 
 
 });

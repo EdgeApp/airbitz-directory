@@ -1,0 +1,93 @@
+@import "../bootstrap/less/variables.less";
+@import "../bootstrap/less/mixins.less";
+
+// BELOW OVERWRITES IS IN ADDITION TO BOOTSTRAP LESS
+@import "variables.less";
+@import "mixins.less";
+
+body {
+    background-color: #dbe9ef;
+    background-image: url(/static/img/skyline-airbitz.jpg);
+    background-attachment: fixed;
+}
+
+
+.region-areas {
+    text-align: left;
+
+    .area-heading {
+
+        @media (min-width: @screen-sm) {
+            font-size: 20px;
+        }
+        @media (min-width: @screen-md) {
+            font-size: 28px;
+        }
+    }
+
+    #other-area-form {
+        margin: 50px 0;
+        padding: 0;
+
+        h3 {
+            margin-top: 10px;
+        }
+    }
+}
+
+.region-tabs {
+    margin-left: 0;
+    padding: 0;
+    border: none;
+
+    .active a {
+        color: #ffffff;
+        background: @brand-primary;
+        border-color: @brand-primary;
+    }
+    li {
+        margin-right: 5px;
+        margin-bottom: 5px;
+        a {
+            padding: 5px 9px;
+
+            &:hover {
+                color: #ffffff;
+                background: @brand-primary;
+                border-color: @brand-primary;
+            }
+        }
+    }
+}
+.area-list {
+    margin: 50px 0;
+
+    .tab-content {
+        padding-top: 10px;
+    }
+}
+#area-form {
+    display: none;
+    margin-top: 50px;
+    padding: 10px;
+
+    border-radius: 5px;
+
+    h3 {
+        margin-top: 0px;
+    }
+}
+
+.vmap {
+    width: 750px;
+    height: 650px;
+
+    @media (max-width: @screen-lg) {
+        width: 617px;
+        height: 360px;
+    }
+    @media (max-width: @screen-md) {
+        width: 470px;
+        height: 360px;
+    }
+}
