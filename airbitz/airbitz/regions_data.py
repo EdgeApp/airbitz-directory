@@ -64,7 +64,7 @@ ACTIVE_REGIONS = {
     'CA-ON': {'name': 'Ontario',
               'search': 'Ontario, Canada'},
     'CA-BC': {'name': 'British Columbia',
-              'search': 'Ontario, Canada'},
+              'search': 'British Columbia, Canada'},
     'CA-QC': {'name': 'Quebec',
               'search': 'Quebec, Canada'},
 
