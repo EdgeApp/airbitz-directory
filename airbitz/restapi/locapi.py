@@ -13,6 +13,15 @@ EARTHS_MEAN_RADIUS=6371000
 DEG_TO_M=(EARTHS_MEAN_RADIUS * math.pi) / 180.0
 HOP=Distance(mi=5)
 
+def admin1Map(l):
+    if l == '':
+        return 'UK'
+    else:
+        return l
+
+def countryMap(c):
+    return c
+
 def locRound(loc, precision=3):
     """
     By rounding lat/lng we are able to better cache results. The following is a
