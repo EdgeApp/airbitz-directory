@@ -318,7 +318,7 @@ class ApiProcess(object):
             res = locapi.googleAutocomplete(term, self.userLocation())
             return [r['description'] for r in res['predictions']]
         else:
-            return locapi.nearbyPlaces(self.userLocation())
+            return None # locapi.nearbyPlaces(self.userLocation())
 
     def querySetAddCategories(self, sqs, category):
         f = None
