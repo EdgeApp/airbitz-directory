@@ -27,23 +27,6 @@ WEEKDAYS = (
 )
 
 
-def get_regions_list(region):
-    regions = list()
-
-    if region == 'EU-':
-        for region_code, data in ACTIVE_REGIONS.items():
-            if '-' not in region_code:
-                # regions.append(data['name'])
-                regions.append( (data['name'], data['search']) )
-    else:
-        for region_code, data in ACTIVE_REGIONS.items():
-            if region in region_code:
-                # regions.append(data['name'])
-                regions.append( (data['name'], data['search']) )
-
-    regions.sort(key=lambda data: data[0])
-    return regions
-
 def get_biz_hours(biz):
     days_hours = biz.businesshours_set.all()
     midnight = datetime.time(0,0,0)
@@ -125,9 +108,7 @@ def business_search(request):
         'results_info': results_info,
         'active_regions': ACTIVE_REGIONS,
         'all_regions': ALL_REGIONS,
-        'us_regions_list': get_regions_list('US-'),
-        'ca_regions_list': get_regions_list('CA-'),
-        'eu_regions_list': get_regions_list('EU-'),
+
     }
     return render_to_response('search.html', RequestContext(request, context))
 

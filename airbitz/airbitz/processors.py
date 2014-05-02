@@ -1,6 +1,8 @@
 from restapi import api
 import logging
 import settings
+from regions_data import get_active_regions_list
+
 
 log=logging.getLogger(__name__)
 
@@ -23,3 +25,9 @@ def debug(request):
         'DEBUG': settings.DEBUG,
     }
 
+def active_regions(request):
+    return {
+        'us_active_regions_list': get_active_regions_list('US-'),
+        'ca_active_regions_list': get_active_regions_list('CA-'),
+        'eu_active_regions_list': get_active_regions_list('EU-'),
+    }

@@ -105,6 +105,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     'airbitz.processors.near',
     'airbitz.processors.debug',
+    'airbitz.processors.active_regions',
     'absolute.context_processors.absolute'
 )
 

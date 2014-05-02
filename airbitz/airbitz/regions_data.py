@@ -1,3 +1,22 @@
+# used in template context processor 'active_regions'
+def get_active_regions_list(region):
+    regions = list()
+
+    if region == 'EU-':
+        for region_code, data in ACTIVE_REGIONS.items():
+            if '-' not in region_code:
+                # regions.append(data['name'])
+                regions.append( (data['name'], data['search']) )
+    else:
+        for region_code, data in ACTIVE_REGIONS.items():
+            if region in region_code:
+                # regions.append(data['name'])
+                regions.append( (data['name'], data['search']) )
+
+    regions.sort(key=lambda data: data[0])
+
+    return regions
+
 
 # ISO_3166 Region codes http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 # these correspond to jvectormaps
@@ -133,7 +152,6 @@ US_REGIONS = {
               'search': 'Kansas, United States'},
     'US-WY': {'name': 'Wyoming',
               'search': 'Wyoming, United States'},
-
     'US-MT': {'name': 'Montana',
               'search': 'Montana, United States'},
     'US-ID': {'name': 'Idaho',
@@ -179,7 +197,6 @@ CA_REGIONS = {
               'search': 'Ontario, Canada'},
     'CA-QC': {'name': 'Quebec',
               'search': 'Quebec, Canada'},
-
     'CA-YT': {'name': 'Yukon',
               'search': 'Yukon, Canada'},
     'CA-NT': {'name': 'Northwest Territories',
@@ -205,7 +222,6 @@ CA_REGIONS = {
 EU_REGIONS = {
     'NL': {'name': 'Netherlands',
            'search': 'Netherlands'},
-
     'IS': {'name': 'Iceland',
        'search': 'Iceland'},
     'GB': {'name': 'United Kingdom',

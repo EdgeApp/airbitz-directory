@@ -30,12 +30,39 @@
                                     <li class="dropdown-header">Get Listed</li>
                                     <li><a href="https://go.airbitz.co/submit-business/">Submit a Business</a></li>
                                     <li class="divider"></li>
-                                    <li class="dropdown-header">Find Businesses</li>
+                                    <li class="dropdown-header">Find By Category</li>
                                     <li><a href="{% url 'landing' %}search?term=&location=Current+Location">Local Businesses</a></li>
                                     <li><a href="{% url 'landing' %}search?term=&location=On+the+Web"">Businesses On the Web</a></li>
                                     <li><a href="{% url 'landing' %}search?term=Restaurants&location=Current+Location"">Restaurants & Food Trucks</a></li>
                                     <li><a href="{% url 'landing' %}search?term=Bar&location=Current+Location"">Bars & Nightclubs</a></li>
                                     <li><a href="{% url 'landing' %}search?term=Hotels+%26+Lodging&location=Current+Location"">Hotels & Lodging</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Find By Region</li>
+                                    <li class="dropdown-submenu">
+                                        <a href="#">United States</a>
+                                        <ul class="dropdown-menu">
+                                        {% for region in us_active_regions_list %}
+                                            <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a href="#">Canada</a>
+                                        <ul class="dropdown-menu">
+                                        {% for region in ca_active_regions_list %}
+                                            <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a href="#">Europe</a>
+                                        <ul class="dropdown-menu">
+                                        {% for region in eu_active_regions_list %}
+                                            <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                        </ul>
+                                    </li>
+
                                 </ul>
                             </li>
                         </ul>
