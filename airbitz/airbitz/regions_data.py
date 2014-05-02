@@ -318,6 +318,10 @@ EU_REGIONS = {
        'search': 'Slovenia'},
     '2': {'name': 'Kosovo',
        'search': 'Kosovo'},
+    'LU': {'name': 'Luxembourg',
+       'search': 'Luxembourg'},
+    'LI': {'name': 'Liechenstein',
+       'search': 'Liechenstein'},
 
 
 }

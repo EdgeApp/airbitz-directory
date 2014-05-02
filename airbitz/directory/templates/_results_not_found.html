@@ -1,10 +1,15 @@
 <div class="row" style="margin-top: 20px;">
     <div class="col-sm-8">
-        <h3 style="color: #D9534F; margin-top: 0;"><i class="fa fa-info-circle"></i> Unfortunately we don't have any listings that match that query</h3>
+        {% if request.GET.term %}
+            <h3 style="margin-top: 0;">You searched for <span class="label label-info">{{ request.GET.term }}</span> near <i class="fa fa-map-marker"></i> {{ location }}</h3>
+        {% else %}
+            <h3 style="margin-top: 0;">You searched for any businesses in <i class="fa fa-map-marker"></i> {{ location }}</h3>
+        {% endif %}
+        <h4 style="color: #D9534F; margin-top: 0;"><i class="fa fa-info-circle"></i> Unfortunately we don't have any listings that match that query</h4>
     </div>
 
     <div class="col-sm-4">
-        <h3 style="margin-top: 0;">Know a business that takes Bitcoin?</h3>
+        <h3>Know a business that takes Bitcoin?</h3>
         <a class="btn btn-lg btn-success" href="https://go.airbitz.co/submit-business/" target="_blank">Get a Business Listed</a>
     </div>
 </div>
