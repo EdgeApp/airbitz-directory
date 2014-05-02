@@ -120,13 +120,20 @@
 
                     {% if biz.address %}
                     <div class="biz-address-street" title="{{ biz.address }}">
-                        <i class="fa fa-map-marker"></i> {{ biz.address }}
+                        <i class="biz-address-marker-icon fa fa-map-marker"></i> {{ biz.address }}
                     </div>
                     {% endif %}
 
                     {% if biz.admin3_name %}
                     <div class="biz-address-city-state">
+                        {% if not biz.address %}<i class="biz-address-marker-icon fa fa-map-marker"></i>{% endif %}
                         {{ biz.admin3_name }}, {{ biz.admin1_code }} {{ biz.postalcode }}
+                    </div>
+                    {% endif %}
+
+                    {% if biz.country %}
+                    <div class="biz-address-country">
+                        {{ biz.country }}
                     </div>
                     {% endif %}
 

@@ -105,6 +105,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     'airbitz.processors.near',
     'airbitz.processors.debug',
+    'airbitz.processors.active_regions',
     'absolute.context_processors.absolute'
 )
 
@@ -201,6 +202,16 @@ PIPELINE_CSS = {
             'media': 'screen,projection',
         },
     },
+    'search': {
+        'source_filenames': (
+            'css/animate.css',
+            'css/search-results.css',
+        ),
+        'output_filename': 'css/search.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
     'management': {
         'source_filenames': (
             'extras/select2/select2.css',
@@ -248,6 +259,7 @@ PIPELINE_JS = {
             'extras/jvectormap/maps/jquery-jvectormap-ca-lcc-en.js',
             'extras/jvectormap/maps/jquery-jvectormap-europe-mill-en.js',
             'extras/ajaxchimp/jquery.ajaxchimp.js',
+            'js/region-map.js',
             'js/home-ui.js',
         ),
         'output_filename': 'js/home.js',
@@ -279,6 +291,21 @@ PIPELINE_JS = {
             'js/directory.js',
         ),
         'output_filename': 'js/directory.js',
+    },
+    'search': {
+        'source_filenames': (
+            'extras/gmaps/gmaps.js',
+            'extras/jvectormap/jquery-jvectormap.js',
+            'extras/jvectormap/maps/jquery-jvectormap-us-aea-en.js',
+            'extras/jvectormap/maps/jquery-jvectormap-ca-lcc-en.js',
+            'extras/jvectormap/maps/jquery-jvectormap-europe-mill-en.js',
+            'extras/masonry/masonry.pkgd.min.js',
+            'extras/blur.js/blur.js',
+            'extras/ajaxchimp/jquery.ajaxchimp.js',
+            'js/region-map.js',
+            'js/directory.js',
+        ),
+        'output_filename': 'js/search.js',
     },
     'dataTables': {
         'source_filenames': (

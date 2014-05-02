@@ -5,6 +5,19 @@
 
 {% block title %}Search{% endblock title %}
 
+
+{% block javascript_headers %}
+    {{ block.super }}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={% if not DEBUG %}{{ mapkey }}{% endif %}&sensor=false"> </script>
+    {% compressed_js 'search' %}
+    {% compressed_css 'search' %}
+    <script type="text/javascript">
+        // FOR REGION MAP
+        var activeRegions = {{ active_regions|safe }}
+        var allRegions = {{ all_regions|safe }}
+	</script>
+{% endblock javascript_headers %}
+
 {% block body %}
 
 {% if not results %} {# NO RESULTS #}
@@ -93,11 +106,6 @@
 
 {% endblock %}
 
-{% block javascript_headers %}
-    {{ block.super }}
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={% if not DEBUG %}{{ mapkey }}{% endif %}&sensor=false"> </script>
-    {% compressed_js 'directory' %}
-{% endblock javascript_headers %}
 
 {% block javascript %}
     {{ block.super }}
@@ -136,80 +144,6 @@
             AB.addMap($('#map'), 5, json[0].lat, json[0].lon, json);
         }
         {% endif %}
-        });
-
-
-
-
-        var activeRegions = {{ active_regions|safe }}
-
-        function checkActive(region) {
-{#            return (activeRegions.indexOf(region) == -1);#}
-            return typeof activeRegions[region] == 'undefined';
-        }
-
-        var vmapOptions = {
-            map: '',
-            backgroundColor: '#ddd',
-            stroke: '#999999',
-            color: '#ffffff',
-            hoverColor: '#22bbcf',
-            selectedColor: '#2299cf',
-            colors: {
-                {% for region in active_regions %}
-                    '{{ region }}': '#2299cf',
-                {% endfor %}
-            }
-        }
-
-        // set up map options
-        var vmapUS = $.extend(true, {}, vmapOptions);
-        vmapUS.map = 'us_aea_en'
-        var vmapCA = $.extend(true, {}, vmapOptions);
-        vmapCA.map = 'ca_lcc_en';
-        var vmapEU = $.extend(true, {}, vmapOptions);
-        vmapEU.map = 'europe_mill_en';
-
-        // initialize maps
-        $('#vmap-us').vectorMap(vmapUS);
-        $('#vmap-ca').vectorMap(vmapCA);
-        $('#vmap-eu').vectorMap(vmapEU);
-
-
-        $('#vmap-us, #vmap-ca').bind('regionClick.jvectormap', function(event, label, region){
-            if( checkActive(label) ){   // regionClick is not active or upcoming
-                console.log('OK REQUEST ' + label);
-                $('#area-info').addClass('hidden');
-                $('#area-form').removeClass('hidden');
-                $('#area-request').html(label).hide().fadeIn('slow');
-                $('#area-request-input').val(label);
-                $.ajaxSetup({ crossDomain: true });
-            } else {
-                var urlLocation = activeRegions[label]['search'];
-{#                var urlTerm = '{{ request.GET.term }}';#}
-{#                var searchUrl = 'search?term=' + encodeURI(urlTerm) + '&location=' + urlLocation;#}
-                var searchUrl = 'search?location=' + urlLocation;
-                window.location = searchUrl;
-            }
-        });
-
-        $('#vmap-us, #vmap-ca').bind('labelShow.jvectormap', function(event, label, code){
-            if( checkActive(code) ){    // regionHover is not active or upcoming
-                label.html('<span class="hover-click-text">Click to Request</span> ' + $(label[0]).html());
-            } else {
-                var regionName = $(label[0]).html();
-                label.html('<span class="hover-region-name">' + regionName + '</span> <span class="hover-click-text">Click to Query</span>')
-            }
-        });
-
-        $('.panel-title > a').on('click', function(){
-            $('.panel-collapse').fadeIn().resize(); // gotta resize the hidden containers or the map won't show properly
-        });
-
-        $('#cancelEmail').on('click', function(e){
-            e.preventDefault();
-            $('#area-info').toggleClass('hidden');
-            $('#area-form').toggleClass('hidden');
         });
 
     </script>

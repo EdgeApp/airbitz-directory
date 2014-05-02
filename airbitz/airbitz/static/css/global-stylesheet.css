@@ -127,6 +127,11 @@
   left: -5px;
   color: #999999;
 }
+@media (max-width: 1200px) {
+  #navbar-search #help-search {
+    display: none;
+  }
+}
 #navbar-search .popover {
   left: 327.5;
   font-size: 12px;
@@ -135,6 +140,11 @@
 #navbar-search .popover hr {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+@media (max-width: 1200px) {
+  #navbar-search #add-business-button {
+    display: none;
+  }
 }
 .typeahead,
 .tt-query,
@@ -391,8 +401,13 @@
 .biz-info-two .biz-details .biz-type {
   margin-bottom: 5px;
 }
-.biz-info-two .biz-details .biz-address-city-state {
-  padding-left: 12px;
+.biz-info-two .biz-details .biz-address-marker-icon {
+  margin-left: -13px;
+}
+.biz-info-two .biz-details .biz-address-street,
+.biz-info-two .biz-details .biz-address-city-state,
+.biz-info-two .biz-details .biz-address-country {
+  padding-left: 15px;
 }
 .biz-info-two .biz-description {
   opacity: 0;
@@ -445,6 +460,7 @@
   width: 80px;
 }
 .results-area .search-title {
+  margin-top: 20px;
   margin-bottom: 10px;
   font-weight: 900;
 }
@@ -523,7 +539,6 @@
   margin-right: 0px;
 }
 .results-map-list .search-title {
-  margin-top: 0;
   margin-bottom: 10px;
   font-weight: 900;
   color: #333333;
@@ -909,4 +924,48 @@ body .main-content {
 }
 .uv-popover-tail {
   display: none;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu > .dropdown-menu {
+  top: 0;
+  left: 100%;
+  left: -100px;
+  max-height: 350px;
+  width: 200px;
+  overflow-y: scroll;
+  margin-top: 26px;
+  margin-left: 175px;
+  -webkit-border-radius: 0 6px 6px 6px;
+  -moz-border-radius: 0 6px 6px 6px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover > .dropdown-menu {
+  display: block;
+}
+.dropdown-submenu > span {
+  display: block;
+  padding: 3px 20px;
+  cursor: pointer;
+}
+.dropdown-submenu > a:after,
+.dropdown-submenu > span:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover > a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
 }

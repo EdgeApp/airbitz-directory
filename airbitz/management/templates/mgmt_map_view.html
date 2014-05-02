@@ -50,7 +50,7 @@
                             </div>
                             <div class="pull-right">
                                 <label for="status">Location</label>
-                                <input id="location" type="text">
+                                <input id="adminLocation" type="text" style="width: 300px">
                                 <button class="btn btn-default btn-sm" id="refresh">Refresh</button>
                             </div>
 
@@ -124,7 +124,7 @@
             $('#status').val(localStorage.getItem('mgmt_status'));
         }
         if (localStorage.getItem('mgmt_location')) {
-            $('#location').val(localStorage.getItem('mgmt_location'));
+            $('#adminLocation').val(localStorage.getItem('mgmt_location'));
         }
         var tableUrl = "/mgmt/api/biz/";
         var oTable = $('.dataTableCustom').dataTable({
@@ -147,7 +147,7 @@
                 var param = sw.lat() + ',' + sw.lng() + '|' + ne.lat() + ',' + ne.lng();
                 aoData.push({ "name": "bounds", "value": param });
             }
-            aoData.push({ "name": "location", "value": $('#location').val() });
+            aoData.push({ "name": "adminLocation", "value": $('#adminLocation').val() });
             var mappy = map;
             $.getJSON(sSource, aoData, function (json) { 
                 clearOverlays();
@@ -223,7 +223,7 @@
             localStorage.setItem('mgmt_status', $(this).val());
             oTable._fnAjaxUpdate();
         });
-        $('#location').keyup(function() {
+        $('#adminLocation').keyup(function() {
             localStorage.setItem('mgmt_location', $(this).val());
             oTable._fnAjaxUpdate();
         });
@@ -231,7 +231,6 @@
             oTable._fnAjaxUpdate();
         });
         $('#status').select2({ 'width': '200px' });
-
         google.maps.event.addDomListener(window, 'load', initializeMap);
     });
     </script>

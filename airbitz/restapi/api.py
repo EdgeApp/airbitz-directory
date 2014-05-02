@@ -114,6 +114,7 @@ class Location(object):
         self.ip = ip
         self.locationStr = locationStr
         self.bounding = None
+        self.admin = None
         self.sortPoint = DEF_POINT
         self.userPoint = DEF_POINT
         self.userCountry = DEF_COUNTRY
@@ -140,9 +141,11 @@ class Location(object):
             res = locapi.googleBestMatch(locationStr, self.userPoint)
             if res:
                 ref = res['reference']
-                (centroid, bounding) = locapi.googleDetailsToBounding(ref)
+                (centroid, bounding, admin) = locapi.googleDetailsToBounding(ref)
+                self.admin = admin
                 self.bounding = bounding
                 if not self.boundingContains(self.sortPoint):
+                    print centroid
                     self.sortPoint = centroid
         if ll:
             geoloc = parseGeoLocation(ll)
@@ -150,6 +153,18 @@ class Location(object):
                 self.userPoint = geoloc;
                 if not self.bounding or self.boundingContains(geoloc):
                     self.sortPoint = geoloc;
+
+    def admin1(self):
+        if self.admin and self.admin.has_key('administrative_area_level_1'):
+            return locapi.admin1Map(self.admin['administrative_area_level_1']['short'])
+        else:
+            return None
+
+    def country(self):
+        if self.admin and self.admin.has_key('country'):
+            return locapi.countryMap(self.admin['country']['short'])
+        else:
+            return None
 
     @property
     def hasBounding(self):
@@ -218,6 +233,10 @@ class ApiProcess(object):
             sqs = self.__filer_on_web__(sqs)
         else:
             sqs = sqs.filter(SQ(has_physical_business=True))
+            if self.location.country():
+                sqs = sqs.filter(country=self.location.country())
+                if self.location.admin1():
+                    sqs = sqs.filter(admin1_code=self.location.admin1())
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
             sqs = sqs.load_all()

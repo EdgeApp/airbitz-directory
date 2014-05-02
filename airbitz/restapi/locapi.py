@@ -13,6 +13,15 @@ EARTHS_MEAN_RADIUS=6371000
 DEG_TO_M=(EARTHS_MEAN_RADIUS * math.pi) / 180.0
 HOP=Distance(mi=5)
 
+def admin1Map(l):
+    if l == 'GB':
+        return 'UK'
+    else:
+        return l
+
+def countryMap(c):
+    return c
+
 def locRound(loc, precision=3):
     """
     By rounding lat/lng we are able to better cache results. The following is a
@@ -105,10 +114,7 @@ def googleNearby(loc):
     res = cacheRequest(url, payload)
     if res.has_key('results') and len(res['results']) > 0:
         f = res['results'][0]
-        m = {}
-        for c in f['address_components']:
-            for t in c['types']:
-                m[t] = {"short": c['short_name'], "long": c['long_name']}
+        m = populateComponents(f['address_components'])
         if m.has_key('locality') \
             and m.has_key('administrative_area_level_1') \
             and m.has_key('country'):
@@ -116,6 +122,13 @@ def googleNearby(loc):
                                         m['administrative_area_level_1']['short'],
                                         m['country']['long'])
     return None
+
+def populateComponents(ls):
+    m = {}
+    for c in ls: 
+        for t in c['types']:
+            m[t] = {"short": c['short_name'], "long": c['long_name']}
+    return m
 
 def googleAutocomplete(txt, loc=None, filtered=True):
     payload = {
@@ -153,6 +166,10 @@ def googleDetailsToBounding(ref):
         'maxlon': float(ne['lng']),
     }
     bounding = Polygon.from_bbox((box['minlon'], box['minlat'], box['maxlon'], box['maxlat']))
+    if details['result'].has_key('address_components'):
+        admin = populateComponents(details['result']['address_components'])
+    else:
+        admin = {}
     # Expand bounding box
-    bounding = bounding.buffer(DEG_TO_M <= DEF_RADIUS.m) 
-    return (point, bounding)
+    # bounding = bounding.buffer(DEG_TO_M <= DEF_RADIUS.m) 
+    return (point, bounding, admin)

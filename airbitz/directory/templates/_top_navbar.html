@@ -30,12 +30,39 @@
                                     <li class="dropdown-header">Get Listed</li>
                                     <li><a href="https://go.airbitz.co/submit-business/">Submit a Business</a></li>
                                     <li class="divider"></li>
-                                    <li class="dropdown-header">Find Businesses</li>
+                                    <li class="dropdown-header">Find By Category</li>
                                     <li><a href="{% url 'landing' %}search?term=&location=Current+Location">Local Businesses</a></li>
                                     <li><a href="{% url 'landing' %}search?term=&location=On+the+Web"">Businesses On the Web</a></li>
                                     <li><a href="{% url 'landing' %}search?term=Restaurants&location=Current+Location"">Restaurants & Food Trucks</a></li>
                                     <li><a href="{% url 'landing' %}search?term=Bar&location=Current+Location"">Bars & Nightclubs</a></li>
                                     <li><a href="{% url 'landing' %}search?term=Hotels+%26+Lodging&location=Current+Location"">Hotels & Lodging</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Find By Region</li>
+                                    <li class="dropdown-submenu">
+                                        <span>United States</span>
+                                        <ul class="dropdown-menu">
+                                        {% for region in us_active_regions_list %}
+                                            <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <span>Canada</span>
+                                        <ul class="dropdown-menu">
+                                        {% for region in ca_active_regions_list %}
+                                            <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <span>Europe</span>
+                                        <ul class="dropdown-menu">
+                                        {% for region in eu_active_regions_list %}
+                                            <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                        </ul>
+                                    </li>
+
                                 </ul>
                             </li>
                         </ul>
@@ -48,7 +75,8 @@
                             <div class="form-group">
                                 <input id="" tabindex="2" name="location" type="text" class="location typeahead form-control" placeholder="City..." autocomplete="off" value="{{ location }}">
                             </div>
-                            <button tabindex="3" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                            <button id="search-button" tabindex="3" type="submit" class="btn btn-success"><i class="glyphicon glyphicon-search"></i> Search</button>
+                            <a id="add-business-button" tabindex="4" class="btn btn-primary btn-default" href="https://go.airbitz.co/submit-business/" target="_blank"><i class="fa fa-plus"></i> Add Business</a>
                         </form>
                         {% endblock search %}
                     </div><!-- /.navbar-collapse -->

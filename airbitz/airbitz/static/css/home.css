@@ -33,6 +33,7 @@ body.home .navbar .logo {
 }
 body.home .ab-app-cta {
   height: 550px;
+  margin-bottom: 60px;
 }
 body.home .ab-app-cta .app-slide {
   width: 50%;
@@ -40,14 +41,41 @@ body.home .ab-app-cta .app-slide {
   margin: 0 auto;
   text-align: center;
 }
+body.home .ab-app-cta .app-slide .app-features.col-md-5 {
+  padding-left: 0;
+  padding-right: 0;
+}
+body.home .ab-app-cta .app-slide .app-features {
+  text-align: left;
+  color: black;
+}
+body.home .ab-app-cta .app-slide .app-features h3 {
+  margin-top: 0;
+  font-weight: 600;
+}
+body.home .ab-app-cta .app-slide .app-features ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+body.home .ab-app-cta .app-slide .app-features ul li {
+  margin-bottom: 15px;
+  font-size: 16px;
+  letter-spacing: .5px;
+}
+@media (max-width: 768px) {
+  body.home .ab-app-cta .app-slide .app-features {
+    text-align: center;
+  }
+}
 body.home .ab-app-cta .app-slide .app-install .app-store {
   margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
 }
 body.home .ab-app-cta .app-slide .app-install .app-screenshot {
   max-height: 500px;
 }
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   body.home .ab-app-cta .app-slide .app-install .app-screenshot {
     max-height: 375px;
   }
@@ -55,7 +83,7 @@ body.home .ab-app-cta .app-slide .app-install .app-screenshot {
 @media (max-width: 768px) {
   body.home .ab-app-cta .app-slide {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
   }
 }
 body.home #general-signup .app-install {
@@ -115,7 +143,7 @@ body.home .region-areas #other-area-form {
 body.home .region-areas #other-area-form h3 {
   margin-top: 0px;
 }
-body.home #area-form.row {
+body.home #area-form {
   display: none;
   margin-top: 15px;
   margin: 0 10px;
@@ -123,7 +151,7 @@ body.home #area-form.row {
   background: rgba(255, 255, 255, 0.7);
   border-radius: 5px;
 }
-body.home #area-form.row h3 {
+body.home #area-form h3 {
   margin-top: 0px;
 }
 body.home #top-slider .et_pb_slide_with_image .et_pb_slide_description {

@@ -1,124 +1,132 @@
-<div class="row hidden-temp">
-
+<div class="row" style="margin-top: 20px;">
     <div class="col-sm-8">
-        <h3 style="margin-top: 0;">Unfortunately we have not collected any listings in that area yet.</h3>
-        <h3>Below are the areas we have <span class="label label-primary">covered</span>.</h3>
-        <h3>Click any region not covered to request it ASAP.</h3>
+        {% if request.GET.term %}
+            <h3 style="margin-top: 0;">You searched for <span class="label label-info">{{ request.GET.term }}</span> near <i class="fa fa-map-marker"></i> {{ location }}</h3>
+        {% else %}
+            <h3 style="margin-top: 0;">You searched for any businesses in <i class="fa fa-map-marker"></i> {{ location }}</h3>
+        {% endif %}
+        <h4 style="color: #D9534F; margin-top: 0;"><i class="fa fa-info-circle"></i> Unfortunately we don't have any listings that match that query</h4>
     </div>
 
     <div class="col-sm-4">
         <h3 style="margin-top: 0;">Know a business that takes Bitcoin?</h3>
         <a class="btn btn-lg btn-success" href="https://go.airbitz.co/submit-business/" target="_blank">Get a Business Listed</a>
     </div>
-
 </div>
 
-<div class="row regions-covered">
+<div class="results-not-found row">
 
-    <div id="area-map" class="col-sm-8">
+    <div class="region-areas col-sm-8">
+        <h3 class="area-heading heading-clean">Click to Search or Request Regions</h3>
 
+        <!-- Tab nav -->
+        <ul class="region-tabs nav nav-pills">
+          <li class="active tab-button" id="button-region-us"><a href="#region-us" data-toggle="tab">U.S.</a></li>
+          <li><a class="tab-button" id="button-region-ca" href="#region-ca" data-toggle="tab">Canada</a></li>
+          <li><a class="tab-button" id="button-region-eu" href="#region-eu" data-toggle="tab">Europe</a></li>
+          <li><a class="tab-button" id="button-region-other" href="#region-other" id="region-other-area-form" data-toggle="tab">Other</a></li>
+        </ul><!-- ./nav-tabs -->
 
-        <div class="panel-group" id="accordion">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">United States</a>
-              </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
-              <div class="panel-body">
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="region-us">
+                <div class="vmap" id="vmap-us"></div>
+            </div><!-- ./tab-pane -->
 
-                    <div id="vmap-us" style="width: 100%; height: 400px;">
-                        <div class="temp-placeholder">
-                            <h2>Oh No! You got us.</h2>
-                            <img style="width: 100%;" class="img-responsive" src="{{ STATIC_URL }}img/not-found-picard-facepalm.jpg" alt="Sorry Not Available." />
+            <div class="tab-pane" id="region-ca">
+                <div class="vmap" id="vmap-ca"></div>
+            </div><!-- ./tab-pane -->
+
+            <div class="tab-pane" id="region-eu">
+                <div class="vmap" id="vmap-eu"></div>
+            </div><!-- ./tab-pane -->
+
+            <div class="tab-pane" id="region-other">
+
+                <div id="other-area-form" class="animated text-left row">
+                    <form id="region-signup-form-other" class="col-sm-12" role="form">
+                        <h3><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Hear About Bitcoin Businesses Launching</h3>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="inputEmailRegion" class="control-label">Email address</label>
+                                <input type="email" id="inputEmailRegion" class="inputEmail form-control" placeholder="Your Email">
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="other-area-request-input" class="control-label">Your Region</label>
+                                <input type="text" id="other-area-request-input" class="inputText form-control" name="REGION" placeholder="Bejing, China or Moscow, Russia ..etc">
+                            </div>
                         </div>
-                    </div>
 
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Canada</a>
-              </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse">
-              <div class="panel-body">
+                        <div class="checkbox">
+                            <label>
+                                <input disabled="true" type="checkbox" checked="checked"> Notify me when this area is covered!
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-info">Request Now</button>
+                        <button id="cancelOther" type="button" class="btn btn-danger">Cancel</button>
+                    </form>
+                </div>
 
-                    <div class="vmap" id="vmap-ca" style="width: 100%; height: 400px;"></div>
+            </div><!-- ./tab-pane -->
+        </div><!-- ./tab-content -->
+    </div><!-- ./region-areas -->
 
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Europe</a>
-              </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse">
-              <div class="panel-body">
+    <div class="area-list animated col-sm-4">
+        <h3>Active Regions</h3>
 
-                  <div id="vmap-eu" style="width: 100%; height: 400px;"></div>
+        <!-- Tab nav -->
+        <ul class="region-tabs nav nav-pills">
+          <li class="active tab-button" id="button-region-us-list"><a href="#region-us-list" data-toggle="tab">U.S.</a></li>
+          <li><a class="tab-button" id="button-region-ca-list" href="#region-ca-list" data-toggle="tab">Canada</a></li>
+          <li><a class="tab-button" id="button-region-eu-list" href="#region-eu-list" data-toggle="tab">Europe</a></li>
+        </ul><!-- ./nav-tabs -->
 
-              </div>
-            </div>
-          </div>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="region-us-list">
+                <ul class="list-unstyled">
+                {% for region in us_active_regions_list %}
+                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                {% endfor %}
+                </ul>
+            </div><!-- ./tab-pane -->
+
+            <div class="tab-pane" id="region-ca-list">
+                <ul class="list-unstyled">
+                {% for region in ca_active_regions_list %}
+                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}">{{ region.0 }}</a></li>
+                {% endfor %}
+                </ul>
+            </div><!-- ./tab-pane -->
+
+            <div class="tab-pane" id="region-eu-list">
+                <ul class="list-unstyled">
+                {% for region in eu_active_regions_list %}
+                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}">{{ region.0 }}</a></li>
+                {% endfor %}
+                </ul>
+            </div><!-- ./tab-pane -->
         </div>
-
-
     </div>
 
 
-    <div id="area-info" class="col-sm-4 hidden-temp">
-        <h2 style="margin-top: 0;">Current Regions Covered</h2>
-
-{#    {% if DEBUG %}#}
-{#        {{ active_regions }}<br /><br /><br />#}
-{#        {% for region in active_regions %}#}
-{#            {% if 'US-' in region %}#}
-{#                {{ region.name }} {# TODO: why you not work #}
-{#            {% endif %}#}
-{#        {% endfor %}#}
-{#    {% endif %}#}
-
-        <h3>United States</h3>
-        <ul>
-            <li>California</li>
-            <li>Hawaii</li>
-            <li>New York</li>
-            <li>Georgia</li>
-            <li>Texas</li>
-            <li>New Jersey</li>
-        </ul>
-
-        <h3>Canada</h3>
-        <ul>
-            <li>Ontario</li>
-        </ul>
-    </div>
-
-
-    <div id="area-form" class="col-sm-4 hidden">
-        <form id="region-signup-form" role="form">
+    <div id="area-form" class="animated col-sm-4">
+        <form id="region-signup-form" class="col-sm-12" role="form" style="padding-left: 0; padding-right: 0;">
             <h3>Request Area <span id="area-request" class="label label-info"></span></h3>
             <div class="form-group">
-                <label for="inputEmail" class="control-label"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Sign up to get notified</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Your Email">
+                <label for="inputEmailRegion" class="control-label"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Hear About Bitcoin Businesses in Your Area</label>
+                <input type="email" id="inputEmailRegion" class="inputEmail form-control" placeholder="Your Email">
                 <input type="hidden" id="area-request-input" name="REGION" value="">
             </div>
 
             <div class="checkbox">
                 <label>
-                    <input disabled="true" type="checkbox" checked="checked"> Email me when Bitcoin businesses are available in this area!
+                    <input disabled="true" type="checkbox" checked="checked"> Notify me when this area is covered!
                 </label>
             </div>
             <button type="submit" class="btn btn-info">Request Now</button>
-            <button id="cancelEmail" class="btn btn-link" href="#">Cancel</button>
+            <button id="cancelEmail" class="btn btn-danger">Cancel</button>
         </form>
     </div>
-
 
 </div>

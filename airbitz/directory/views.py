@@ -7,6 +7,7 @@ from django.template import RequestContext
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from airbitz.settings import GOOGLE_MAP_KEY
+from airbitz.regions_data import ACTIVE_REGIONS, ALL_REGIONS, US_REGIONS, CA_REGIONS, EU_REGIONS
 from directory.models import Business, BusinessImage
 # from management.views import isManager
 from restapi import api
@@ -24,79 +25,6 @@ WEEKDAYS = (
     ('friday', 'Fri'),
     ('saturday', 'Sat'),
 )
-
-# ISO_3166 Region codes http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-# these correspond to jvectormaps
-ACTIVE_REGIONS = {
-    'US-CA': {'name': 'California',
-              'search': 'California, United States'},
-    'US-TX': {'name': 'Texas',
-              'search': 'Texas, United States'},
-    'US-NY': {'name': 'New York',
-              'search': 'New York, United States'},
-    'US-HI': {'name': 'Hawaii',
-              'search': 'Hawaii, United States'},
-    'US-NJ': {'name': 'New Jersey',
-              'search': 'New Jersey, United States'},
-    'US-GA': {'name': 'Georgia',
-              'search': 'Georgia, United States'},
-    'US-IL': {'name': 'Illinois',
-              'search': 'Illinois, United States'},
-    'US-UT': {'name': 'Utah',
-              'search': 'Utah, United States'},
-    'US-NV': {'name': 'Nevada',
-              'search': 'Nevada, United States'},
-    'US-CO': {'name': 'Colorado',
-              'search': 'Colorado, United States'},
-    'US-FL': {'name': 'Florida',
-              'search': 'Florida, United States'},
-    'US-NH': {'name': 'New Hampshire',
-              'search': 'New Hapshire, United States'},
-    'US-MA': {'name': 'Massachusetts',
-              'search': 'Massachusetts, United States'},
-    'US-VT': {'name': 'Vermont',
-              'search': 'Vermont, United States'},
-    'US-PA': {'name': 'Pennsylvania',
-              'search': 'Pennsylvania, United States'},
-    'US-CT': {'name': 'Connecticut',
-              'search': 'Connecticut, United States'},
-    'US-DE': {'name': 'Delaware',
-              'search': 'Delaware, United States'},
-    'US-MD': {'name': 'Maryland',
-              'search': 'Maryland, United States'},
-    'US-WA': {'name': 'Washington',
-              'search': 'Washington, United States'},
-    'US-OR': {'name': 'Oregon',
-              'search': 'Oregon, United States'},
-    'US-AK': {'name': 'Alaska',
-              'search': 'Alaska, United States'},
-    'US-AZ': {'name': 'Arizona',
-              'search': 'Arizona, United States'},
-    'US-NM': {'name': 'New Mexico',
-              'search': 'New Mexico, United States'},
-    'US-MI': {'name': 'Michigan',
-              'search': 'Michigan, United States'},
-    'US-MN': {'name': 'Minnesota',
-              'search': 'Minnesota, United States'},
-    'US-DC': {'name': 'Washington DC',
-              'search': 'Washington, DC, United States'},
-    'US-IN': {'name': 'Indiana',
-              'search': 'Indiana, United States'},
-    'US-IA': {'name': 'Iowa',
-              'search': 'Iowa, United States'},
-    'US-KS': {'name': 'Kansas',
-              'search': 'Kansas, United States'},
-    'US-WY': {'name': 'Wyoming',
-              'search': 'Wyoming, United States'},
-
-    'CA-ON': {'name': 'Ontario',
-              'search': 'Ontario, Canada'},
-    'CA-BC': {'name': 'British Columbia',
-              'search': 'Ontario, Canada'},
-    # 'CA-QC': {'name': 'Quebec',
-    #           'search': 'Quebec, Canada'},
-}
-
 
 
 def get_biz_hours(biz):
@@ -130,6 +58,7 @@ def home_v2(request):
 def landing(request):
     context = {
         'active_regions': ACTIVE_REGIONS,
+        'all_regions': ALL_REGIONS,
     }
     return render_to_response('home.html', RequestContext(request, context))
 
@@ -178,6 +107,8 @@ def business_search(request):
         'page_obj': paginator.page(page_num),
         'results_info': results_info,
         'active_regions': ACTIVE_REGIONS,
+        'all_regions': ALL_REGIONS,
+
     }
     return render_to_response('search.html', RequestContext(request, context))
 

@@ -48,7 +48,7 @@
                                     {% endfor %}
                                 </select>
                                 <label for="status">Location</label>
-                                <input id="adminLocation" type="text">
+                                <input id="adminLocation" type="text" class="form-control" style="width: 300px">
                                 <button class="btn btn-default btn-sm" id="refresh">Refresh</button>
                             </div>
                         </div>
@@ -89,6 +89,9 @@
     {{ block.super }}
     <script type="text/javascript">
     $(function() {
+        AB.setup();
+        AB.addLocationSearch($('#adminLocation'));
+        
         if (localStorage.getItem('mgmt_status')) {
             $('#status').val(localStorage.getItem('mgmt_status'));
         }
