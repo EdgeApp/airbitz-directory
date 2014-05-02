@@ -30,6 +30,8 @@ if DEBUG:
     print 'STAGING:', STAGING
     print 'PRODUCTION:', PRODUCTION
 
+DEPLOY_DATE = '20140502'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -168,16 +170,16 @@ STATICFILES_DIRS = (
     os.path.join(SITE_ROOT, 'static/'),
 )
 if not DEBUG:
-    USE_X_FORWARDED_HOST=True
+    USE_X_FORWARDED_HOST = True
 
-if True or PRODUCTION or STAGING or LOCAL:
-    PIPELINE_ENABLED=False
+if LOCAL:
+    PIPELINE_ENABLED = False
 else:
     STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+    PIPELINE_ENABLED = True
     PIPELINE_DISABLE_WRAPPER = True
-    PIPELINE_ENABLED=True
-    PIPELINE_AUTO = False
-    PIPELINE_VERSION = True
+    PIPELINE_VERSION = False # currently using DEPLOY_DATE to manually accomplish this feature
+    PIPELINE_JS_COMPRESSOR = False # yuglify does not include all files (seems to leave out things that fail linting)
 
 PIPELINE_CSS = {
     'global': {
@@ -187,7 +189,7 @@ PIPELINE_CSS = {
             'extras/jvectormap/jquery-jvectormap.css',
             'css/global-stylesheet.css',
         ),
-        'output_filename': 'css/global.css',
+        'output_filename': 'css/global.' + DEPLOY_DATE + '.css',
         'extra_context': {
             'media': 'screen,projection',
         },
@@ -197,7 +199,7 @@ PIPELINE_CSS = {
             'css/animate.css',
             'css/home.css',
         ),
-        'output_filename': 'css/home.css',
+        'output_filename': 'css/home.' + DEPLOY_DATE + '.css',
         'extra_context': {
             'media': 'screen,projection',
         },
@@ -207,7 +209,7 @@ PIPELINE_CSS = {
             'css/animate.css',
             'css/search-results.css',
         ),
-        'output_filename': 'css/search.css',
+        'output_filename': 'css/search.' + DEPLOY_DATE + '.css',
         'extra_context': {
             'media': 'screen,projection',
         },
@@ -218,7 +220,7 @@ PIPELINE_CSS = {
             'css/global-management.css',
             'extras/jquery.imgareaselect-0.9.10/css/imgareaselect-default.css',
         ),
-        'output_filename': 'css/management.css',
+        'output_filename': 'css/management.' + DEPLOY_DATE + '.css',
         'extra_context': {
             'media': 'screen,projection',
         },
@@ -227,7 +229,7 @@ PIPELINE_CSS = {
         'source_filenames': (
             'extras/DataTables-1.9.4/media/css/jquery.dataTables.css',
         ),
-        'output_filename': 'css/dataTables.css',
+        'output_filename': 'css/dataTables.' + DEPLOY_DATE + '.css',
         'extra_context': {
             'media': 'screen,projection',
         },
@@ -250,7 +252,7 @@ PIPELINE_JS = {
             'extras/swipebox-master/source/jquery.swipebox.min.js',
             'js/frontend-ui.js'
         ),
-        'output_filename': 'js/core.js',
+        'output_filename': 'js/core.' + DEPLOY_DATE + '.js',
     },
     'home': {
         'source_filenames': (
@@ -262,7 +264,7 @@ PIPELINE_JS = {
             'js/region-map.js',
             'js/home-ui.js',
         ),
-        'output_filename': 'js/home.js',
+        'output_filename': 'js/home.' + DEPLOY_DATE + '.js',
     },
     'management': {
         'source_filenames': (
@@ -276,7 +278,7 @@ PIPELINE_JS = {
             'extras/select2/select2.js',
             'extras/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.min.js',
         ),
-        'output_filename': 'js/management.js',
+        'output_filename': 'js/management.' + DEPLOY_DATE + '.js',
     },
     'directory': {
         'source_filenames': (
@@ -290,7 +292,7 @@ PIPELINE_JS = {
             'extras/ajaxchimp/jquery.ajaxchimp.js',
             'js/directory.js',
         ),
-        'output_filename': 'js/directory.js',
+        'output_filename': 'js/directory.' + DEPLOY_DATE + '.js',
     },
     'search': {
         'source_filenames': (
@@ -305,13 +307,13 @@ PIPELINE_JS = {
             'js/region-map.js',
             'js/directory.js',
         ),
-        'output_filename': 'js/search.js',
+        'output_filename': 'js/search.' + DEPLOY_DATE + '.js',
     },
     'dataTables': {
         'source_filenames': (
             'extras/DataTables-1.9.4/media/js/jquery.dataTables.min.js',
         ),
-        'output_filename': 'js/dataTables.js',
+        'output_filename': 'js/dataTables.' + DEPLOY_DATE + '.js',
     }
 }
 
