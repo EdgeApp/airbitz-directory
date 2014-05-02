@@ -127,6 +127,11 @@
   left: -5px;
   color: #999999;
 }
+@media (max-width: 1200px) {
+  #navbar-search #help-search {
+    display: none;
+  }
+}
 #navbar-search .popover {
   left: 327.5;
   font-size: 12px;
@@ -135,6 +140,11 @@
 #navbar-search .popover hr {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+@media (max-width: 1200px) {
+  #navbar-search #add-business-button {
+    display: none;
+  }
 }
 .typeahead,
 .tt-query,
