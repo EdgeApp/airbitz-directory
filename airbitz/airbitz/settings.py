@@ -177,6 +177,7 @@ if LOCAL:
 else:
     STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
     PIPELINE_ENABLED = True
+    PIPELINE_AUTO = True
     PIPELINE_DISABLE_WRAPPER = True
     PIPELINE_VERSION = False # currently using DEPLOY_DATE to manually accomplish this feature
     PIPELINE_JS_COMPRESSOR = False # yuglify does not include all files (seems to leave out things that fail linting)
