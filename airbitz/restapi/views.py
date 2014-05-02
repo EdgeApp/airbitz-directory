@@ -190,7 +190,9 @@ class AutoCompleteLocation(APIView):
         ll = self.request.QUERY_PARAMS.get('ll', None)
         ip = api.getRequestIp(request)
         a = api.ApiProcess(ll=ll, ip=ip)
-        results = a.autocompleteLocation(term=term)[:DEFAULT_PAGE_SIZE]
+        results = a.autocompleteLocation(term=term)
+        if results:
+            results = results[:DEFAULT_PAGE_SIZE]
         return Response({ 'results':  results })
 
 
