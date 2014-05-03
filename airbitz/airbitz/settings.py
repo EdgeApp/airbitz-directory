@@ -185,6 +185,7 @@ PIPELINE_CSS = {
     'global': {
         'source_filenames': (
             'bootstrap/css/bootstrap.css',
+            'extras/font-awesome/css/font-awesome.min.css',
             'extras/swipebox-master/source/swipebox.css',
             'extras/jvectormap/jquery-jvectormap.css',
             'css/global-stylesheet.css',
