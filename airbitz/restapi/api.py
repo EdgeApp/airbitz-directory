@@ -184,7 +184,7 @@ class Location(object):
                     return "{0}, {1}, {2}".format(a1l, c)
         except:
             log.warn('error creating geolocation string')
-        return ""
+        return None 
 
     @property
     def hasBounding(self):
@@ -357,11 +357,7 @@ class ApiProcess(object):
             res = locapi.googleAutocomplete(term, self.userLocation())
             return [r['description'] for r in res['predictions']]
         else:
-            mloc = self.location.myLocation()
-            if mloc:
-                return [mloc]
-            else:
-                return []
+            return []
 
     def querySetAddCategories(self, sqs, category):
         f = None
