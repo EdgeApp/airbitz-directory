@@ -128,6 +128,8 @@ US_REGIONS = {
               'search': 'Delaware, United States'},
     'US-MD': {'name': 'Maryland',
               'search': 'Maryland, United States'},
+    'US-ME': {'name': 'Maine',
+              'search': 'Maine, United States'},
     'US-WA': {'name': 'Washington',
               'search': 'Washington, United States'},
     'US-OR': {'name': 'Oregon',
