@@ -166,6 +166,26 @@ class Location(object):
         else:
             return None
 
+    def myLocation(self):
+        try:
+            if self.admin and self.admin.has_key('country') \
+                        and self.admin.has_key('administrative_area_level_1') \
+                        and self.admin.has_key('administrative_area_level_2'):
+                c = self.admin['country']['long']
+                a1s, a1l = self.admin['administrative_area_level_1']['short'],\
+                           self.admin['administrative_area_level_1']['long']
+                try:
+                    loc = self.admin['locality']['long']
+                except:
+                    loc = None
+                if loc:
+                    return "{0}, {1}, {2}".format(loc, a1s, c)
+                else:
+                    return "{0}, {1}, {2}".format(a1l, c)
+        except:
+            log.warn('error creating geolocation string')
+        return ""
+
     @property
     def hasBounding(self):
         return self.bounding is not None
@@ -337,7 +357,11 @@ class ApiProcess(object):
             res = locapi.googleAutocomplete(term, self.userLocation())
             return [r['description'] for r in res['predictions']]
         else:
-            return None # locapi.nearbyPlaces(self.userLocation())
+            mloc = self.location.myLocation()
+            if mloc:
+                return [mloc]
+            else:
+                return []
 
     def querySetAddCategories(self, sqs, category):
         f = None
