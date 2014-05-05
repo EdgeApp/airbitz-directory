@@ -14,13 +14,13 @@ DEG_TO_M=(EARTHS_MEAN_RADIUS * math.pi) / 180.0
 HOP=Distance(mi=5)
 
 def admin1Map(l):
-    if l == 'GB':
-        return 'UK'
-    else:
-        return l
+    return l
 
 def countryMap(c):
-    return c
+    if c == 'GB':
+        return 'UK'
+    else:
+        return c
 
 def locRound(loc, precision=3):
     """
