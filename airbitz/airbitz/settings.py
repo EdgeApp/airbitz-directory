@@ -172,7 +172,7 @@ STATICFILES_DIRS = (
 if not DEBUG:
     USE_X_FORWARDED_HOST = True
 
-if LOCAL or STAGING:
+if LOCAL:
     PIPELINE_ENABLED = False
 else:
     STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
