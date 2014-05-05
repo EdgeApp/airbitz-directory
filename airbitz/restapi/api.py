@@ -357,7 +357,11 @@ class ApiProcess(object):
             res = locapi.googleAutocomplete(term, self.userLocation())
             return [r['description'] for r in res['predictions']]
         else:
-            return [self.location.myLocation()]
+            mloc = self.location.myLocation()
+            if mloc:
+                return [mloc]
+            else:
+                return []
 
     def querySetAddCategories(self, sqs, category):
         f = None
