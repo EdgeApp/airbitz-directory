@@ -772,8 +772,8 @@
             }).select2('val', '{{ biz.status }}');
 
             var app = new AppView();
-            $('#bizForm').bind("keypress", function(e) {
-                if (e.keyCode == 13) {               
+            $('#bizForm input').bind("keypress", function(e) {
+                if (e.keyCode == 13) {
                     e.preventDefault();
                     return false;
                 }
