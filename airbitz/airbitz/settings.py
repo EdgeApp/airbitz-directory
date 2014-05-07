@@ -158,10 +158,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 if LOCAL:
-    MEDIA_ROOT = '/staging/media/'
+    MEDIA_ROOT = '/staging/media'
     MEDIA_URL = '/media/'
 elif STAGING:
-    MEDIA_ROOT = os.path.join(os.environ['HOME'], 'media')
+    MEDIA_ROOT = '/home/devbitz/media'
     MEDIA_URL = '/media/'
 else:
     MEDIA_ROOT = os.path.join('/home/bitz/', 'media')
