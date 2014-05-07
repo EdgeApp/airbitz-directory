@@ -160,11 +160,8 @@ USE_TZ = True
 if LOCAL:
     MEDIA_ROOT = '/staging/media'
     MEDIA_URL = '/media/'
-elif STAGING:
-    MEDIA_ROOT = '/home/devbitz/media'
-    MEDIA_URL = '/media/'
 else:
-    MEDIA_ROOT = os.path.join('/home/bitz/', 'media')
+    MEDIA_ROOT = os.path.join(os.environ['HOME'], 'media')
     MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
