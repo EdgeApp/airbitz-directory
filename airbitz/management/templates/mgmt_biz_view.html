@@ -41,7 +41,7 @@
 
 {% block bizbody %}
 <div id="bizapp">
-    <form>
+    <form id="bizForm">
     <div class="row">
         <div class="col-sm-12">
             <div class="alertsdiv"></div>
@@ -749,6 +749,12 @@
             }).select2('val', '{{ biz.status }}');
 
             var app = new AppView();
+            $('#bizForm').bind("keypress", function(e) {
+                if (e.keyCode == 13) {               
+                    e.preventDefault();
+                    return false;
+                }
+            });
             $(document).bind('keydown', 'ctrl+return', function(e) {
                 e.preventDefault();
                 app.saveBusiness();
