@@ -12,7 +12,7 @@ var componentForm = {
     locality: 'long_name',
     administrative_area_level_1: 'short_name',
     administrative_area_level_2: 'short_name',
-    country: 'long_name',
+    country: 'short_name',
     postal_code: 'short_name'
 };
 
@@ -142,6 +142,7 @@ function fillInAddress() {
     }
 
     holdInputsForUndo();
+    country = getCountryDataMapping(country);
 
     // Clear address fields
     document.getElementById('address').value = '';
@@ -153,4 +154,12 @@ function fillInAddress() {
     setInputValue('country', country); // country
     setInputValue('latitude', place.geometry.location.lat().toFixed(7)); // country
     setInputValue('longitude', place.geometry.location.lng().toFixed(7)); // country
+}
+
+function getCountryDataMapping(country) {
+    switch(country)
+    {
+        case 'GB':  return 'UK';
+        default:    return country;
+    }
 }
