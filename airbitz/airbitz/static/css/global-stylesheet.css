@@ -410,6 +410,7 @@
 }
 .biz-info-two .biz-description {
   opacity: 0;
+  overflow: hidden;
 }
 .biz-info-three .biz-hours {
   margin-bottom: 30px;

@@ -157,11 +157,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-if DEBUG:
-    MEDIA_ROOT = os.path.join(os.environ['HOME'], 'media')
+if LOCAL:
+    MEDIA_ROOT = '/staging/media'
     MEDIA_URL = '/media/'
 else:
-    MEDIA_ROOT = os.path.join('/home/bitz/', 'media')
+    MEDIA_ROOT = os.path.join(os.environ['HOME'], 'media')
     MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
@@ -315,7 +315,13 @@ PIPELINE_JS = {
             'extras/DataTables-1.9.4/media/js/jquery.dataTables.min.js',
         ),
         'output_filename': 'js/dataTables.' + DEPLOY_DATE + '.js',
-    }
+    },
+    'googlePlaceAutocomplete': {
+        'source_filenames': (
+            'extras/Google/placeAutocomplete.js',
+        ),
+        'output_filename': 'js/googlePlaceAutocomplete.' + DEPLOY_DATE + '.js',
+    },
 }
 
 CRISPY_TEMPLATE_PACK='bootstrap3'

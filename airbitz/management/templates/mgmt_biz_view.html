@@ -158,12 +158,22 @@
             </div>
         </div>
 
-        <div class="col-sm-6">
+        <div class="admin-location col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-heading">LOCATION
                     <a class="pull-right" href="{% url 'mgmt_biz_loc_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" /></a>
                     </div>
                 <div class="panel-body">
+
+                    <div class="location-lookup form-group">
+                        <label for="autocomplete"><i class="fa fa-map-marker"></i> Lookup via Google Places
+                            <a class="pull-right btn btn-xs btn-danger" id="undoAutocomplete"><i class="fa fa-refresh"></i> Undo</a>
+                            <a class="pull-right btn btn-xs btn-info" id="lookupName" style="margin-right: 5px;"><i class="fa fa-bolt"></i> Use Name</a>
+                        </label>
+
+                        <input type="text" id="autocomplete" class="form-control" />
+                    </div>
+
                     <div class="form-group">
                         <label for="address">Address:</label>
                         <input type="text" id="address" name="address" class="form-control" value="{{ biz.address|default:"" }}" />
@@ -173,7 +183,9 @@
                         <input type="text" id="admin3_name" name="admin3_name" class="form-control" value="{{ biz.admin3_name|default:"" }}" />
                     </div>
                     <div class="form-group">
-                        <label for="admin2_name">County:</label>
+                        <label for="admin2_name">County:
+                            <a class="pull-right btn btn-xs btn-primary" id="copy-city"><i class="fa fa-arrow-down"></i> Copy City</a>
+                        </label>
                         <input type="text" id="admin2_name" name="admin2_name" class="form-control" value="{{ biz.admin2_name|default:"" }}" />
                     </div>
                     <div class="form-group">
@@ -244,8 +256,9 @@
 
 {% block javascript_headers %}
     {{ block.super }}
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&v=3.exp&libraries=places"></script>
     {% compressed_js 'management' %}
+    {% compressed_js 'googlePlaceAutocomplete' %}
 {% endblock javascript_headers %}
 
 {% block javascript %}
@@ -355,6 +368,16 @@
 
     <script>
         $(function() {
+
+            function copyCity() {
+                var city = $('#admin3_name').val();
+                $('#admin2_name').val(city);
+            }
+
+            $('#copy-city').on('click', function(){
+                copyCity();
+            });
+
             var ifEmpty = function(s) {
                 return (s === null || s === '') ? null : s;
             };
@@ -450,7 +473,7 @@
                     setTimeout(function() {
                         w.setSelection(
                             that.data.web_photo_x1 / 2.0, that.data.web_photo_y1 / 2.0,
-                            that.data.web_photo_x2 / 2.0, that.data.web_photo_y2 / 2.0, 
+                            that.data.web_photo_x2 / 2.0, that.data.web_photo_y2 / 2.0,
                             true);
                         w.update();
                         that.webPreview(w, w.getSelection(true));
@@ -468,7 +491,7 @@
                     setTimeout(function() {
                         m.setSelection(
                             that.data.mobile_photo_x1 / 2.0, that.data.mobile_photo_y1 / 2.0,
-                            that.data.mobile_photo_x2 / 2.0, that.data.mobile_photo_y2 / 2.0, 
+                            that.data.mobile_photo_x2 / 2.0, that.data.mobile_photo_y2 / 2.0,
                             true);
                         m.update();
                         that.mobilePreview(m, m.getSelection(true));
@@ -484,7 +507,7 @@
                     this.imgSelectClose();
                 },
                 imgSelectClose: function() {
-                    this.$el.find('.img-web').imgAreaSelect({ 
+                    this.$el.find('.img-web').imgAreaSelect({
                         'remove': true
                     });
                     this.$el.find('.img-mobile').imgAreaSelect({
@@ -749,8 +772,8 @@
             }).select2('val', '{{ biz.status }}');
 
             var app = new AppView();
-            $('#bizForm').bind("keypress", function(e) {
-                if (e.keyCode == 13) {               
+            $('#bizForm input').bind("keypress", function(e) {
+                if (e.keyCode == 13) {
                     e.preventDefault();
                     return false;
                 }

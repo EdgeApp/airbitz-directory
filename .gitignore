@@ -19,3 +19,8 @@ business_images
 
 # Ignore postgres database dumps
 *.dump
+
+# Ignore .ssh keys
+dev_keys
+testing_keys
+prod_keys

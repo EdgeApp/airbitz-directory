@@ -165,6 +165,7 @@
 
             {% google_analytics %}
 
+            {% block addthis_sharing %}
             <!-- AddThis Smart Layers BEGIN -->
             <!-- Go to http://www.addthis.com/get/smart-layers to customize -->
             <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53347e5a6a7094df"></script>
@@ -178,6 +179,7 @@
               });
             </script>
             <!-- AddThis Smart Layers END -->
+            {% endblock addthis_sharing %}
         {% endblock javascript %}
     </body>
 </html>
