@@ -151,6 +151,6 @@ function fillInAddress() {
     setInputValue('admin1_code', admin1_code); // state
     setInputValue('postalcode', postalcode); // zip
     setInputValue('country', country); // country
-    setInputValue('latitude', place.geometry.location.lat()); // country
-    setInputValue('longitude', place.geometry.location.lng()); // country
+    setInputValue('latitude', place.geometry.location.lat().toFixed(7)); // country
+    setInputValue('longitude', place.geometry.location.lng().toFixed(7)); // country
 }
