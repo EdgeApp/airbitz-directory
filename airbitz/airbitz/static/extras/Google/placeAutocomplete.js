@@ -27,10 +27,17 @@ function initializePlaceAutocomplete() {
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         fillInAddress();
     });
-    document.getElementById('undoAutocomplete').addEventListener('click', function() {
-        inputsUndo();
-    }, false);
-
+    // If undo button or lookup elements exist add listener
+    if (document.getElementById('undoAutocomplete')) {
+        document.getElementById('undoAutocomplete').addEventListener('click', function() {
+            inputsUndo();
+        }, false);
+    }
+    if (document.getElementById('lookupName')) {
+        document.getElementById('lookupName').addEventListener('click', function() {
+            lookupName();
+        }, false);
+    }
 }
 
 function formatStreetAddress(streetAddress) {
@@ -48,11 +55,16 @@ function setInputValue(cssId, inputValue) {
     document.getElementById(cssId).value = inputValue;
 }
 
+function lookupName() {
+    document.getElementById('autocomplete').value = document.getElementById('name').value
+}
+
 function inputsUndo() {
     for (var i=0; i < Object.keys(origInputValues).length; i++) {
         var elementId = Object.keys(origInputValues)[i];
         document.getElementById(elementId).value = origInputValues[elementId];
     }
+    document.getElementById('autocomplete').value = '';
 }
 
 function holdInputForUndo(cssId) {
