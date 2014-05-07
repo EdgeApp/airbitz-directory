@@ -315,7 +315,13 @@ PIPELINE_JS = {
             'extras/DataTables-1.9.4/media/js/jquery.dataTables.min.js',
         ),
         'output_filename': 'js/dataTables.' + DEPLOY_DATE + '.js',
-    }
+    },
+    'googlePlaceAutocomplete': {
+        'source_filenames': (
+            'extras/Google/placeAutocomplete.js',
+        ),
+        'output_filename': 'js/googlePlaceAutocomplete.' + DEPLOY_DATE + '.js',
+    },
 }
 
 CRISPY_TEMPLATE_PACK='bootstrap3'
