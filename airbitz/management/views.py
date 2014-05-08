@@ -359,3 +359,14 @@ def image_delete(request, bizId, imgId):
     else:
         raise Http404
 
+
+# QUICK REDIRECTIONS (PROBABLY SHOULD BE ITS OWN APP EVENTUALLY)
+def redirect_vote(request):
+    return HttpResponseRedirect('https://docs.google.com/a/airbitz.co/forms/d/1XGPghf1OsdgTmrsiEscWqcPjssfDX3u8IE-PBOLebc4/viewform')
+
+def redirect_blog(request):
+    return HttpResponseRedirect('https:go.airbitz.co')
+
+def redirect_about(request):
+    return HttpResponseRedirect('https:go.airbitz.co/about/')
+

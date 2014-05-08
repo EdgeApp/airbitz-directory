@@ -21,6 +21,9 @@ urlpatterns = patterns('',
     url(r'^docs/', include('rest_framework_swagger.urls')),
     (r'^', include('directory.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^vote/$', 'management.views.redirect_vote', name='mgmt_redirect_vote'),
+    url(r'^blog/$', 'management.views.redirect_blog', name='mgmt_redirect_blog'),
+    url(r'^about/$', 'management.views.redirect_about', name='mgmt_redirect_about'),
 )
 
 if settings.DEBUG:
