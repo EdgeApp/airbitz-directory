@@ -143,6 +143,7 @@ function fillInAddress() {
 
     holdInputsForUndo();
     country = getCountryDataMapping(country);
+    admin2_name = admin2_name.split(" County")[0]; // remove county
 
     // Clear address fields
     document.getElementById('address').value = '';
