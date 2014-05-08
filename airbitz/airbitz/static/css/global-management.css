@@ -42,3 +42,9 @@
   background: #2291cf;
   color: #ffffff;
 }
+.undo-field {
+  box-shadow: 0 0 8px #d9534f;
+}
+.updated-field {
+  box-shadow: 0 0 8px #2291cf;
+}

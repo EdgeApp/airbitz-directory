@@ -51,8 +51,16 @@ function formatStreetAddress(streetAddress) {
 }
 
 function setInputValue(cssId, inputValue) {
+    var inputElement = document.getElementById(cssId);
     if (typeof inputValue == 'undefined') { inputValue = '' }
-    document.getElementById(cssId).value = inputValue;
+    inputElement.value = inputValue;
+
+    // Show that fields were updated and when focused remove effect
+    inputElement.className += ' updated-field';
+    $('.updated-field').removeClass('undo-field');
+    $('.updated-field').on('focus', function(){
+        $(this).removeClass('updated-field');
+    });
 }
 
 function lookupName() {
@@ -65,11 +73,13 @@ function inputsUndo() {
         document.getElementById(elementId).value = origInputValues[elementId];
     }
     document.getElementById('autocomplete').value = '';
+    $('.updated-field').removeClass('updated-field');
 }
 
 function holdInputForUndo(cssId) {
-    if (document.getElementById(cssId)){
-        var val = document.getElementById(cssId).value;
+    var inputElement = document.getElementById(cssId)
+    if (inputElement){
+        var val = inputElement.value;
         origInputValues[cssId] = val;
     }
 }
@@ -83,13 +93,14 @@ function holdInputsForUndo() {
     holdInputForUndo('country'); // country
     holdInputForUndo('latitude'); // country
     holdInputForUndo('longitude'); // country
+    holdInputForUndo('phone'); // country
 }
 
 function fillInAddress() {
     // Get the place details from the autocomplete object
     var place = autocomplete.getPlace();
     var street_address = [];
-    var admin3_name, admin2_name, admin1_code, postalcode, country, latitude, longitude;
+    var admin3_name, admin2_name, admin1_code, postalcode, country, latitude, longitude, phone;
 
     console.log(place);
 
@@ -141,9 +152,17 @@ function fillInAddress() {
         }
     }
 
+
     holdInputsForUndo();
     country = getCountryDataMapping(country);
-    admin2_name = admin2_name.split(" County")[0]; // remove county
+
+    // Get phone number if available
+    if (place.formatted_phone_number) {
+        phone = place.international_phone_number;
+    }
+    if (admin2_name) {
+        admin2_name = admin2_name.split(" County")[0]; // remove county
+    }
 
     // Clear address fields
     document.getElementById('address').value = '';
@@ -155,6 +174,7 @@ function fillInAddress() {
     setInputValue('country', country); // country
     setInputValue('latitude', place.geometry.location.lat().toFixed(7)); // country
     setInputValue('longitude', place.geometry.location.lng().toFixed(7)); // country
+    setInputValue('phone', phone); // phone
 }
 
 function getCountryDataMapping(country) {
