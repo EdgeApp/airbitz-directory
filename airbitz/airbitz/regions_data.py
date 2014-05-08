@@ -61,8 +61,6 @@ ACTIVE_REGIONS = {
               'search': 'Washington, United States'},
     'US-OR': {'name': 'Oregon',
               'search': 'Oregon, United States'},
-    'US-AK': {'name': 'Alaska',
-              'search': 'Alaska, United States'},
     'US-AZ': {'name': 'Arizona',
               'search': 'Arizona, United States'},
     'US-NM': {'name': 'New Mexico',
