@@ -50,21 +50,46 @@ function formatStreetAddress(streetAddress) {
 	}
 }
 
+function formatCounty(county) {
+    if (county) {
+        switch(county) {
+            case 'Orange County':   return county;
+            default:                return county.split(" County")[0]; // remove county
+        }
+    }
+    return county;
+}
+
+function formatCountry(country) {
+    if (country) {
+        switch(country) {
+            case 'GB':  return 'UK';
+            default:    return country;
+        }
+    }
+}
+
 function setInputValue(cssId, inputValue) {
     var inputElement = document.getElementById(cssId);
+    var origVal = inputElement.value;
     if (typeof inputValue == 'undefined') { inputValue = '' }
-    inputElement.value = inputValue;
 
-    // Show that fields were updated and when focused remove effect
-    inputElement.className += ' updated-field';
-    $('.updated-field').removeClass('undo-field');
-    $('.updated-field').on('focus', function(){
-        $(this).removeClass('updated-field');
-    });
+    if (origVal == inputValue) {
+        return true;
+    } else {
+        inputElement.value = inputValue;
+
+        // Show that fields were updated and when focused remove effect
+        inputElement.className += ' updated-field';
+        $('.updated-field').removeClass('undo-field');
+        $('.updated-field').on('focus', function(){
+            $(this).removeClass('updated-field');
+        });
+    }
 }
 
 function lookupName() {
-    document.getElementById('autocomplete').value = document.getElementById('name').value
+    document.getElementById('autocomplete').value = document.getElementById('name').value;
 }
 
 function inputsUndo() {
@@ -154,33 +179,148 @@ function fillInAddress() {
 
 
     holdInputsForUndo();
-    country = getCountryDataMapping(country);
 
     // Get phone number if available
     if (place.formatted_phone_number) {
         phone = place.international_phone_number;
-    }
-    if (admin2_name) {
-        admin2_name = admin2_name.split(" County")[0]; // remove county
     }
 
     // Clear address fields
     document.getElementById('address').value = '';
     setInputValue('address', formatStreetAddress(street_address)); // street address
     setInputValue('admin3_name', admin3_name); // city
-    setInputValue('admin2_name', admin2_name); // county
+    setInputValue('admin2_name', formatCounty(admin2_name)); // county
     setInputValue('admin1_code', admin1_code); // state
     setInputValue('postalcode', postalcode); // zip
-    setInputValue('country', country); // country
+    setInputValue('country', formatCountry(country)); // country
     setInputValue('latitude', place.geometry.location.lat().toFixed(7)); // country
     setInputValue('longitude', place.geometry.location.lng().toFixed(7)); // country
     setInputValue('phone', phone); // phone
+
+    updateLatLng();
 }
 
-function getCountryDataMapping(country) {
-    switch(country)
-    {
-        case 'GB':  return 'UK';
-        default:    return country;
-    }
+
+function updateLatLng() {
+    var lat = $('#latitude').val();
+    var lng = $('#longitude').val();
+    $('#latlng').val(lat + ',' + lng);
 }
+
+$('#latitude, #longitude').on('change', function(){
+    updateLatLng();
+});
+
+$('.geocode-latlon').click(function(e) {
+    var lat = $('#latitude').val();
+    var lng = $('#longitude').val();
+    var latlng = new google.maps.LatLng(lat, lng);
+
+    var geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+//        console.log('STATUS:' + status);
+
+        if (status === 'OK' && results) {
+            var street_address = [];
+
+//            console.log('LENGTH: ' + results.length);
+
+            for (var i = 0; i < results.length; i++) {
+                var addressType = results[i].types[0];
+
+
+                if (addressType == 'street_address') {
+
+//                    console.log(addressType);
+//                    console.log(results[i]);
+
+                    street_address[0] = results[i].address_components[0].types[0]
+                    street_address[1] = results[i].address_components[1]['long_name']
+
+//                    console.log(results[i].address_components.length);
+
+                    for (var j = 0; j < results[i].address_components.length; j++) {
+                        var addressComponent = results[i].address_components[j];
+                        var addressType = addressComponent.types[0]
+//                        console.log(addressComponent);
+
+                        if ( addressType == 'street_number') {
+                            street_address[0] = addressComponent[componentForm[addressType]];
+                        }
+                        if ( addressType == 'route') {
+                            street_address[1] = addressComponent[componentForm[addressType]];
+                        }
+                        if (addressType == 'locality') {
+                            // City
+                            admin3_name = addressComponent[componentForm[addressType]];
+                        }
+                        if (addressType == 'administrative_area_level_2') {
+                            // County
+                            admin2_name = addressComponent[componentForm[addressType]];
+                        }
+                        if (addressType == 'administrative_area_level_1') {
+                            // State
+                            admin1_code = addressComponent[componentForm[addressType]];
+                        }
+                        if (addressType == 'postal_code') {
+                            // Zip
+                            postalcode = addressComponent[componentForm[addressType]];
+                        }
+                        if (addressType == 'country') {
+                            // Country
+                            country = addressComponent[componentForm[addressType]];
+                        }
+                    }
+                }
+            }
+
+            holdInputsForUndo();
+
+            setInputValue('address', formatStreetAddress(street_address)); // street address
+            setInputValue('admin3_name', admin3_name); // city
+            setInputValue('admin2_name', formatCounty(admin2_name)); // county
+            setInputValue('admin1_code', admin1_code); // state
+            setInputValue('postalcode', postalcode); // zip
+            setInputValue('country', country); // country
+        }
+
+    });
+
+    e.preventDefault();
+    return false;
+});
+
+
+$('.geocode-address').click(function(e) {
+    var self = $(this);
+    var origText = self.html();
+    var address = $('#address').val();
+    var city = $('#admin3_name').val();
+    var state = $('#admin1_code').val();
+    var zip = $('#postalcode').val();
+    var self = jQuery(this);
+    if (!address || !city || !state || !zip) {
+        alert("Missing address fields. Unable to geocode address.");
+        return false;
+    }
+    var address = address + ',' + city + ',' + state + ',' + zip
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            var loc = results[0].geometry;
+            latestResult = results[0];
+            var g = latestResult.geometry.location;
+            console.log(g);
+            $('#latitude').val(g.lat().toFixed(7));
+            $('#longitude').val(g.lng().toFixed(7));
+            updateLatLng();
+        } else {
+            alert('Unable to find lat/lon from ' + address);
+        }
+        self.html(origText);
+    });
+
+    e.preventDefault();
+    return false;
+});
