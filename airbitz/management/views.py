@@ -19,6 +19,10 @@ from management.forms import CategoryForm, ImageTagForm, \
                              BizImportForm, HoursFormSet, HoursFormSetHelper, \
                              SocialFormSet, SocialFormHelper
 
+from factual import Factual, APIException
+from airbitz.settings import FACTUAL_KEY, FACTUAL_SECRET
+
+
 LOGIN_URL='/mgmt/login'
 
 def isManager(u): 
@@ -358,6 +362,38 @@ def image_delete(request, bizId, imgId):
         return HttpResponseRedirect(reverse('mgmt_biz_image_view', args=(bizId, )))
     else:
         raise Http404
+
+
+
+
+@user_passes_test(isManager, login_url=LOGIN_URL)
+def factual_lookup(request, bizId):
+    biz = get_object_or_404(Business, pk=bizId)
+
+    fsInfo = biz.socialid_set.filter(social_type='foursquare').values()
+    fsId = fsInfo[0]['social_id']
+
+    # try fs id
+    if fsId:
+        factual = Factual(FACTUAL_KEY, FACTUAL_SECRET)
+        q = factual.table("crosswalk").filters({
+            "namespace": "foursquare",
+            "namespace_id": fsId
+        }).data()
+
+    if not q:
+        q = ''
+
+
+    context = {
+        'biz': biz,
+        'fs_info': fsInfo,
+        'fs_id': fsId,
+        'factual': q,
+    }
+    return render(request, 'mgmt_factual_lookup.html', context)
+
+
 
 
 # QUICK REDIRECTIONS (PROBABLY SHOULD BE ITS OWN APP EVENTUALLY)

@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^vote/$', 'management.views.redirect_vote', name='mgmt_redirect_vote'),
     url(r'^blog/$', 'management.views.redirect_blog', name='mgmt_redirect_blog'),
     url(r'^about/$', 'management.views.redirect_about', name='mgmt_redirect_about'),
+    url(r'^factual/(?P<bizId>\d+)/$', 'management.views.factual_lookup', name='mgmt_factual_lookup'),
 )
 
 if settings.DEBUG:

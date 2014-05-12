@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load compressed %}
+{% load humanize %}
+{% load ab_custom_tags %}
+
+{% block head %}
+    {{ block.super }}
+    {% compressed_css 'management' %}
+{% endblock head %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-heading"><h2>{{ biz.name }}</h2></div>
+        <div class="panel-body" style="margin: 0 10px">
+
+            {% for s in biz.socialid_set.all %}
+                {% if s.social_type != "osm" %}
+                <a class="btn btn-default" href="{{ s.social_url }}" target="_blank">
+                    <i class="fa {{ s.social_icon }}" data-toggle="tooltip" data-placement="bottom" title="{{ s.social_type }}"></i> {{ s.social_type|replace:"/_/ "|title }}
+                </a>
+                {% endif %}
+            {% endfor %}
+
+
+            {% for s in biz.socialid_set.all %}
+                {% if s.social_type != "osm" %}
+                <div class="row">
+                    <div class="col-sm-6">{{ s.social_type }}: {{ s.social_id }}</div>
+                </div>
+
+                {% endif %}
+            {% endfor %}
+
+            <hr>
+
+            <h3>Foursquare INFO:</h3>
+            {{ fs_info }}
+
+            <hr>
+            <h3>Foursquare ID:</h3>
+            {{ fs_id }}
+
+            <hr>
+            <h3><img src="http://www.factual.com/assets/factual_logo_small-b79536dcf19486be99e15a6e0d9ac221.png" alt=""/></h3>
+            {{ factual }}
+
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascript_headers %}
+    {{ block.super }}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    {% compressed_js 'management' %}
+{% endblock javascript_headers %}
