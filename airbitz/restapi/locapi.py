@@ -14,9 +14,13 @@ DEG_TO_M=(EARTHS_MEAN_RADIUS * math.pi) / 180.0
 HOP=Distance(mi=5)
 
 def admin1Map(l):
-    return l
+    if 'Berlin' == l:
+        return 'BB'
+    else:
+        return l
 
 def countryMap(c):
+    print c
     if c == 'GB':
         return 'UK'
     else:
