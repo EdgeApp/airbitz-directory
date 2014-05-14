@@ -733,6 +733,7 @@
                     biz.save({}, {
                         success: function() {
                             $('.save').html('Save');
+                            $('.admin-og-image img').attr('src', $('.admin-og-image img').attr('src') + '?' + Math.random());
                             that.flash('alert-success', 'Successfullly updated business.');
                         },
                         error: function() {

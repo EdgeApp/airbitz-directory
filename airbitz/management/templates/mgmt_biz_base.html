@@ -18,7 +18,16 @@
             <span class="label label-danger">WARNING NOT PRODUCTION</span>
         </div>
     {% endif %}
-        <h1 class="biz-name col-sm-12">{{ biz.name }}</h1>
+        <div class="col-sm-12">
+            <h1 class="biz-name">{{ biz.name }}</h1>
+        </div>
+    </div>
+    <div class="admin-og-image row">
+        <div class="col-sm-3">
+            <a href="{{ MEDIA_URL }}screencaps/biz-{{ biz.id }}.jpg" target="_blank">
+                <img class="img-responsive" src="{{ MEDIA_URL }}screencaps/biz-{{ biz.id }}.jpg" />
+            </a>
+        </div>
     </div>
     {% block bizbody %}
     {% endblock bizbody %}
