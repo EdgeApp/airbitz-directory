@@ -15,7 +15,7 @@ HOP=Distance(mi=5)
 
 def admin1Map(l):
     if 'Berlin' == l:
-        return 'BB'
+        return 'BE'
     else:
         return l
 
