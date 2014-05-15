@@ -79,7 +79,9 @@ def lookupSocialIcon(social_type):
 
 def screencap(biz):
     print '******* CASPERJS TIME *******'
-    print subprocess.check_output('casperjs /staging/biz-screen-capture.js ' + str(biz.id), shell=True)
+    casper_script = '/staging/biz-screen-capture.js'
+    casper_args = 'casperjs ' + casper_script + ' --url=' + settings.SCREENCAP_ABSOLUTE_URL + ' ' + str(biz.id)
+    print subprocess.check_output(casper_args, shell=True)
 
 class Category(models.Model):
     name = models.CharField(max_length=30)

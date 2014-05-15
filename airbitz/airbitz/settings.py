@@ -30,6 +30,8 @@ if DEBUG:
     print 'STAGING:', STAGING
     print 'PRODUCTION:', PRODUCTION
 
+SCREENCAP_ABSOLUTE_URL = 'https://airbitz.co'
+
 DEPLOY_DATE = '20140502'
 
 # Quick-start development settings - unsuitable for production

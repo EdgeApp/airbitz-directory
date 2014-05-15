@@ -8,22 +8,28 @@ var casper = require('casper').create({
 var args = casper.cli.args;
 
 var captureDir = '/staging/media/screencaps/';
-var baseSite = 'https://airbitz.co';
+var baseSite = casper.cli.has('url') ? casper.cli.get('url') : 'http://127.0.0.1:8000';
 var bizPage = baseSite + '/biz/';
 
 var urls = [];
 
-if (args.length < 1) {
+if (args.length === 0) {
 	casper
 		.echo('Usage: $ casperjs biz-screen-capture.js id1 id2 id3 ..')
 		.exit(1);
 
 } else if (args.length >= 1) {
+	if (casper.cli.has('url')) {
+		if (casper.cli.get('url').substring(0,4) == 'http') {
+			casper.cli.drop('url');
+		}
+	}
+
 	for (ii=0; ii<args.length; ii++) {
 		var bizId = args[ii].toString();
 		urls[ii] = bizPage + bizId;
 	}
-	casper.warn('Processing: ' + urls.length + ' URLS');
+	casper.warn('**** Processing: ' + urls.length + ' URLS ****');
 	casper.warn('IDS: ' + urls[0] + ' - ' + urls[urls.length - 1]);
 }
 
@@ -81,7 +87,7 @@ casper.each(urls, function(self, url) {
 
 	self.then(function() {
 		
-		self.echo('SCREENSHOT[' + bizId + ']: ' + url);
+		self.warn('[' + bizId + ']: SCREEN CAPTURED - ' + url);
 	    self.capture(captureDir + 'biz-' + bizId + '.jpg', {
 	        format: 'jpg',
 	        quality: 100,
