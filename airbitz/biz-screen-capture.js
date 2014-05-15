@@ -15,7 +15,7 @@ var urls = [];
 
 if (args.length === 0) {
 	casper
-		.warn('Usage: $ casperjs biz-screen-capture.js id1 id2 id3 ..')
+		.echo('Usage: $ casperjs biz-screen-capture.js id1 id2 id3 ..')
 		.exit(1);
 
 } else if (args.length >= 1) {
