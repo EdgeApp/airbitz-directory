@@ -89,6 +89,9 @@ def screencap(biz):
     casper_url = '--url=' + settings.SCREENCAP_ABSOLUTE_URL
     casper_args = ' '.join(['casperjs', casper_script, casper_save, casper_url, str(biz.id)])
     logger.debug("this is a debug message!")
+    print ''
+    print casper_script
+    print ''
     print casper_args
     try:
         print subprocess.check_output(
