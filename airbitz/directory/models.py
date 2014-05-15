@@ -81,7 +81,9 @@ def lookupSocialIcon(social_type):
     return social_icon
 
 def screencap(biz):
+    print ''
     print '******* CASPERJS TIME *******'
+    print ''
     casper_script = os.getcwd() + '/biz-screen-capture.js'
     casper_save = '--save=' + settings.MEDIA_ROOT + '/screencaps/'
     casper_url = '--url=' + settings.SCREENCAP_ABSOLUTE_URL
@@ -89,7 +91,11 @@ def screencap(biz):
     logger.debug("this is a debug message!")
     print casper_args
     try:
-        print subprocess.check_output(casper_args, shell=True)
+        print subprocess.check_output(
+            casper_args,
+            shell=True,
+            stderr=subprocess.STDOUT
+        )
     except subprocess.CalledProcessError as e:
         print e
 
