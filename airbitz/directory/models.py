@@ -12,9 +12,12 @@ from rest_framework.authtoken.models import Token
 import os
 import subprocess
 import urllib
+import logging
 
 from airbitz import settings
 from imgprocessors import DEF_ADMIN_PROC, DEF_MOBILE_PROC
+
+logger = logging.getLogger(__name__)
 
 @receiver(post_save, sender=get_user_model())
 def create_auth_token(sender, instance=None, created=False, **kwargs):
@@ -83,6 +86,7 @@ def screencap(biz):
     casper_save = '--save=' + settings.MEDIA_ROOT + '/screencaps/'
     casper_url = '--url=' + settings.SCREENCAP_ABSOLUTE_URL
     casper_args = ' '.join(['casperjs', casper_script, casper_save, casper_url, str(biz.id)])
+    logger.debug("this is a debug message!")
     print casper_args
     print subprocess.check_output(casper_args, shell=True)
 
