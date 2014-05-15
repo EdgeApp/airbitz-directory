@@ -88,7 +88,10 @@ def screencap(biz):
     casper_args = ' '.join(['casperjs', casper_script, casper_save, casper_url, str(biz.id)])
     logger.debug("this is a debug message!")
     print casper_args
-    print subprocess.check_output(casper_args, shell=True)
+    try:
+        print subprocess.check_output(casper_args, shell=True)
+    except subprocess.CalledProcessError as e:
+        print e
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
