@@ -89,6 +89,8 @@ ACTIVE_REGIONS = {
            'search': 'Netherlands'},
     'GB': {'name': 'United Kingdom',
        'search': 'United Kingdom'},
+    'DE': {'name': 'Germany',
+       'search': 'Germany'},
 }
 
 US_REGIONS = {
