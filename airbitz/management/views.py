@@ -19,6 +19,9 @@ from management.forms import CategoryForm, ImageTagForm, \
                              BizImportForm, HoursFormSet, HoursFormSetHelper, \
                              SocialFormSet, SocialFormHelper
 
+import logging
+logger = logging.getLogger(__name__)
+
 LOGIN_URL='/mgmt/login'
 
 def isManager(u): 
@@ -221,6 +224,7 @@ def business_view(request, bizId):
         'social': social,
         'tab_main': ' class=active ',
     }
+    logger.debug("this is a debug message!")
     return render_to_response('mgmt_biz_view.html', RequestContext(request, context))
 
 @user_passes_test(isManager, login_url=LOGIN_URL)
