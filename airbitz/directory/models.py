@@ -10,6 +10,7 @@ from django.utils.http import urlquote_plus
 from imagekit.models import ImageSpecField
 from rest_framework.authtoken.models import Token
 import os
+import subprocess
 import urllib
 
 from airbitz import settings
@@ -76,6 +77,11 @@ def lookupSocialIcon(social_type):
         social_icon = 'link'
     return social_icon
 
+def screencap(biz):
+    print '******* CASPERJS TIME *******'
+    casper_script = '/staging/biz-screen-capture.js'
+    casper_args = 'casperjs ' + casper_script + ' --url=' + settings.SCREENCAP_ABSOLUTE_URL + ' ' + str(biz.id)
+    print subprocess.check_output(casper_args, shell=True)
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
@@ -165,7 +171,9 @@ class Business(models.Model):
         
 
     def save(self, *args, **kwargs):
-        super(Business, self).save()
+        if self.status == "PUB":
+            screencap(self);
+        super(Business, self).save(*args, **kwargs)    # Call the "real" save() method.
 
 class SocialId(models.Model):
     business = models.ForeignKey(Business, null=False)
