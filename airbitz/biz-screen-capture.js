@@ -7,7 +7,8 @@ var casper = require('casper').create({
 
 var args = casper.cli.args;
 
-var captureDir = '/staging/media/screencaps/';
+// var captureDir = '/staging/media/screencaps/';
+var captureDir = casper.cli.has('save') ? casper.cli.get('save') : '/staging/media/screencaps/';
 var baseSite = casper.cli.has('url') ? casper.cli.get('url') : 'http://127.0.0.1:8000';
 var bizPage = baseSite + '/biz/';
 
@@ -15,13 +16,18 @@ var urls = [];
 
 if (args.length === 0) {
 	casper
-		.warn('Usage: $ casperjs biz-screen-capture.js id1 id2 id3 ..')
+		.warn('Usage: $ casperjs biz-screen-capture.js --url=http://targeturl.com --save=/path/to/save/ id1 [id2 id3 ..]')
 		.exit(1);
 
 } else if (args.length >= 1) {
 	if (casper.cli.has('url')) {
-		if (casper.cli.get('url').substring(0,4) == 'http') {
+		if (casper.cli.get('url')) {
 			casper.cli.drop('url');
+		}
+	}
+	if (casper.cli.has('save')) {
+		if (casper.cli.get('save')) {
+			casper.cli.drop('save');
 		}
 	}
 
