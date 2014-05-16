@@ -15,7 +15,7 @@ airbitz/media
 config.codekit
 *-ck.js
 
-business_images
+staging/media
 
 # Ignore postgres database dumps
 *.dump
