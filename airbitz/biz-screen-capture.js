@@ -1,4 +1,14 @@
- /* jshint ignore:start */
+/* jshint ignore:start */
+//
+// Usage: $ casperjs biz-screen-capture.js --url=http://targeturl.com --save=/path/to/save/ id1 [id2 id3 ..]
+//
+// # Caveats: Seems to fail after processing 10-15 ids
+// # ...best to loop with python and call 1 id at a time
+// # python example:
+// import subprocess
+// 
+
+
 
 var casper = require('casper').create({
 	// verbose: true,

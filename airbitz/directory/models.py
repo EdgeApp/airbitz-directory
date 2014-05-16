@@ -87,7 +87,7 @@ def screencap(biz):
     casper_script = os.getcwd() + '/biz-screen-capture.js'
     casper_save = '--save=' + settings.MEDIA_ROOT + '/screencaps/'
     casper_url = '--url=' + settings.SCREENCAP_ABSOLUTE_URL
-    casper_args = ' '.join(['casperjs', casper_script, casper_save, casper_url, str(biz.id)])
+    casper_args = ' '.join(['/home/devbitz/local/bin/casperjs', casper_script, casper_save, casper_url, str(biz.id)])
     logger.debug("this is a debug message!")
     print casper_args
     try:
