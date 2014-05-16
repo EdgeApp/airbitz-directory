@@ -11,8 +11,8 @@
 
 
 var casper = require('casper').create({
-	verbose: true,
-	logLevel: "debug"
+	//verbose: true,
+	//logLevel: "debug"
 });
 
 var args = casper.cli.args;
