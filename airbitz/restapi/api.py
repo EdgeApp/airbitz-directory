@@ -252,11 +252,11 @@ class ApiProcess(object):
             sqs = sqs.load_all()
             sqs = self.__filer_on_web__(sqs)
         else:
-            sqs = sqs.filter(SQ(has_physical_business=True))
+            sqs = sqs.narrow('has_physical_business:true')
             if self.location.country():
-                sqs = sqs.filter(country=self.location.country())
+                sqs = sqs.narrow('country:' + self.location.country());
                 if self.location.admin1():
-                    sqs = sqs.filter(admin1_code=self.location.admin1())
+                    sqs = sqs.narrow('admin1_code:' + self.location.admin1())
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
             sqs = sqs.load_all()
