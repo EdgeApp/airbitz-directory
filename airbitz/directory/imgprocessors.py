@@ -117,3 +117,10 @@ class TopBgBlurred(ImageSpec):
 
 register.generator('ab:topbgblurred', TopBgBlurred)
 
+
+class SearchResultThumb(ImageSpec):
+    processors = [ResizeToFill(150,150)]
+    format = 'JPEG'
+    options = {'quality': 80}
+
+register.generator('ab:searchresultthumb', SearchResultThumb)
