@@ -261,6 +261,7 @@ class ApiProcess(object):
             sqs = sqs.order_by('distance')
             sqs = sqs.load_all()
             sqs = self.__geolocation_filter__(sqs, geopoly, radius)
+            sqs = sorted(sqs, key=lambda x: x.object.distance)
         return [s.object for s in sqs]
 
     def __filer_on_web__(self, sqs):
