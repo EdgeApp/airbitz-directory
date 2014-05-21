@@ -1,3 +1,4 @@
+import datetime
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.gis.db import models
@@ -141,6 +142,9 @@ class Business(models.Model):
 
     contact1_email = models.EmailField(blank=True)
     contact2_email = models.EmailField(blank=True)
+
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     # PostGis fields
     center = models.PointField(blank=True, null=True)
