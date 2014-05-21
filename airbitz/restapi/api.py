@@ -30,13 +30,13 @@ def autocompleteSuggSerialize(row, used):
     if not used.has_key(row.content_auto):
         used[row.content_auto] = True
         res.append({ 'type': 'business', 'bizId': row.pk, 'text': row.content_auto })
-
-    for c in row.categories:
-        if used.has_key(c):
-            continue
-        used[c] = True
-        res.append({ 'type': 'category', 'text': c })
-        return res
+    if row.categories:
+        for c in row.categories:
+            if used.has_key(c):
+                continue
+            used[c] = True
+            res.append({ 'type': 'category', 'text': c })
+            return res
     return res
 
 def flatten(ls):
