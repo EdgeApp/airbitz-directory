@@ -8,9 +8,10 @@
         {% endif %}
         <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">
         {% if biz.landing_image %}
-            {% thumbnail '150x150' biz.landing_image.web_photo -- class="biz-img" %}
+            {% generateimage 'ab:searchresultthumb' source=biz.landing_image.web_photo as th %}
+            <img src="{{ th.url }}" class="biz-img" title="{{ biz.name }}" alt="{{ biz.name }}" />
         {% else %}
-            <img data-src="holder.js/150x150/ab-blue/text:{{ biz.name }}" class="biz-img">
+            <img data-src="holder.js/150x150/ab-blue/text:{{ biz.name }}" class="biz-img" title="{{ biz.name }}" alt="{{ biz.name }}">
         {% endif %}
         </a>
 

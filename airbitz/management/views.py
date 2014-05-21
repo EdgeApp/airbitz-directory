@@ -18,6 +18,7 @@ from management.forms import CategoryForm, ImageTagForm, \
                              BizImageForm, BizImageLinkForm, \
                              BizImportForm, HoursFormSet, HoursFormSetHelper, \
                              SocialFormSet, SocialFormHelper
+from time import strftime
 
 import logging
 logger = logging.getLogger(__name__)
@@ -223,6 +224,8 @@ def business_view(request, bizId):
         'hours': hours,
         'social': social,
         'tab_main': ' class=active ',
+        'created': biz.created.strftime('%m/%d/%y %H:%M:%S'),
+        'modified': biz.modified.strftime('%m/%d/%y %H:%M:%S'),
     }
     logger.debug("this is a debug message!")
     return render_to_response('mgmt_biz_view.html', RequestContext(request, context))
