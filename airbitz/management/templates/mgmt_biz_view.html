@@ -64,13 +64,26 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-6">
-                            <div>
-                                <label for="status">Status:</label>
-                                <select id="status" name="status" />
-                                    {% for s in STATUS_CHOICES %}
-                                        <option value="{{ s.0 }}">{{ s.1 }}</option>
-                                    {% endfor %}
-                                </select>
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label for="status">Status:</label>
+                                    <select id="status" name="status" />
+                                        {% for s in STATUS_CHOICES %}
+                                            <option value="{{ s.0 }}">{{ s.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-sm-4">
+                                    <label for="created-time">Created:</label>
+                                    <input type="text" class="disabled form-control" id="created-time" name="created" value="{{ created }}" disabled="disabled" />
+                                </div>
+
+                                <div class="form-group col-sm-4">
+                                    <label for="modified-time">Modified:</label>
+                                    <input type="text" class="disabled form-control" id="modified-time" name="modified" value="{{ modified }}" disabled="disabled" />
+                                </div>
+
                             </div>
                             <div class="form-group">
                                 <label for="name">Name:</label>
@@ -733,7 +746,14 @@
                     biz.save({}, {
                         success: function() {
                             $('.save').html('Save');
-                            that.flash('alert-success', 'Successfullly updated business.');
+                            var $ogImg = $('.admin-og-image img');
+                            $ogImg.attr('src', $ogImg.attr('src') + '?' + Math.random());
+
+                            // update modified time in gui
+                            var currentModifiedTime = moment.utc(moment(), 'MM/DD/YY HH:mm:ss').zone(7);
+                            $('#modified-time').val(currentModifiedTime.calendar()).css('color', 'blue');
+
+                            that.flash('alert-success', 'Successfullly updated business ' + modifiedTime.calendar() + '.');
                         },
                         error: function() {
                             alert('An error occurred.');
