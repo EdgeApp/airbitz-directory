@@ -25,6 +25,7 @@
 {% endblock body %}
 
 {% block javascript %}
+    {{ block.super }}
     <script type="text/javascript">
     $(function() {
         $('#mgmt_biz_copy').click(function() {
