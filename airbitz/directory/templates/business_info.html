@@ -24,7 +24,7 @@
     {{ biz.description }}
     {% endspaceless %}
 {% endblock og_description %}
-{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-business.jpg{% endblock og_image %}
+{% block og_image %}{{ ABSOLUTE_ROOT_URL }}media/screencaps/biz-{{ biz.id }}.jpg{% endblock og_image %}
 
 {% block twitter_title %}{{ biz.name }}, {% if biz.admin3_name %}{{ biz.admin3_name }} {% endif %}Accepts Bitcoin{% endblock twitter_title %}
 {% block twitter_description %}
@@ -33,7 +33,7 @@
     {{ biz.description }}
     {% endspaceless %}
 {% endblock twitter_description %}
-{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-business.jpg{% endblock twitter_image_src %}
+{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}media/screencaps/biz-{{ biz.id }}.jpg{% endblock twitter_image_src %}
 
 
 
