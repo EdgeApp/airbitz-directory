@@ -238,8 +238,9 @@ class ApiProcess(object):
                            | SQ(description=term))
         if category:
             sqs = self.querySetAddCategories(sqs, category)
-        if self.isExactCategory(term):
-            sqs = sqs.filter(categories=term)
+        # Remove we never want to filter strictly on a category
+        # if self.isExactCategory(term):
+        #     sqs = sqs.filter(categories=term)
         if self.location.isWebOnly():
             sqs = sqs.filter(SQ(has_online_business=True) & SQ(has_physical_business=False))
         elif self.location.isOnWeb():
