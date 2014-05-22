@@ -9,7 +9,10 @@ function afterEmailSubmission(resp){
 
 
 jQuery(function($) {
-
+    $('#email-signup-form').on('click', function() {
+        $.ajaxSetup({ crossDomain: true });
+    });
+    
     $('#email-signup-form').ajaxChimp({
         url: 'https://airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=b7bd36890d',
         callback: afterEmailSubmission

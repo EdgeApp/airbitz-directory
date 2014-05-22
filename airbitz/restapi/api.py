@@ -30,13 +30,13 @@ def autocompleteSuggSerialize(row, used):
     if not used.has_key(row.content_auto):
         used[row.content_auto] = True
         res.append({ 'type': 'business', 'bizId': row.pk, 'text': row.content_auto })
-
-    for c in row.categories:
-        if used.has_key(c):
-            continue
-        used[c] = True
-        res.append({ 'type': 'category', 'text': c })
-        return res
+    if row.categories:
+        for c in row.categories:
+            if used.has_key(c):
+                continue
+            used[c] = True
+            res.append({ 'type': 'category', 'text': c })
+            return res
     return res
 
 def flatten(ls):
@@ -238,8 +238,9 @@ class ApiProcess(object):
                            | SQ(description=term))
         if category:
             sqs = self.querySetAddCategories(sqs, category)
-        if self.isExactCategory(term):
-            sqs = sqs.filter(categories=term)
+        # Remove we never want to filter strictly on a category
+        # if self.isExactCategory(term):
+        #     sqs = sqs.filter(categories=term)
         if self.location.isWebOnly():
             sqs = sqs.filter(SQ(has_online_business=True) & SQ(has_physical_business=False))
         elif self.location.isOnWeb():
@@ -252,15 +253,16 @@ class ApiProcess(object):
             sqs = sqs.load_all()
             sqs = self.__filer_on_web__(sqs)
         else:
-            sqs = sqs.filter(SQ(has_physical_business=True))
+            sqs = sqs.narrow('has_physical_business:true')
             if self.location.country():
-                sqs = sqs.filter(country=self.location.country())
+                sqs = sqs.narrow('country:' + self.location.country());
                 if self.location.admin1():
-                    sqs = sqs.filter(admin1_code=self.location.admin1())
+                    sqs = sqs.narrow('admin1_code:' + self.location.admin1())
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
             sqs = sqs.load_all()
             sqs = self.__geolocation_filter__(sqs, geopoly, radius)
+            sqs = sorted(sqs, key=lambda x: x.object.distance)
         return [s.object for s in sqs]
 
     def __filer_on_web__(self, sqs):
