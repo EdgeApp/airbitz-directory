@@ -69,3 +69,55 @@
   font-size: 18px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
 }
+.custom-controls {
+  margin-bottom: 10px;
+}
+table.dataTable tr td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+table.dataTable tr td a i.fa.fa-pencil {
+  margin-right: 3px;
+  border-radius: 5px;
+}
+table.dataTable tr td a i.fa.fa-pencil:hover {
+  color: black;
+}
+table.dataTable tr td i.ab-draft {
+  color: #003e61;
+}
+table.dataTable tr td i.ab-published {
+  color: #55af00;
+}
+table.dataTable tr td i.ab-pending {
+  color: brown;
+}
+table.dataTable tr td i.ab-trash {
+  color: #ff0000;
+}
+table.dataTable tr td .popover {
+  max-width: 500px;
+}
+table.dataTable tr td .popover strong {
+  display: inline-block;
+  width: 80px;
+  margin-right: 10px;
+}
+table.dataTable tr td .popover hr {
+  margin: 10px 0px;
+}
+table.dataTable tr.even td.sorting_1,
+table.dataTable tr.even td.sorting_2,
+table.dataTable tr.even td.sorting_3,
+table.dataTable tr.even td.sorting_4 {
+  background-color: #E4F8FF;
+}
+table.dataTable tr.odd {
+  background-color: #E2F0FF;
+}
+table.dataTable tr.odd td.sorting_1,
+table.dataTable tr.odd td.sorting_2,
+table.dataTable tr.odd td.sorting_3,
+table.dataTable tr.odd td.sorting_4 {
+  background-color: #ACDCEB;
+}
