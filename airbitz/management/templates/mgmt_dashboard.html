@@ -37,33 +37,37 @@
         <div class="col-sm-12">
             <div class="panel panel-default panel-tabbed">
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="pull-right">
-                                <label for="status">Status</label>
-                                <select id="status">
-                                    <option value="ALL">All</option>
-                                    {% for s in STATUS_CHOICES %}
-                                        <option value="{{ s.0 }}">{{ s.1 }}</option>
-                                    {% endfor %}
-                                </select>
-                                <label for="status">Location</label>
-                                <input id="adminLocation" type="text" class="form-control" style="width: 300px">
-                                <button class="btn btn-default btn-sm" id="refresh">Refresh</button>
-                            </div>
+                    <div class="custom-controls row">
+                        <div class="col-sm-6">
+                            <label for="status">Status</label>
+                            <select id="status">
+                                <option value="ALL">All</option>
+                                {% for s in STATUS_CHOICES %}
+                                    <option value="{{ s.0 }}">{{ s.1 }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <label for="adminLocation">Location</label>
+                            <input id="adminLocation" type="text" class="form-control" style="width: 300px">
+                            <button class="btn btn-default btn-sm" id="refresh">Refresh</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <table class="table dataTableCustom">
                                 <thead>
-                                    <th></th>
                                     <th>Status</th>
                                     <th>Name</th>
                                     <th>Categories</th>
+                                    <th>Phone</th>
+                                    <th>Modified</th>
+                                    <th>Created</th>
                                 </thead>
                                 <tbody></tbody>
                                 <tfoot>
+                                    <th></th>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -88,6 +92,49 @@
 {% block javascript %}
     {{ block.super }}
     <script type="text/javascript">
+
+    function createTooltip(data) {
+        var toolTip = '';
+        var phone = data['phone'];
+        var address = data['address'];
+        var state = data['admin1_code'];
+        var county = data['admin2_name'];
+        var city = data['admin3_name'];
+        var country = data['country'];
+
+        if (phone) {
+            toolTip +=  '<strong>Phone:</strong> ' + phone + '<hr />';
+        }
+        if (address) {
+            toolTip +=  '<strong>Street:</strong> ' + address + '<br />';
+        }
+        if (city && state) {
+            toolTip +=  '<strong>City, State:</strong> ' + city + ', ' + state + '<br />';
+        } else if (city && !state){
+            toolTip +=  '<strong>City:</strong> ' + city + '<br />';
+        } else if (state && !city){
+            toolTip += '<strong>State:</strong> ' +  state + '<br />';
+        }
+        if (county) {
+            toolTip += '<strong>County:</strong> ' + county + '<br />';
+        }
+        if (country) {
+            toolTip += '<strong>Country:</strong> ' + country + '<br />';
+        }
+
+        return toolTip;
+    }
+
+    $.fn.dataTableExt.oApi.fnResetAllFilters = function (oSettings, bDraw/*default true*/) {
+        for(iCol = 0; iCol < oSettings.aoPreSearchCols.length; iCol++) {
+                oSettings.aoPreSearchCols[ iCol ].sSearch = '';
+        }
+        oSettings.oPreviousSearch.sSearch = '';
+
+        if(typeof bDraw === 'undefined') bDraw = true;
+        if(bDraw) this.fnDraw();
+    }
+
     $(function() {
         AB.setup();
         AB.addLocationSearch($('#adminLocation'));
@@ -101,8 +148,8 @@
         var tableUrl = "/mgmt/api/biz/";
         var oTable = $('.dataTableCustom').dataTable({
           "sPaginationType": "full_numbers",
-          "iDisplayLength": 10,
-          "aLengthMenu": [5, 10, 20, 50],
+          "iDisplayLength": 15,
+          "aLengthMenu": [5, 10, 15, 20, 25, 50],
           "bStateSave": true,
           "bProcessing": true,
           "bServerSide": true,
@@ -113,59 +160,101 @@
                 aoData.push({ "name": "status", "value": st });
             }
             aoData.push({ "name": "adminLocation", "value": $('#adminLocation').val() });
-            $.getJSON(sSource, aoData, function (json) { 
+            $.getJSON(sSource, aoData, function (json) {
                 fnCallback(json)
+                $('td span').popover( {
+                    "delay": 100,
+                    "trigger": 'hover',
+                    "fade": 350,
+                    "html": true,
+                })
             });
           },
+          "bAutoWidth": false,
           "aoColumns": [
-            {"mData": "id"},
             {"mData": "status"},
             {"mData": "name"},
-            {"mData": "categories"}
+            {"mData": "categories"},
+            {"mData": "phone"},
+            {"mData": "modified"},
+            {"mData": "created"},
           ],
           "aoColumnDefs": [ {
             "aTargets":[0],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
-              $(nTd).css('text-align', 'center');
+              $(nTd).css('text-align', 'left');
+              $(nTd).attr('data-sort', oData['status']);
+                console.log(oData);
             },
             "mData": null,
             "mRender": function(data, type, full) {
-                return '<td><a href="/mgmt/biz/view/' + data + '/main" class="add">' + 
-                            '<span class="glyphicon glyphicon-pencil"></span>' + 
-                       '</a></td>';
+                if (data === "DR") {
+                    return '<i class="ab-draft fa fa-pencil-square-o" title="Draft"></i>';
+                } else if (data === "PUB") {
+                    return '<i class="ab-published fa fa-check-square-o" title="Published"></i>';
+                } else if (data === "PEN") {
+                    return '<i class="ab-pending fa fa-clock-o" title="Pending"></i>';
+                } else {
+                    return '<i class="ab-trash fa fa-trash-o" title="Trashed"></i>';
+                }
             }
           } , {
             "aTargets":[1],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+                $(nTd).css('text-align', 'left');
+
+                var tooltip = createTooltip(oData);
+                if (tooltip) { var title = ' title="Business Details"'; }
+                $(nTd).html('' +
+                        '<a href="/mgmt/biz/view/' + oData['id'] + '/main" class="add">' +
+                            '<i class="fa fa-pencil"></i>' +
+                        '</a> ' +
+                        '<span data-toggle="tooltip" data-content="' + tooltip + '"' + title +'>' +
+                            $(nTd).text() +
+                        '</span>'
+                );
+            }
+          } , {
+            "aTargets":[2],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
               $(nTd).css('text-align', 'left');
             },
             "mData": null,
             "mRender": function(data, type, full) {
-                if (data === "DR") {
-                    return '<td>Draft</td>';
-                } else if (data === "PUB") {
-                    return '<td>Published</td>';
-                } else if (data === "PEN") {
-                    return '<td>Pending</td>';
-                } else {
-                    return '<td>Trashed</td>';
-                }
-            }
-          } , {
-            "aTargets":[3],
-            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
-              $(nTd).css('text-align', 'center');
-            },
-            "mData": null,
-            "mRender": function(data, type, full) {
               var html = '';
               for (var i = 0; i < data.length; ++i) {
-                html += '<span class="btn btn-sm btn-default">' + data[i].name + '</span>';
+                html += '<span class="label label-primary" style="margin-right: 2px;">' + data[i].name + '</span>';
               }
               return html;
             }
+          } , {
+            "aTargets":[4],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+                $(nTd).css('text-align', 'left');
+                unixTimestamp = moment(oData['modified']).unix();
+                $(nTd).attr('data-sort', unixTimestamp);
+            },
+            "mData": null,
+            "mRender": function(data, type, full) {
+                niceTimestamp = moment(data).format('MM-DD-YY HH:mm:ss');
+                return niceTimestamp;
+            }
+          } , {
+            "aTargets":[5],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+                $(nTd).css('text-align', 'left');
+                unixTimestamp = moment(oData['modified']).unix();
+                $(nTd).attr('data-sort', unixTimestamp);
+            },
+            "mData": null,
+            "mRender": function(data, type, full) {
+                niceTimestamp = moment(data).format('MM-DD-YY HH:mm:ss');
+                return niceTimestamp;
+            }
           }]
         });
+
+
         $('.panel select').select2({ 'width': '200px' });
         $('#status').change(function() {
             localStorage.setItem('mgmt_status', $(this).val());
@@ -178,7 +267,7 @@
         $('#refresh').click(function() {
             oTable._fnAjaxUpdate();
         });
-        $('#status').select2({ 'width': '200px' });
+        $('#status').select2({ 'width': '120px' });
     });
     </script>
 {% endblock javascript %}
