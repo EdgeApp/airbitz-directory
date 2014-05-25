@@ -23,8 +23,8 @@
 {% block body %}
     <div class="row">
         <div class="col-sm-12">
-            <a class="pull-right btn-sm btn btn-default" href="{% url 'mgmt_biz_import' %}">Import Place</a>
-            <a class="pull-right btn-sm btn btn-default" href="{% url 'mgmt_biz_add' %}">Add Place</a>
+            <a class="pull-right btn-sm btn btn-warning" href="{% url 'mgmt_biz_import' %}"><i class="fa fa-download"></i> Import Place</a>
+            <a class="pull-right btn-sm btn btn-success" href="{% url 'mgmt_biz_add' %}" style="margin-right: 5px;"><i class="fa fa-plus"></i> Add Place</a>
             <ul class="nav nav-tabs">
                 <li class="active"><a href="{% url 'mgmt_dashboard' %}">Dashboard</a></li>
                 <li><a href="{% url 'mgmt_map' %}">Map</a></li>
@@ -60,7 +60,7 @@
                                     <th>Status</th>
                                     <th>Name</th>
                                     <th>Categories</th>
-                                    <th>Phone</th>
+                                    <th>Country</th>
                                     <th>Published</th>
                                     <th>Modified</th>
                                     <th>Created</th>
@@ -127,16 +127,6 @@
         return toolTip;
     }
 
-    $.fn.dataTableExt.oApi.fnResetAllFilters = function (oSettings, bDraw/*default true*/) {
-        for(iCol = 0; iCol < oSettings.aoPreSearchCols.length; iCol++) {
-                oSettings.aoPreSearchCols[ iCol ].sSearch = '';
-        }
-        oSettings.oPreviousSearch.sSearch = '';
-
-        if(typeof bDraw === 'undefined') bDraw = true;
-        if(bDraw) this.fnDraw();
-    }
-
     $(function() {
         AB.setup();
         AB.addLocationSearch($('#adminLocation'));
@@ -180,7 +170,7 @@
             {"mData": "status"},
             {"mData": "name"},
             {"mData": "categories"},
-            {"mData": "phone"},
+            {"mData": "country"},
             {"mData": "published"},
             {"mData": "modified"},
             {"mData": "created"},
@@ -239,7 +229,9 @@
                 $(nTd).css('text-align', 'left');
                 if (oData['published'] !== null) {
                     unixTimestamp = moment(oData['published']).unix();
+                    searchTimestamp = moment(oData['published']).toString();
                     $(nTd).attr('data-sort', unixTimestamp);
+                    $(nTd).attr('data-search', searchTimestamp);
                 }
             },
             "mData": null,

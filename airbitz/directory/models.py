@@ -189,17 +189,23 @@ class Business(models.Model):
         else:
             destination = self.name
         return gmaps_url + urlquote_plus(destination)
-        
 
     # override default save and check for published to set a publish date
     def save(self, *args, **kwargs):
-        if self.status == "PUB":
-            screencap(self);
-            self.published = datetime.datetime.now()
-        else:
-            self.published = None
+        orig = Business.objects.get(pk=self.pk)
 
-        super(Business, self).save(*args, **kwargs)    # Call the "real" save() method.        super(Business, self).save()
+        if orig.status == 'PUB':
+            if self.published == None:
+                self.published = datetime.datetime.now()
+        else:
+            if self.status == 'PUB':
+                self.published = datetime.datetime.now()
+            else:
+                self.published = None
+		if self.status == 'PUB':
+			screencap(self)
+
+        super(Business, self).save(*args, **kwargs)
 
 class SocialId(models.Model):
     business = models.ForeignKey(Business, null=False)
