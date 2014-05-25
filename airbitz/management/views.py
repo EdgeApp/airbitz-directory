@@ -217,6 +217,12 @@ def business_view(request, bizId):
     biz = get_object_or_404(Business, pk=bizId)
     hours = BusinessHours.objects.filter(business=biz)
     social = SocialId.objects.filter(business=biz)
+
+    if biz.published is None:
+        published = ''
+    else:
+        published = biz.published.strftime('%m/%d/%y %H:%M:%S')
+
     context = {
         'STATUS_CHOICES': STATUS_CHOICES,
         'SOCIAL_TYPES': SOCIAL_TYPES,
@@ -226,6 +232,7 @@ def business_view(request, bizId):
         'tab_main': ' class=active ',
         'created': biz.created.strftime('%m/%d/%y %H:%M:%S'),
         'modified': biz.modified.strftime('%m/%d/%y %H:%M:%S'),
+        'published': published,
     }
     logger.debug("this is a debug message!")
     return render_to_response('mgmt_biz_view.html', RequestContext(request, context))

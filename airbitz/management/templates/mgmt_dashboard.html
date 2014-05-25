@@ -61,11 +61,13 @@
                                     <th>Name</th>
                                     <th>Categories</th>
                                     <th>Phone</th>
+                                    <th>Published</th>
                                     <th>Modified</th>
                                     <th>Created</th>
                                 </thead>
                                 <tbody></tbody>
                                 <tfoot>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -147,6 +149,9 @@
         }
         var tableUrl = "/mgmt/api/biz/";
         var oTable = $('.dataTableCustom').dataTable({
+          "oLanguage": {
+            "sProcessing": "<i class='fa fa-spinner fa-spin'> </i> Building Table"
+          },
           "sPaginationType": "full_numbers",
           "iDisplayLength": 15,
           "aLengthMenu": [5, 10, 15, 20, 25, 50],
@@ -176,6 +181,7 @@
             {"mData": "name"},
             {"mData": "categories"},
             {"mData": "phone"},
+            {"mData": "published"},
             {"mData": "modified"},
             {"mData": "created"},
           ],
@@ -231,6 +237,25 @@
             "aTargets":[4],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                 $(nTd).css('text-align', 'left');
+                if (oData['published'] !== null) {
+                    unixTimestamp = moment(oData['published']).unix();
+                    $(nTd).attr('data-sort', unixTimestamp);
+                }
+            },
+            "mData": null,
+            "mRender": function(data, type, full) {
+                console.log('PUBLISHED IS:' + data)
+                if (data !== null) {
+                    niceTimestamp = moment(data).format('MM-DD-YY HH:mm:ss');
+                    return niceTimestamp;
+                } else {
+                    return '';
+                }
+            }
+          } , {
+            "aTargets":[5],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+                $(nTd).css('text-align', 'left');
                 unixTimestamp = moment(oData['modified']).unix();
                 $(nTd).attr('data-sort', unixTimestamp);
             },
@@ -240,10 +265,10 @@
                 return niceTimestamp;
             }
           } , {
-            "aTargets":[5],
+            "aTargets":[6],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                 $(nTd).css('text-align', 'left');
-                unixTimestamp = moment(oData['modified']).unix();
+                unixTimestamp = moment(oData['created']).unix();
                 $(nTd).attr('data-sort', unixTimestamp);
             },
             "mData": null,

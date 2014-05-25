@@ -145,6 +145,7 @@ class Business(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    published = models.DateTimeField(blank=True, null=True)
 
     # PostGis fields
     center = models.PointField(blank=True, null=True)
@@ -190,10 +191,15 @@ class Business(models.Model):
         return gmaps_url + urlquote_plus(destination)
         
 
+    # override default save and check for published to set a publish date
     def save(self, *args, **kwargs):
         if self.status == "PUB":
             screencap(self);
-        super(Business, self).save(*args, **kwargs)    # Call the "real" save() method.
+            self.published = datetime.datetime.now()
+        else:
+            self.published = None
+
+        super(Business, self).save(*args, **kwargs)    # Call the "real" save() method.        super(Business, self).save()
 
 class SocialId(models.Model):
     business = models.ForeignKey(Business, null=False)
