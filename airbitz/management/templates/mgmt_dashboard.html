@@ -23,8 +23,8 @@
 {% block body %}
     <div class="row">
         <div class="col-sm-12">
-            <a class="pull-right btn-sm btn btn-default" href="{% url 'mgmt_biz_import' %}">Import Place</a>
-            <a class="pull-right btn-sm btn btn-default" href="{% url 'mgmt_biz_add' %}">Add Place</a>
+            <a class="pull-right btn-sm btn btn-warning" href="{% url 'mgmt_biz_import' %}"><i class="fa fa-download"></i> Import Place</a>
+            <a class="pull-right btn-sm btn btn-success" href="{% url 'mgmt_biz_add' %}" style="margin-right: 5px;"><i class="fa fa-plus"></i> Add Place</a>
             <ul class="nav nav-tabs">
                 <li class="active"><a href="{% url 'mgmt_dashboard' %}">Dashboard</a></li>
                 <li><a href="{% url 'mgmt_map' %}">Map</a></li>
