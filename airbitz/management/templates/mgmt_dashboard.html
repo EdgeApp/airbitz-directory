@@ -60,7 +60,7 @@
                                     <th>Status</th>
                                     <th>Name</th>
                                     <th>Categories</th>
-                                    <th>Phone</th>
+                                    <th>Country</th>
                                     <th>Published</th>
                                     <th>Modified</th>
                                     <th>Created</th>
@@ -127,16 +127,6 @@
         return toolTip;
     }
 
-    $.fn.dataTableExt.oApi.fnResetAllFilters = function (oSettings, bDraw/*default true*/) {
-        for(iCol = 0; iCol < oSettings.aoPreSearchCols.length; iCol++) {
-                oSettings.aoPreSearchCols[ iCol ].sSearch = '';
-        }
-        oSettings.oPreviousSearch.sSearch = '';
-
-        if(typeof bDraw === 'undefined') bDraw = true;
-        if(bDraw) this.fnDraw();
-    }
-
     $(function() {
         AB.setup();
         AB.addLocationSearch($('#adminLocation'));
@@ -180,7 +170,7 @@
             {"mData": "status"},
             {"mData": "name"},
             {"mData": "categories"},
-            {"mData": "phone"},
+            {"mData": "country"},
             {"mData": "published"},
             {"mData": "modified"},
             {"mData": "created"},
@@ -239,7 +229,9 @@
                 $(nTd).css('text-align', 'left');
                 if (oData['published'] !== null) {
                     unixTimestamp = moment(oData['published']).unix();
+                    searchTimestamp = moment(oData['published']).toString();
                     $(nTd).attr('data-sort', unixTimestamp);
+                    $(nTd).attr('data-search', searchTimestamp);
                 }
             },
             "mData": null,
