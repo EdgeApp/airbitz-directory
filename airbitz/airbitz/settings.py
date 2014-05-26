@@ -228,7 +228,8 @@ PIPELINE_CSS = {
     },
     'dataTables': {
         'source_filenames': (
-            'extras/DataTables-1.9.4/media/css/jquery.dataTables.css',
+            # 'extras/DataTables-1.9.4/media/css/jquery.dataTables.css',
+            'extras/DataTables-1.10.0/media/css/jquery.dataTables.css',
         ),
         'output_filename': 'css/dataTables.' + DEPLOY_DATE + '.css',
         'extra_context': {
@@ -312,7 +313,8 @@ PIPELINE_JS = {
     },
     'dataTables': {
         'source_filenames': (
-            'extras/DataTables-1.9.4/media/js/jquery.dataTables.min.js',
+            # 'extras/DataTables-1.9.4/media/js/jquery.dataTables.min.js',
+            'extras/DataTables-1.10.0/media/js/jquery.dataTables.min.js',
         ),
         'output_filename': 'js/dataTables.' + DEPLOY_DATE + '.js',
     },

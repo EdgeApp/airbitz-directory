@@ -180,7 +180,6 @@
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
               $(nTd).css('text-align', 'left');
               $(nTd).attr('data-sort', oData['status']);
-                console.log(oData);
             },
             "mData": null,
             "mRender": function(data, type, full) {
@@ -236,7 +235,6 @@
             },
             "mData": null,
             "mRender": function(data, type, full) {
-                console.log('PUBLISHED IS:' + data)
                 if (data !== null) {
                     niceTimestamp = moment(data).format('MM-DD-YY HH:mm:ss');
                     return niceTimestamp;
@@ -272,19 +270,19 @@
         });
 
 
-        $('.panel select').select2({ 'width': '200px' });
+        $('.panel select').select2({ 'width': '120px' });
         $('#status').change(function() {
             localStorage.setItem('mgmt_status', $(this).val());
-            oTable._fnAjaxUpdate();
+            oTable.ajax.reload();
         });
         $('#adminLocation').keyup(function() {
             localStorage.setItem('mgmt_location', $(this).val());
-            oTable._fnAjaxUpdate();
+            oTable.ajax.reload();
         });
         $('#refresh').click(function() {
-            oTable._fnAjaxUpdate();
+            oTable.ajax.reload();
         });
-        $('#status').select2({ 'width': '120px' });
+        });
     });
     </script>
 {% endblock javascript %}
