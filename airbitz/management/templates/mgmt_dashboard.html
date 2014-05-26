@@ -50,30 +50,34 @@
                         <div class="col-sm-6 text-right">
                             <label for="adminLocation">Location</label>
                             <input id="adminLocation" type="text" class="form-control" style="width: 300px">
-                            <button class="btn btn-default btn-sm" id="refresh">Refresh</button>
+                            <button class="btn btn-default" id="refresh">Refresh</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table dataTableCustom">
+                            <table class="table table-striped table-bordered dataTableCustom">
                                 <thead>
-                                    <th>Status</th>
-                                    <th>Name</th>
-                                    <th>Categories</th>
-                                    <th>Country</th>
-                                    <th>Published</th>
-                                    <th>Modified</th>
-                                    <th>Created</th>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Name</th>
+                                        <th>Categories</th>
+                                        <th>Country</th>
+                                        <th>Published</th>
+                                        <th>Modified</th>
+                                        <th>Created</th>
+                                    </tr>
                                 </thead>
                                 <tbody></tbody>
                                 <tfoot>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Name</th>
+                                        <th>Categories</th>
+                                        <th>Country</th>
+                                        <th>Published</th>
+                                        <th>Modified</th>
+                                        <th>Created</th>
+                                    </tr>
                                 </tfoot>
                             </table>
                         </div>
@@ -127,20 +131,23 @@
         return toolTip;
     }
 
+
+
     $(function() {
         AB.setup();
         AB.addLocationSearch($('#adminLocation'));
-        
+
         if (localStorage.getItem('mgmt_status')) {
             $('#status').val(localStorage.getItem('mgmt_status'));
         }
         if (localStorage.getItem('mgmt_location')) {
             $('#adminLocation').val(localStorage.getItem('mgmt_location'));
         }
+
         var tableUrl = "/mgmt/api/biz/";
-        var oTable = $('.dataTableCustom').dataTable({
+        var oTable = $('.dataTableCustom').DataTable({
           "oLanguage": {
-            "sProcessing": "<i class='fa fa-spinner fa-spin'> </i> Building Table"
+            "sProcessing": "<i class='fa fa-spinner fa-spin'> </i> Refreshing Table"
           },
           "sPaginationType": "full_numbers",
           "iDisplayLength": 15,
@@ -282,8 +289,27 @@
         $('#refresh').click(function() {
             oTable.ajax.reload();
         });
+
+
+        // Setup - add a text input to each footer cell
+        $('.dataTableCustom tfoot th').each( function () {
+            var title = $('.dataTableCustom thead th').eq( $(this).index() ).text();
+            if (title != 'Status') {
+                $(this).html( '<input type="text" id="colFilter_' + title + '" placeholder="Search ' + title + '" style="width: 100%;" />' );
+            }
         });
+
+        // Apply the filter
+        $(".dataTableCustom tfoot input").on( 'keyup change', function () {
+            oTable.search(this.value);
+            oTable.ajax.reload();
+        });
+
+
     });
+
+
+
     </script>
 {% endblock javascript %}
 

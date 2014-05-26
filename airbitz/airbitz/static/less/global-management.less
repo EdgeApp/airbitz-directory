@@ -57,24 +57,26 @@
     }
 }
 
+.dataTables_wrapper {
 
-.dataTables_processing {
-    width: 180px;
-    height: 50px;
-    padding-top: 12px;
-    border-radius: 30px;
-    background: @brand-primary;
-    opacity: .9;
-    color: white;
-    font-size: 18px;
-    box-shadow: 0 0 15px rgba(0, 0, 0 ,.8);
+    .dataTables_processing {
+        height: 50px;
+        padding-top: 12px;
+        border-radius: 30px;
+        background: @brand-primary;
+        opacity: .9;
+        color: white;
+        font-size: 18px;
+        box-shadow: 0 0 15px rgba(0, 0, 0 ,.8);
+    }
 }
 
 .custom-controls {
     margin-bottom: 10px;
 }
 table.dataTable {
-
+    margin: 20px 0
+;
     tr {
         td {
             overflow: hidden;
@@ -135,6 +137,11 @@ table.dataTable {
         td.sorting_3,
         td.sorting_4 {
             background-color: #ACDCEB;
+        }
+    }
+    tfoot {
+        th {
+            padding: 10px 8px 6px 8px;
         }
     }
 }

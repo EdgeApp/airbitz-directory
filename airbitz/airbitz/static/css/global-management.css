@@ -58,8 +58,7 @@
 #bizForm #description {
   height: 200px;
 }
-.dataTables_processing {
-  width: 180px;
+.dataTables_wrapper .dataTables_processing {
   height: 50px;
   padding-top: 12px;
   border-radius: 30px;
@@ -71,6 +70,10 @@
 }
 .custom-controls {
   margin-bottom: 10px;
+}
+table.dataTable {
+  margin: 20px 0
+;
 }
 table.dataTable tr td {
   overflow: hidden;
@@ -120,4 +123,7 @@ table.dataTable tr.odd td.sorting_2,
 table.dataTable tr.odd td.sorting_3,
 table.dataTable tr.odd td.sorting_4 {
   background-color: #ACDCEB;
+}
+table.dataTable tfoot th {
+  padding: 10px 8px 6px 8px;
 }
