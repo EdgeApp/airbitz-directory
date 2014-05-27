@@ -125,7 +125,7 @@ class Business(models.Model):
     modified = models.DateTimeField(auto_now=True)
     published = models.DateTimeField(blank=True, null=True)
 
-    admin_user = models.CharField(max_length=200, blank=True, null=True)
+    last_modified_by = models.CharField(max_length=200, blank=True, null=True)
     admin_notes = models.TextField(blank=True, null=True)
 
     # PostGis fields
