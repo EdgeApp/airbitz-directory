@@ -71,12 +71,29 @@
 .custom-controls {
   margin-bottom: 10px;
 }
+.popover {
+  max-width: 350px;
+}
+.popover .popover-title {
+  color: #2291cf;
+  font-weight: 600;
+}
+.popover strong {
+  display: inline-block;
+  width: 80px;
+  margin-right: 10px;
+}
+.popover hr {
+  margin: 10px 0px;
+}
 table.dataTable {
   margin: 20px 0
 ;
 }
 table.dataTable tr td {
   overflow: hidden;
+  max-width: 275px;
+  white-space: nowrap;
   text-overflow: ellipsis;
 }
 table.dataTable tr td a i.fa.fa-pencil {
@@ -97,17 +114,6 @@ table.dataTable tr td i.ab-pending {
 }
 table.dataTable tr td i.ab-trash {
   color: #ff0000;
-}
-table.dataTable tr td .popover {
-  max-width: 500px;
-}
-table.dataTable tr td .popover strong {
-  display: inline-block;
-  width: 80px;
-  margin-right: 10px;
-}
-table.dataTable tr td .popover hr {
-  margin: 10px 0px;
 }
 table.dataTable tr.even td.sorting_1,
 table.dataTable tr.even td.sorting_2,

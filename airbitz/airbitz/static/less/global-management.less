@@ -74,14 +74,33 @@
 .custom-controls {
     margin-bottom: 10px;
 }
+
+.popover {
+    max-width: 350px;
+
+    .popover-title {
+        color: @brand-primary;
+        font-weight: 600;
+    }
+    strong {
+        display: inline-block;
+        width: 80px;
+        margin-right: 10px;
+    }
+    hr {
+        margin: 10px 0px;
+    }
+}
+
 table.dataTable {
     margin: 20px 0
 ;
     tr {
         td {
             overflow: hidden;
+            max-width: 275px;
+            white-space: nowrap;
             text-overflow: ellipsis;
-
             a {
 
                 i.fa.fa-pencil {
@@ -104,17 +123,6 @@ table.dataTable {
             }
             i.ab-trash {
                 color: #ff0000;
-            }
-            .popover {
-                max-width: 500px;
-                strong {
-                    display: inline-block;
-                    width: 80px;
-                    margin-right: 10px;
-                }
-                hr {
-                    margin: 10px 0px;
-                }
             }
         }
     }

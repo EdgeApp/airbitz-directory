@@ -168,11 +168,12 @@
             aoData.push({ "name": "adminLocation", "value": $('#adminLocation').val() });
             $.getJSON(sSource, aoData, function (json) {
                 fnCallback(json)
-                $('td span').popover( {
+                $('[data-toggle="popover"]').popover( {
                     "delay": 100,
                     "trigger": 'hover',
                     "fade": 350,
                     "html": true,
+                    "container": 'body',
                 })
             });
           },
@@ -213,13 +214,15 @@
 
                 var tooltip = createTooltip(oData);
                 if (tooltip) { var title = ' title="Business Details"'; }
-                $(nTd).html('' +
-                        '<a href="/mgmt/biz/view/' + oData['id'] + '/main" class="add">' +
-                            '<i class="fa fa-pencil"></i>' +
-                        '</a> ' +
-                        '<span data-toggle="tooltip" data-content="' + tooltip + '"' + title +'>' +
-                            $(nTd).text() +
-                        '</span>'
+
+                $(nTd).attr('data-toggle', 'popover');
+                $(nTd).attr('data-content', tooltip);
+                $(nTd).attr('title', $(nTd).text());
+
+                $(nTd).html(
+                    '<a href="/mgmt/biz/view/' + oData['id'] + '/main" class="add">' +
+                        '<i class="fa fa-pencil"></i>' +
+                    '</a> ' + $(nTd).text()
                 );
             }
           } , {
