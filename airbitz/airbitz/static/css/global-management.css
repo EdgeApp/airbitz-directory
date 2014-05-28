@@ -59,7 +59,11 @@
   height: 200px;
 }
 .dataTables_wrapper .dataTables_processing {
+  position: fixed;
   height: 50px;
+  width: 225px !important;
+  top: -90px;
+  left: 93% !important;
   padding-top: 12px;
   border-radius: 30px;
   background: #2291cf;
