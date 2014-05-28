@@ -101,6 +101,12 @@
                                     <textarea class="form-control" rows="5" id="description" name="description">{{ biz.description }}</textarea>
                                 </div>
                             </div>
+                            <div>
+                                <label>Admin Notes:</label>
+                                <div>
+                                    <textarea class="form-control" rows="5" id="admin_notes" name="admin_notes">{{ biz.admin_notes }}</textarea>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-6">
                             <div>
@@ -687,6 +693,7 @@
                     var obj = {};
                     obj['name'] = $('#name').val();
                     obj['description'] = $('#description').val();
+                    obj['admin_notes'] = $('#admin_notes').val();
                     obj['status'] = $('#status').select2('val');
                     obj['landing_image'] = $('#landing_image').val();
                     obj['mobile_landing_image'] = $('#mobile_landing_image').val();
