@@ -71,21 +71,6 @@
 .custom-controls {
   margin-bottom: 10px;
 }
-.popover {
-  max-width: 350px;
-}
-.popover .popover-title {
-  color: #2291cf;
-  font-weight: 600;
-}
-.popover strong {
-  display: inline-block;
-  width: 80px;
-  margin-right: 10px;
-}
-.popover hr {
-  margin: 10px 0px;
-}
 table.dataTable {
   margin: 20px 0;
 }
@@ -179,6 +164,21 @@ table.dataTable tr.odd td.sorting_4 {
 }
 table.dataTable tfoot th {
   padding: 10px 8px 6px 8px;
+}
+table.dataTable .popover {
+  max-width: 350px;
+}
+table.dataTable .popover .popover-title {
+  color: #2291cf;
+  font-weight: 600;
+}
+table.dataTable .popover strong {
+  display: inline-block;
+  width: 80px;
+  margin-right: 10px;
+}
+table.dataTable .popover hr {
+  margin: 10px 0px;
 }
 .FixedHeader_Cloned {
   visibility: hidden;
