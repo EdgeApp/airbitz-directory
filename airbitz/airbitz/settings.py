@@ -315,6 +315,7 @@ PIPELINE_JS = {
         'source_filenames': (
             # 'extras/DataTables-1.9.4/media/js/jquery.dataTables.min.js',
             'extras/DataTables-1.10.0/media/js/jquery.dataTables.min.js',
+            'extras/dataTables.fixedHeader/dataTables.fixedHeader.min.js',
         ),
         'output_filename': 'js/dataTables.' + DEPLOY_DATE + '.js',
     },

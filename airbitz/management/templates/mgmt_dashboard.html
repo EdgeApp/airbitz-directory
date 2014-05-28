@@ -364,10 +364,10 @@
 
 
 
+        // Detect keystroke and only execute after the user not input anything for doneTypingInterval
         var typingTimer;
         var doneTypingInterval = 700;
 
-        //Detect keystroke and only execute after the user has finish typing
         function delayExecuteFilter(obj) {
             clearTimeout(typingTimer);
                 typingTimer = setTimeout(
@@ -391,7 +391,19 @@
         });
 
 
+        // Use fixed header plugin on our table
+        new $.fn.dataTable.FixedHeader( oTable, {
+            alwaysCloneTop: true
+        });
 
+        // Hide fixed header unless we need it
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 160) {
+                $('.FixedHeader_Cloned').css('visibility', 'visible');
+            } else {
+                $('.FixedHeader_Cloned').css('visibility', 'hidden');
+            }
+        });
 
 
 
