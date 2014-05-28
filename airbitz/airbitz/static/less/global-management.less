@@ -93,8 +93,23 @@
 }
 
 table.dataTable {
-    margin: 20px 0
-;
+    margin: 20px 0;
+
+    thead {
+        tr {
+            th {
+                &:nth-child(2) {
+                    text-align: center;
+                }
+                &:nth-child(5) {
+                    text-align: center;
+                }
+                &:nth-child(6) {
+                    text-align: center;
+                }
+            }
+        }
+    }
     tr {
         td {
             overflow: hidden;
@@ -124,6 +139,46 @@ table.dataTable {
             i.ab-trash {
                 color: #ff0000;
             }
+            i.ab-true {
+                color: @ab-green-dark;
+            }
+            i.ab-false {
+                color: #ff0000;
+            }
+            &:nth-child(1) {
+                width: 40px;
+            }
+            &:nth-child(2) {
+                width: 40px;
+            }
+            &:nth-child(3) {
+                width: 40px;
+            }
+            &:nth-child(4) {
+                width: 40px;
+            }
+            &:nth-child(5) {
+                width: 40px;
+            }
+            &:nth-child(6) {
+                width: 40px;
+            }
+            &:nth-child(7) {
+                width: 40px;
+            }
+            &:nth-child(8) {
+                width: 40px;
+            }
+            &:nth-child(9) {
+                width: 40px;
+            }
+            &:nth-child(10) {
+                width: 40px;
+            }
+            &:nth-child(11) {
+                width: 40px;
+            }
+
         }
     }
 

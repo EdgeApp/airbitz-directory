@@ -87,8 +87,16 @@
   margin: 10px 0px;
 }
 table.dataTable {
-  margin: 20px 0
-;
+  margin: 20px 0;
+}
+table.dataTable thead tr th:nth-child(2) {
+  text-align: center;
+}
+table.dataTable thead tr th:nth-child(5) {
+  text-align: center;
+}
+table.dataTable thead tr th:nth-child(6) {
+  text-align: center;
 }
 table.dataTable tr td {
   overflow: hidden;
@@ -114,6 +122,45 @@ table.dataTable tr td i.ab-pending {
 }
 table.dataTable tr td i.ab-trash {
   color: #ff0000;
+}
+table.dataTable tr td i.ab-true {
+  color: #55af00;
+}
+table.dataTable tr td i.ab-false {
+  color: #ff0000;
+}
+table.dataTable tr td:nth-child(1) {
+  width: 40px;
+}
+table.dataTable tr td:nth-child(2) {
+  width: 40px;
+}
+table.dataTable tr td:nth-child(3) {
+  width: 40px;
+}
+table.dataTable tr td:nth-child(4) {
+  width: 40px;
+}
+table.dataTable tr td:nth-child(5) {
+  width: 40px;
+}
+table.dataTable tr td:nth-child(6) {
+  width: 40px;
+}
+table.dataTable tr td:nth-child(7) {
+  width: 40px;
+}
+table.dataTable tr td:nth-child(8) {
+  width: 40px;
+}
+table.dataTable tr td:nth-child(9) {
+  width: 40px;
+}
+table.dataTable tr td:nth-child(10) {
+  width: 40px;
+}
+table.dataTable tr td:nth-child(11) {
+  width: 40px;
 }
 table.dataTable tr.even td.sorting_1,
 table.dataTable tr.even td.sorting_2,
