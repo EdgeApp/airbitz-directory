@@ -149,7 +149,7 @@
         AB.addLocationSearch($('#adminLocation'));
 
         if (localStorage.getItem('mgmt_status')) {
-            $('#status').val(localStorage.getItem('mgmt_status'));
+            $('#status').select2('val', localStorage.getItem('mgmt_status'))
         }
         if (localStorage.getItem('mgmt_location')) {
             $('#adminLocation').val(localStorage.getItem('mgmt_location'));
@@ -157,6 +157,7 @@
 
 
     });
+
 
 
         var tableUrl = "/mgmt/api/biz/";
@@ -172,7 +173,7 @@
           "bServerSide": true,
           "sAjaxSource": tableUrl,
           "fnServerData": function (sSource, aoData, fnCallback) {
-            var st = $('#status').val()
+            var st = localStorage.getItem('mgmt_status');
             if (st && st !== 'ALL') {
                 aoData.push({ "name": "status", "value": st });
             }
