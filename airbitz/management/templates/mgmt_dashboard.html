@@ -374,22 +374,20 @@
 
         // Local Storage Helpers
         function setLocalStorage (cols) {
-            console.log('------ SETTING LOCAL STORAGE KEYS')
+{#            console.log('------ SETTING LOCAL STORAGE KEYS')#}
             for (i=0; i < cols.length; ++i) {
                 var fId = 'colFilter_' + cols[i].toLowerCase();
                 var fVal = $('#' + fId).val();
                 localStorage.setItem(fId, fVal);
-                console.log(fId + ' : ' + fVal);
             }
         }
 
         function getLocalStorage (cols) {
-            console.log('------ GETTING LOCAL STORAGE KEYS')
+{#            console.log('------ GETTING LOCAL STORAGE KEYS')#}
             for (i=0; i < cols.length; ++i) {
                 var fId = 'colFilter_' + cols[i].toLowerCase();
                 var fVal = $('#' + fId).val();
                 $('#' + fId).val(localStorage.getItem(fId, fVal));
-                console.log(fId);
             }
         }
 
@@ -426,7 +424,7 @@
         }
 
         function filterColumn(colInputField) {
-            console.log('---------- FILTERING:' + $(colInputField).val());
+{#            console.log('---------- FILTERING:' + $(colInputField).val());#}
             setLocalStorage(localStorageColumns);
             oTable
                 .column( $(colInputField).parent().index()+':visible' )
