@@ -183,6 +183,16 @@ class AdminBusinessView(ListCreateAPIView):
         filters = self.paramSearchArray(request=self.request)
         col_filters = zip(cols, filters)
 
+        print ''
+        print '--- SEARCH -----------------------------'
+        print search
+        print ''
+        print '--- LOCATION -----------------------------'
+        print location
+        print ''
+        print '--- STATUS -----------------------------'
+        print bizStatus
+        print ''
         print '--- COLS -----------------------------'
         print cols
         print ''
@@ -218,7 +228,7 @@ class AdminBusinessView(ListCreateAPIView):
                         kwargs = {
                             '{0}__icontains'.format(c): f
                         }
-                        print '*******######## ',kwargs
+                        print '******* ######## ',kwargs
                         q = q.filter(Q(**kwargs))
                     elif str(c) == 'categories':
                         c = str(c)
@@ -230,8 +240,12 @@ class AdminBusinessView(ListCreateAPIView):
                         q = q.filter(Q(**kwargs))
 
         if search:
-            q = q.filter(Q(name__icontains=search)
-                       | Q(categories__name__icontains=search))
+            q = q.filter(
+                Q(name__icontains=search) |
+                Q(categories__name__icontains=search) |
+                Q(description__icontains=search) |
+                Q(admin_notes__icontains=search)
+            )
             q = q.distinct()
         if location:
             a = api.ApiProcess(locationStr=location)

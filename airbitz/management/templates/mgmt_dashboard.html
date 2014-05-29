@@ -51,7 +51,7 @@
                             <label for="adminLocation">Location</label>
                             <input id="adminLocation" type="text" class="form-control" style="width: 300px">
                             <button class="btn btn-default" id="refresh">Refresh</button>
-                            <button class="btn btn-default btn-info" id="clearFilters"><i class="fa fa-filter"></i> Clear Filters</button>
+                            <button class="btn btn-default btn-info" id="clearFilters"><i class="fa fa-ban text-danger"></i> Clear Filters</button>
                         </div>
                     </div>
                     <div class="row">
@@ -149,14 +149,15 @@
         AB.addLocationSearch($('#adminLocation'));
 
         if (localStorage.getItem('mgmt_status')) {
-            $('#status').val(localStorage.getItem('mgmt_status'));
+            $('#status').select2('val', localStorage.getItem('mgmt_status'))
         }
         if (localStorage.getItem('mgmt_location')) {
             $('#adminLocation').val(localStorage.getItem('mgmt_location'));
         }
-
+        getLocalStorage(localStorageColumns);
 
     });
+
 
 
         var tableUrl = "/mgmt/api/biz/";
@@ -172,7 +173,7 @@
           "bServerSide": true,
           "sAjaxSource": tableUrl,
           "fnServerData": function (sSource, aoData, fnCallback) {
-            var st = $('#status').val()
+            var st = localStorage.getItem('mgmt_status');
             if (st && st !== 'ALL') {
                 aoData.push({ "name": "status", "value": st });
             }
@@ -343,31 +344,78 @@
             oTable.ajax.reload();
         });
         $('#clearFilters').click(function() {
+            clearLocalStorage(localStorageColumns);
             oTable
                 .search( '' )
                 .columns().search( '' )
                 .draw();
-            $('input[type=search]').val('');
         });
 
 
+        var localStorageColumns = [
+            "user",                      // 0
+            "status",                    // 1
+            "name",                      // 2
+            "categories",                // 3
+            "local",                     // 4
+            "web",                       // 5
+            "country",                   // 6
+            "state",                     // 7
+            "city",                      // 8
+            "published",                 // 9
+            "modified",                  // 10
+            "created",                   // 11
+        ]
 
+        function getColumnList () {
+        {# TODO: load column list dynamically                      #}
+        }
+
+
+        // Local Storage Helpers
+        function setLocalStorage (cols) {
+            console.log('------ SETTING LOCAL STORAGE KEYS')
+            for (i=0; i < cols.length; ++i) {
+                var fId = 'colFilter_' + cols[i].toLowerCase();
+                var fVal = $('#' + fId).val();
+                localStorage.setItem(fId, fVal);
+                console.log(fId + ' : ' + fVal);
+            }
+        }
+
+        function getLocalStorage (cols) {
+            console.log('------ GETTING LOCAL STORAGE KEYS')
+            for (i=0; i < cols.length; ++i) {
+                var fId = 'colFilter_' + cols[i].toLowerCase();
+                var fVal = $('#' + fId).val();
+                $('#' + fId).val(localStorage.getItem(fId, fVal));
+                console.log(fId);
+            }
+        }
+
+        function clearLocalStorage(cols) {
+            // console.log('------ CLEARING LOCAL STORAGE KEYS')
+            for (i=0; i < cols.length; ++i) {
+                var fId = 'colFilter_' + cols[i].toLowerCase();
+                localStorage.removeItem(fId);
+                $('#' + fId).val('');
+                $('input[type=search]').val('');
+            }
+        }
 
 
         // Setup - add a text input to each footer cell
         $('.dataTableCustom tfoot th').each( function () {
-            var title = $('.dataTableCustom thead th').eq( $(this).index() ).text();
-            if (title != 'Status') {
-                $(this).html( '<input type="search" class="data_filter" id="colFilter_' + title + '" placeholder="# ' + title + '" style="width: 100%;" />' );
-            }
+            var title = $(this).text().toLowerCase();
+            $(this).html( '<input type="search" class="data_filter" id="colFilter_' + title + '" placeholder="# ' + title + '" style="width: 100%;" />' );
         });
 
 
 
+        // Detect keystroke and only execute after the user not input anything for doneTypingInterval
         var typingTimer;
         var doneTypingInterval = 700;
 
-        //Detect keystroke and only execute after the user has finish typing
         function delayExecuteFilter(obj) {
             clearTimeout(typingTimer);
                 typingTimer = setTimeout(
@@ -378,7 +426,8 @@
         }
 
         function filterColumn(colInputField) {
-            console.log(colInputField);
+            console.log('---------- FILTERING:' + $(colInputField).val());
+            setLocalStorage(localStorageColumns);
             oTable
                 .column( $(colInputField).parent().index()+':visible' )
                 .search(colInputField.value)
@@ -390,8 +439,23 @@
             delayExecuteFilter(this);
         });
 
+        $(".dataTableCustom tfoot input").on( 'blur', function () {
+            filterColumn(this);
+        });
 
+        // Use fixed header plugin on our table
+        new $.fn.dataTable.FixedHeader( oTable, {
+            alwaysCloneTop: true
+        });
 
+        // Hide fixed header unless we need it
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 160) {
+                $('.FixedHeader_Cloned').css('visibility', 'visible');
+            } else {
+                $('.FixedHeader_Cloned').css('visibility', 'hidden');
+            }
+        });
 
 
 

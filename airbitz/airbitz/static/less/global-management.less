@@ -60,7 +60,11 @@
 .dataTables_wrapper {
 
     .dataTables_processing {
+        position: fixed;
         height: 50px;
+        width: 225px !important;
+        top: 90px;
+        left: 93% !important;
         padding-top: 12px;
         border-radius: 30px;
         background: @brand-primary;
@@ -75,22 +79,6 @@
     margin-bottom: 10px;
 }
 
-.popover {
-    max-width: 350px;
-
-    .popover-title {
-        color: @brand-primary;
-        font-weight: 600;
-    }
-    strong {
-        display: inline-block;
-        width: 80px;
-        margin-right: 10px;
-    }
-    hr {
-        margin: 10px 0px;
-    }
-}
 
 table.dataTable {
     margin: 20px 0;
@@ -98,6 +86,9 @@ table.dataTable {
     thead {
         tr {
             th {
+                &:nth-child(1) {
+                    text-align: center;
+                }
                 &:nth-child(2) {
                     text-align: center;
                 }
@@ -207,5 +198,43 @@ table.dataTable {
             padding: 10px 8px 6px 8px;
         }
     }
+
+    .popover {
+        max-width: 350px;
+
+        .popover-title {
+            color: @brand-primary;
+            font-weight: 600;
+        }
+        strong {
+            display: inline-block;
+            width: 80px;
+            margin-right: 10px;
+        }
+        hr {
+            margin: 10px 0px;
+        }
+    }
+
 }
 
+
+.FixedHeader_Cloned {
+    visibility: hidden;
+    z-index: 1030 !important;
+    margin-top: 10px;
+
+    th, td {
+        background-color: white !important;
+    }
+}
+
+.select2-container-multi .select2-choices .select2-search-choice {
+    background: @brand-primary;
+    color: #ffffff;
+
+//    .select2-search-choice-close {
+//        background: url('select2_white.png') right top no-repeat;
+//    }
+
+}
