@@ -225,17 +225,24 @@ class AdminBusinessView(ListCreateAPIView):
                     if str(c) != 'categories':
                         c = str(c)
                         f = str(f)
-                        kwargs = {
-                            '{0}__icontains'.format(c): f
-                        }
+                        if f.startswith('!'):
+                            kwargs = {'{0}__exact'.format(c): f[1:]}
+                        elif f.startswith('#'):
+                            kwargs = {'{0}__iexact'.format(c): f[1:]}
+                        else:
+                            kwargs = {'{0}__icontains'.format(c): f}
                         print '******* ######## ',kwargs
                         q = q.filter(Q(**kwargs))
                     elif str(c) == 'categories':
                         c = str(c)
                         f = str(f)
-                        kwargs = {
-                            'categories__name__icontains': f
-                        }
+                        if f.startswith('!'):
+                            kwargs = {'categories__name__exact': f[1:]}
+                        elif f.startswith('#'):
+                            kwargs = {'categories__name__iexact': f[1:]}
+                        else:
+                            kwargs = {'categories__name__icontains': f}
+
                         print '******* CATEGORIES ######## ',kwargs
                         q = q.filter(Q(**kwargs))
 
