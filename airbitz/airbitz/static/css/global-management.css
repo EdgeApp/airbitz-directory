@@ -62,7 +62,7 @@
   position: fixed;
   height: 50px;
   width: 225px !important;
-  top: -90px;
+  top: 90px;
   left: 93% !important;
   padding-top: 12px;
   border-radius: 30px;
@@ -77,6 +77,9 @@
 }
 table.dataTable {
   margin: 20px 0;
+}
+table.dataTable thead tr th:nth-child(1) {
+  text-align: center;
 }
 table.dataTable thead tr th:nth-child(2) {
   text-align: center;
@@ -192,4 +195,8 @@ table.dataTable .popover hr {
 .FixedHeader_Cloned th,
 .FixedHeader_Cloned td {
   background-color: white !important;
+}
+.select2-container-multi .select2-choices .select2-search-choice {
+  background: #2291cf;
+  color: #ffffff;
 }

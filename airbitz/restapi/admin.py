@@ -228,7 +228,7 @@ class AdminBusinessView(ListCreateAPIView):
                         kwargs = {
                             '{0}__icontains'.format(c): f
                         }
-                        print '*******######## ',kwargs
+                        print '******* ######## ',kwargs
                         q = q.filter(Q(**kwargs))
                     elif str(c) == 'categories':
                         c = str(c)
