@@ -294,8 +294,6 @@ class ApiProcess(object):
                         self.__append_if_within__(newsqs, s, poly=geopoly, radius=radius)
             return newsqs
         else:
-            if not radius:
-                radius = locapi.DEF_RADIUS.m
             for s in sqs:
                 s.object.distance = s.distance
                 s.object.bounded = False

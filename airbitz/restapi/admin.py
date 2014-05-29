@@ -152,6 +152,20 @@ class AdminBusinessView(ListCreateAPIView):
             i = i + 1
         return l
 
+
+
+    def paramSearchArray(self, request):
+        totalColumns = int(self.request.QUERY_PARAMS.get('iColumns', '0'))
+        search = 'sSearch_'
+        l = []
+
+        i = 0
+        for i in xrange(0, totalColumns):
+            l.append(request.QUERY_PARAMS.get(search + str(i)))
+
+        return  l
+
+
     def formatDir(self, c, d):
         if d == "desc":
             return '-' + c
@@ -166,11 +180,79 @@ class AdminBusinessView(ListCreateAPIView):
         cols = self.paramArray('mDataProp_', self.request)
         sorts = self.paramArray('iSortCol_', self.request)
         dirs = self.paramArray('sSortDir_', self.request)
+        filters = self.paramSearchArray(request=self.request)
+        col_filters = zip(cols, filters)
+
+        print ''
+        print '--- SEARCH -----------------------------'
+        print search
+        print ''
+        print '--- LOCATION -----------------------------'
+        print location
+        print ''
+        print '--- STATUS -----------------------------'
+        print bizStatus
+        print ''
+        print '--- COLS -----------------------------'
+        print cols
+        print ''
+        print '--- SORTS -----------------------------'
+        print sorts
+        print ''
+        print '--- DIRS -----------------------------'
+        print dirs
+        print ''
+
+        if any(filters):
+            print '--- FILTERS -----------------------------'
+            print filters
+            print ''
+            print '--- COLS, FILTERS -----------------------------'
+            for row in col_filters:
+                print row
+            print ''
+        else:
+            print '--- NO FILTERS DETECTED ---'
+            print ''
+
 
         q = Business.objects.all()
+
+        if any(filters):
+            for c,f in col_filters:
+                if f:
+                    kwargs = {}
+                    if str(c) != 'categories':
+                        c = str(c)
+                        f = str(f)
+                        if f.startswith('!'):
+                            kwargs = {'{0}__exact'.format(c): f[1:]}
+                        elif f.startswith('#'):
+                            kwargs = {'{0}__iexact'.format(c): f[1:]}
+                        else:
+                            kwargs = {'{0}__icontains'.format(c): f}
+                        print '******* ######## ',kwargs
+                        q = q.filter(Q(**kwargs))
+                    elif str(c) == 'categories':
+                        c = str(c)
+                        f = str(f)
+                        if f.startswith('!'):
+                            kwargs = {'categories__name__exact': f[1:]}
+                        elif f.startswith('#'):
+                            kwargs = {'categories__name__iexact': f[1:]}
+                        else:
+                            kwargs = {'categories__name__icontains': f}
+
+                        print '******* CATEGORIES ######## ',kwargs
+                        q = q.filter(Q(**kwargs))
+
         if search:
-            q = q.filter(Q(name__icontains=search)
-                       | Q(categories__name__icontains=search))
+            q = q.filter(
+                Q(name__icontains=search) |
+                Q(categories__name__icontains=search) |
+                Q(description__icontains=search) |
+                Q(admin_notes__icontains=search)
+            )
             q = q.distinct()
         if location:
             a = api.ApiProcess(locationStr=location)

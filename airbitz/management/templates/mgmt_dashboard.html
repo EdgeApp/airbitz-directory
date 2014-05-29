@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_mgmt.html' %}
 {% load compressed %}
 
 {% block title %} Management Dashboard {% endblock title %}
@@ -23,8 +23,8 @@
 {% block body %}
     <div class="row">
         <div class="col-sm-12">
-            <a class="pull-right btn-sm btn btn-default" href="{% url 'mgmt_biz_import' %}">Import Place</a>
-            <a class="pull-right btn-sm btn btn-default" href="{% url 'mgmt_biz_add' %}">Add Place</a>
+            <a class="pull-right btn-sm btn btn-warning" href="{% url 'mgmt_biz_import' %}"><i class="fa fa-download"></i> Import Place</a>
+            <a class="pull-right btn-sm btn btn-success" href="{% url 'mgmt_biz_add' %}" style="margin-right: 5px;"><i class="fa fa-plus"></i> Add Place</a>
             <ul class="nav nav-tabs">
                 <li class="active"><a href="{% url 'mgmt_dashboard' %}">Dashboard</a></li>
                 <li><a href="{% url 'mgmt_map' %}">Map</a></li>
@@ -37,37 +37,58 @@
         <div class="col-sm-12">
             <div class="panel panel-default panel-tabbed">
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="pull-right">
-                                <label for="status">Status</label>
-                                <select id="status">
-                                    <option value="ALL">All</option>
-                                    {% for s in STATUS_CHOICES %}
-                                        <option value="{{ s.0 }}">{{ s.1 }}</option>
-                                    {% endfor %}
-                                </select>
-                                <label for="status">Location</label>
-                                <input id="adminLocation" type="text" class="form-control" style="width: 300px">
-                                <button class="btn btn-default btn-sm" id="refresh">Refresh</button>
-                            </div>
+                    <div class="custom-controls row">
+                        <div class="col-sm-6">
+                            <label for="status">Status</label>
+                            <select id="status">
+                                <option value="ALL">All</option>
+                                {% for s in STATUS_CHOICES %}
+                                    <option value="{{ s.0 }}">{{ s.1 }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <label for="adminLocation">Location</label>
+                            <input id="adminLocation" type="text" class="form-control" style="width: 300px">
+                            <button class="btn btn-default" id="refresh">Refresh</button>
+                            <button class="btn btn-default btn-info" id="clearFilters"><i class="fa fa-ban text-danger"></i> Clear Filters</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table dataTableCustom">
+                            <table class="table table-striped table-bordered dataTableCustom">
                                 <thead>
-                                    <th></th>
-                                    <th>Status</th>
-                                    <th>Name</th>
-                                    <th>Categories</th>
+                                    <tr>
+                                        <th title="User"><i class="fa fa-user"></i></th>
+                                        <th title="Status"><i class="fa fa-spinner"></i></th>
+                                        <th title="Name">Name</th>
+                                        <th title="Categories">Categories</th>
+                                        <th title="Local Business"><i class="fa fa-building-o"></i></th>
+                                        <th title="Web Business"><i class="fa fa-globe"></i></th>
+                                        <th title="Country (country)">Country</th>
+                                        <th title="State (admin1_code)">State</th>
+                                        <th title="City (admin3_name)">City</th>
+                                        <th title="Published (toggled from any status other than published to published) Date">Published</th>
+                                        <th title="Last Modified Date">Modified</th>
+                                        <th title="Created or Imported Date">Created</th>
+                                    </tr>
                                 </thead>
                                 <tbody></tbody>
                                 <tfoot>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Status</th>
+                                        <th>Name</th>
+                                        <th>Categories</th>
+                                        <th>Local</th>
+                                        <th>Web</th>
+                                        <th>Country</th>
+                                        <th>State</th>
+                                        <th>City</th>
+                                        <th>Published</th>
+                                        <th>Modified</th>
+                                        <th>Created</th>
+                                    </tr>
                                 </tfoot>
                             </table>
                         </div>
@@ -88,98 +109,355 @@
 {% block javascript %}
     {{ block.super }}
     <script type="text/javascript">
+
+    function createTooltip(data) {
+        var toolTip = '';
+        var phone = data['phone'];
+        var address = data['address'];
+        var state = data['admin1_code'];
+        var county = data['admin2_name'];
+        var city = data['admin3_name'];
+        var country = data['country'];
+
+        if (phone) {
+            toolTip +=  '<strong>Phone:</strong> ' + phone + '<hr />';
+        }
+        if (address) {
+            toolTip +=  '<strong>Street:</strong> ' + address + '<br />';
+        }
+        if (city && state) {
+            toolTip +=  '<strong>City, State:</strong> ' + city + ', ' + state + '<br />';
+        } else if (city && !state){
+            toolTip +=  '<strong>City:</strong> ' + city + '<br />';
+        } else if (state && !city){
+            toolTip += '<strong>State:</strong> ' +  state + '<br />';
+        }
+        if (county) {
+            toolTip += '<strong>County:</strong> ' + county + '<br />';
+        }
+        if (country) {
+            toolTip += '<strong>Country:</strong> ' + country + '<br />';
+        }
+
+        return toolTip;
+    }
+
+
+
     $(function() {
         AB.setup();
         AB.addLocationSearch($('#adminLocation'));
-        
+
         if (localStorage.getItem('mgmt_status')) {
-            $('#status').val(localStorage.getItem('mgmt_status'));
+            $('#status').select2('val', localStorage.getItem('mgmt_status'))
         }
         if (localStorage.getItem('mgmt_location')) {
             $('#adminLocation').val(localStorage.getItem('mgmt_location'));
         }
+        getLocalStorage(localStorageColumns);
+
+    });
+
+
+
         var tableUrl = "/mgmt/api/biz/";
-        var oTable = $('.dataTableCustom').dataTable({
+        var oTable = $('.dataTableCustom').DataTable({
+          "oLanguage": {
+            "sProcessing": "<i class='fa fa-spinner fa-spin'> </i> Refreshing Table"
+          },
           "sPaginationType": "full_numbers",
-          "iDisplayLength": 10,
-          "aLengthMenu": [5, 10, 20, 50],
+          "iDisplayLength": 15,
+          "aLengthMenu": [5, 10, 15, 20, 25, 50],
           "bStateSave": true,
           "bProcessing": true,
           "bServerSide": true,
           "sAjaxSource": tableUrl,
           "fnServerData": function (sSource, aoData, fnCallback) {
-            var st = $('#status').val()
+            var st = localStorage.getItem('mgmt_status');
             if (st && st !== 'ALL') {
                 aoData.push({ "name": "status", "value": st });
             }
             aoData.push({ "name": "adminLocation", "value": $('#adminLocation').val() });
-            $.getJSON(sSource, aoData, function (json) { 
+            $.getJSON(sSource, aoData, function (json) {
                 fnCallback(json)
+                $('[data-toggle="popover"]').popover( {
+                    "delay": 100,
+                    "trigger": 'hover',
+                    "fade": 350,
+                    "html": true,
+                    "container": 'body',
+                })
             });
           },
+          "bAutoWidth": false,
           "aoColumns": [
-            {"mData": "id"},
-            {"mData": "status"},
-            {"mData": "name"},
-            {"mData": "categories"}
+            {"mData": "last_modified_by"},          // 0
+            {"mData": "status"},                    // 1
+            {"mData": "name"},                      // 2
+            {"mData": "categories"},                // 3
+            {"mData": "has_physical_business"},     // 4
+            {"mData": "has_online_business"},       // 5
+            {"mData": "country"},                   // 6
+            {"mData": "admin1_code"},               // 7
+            {"mData": "admin3_name"},               // 8
+            {"mData": "published"},                 // 9
+            {"mData": "modified"},                  // 10
+            {"mData": "created"},                   // 11
           ],
           "aoColumnDefs": [ {
-            "aTargets":[0],
+            "aTargets":[1],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
               $(nTd).css('text-align', 'center');
+              $(nTd).attr('data-sort', oData['status']);
             },
             "mData": null,
             "mRender": function(data, type, full) {
-                return '<td><a href="/mgmt/biz/view/' + data + '/main" class="add">' + 
-                            '<span class="glyphicon glyphicon-pencil"></span>' + 
-                       '</a></td>';
+                if (data === "DR") {
+                    return '<i class="ab-draft fa fa-pencil-square-o" title="Draft"></i>';
+                } else if (data === "PUB") {
+                    return '<i class="ab-published fa fa-check-square-o" title="Published"></i>';
+                } else if (data === "PEN") {
+                    return '<i class="ab-pending fa fa-clock-o" title="Pending"></i>';
+                } else {
+                    return '<i class="ab-trash fa fa-trash-o" title="Trashed"></i>';
+                }
             }
           } , {
-            "aTargets":[1],
+            "aTargets":[2],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+                $(nTd).css('text-align', 'left');
+
+                var tooltip = createTooltip(oData);
+                if (tooltip) { var title = ' title="Business Details"'; }
+
+                $(nTd).attr('data-toggle', 'popover');
+                $(nTd).attr('data-content', tooltip);
+                $(nTd).attr('title', $(nTd).text());
+
+                $(nTd).html(
+                    '<a href="/mgmt/biz/view/' + oData['id'] + '/main" class="add">' +
+                        '<i class="fa fa-pencil"></i>' +
+                    '</a> ' + $(nTd).text()
+                );
+            }
+          } , {
+            "aTargets":[3],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
               $(nTd).css('text-align', 'left');
             },
             "mData": null,
             "mRender": function(data, type, full) {
-                if (data === "DR") {
-                    return '<td>Draft</td>';
-                } else if (data === "PUB") {
-                    return '<td>Published</td>';
-                } else if (data === "PEN") {
-                    return '<td>Pending</td>';
-                } else {
-                    return '<td>Trashed</td>';
-                }
-            }
-          } , {
-            "aTargets":[3],
-            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
-              $(nTd).css('text-align', 'center');
-            },
-            "mData": null,
-            "mRender": function(data, type, full) {
               var html = '';
               for (var i = 0; i < data.length; ++i) {
-                html += '<span class="btn btn-sm btn-default">' + data[i].name + '</span>';
+                html += '<span class="label label-primary" style="margin-right: 2px;" title="' + data[i].name.trim() + '">' + data[i].name + '</span>';
               }
               return html;
             }
+          } , {
+            "aTargets":[4],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+                $(nTd).css('text-align', 'center');
+                $(nTd).attr('data-sort', oData['has_local_business']);
+            },
+            "mData": null,
+            "mRender": function(data, type, full) {
+                if (data) {
+                    return '<i class="ab-true fa fa-check" title="true"></i>';
+                } else {
+                    return '<i class="ab-false fa fa-times" title="false"></i>';
+                }
+            }
+          } , {
+            "aTargets":[5],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+                $(nTd).css('text-align', 'center');
+                $(nTd).attr('data-sort', oData['has_physical_business']);
+            },
+            "mData": null,
+            "mRender": function(data, type, full) {
+                if (data) {
+                    return '<i class="ab-true fa fa-check" title="true"></i>';
+                } else {
+                    return '<i class="ab-false fa fa-times" title="false"></i>';
+                }
+            }
+          } , {
+            "aTargets":[9],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+                $(nTd).css('text-align', 'left');
+                if (oData['published'] !== null) {
+                    unixTimestamp = moment(oData['published']).unix();
+                    searchTimestamp = moment(oData['published']).toString();
+                    $(nTd).attr('data-sort', unixTimestamp);
+                    $(nTd).attr('data-search', searchTimestamp);
+                }
+            },
+            "mData": null,
+            "mRender": function(data, type, full) {
+                if (data !== null) {
+                    niceTimestamp = moment(data).format('MM-DD-YY HH:mm:ss');
+                    return niceTimestamp;
+                } else {
+                    return '';
+                }
+            }
+          } , {
+            "aTargets":[10],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+                $(nTd).css('text-align', 'left');
+                unixTimestamp = moment(oData['modified']).unix();
+                $(nTd).attr('data-sort', unixTimestamp);
+            },
+            "mData": null,
+            "mRender": function(data, type, full) {
+                niceTimestamp = moment(data).format('MM-DD-YY HH:mm:ss');
+                return niceTimestamp;
+            }
+          } , {
+            "aTargets":[11],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+                $(nTd).css('text-align', 'left');
+                unixTimestamp = moment(oData['created']).unix();
+                $(nTd).attr('data-sort', unixTimestamp);
+            },
+            "mData": null,
+            "mRender": function(data, type, full) {
+                niceTimestamp = moment(data).format('MM-DD-YY HH:mm:ss');
+                return niceTimestamp;
+            }
           }]
         });
-        $('.panel select').select2({ 'width': '200px' });
+
+
+
+
+        $('.panel select').select2({ 'width': '120px' });
         $('#status').change(function() {
             localStorage.setItem('mgmt_status', $(this).val());
-            oTable._fnAjaxUpdate();
+            oTable.ajax.reload();
         });
         $('#adminLocation').keyup(function() {
             localStorage.setItem('mgmt_location', $(this).val());
-            oTable._fnAjaxUpdate();
+            oTable.ajax.reload();
         });
         $('#refresh').click(function() {
-            oTable._fnAjaxUpdate();
+            oTable.ajax.reload();
         });
-        $('#status').select2({ 'width': '200px' });
-    });
+        $('#clearFilters').click(function() {
+            clearLocalStorage(localStorageColumns);
+            oTable
+                .search( '' )
+                .columns().search( '' )
+                .draw();
+        });
+
+
+        var localStorageColumns = [
+            "user",                      // 0
+            "status",                    // 1
+            "name",                      // 2
+            "categories",                // 3
+            "local",                     // 4
+            "web",                       // 5
+            "country",                   // 6
+            "state",                     // 7
+            "city",                      // 8
+            "published",                 // 9
+            "modified",                  // 10
+            "created",                   // 11
+        ]
+
+        function getColumnList () {
+        {# TODO: load column list dynamically                      #}
+        }
+
+
+        // Local Storage Helpers
+        function setLocalStorage (cols) {
+{#            console.log('------ SETTING LOCAL STORAGE KEYS')#}
+            for (i=0; i < cols.length; ++i) {
+                var fId = 'colFilter_' + cols[i].toLowerCase();
+                var fVal = $('#' + fId).val();
+                localStorage.setItem(fId, fVal);
+            }
+        }
+
+        function getLocalStorage (cols) {
+{#            console.log('------ GETTING LOCAL STORAGE KEYS')#}
+            for (i=0; i < cols.length; ++i) {
+                var fId = 'colFilter_' + cols[i].toLowerCase();
+                var fVal = $('#' + fId).val();
+                $('#' + fId).val(localStorage.getItem(fId, fVal));
+            }
+        }
+
+        function clearLocalStorage(cols) {
+            // console.log('------ CLEARING LOCAL STORAGE KEYS')
+            for (i=0; i < cols.length; ++i) {
+                var fId = 'colFilter_' + cols[i].toLowerCase();
+                localStorage.removeItem(fId);
+                $('#' + fId).val('');
+                $('input[type=search]').val('');
+            }
+        }
+
+
+        // Setup - add a text input to each footer cell
+        $('.dataTableCustom tfoot th').each( function () {
+            var title = $(this).text().toLowerCase();
+            $(this).html( '<input type="search" class="data_filter" id="colFilter_' + title + '" placeholder="# ' + title + '" style="width: 100%;" />' );
+        });
+
+
+
+        // Detect keystroke and only execute after the user not input anything for doneTypingInterval
+        var typingTimer;
+        var doneTypingInterval = 700;
+
+        function delayExecuteFilter(obj) {
+            clearTimeout(typingTimer);
+                typingTimer = setTimeout(
+                function() { filterColumn(obj)},
+                doneTypingInterval
+            );
+            return true;
+        }
+
+        function filterColumn(colInputField) {
+{#            console.log('---------- FILTERING:' + $(colInputField).val());#}
+            setLocalStorage(localStorageColumns);
+            oTable
+                .column( $(colInputField).parent().index()+':visible' )
+                .search(colInputField.value)
+                .draw();
+        }
+
+        // Apply the filter
+        $(".dataTableCustom tfoot input").on( 'keyup change', function () {
+            delayExecuteFilter(this);
+        });
+
+        $(".dataTableCustom tfoot input").on( 'blur', function () {
+            filterColumn(this);
+        });
+
+        // Use fixed header plugin on our table
+        new $.fn.dataTable.FixedHeader( oTable, {
+            alwaysCloneTop: true
+        });
+
+        // Hide fixed header unless we need it
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 160) {
+                $('.FixedHeader_Cloned').css('visibility', 'visible');
+            } else {
+                $('.FixedHeader_Cloned').css('visibility', 'hidden');
+            }
+        });
+
+
+
+
     </script>
 {% endblock javascript %}
 

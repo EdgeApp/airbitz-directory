@@ -145,6 +145,10 @@ class Business(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    published = models.DateTimeField(blank=True, null=True)
+
+    last_modified_by = models.CharField(max_length=200, blank=True, null=True)
+    admin_notes = models.TextField(blank=True, null=True)
 
     # PostGis fields
     center = models.PointField(blank=True, null=True)
@@ -188,9 +192,22 @@ class Business(models.Model):
         else:
             destination = self.name
         return gmaps_url + urlquote_plus(destination)
-        
 
+    # override default save and check for published to set a publish date
     def save(self, *args, **kwargs):
+        try:
+            orig = Business.objects.get(pk=self.pk)
+            if orig.status == 'PUB':
+                if self.published == None:
+                    self.published = datetime.datetime.now()
+            else:
+                if self.status == 'PUB':
+                    self.published = datetime.datetime.now()
+                else:
+                    self.published = None
+        except Business.DoesNotExist:
+            pass
+
         if self.status == "PUB":
             screencap(self);
         super(Business, self).save(*args, **kwargs)    # Call the "real" save() method.
