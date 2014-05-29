@@ -195,16 +195,19 @@ class Business(models.Model):
 
     # override default save and check for published to set a publish date
     def save(self, *args, **kwargs):
-        orig = Business.objects.get(pk=self.pk)
-
-        if orig.status == 'PUB':
-            if self.published == None:
-                self.published = datetime.datetime.now()
-        else:
-            if self.status == 'PUB':
-                self.published = datetime.datetime.now()
+        try:
+            orig = Business.objects.get(pk=self.pk)
+            if orig.status == 'PUB':
+                if self.published == None:
+                    self.published = datetime.datetime.now()
             else:
-                self.published = None
+                if self.status == 'PUB':
+                    self.published = datetime.datetime.now()
+                else:
+                    self.published = None
+        except Business.DoesNotExist:
+            pass
+		
 		if self.status == 'PUB':
 			screencap(self)
 
