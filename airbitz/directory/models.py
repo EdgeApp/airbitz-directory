@@ -208,8 +208,8 @@ class Business(models.Model):
         except Business.DoesNotExist:
             pass
 		
-		if self.status == 'PUB':
-			screencap(self)
+        if self.status is 'PUB':
+            screencap(self)
 
         super(Business, self).save(*args, **kwargs)
 
