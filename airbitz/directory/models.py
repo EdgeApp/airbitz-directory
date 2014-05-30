@@ -207,9 +207,9 @@ class Business(models.Model):
                     self.published = None
         except Business.DoesNotExist:
             pass
-
-        if self.status == "PUB":
-            screencap(self)
+		
+		if self.status == 'PUB':
+			screencap(self)
 
         super(Business, self).save(*args, **kwargs)    # Call the "real" save() method.
 
