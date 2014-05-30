@@ -209,7 +209,8 @@ class Business(models.Model):
             pass
 
         if self.status == "PUB":
-            screencap(self);
+            screencap(self)
+
         super(Business, self).save(*args, **kwargs)    # Call the "real" save() method.
 
 class SocialId(models.Model):
