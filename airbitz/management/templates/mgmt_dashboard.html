@@ -21,6 +21,20 @@
 {% endblock search %}
 
 {% block body %}
+
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-sm-1">
+            <a href="https://airbitz.co/button/" title="Bitcoin Wallet App">
+                <img src="https://airbitz.co/static/img/web-button/bitcoin-accepted-150.png" alt="Bitcoin Business Directory" class="img-responsive" />
+            </a>
+        </div>
+        <div class="col-sm-5">
+            <textarea name="" id="accepted-here-code" cols="" rows="3" style="width: 100%; font-size: 8px; line-height: 12px;"><a href="https://airbitz.co/button/" title="Bitcoin Wallet App">
+    <img src="https://airbitz.co/static/img/web-button/bitcoin-accepted-150.png" alt="Bitcoin Business Directory" />
+</a></textarea>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-sm-12">
             <a class="pull-right btn-sm btn btn-warning" href="{% url 'mgmt_biz_import' %}"><i class="fa fa-download"></i> Import Place</a>
