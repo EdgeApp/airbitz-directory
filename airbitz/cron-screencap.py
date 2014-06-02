@@ -54,7 +54,7 @@ def get_screencaps(b_list=get_biz_list()):
 date1 = datetime.date(2014, 5, 30)
 date2 = datetime.date.today
 
-biz_list = get_biz_list(date1)[35:]
+biz_list = get_biz_list(date1)
 biz_list.sort(reverse=True)
 
 '''
