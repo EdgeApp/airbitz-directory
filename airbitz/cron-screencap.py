@@ -27,14 +27,14 @@ def screencap(biz_id):
 
 
 '''
-Queries for businesses modified in the window given
+Queries for businesses modified in the window given otherwise it will just query anything modified today
 '''
 def get_biz_list(d1=datetime.date.today(), d2=None):
     b_list = []
     if not d2:
         pub = Business.objects.filter(status="PUB").filter(modified__gte=d1)
     else:
-        pub = Business.objects.filter(status="PUB").filter(modified__gte=d1, modified__lte=d2)
+        pub = Business.objects.filter(status="PUB").filter(modified__lte=d1, modified__gte=d2)
     for b in pub:
         b_list.append(b.id)
     b_list.sort(reverse=True)
@@ -51,10 +51,11 @@ def get_screencaps(b_list=get_biz_list()):
         print 'NEXT 5:', str(b_list[:5]), str(len(b_list)), 'LEFT'
 
 
-date1 = datetime.date(2014, 5, 30)
-date2 = datetime.date.today
+interval = datetime.timedelta(minutes=15)
+date1 = datetime.datetime.today()
+date2 = date1 - interval
 
-biz_list = get_biz_list(date1)
+biz_list = get_biz_list(date1, date2)
 biz_list.sort(reverse=True)
 
 '''
