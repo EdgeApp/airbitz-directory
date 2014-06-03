@@ -12,10 +12,11 @@ Makes screencapture image based on Airbitz Buisness ID
 '''
 def screencap(biz_id):
     casper_timeout = 30
-    casper_script = os.getcwd() + '/biz-screen-capture.js'
+    casper_path = '/home/' + settings.SYS_USER + '/local/bin/casperjs'
+    casper_script = os.path.dirname(os.path.dirname(__file__)) + '/airbitz/biz-screen-capture.js'
     casper_save = '--save=' + settings.MEDIA_ROOT + '/screencaps/'
     casper_url = '--url=' + settings.SCREENCAP_ABSOLUTE_URL
-    casper_args = ' '.join(['casperjs', casper_script, casper_save, casper_url, str(biz_id)])
+    casper_args = ' '.join([casper_path, casper_script, casper_save, casper_url, str(biz_id)])
     print 'CASPER CMD:', casper_args
 
     try:
