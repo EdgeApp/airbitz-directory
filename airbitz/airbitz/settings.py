@@ -10,6 +10,9 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import getpass
+import datetime
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DB_HOST = 'localhost'
 
@@ -17,9 +20,11 @@ local_usernames = ('vagrant', )
 staging_usernames = ('devbitz', )
 prod_usernames = ('bitz', 'root', )
 
-LOCAL = os.environ.get('USER') in local_usernames
-STAGING = os.environ.get('USER') in staging_usernames
-PRODUCTION = os.environ.get('USER') in prod_usernames
+SYS_USER = getpass.getuser()
+
+LOCAL = SYS_USER in local_usernames
+STAGING = SYS_USER in staging_usernames
+PRODUCTION = SYS_USER in prod_usernames
 
 DEBUG = not PRODUCTION # EVERYTHING BUT PRODUCTION IS DEBUG
 TEMPLATE_DEBUG = DEBUG
@@ -29,6 +34,9 @@ if DEBUG:
     print 'LOCAL:', LOCAL
     print 'STAGING:', STAGING
     print 'PRODUCTION:', PRODUCTION
+
+SCREENCAP_ABSOLUTE_URL = 'https://airbitz.co'
+SCREENCAP_INTERVAL = datetime.timedelta(minutes=15)
 
 DEPLOY_DATE = '20140502'
 
@@ -391,7 +399,7 @@ LOGGING = {
     },
     'handlers': {
         'file': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'formatter': 'verbose',
             'filename': '/tmp/django-app.log',
@@ -411,12 +419,12 @@ LOGGING = {
     'loggers': {
         'django.request': {
             'handlers': ['requests'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': True,
         },
        'airbitz': {
             'handlers': ['file', 'mail_admins'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': True,
         }
     },
