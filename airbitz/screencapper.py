@@ -3,9 +3,11 @@ import sys
 import subprocess32 as subprocess
 import urllib2
 import json
+import datetime
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'airbitz.settings')
 from airbitz import settings
+from directory.models import Business
 
 '''
 Makes screencapture image based on Airbitz Buisness ID
@@ -27,6 +29,16 @@ def screencap(biz_id):
     except subprocess.CalledProcessError as e:
         print '*** CASPER CMD ERROR CODE = ', e.returncode
 
+def query_biz_list(d1=datetime.date.today(), d2=None):
+    b_list = []
+    if not d2:
+        pub = Business.objects.filter(status="PUB").filter(modified__gte=d1)
+    else:
+        pub = Business.objects.filter(status="PUB").filter(modified__lte=d1, modified__gte=d2)
+    for b in pub:
+        b_list.append(b.id)
+    b_list.sort(reverse=True)
+    print b_list, '\n', 'BUSINESSES MODIFIED :', pub.count(), '\n'
 
 '''
 Queries for businesses modified in the window given otherwise it will just query anything modified today
@@ -51,6 +63,14 @@ def get_screencaps(b_list=get_biz_list()):
         screencap(bId)
         b_list.remove(bId)
         print 'NEXT 5:', str(b_list[:5]), str(len(b_list)), 'LEFT'
+
+
+# interval = datetime.timedelta(minutes=15)
+# date1 = datetime.datetime.today()
+# date2 = date1 - interval
+#
+# biz_list = query_biz_list(date1, date2)
+
 
 biz_list = get_biz_list()
 biz_list.sort(reverse=True)
