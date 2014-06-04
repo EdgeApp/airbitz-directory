@@ -32,7 +32,7 @@ def screencap(biz_id):
 Queries for businesses modified in the window given otherwise it will just query anything modified today
 '''
 def get_biz_list():
-    url = 'https://admin.airbitz.co/mgmt/api/biz/caplist'
+    url = 'http://admin.airbitz.co/mgmt/api/biz/caplist'
     response = urllib2.urlopen(url)
     data = json.loads(response.read())
     b_list = []
