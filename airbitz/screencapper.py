@@ -1,14 +1,15 @@
 import os
 import sys
 import subprocess32 as subprocess
-import datetime
+import urllib2
+import json
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'airbitz.settings')
 from airbitz import settings
-from directory.models import Business
 
 '''
 Makes screencapture image based on Airbitz Buisness ID
+REQUIREMENTS: casperjs & phantomjs binaries must be in path for execution
 '''
 def screencap(biz_id):
     casper_timeout = 30
@@ -30,16 +31,16 @@ def screencap(biz_id):
 '''
 Queries for businesses modified in the window given otherwise it will just query anything modified today
 '''
-def get_biz_list(d1=datetime.date.today(), d2=None):
+def get_biz_list():
+    url = 'https://admin.airbitz.co/mgmt/api/biz/caplist'
+    response = urllib2.urlopen(url)
+    data = json.loads(response.read())
     b_list = []
-    if not d2:
-        pub = Business.objects.filter(status="PUB").filter(modified__gte=d1)
-    else:
-        pub = Business.objects.filter(status="PUB").filter(modified__lte=d1, modified__gte=d2)
-    for b in pub:
-        b_list.append(b.id)
-    b_list.sort(reverse=True)
-    print b_list, '\n', 'BUSINESSES MODIFIED :', pub.count(), '\n'
+    for result in data['results']:
+        print result['id']
+        b_list.append(result['id'])
+
+    print b_list, '\n', 'BUSINESSES MODIFIED :', len(b_list), '\n'
     return b_list
 
 '''
@@ -51,12 +52,7 @@ def get_screencaps(b_list=get_biz_list()):
         b_list.remove(bId)
         print 'NEXT 5:', str(b_list[:5]), str(len(b_list)), 'LEFT'
 
-
-interval = datetime.timedelta(minutes=15)
-date1 = datetime.datetime.today()
-date2 = date1 - interval
-
-biz_list = get_biz_list(date1, date2)
+biz_list = get_biz_list()
 biz_list.sort(reverse=True)
 
 '''

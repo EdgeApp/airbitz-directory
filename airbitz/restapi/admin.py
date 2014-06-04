@@ -13,6 +13,8 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
 import logging
+import datetime
+from airbitz import settings
 
 from directory.models import Business, BusinessHours, Category, SocialId
 from restapi import api
@@ -133,6 +135,17 @@ class DataTablePaginate(Paginator):
                 pass
             return number
 
+class ScreencapList(ListCreateAPIView):
+    serializer_class = AdminBizSerializer
+    model = Business
+    allow_empty = True
+    def get_queryset(self):
+        interval = settings.SCREENCAP_INTERVAL
+        date1 = datetime.datetime.today()
+        date2 = date1 - interval
+        q = Business.objects.filter(status="PUB").filter(modified__lte=date1, modified__gte=date2)
+        return q
+
 class AdminBusinessView(ListCreateAPIView):
     serializer_class = AdminBizSerializer
     permission_classes = (IsAdminUser,)
@@ -152,8 +165,6 @@ class AdminBusinessView(ListCreateAPIView):
             i = i + 1
         return l
 
-
-
     def paramSearchArray(self, request):
         totalColumns = int(self.request.QUERY_PARAMS.get('iColumns', '0'))
         search = 'sSearch_'
@@ -164,7 +175,6 @@ class AdminBusinessView(ListCreateAPIView):
             l.append(request.QUERY_PARAMS.get(search + str(i)))
 
         return  l
-
 
     def formatDir(self, c, d):
         if d == "desc":

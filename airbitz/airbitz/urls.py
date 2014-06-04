@@ -9,6 +9,7 @@ import restapi.admin as a
 mgmtapi = patterns('',
     url(r'^api/biz/$', a.AdminBusinessView.as_view()),
     url(r'^api/biz/(?P<pk>\d+)/?$', a.AdminBusinessDetails.as_view()),
+    url(r'^api/biz/caplist/$', a.ScreencapList.as_view()),
 
     url(r'^api/cat/$', a.AdminCategory.as_view()),
     url(r'^api/cat/(?P<pk>\d+)/?$', a.AdminCategoryDetail.as_view()),

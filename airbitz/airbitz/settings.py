@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import getpass
+import datetime
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DB_HOST = 'localhost'
@@ -35,6 +36,7 @@ if DEBUG:
     print 'PRODUCTION:', PRODUCTION
 
 SCREENCAP_ABSOLUTE_URL = 'https://airbitz.co'
+SCREENCAP_INTERVAL = datetime.timedelta(minutes=15)
 
 DEPLOY_DATE = '20140502'
 
