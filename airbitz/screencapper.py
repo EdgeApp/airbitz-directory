@@ -44,7 +44,7 @@ def query_biz_list(d1=datetime.date.today(), d2=None):
 Queries for businesses modified in the window given otherwise it will just query anything modified today
 '''
 def get_biz_list():
-    url = 'http://admin.airbitz.co/mgmt/api/biz/caplist'
+    url = 'https://airbitz.co/mgmt/api/biz/caplist'
     response = urllib2.urlopen(url)
     data = json.loads(response.read())
     b_list = []
