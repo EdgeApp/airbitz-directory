@@ -64,7 +64,9 @@
 
                 <div class="categories col-xs-12">
                     {% for c in biz.categories.all %}
-                        <span class="label label-primary">{{c.name}}</span>
+                        <a class="biz-cat-link" href="{% url 'search' %}?term={{ c.name }}&location={{ location }}">
+                            <span class="label label-primary">{{c.name}}</span>
+                        </a>
                     {% endfor %}
                 </div>
 
@@ -219,9 +221,7 @@
         $(function() {
             var mapImgUrl = GMaps.staticMapURL({
                 scale: 1,
-            {% if not DEBUG %}
                 key: '{{ mapkey }}',
-            {% endif %}
                 lat: {{ biz.center.y }},
                 lng: {{ biz.center.x }},
                 markers: [

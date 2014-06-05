@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
@@ -18,6 +18,11 @@ from management.forms import CategoryForm, ImageTagForm, \
                              BizImageForm, BizImageLinkForm, \
                              BizImportForm, HoursFormSet, HoursFormSetHelper, \
                              SocialFormSet, SocialFormHelper
+from time import strftime
+from urlparse import urlparse
+
+import logging
+logger = logging.getLogger(__name__)
 
 from factual import Factual, APIException
 from airbitz.settings import FACTUAL_KEY, FACTUAL_SECRET
@@ -217,6 +222,12 @@ def business_view(request, bizId):
     biz = get_object_or_404(Business, pk=bizId)
     hours = BusinessHours.objects.filter(business=biz)
     social = SocialId.objects.filter(business=biz)
+
+    if biz.published is None:
+        published = ''
+    else:
+        published = biz.published.strftime('%m/%d/%y %H:%M:%S')
+
     context = {
         'STATUS_CHOICES': STATUS_CHOICES,
         'SOCIAL_TYPES': SOCIAL_TYPES,
@@ -224,7 +235,11 @@ def business_view(request, bizId):
         'hours': hours,
         'social': social,
         'tab_main': ' class=active ',
+        'created': biz.created.strftime('%m/%d/%y %H:%M:%S'),
+        'modified': biz.modified.strftime('%m/%d/%y %H:%M:%S'),
+        'published': published,
     }
+    logger.debug("this is a debug message!")
     return render_to_response('mgmt_biz_view.html', RequestContext(request, context))
 
 @user_passes_test(isManager, login_url=LOGIN_URL)
@@ -401,8 +416,20 @@ def redirect_vote(request):
     return HttpResponseRedirect('https://docs.google.com/a/airbitz.co/forms/d/1XGPghf1OsdgTmrsiEscWqcPjssfDX3u8IE-PBOLebc4/viewform')
 
 def redirect_blog(request):
-    return HttpResponseRedirect('https:go.airbitz.co')
+    return HttpResponseRedirect('https://go.airbitz.co')
 
 def redirect_about(request):
-    return HttpResponseRedirect('https:go.airbitz.co/about/')
+    return HttpResponseRedirect('https://go.airbitz.co/about/')
+
+def redirect_button(request):
+    referer = request.META['HTTP_REFERER']
+    parsed_referer = urlparse(referer)
+    domain = '{uri.netloc}'.format(uri=parsed_referer)
+    b_match = Business.objects.filter(website__icontains=domain)
+    if b_match:
+        biz_id = b_match[0].id
+        return HttpResponseRedirect(request.build_absolute_uri(reverse('business_info', args=[biz_id])))
+    else:
+        redirect_url = request.build_absolute_uri(reverse('landing'))
+        return HttpResponseRedirect(redirect_url)
 

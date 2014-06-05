@@ -9,6 +9,7 @@ import restapi.admin as a
 mgmtapi = patterns('',
     url(r'^api/biz/$', a.AdminBusinessView.as_view()),
     url(r'^api/biz/(?P<pk>\d+)/?$', a.AdminBusinessDetails.as_view()),
+    url(r'^api/biz/caplist/$', a.ScreencapList.as_view()),
 
     url(r'^api/cat/$', a.AdminCategory.as_view()),
     url(r'^api/cat/(?P<pk>\d+)/?$', a.AdminCategoryDetail.as_view()),
@@ -24,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^vote/$', 'management.views.redirect_vote', name='mgmt_redirect_vote'),
     url(r'^blog/$', 'management.views.redirect_blog', name='mgmt_redirect_blog'),
     url(r'^about/$', 'management.views.redirect_about', name='mgmt_redirect_about'),
+    url(r'^button/$', 'management.views.redirect_button', name='mgmt_redirect_button'),
     url(r'^factual/(?P<bizId>\d+)/$', 'management.views.factual_lookup', name='mgmt_factual_lookup'),
 )
 

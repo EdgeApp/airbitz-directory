@@ -1,0 +1,176 @@
+{% load compressed %}
+{% load google_analytics %}
+{% load absolute %}
+
+<!doctype html>
+<html>
+    <head>
+        <meta name="google-site-verification" content="KKMUdX_TFC0dy0XA-Tb_HPjaiGLu8OJbOqdDXcCgV48" />
+        {% block head %}
+            <meta name="csrf-token" content="{{csrf_token}}">
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+            {% block head_seo_social %}
+
+                {% block seo_meta %}
+                    <title>{% block title %}Bitcoin Wallet and Business Directory{% endblock title %} | Airbitz</title>
+                    <meta name="description" content="{% block meta_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock meta_description %}">
+                    <meta name="news_keywords" content="{% block meta_news_keywords %}Local Bitcoin Business,Bitcoin Food,Bitcoin Friendly Business{% endblock meta_news_keywords %}">
+                {% endblock seo_meta %}
+
+                {% block og_meta %}
+                    <meta property="og:title" content="{% block og_title %}Airbitz Bitcoin Wallet and Directory{% endblock og_title %}">
+                    <meta property="og:description" content="{% block og_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock og_description %}">
+                    <meta property="og:type" content="{% block og_type %}Article{% endblock og_type %}">
+                    <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock og_url %}">
+                    <meta property="og:image" content="{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock og_image %}">
+                    <meta property="og:site_name" content="{% block og_site_name %}Airbitz Bitcoin Wallet & Directory{% endblock og_site_name %}">
+            {#        <meta property="fb:admins" content="{% block og_fb_admins %}{% endblock og_fb_admins %}">#}
+                {% endblock og_meta %}
+
+                {% block twitter_meta %}
+                    <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock twitter_card %}">
+                    <meta name="twitter:site" content="{% block twitter_site %}@airbitz{% endblock twitter_site %}">
+                    <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet & Directory{% endblock twitter_title %}">
+                    <meta name="twitter:description" content="{% block twitter_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock twitter_description %}">
+                    <meta name="twitter:creator" content="{% block twitter_creator %}@airbitz{% endblock twitter_creator %}">
+                    <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock twitter_image_src %}">
+                    <meta name="twitter:domain" content="{% block twitter_domain %}{{ request.META.HTTP_HOST }}{% endblock twitter_domain %}">
+                    <meta name="twitter:url" content="{% block twitter_url %}{{ request.build_absolute_uri }}{% endblock twitter_url %}">
+                    <meta name="twitter:author" content="{% block twitter_author %}@airbitz{% endblock twitter_author %}">
+                    <meta name="twitter:app:id:iphone" content="{% block twitter_app_id_iphone %}id843536046{% endblock twitter_app_id_iphone %}">
+                    <meta name="twitter:app:id:ipad" content="{% block twitter_app_id_ipad %}id843536046{% endblock twitter_app_id_ipad %}">
+                {% endblock twitter_meta %}
+
+            {% endblock head_seo_social %}
+
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+            <meta name="mobile-web-app-capable" content="yes">
+            <link rel="icon" type="image/png" href="{{ STATIC_URL }}img/favicon.ico">
+            {% compressed_css 'global' %}
+        {% endblock head %}
+    </head>
+    <body>
+        <div id="wrap">
+            {% block top_bg %}{% endblock %}
+
+            {% block topbar %}
+
+                {% include '_top_navbar.html' %}
+
+            {% endblock topbar %}
+
+
+        {% if user.is_superuser %}
+
+        <nav class="navbar navbar-admin navbar-ab navbar-fixed-bottom" role="navigation">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% if DEBUG %}
+                            <span style="margin-top: 20px;" class="label label-danger pull-left">WARNING NOT PRODUCTION</span>
+                        {% endif %}
+                        <button type="button" class="close btn btn-link" aria-hidden="true" title="Hide Admin Bar"><i class="fa fa-times-circle-o"></i></button>
+                        <a class="btn btn-default" href="{% url 'mgmt_dashboard' %}"><i class="fa fa-th-large"></i> Dashboard</a>
+                        {% block admin_buttons %}{% endblock admin_buttons %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        {% endif %}
+
+
+            <div class="main-content container">
+                {% block message %}
+                    {% if messages %}
+                        <div class="row">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="alert {{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endblock message %}
+
+                {% block body %}
+                {% endblock body %}
+            </div><!-- /.container -->
+
+
+        </div><!-- /#wrap -->
+
+        {% block footer %}
+
+            {% include '_footer_main.html' %}
+
+        {% endblock footer %}
+
+
+        {% block javascript_headers %}
+            {% compressed_js 'core' %}
+        {% endblock javascript_headers %}
+        {% block javascript %}
+            <script type="text/javascript">
+                $(function() {
+                    AB.setup();
+                    AB.addLocationSearch($('input.location'));
+                    AB.addPlaceSearch($('input.term'));
+                });
+            </script>
+
+            <script>
+            // Include the UserVoice JavaScript SDK (only needed once on a page)
+            UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/sf1HfQGz9aR6JlwkmTvKbQ.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+
+            //
+            // UserVoice Javascript SDK developer documentation:
+            // https://www.uservoice.com/o/javascript-sdk
+            //
+
+            // Set colors
+            UserVoice.push(['set', {
+              accent_color: '#448dd6',
+              trigger_color: 'white',
+              trigger_background_color: '#6aba2e'
+            }]);
+
+            // Identify the user and pass traits
+            // To enable, replace sample data with actual user traits and uncomment the line
+            UserVoice.push(['identify', {
+              //email:      'john.doe@example.com', // User’s email address
+              //name:       'John Doe', // User’s real name
+              //created_at: 1364406966, // Unix timestamp for the date the user signed up
+              //id:         123, // Optional: Unique id of the user (if set, this should not change)
+              //type:       'Owner', // Optional: segment your users by type
+              //account: {
+              //  id:           123, // Optional: associate multiple users with a single account
+              //  name:         'Acme, Co.', // Account name
+              //  created_at:   1364406966, // Unix timestamp for the date the account was created
+              //  monthly_rate: 9.99, // Decimal; monthly rate of the account
+              //  ltv:          1495.00, // Decimal; lifetime value of the account
+              //  plan:         'Enhanced' // Plan name for the account
+              //}
+            }]);
+
+            // Add default trigger to the bottom-right corner of the window:
+            UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-right' }]);
+
+            // Or, use your own custom trigger:
+            //UserVoice.push(['addTrigger', '#id', { mode: 'contact' }]);
+
+            // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
+            UserVoice.push(['autoprompt', {}]);
+            </script>
+
+            <script type="text/javascript">
+            $(function(){
+                $('.main-content').removeClass('container').addClass('container-fluid').css('padding', '0 10px');
+                $('.addthis-smartlayers').remove();
+            });
+            </script>
+
+        {% endblock javascript %}
+    </body>
+</html>
+

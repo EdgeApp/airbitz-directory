@@ -861,6 +861,12 @@ body .main-content {
   /* Opera */
   animation: fadein 2s;
 }
+body a.biz-cat-link:hover {
+  text-decoration: none;
+}
+body a.biz-cat-link .label:hover {
+  background: #003e61;
+}
 .hidden-temp {
   opacity: 0;
   visibility: hidden;

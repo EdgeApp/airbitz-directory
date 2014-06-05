@@ -13,7 +13,7 @@
 }
 
 .admin-heads-up {
-    margin-bottom: 40px;
+    margin-bottom: 15px;
 
 
     .biz-name {
@@ -41,8 +41,200 @@
         }
     }
 
+    #s2id_status {
+        width: 100% !important;
+    }
+    
+    #created-time, #modified-time {
+        padding: 2px 12px;
+    }
+
+    .select2-container-multi .select2-choices .select2-search-field input {
+        padding: 0;
+    }
     #description {
         height: 200px;
     }
 }
 
+.dataTables_wrapper {
+
+    .dataTables_processing {
+        position: fixed;
+        height: 50px;
+        width: 225px !important;
+        top: 90px;
+        left: 93% !important;
+        padding-top: 12px;
+        border-radius: 30px;
+        background: @brand-primary;
+        opacity: .9;
+        color: white;
+        font-size: 18px;
+        box-shadow: 0 0 15px rgba(0, 0, 0 ,.8);
+    }
+}
+
+.custom-controls {
+    margin-bottom: 10px;
+}
+
+
+table.dataTable {
+    margin: 20px 0;
+
+    thead {
+        tr {
+            th {
+                &:nth-child(1) {
+                    text-align: center;
+                }
+                &:nth-child(2) {
+                    text-align: center;
+                }
+                &:nth-child(5) {
+                    text-align: center;
+                }
+                &:nth-child(6) {
+                    text-align: center;
+                }
+            }
+        }
+    }
+    tr {
+        td {
+            overflow: hidden;
+            max-width: 275px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            a {
+
+                i.fa.fa-pencil {
+                    margin-right: 3px;
+
+                    border-radius: 5px;
+                    &:hover {
+                        color: black;
+                    }
+                }
+            }
+            i.ab-draft {
+                color: @ab-blue-dark;
+            }
+            i.ab-published {
+                color: @ab-green-dark;
+            }
+            i.ab-pending {
+                color: brown;
+            }
+            i.ab-trash {
+                color: #ff0000;
+            }
+            i.ab-true {
+                color: @ab-green-dark;
+            }
+            i.ab-false {
+                color: #ff0000;
+            }
+            &:nth-child(1) {
+                width: 40px;
+            }
+            &:nth-child(2) {
+                width: 40px;
+            }
+            &:nth-child(3) {
+                width: 40px;
+            }
+            &:nth-child(4) {
+                width: 40px;
+            }
+            &:nth-child(5) {
+                width: 40px;
+            }
+            &:nth-child(6) {
+                width: 40px;
+            }
+            &:nth-child(7) {
+                width: 40px;
+            }
+            &:nth-child(8) {
+                width: 40px;
+            }
+            &:nth-child(9) {
+                width: 40px;
+            }
+            &:nth-child(10) {
+                width: 40px;
+            }
+            &:nth-child(11) {
+                width: 40px;
+            }
+
+        }
+    }
+
+    tr.even {
+
+        td.sorting_1,
+        td.sorting_2,
+        td.sorting_3,
+        td.sorting_4 {
+            background-color: #E4F8FF;
+        }
+    }
+
+    tr.odd {
+        background-color: #E2F0FF;
+
+        td.sorting_1,
+        td.sorting_2,
+        td.sorting_3,
+        td.sorting_4 {
+            background-color: #ACDCEB;
+        }
+    }
+    tfoot {
+        th {
+            padding: 10px 8px 6px 8px;
+        }
+    }
+
+    .popover {
+        max-width: 350px;
+
+        .popover-title {
+            color: @brand-primary;
+            font-weight: 600;
+        }
+        strong {
+            display: inline-block;
+            width: 80px;
+            margin-right: 10px;
+        }
+        hr {
+            margin: 10px 0px;
+        }
+    }
+
+}
+
+
+.FixedHeader_Cloned {
+    visibility: hidden;
+    z-index: 1030 !important;
+    margin-top: 10px;
+
+    th, td {
+        background-color: white !important;
+    }
+}
+
+.select2-container-multi .select2-choices .select2-search-choice {
+    background: @brand-primary;
+    color: #ffffff;
+
+//    .select2-search-choice-close {
+//        background: url('select2_white.png') right top no-repeat;
+//    }
+
+}
