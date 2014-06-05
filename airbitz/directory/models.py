@@ -11,10 +11,14 @@ from django.utils.http import urlquote_plus
 from imagekit.models import ImageSpecField
 from rest_framework.authtoken.models import Token
 import os
+import subprocess32 as subprocess
 import urllib
+import logging
 
 from airbitz import settings
 from imgprocessors import DEF_ADMIN_PROC, DEF_MOBILE_PROC
+
+logger = logging.getLogger(__name__)
 
 @receiver(post_save, sender=get_user_model())
 def create_auth_token(sender, instance=None, created=False, **kwargs):
@@ -77,6 +81,25 @@ def lookupSocialIcon(social_type):
         social_icon = 'link'
     return social_icon
 
+'''
+Makes screencapture image based on Airbitz Buisness ID
+'''
+def screencap(biz_id):
+    casper_timeout = 30
+    casper_path = '/home/' + settings.SYS_USER + '/local/bin/casperjs'
+    casper_script = os.path.dirname(os.path.dirname(__file__)) + '/biz-screen-capture.js'
+    casper_save = '--save=' + settings.MEDIA_ROOT + '/screencaps/'
+    casper_url = '--url=' + settings.SCREENCAP_ABSOLUTE_URL
+    casper_args = ' '.join([casper_path, casper_script, casper_save, casper_url, str(biz_id)])
+    print 'CASPER CMD:', casper_args
+
+    try:
+        print subprocess.check_output(casper_args, shell=True, timeout=casper_timeout)
+        return settings.MEDIA_ROOT + '/screencaps/biz-' + str(biz_id)
+    except subprocess.TimeoutExpired:
+        print '**** CASPERJS TIME IS UP GOTTA MOVE ON ****'
+    except subprocess.CalledProcessError as e:
+        print '*** CASPER CMD ERROR CODE = ', e.returncode
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
@@ -135,6 +158,14 @@ class Business(models.Model):
     def __unicode__(self):
         return u'%s (id=%s)' % (self.name, self.pk)
 
+    def get_screencap(self):
+        if self.status == 'PUB':
+            screencap(self.id)
+            return True
+        else:
+            print '** CANNOT CREATE SCREENCAP UNLESS PUBLISHED **'
+            return False
+
     @property
     def lookupStatus(self):
         return lookupChoice(self.status, STATUS_CHOICES)
@@ -186,7 +217,7 @@ class Business(models.Model):
         except Business.DoesNotExist:
             pass
 
-        super(Business, self).save(*args, **kwargs)
+        super(Business, self).save(*args, **kwargs)    # Call the "real" save() method.
 
 class SocialId(models.Model):
     business = models.ForeignKey(Business, null=False)

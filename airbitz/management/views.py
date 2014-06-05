@@ -21,6 +21,9 @@ from management.forms import CategoryForm, ImageTagForm, \
 from time import strftime
 from urlparse import urlparse
 
+import logging
+logger = logging.getLogger(__name__)
+
 LOGIN_URL='/mgmt/login'
 
 def isManager(u): 
@@ -232,6 +235,7 @@ def business_view(request, bizId):
         'modified': biz.modified.strftime('%m/%d/%y %H:%M:%S'),
         'published': published,
     }
+    logger.debug("this is a debug message!")
     return render_to_response('mgmt_biz_view.html', RequestContext(request, context))
 
 @user_passes_test(isManager, login_url=LOGIN_URL)

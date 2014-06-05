@@ -22,7 +22,9 @@
         <div class="biz-meta">
             <div class="biz-categories">
                 {% for c in biz.categories.all %}
-                    <span class="label label-primary">{{c.name}}</span>
+                    <a class="biz-cat-link" href="{% url 'search' %}?term={{ c.name }}&location={{ location }}">
+                        <span class="label label-primary">{{ c.name }}</span>
+                    </a>
                 {% empty %}
                     <span class="label label-warning">Uncategorized</span>
                 {% endfor %}
