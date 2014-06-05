@@ -287,6 +287,7 @@ PIPELINE_JS = {
             'js/parsley.js',
             'extras/select2/select2.js',
             'extras/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.min.js',
+            'js/mgmt-ui.js',
         ),
         'output_filename': 'js/management.' + DEPLOY_DATE + '.js',
     },
