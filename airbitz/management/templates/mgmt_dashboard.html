@@ -21,20 +21,6 @@
 {% endblock search %}
 
 {% block body %}
-
-    <div class="row" style="margin-bottom: 10px;">
-        <div class="col-sm-1">
-            <a href="https://airbitz.co/button/" title="Bitcoin Wallet & Business Directory">
-                <img src="{{ STATIC_URL }}/img/web-button/airbitz-bitcoin-accepted-300w.png" alt="Bitcoin Wallet & Business Directory" class="img-responsive" />
-            </a>
-        </div>
-        <div class="col-sm-5">
-            <textarea name="" id="accepted-here-code" cols="" rows="3" style="width: 100%; font-size: 8px; line-height: 12px;"><a href="https://airbitz.co/button/" title="Bitcoin Wallet & Business Directory">
-    <img src="https://airbitz.co/static/img/web-button/airbitz-bitcoin-accepted-300w.png" alt="Bitcoin Wallet & Business Directory" width="150" />
-</a></textarea>
-        </div>
-    </div>
-
     <div class="row">
         <div class="col-sm-12">
             <a class="pull-right btn-sm btn btn-warning" href="{% url 'mgmt_biz_import' %}"><i class="fa fa-download"></i> Import Place</a>
@@ -109,6 +95,30 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-sm-12">
+            <h2>Website Buttons</h2>
+        </div>
+        <div class="col-sm-1">
+            <h4>Normal 150px</h4>
+            <a href="https://airbitz.co/button/" title="Bitcoin Wallet & Business Directory">
+                <img src="{{ STATIC_URL }}/img/web-button/airbitz-bitcoin-accepted-150w.png" alt="Bitcoin Wallet & Business Directory" class="img-responsive" />
+            </a>
+        </div>
+        <div class="col-sm-1">
+            <h4>Retina 300px</h4>
+            <a href="https://airbitz.co/button/" title="Bitcoin Wallet & Business Directory">
+                <img src="{{ STATIC_URL }}/img/web-button/airbitz-bitcoin-accepted-300w.png" alt="Bitcoin Wallet & Business Directory" class="img-responsive" />
+            </a>
+        </div>
+        <div class="col-sm-5">
+            <h4>Click to Select All</h4>
+            <textarea name="" id="accepted-here-code" cols="" rows="3" style="width: 100%; font-size: 8px; line-height: 12px;"><a href="https://airbitz.co/button/" title="Bitcoin Wallet & Business Directory">
+    <img src="https://airbitz.co/static/img/web-button/airbitz-bitcoin-accepted-300w.png" alt="Bitcoin Wallet & Business Directory" width="150" />
+</a></textarea>
         </div>
     </div>
 {% endblock %}
