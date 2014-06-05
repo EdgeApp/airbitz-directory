@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^vote/$', 'management.views.redirect_vote', name='mgmt_redirect_vote'),
     url(r'^blog/$', 'management.views.redirect_blog', name='mgmt_redirect_blog'),
     url(r'^about/$', 'management.views.redirect_about', name='mgmt_redirect_about'),
+    url(r'^button/$', 'management.views.redirect_button', name='mgmt_redirect_button'),
 )
 
 if settings.DEBUG:
