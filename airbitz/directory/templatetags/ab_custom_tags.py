@@ -24,6 +24,10 @@ def replace ( string, args ):
 @register.filter(name='decimal_to_percent')
 def decimal_to_percent(decimal):
     try:
-        return "%d%%" % float(decimal * 100)
+        if str(decimal)[4] == '0':
+            return "%d%%" % float(decimal * 100)
+        else:
+            return "%.1f%%" % float(decimal * 100)
+
     except ValueError:
         return ''
