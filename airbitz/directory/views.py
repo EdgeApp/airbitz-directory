@@ -75,7 +75,7 @@ def business_search(request):
     if location == 'On the Web':
         results_per_page = 30
     else:
-        results_per_page = 10
+        results_per_page = 25
 
     paginator = Paginator(results, results_per_page)
 
