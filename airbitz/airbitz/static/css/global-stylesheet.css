@@ -827,7 +827,7 @@ body .top-bg {
     position: absolute;
     top: 0;
     width: 100%;
-    height: 700px;
+    height: 100%;
     background: #2291cf;
     background-size: cover !important;
   }

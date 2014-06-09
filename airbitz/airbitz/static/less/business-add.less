@@ -1,0 +1,86 @@
+@import "../bootstrap/less/variables.less";
+@import "../bootstrap/less/mixins.less";
+
+
+.business-info.form-horizontal {
+
+    h4 {
+        margin: 20px 0;
+        padding-bottom: 8px;
+        color: #2291cf;
+        border-bottom: 1px solid #dedede;
+    }
+
+    .input-group-lg>.form-control {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .radio {
+        padding-top: 0;
+    }
+
+    .checkbox {
+        padding-top: 0;
+    }
+
+    textarea {
+        .resizable(vertical);
+    }
+}
+
+.module-add-hours {
+    position: relative;
+    width: 325px;
+    height: 130px;
+    clear: both;
+    background: white;
+    border: 1px solid #ddd;
+
+    .input-hours {
+        padding: 10px;
+        
+        label {
+            padding-right: 5px;
+        }
+        input {
+            margin-right: 10px;
+        }
+        .hours-from,
+        .hours-to {
+            width: 80px;
+            padding: 0 4px;
+            font-size: 14px;
+        }
+
+    }
+
+    .input-days {
+        padding: 0 10px;
+
+        .btn-group-xs>.btn {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+    }
+
+    .module-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 5px 10px;
+        background: #eee;
+
+        .checkbox {
+            label {
+                font-size: 12px;
+            }
+            input[type="checkbox"] {
+                margin-top: 5px;
+            }
+        }
+    }
+}
+
+
+

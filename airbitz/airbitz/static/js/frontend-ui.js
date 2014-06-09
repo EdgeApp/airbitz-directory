@@ -1,5 +1,9 @@
 /*jshint devel:true */
 
+var screen_lg = "screen and (min-width: 992px)";
+var blurRadius = 10;
+
+
 $(function() {
 
     // custom holder theme for missing images
@@ -85,5 +89,49 @@ $(function() {
         });
     }
 
+
+    // only blur bg on larger screens
+
+    if(!Modernizr.webgl) {
+        enquire.register(screen_lg, function() {
+            var $topBg = $('.top-bg');
+
+            if($topBg.length != 0) {
+                $topBg.css({
+                    '-webkit-filter': 'blur(' + blurRadius + 'px)',
+                });
+                $topBg.blurjs({
+                    source: '.top-bg',
+                    radius: blurRadius,
+                    overlay: '',
+                    offset: {
+                        x: 0,
+                        y: 0
+                    },
+                    cache: false // keep false because browser localstorage quota limits get hit
+                });
+            }
+        });
+    }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+// wait for everything to resize and load then do stuff
+jQuery(window).on('load', function(){
+
+    // only load bg on larger screens
+    enquire.register(screen_lg, function() {
+        $('.top-bg').fadeIn(800);
+    });
 
 });

@@ -5,12 +5,13 @@ from django.http import Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from airbitz.regions_data import ACTIVE_REGIONS, ALL_REGIONS
 
 from airbitz.settings import GOOGLE_MAP_KEY
-from airbitz.regions_data import ACTIVE_REGIONS, ALL_REGIONS, US_REGIONS, CA_REGIONS, EU_REGIONS
 from directory.models import Business, BusinessImage
 # from management.views import isManager
 from restapi import api
+from directory.models import STATUS_CHOICES, SOCIAL_TYPES
 
 SEARCH_LIMIT = 20
 DISTANCE_LIMIT_KILOMETERS = 20
@@ -90,7 +91,7 @@ def business_search(request):
         page_num = paginator.num_pages
         results = paginator.page(page_num)
 
-    results_left = min(paginator.count, results_per_page, 
+    results_left = min(paginator.count, results_per_page,
                        (paginator.count - results_per_page * (page_num - 1)))
     results_info = {
         'total': paginator.count,
@@ -134,3 +135,13 @@ def business_info(request, bizId):
     }
     return render_to_response('business_info.html', RequestContext(request, context))
 
+
+def add_business(request, url=None):
+
+    context = {
+        'STATUS_CHOICES': STATUS_CHOICES,
+        'SOCIAL_TYPES': SOCIAL_TYPES,
+        'starter_url': url,
+        'top_bg_img': '',
+    }
+    return render_to_response('business_add.html', RequestContext(request, context))

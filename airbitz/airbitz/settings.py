@@ -234,6 +234,17 @@ PIPELINE_CSS = {
             'media': 'screen,projection',
         },
     },
+    'business_add': {
+        'source_filenames': (
+            'extras/select2/select2.css',
+            'extras/jquery.imgareaselect-0.9.10/css/imgareaselect-default.css',
+            'css/business-add.css',
+        ),
+        'output_filename': 'css/business-add.min.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
     'dataTables': {
         'source_filenames': (
             # 'extras/DataTables-1.9.4/media/css/jquery.dataTables.css',
@@ -256,6 +267,7 @@ PIPELINE_JS = {
             'js/core.js',
             'js/holder.js',
             'js/typeahead.bundle.js',
+            'js/angular.min.js'
             'extras/jQuery.dotdotdot-master/src/js/jquery.dotdotdot.min.js',
             'extras/Readmore.js-master/readmore.min.js',
             'extras/colorbox-master/jquery.colorbox-min.js',
@@ -319,6 +331,16 @@ PIPELINE_JS = {
             'js/directory.js',
         ),
         'output_filename': 'js/search.' + DEPLOY_DATE + '.js',
+    },
+    'business_add': {
+        'source_filenames': (
+            'js/angular.min.js',
+            'extras/blur.js/blur.js',
+            'extras/select2/select2.js',
+            'extras/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.min.js',
+            'js/business-add.js',
+        ),
+        'output_filename': 'js/business-add.min.js',
     },
     'dataTables': {
         'source_filenames': (
