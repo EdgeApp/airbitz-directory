@@ -46,6 +46,7 @@
                                     <option value="{{ s.0 }}">{{ s.1 }}</option>
                                 {% endfor %}
                             </select>
+                            <button class="destroy-popups btn btn-xs btn-danger"><i class="fa fa-bolt"></i> Seek and Destroy All Popups</button>
                         </div>
                         <div class="col-sm-6 text-right">
                             <label for="adminLocation">Location</label>
@@ -206,7 +207,7 @@
                 fnCallback(json)
                 $('[data-toggle="popover"]').popover( {
                     "delay": 100,
-                    "trigger": 'hover',
+                    "trigger": 'click',
                     "fade": 350,
                     "html": true,
                     "container": 'body',

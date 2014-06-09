@@ -4,6 +4,11 @@
 
 jQuery(function($) {
 
+    $('.destroy-popups').on('click', function() {
+        $('[data-toggle="popover"]').popover('hide');
+    });
+
+
     $('#accepted-here-code').focus(function () {
         var $this = $(this);
         $this.select();

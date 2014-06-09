@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
@@ -19,6 +19,7 @@ from management.forms import CategoryForm, ImageTagForm, \
                              BizImportForm, HoursFormSet, HoursFormSetHelper, \
                              SocialFormSet, SocialFormHelper
 from time import strftime
+from urlparse import urlparse
 
 import logging
 logger = logging.getLogger(__name__)
@@ -385,5 +386,14 @@ def redirect_about(request):
     return HttpResponseRedirect('https://go.airbitz.co/about/')
 
 def redirect_button(request):
-    return HttpResponseRedirect('https://airbitz.co/')
+    referer = request.META['HTTP_REFERER']
+    parsed_referer = urlparse(referer)
+    domain = '{uri.netloc}'.format(uri=parsed_referer)
+    b_match = Business.objects.filter(website__icontains=domain)
+    if b_match:
+        biz_id = b_match[0].id
+        return HttpResponseRedirect(request.build_absolute_uri(reverse('business_info', args=[biz_id])))
+    else:
+        redirect_url = request.build_absolute_uri(reverse('landing'))
+        return HttpResponseRedirect(redirect_url)
 

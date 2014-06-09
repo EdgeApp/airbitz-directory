@@ -12,6 +12,11 @@ from directory.models import Business
 '''
 Makes screencapture image based on Airbitz Buisness ID
 REQUIREMENTS: casperjs & phantomjs binaries must be in path for execution
+
+EXAMPLE LOCAL CRON JOB
+PATH=/home/vagrant/local/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+*/15 * * * * $HOME/airbitz/ENV/bin/python $HOME/airbitz/ENV/airbitz/screencapper.py >> /tmp/screencaps.log 2>&1
+
 '''
 def screencap(biz_id):
     casper_timeout = 30
