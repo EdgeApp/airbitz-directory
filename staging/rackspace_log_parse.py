@@ -11,7 +11,7 @@ logs_path = '/staging/rackspace/logs/'
 zip_files = []
 log_files = []
 csv_file_rows = []
-csv_filename = 'access_log.csv'
+csv_filename = 'access_log'
 log_to_csv_pattern = '^.*\d+_\d+ (.*\.*) (\d+\.\d+\.\d+\.\d+) .*\[(.*?)\].*?\"(.*?)\".*?\".*?\".*?\"(.*?)\".*'
 
 
@@ -61,7 +61,7 @@ for log_file in log_files:
 
 
 # Take csv_files_rows list and create csv file from it
-with open(logs_path + csv_filename, 'wb') as result:
+with open(logs_path + csv_filename + '.csv', 'wb') as result:
     print '\nWRITING TO', logs_path + csv_filename
     writer = csv.writer(result, dialect='excel')
     writer.writerows(csv_file_rows)
