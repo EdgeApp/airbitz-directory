@@ -334,7 +334,7 @@ PIPELINE_JS = {
     },
     'business_add': {
         'source_filenames': (
-            'js/angular.min.js',
+            'js/angular-1.3.0-beta.11.min.js',
             'extras/blur.js/blur.js',
             'extras/select2/select2.js',
             'extras/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.min.js',
