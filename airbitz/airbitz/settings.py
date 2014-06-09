@@ -267,7 +267,7 @@ PIPELINE_JS = {
             'js/core.js',
             'js/holder.js',
             'js/typeahead.bundle.js',
-            'js/angular.min.js'
+            'js/angular.min.js',
             'extras/jQuery.dotdotdot-master/src/js/jquery.dotdotdot.min.js',
             'extras/Readmore.js-master/readmore.min.js',
             'extras/colorbox-master/jquery.colorbox-min.js',
