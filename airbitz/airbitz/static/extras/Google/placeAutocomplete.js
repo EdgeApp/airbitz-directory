@@ -1,3 +1,5 @@
+/*jshint devel:true */
+//
 // Including this file will hook up a google autocomplte field to the #autocomplete input field
 //
 

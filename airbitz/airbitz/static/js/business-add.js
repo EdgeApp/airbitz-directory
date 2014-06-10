@@ -1,4 +1,4 @@
-
+/*jshint devel:true */
 
 $(function() {
 
