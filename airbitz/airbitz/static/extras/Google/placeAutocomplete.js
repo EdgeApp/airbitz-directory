@@ -3,6 +3,11 @@
 // Including this file will hook up a google autocomplte field to the #autocomplete input field
 //
 
+String.prototype.toTitleCase = function () {
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);});
+};
+
+
 initializePlaceAutocomplete();
 
 // Use the autocomplete feature of the Google Places API to help fill in the address info.
@@ -72,12 +77,21 @@ function formatCountry(country) {
 }
 
 function setInputValue(cssId, inputValue) {
+    var cssIdNew = 'input' + cssId.toTitleCase();
+
+    // check for new versions of the page elements
+    if (document.getElementById(cssIdNew)) {
+        cssId = cssIdNew
+    }
+
     if (document.getElementById(cssId)) {
         console.log('Setting value of: #' + cssId);
 
         var inputElement = document.getElementById(cssId);
         var origVal = inputElement.value;
-        if (typeof inputValue == 'undefined') { inputValue = '' }
+        if (typeof inputValue == 'undefined') {
+            inputValue = ''
+        }
 
         if (origVal == inputValue) {
             return true;
@@ -87,12 +101,12 @@ function setInputValue(cssId, inputValue) {
             // Show that fields were updated and when focused remove effect
             inputElement.className += ' updated-field';
             $('.updated-field').removeClass('undo-field');
-            $('.updated-field').on('focus', function(){
+            $('.updated-field').on('focus', function () {
                 $(this).removeClass('updated-field');
             });
         }
     } else {
-        console.log('setInputValue() failed to set value. Cannot find element: #' + cssId);
+        console.log('setInputValue() failed to set value. Cannot find element: #' + cssId + 'or' + cssIdNew);
     }
 }
 
@@ -133,7 +147,7 @@ function fillInAddress() {
     // Get the place details from the autocomplete object
     var place = autocomplete.getPlace();
     var street_address = [];
-    var admin3_name, admin2_name, admin1_code, postalcode, country, latitude, longitude, phone;
+    var admin3_name, admin2_name, admin1_code, postalcode, country, latitude, longitude, phone, website, gplus;
 
     console.log(place);
 
@@ -194,7 +208,7 @@ function fillInAddress() {
     }
 
     // Clear address fields
-    document.getElementById('address').value = '';
+//    document.getElementById('address').value = '';
     setInputValue('address', formatStreetAddress(street_address)); // street address
     setInputValue('admin3_name', admin3_name); // city
     setInputValue('admin2_name', formatCounty(admin2_name)); // county
@@ -204,6 +218,10 @@ function fillInAddress() {
     setInputValue('latitude', place.geometry.location.lat().toFixed(7)); // country
     setInputValue('longitude', place.geometry.location.lng().toFixed(7)); // country
     setInputValue('phone', phone); // phone
+
+    setInputValue('name', place.name); // phone
+    setInputValue('website', place.website); // phone
+    setInputValue('googlePlusUrl', place.url); // phone
 
     updateLatLng();
 }
