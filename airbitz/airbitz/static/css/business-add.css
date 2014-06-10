@@ -1,3 +1,12 @@
+#collapse-2 .panel-body {
+  padding-top: 0;
+}
+.location-lookup {
+  background: #428bca;
+  padding: 15px;
+  color: white;
+  border: 1px solid #DDD;
+}
 .business-info.form-horizontal h4 {
   margin: 20px 0;
   padding-bottom: 8px;

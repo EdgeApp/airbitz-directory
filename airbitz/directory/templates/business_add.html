@@ -40,64 +40,7 @@
         <div class="biz-info-header col-xs-12">
             <h1 class="biz-name">Add a Bitcoin Friendly Business</h1>
 
-
-
             <div class="panel-group" id="accordion">
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-1">
-                                <i class="fa fa-link"></i> Add URL for Automatic Data Retrieval
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapse-1" class="panel-collapse collapse in">
-                        <div class="panel-body">
-
-                            <form class="form-horizontal" role="form">
-                                <div class="form-group">
-{#                                    <label for="inputBusinessWebsite" class="col-sm-2 control-label">Business Website</label>#}
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="inputBusinessWebsite" placeholder="Business Website URL">
-                                        <span class="help-text">Try to find business name/id via Google Places API</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-{#                                    <label for="inputFoursquarePage" class="col-sm-2 control-label">Foursquare Page</label>#}
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="inputFoursquarePage" placeholder="Foursquare Page URL">
-                                        <span class="help-text">Try to find business name/id with Foursquare API</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-{#                                    <label for="inputFacebookPage" class="col-sm-2 control-label">Facebook Page</label>#}
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="inputFacebookPage" placeholder="Facebook Page URL">
-                                        <span class="help-text">Try to find business name/id via Facebook OG API</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-{#                                    <label for="inputYelpPage" class="col-sm-2 control-label">Yelp Page</label>#}
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="inputYelpPage" placeholder="Yelp Page URL">
-                                        <span class="help-text">Try to find business name/id with Yelp API</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-4">
-                                        <button type="submit" class="btn btn-primary">Go Go Gadget Import!</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -107,36 +50,20 @@
                             </a>
                         </h4>
                     </div>
-                    <div id="collapse-2" class="panel-collapse collapse">
+                    <div id="collapse-2" class="panel-collapse collapse in">
                         <div class="panel-body">
-
+                            <div class="row">
+                                <div class="location-lookup form-group col-sm-6">
+                                    <label for="autocomplete"><i class="fa fa-map-marker"></i> Lookup via Google Places
+                                    </label>
+                                    <input type="text" id="autocomplete" class="form-control" />
+                                </div>
+                            </div>
+                            
                             {% include '_business-add-form.html' %}
-
-                            <ul class="list-group col-sm-4 hidden">
-                                <li class="list-group-item">name</li>
-                                <li class="list-group-item">description</li>
-                                <li class="list-group-item">website</li>
-                                <li class="list-group-item">phone</li>
-                                <li class="list-group-item">address</li>
-                                <li class="list-group-item">neighborhood</li>
-                                <li class="list-group-item">admin3_name (city)</li>
-                                <li class="list-group-item">admin2_name (county)</li>
-                                <li class="list-group-item">admin1_name (state)</li>
-                                <li class="list-group-item">postalcode</li>
-                                <li class="list-group-item">country</li>
-                            </ul>
-                            <ul class="list-group col-sm-4 hidden">
-                                <li class="list-group-item">categories</li>
-                                <li class="list-group-item">landing_image</li>
-                                <li class="list-group-item">mobile_landing_image</li>
-                                <li class="list-group-item">has_physical_business</li>
-                                <li class="list-group-item">has_online_business</li>
-                                <li class="list-group-item">has_bitcoin_discount</li>
-                            </ul>
                         </div>
                     </div>
                 </div>
-
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -148,57 +75,7 @@
                     </div>
                     <div id="collapse-4" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <p>Easy to click on images to add check marks</p>
-
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="http://lorempixel.com/200/200/abstract" alt="...">
-                                </a>
-                            </div>
-
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="http://lorempixel.com/200/200/people" alt="...">
-                                </a>
-                            </div>
-
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="http://lorempixel.com/200/200/nightlife" alt="...">
-                                </a>
-                            </div>
-
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="http://lorempixel.com/200/200/food" alt="...">
-                                </a>
-                            </div>
-
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="http://lorempixel.com/200/200/transport" alt="...">
-                                </a>
-                            </div>
-
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="http://lorempixel.com/200/200/city" alt="...">
-                                </a>
-                            </div>
-
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="http://lorempixel.com/200/200/nature" alt="...">
-                                </a>
-                            </div>
-
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="http://lorempixel.com/200/200/technics" alt="...">
-                                </a>
-                            </div>
-
-
+                            {% include '_business-add-images.html' %}
                         </div>
                     </div>
                 </div>
@@ -257,6 +134,8 @@
 {% block javascript_headers %}
     {{ block.super }}
     <script type="text/javascript" src="https://maps-api-ssl.google.com/maps/api/js?key={{ mapkey }}&sensor=false"> </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&v=3.exp&libraries=places"></script>
+    {% compressed_js 'googlePlaceAutocomplete' %}
     {% compressed_js 'business_add' %}
 {% endblock javascript_headers %}
 
