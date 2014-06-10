@@ -70,21 +70,27 @@ function formatCountry(country) {
 }
 
 function setInputValue(cssId, inputValue) {
-    var inputElement = document.getElementById(cssId);
-    var origVal = inputElement.value;
-    if (typeof inputValue == 'undefined') { inputValue = '' }
+    if (document.getElementById(cssId)) {
+        console.log('Setting value of: #' + cssId);
 
-    if (origVal == inputValue) {
-        return true;
+        var inputElement = document.getElementById(cssId);
+        var origVal = inputElement.value;
+        if (typeof inputValue == 'undefined') { inputValue = '' }
+
+        if (origVal == inputValue) {
+            return true;
+        } else {
+            inputElement.value = inputValue;
+
+            // Show that fields were updated and when focused remove effect
+            inputElement.className += ' updated-field';
+            $('.updated-field').removeClass('undo-field');
+            $('.updated-field').on('focus', function(){
+                $(this).removeClass('updated-field');
+            });
+        }
     } else {
-        inputElement.value = inputValue;
-
-        // Show that fields were updated and when focused remove effect
-        inputElement.className += ' updated-field';
-        $('.updated-field').removeClass('undo-field');
-        $('.updated-field').on('focus', function(){
-            $(this).removeClass('updated-field');
-        });
+        console.log('setInputValue() failed to set value. Cannot find element: #' + cssId);
     }
 }
 
