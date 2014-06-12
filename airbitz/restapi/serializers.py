@@ -126,7 +126,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(source='categories')
     social = SocialSerializer(source='socialid_set')
     profile_image = SizedImageField(source='*')
-    web_image = WebImageField(source='*')
+    square_image = WebImageField(source='*')
     state = serializers.CharField(source='admin1_code')
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
@@ -141,7 +141,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
                   'categories',
                   'social',
                   'profile_image',
-                  'web_image',
+                  'square_image',
                   'website',
                   'phone',
                   'address',
