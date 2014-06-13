@@ -21,6 +21,20 @@ class SizedImageField(serializers.Field):
         else:
             return {}
 
+class WebImageField(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        image = obj.landing_image
+        if image:
+            return {
+                'image': image.web_photo.url,
+                'width': image.web_photo.width,
+                'height': image.web_photo.height,
+                'bounding_box': {'x': 0.0, 'y': 0.0, 'height': 0.25, 'width': 1.0},
+                'thumbnail': image.web_photo.url,
+            }
+        else:
+            return {}
+
 class HoursField(serializers.Field):
     def serial(self, obj):
         return {
@@ -112,6 +126,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(source='categories')
     social = SocialSerializer(source='socialid_set')
     profile_image = SizedImageField(source='*')
+    square_image = WebImageField(source='*')
     state = serializers.CharField(source='admin1_code')
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
@@ -126,6 +141,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
                   'categories',
                   'social',
                   'profile_image',
+                  'square_image',
                   'website',
                   'phone',
                   'address',
