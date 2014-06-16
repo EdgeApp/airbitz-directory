@@ -122,7 +122,7 @@ def business_info(request, bizId):
         nearby = Business.objects.filter(status='PUB').filter(\
                     ~Q(pk=biz.id), \
                     center__distance_lt=(biz.center, D(km=DISTANCE_LIMIT_KILOMETERS)))
-        nearby = nearby.distance(biz.center).order_by('distance')[:6]
+        nearby = nearby.distance(biz.center).order_by('distance')[:12]
     context = {
         'biz': biz,
         'imgs': imgs,
