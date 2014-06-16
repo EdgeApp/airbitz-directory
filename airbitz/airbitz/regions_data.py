@@ -2,16 +2,22 @@
 def get_active_regions_list(region):
     regions = list()
 
-    if region == 'EU-':
-        for region_code, data in ACTIVE_REGIONS.items():
+    if region == 'SOUTHAMERICA':
+        for region_code, data in ACTIVE_REGIONS_SOUTH_AMERICA.items():
             if '-' not in region_code:
-                # regions.append(data['name'])
-                regions.append( (data['name'], data['search']) )
+                regions.append((data['name'], data['search']))
+    if region == 'ASIA':
+        for region_code, data in ACTIVE_REGIONS_ASIA.items():
+            if '-' not in region_code:
+                regions.append((data['name'], data['search']))
+    if region == 'EUROPE':
+        for region_code, data in ACTIVE_REGIONS_EUROPE.items():
+            if '-' not in region_code:
+                regions.append((data['name'], data['search']))
     else:
         for region_code, data in ACTIVE_REGIONS.items():
             if region in region_code:
-                # regions.append(data['name'])
-                regions.append( (data['name'], data['search']) )
+                regions.append((data['name'], data['search']))
 
     regions.sort(key=lambda data: data[0])
 
@@ -20,78 +26,6 @@ def get_active_regions_list(region):
 
 # ISO_3166 Region codes http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 # these correspond to jvectormaps
-ACTIVE_REGIONS = {
-    'US-CA': {'name': 'California',
-              'search': 'California, United States'},
-    'US-TX': {'name': 'Texas',
-              'search': 'Texas, United States'},
-    'US-NY': {'name': 'New York',
-              'search': 'New York, United States'},
-    'US-HI': {'name': 'Hawaii',
-              'search': 'Hawaii, United States'},
-    'US-NJ': {'name': 'New Jersey',
-              'search': 'New Jersey, United States'},
-    'US-GA': {'name': 'Georgia',
-              'search': 'Georgia, United States'},
-    'US-IL': {'name': 'Illinois',
-              'search': 'Illinois, United States'},
-    'US-UT': {'name': 'Utah',
-              'search': 'Utah, United States'},
-    'US-NV': {'name': 'Nevada',
-              'search': 'Nevada, United States'},
-    'US-CO': {'name': 'Colorado',
-              'search': 'Colorado, United States'},
-    'US-FL': {'name': 'Florida',
-              'search': 'Florida, United States'},
-    'US-NH': {'name': 'New Hampshire',
-              'search': 'New Hapshire, United States'},
-    'US-MA': {'name': 'Massachusetts',
-              'search': 'Massachusetts, United States'},
-    'US-VT': {'name': 'Vermont',
-              'search': 'Vermont, United States'},
-    'US-PA': {'name': 'Pennsylvania',
-              'search': 'Pennsylvania, United States'},
-    'US-CT': {'name': 'Connecticut',
-              'search': 'Connecticut, United States'},
-    'US-DE': {'name': 'Delaware',
-              'search': 'Delaware, United States'},
-    'US-MD': {'name': 'Maryland',
-              'search': 'Maryland, United States'},
-    'US-WA': {'name': 'Washington',
-              'search': 'Washington, United States'},
-    'US-OR': {'name': 'Oregon',
-              'search': 'Oregon, United States'},
-    'US-AZ': {'name': 'Arizona',
-              'search': 'Arizona, United States'},
-    'US-NM': {'name': 'New Mexico',
-              'search': 'New Mexico, United States'},
-    'US-MI': {'name': 'Michigan',
-              'search': 'Michigan, United States'},
-    'US-MN': {'name': 'Minnesota',
-              'search': 'Minnesota, United States'},
-    'US-DC': {'name': 'Washington DC',
-              'search': 'Washington, DC, United States'},
-    'US-IN': {'name': 'Indiana',
-              'search': 'Indiana, United States'},
-    'US-IA': {'name': 'Iowa',
-              'search': 'Iowa, United States'},
-    'US-KS': {'name': 'Kansas',
-              'search': 'Kansas, United States'},
-
-    'CA-ON': {'name': 'Ontario',
-              'search': 'Ontario, Canada'},
-    'CA-BC': {'name': 'British Columbia',
-              'search': 'British Columbia, Canada'},
-    'CA-QC': {'name': 'Quebec',
-              'search': 'Quebec, Canada'},
-
-    'NL': {'name': 'Netherlands',
-           'search': 'Netherlands'},
-    'GB': {'name': 'United Kingdom',
-       'search': 'United Kingdom'},
-    'DE': {'name': 'Germany',
-       'search': 'Germany'},
-}
 
 US_REGIONS = {
     'US-CA': {'name': 'California',
@@ -192,6 +126,8 @@ US_REGIONS = {
               'search': 'North Carolina, United States'},
     'US-SC': {'name': 'South Carolina',
               'search': 'South Carolina, United States'},
+    'US-WI': {'name': 'Wisconsin',
+              'search': 'Wisconsin, United States'},
 }
 
 CA_REGIONS = {
@@ -326,8 +262,46 @@ EU_REGIONS = {
        'search': 'Luxembourg'},
     'LI': {'name': 'Liechenstein',
        'search': 'Liechenstein'},
-
-
 }
 
-ALL_REGIONS = dict(US_REGIONS.items() + CA_REGIONS.items() + EU_REGIONS.items())
+SOUTH_AMERICA_REGIONS = {}  # TODO: get full list
+
+ASIA_REGIONS = {}           # TODO: get full list
+
+# Regions listed with partial coverage listed below
+ACTIVE_REGIONS_EUROPE = {
+    # EU regions
+    'NL': {'name': 'Netherlands',
+           'search': 'Netherlands'},
+    'GB': {'name': 'United Kingdom',
+           'search': 'United Kingdom'},
+    'DE': {'name': 'Germany',
+           'search': 'Germany'},
+    'AT': {'name': 'Austria',
+           'search': 'Austria'},
+}
+
+ACTIVE_REGIONS_SOUTH_AMERICA = {
+    # South American regions
+    'BR': {'name': 'Brazil',
+           'search': 'Brazil'},
+}
+
+ACTIVE_REGIONS_ASIA = {
+    # Asian regions
+    'HK': {'name': 'Hong Kong',
+           'search': 'Hong Kong'},
+}
+
+ACTIVE_REGIONS = {}
+ACTIVE_REGIONS.update(US_REGIONS)   # all
+ACTIVE_REGIONS.update(CA_REGIONS)   # all
+ACTIVE_REGIONS.update(ACTIVE_REGIONS_EUROPE)            # partial
+ACTIVE_REGIONS.update(ACTIVE_REGIONS_ASIA)              # partial
+ACTIVE_REGIONS.update(ACTIVE_REGIONS_SOUTH_AMERICA)     # partial
+
+# ALL_REGIONS = dict(US_REGIONS.items() + CA_REGIONS.items() + EU_REGIONS.items())
+ALL_REGIONS = {}
+ALL_REGIONS.update(US_REGIONS)
+ALL_REGIONS.update(CA_REGIONS)
+ALL_REGIONS.update(EU_REGIONS)
