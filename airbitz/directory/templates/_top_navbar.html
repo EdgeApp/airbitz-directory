@@ -62,6 +62,22 @@
                                         {% endfor %}
                                         </ul>
                                     </li>
+                                    <li class="dropdown-submenu">
+                                        <span>Asia</span>
+                                        <ul class="dropdown-menu">
+                                        {% for region in asia_active_regions_list %}
+                                            <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <span>South America</span>
+                                        <ul class="dropdown-menu">
+                                        {% for region in south_america_active_regions_list %}
+                                            <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                        </ul>
+                                    </li>
 
                                 </ul>
                             </li>
