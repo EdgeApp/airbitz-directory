@@ -29,7 +29,7 @@ def active_regions(request):
     return {
         'us_active_regions_list':               get_active_regions_list('US-'),
         'ca_active_regions_list':               get_active_regions_list('CA-'),
-        'eu_active_regions_list':               get_active_regions_list('EU-'),
+        'eu_active_regions_list':               get_active_regions_list('EUROPE'),
         'south_america_active_regions_list':    get_active_regions_list('SOUTHAMERICA'),
         'asia_active_regions_list':             get_active_regions_list('ASIA'),
     }

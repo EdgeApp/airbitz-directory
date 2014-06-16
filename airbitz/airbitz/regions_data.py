@@ -10,7 +10,7 @@ def get_active_regions_list(region):
         for region_code, data in ACTIVE_REGIONS_ASIA.items():
             if '-' not in region_code:
                 regions.append((data['name'], data['search']))
-    if region == 'EU-':
+    if region == 'EUROPE':
         for region_code, data in ACTIVE_REGIONS_EUROPE.items():
             if '-' not in region_code:
                 regions.append((data['name'], data['search']))
