@@ -3,7 +3,7 @@
 {% load absolute %}
 
 <!doctype html>
-<html>
+<html {% block html_open_tag %}{% endblock html_open_tag %}>
     <head>
         <meta name="google-site-verification" content="KKMUdX_TFC0dy0XA-Tb_HPjaiGLu8OJbOqdDXcCgV48" />
         {% block head %}

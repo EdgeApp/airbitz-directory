@@ -9,7 +9,7 @@
 
             <div class="form-group">
                 <div class="col-sm-5 input-group-sm">
-                    <select id="status">
+                    <select ng-model="biz.status" id="status">
                         <option value="ALL">Listing Status</option>
                         {% for s in STATUS_CHOICES %}
                             <option value="{{ s.0 }}">{{ s.1 }}</option>
@@ -19,79 +19,76 @@
 
                 <div class="checkbox col-sm-3">
                     <label for="has_physical_business">
-                        <input type="checkbox" id="has_physical_business" name="has_physical_business"> Physical
+                        <input ng-model="biz.has_physical_business" type="checkbox" id="has_physical_business" name="has_physical_business"> Physical
                     </label>
                 </div>
 
                 <div class="checkbox col-sm-3 ">
                     <label for="has_online_business">
-                        <input type="checkbox" id="has_online_business" name="has_online_business"> Online
+                        <input ng-model="biz.has_online_business" type="checkbox" id="has_online_business" name="has_online_business"> Online
                     </label>
                 </div>
             </div>
 
             <div class="form-group">
-{#                <label for="inputBizName" class="col-sm-3 control-label">Business Name</label>#}
                 <div class="col-sm-10 input-group-lg">
-                    <input type="text" class="form-control" id="inputName" placeholder="Sunbucks Tea" />
+                    <input ng-change="" ng-model="name" type="text" class="form-control" id="inputName" placeholder="Sunbucks Tea" />
                 </div>
                 <div class="col-sm-2 input-group-lg">
-                    <input type="text" class="form-control" id="inputDiscount" placeholder="10%" />
+                    <input ng-model="biz.discount" type="text" class="form-control" id="inputDiscount" placeholder="10%" />
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-12">
-                    <textarea rows="4" class="form-control input-sm" placeholder="Hey we love to serve tea and crumpets what can we say!"></textarea>
+                    <textarea ng-model="biz.description" rows="4" class="form-control input-sm" placeholder="Hey we love to serve tea and crumpets what can we say!"></textarea>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-12">
-                    <input id="categories" value="{% for c in biz.categories.all %}{{c.id}},{% endfor %}" placeholder="Coffee & Tea" />
+                    <input ng-model="biz.categories" id="categories" value="{% for c in biz.categories.all %}{{c.id}},{% endfor %}" placeholder="Coffee & Tea" />
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-6 input-group-sm">
-                    <input type="text" class="form-control" id="inputWebsite" placeholder="https://sunbucks.com" />
+                    <input ng-model="biz.website" type="text" class="form-control" id="inputWebsite" placeholder="https://sunbucks.com" />
                 </div>
                 <div class="col-sm-6 input-group-sm">
-                    <input type="text" class="form-control" id="inputPhone" placeholder="321-865-7309" />
+                    <input ng-model="biz.phone" type="text" class="form-control" id="inputPhone" placeholder="321-865-7309" />
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-6 input-group-sm">
-                    <input type="text" class="form-control input-sm" id="inputEmail" placeholder="jimmy@sunbucks.com" />
+                    <input ng-model="biz.email" type="text" class="form-control input-sm" id="inputEmail" placeholder="jimmy@sunbucks.com" />
                 </div>
             </div>
 
-
-            <br />
             <h4>Social</h4>
 
             <div class="form-group">
                 <div class="col-sm-6 input-group-sm">
-                    <input type="text" class="form-control input-sm" id="inputGooglePlusUrl" placeholder="plus.google.com/39392929291" />
+                    <input ng-model="biz.google_plus_url" type="text" class="form-control input-sm" id="inputGooglePlusUrl" placeholder="plus.google.com/39392929291" />
                 </div>
                 <div class="col-sm-6 input-group-sm">
-                    <input type="text" class="form-control input-sm" id="inputYelpUrl" placeholder="yelp.com/biz/sunbucks-tea-sandiego" />
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-6 input-group-sm">
-                    <input type="text" class="form-control input-sm" id="inputFacebookUrl" placeholder="facebook.com/sunbucks" />
-                </div>
-                <div class="col-sm-6 input-group-sm">
-                    <input type="text" class="form-control input-sm" id="inputTwitterUrl" placeholder="twitter.com/sunbucks" />
+                    <input ng-model="biz.yelp_url" type="text" class="form-control input-sm" id="inputYelpUrl" placeholder="yelp.com/biz/sunbucks-tea-sandiego" />
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-6 input-group-sm">
-                    <input type="text" class="form-control input-sm" id="inputFoursquareUrl" placeholder="foursquare.com/v/sunbucks--coffe-shop/519fac01498e4aa727182ebd" />
+                    <input ng-model="biz.facebook_url" type="text" class="form-control input-sm" id="inputFacebookUrl" placeholder="facebook.com/sunbucks" />
+                </div>
+                <div class="col-sm-6 input-group-sm">
+                    <input ng-model="biz.twitter_url" type="text" class="form-control input-sm" id="inputTwitterUrl" placeholder="twitter.com/sunbucks" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-6 input-group-sm">
+                    <input ng-model="biz.foursquare_url" type="text" class="form-control input-sm" id="inputFoursquareUrl" placeholder="foursquare.com/v/sunbucks--coffe-shop/519fac01498e4aa727182ebd" />
                 </div>
             </div>
 
@@ -105,40 +102,46 @@
 
             <div class="form-group">
                 <div class="col-sm-8 input-group-sm">
-                    <input type="text" class="form-control input-sm" id="inputAddress" placeholder="3060 University" />
+                    <input ng-model="address" type="text" class="form-control input-sm" id="inputAddress" placeholder="3060 University" />
                 </div>
                 <div class="col-sm-4 input-group-sm">
-                    <input type="text" class="form-control input-sm" id="inputAdmin3_name" placeholder="San Diego" />
+                    <input ng-model="admin3_name" type="text" class="form-control input-sm" id="inputAdmin3_name" placeholder="San Diego" />
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-4 input-group-sm">
-                    <input type="text" class="form-control input-sm" id="inputPostalcode" placeholder="92104" />
+                    <input ng-model="postalcode" type="text" class="form-control input-sm" id="inputPostalcode" placeholder="92104" />
                 </div>
                 <div class="col-sm-4 input-group-sm">
-                    <input type="text" class="form-control input-sm" id="inputAdmin1_code" placeholder="CA" />
+                    <input ng-model="admin1_code" type="text" class="form-control input-sm" id="inputAdmin1_code" placeholder="CA" />
                 </div>
                 <div class="col-sm-4 input-group-sm">
-                    <input type="text" class="form-control input-sm" id="inputAdmin2_name" placeholder="San Diego" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-4 input-group-sm">
-                    <input type="text" class="form-control input-sm" id="inputCountry" placeholder="United States" />
-                </div>
-                <div class="col-sm-3 input-group-sm">
-                    <input type="text" class="form-control input-sm" id="inputLat" placeholder="Lat" />
-                </div>
-                <div class="col-sm-3 input-group-sm">
-                    <input type="text" class="form-control input-sm" id="inputLon" placeholder="Lon" />
-                </div>
-                <div class="col-sm-2 input-group-sm">
-                    <button type="text" class="form-control btn btn-primary" id="inputDiscount" /><i class="fa fa-crosshairs"></i></button>
+                    <input ng-model="admin2_name" type="text" class="form-control input-sm" id="inputAdmin2_name" placeholder="San Diego" />
                 </div>
             </div>
 
-            <br>
+            <div class="form-group">
+                <div class="col-sm-4 input-group-sm">
+                    <input ng-model="country" type="text" class="form-control input-sm" id="inputCountry" placeholder="United States" />
+                </div>
+            </div>
+
+            <h4>Lat/Lng: Geocoding</h4>
+            <div class="form-group">
+                <div class="form-inline col-sm-12">
+                    <input type="text" style="width: 120px" class="form-control" id="latitude" name="latitude" value="37.7705183" onclick="this.select()">
+                    <input type="text" style="width: 120px" class="form-control" id="longitude" name="longitude" value="-122.4504132" onclick="this.select()">
+                    <button class="btn btn-primary geocode-address"><i class="fa fa-arrow-down"></i> Geocode</button>
+                    <button class="btn btn-primary geocode-latlon"><i class="fa fa-arrow-up"></i> Reverse Geocode</button>
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <input type="text" style="width: 200px" class="form-control" id="latlng" name="latitude" value="37.7705183,-122.4504132" onclick="this.select()">
+            </div>
+
+            <br><br>
             <h4>Business Hours</h4>
 
             <div class="col-sm-5">

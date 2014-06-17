@@ -333,13 +333,21 @@ PIPELINE_JS = {
     },
     'business_add': {
         'source_filenames': (
-            'js/angular-1.3.0-beta.11.min.js',
             'extras/blur.js/blur.js',
             'extras/select2/select2.js',
             'extras/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.min.js',
+            'businessAdd/app.js',
             'js/business-add.js',
         ),
         'output_filename': 'js/business-add.min.js',
+    },
+    'angularjs': {
+        'source_filenames': (
+            # 'angular/angular-1.3.0-beta.11.min.js',
+            'angular/angular-1.2.17.min.js',
+            'angular/angular-ui-router.min.js',
+        ),
+        'output_filename': 'js/angular.min.js',
     },
     'dataTables': {
         'source_filenames': (
