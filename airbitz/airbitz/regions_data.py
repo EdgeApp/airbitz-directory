@@ -128,6 +128,8 @@ US_REGIONS = {
               'search': 'South Carolina, United States'},
     'US-WI': {'name': 'Wisconsin',
               'search': 'Wisconsin, United States'},
+    'US-RI': {'name': 'Rhode Island',
+              'search': 'Rhode Island, United States'},
 }
 
 CA_REGIONS = {
