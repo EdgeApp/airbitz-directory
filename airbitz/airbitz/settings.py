@@ -344,10 +344,11 @@ PIPELINE_JS = {
     'angularjs': {
         'source_filenames': (
             # 'angular/angular-1.3.0-beta.11.min.js',
-            'angular/angular-1.2.17.min.js',
-            'angular/angular-ui-router.min.js',
+            # 'angular/angular-1.2.17.js',
+            'angular/angular.js',
+            'angular/angular-ui-router.js',
         ),
-        'output_filename': 'js/angular.min.js',
+        'output_filename': 'js/angular.js',
     },
     'dataTables': {
         'source_filenames': (
