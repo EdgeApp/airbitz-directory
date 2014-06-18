@@ -71,10 +71,11 @@
                                             <dt>Geolocation</dt>
                                             <dd>{{ geolocation||"default location" }}</dd>
                                         </dl>
-<style>
-dl dt { float: left; margin-right: 5px; }
-dl dd { clear: both; }
-</style>
+
+                                        <style>
+                                        dl dt { float: left; margin-right: 5px; }
+                                        dl dd { clear: both; }
+                                        </style>
                                         <dl class="col-sm-6">
                                             <dt>Biz name</dt>
                                             <dd>{{ name }}</dd>
@@ -91,6 +92,8 @@ dl dd { clear: both; }
                                             <dt>Biz admin1_code</dt>
                                             <dd>{{ admin1_code }}</dd>
                                         </dl>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -120,6 +123,7 @@ dl dd { clear: both; }
                         <div class="panel-body">
 
                             {% include '_business-add-images.html' %}
+
                         </div>
                     </div>
                 </div>
