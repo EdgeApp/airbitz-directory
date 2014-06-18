@@ -1,6 +1,6 @@
 /* jshint devel:true */
 
-var app = angular.module('addBizApp', [
+var app = angular.module('addBiz', [
     'ui.router'
 ]);
 
@@ -13,11 +13,12 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
         // route for home
         .state('home', {
             url: '/',
+            templateUrl: '../partials/placeLookup.html',
             controller: 'addBizCtrl',
         })
         .state('collectInfo', {
             url: 'collect-info',
-            templateUrl: 'partials/collectInfo.html',
+            templateUrl: '../partials/collectInfo.html',
             controller: function ($scope) {
                 $scope.msg = 'How is this?';
             },
@@ -34,11 +35,11 @@ app.controller('addBizCtrl', ['$scope', function ($scope) {
         }
     };
 
-    $scope.loadForm = function() {
+    $scope.loadForm = function () {
         $scope.msg = 'HERE IS THE MSG';
     };
 
     $scope.getGeolocation = function (data) {
         $scope.geolocation = data;
     }
-  }]);
+}]);

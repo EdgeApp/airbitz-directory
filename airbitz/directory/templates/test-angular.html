@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load imagekit %}
+{% load humanize %}
+{% load compressed %}
+{% load absolute %}
+{% load ab_custom_tags %}
+
+{% block html_open_tag %}ng-app="addBiz"{% endblock html_open_tag %}{# angular initialization #}
+{% block addthis_sharing %}{% endblock %}{# remove addthis #}
+}
+{% block head %}
+    {{ block.super }}
+    {% compressed_css 'business_add' %}
+{% endblock %}
+
+{% block title %}Create a Bitcoin Business Listing{% endblock title %}
+{% block meta_description %}Easily create a business listing for a Bitcoin friendly business in just a couple middingminutes.{% endblock meta_description %}
+{% block meta_news_keywords %}{{ biz.admin3_name }} Bitcoin Business, Accepts Bitcoin, Business Listing{% endblock meta_news_keywords %}
+
+{% block og_title %}Create a Bitcoin Business Listing{% endblock og_title %}
+{% block og_description %}Easily create a business listing for a Bitcoin friendly business in just a couple minutes.{% endblock og_description %}
+{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-business.jpg{% endblock og_image %}
+
+{% block twitter_title %}Create a Bitcoin Business Listing{% endblock twitter_title %}
+{% block twitter_description %}Easily create a business listing for a Bitcoin friendly business in just a couple minutes.{% endblock twitter_description %}
+{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-business.jpg{% endblock twitter_image_src %}
+
+
+
+{% block top_bg %}
+{#    <div class="top-bg" style="background: url('{{ STATIC_URL }}img/business-add/top-bg.jpg'); display: none;">&nbsp;</div>#}
+{% endblock %}
+
+{% block admin_buttons %}
+    {{ block.super }}
+    {% if user.is_superuser %}{% endif %}
+{% endblock admin_buttons %}
+
+{% block body %}
+
+
+    <div class="row" style="margin-bottom: 30px;">
+        <div class="biz-info-header col-xs-12">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div id="collapse-2" class="panel-collapse collapse in">
+                        <div class="panel-body">
+{% verbatim %}
+                            <div ng-controller="addBizCtrl" class="row">
+                                <div class="col-sm-3" style="padding: 30px;">
+
+                                    <dl>
+                                        <dt>Hello {{ greetMe }}</dt>
+                                        <dd>{{ bizName||'&nbsp;' }}</dd>
+                                    </dl>
+
+                                    <p>{{ msg }}</p>
+
+                                    <div class="form-group">
+                                        <input ng-model="bizName" type="text" class="form-control input-sm" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button ng-click="setPage('collectInfo')" class="btn btn-primary form-control">Load View</button>
+                                    </div>
+
+                                </div>
+                                <div ui-view></div>
+                            </div>
+{% endverbatim %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+    </div>
+
+{% endblock %}
+
+{% block javascript_headers %}
+    {{ block.super }}
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+{% endblock javascript_headers %}
+
+{% block javascript %}
+    {{ block.super }}
+<script type="text/javascript">
+
+var app = angular.module('addBiz', [
+    'ui.router'
+]);
+
+app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';   //http://django-angular.readthedocs.org/en/latest/integration.html#xmlhttprequest
+
+    $urlRouterProvider.otherwise('/');
+
+{#    var home = {#}
+{#        name: 'home',#}
+{#        url: '/',#}
+{#    };#}
+
+    $stateProvider
+        // route for home
+        .state('home', {
+            url: '/',
+            controller: 'addBizCtrl',
+        })
+        .state('collectInfo', {
+            url: 'collect-info',
+            templateUrl: '../partials/collectInfo.html',
+            controller: function ($scope) {
+                $scope.msg = 'How is this?';
+            },
+        })
+});
+
+
+app.controller('addBizCtrl', ['$scope', '$state', function ($scope, $state) {
+    $scope.greetMe = 'AddBizController';
+    $scope.setPage = function (page) {
+        $state.transitionTo(page);
+    }
+}]);
+
+
+
+
+</script>
+{% endblock %}
+
+
+
+
+
+
+
+

@@ -145,3 +145,10 @@ def add_business(request, url=None):
         'top_bg_img': '',
     }
     return render_to_response('business_add.html', RequestContext(request, context))
+
+
+def test(request, url=None):
+
+    context = {
+    }
+    return render_to_response('test-angular.html', RequestContext(request, context))
