@@ -7,7 +7,7 @@ var app = angular.module('addBiz', [
 app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';   //http://django-angular.readthedocs.org/en/latest/integration.html#xmlhttprequest
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('');
 
     $stateProvider
         // route for home
@@ -23,23 +23,15 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
                 $scope.msg = 'How is this?';
             },
         })
+        .state('collectInfo.bizHours', {
+            url: 'biz-hours',
+            templateUrl: '../partials/bizHours.html',
+            controller: 'bizHoursCtrl'
+        })
 });
 
 
-app.controller('addBizCtrl', ['$scope', function ($scope) {
-    $scope.updated = 'Waiting for updates...';
 
-    $scope.makeUpdate = function (text) {
-        if(!text) {
-            $scope.updated = new Date();
-        }
-    };
 
-    $scope.loadForm = function () {
-        $scope.msg = 'HERE IS THE MSG';
-    };
 
-    $scope.getGeolocation = function (data) {
-        $scope.geolocation = data;
-    }
-}]);
+

@@ -55,6 +55,14 @@
                         <div class="panel-body">
 
 
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-12 input-group-sm">
+                                    <a ng-click="makeUpdate()" class="btn btn-primary" id="inputDiscount"><i class="fa fa-refresh"></i></a>
+                                    <a ui-sref="collectInfo" class="btn btn-success" id="inputDiscount"><i class="fa fa-building-o"></i> Collect Biz Info</a>
+                                    <p>{{ msg||'&nbsp;' }}</p>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="location-lookup form-group col-sm-6">
                                     <label for="autocomplete"><i class="fa fa-map-marker"></i> Lookup via Google Places
@@ -64,6 +72,7 @@
 
                                 <div class="col-sm-6">
                                     <div class="row" style="margin-top: 15px;">
+
                                         <dl class="col-sm-6">
                                             <dt>Updated</dt>
                                             <dd>{{ updated|date:'MM/dd/yyyy @ h:mma' }}</dd>
@@ -72,10 +81,6 @@
                                             <dd>{{ geolocation||"default location" }}</dd>
                                         </dl>
 
-                                        <style>
-                                        dl dt { float: left; margin-right: 5px; }
-                                        dl dd { clear: both; }
-                                        </style>
                                         <dl class="col-sm-6">
                                             <dt>Biz name</dt>
                                             <dd>{{ name }}</dd>
@@ -93,18 +98,11 @@
                                             <dd>{{ admin1_code }}</dd>
                                         </dl>
 
-
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-sm-12 input-group-sm">
-                                    <p>{{ msg||'&nbsp;' }}</p>
-                                    <a ng-click="makeUpdate()" class="btn btn-primary" id="inputDiscount"><i class="fa fa-refresh"></i></a>
-                                    <a ng-click="loadForm()" class="btn btn-success" id="inputDiscount"><i class="fa fa-building-o"></i> Collect Biz Info</a>
-                                </div>
-                            </div>
+                            <div ui-view></div>
 
 {% endverbatim %}
                         </div>
@@ -169,7 +167,7 @@
     <script type="text/javascript" src="https://maps-api-ssl.google.com/maps/api/js?key={{ mapkey }}&sensor=false"> </script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&v=3.exp&libraries=places"></script>
     {% compressed_js 'angularjs' %}
-{#    {% compressed_js 'googlePlaceAutocomplete' %}#}
+    {% compressed_js 'googlePlaceAutocomplete' %}
     {% compressed_js 'business_add' %}
 {% endblock javascript_headers %}
 

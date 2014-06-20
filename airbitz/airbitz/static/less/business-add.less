@@ -1,6 +1,13 @@
 @import "../bootstrap/less/variables.less";
 @import "../bootstrap/less/mixins.less";
 
+
+dl {
+    dt { float: left; margin-right: 5px; }
+    dd { clear: both; }
+}
+
+
 #collapse-2 .panel-body {
     padding-top: 0;
 }
@@ -38,54 +45,78 @@
     }
 }
 
-.module-add-hours {
-    position: relative;
-    width: 325px;
-    height: 130px;
-    clear: both;
-    background: white;
-    border: 1px solid #ddd;
+.biz-general {}
 
-    .input-hours {
-        padding: 10px;
-        
-        label {
-            padding-right: 5px;
-        }
-        input {
-            margin-right: 10px;
-        }
-        .hours-from,
-        .hours-to {
-            width: 80px;
-            padding: 0 4px;
-            font-size: 14px;
-        }
+.biz-location {}
 
+.biz-geocoding {}
+
+.biz-hours {
+
+    .button-add-hours {
+        margin-top: 15px;
     }
 
-    .input-days {
-        padding: 0 10px;
-
-        .btn-group-xs>.btn {
-            padding-top: 5px;
-            padding-bottom: 5px;
-        }
-    }
-
-    .module-footer {
-        position: absolute;
-        bottom: 0;
+    .module-add-hours {
+        position: relative;
         width: 100%;
-        padding: 5px 10px;
-        background: #eee;
+        height: 130px;
+        clear: both;
+        text-align: left;
+        margin: 10px auto;
+        background: white;
+        border: 1px solid #ddd;
 
-        .checkbox {
+        .input-hours {
+            padding: 10px;
+
             label {
-                font-size: 12px;
+                padding-right: 5px;
             }
-            input[type="checkbox"] {
-                margin-top: 5px;
+            input {
+                margin-right: 10px;
+            }
+            .hours-open,
+            .hours-close {
+                width: 80px;
+                padding: 0 4px;
+                font-size: 14px;
+                background: white;
+                border: 1px solid #ddd;
+                color: #777;
+            }
+
+        }
+
+        .input-days {
+            padding: 0 10px;
+
+            .btn-group-xs > .btn {
+                padding-top: 5px;
+                padding-bottom: 5px;
+
+                &.active {
+                    background: @brand-primary;
+                    color: white;
+                    border: 1px solid @brand-primary;
+                }
+            }
+        }
+
+        .module-footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 5px 10px;
+            background: #eee;
+
+            .checkbox {
+                label {
+                    font-size: 12px;
+                }
+                input[type="checkbox"] {
+                    margin-top: 5px;
+                }
             }
         }
     }

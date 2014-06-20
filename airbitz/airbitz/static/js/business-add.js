@@ -27,49 +27,6 @@ $(function() {
     });
 
 
-
-
-    // setup interface
-    var $addHoursModule = $('.module-add-hours');
-    $addHoursModule.hide();
-
-    var $buttonAddHours = $('.button-add-hours');
-    $buttonAddHours.hide();
-
-
-    $('.button-add-hours').on('click', function(e){
-        e.preventDefault();
-        $addHoursModule.fadeIn();
-    });
-
-    $('.module-footer .button-add').on('click', function(e){
-        e.preventDefault();
-        $addHoursModule.fadeOut();
-    });
-
-    $('.module-footer .button-cancel').on('click', function(e){
-        e.preventDefault();
-        $addHoursModule.fadeOut();
-    });
-
-
-
-
-    $('input:radio[name="optionsBizHours"]').on('change',
-        function(){
-            console.log($(this).val());
-
-            if($(this).val() == 'open') {
-                $buttonAddHours.fadeIn();
-            } else {
-                $buttonAddHours.fadeOut();
-                $addHoursModule.fadeOut();
-            }
-        }
-    );
-
-
-
 });
 
 

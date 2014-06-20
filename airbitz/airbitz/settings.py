@@ -238,6 +238,7 @@ PIPELINE_CSS = {
         'source_filenames': (
             'extras/select2/select2.css',
             'extras/jquery.imgareaselect-0.9.10/css/imgareaselect-default.css',
+            'extras/bootstrap-datetimepicker-master/build/css/bootstrap-datetimepicker.css',
             'css/business-add.css',
         ),
         'output_filename': 'css/business-add.min.css',
@@ -335,8 +336,13 @@ PIPELINE_JS = {
         'source_filenames': (
             'extras/blur.js/blur.js',
             'extras/select2/select2.js',
+            'js/moment.min.js',
             'extras/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.min.js',
+            'extras/bootstrap-datetimepicker-master/build/js/bootstrap-datetimepicker.min.js',
             'businessAdd/app.js',
+            'businessAdd/controllers/addBizCtrl.js',
+            'businessAdd/controllers/bizHoursCtrl.js',
+            'businessAdd/filters/miscFilters.js',
             'js/business-add.js',
         ),
         'output_filename': 'js/business-add.min.js',

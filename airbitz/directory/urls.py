@@ -47,7 +47,9 @@ class PartialGroupView(TemplateView):
 
 
 partial_patterns = patterns('',
+    url(r'^placeLookup.html$', PartialGroupView.as_view(template_name='ng-partials/placeLookup.html'), name='place_lookup'),
     url(r'^collectInfo.html$', PartialGroupView.as_view(template_name='ng-partials/collectInfo.html'), name='collection_info'),
+    url(r'^bizHours.html$', PartialGroupView.as_view(template_name='ng-partials/bizHours.html'), name='biz_hours'),
 )
 
 urlpatterns += patterns('',

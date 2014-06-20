@@ -1,46 +1,5 @@
-<div class="row">
-    <div class="location-lookup form-group col-sm-6">
-        <label for="autocomplete"><i class="fa fa-map-marker"></i> Lookup via Google Places
-        </label>
-        <input type="text" id="autocomplete" class="form-control" />
-    </div>
-    <div class="col-sm-6">
-        <div class="row" style="margin-top: 15px;">
-            <dl class="col-sm-6">
-                <dt>Updated</dt>
-                <dd>{{ updated|date:'MM/dd/yyyy @ h:mma' }}</dd>
+{% verbatim %}
 
-                <dt>Geolocation</dt>
-                <dd>{{ geolocation||"default location" }}</dd>
-            </dl>
-            <style>
-                dl dt { float: left; margin-right: 5px; }
-                dl dd { clear: both; }
-            </style>
-            <dl class="col-sm-6">
-                <dt>Biz name</dt>
-                <dd>{{ name }}</dd>
 
-                <dt>Biz address</dt>
-                <dd>{{ address }}</dd>
 
-                <dt>Biz admin3_name</dt>
-                <dd>{{ admin3_name }}</dd>
-
-                <dt>Biz postalcode</dt>
-                <dd>{{ postalcode }}</dd>
-
-                <dt>Biz admin1_code</dt>
-                <dd>{{ admin1_code }}</dd>
-            </dl>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-12 input-group-sm">
-        <p>{{ msg||'&nbsp;' }}</p>
-        <a ng-click="makeUpdate()" class="btn btn-primary" id="inputDiscount"><i class="fa fa-refresh"></i></a>
-        <a ng-click="loadForm()" class="btn btn-success" id="inputDiscount"><i class="fa fa-building-o"></i> Collect Biz Info</a>
-    </div>
-</div>
+{% endverbatim %}
