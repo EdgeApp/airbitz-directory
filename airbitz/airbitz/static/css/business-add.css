@@ -34,7 +34,7 @@ dl dd {
   resize: vertical;
   overflow: auto;
 }
-.biz-hours .button-add-hours {
+.biz-hours .button-update-hours {
   margin-top: 15px;
 }
 .biz-hours .module-add-hours {
@@ -52,18 +52,18 @@ dl dd {
 }
 .biz-hours .module-add-hours .input-hours label {
   padding-right: 5px;
+  font-weight: 300;
 }
 .biz-hours .module-add-hours .input-hours input {
+  width: 60px;
   margin-right: 10px;
-}
-.biz-hours .module-add-hours .input-hours .hours-open,
-.biz-hours .module-add-hours .input-hours .hours-close {
-  width: 80px;
-  padding: 0 4px;
-  font-size: 14px;
+  padding: 2px 4px;
+  color: #777;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
   background: white;
   border: 1px solid #ddd;
-  color: #777;
 }
 .biz-hours .module-add-hours .input-days {
   padding: 0 10px;
@@ -89,4 +89,26 @@ dl dd {
 }
 .biz-hours .module-add-hours .module-footer .checkbox input[type="checkbox"] {
   margin-top: 5px;
+}
+.biz-hours .module-hours-table table {
+  letter-spacing: .5px;
+  font-weight: 300;
+}
+.biz-hours .module-hours-table table thead tr th {
+  color: white;
+  background: #555;
+  font-weight: 300;
+}
+.biz-hours .module-hours-table table tbody tr td .clear-hours {
+  cursor: auto;
+}
+.biz-hours .module-hours-table table tbody tr td .clear-hours:hover {
+  color: black;
+}
+.biz-hours .module-hours-table table tbody tr td .help-edit {
+  margin-left: 5px;
+  font-size: 10px;
+}
+.biz-hours .module-hours-table table tbody tr:hover td {
+  background: #eee;
 }
