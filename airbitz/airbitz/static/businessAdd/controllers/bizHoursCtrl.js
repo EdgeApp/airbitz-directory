@@ -2,7 +2,24 @@
 var app = angular.module('addBiz');
 
 
-app.controller('bizHoursCtrl', ['$scope', function ($scope) {
+app.controller('bizHoursCtrl', ['$scope', 'abDataFactory', function ($scope, abDataFactory) {
+
+  $scope.query = {};
+  $scope.query.bizId = 5;
+
+  $scope.query.getBiz = function (bizId) {
+    bizId = bizId !== undefined ? bizId : $scope.query.bizId;
+
+    abDataFactory.getBiz(bizId).then(function (data) {
+      $scope.bizInfo = data;
+    });
+  };
+
+  $scope.query.getBiz();
+
+
+
+
   $scope.hours = {}
   $scope.hours.daysOfWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat' ,'sun'];
   $scope.hours.selected = 'selectedHours';
@@ -48,7 +65,7 @@ app.controller('bizHoursCtrl', ['$scope', function ($scope) {
   };
 
   $scope.hours.selectDays = function (daysArray) {
-    var alreadySelected = daysArray.toString() === $scope.hours.daysSelected.toString() ? true : false;
+    var alreadySelected = daysArray.toString() === $scope.hours.daysSelected.toString();
 
     if (alreadySelected) {
       $scope.hours.daysSelected = [];
@@ -126,7 +143,7 @@ app.controller('bizHoursCtrl', ['$scope', function ($scope) {
       $scope.hours.hoursClosed = '';
       */
     }
-  }
+  };
 
   $scope.hours.sortBusinessHours = function () {
     sortByKey($scope.hours.businessHours, 'order')
@@ -143,7 +160,7 @@ app.controller('bizHoursCtrl', ['$scope', function ($scope) {
         console.log($scope.hours.businessHours[i]);
       }
     }
-  }
+  };
 
   $scope.hours.loadFromCell = function (clicked) {
     console.log('CLICKED CELL : ' + clicked);
@@ -156,10 +173,10 @@ app.controller('bizHoursCtrl', ['$scope', function ($scope) {
         console.log($scope.hours.businessHours[clicked]);
       }
     }
-  }
+  };
 
 
-}])
+}]);
 
 
 

@@ -342,6 +342,7 @@ PIPELINE_JS = {
             'businessAdd/app.js',
             'businessAdd/controllers/addBizCtrl.js',
             'businessAdd/controllers/bizHoursCtrl.js',
+            'businessAdd/services/abDataFactory.js',
             'businessAdd/filters/miscFilters.js',
             'js/business-add.js',
         ),

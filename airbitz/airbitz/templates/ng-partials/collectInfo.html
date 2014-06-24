@@ -152,6 +152,19 @@
 
     <div ng-controller="bizHoursCtrl" class="biz-hours"><!-- .biz-hours -->
 
+        <div class="col-sm-12">
+            <ul class="list-group">
+                <li class="list-group-item text-success">
+                    QUERY BIZID
+                    <input ng-change="query.getBiz()" ng-model="query.bizId" type="text" class="form-control input-sm" />
+                </li>
+                <li ng-repeat="item in bizInfo" class="list-group-item">
+                    [{{ $index }}] : {{ item }}
+                </li>
+            </ul>
+        </div>
+
+
       <div class="col-sm-12">
         <h4>Business Hours</h4>
         <div class="row">
