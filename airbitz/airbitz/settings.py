@@ -236,6 +236,7 @@ PIPELINE_CSS = {
     },
     'business_add': {
         'source_filenames': (
+            'css/animate.css',
             'extras/select2/select2.css',
             'extras/jquery.imgareaselect-0.9.10/css/imgareaselect-default.css',
             'extras/bootstrap-datetimepicker-master/build/css/bootstrap-datetimepicker.css',
@@ -354,6 +355,7 @@ PIPELINE_JS = {
             # 'angular/angular-1.2.17.js',
             'angular/angular.js',
             'angular/angular-ui-router.js',
+            'angular/angular-animate.js',
         ),
         'output_filename': 'js/angular.js',
     },

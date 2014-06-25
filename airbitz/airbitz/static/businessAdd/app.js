@@ -1,7 +1,8 @@
 /* jshint devel:true */
 
 var app = angular.module('addBiz', [
-    'ui.router'
+    'ui.router',
+    'ngAnimate',
 ]);
 
 app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
