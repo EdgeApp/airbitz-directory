@@ -20,14 +20,14 @@ app.controller('bizHoursCtrl', ['$scope', 'abDataFactory', function ($scope, abD
 
 
 
-  $scope.hours = {}
+  $scope.hours = {};
   $scope.hours.daysOfWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat' ,'sun'];
   $scope.hours.selected = 'selectedHours';
   $scope.hours.options = [
       {'label': 'Open for Selected Hours', 'value': 'selectedHours'},
       {'label': 'Always Open', 'value': 'alwaysOpen'},
       {'label': 'Permanently Closed', 'value': 'permClosed'},
-      {'label': 'No Hours Available', 'value': 'noneAvail'},
+      {'label': 'No Hours Available', 'value': 'noneAvail'}
   ];
 
   $scope.hours.daysSelected = [];
@@ -39,7 +39,7 @@ app.controller('bizHoursCtrl', ['$scope', 'abDataFactory', function ($scope, abD
     {order: 3, day: 'thu', open: '', closed: ''},
     {order: 4, day: 'fri', open: '', closed: ''},
     {order: 5, day: 'sat', open: '', closed: ''},
-    {order: 6, day: 'sun', open: '', closed: ''},
+    {order: 6, day: 'sun', open: '', closed: ''}
   ];
 
   $scope.hours.selectDay = function (day) {
@@ -48,7 +48,7 @@ app.controller('bizHoursCtrl', ['$scope', 'abDataFactory', function ($scope, abD
       $scope.hours.daysSelected.push(day);
       $scope.hours.updateHours();
     } else {
-      var removed = $scope.hours.daysSelected.splice(dayIndex, 1);
+      $scope.hours.daysSelected.splice(dayIndex, 1);
     }
   };
 
@@ -86,7 +86,7 @@ app.controller('bizHoursCtrl', ['$scope', 'abDataFactory', function ($scope, abD
     var hoursClosed = $scope.hours.hoursClosed;
     var businessHours = $scope.hours.businessHours;
 
-    console.log('DAYS SELECTED : ' + daysSelected)
+    console.log('DAYS SELECTED : ' + daysSelected);
 
     if (daysSelected.length > 0) {
 
@@ -147,7 +147,7 @@ app.controller('bizHoursCtrl', ['$scope', 'abDataFactory', function ($scope, abD
 
   $scope.hours.sortBusinessHours = function () {
     sortByKey($scope.hours.businessHours, 'order')
-  }
+  };
 
   $scope.hours.clearDay = function(day) {
     console.log('CLICKED CLEAR: ' + day);

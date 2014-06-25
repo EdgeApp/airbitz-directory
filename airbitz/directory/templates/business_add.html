@@ -9,8 +9,8 @@
 {% block addthis_sharing %}{% endblock %}{# remove addthis #}
 
 {% block head %}
-    {{ block.super }}
-    {% compressed_css 'business_add' %}
+  {{ block.super }}
+  {% compressed_css 'business_add' %}
 {% endblock %}
 
 {% block title %}Create a Bitcoin Business Listing{% endblock title %}
@@ -28,154 +28,154 @@
 
 
 {% block top_bg %}
-    <div class="top-bg" style="background: url('{{ STATIC_URL }}img/business-add/top-bg.jpg'); display: none;">&nbsp;</div>
+  <div class="top-bg" style="background: url('{{ STATIC_URL }}img/business-add/top-bg.jpg'); display: none;">&nbsp;</div>
 {% endblock %}
 
 {% block admin_buttons %}
-    {{ block.super }}
-    {% if user.is_superuser %}{% endif %}
+  {{ block.super }}
+  {% if user.is_superuser %}{% endif %}
 {% endblock admin_buttons %}
 
 {% block body %}
 
-{% verbatim %}
-    <div ng-controller="addBizCtrl" class="row" style="margin-bottom: 30px;">
-        <div class="biz-info-header col-xs-12">
-            <h1 class="biz-name">Add a Bitcoin Friendly Business</h1>
-            <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-2">
-                                <i class="fa fa-refresh"></i> Fetch and Show Initial Data
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapse-2" class="panel-collapse collapse in">
-                        <div class="panel-body">
+  {% verbatim %}
+  <div ng-controller="addBizCtrl" class="row" style="margin-bottom: 30px;">
+    <div class="biz-info-header col-xs-12">
+      <h1 class="biz-name">Add a Bitcoin Friendly Business</h1>
+      <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse-2">
+                <i class="fa fa-refresh"></i> Fetch and Show Initial Data
+              </a>
+            </h4>
+          </div>
+          <div id="collapse-2" class="panel-collapse collapse in">
+            <div class="panel-body">
 
 
-                            <div class="row" style="margin-top: 10px;">
-                                <div class="col-sm-12 input-group-sm">
-                                    <a ng-click="makeUpdate()" class="btn btn-primary" id="inputDiscount"><i class="fa fa-refresh"></i></a>
-                                    <a ui-sref="collectInfo" class="btn btn-success" id="inputDiscount"><i class="fa fa-building-o"></i> Collect Biz Info</a>
-                                    <p>{{ msg||'&nbsp;' }}</p>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="location-lookup form-group col-sm-6">
-                                    <label for="autocomplete"><i class="fa fa-map-marker"></i> Lookup via Google Places
-                                    </label>
-                                    <input type="text" id="autocomplete" class="form-control" />
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="row" style="margin-top: 15px;">
-
-                                        <dl class="col-sm-6">
-                                            <dt>Updated</dt>
-                                            <dd>{{ updated|date:'MM/dd/yyyy @ h:mma' }}</dd>
-
-                                            <dt>Geolocation</dt>
-                                            <dd>{{ geolocation||"default location" }}</dd>
-                                        </dl>
-
-                                        <dl class="col-sm-6">
-                                            <dt>Biz name</dt>
-                                            <dd>{{ name }}</dd>
-
-                                            <dt>Biz address</dt>
-                                            <dd>{{ address }}</dd>
-
-                                            <dt>Biz admin3_name</dt>
-                                            <dd>{{ admin3_name }}</dd>
-
-                                            <dt>Biz postalcode</dt>
-                                            <dd>{{ postalcode }}</dd>
-
-                                            <dt>Biz admin1_code</dt>
-                                            <dd>{{ admin1_code }}</dd>
-                                        </dl>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div ui-view class="main-view"></div>
-
-{% endverbatim %}
-                        </div>
-                    </div>
+              <div class="row" style="margin-top: 10px;">
+                <div class="col-sm-12 input-group-sm">
+                  <a ng-click="makeUpdate()" class="btn btn-primary" id="inputDiscount"><i class="fa fa-refresh"></i></a>
+                  <a ui-sref="collectInfo" class="btn btn-success" id="inputDiscount"><i class="fa fa-building-o"></i> Collect Biz Info</a>
+                  <p>{{ msg||'&nbsp;' }}</p>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-4">
-                                <i class="fa fa-picture-o"></i> Image Fetch and Show Options
-                            </a>
-                        </h4>
-                    </div>
+              </div>
 
-                    <div id="collapse-4" class="panel-collapse collapse">
-                        <div class="panel-body">
+              <div class="row">
+                <div class="location-lookup form-group col-sm-6">
+                  <label for="autocomplete"><i class="fa fa-map-marker"></i> Lookup via Google Places
+                  </label>
+                  <input type="text" id="autocomplete" class="form-control" />
+                </div>
 
-                            {% include '_business-add-images.html' %}
+                <div class="col-sm-6">
+                  <div class="row" style="margin-top: 15px;">
 
-                        </div>
-                    </div>
+                    <dl class="col-sm-6">
+                      <dt>Updated</dt>
+                      <dd>{{ updated|date:'MM/dd/yyyy @ h:mma' }}</dd>
+
+                      <dt>Geolocation</dt>
+                      <dd>{{ geolocation||"default location" }}</dd>
+                    </dl>
+
+                    <dl class="col-sm-6">
+                      <dt>Biz name</dt>
+                      <dd>{{ name }}</dd>
+
+                      <dt>Biz address</dt>
+                      <dd>{{ address }}</dd>
+
+                      <dt>Biz admin3_name</dt>
+                      <dd>{{ admin3_name }}</dd>
+
+                      <dt>Biz postalcode</dt>
+                      <dd>{{ postalcode }}</dd>
+
+                      <dt>Biz admin1_code</dt>
+                      <dd>{{ admin1_code }}</dd>
+                    </dl>
+
+                  </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-6">
-                                <i class="fa fa-list"></i> Preview Listing
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapse-6" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <img style="width: 100%" src="{{ STATIC_URL }}img/og-business.jpg" />
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-5">
-                                <i class="fa fa-save"></i> Submit Listing for Publishing
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapse-5" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <ul class="list-group">
-                                <li class="list-group-item">Generate Thumbnails</li>
-                                <li class="list-group-item">Add to Search Index</li>
-                                <li class="list-group-item">Email Business Owner</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+              </div>
+
+              <div ui-view class="main-view"></div>
+
+              {% endverbatim %}
             </div>
+          </div>
         </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse-4">
+                <i class="fa fa-picture-o"></i> Image Fetch and Show Options
+              </a>
+            </h4>
+          </div>
+
+          <div id="collapse-4" class="panel-collapse collapse">
+            <div class="panel-body">
+
+              {% include '_business-add-images.html' %}
+
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse-6">
+                <i class="fa fa-list"></i> Preview Listing
+              </a>
+            </h4>
+          </div>
+          <div id="collapse-6" class="panel-collapse collapse">
+            <div class="panel-body">
+              <img style="width: 100%" src="{{ STATIC_URL }}img/og-business.jpg" />
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse-5">
+                <i class="fa fa-save"></i> Submit Listing for Publishing
+              </a>
+            </h4>
+          </div>
+          <div id="collapse-5" class="panel-collapse collapse">
+            <div class="panel-body">
+              <ul class="list-group">
+                <li class="list-group-item">Generate Thumbnails</li>
+                <li class="list-group-item">Add to Search Index</li>
+                <li class="list-group-item">Email Business Owner</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 {% endblock %}
 
 {% block javascript_headers %}
-    {{ block.super }}
-    <script type="text/javascript" src="https://maps-api-ssl.google.com/maps/api/js?key={{ mapkey }}&sensor=false"> </script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&v=3.exp&libraries=places"></script>
-    {% compressed_js 'angularjs' %}
-    {% compressed_js 'googlePlaceAutocomplete' %}
-    {% compressed_js 'business_add' %}
+  {{ block.super }}
+  <script type="text/javascript" src="https://maps-api-ssl.google.com/maps/api/js?key={{ mapkey }}&sensor=false"> </script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&v=3.exp&libraries=places"></script>
+  {% compressed_js 'angularjs' %}
+  {% compressed_js 'googlePlaceAutocomplete' %}
+  {% compressed_js 'business_add' %}
 {% endblock javascript_headers %}
 
 {% block javascript %}
-    {{ block.super }}
-    <script type="text/javascript">
+  {{ block.super }}
+  <script type="text/javascript">
 
 
-    </script>
+  </script>
 {% endblock %}
 

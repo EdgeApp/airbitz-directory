@@ -2,249 +2,249 @@
 
 <form class="business-info form-horizontal" action="" role="form">
 
-    <div class="row">
+<div class="row">
 
-        <div class="col-sm-6"><!-- column1 -->
+<div class="col-sm-6"><!-- column1 -->
 
-            <div class="biz-general">
-                <h4>Business Info</h4>
+  <div class="biz-general">
+    <h4>Business Info</h4>
 
-                <div class="form-group">
-                    <div class="col-sm-5 input-group-sm">
-                        <select ng-model="biz.status" id="status">
-                            <option value="ALL">Listing Status</option>
-                            <option value=""></option>
-                        </select>
-                    </div>
-
-                    <div class="checkbox col-sm-3">
-                        <label for="has_physical_business">
-                            <input ng-model="biz.has_physical_business" type="checkbox" id="has_physical_business" name="has_physical_business"> Physical
-                        </label>
-                    </div>
-
-                    <div class="checkbox col-sm-3 ">
-                        <label for="has_online_business">
-                            <input ng-model="biz.has_online_business" type="checkbox" id="has_online_business" name="has_online_business"> Online
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-10 input-group-lg">
-                        <input ng-change="" ng-model="name" type="text" class="form-control" id="inputName" placeholder="Sunbucks Tea" />
-                    </div>
-                    <div class="col-sm-2 input-group-lg">
-                        <input ng-model="biz.discount" type="text" class="form-control" id="inputDiscount" placeholder="10%" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <textarea ng-model="biz.description" rows="4" class="form-control input-sm" placeholder="Hey we love to serve tea and crumpets what can we say!"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <input ng-model="biz.categories" id="categories" value="{% for c in biz.categories.all %}{{c.id}},{% endfor %}" placeholder="Coffee & Tea" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-6 input-group-sm">
-                        <input ng-model="biz.website" type="text" class="form-control" id="inputWebsite" placeholder="https://sunbucks.com" />
-                    </div>
-                    <div class="col-sm-6 input-group-sm">
-                        <input ng-model="biz.phone" type="text" class="form-control" id="inputPhone" placeholder="321-865-7309" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-6 input-group-sm">
-                        <input ng-model="biz.email" type="text" class="form-control input-sm" id="inputEmail" placeholder="jimmy@sunbucks.com" />
-                    </div>
-                </div>
-            </div>
-
-            <div class="biz-social">
-                <h4>Social</h4>
-
-                <div class="form-group">
-                    <div class="col-sm-6 input-group-sm">
-                        <input ng-model="biz.google_plus_url" type="text" class="form-control input-sm" id="inputGooglePlusUrl" placeholder="plus.google.com/39392929291" />
-                    </div>
-                    <div class="col-sm-6 input-group-sm">
-                        <input ng-model="biz.yelp_url" type="text" class="form-control input-sm" id="inputYelpUrl" placeholder="yelp.com/biz/sunbucks-tea-sandiego" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-6 input-group-sm">
-                        <input ng-model="biz.facebook_url" type="text" class="form-control input-sm" id="inputFacebookUrl" placeholder="facebook.com/sunbucks" />
-                    </div>
-                    <div class="col-sm-6 input-group-sm">
-                        <input ng-model="biz.twitter_url" type="text" class="form-control input-sm" id="inputTwitterUrl" placeholder="twitter.com/sunbucks" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-6 input-group-sm">
-                        <input ng-model="biz.foursquare_url" type="text" class="form-control input-sm" id="inputFoursquareUrl" placeholder="foursquare.com/v/sunbucks--coffe-shop/519fac01498e4aa727182ebd" />
-                    </div>
-                </div>
-            </div>
-
-        </div><!-- /column1 -->
-
-
-        <div class="col-sm-6"><!-- column2 -->
-
-            <div class="biz-location">
-                <h4>Business Location</h4>
-
-                <div class="form-group">
-                    <div class="col-sm-8 input-group-sm">
-                        <input ng-model="address" type="text" class="form-control input-sm" id="inputAddress" placeholder="3060 University" />
-                    </div>
-                    <div class="col-sm-4 input-group-sm">
-                        <input ng-model="admin3_name" type="text" class="form-control input-sm" id="inputAdmin3_name" placeholder="San Diego" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-4 input-group-sm">
-                        <input ng-model="postalcode" type="text" class="form-control input-sm" id="inputPostalcode" placeholder="92104" />
-                    </div>
-                    <div class="col-sm-4 input-group-sm">
-                        <input ng-model="admin1_code" type="text" class="form-control input-sm" id="inputAdmin1_code" placeholder="CA" />
-                    </div>
-                    <div class="col-sm-4 input-group-sm">
-                        <input ng-model="admin2_name" type="text" class="form-control input-sm" id="inputAdmin2_name" placeholder="San Diego" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-4 input-group-sm">
-                        <input ng-model="country" type="text" class="form-control input-sm" id="inputCountry" placeholder="United States" />
-                    </div>
-                </div>
-            </div>
-
-            <div class="biz-geocoding">
-                <h4>Lat/Lng: Geocoding</h4>
-                <div class="form-group">
-                    <div class="form-inline col-sm-12">
-                        <input type="text" style="width: 120px" class="form-control" id="latitude" name="latitude" value="37.7705183" onclick="this.select()">
-                        <input type="text" style="width: 120px" class="form-control" id="longitude" name="longitude" value="-122.4504132" onclick="this.select()">
-                        <button class="btn btn-primary geocode-address"><i class="fa fa-arrow-down"></i> Geocode</button>
-                        <button class="btn btn-primary geocode-latlon"><i class="fa fa-arrow-up"></i> Reverse Geocode</button>
-                    </div>
-                </div>
-
-                <div class="form-group col-sm-12">
-                    <input type="text" style="width: 200px" class="form-control" id="latlng" name="latitude" value="37.7705183,-122.4504132" onclick="this.select()">
-                </div>
-            </div>
-
-
-
-
-    <div ng-controller="bizHoursCtrl" class="biz-hours"><!-- .biz-hours -->
-
-        <div class="col-sm-12">
-            <ul class="list-group">
-                <li class="list-group-item text-success">
-                    QUERY BIZID
-                    <input ng-change="query.getBiz()" ng-model="query.bizId" type="text" class="form-control input-sm" />
-                </li>
-                <li ng-repeat="item in bizInfo" class="list-group-item">
-                    [{{ $index }}] : {{ item }}
-                </li>
-            </ul>
-        </div>
-
-
-      <div class="col-sm-12">
-        <h4>Business Hours</h4>
-        <div class="row">
-          <div class="biz-hours-options form-group col-sm-6">
-            <div ng-repeat="option in hours.options" class="radio">
-              <label>
-                <input ng-model="hours.selected" type="radio" name="{{ option.value }}" id="{{ option.value }}" value="{{ option.value }}" />
-                {{ option.label }}
-              </label>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <button class="btn btn-primary btn-lg">{{ hours.selected }}</button>
-          </div>
-        </div>
+    <div class="form-group">
+      <div class="col-sm-5 input-group-sm">
+        <select ng-model="biz.status" id="status">
+          <option value="ALL">Listing Status</option>
+          <option value=""></option>
+        </select>
       </div>
 
-      <div class="col-sm-12">
-        <p class="text-warning">{{ hours.error||'&nbsp;' }}</p>
-        <div ng-show="hours.selected == 'selectedHours'" class="module-add-hours">
-
-          <div class="input-hours pull-left">
-            <label for="">Open</label>
-            <input ng-keyup="hours.updateHours()" ng-model="hours.hoursOpen" type="text" class="hours-open">
-
-            <label for="">Close</label>
-            <input ng-keyup="hours.updateHours()" ng-model="hours.hoursClosed" type="text" class="hours-close">
-          </div>
-
-          <div class="input-days btn-group btn-group-justified">
-            <div ng-repeat="day in hours.daysOfWeek" class="btn-group btn-group-xs">
-              <button ng-click="hours.selectDay(day)" ng-class="{active: hours.isDayActive(day)}" class="btn btn-default">
-                <i ng-show="hours.isDayActive(day)" class="fa fa-check"></i> {{ day|titleCase }}
-              </button>
-            </div>
-          </div>
-
-          <div class="module-footer">
-            <div class="pull-left">
-              <div class="btn-group">
-                <button class="btn btn-primary btn-xs disabled"><i class="fa fa-check"></i></button>
-                <button ng-click="hours.selectDays(['mon','tue','wed','thu','fri','sat','sun'])" class="btn btn-primary btn-xs">All</button>
-                <button ng-click="hours.selectDays(['mon','tue','wed','thu','fri'])" class="btn btn-primary btn-xs">Weekdays</button>
-                <button ng-click="hours.selectDays(['sat','sun'])" class="btn btn-primary btn-xs">Weekend</button>
-              </div>
-              <small class="text-muted">Quick Selections</small>
-            </div>
-          </div>
-        </div>
-
-        <div ng-show="hours.businessHours.length > 0" class="module-hours-table table-responsive">
-          <table class="table table-bordered table-rounded">
-            <thead>
-              <tr>
-                <th>Day</th>
-                <th>Hours</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-click="hours.loadFromCell($index)" ng-repeat="row in hours.businessHours">
-                <td class="day-name">{{ row.day|titleCase }}</td>
-                <td class="day-hours">
-                  {{ row.open + ' - ' + row.closed }}<span class="help-edit text-muted">click to edit</span>
-                  <i ng-click="hours.clearDay($index)" ng-show="row.open || row.closed" class="clear-hours fa fa-times-circle text-danger pull-right"></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="checkbox col-sm-3">
+        <label for="has_physical_business">
+          <input ng-model="biz.has_physical_business" type="checkbox" id="has_physical_business" name="has_physical_business"> Physical
+        </label>
       </div>
 
-    </div><!-- /.biz-hours -->
-
-
-
-
-
-        </div><!-- /column2 -->
-
+      <div class="checkbox col-sm-3 ">
+        <label for="has_online_business">
+          <input ng-model="biz.has_online_business" type="checkbox" id="has_online_business" name="has_online_business"> Online
+        </label>
+      </div>
     </div>
+
+    <div class="form-group">
+      <div class="col-sm-10 input-group-lg">
+        <input ng-change="" ng-model="name" type="text" class="form-control" id="inputName" placeholder="Sunbucks Tea" />
+      </div>
+      <div class="col-sm-2 input-group-lg">
+        <input ng-model="biz.discount" type="text" class="form-control" id="inputDiscount" placeholder="10%" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-12">
+        <textarea ng-model="biz.description" rows="4" class="form-control input-sm" placeholder="Hey we love to serve tea and crumpets what can we say!"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-12">
+        <input ng-model="biz.categories" id="categories" value="{% for c in biz.categories.all %}{{c.id}},{% endfor %}" placeholder="Coffee & Tea" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-6 input-group-sm">
+        <input ng-model="biz.website" type="text" class="form-control" id="inputWebsite" placeholder="https://sunbucks.com" />
+      </div>
+      <div class="col-sm-6 input-group-sm">
+        <input ng-model="biz.phone" type="text" class="form-control" id="inputPhone" placeholder="321-865-7309" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-6 input-group-sm">
+        <input ng-model="biz.email" type="text" class="form-control input-sm" id="inputEmail" placeholder="jimmy@sunbucks.com" />
+      </div>
+    </div>
+  </div>
+
+  <div class="biz-social">
+    <h4>Social</h4>
+
+    <div class="form-group">
+      <div class="col-sm-6 input-group-sm">
+        <input ng-model="biz.google_plus_url" type="text" class="form-control input-sm" id="inputGooglePlusUrl" placeholder="plus.google.com/39392929291" />
+      </div>
+      <div class="col-sm-6 input-group-sm">
+        <input ng-model="biz.yelp_url" type="text" class="form-control input-sm" id="inputYelpUrl" placeholder="yelp.com/biz/sunbucks-tea-sandiego" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-6 input-group-sm">
+        <input ng-model="biz.facebook_url" type="text" class="form-control input-sm" id="inputFacebookUrl" placeholder="facebook.com/sunbucks" />
+      </div>
+      <div class="col-sm-6 input-group-sm">
+        <input ng-model="biz.twitter_url" type="text" class="form-control input-sm" id="inputTwitterUrl" placeholder="twitter.com/sunbucks" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-6 input-group-sm">
+        <input ng-model="biz.foursquare_url" type="text" class="form-control input-sm" id="inputFoursquareUrl" placeholder="foursquare.com/v/sunbucks--coffe-shop/519fac01498e4aa727182ebd" />
+      </div>
+    </div>
+  </div>
+
+</div><!-- /column1 -->
+
+
+<div class="col-sm-6"><!-- column2 -->
+
+  <div class="biz-location">
+    <h4>Business Location</h4>
+
+    <div class="form-group">
+      <div class="col-sm-8 input-group-sm">
+        <input ng-model="address" type="text" class="form-control input-sm" id="inputAddress" placeholder="3060 University" />
+      </div>
+      <div class="col-sm-4 input-group-sm">
+        <input ng-model="admin3_name" type="text" class="form-control input-sm" id="inputAdmin3_name" placeholder="San Diego" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-4 input-group-sm">
+        <input ng-model="postalcode" type="text" class="form-control input-sm" id="inputPostalcode" placeholder="92104" />
+      </div>
+      <div class="col-sm-4 input-group-sm">
+        <input ng-model="admin1_code" type="text" class="form-control input-sm" id="inputAdmin1_code" placeholder="CA" />
+      </div>
+      <div class="col-sm-4 input-group-sm">
+        <input ng-model="admin2_name" type="text" class="form-control input-sm" id="inputAdmin2_name" placeholder="San Diego" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-4 input-group-sm">
+        <input ng-model="country" type="text" class="form-control input-sm" id="inputCountry" placeholder="United States" />
+      </div>
+    </div>
+  </div>
+
+  <div class="biz-geocoding">
+    <h4>Lat/Lng: Geocoding</h4>
+    <div class="form-group">
+      <div class="form-inline col-sm-12">
+        <input type="text" style="width: 120px" class="form-control" id="latitude" name="latitude" value="37.7705183" onclick="this.select()">
+        <input type="text" style="width: 120px" class="form-control" id="longitude" name="longitude" value="-122.4504132" onclick="this.select()">
+        <button class="btn btn-primary geocode-address"><i class="fa fa-arrow-down"></i> Geocode</button>
+        <button class="btn btn-primary geocode-latlon"><i class="fa fa-arrow-up"></i> Reverse Geocode</button>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12">
+      <input type="text" style="width: 200px" class="form-control" id="latlng" name="latitude" value="37.7705183,-122.4504132" onclick="this.select()">
+    </div>
+  </div>
+
+
+
+
+  <div ng-controller="bizHoursCtrl" class="biz-hours"><!-- .biz-hours -->
+
+    <div class="col-sm-12">
+      <ul class="list-group">
+        <li class="list-group-item text-success">
+          QUERY BIZID
+          <input ng-change="query.getBiz()" ng-model="query.bizId" type="text" class="form-control input-sm" />
+        </li>
+        <li ng-repeat="item in bizInfo" class="list-group-item">
+          [{{ $index }}] : {{ item }}
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="col-sm-12">
+      <h4>Business Hours</h4>
+      <div class="row">
+        <div class="biz-hours-options form-group col-sm-6">
+          <div ng-repeat="option in hours.options" class="radio">
+            <label>
+              <input ng-model="hours.selected" type="radio" name="{{ option.value }}" id="{{ option.value }}" value="{{ option.value }}" />
+              {{ option.label }}
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <button class="btn btn-primary btn-lg">{{ hours.selected }}</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12">
+      <p class="text-warning">{{ hours.error||'&nbsp;' }}</p>
+      <div ng-show="hours.selected == 'selectedHours'" class="module-add-hours">
+
+        <div class="input-hours pull-left">
+          <label for="">Open</label>
+          <input ng-keyup="hours.updateHours()" ng-model="hours.hoursOpen" type="text" class="hours-open">
+
+          <label for="">Close</label>
+          <input ng-keyup="hours.updateHours()" ng-model="hours.hoursClosed" type="text" class="hours-close">
+        </div>
+
+        <div class="input-days btn-group btn-group-justified">
+          <div ng-repeat="day in hours.daysOfWeek" class="btn-group btn-group-xs">
+            <button ng-click="hours.selectDay(day)" ng-class="{active: hours.isDayActive(day)}" class="btn btn-default">
+              <i ng-show="hours.isDayActive(day)" class="fa fa-check"></i> {{ day|titleCase }}
+            </button>
+          </div>
+        </div>
+
+        <div class="module-footer">
+          <div class="pull-left">
+            <div class="btn-group">
+              <button class="btn btn-primary btn-xs disabled"><i class="fa fa-check"></i></button>
+              <button ng-click="hours.selectDays(['mon','tue','wed','thu','fri','sat','sun'])" class="btn btn-primary btn-xs">All</button>
+              <button ng-click="hours.selectDays(['mon','tue','wed','thu','fri'])" class="btn btn-primary btn-xs">Weekdays</button>
+              <button ng-click="hours.selectDays(['sat','sun'])" class="btn btn-primary btn-xs">Weekend</button>
+            </div>
+            <small class="text-muted">Quick Selections</small>
+          </div>
+        </div>
+      </div>
+
+      <div ng-show="hours.businessHours.length > 0" class="module-hours-table table-responsive">
+        <table class="table table-bordered table-rounded">
+          <thead>
+          <tr>
+            <th>Day</th>
+            <th>Hours</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-click="hours.loadFromCell($index)" ng-repeat="row in hours.businessHours">
+            <td class="day-name">{{ row.day|titleCase }}</td>
+            <td class="day-hours">
+              {{ row.open + ' - ' + row.closed }}<span class="help-edit text-muted">click to edit</span>
+              <i ng-click="hours.clearDay($index)" ng-show="row.open || row.closed" class="clear-hours fa fa-times-circle text-danger pull-right"></i>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /.biz-hours -->
+
+
+
+
+
+</div><!-- /column2 -->
+
+</div>
 
 </form>
 
