@@ -4,18 +4,7 @@ var app = angular.module('addBiz');
 
 app.controller('bizHoursCtrl', ['$scope', 'abDataFactory', function ($scope, abDataFactory) {
 
-  $scope.query = {};
-  $scope.query.bizId = 5;
 
-  $scope.query.getBiz = function (bizId) {
-    bizId = bizId !== undefined ? bizId : $scope.query.bizId;
-
-    abDataFactory.getBiz(bizId).then(function (data) {
-      $scope.bizInfo = data;
-    });
-  };
-
-  $scope.query.getBiz();
 
 
 

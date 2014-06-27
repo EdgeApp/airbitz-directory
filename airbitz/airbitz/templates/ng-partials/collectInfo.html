@@ -32,7 +32,7 @@
 
     <div class="form-group">
       <div class="col-sm-10 input-group-lg">
-        <input ng-change="" ng-model="name" type="text" class="form-control" id="inputName" placeholder="Sunbucks Tea" />
+        <input ng-model="biz.name" type="text" class="form-control" id="inputName" placeholder="Sunbucks Tea" />
       </div>
       <div class="col-sm-2 input-group-lg">
         <input ng-model="biz.discount" type="text" class="form-control" id="inputDiscount" placeholder="10%" />
@@ -151,20 +151,6 @@
 
 
   <div ng-controller="bizHoursCtrl" class="biz-hours"><!-- .biz-hours -->
-
-    <div class="col-sm-12">
-      <ul class="list-group">
-        <li class="list-group-item text-success">
-          QUERY BIZID
-          <input ng-change="query.getBiz()" ng-model="query.bizId" type="text" class="form-control input-sm" />
-        </li>
-        <li ng-repeat="item in bizInfo" class="list-group-item">
-          [{{ $index }}] : {{ item }}
-        </li>
-      </ul>
-    </div>
-
-
     <div class="col-sm-12">
       <h4>Business Hours</h4>
       <div class="row">

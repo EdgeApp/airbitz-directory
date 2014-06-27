@@ -57,7 +57,7 @@
 
               <div class="row" style="margin-top: 10px;">
                 <div class="col-sm-12 input-group-sm">
-                  <a ng-click="makeUpdate()" class="btn btn-primary" id="inputDiscount"><i class="fa fa-refresh"></i></a>
+                  <a ng-click="makeUpdate('Clicked refresh')" class="btn btn-primary" id="inputDiscount"><i class="fa fa-refresh"></i></a>
                   <a ui-sref="collectInfo" class="btn btn-success" id="inputDiscount"><i class="fa fa-building-o"></i> Collect Biz Info</a>
                   <p>{{ msg||'&nbsp;' }}</p>
                 </div>
@@ -75,32 +75,57 @@
 
                     <dl class="col-sm-6">
                       <dt>Updated</dt>
-                      <dd>{{ updated|date:'MM/dd/yyyy @ h:mma' }}</dd>
+                      <dd>{{ biz.updated.msg }} @ {{ biz.updated.date | date:'h:mm:ss a' }}</dd>
 
                       <dt>Geolocation</dt>
-                      <dd>{{ geolocation||"default location" }}</dd>
+                      <dd>{{ biz.geolocation || "default location" }}</dd>
                     </dl>
 
                     <dl class="col-sm-6">
                       <dt>Biz name</dt>
-                      <dd>{{ name }}</dd>
+                      <dd>{{ biz.name }}</dd>
 
                       <dt>Biz address</dt>
-                      <dd>{{ address }}</dd>
+                      <dd>{{ biz.address }}</dd>
 
                       <dt>Biz admin3_name</dt>
-                      <dd>{{ admin3_name }}</dd>
+                      <dd>{{ biz.admin3_name }}</dd>
 
                       <dt>Biz postalcode</dt>
-                      <dd>{{ postalcode }}</dd>
+                      <dd>{{ biz.postalcode }}</dd>
 
                       <dt>Biz admin1_code</dt>
-                      <dd>{{ admin1_code }}</dd>
+                      <dd>{{ biz.admin1_code }}</dd>
                     </dl>
 
                   </div>
                 </div>
               </div>
+
+              <!--{# TESTING GLOBAL DATA BETWEEN CONTROLLERS #}-->
+              <div class="row">
+
+                <div class="col-sm-3">
+                  <ul class="list-group">
+                    <li class="list-group-item text-success">
+                      <form class="form-horizontal">
+                        <label for="">QUERY BIZID</label>
+                        <input ng-model="query.bizId" type="text" class="form-control input-sm" />
+                        <button ng-click="query.getBiz(query.bizId)" class="btn btn-warning">getBiz({{ query.bizId }})</button>
+                        <p>storage_array: {{ storage_array.length }}</p>
+                      </form>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="col-sm-9">
+                  <div class="form-group">
+                    <textarea rows="7" class="form-control">{{ storage_array }}</textarea>
+                  </div>
+                </div>
+
+              </div><!-- /.row -->
+              <!--{# /TESTING GLOBAL DATA BETWEEN CONTROLLERS #}-->
 
               <div ui-view class="main-view"></div>
 
