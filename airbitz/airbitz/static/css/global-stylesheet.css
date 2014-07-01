@@ -813,15 +813,15 @@ body .jvectormap-label {
 body .top-bg,
 body .top-bg-noblur {
   z-index: -1;
-  -webkit-animation: fadein 3s;
+  -webkit-animation: fadein 2s;
   /* Safari and Chrome */
-  -moz-animation: fadein 3s;
+  -moz-animation: fadein 2s;
   /* Firefox */
-  -ms-animation: fadein 3s;
+  -ms-animation: fadein 2s;
   /* Internet Explorer */
-  -o-animation: fadein 3s;
+  -o-animation: fadein 2s;
   /* Opera */
-  animation: fadein 3s;
+  animation: fadein 2s;
 }
 @media (min-width: 992px) {
   body .top-bg,
