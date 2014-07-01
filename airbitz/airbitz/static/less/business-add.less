@@ -8,28 +8,39 @@ dl {
 }
 
 
-#collapse-2 .panel-body {
-    padding-top: 0;
+.main-content {
+    border-radius: 10px;
 }
-.location-lookup {
-    background: @brand-primary;
-    padding: 15px;
-    color: white;
-    border: 1px solid #DDD;
-}
+
+
+
+
 
 
 .main-view {
 
+    .location-lookup {
+        margin-top: 44px;
+        background: @brand-primary;
+        padding: 15px;
+        color: white;
+        border: 1px solid #DDD;
+    }
+
     &.ng-enter {
-        -webkit-animation: fadeInLeft 1s;
-        -moz-animation: fadeInLeft 1s;
-        -ms-animation: fadeInLeft 1s;
-        animation: fadeInLeft 1s;
+        -webkit-animation: fadeInRight .5s;
+        -moz-animation: fadeInRight .5s;
+        -ms-animation: fadeInRight .5s;
+        animation: fadeInRight .5s;
     }
 }
 
-.business-info.form-horizontal {
+.general-info.form-horizontal,
+.location-info.form-horizontal,
+.social-info.form-horizontal,
+.geo-info.form-horizontal,
+.hours-info.form-horizontal
+{
 
     h4 {
         margin: 20px 0;
@@ -56,13 +67,8 @@ dl {
     }
 }
 
-.biz-general {}
 
-.biz-location {}
-
-.biz-geocoding {}
-
-.biz-hours {
+.hours-info {
 
     .button-update-hours {
         margin-top: 15px;

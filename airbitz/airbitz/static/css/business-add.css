@@ -5,39 +5,66 @@ dl dt {
 dl dd {
   clear: both;
 }
-#collapse-2 .panel-body {
-  padding-top: 0;
+.main-content {
+  border-radius: 10px;
 }
-.location-lookup {
+.main-view .location-lookup {
+  margin-top: 44px;
   background: #428bca;
   padding: 15px;
   color: white;
   border: 1px solid #DDD;
 }
-.business-info.form-horizontal h4 {
+.main-view.ng-enter {
+  -webkit-animation: fadeInRight .5s;
+  -moz-animation: fadeInRight .5s;
+  -ms-animation: fadeInRight .5s;
+  animation: fadeInRight .5s;
+}
+.general-info.form-horizontal h4,
+.location-info.form-horizontal h4,
+.social-info.form-horizontal h4,
+.geo-info.form-horizontal h4,
+.hours-info.form-horizontal h4 {
   margin: 20px 0;
   padding-bottom: 8px;
   color: #2291cf;
   border-bottom: 1px solid #dedede;
 }
-.business-info.form-horizontal .input-group-lg > .form-control {
+.general-info.form-horizontal .input-group-lg > .form-control,
+.location-info.form-horizontal .input-group-lg > .form-control,
+.social-info.form-horizontal .input-group-lg > .form-control,
+.geo-info.form-horizontal .input-group-lg > .form-control,
+.hours-info.form-horizontal .input-group-lg > .form-control {
   padding-left: 8px;
   padding-right: 8px;
 }
-.business-info.form-horizontal .radio {
+.general-info.form-horizontal .radio,
+.location-info.form-horizontal .radio,
+.social-info.form-horizontal .radio,
+.geo-info.form-horizontal .radio,
+.hours-info.form-horizontal .radio {
   padding-top: 0;
 }
-.business-info.form-horizontal .checkbox {
+.general-info.form-horizontal .checkbox,
+.location-info.form-horizontal .checkbox,
+.social-info.form-horizontal .checkbox,
+.geo-info.form-horizontal .checkbox,
+.hours-info.form-horizontal .checkbox {
   padding-top: 0;
 }
-.business-info.form-horizontal textarea {
+.general-info.form-horizontal textarea,
+.location-info.form-horizontal textarea,
+.social-info.form-horizontal textarea,
+.geo-info.form-horizontal textarea,
+.hours-info.form-horizontal textarea {
   resize: vertical;
   overflow: auto;
 }
-.biz-hours .button-update-hours {
+.hours-info .button-update-hours {
   margin-top: 15px;
 }
-.biz-hours .module-add-hours {
+.hours-info .module-add-hours {
   position: relative;
   width: 100%;
   height: 130px;
@@ -47,14 +74,14 @@ dl dd {
   background: white;
   border: 1px solid #ddd;
 }
-.biz-hours .module-add-hours .input-hours {
+.hours-info .module-add-hours .input-hours {
   padding: 10px;
 }
-.biz-hours .module-add-hours .input-hours label {
+.hours-info .module-add-hours .input-hours label {
   padding-right: 5px;
   font-weight: 300;
 }
-.biz-hours .module-add-hours .input-hours input {
+.hours-info .module-add-hours .input-hours input {
   width: 60px;
   margin-right: 10px;
   padding: 2px 4px;
@@ -65,50 +92,50 @@ dl dd {
   background: white;
   border: 1px solid #ddd;
 }
-.biz-hours .module-add-hours .input-days {
+.hours-info .module-add-hours .input-days {
   padding: 0 10px;
 }
-.biz-hours .module-add-hours .input-days .btn-group-xs > .btn {
+.hours-info .module-add-hours .input-days .btn-group-xs > .btn {
   padding-top: 5px;
   padding-bottom: 5px;
 }
-.biz-hours .module-add-hours .input-days .btn-group-xs > .btn.active {
+.hours-info .module-add-hours .input-days .btn-group-xs > .btn.active {
   background: #428bca;
   color: white;
   border: 1px solid #428bca;
 }
-.biz-hours .module-add-hours .module-footer {
+.hours-info .module-add-hours .module-footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   padding: 5px 10px;
   background: #eee;
 }
-.biz-hours .module-add-hours .module-footer .checkbox label {
+.hours-info .module-add-hours .module-footer .checkbox label {
   font-size: 12px;
 }
-.biz-hours .module-add-hours .module-footer .checkbox input[type="checkbox"] {
+.hours-info .module-add-hours .module-footer .checkbox input[type="checkbox"] {
   margin-top: 5px;
 }
-.biz-hours .module-hours-table table {
+.hours-info .module-hours-table table {
   letter-spacing: .5px;
   font-weight: 300;
 }
-.biz-hours .module-hours-table table thead tr th {
+.hours-info .module-hours-table table thead tr th {
   color: white;
   background: #555;
   font-weight: 300;
 }
-.biz-hours .module-hours-table table tbody tr td .clear-hours {
+.hours-info .module-hours-table table tbody tr td .clear-hours {
   cursor: auto;
 }
-.biz-hours .module-hours-table table tbody tr td .clear-hours:hover {
+.hours-info .module-hours-table table tbody tr td .clear-hours:hover {
   color: black;
 }
-.biz-hours .module-hours-table table tbody tr td .help-edit {
+.hours-info .module-hours-table table tbody tr td .help-edit {
   margin-left: 5px;
   font-size: 10px;
 }
-.biz-hours .module-hours-table table tbody tr:hover td {
+.hours-info .module-hours-table table tbody tr:hover td {
   background: #eee;
 }
