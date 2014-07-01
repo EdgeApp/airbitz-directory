@@ -810,7 +810,8 @@ body .jvectormap-label {
   z-index: 2;
   padding-bottom: 0;
 }
-body .top-bg {
+body .top-bg,
+body .top-bg-noblur {
   z-index: -1;
   -webkit-animation: fadein 3s;
   /* Safari and Chrome */
@@ -823,7 +824,8 @@ body .top-bg {
   animation: fadein 3s;
 }
 @media (min-width: 992px) {
-  body .top-bg {
+  body .top-bg,
+  body .top-bg-noblur {
     position: absolute;
     top: 0;
     width: 100%;
@@ -833,7 +835,8 @@ body .top-bg {
   }
 }
 @media (min-width: 768px) {
-  body .top-bg {
+  body .top-bg,
+  body .top-bg-noblur {
     display: none;
   }
 }
