@@ -7,11 +7,11 @@ app.controller('addBizCtrl', ['$scope', 'abDataFactory', function ($scope, abDat
   $scope.storage_array = $scope.DF.getData();
 
   // trying to watch globally accessible data
-  $scope.$watch('', function() {
+  $scope.$watch('storage_array', function() {
     console.log('STORAGE_ARRAY CHANGED');
   });
 
-
+  $scope.DF.details = $scope.details
 
 
 

@@ -7,25 +7,50 @@ dl {
     dd { clear: both; }
 }
 
+body {
 
-.main-content {
-    border-radius: 10px;
+    .main-content {
+        border-radius: 10px;
+        border: none;
+        background: transparent;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
 }
 
-
-
-
+.btn-circle {
+    width: 60px;
+    height: 60px;
+    margin: 0 20px;
+    text-align: center;
+    font-size: 32px;
+    line-height: 0;
+    border-radius: 100px;
+    padding: 20px;
+}
 
 
 .main-view {
 
     .location-lookup {
         margin-top: 44px;
-        background: @brand-primary;
+        background: rgba(255, 255, 255, .8);
         padding: 15px;
-        color: white;
-        border: 1px solid #DDD;
+        color: #555;
+        border: 1px solid #fff;
+        border-radius: 10px;
+
+        label {
+            font-size: 18px;
+        }
+        input.form-control {
+            height: auto;
+            font-size: 28px;
+            letter-spacing: -2px;
+        }
     }
+
 
     &.ng-enter {
         -webkit-animation: fadeInRight .5s;
@@ -35,13 +60,34 @@ dl {
     }
 }
 
+
+.all-business-info {
+    padding: 0 15px;
+    background: white;
+    background: rgba(255,255,255,.9);
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.image-gatherer,
+.biz-preview {
+    padding: 15px;
+    background: white;
+    background: rgba(255,255,255,.9);
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+
+
+
 .general-info.form-horizontal,
 .location-info.form-horizontal,
 .social-info.form-horizontal,
 .geo-info.form-horizontal,
-.hours-info.form-horizontal
+.hours-info.form-horizontal,
+.all-business-info.form-horizontal
 {
-
     h4 {
         margin: 20px 0;
         padding-bottom: 8px;
@@ -69,6 +115,12 @@ dl {
 
 
 .hours-info {
+
+    .biz-hours-options {
+        .radio {
+            margin: 0;
+        }
+    }
 
     .button-update-hours {
         margin-top: 15px;
@@ -146,6 +198,7 @@ dl {
     .module-hours-table {
 
         table {
+            background: white;
             letter-spacing: .5px;
             font-weight: 300;
 

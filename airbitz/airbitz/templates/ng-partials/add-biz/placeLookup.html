@@ -1,22 +1,39 @@
 {% verbatim %}
 
 <div class="row">
+  <form>
+    <div class="location-lookup form-group col-sm-10 col-sm-offset-1">
+      <label for="autocomplete"><i class="fa fa-map-marker"></i> Lookup via Google Places
+      </label>
+      <input ng-autocomplete ng-model="autocomplete" options="options" details="details" type="text" class="form-control" />
+      <div class="row" style="margin-top: 15px;">
+        <div class="col-sm-12">
+          <button ui-sref="collectAll" class="next-step btn btn-lg btn-primary">Next</button>
+          <a ui-sref="collectAll" class="pull-right">Skip Business Lookup..</a>
+        </div>
+      </div>
+    </div>
+  </form>
 
-  <div class="location-lookup form-group col-sm-6">
-    <label for="autocomplete"><i class="fa fa-map-marker"></i> Lookup via Google Places
-    </label>
-    <input ng-autocomplete ng-model="autocomplete" options="options" details="details" type="text" class="form-control" />
+</div>
+
+<div class="row hide" style="margin-top: 50px; padding:30px; background: white">
+  <div class="col-sm-12">
+    <button ng-click="DF.updateData(details)" class="btn btn-success"><i class="fa fa-flash"></i> updateData(details)</button>
   </div>
 
-  <div class="col-sm-6">
-    <h2 style="margin-top: 0;">Lets Find the Business</h2>
-    <div list-group>
-      <div class="list-group-item">One</div>
-      <div class="list-group-item">Two</div>
-      <div class="list-group-item">Three</div>
-      <div class="list-group-item">Four</div>
-      <div class="list-group-item">Five</div>
-    </div>
+  <div class="col-sm-6" style="word-break: break-all;">
+    <h4 style="margin-top: 0">storage_array OUTPUT:</h4>
+    <p>
+      {{ storage_array }}
+    </p>
+  </div>
+
+  <div class="col-sm-6" style="word-break: break-all;">
+    <h4 style="margin-top: 0">details OUTPUT FOR: {{ autocomplete }}</h4>
+    <p>
+      {{ details }}
+    </p>
   </div>
 
 </div>

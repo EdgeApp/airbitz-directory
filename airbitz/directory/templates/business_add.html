@@ -39,30 +39,42 @@
 {% block body %}
 
   {% verbatim %}
-  <div ng-controller="addBizCtrl" class="row" style="margin-bottom: 30px;">
+  <div class="row">
     <div class="biz-info-header col-xs-12">
-      <h1 class="biz-name text-center">Add a Bitcoin Friendly Business</h1>
+      <h1 class="biz-name text-center">
+        <img class="alignnone" id="bitcoin-logo" alt="bitcoin" src="{% endverbatim %}{{ STATIC_URL }}{% verbatim %}wp/assets/img/bitcoin-icon-logo_white-bg.png" width="64" height="64">&nbsp;Add a Bitcoin Friendly Business
+      </h1>
+    </div>
+  </div>
 
-      <div class="row">
-        <div class="col-sm-12 text-center" style="margin: 25px;">
-          <div class="add-biz-steps btn-group">
-            <button ui-sref-active="btn-primary" ui-sref="placeLookup" class="step btn btn-default">1. Lookup</button>
-            <button ui-sref-active="btn-primary" ui-sref="generalInfo" class="step btn btn-default">2. General</button>
-            <button ui-sref-active="btn-primary" ui-sref="locationInfo" class="step btn btn-default">3 Location</button>
-            <button ui-sref-active="btn-primary" ui-sref="socialInfo" class="step btn btn-default">4. Social</button>
-            <button ui-sref-active="btn-primary" ui-sref="bizHours" class="step btn btn-default">5. Hours</button>
-            <button ui-sref-active="btn-primary" ui-sref="imageGatherer" class="step btn btn-default">6. Images</button>
-            <button ui-sref-active="btn-primary" ui-sref="bizPreview" class="step btn btn-default">7. Preview</button>
-          </div>
-        </div>
+  <div class="row" style="margin: 50px 0;">
+    <div class="col-sm-12 text-center">
+
+      <div class="add-biz-steps">
+        <button ui-sref-active="btn-primary" ui-sref="placeLookup" class="step btn btn-default btn-circle">1</button>
+        <button ui-sref-active="btn-primary" ui-sref="collectAll" class="step btn btn-default btn-circle">2</button>
+        <button ui-sref-active="btn-primary" ui-sref="imageGatherer" class="step btn btn-default btn-circle">3</button>
+        <button ui-sref-active="btn-primary" ui-sref="bizPreview" class="step btn btn-default btn-circle">4</button>
       </div>
 
-      <div ui-view class="main-view"></div>
+
+      <div class="add-biz-steps btn-group hide">
+        <button ui-sref-active="btn-primary" ui-sref="placeLookup" class="step btn btn-default">1. Lookup</button>
+        <button ui-sref-active="btn-primary" ui-sref="generalInfo" class="step btn btn-default">2. General</button>
+        <button ui-sref-active="btn-primary" ui-sref="locationInfo" class="step btn btn-default">3 Location</button>
+        <button ui-sref-active="btn-primary" ui-sref="socialInfo" class="step btn btn-default">4. Social</button>
+        <button ui-sref-active="btn-primary" ui-sref="bizHours" class="step btn btn-default">5. Hours</button>
+        <button ui-sref-active="btn-primary" ui-sref="imageGatherer" class="step btn btn-default">6. Images</button>
+        <button ui-sref-active="btn-primary" ui-sref="bizPreview" class="step btn btn-default">7. Preview</button>
+        <button ui-sref-active="btn-primary" ui-sref="collectAll" class="step btn btn-default">All</button>
+      </div>
+    </div>
+  </div>
+
+  <div ui-view class="main-view container"></div>
 
   {% endverbatim %}
 
-    </div>
-  </div>
 
 {% endblock %}
 

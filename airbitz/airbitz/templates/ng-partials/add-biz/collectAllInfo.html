@@ -1,0 +1,43 @@
+{% verbatim %}
+
+<form class="all-business-info form-horizontal" action="" role="form">
+
+<div class="row">
+
+  <div class="col-sm-6"><!-- column1 -->
+
+    <div ui-view="generalInfo"></div>
+
+  </div><!-- /column1 -->
+
+
+  <div class="col-sm-6"><!-- column2 -->
+
+    <div ui-view="locationInfo"></div>
+    <div ui-view="geoInfo"></div>
+
+  </div><!-- /column2 -->
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-6"><!-- column1 -->
+
+    <div ui-view="socialInfo"></div>
+
+  </div><!-- /column1 -->
+
+
+  <div class="col-sm-6"><!-- column2 -->
+
+    <div ui-view="bizHours"></div>
+
+  </div><!-- /column2 -->
+
+</div>
+
+
+</form>
+
+{% endverbatim %}

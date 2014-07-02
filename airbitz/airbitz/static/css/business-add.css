@@ -5,15 +5,39 @@ dl dt {
 dl dd {
   clear: both;
 }
-.main-content {
+body .main-content {
   border-radius: 10px;
+  border: none;
+  background: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.btn-circle {
+  width: 60px;
+  height: 60px;
+  margin: 0 20px;
+  text-align: center;
+  font-size: 32px;
+  line-height: 0;
+  border-radius: 100px;
+  padding: 20px;
 }
 .main-view .location-lookup {
   margin-top: 44px;
-  background: #428bca;
+  background: rgba(255, 255, 255, 0.8);
   padding: 15px;
-  color: white;
-  border: 1px solid #DDD;
+  color: #555;
+  border: 1px solid #fff;
+  border-radius: 10px;
+}
+.main-view .location-lookup label {
+  font-size: 18px;
+}
+.main-view .location-lookup input.form-control {
+  height: auto;
+  font-size: 28px;
+  letter-spacing: -2px;
 }
 .main-view.ng-enter {
   -webkit-animation: fadeInRight .5s;
@@ -21,11 +45,27 @@ dl dd {
   -ms-animation: fadeInRight .5s;
   animation: fadeInRight .5s;
 }
+.all-business-info {
+  padding: 0 15px;
+  background: white;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+.image-gatherer,
+.biz-preview {
+  padding: 15px;
+  background: white;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
 .general-info.form-horizontal h4,
 .location-info.form-horizontal h4,
 .social-info.form-horizontal h4,
 .geo-info.form-horizontal h4,
-.hours-info.form-horizontal h4 {
+.hours-info.form-horizontal h4,
+.all-business-info.form-horizontal h4 {
   margin: 20px 0;
   padding-bottom: 8px;
   color: #2291cf;
@@ -35,7 +75,8 @@ dl dd {
 .location-info.form-horizontal .input-group-lg > .form-control,
 .social-info.form-horizontal .input-group-lg > .form-control,
 .geo-info.form-horizontal .input-group-lg > .form-control,
-.hours-info.form-horizontal .input-group-lg > .form-control {
+.hours-info.form-horizontal .input-group-lg > .form-control,
+.all-business-info.form-horizontal .input-group-lg > .form-control {
   padding-left: 8px;
   padding-right: 8px;
 }
@@ -43,23 +84,29 @@ dl dd {
 .location-info.form-horizontal .radio,
 .social-info.form-horizontal .radio,
 .geo-info.form-horizontal .radio,
-.hours-info.form-horizontal .radio {
+.hours-info.form-horizontal .radio,
+.all-business-info.form-horizontal .radio {
   padding-top: 0;
 }
 .general-info.form-horizontal .checkbox,
 .location-info.form-horizontal .checkbox,
 .social-info.form-horizontal .checkbox,
 .geo-info.form-horizontal .checkbox,
-.hours-info.form-horizontal .checkbox {
+.hours-info.form-horizontal .checkbox,
+.all-business-info.form-horizontal .checkbox {
   padding-top: 0;
 }
 .general-info.form-horizontal textarea,
 .location-info.form-horizontal textarea,
 .social-info.form-horizontal textarea,
 .geo-info.form-horizontal textarea,
-.hours-info.form-horizontal textarea {
+.hours-info.form-horizontal textarea,
+.all-business-info.form-horizontal textarea {
   resize: vertical;
   overflow: auto;
+}
+.hours-info .biz-hours-options .radio {
+  margin: 0;
 }
 .hours-info .button-update-hours {
   margin-top: 15px;
@@ -118,6 +165,7 @@ dl dd {
   margin-top: 5px;
 }
 .hours-info .module-hours-table table {
+  background: white;
   letter-spacing: .5px;
   font-weight: 300;
 }

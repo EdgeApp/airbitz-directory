@@ -129,9 +129,11 @@ $(function() {
 // wait for everything to resize and load then do stuff
 jQuery(window).on('load', function(){
 
-    // only load bg on larger screens
-    enquire.register(screen_lg, function() {
-        $('.top-bg').fadeIn(800);
-    });
+  // only load bg on larger screens
+  enquire.register(screen_lg, function() {
+      $('.top-bg').fadeIn(800);
+  });
+
+  $('.top-bg-noblur').fadeIn(800);
 
 });
