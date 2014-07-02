@@ -1,25 +1,25 @@
 {% verbatim %}
 
 <div class="row">
-  <form>
+
     <div class="location-lookup form-group col-sm-10 col-sm-offset-1">
       <label for="autocomplete"><i class="fa fa-map-marker"></i> Lookup via Google Places
       </label>
-      <input ng-autocomplete ng-model="autocomplete" options="options" details="details" type="text" class="form-control" />
+      <input ng-autocomplete ng-model="autocomplete" options="options" details="details" type="text" id="google_places_autocomplete" class="form-control" />
       <div class="row" style="margin-top: 15px;">
         <div class="col-sm-12">
-          <button ui-sref="collectAll" class="next-step btn btn-lg btn-primary">Next</button>
+          <button ng-click="lookupUpdate()" class="next-step btn btn-lg btn-primary">Next</button>
           <a ui-sref="collectAll" class="pull-right">Skip Business Lookup..</a>
         </div>
       </div>
     </div>
-  </form>
+
 
 </div>
 
 <div class="row hide" style="margin-top: 50px; padding:30px; background: white">
   <div class="col-sm-12">
-    <button ng-click="DF.updateData(details)" class="btn btn-success"><i class="fa fa-flash"></i> updateData(details)</button>
+    <button ng-click="lookupUpdate()" class="btn btn-success"><i class="fa fa-flash"></i> updateData(details)</button>
   </div>
 
   <div class="col-sm-6" style="word-break: break-all;">

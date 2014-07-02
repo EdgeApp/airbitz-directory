@@ -71,7 +71,8 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
       url: '/collect-all',
       views: {
         '': {
-          templateUrl: '../partials/collectAllInfo.html'
+          templateUrl: '../partials/collectAllInfo.html',
+          controller: 'collectAllInfo'
         },
         'generalInfo@collectAll': {
           templateUrl: '../partials/generalInfo.html',

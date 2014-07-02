@@ -4,15 +4,15 @@
   <h4>Lat/Lng: Geocoding</h4>
   <div class="form-group">
     <div class="form-inline col-sm-12">
-      <input type="text" style="width: 120px" class="form-control" id="latitude" name="latitude" value="37.7705183" onclick="this.select()">
-      <input type="text" style="width: 120px" class="form-control" id="longitude" name="longitude" value="-122.4504132" onclick="this.select()">
+      <input ng-model="biz.latitude" type="text" style="width: 120px" class="form-control" id="latitude" name="latitude" onclick="this.select()">
+      <input ng-model="biz.longitude" type="text" style="width: 120px" class="form-control" id="longitude" name="longitude" onclick="this.select()">
       <button class="btn btn-primary geocode-address"><i class="fa fa-arrow-down"></i> Geocode</button>
       <button class="btn btn-primary geocode-latlon"><i class="fa fa-arrow-up"></i> Reverse Geocode</button>
     </div>
   </div>
 
   <div class="form-group col-sm-12">
-    <input type="text" style="width: 200px" class="form-control" id="latlng" name="latitude" value="37.7705183,-122.4504132" onclick="this.select()">
+    <input ng-click="updateLatLng()" ng-model="biz.latlng" type="text" style="width: 200px" class="form-control" id="latlng" name="latitude" onclick="this.select()">
   </div>
 </div>
 
