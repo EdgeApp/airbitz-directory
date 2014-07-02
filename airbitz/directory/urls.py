@@ -48,7 +48,6 @@ class PartialGroupView(TemplateView):
 
 partial_patterns = patterns('',
     url(r'^placeLookup.html$', PartialGroupView.as_view(template_name='ng-partials/add-biz/placeLookup.html'), name='place_lookup'),
-    url(r'^collectInfo.html$', PartialGroupView.as_view(template_name='ng-partials/add-biz/collectInfo.html'), name='collect_info'),
     url(r'^generalInfo.html$', PartialGroupView.as_view(template_name='ng-partials/add-biz/generalInfo.html'), name='general_info'),
     url(r'^locationInfo.html$', PartialGroupView.as_view(template_name='ng-partials/add-biz/locationInfo.html'), name='location_info'),
     url(r'^geoInfo.html$', PartialGroupView.as_view(template_name='ng-partials/add-biz/geoInfo.html'), name='geo_info'),
@@ -57,6 +56,7 @@ partial_patterns = patterns('',
     url(r'^imageGather.html$', PartialGroupView.as_view(template_name='ng-partials/add-biz/imageGather.html'), name='image_gather'),
     url(r'^bizPreview.html$', PartialGroupView.as_view(template_name='ng-partials/add-biz/bizPreview.html'), name='biz_preview'),
     url(r'^finishedThankYou.html$', PartialGroupView.as_view(template_name='ng-partials/add-biz/finishedThankYou.html'), name='finished_thank_you'),
+    url(r'^collectAllInfo.html$', PartialGroupView.as_view(template_name='ng-partials/add-biz/collectAllInfo.html'), name='collect_all_info'),
     url(r'^bizQuery.html$', PartialGroupView.as_view(template_name='ng-partials/add-biz/bizQuery.html'), name='biz_query'),
 )
 

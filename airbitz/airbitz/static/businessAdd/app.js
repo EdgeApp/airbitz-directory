@@ -18,10 +18,6 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
       templateUrl: '../partials/placeLookup.html',
       controller: 'addBizCtrl'
     })
-    .state('collectInfo', {
-      url: '/collect-info',
-      templateUrl: '../partials/collectInfo.html'
-    })
     .state('generalInfo', {
       url: '/general-info',
       templateUrl: '../partials/generalInfo.html',
@@ -68,6 +64,39 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
         console.log('finishedThankYouCtrl LOADED')
       }
     })
+
+
+    // all at once for admins
+    .state('collectAll', {
+      url: '/collect-all',
+      views: {
+        '': {
+          templateUrl: '../partials/collectAllInfo.html'
+        },
+        'generalInfo@collectAll': {
+          templateUrl: '../partials/generalInfo.html',
+          controller: 'generalInfoCtrl'
+        },
+        'locationInfo@collectAll': {
+          templateUrl: '../partials/locationInfo.html',
+          controller: 'locationInfoCtrl'
+        },
+        'socialInfo@collectAll': {
+          templateUrl: '../partials/socialInfo.html',
+          controller: 'socialInfoCtrl'
+        },
+        'geoInfo@collectAll': {
+          templateUrl: '../partials/geoInfo.html',
+          controller: 'geoInfoCtrl'
+        },
+        'bizHours@collectAll': {
+          templateUrl: '../partials/bizHours.html',
+          controller: 'bizHoursCtrl'
+        },
+
+      }
+    })
+
 
 
     // other testing area

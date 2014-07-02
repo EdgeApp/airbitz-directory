@@ -1,57 +1,59 @@
 {% verbatim %}
-
   <div ng-controller="bizHoursCtrl" class="hours-info form-horizontal"><!-- .biz-hours -->
-    <div class="col-sm-12">
-      <h4>Business Hours</h4>
-      <div class="row">
-        <div class="biz-hours-options form-group col-sm-6">
-          <div ng-repeat="option in hours.options" class="radio">
-            <label>
-              <input ng-model="hours.selected" type="radio" name="{{ option.value }}" id="{{ option.value }}" value="{{ option.value }}" />
-              {{ option.label }}
-            </label>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <button class="btn btn-primary btn-lg">{{ hours.selected }}</button>
+    <h4>Business Hours</h4>
+
+    <div class="row">
+      <div class="biz-hours-options form-group col-sm-12">
+        <div ng-repeat="option in hours.options" class="radio">
+          <label>
+            <input ng-model="hours.selected" type="radio" name="{{ option.value }}" id="{{ option.value }}" value="{{ option.value }}" />
+            {{ option.label }}
+          </label>
         </div>
       </div>
     </div>
 
-    <div class="col-sm-12">
-      <p class="text-warning">{{ hours.error||'&nbsp;' }}</p>
-      <div ng-show="hours.selected == 'selectedHours'" class="module-add-hours">
+    <div class="row">
 
-        <div class="input-hours pull-left">
-          <label for="">Open</label>
-          <input ng-keyup="hours.updateHours()" ng-model="hours.hoursOpen" type="text" class="hours-open">
+      <div class="col-sm-12">
+        <p class="text-warning">{{ hours.error||'&nbsp;' }}</p>
+        <div ng-show="hours.selected == 'selectedHours'" class="module-add-hours">
 
-          <label for="">Close</label>
-          <input ng-keyup="hours.updateHours()" ng-model="hours.hoursClosed" type="text" class="hours-close">
-        </div>
+          <div class="input-hours pull-left">
+            <label for="">Open</label>
+            <input ng-keyup="hours.updateHours()" ng-model="hours.hoursOpen" type="text" class="hours-open">
 
-        <div class="input-days btn-group btn-group-justified">
-          <div ng-repeat="day in hours.daysOfWeek" class="btn-group btn-group-xs">
-            <button ng-click="hours.selectDay(day)" ng-class="{active: hours.isDayActive(day)}" class="btn btn-default">
-              <i ng-show="hours.isDayActive(day)" class="fa fa-check"></i> {{ day|titleCase }}
-            </button>
+            <label for="">Close</label>
+            <input ng-keyup="hours.updateHours()" ng-model="hours.hoursClosed" type="text" class="hours-close">
           </div>
-        </div>
 
-        <div class="module-footer">
-          <div class="pull-left">
-            <div class="btn-group">
-              <button class="btn btn-primary btn-xs disabled"><i class="fa fa-check"></i></button>
-              <button ng-click="hours.selectDays(['mon','tue','wed','thu','fri','sat','sun'])" class="btn btn-primary btn-xs">All</button>
-              <button ng-click="hours.selectDays(['mon','tue','wed','thu','fri'])" class="btn btn-primary btn-xs">Weekdays</button>
-              <button ng-click="hours.selectDays(['sat','sun'])" class="btn btn-primary btn-xs">Weekend</button>
+          <div class="input-days btn-group btn-group-justified">
+            <div ng-repeat="day in hours.daysOfWeek" class="btn-group btn-group-xs">
+              <button ng-click="hours.selectDay(day)" ng-class="{active: hours.isDayActive(day)}" class="btn btn-default">
+                <i ng-show="hours.isDayActive(day)" class="fa fa-check"></i> {{ day|titleCase }}
+              </button>
             </div>
-            <small class="text-muted">Quick Selections</small>
+          </div>
+
+          <div class="module-footer">
+            <div class="pull-left">
+              <div class="btn-group">
+                <button class="btn btn-primary btn-xs disabled"><i class="fa fa-check"></i></button>
+                <button ng-click="hours.selectDays(['mon','tue','wed','thu','fri','sat','sun'])" class="btn btn-primary btn-xs">All</button>
+                <button ng-click="hours.selectDays(['mon','tue','wed','thu','fri'])" class="btn btn-primary btn-xs">Weekdays</button>
+                <button ng-click="hours.selectDays(['sat','sun'])" class="btn btn-primary btn-xs">Weekend</button>
+              </div>
+              <small class="text-muted">Quick Selections</small>
+            </div>
           </div>
         </div>
       </div>
 
-      <div ng-show="hours.businessHours.length > 0" class="module-hours-table table-responsive">
+    </div>
+
+    <div class="row">
+
+      <div ng-show="hours.businessHours.length > 0" class="module-hours-table table-responsive col-sm-12">
         <table class="table table-bordered table-rounded">
           <thead>
           <tr>
@@ -70,9 +72,9 @@
           </tbody>
         </table>
       </div>
+
     </div>
 
   </div><!-- /.biz-hours -->
-
 
 {% endverbatim %}
