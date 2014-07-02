@@ -43,12 +43,10 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
       templateUrl: '../partials/bizHours.html',
       controller: 'bizHoursCtrl'
     })
-    .state('imageGatherer', {
+    .state('imageGather', {
       url: '/image-gather',
       templateUrl: '../partials/imageGather.html',
-      controller: function() {
-        console.log('imageGatherCtrl LOADED')
-      }
+      controller: 'imageGatherCtrl'
     })
     .state('bizPreview', {
       url: '/biz-preview',
