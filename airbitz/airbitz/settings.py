@@ -349,6 +349,7 @@ PIPELINE_JS = {
             'angular/ngAutocomplete.js',
             'businessAdd/app.js',
             'businessAdd/controllers/addBizCtrl.js',
+            'businessAdd/controllers/collectAllInfo.js',
             'businessAdd/controllers/generalInfoCtrl.js',
             'businessAdd/controllers/locationInfoCtrl.js',
             'businessAdd/controllers/geoInfoCtrl.js',
