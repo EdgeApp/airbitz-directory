@@ -310,3 +310,54 @@ body.home #footer .social-icons a:hover {
     margin-top: -80px;
   }
 }
+.landing-module {
+  height: 700px;
+  margin-top: 172px;
+  padding-top: 50px;
+  background: url('/static/img/skyline-airbitz.jpg') no-repeat center;
+  background-size: cover;
+}
+.landing-module .column1 .list-container {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+.landing-module .column1 .list-container .list-group {
+  margin: 0;
+}
+.landing-module .column1 .list-container .list-group .list-group-item {
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-transition: all .15s;
+  -moz-transition: all .15s;
+  -ms-transition: all .15s;
+  -o-transition: all .15s;
+  transition: all .15s;
+}
+.landing-module .column1 .list-container .list-group .list-group-item:hover {
+  background: #ffffff;
+}
+.landing-module .column2 {
+  text-align: center;
+}
+.landing-module .column3 #bitcoin-logo {
+  float: left;
+  width: 75px;
+  margin-right: 10px;
+}
+.landing-module .column3 .bitcoin-directory-wallet {
+  margin-top: 10px;
+}
+.landing-module .column3 .bitcoin-directory-wallet h2 {
+  margin-top: 0px;
+  font-size: 22px;
+}
+.landing-module .column3 .bitcoin-directory-wallet .slide-text {
+  text-align: center;
+  color: #003E61;
+}
+.landing-module .column3 #app-store-links {
+  margin: 15px 0;
+}
+.landing-module .column3 .signup-area .form-group .control-label,
+.landing-module .column3 .signup-area .form-group .form-control {
+  text-align: center;
+}

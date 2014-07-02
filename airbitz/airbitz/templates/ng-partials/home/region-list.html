@@ -1,0 +1,18 @@
+{% verbatim %}
+
+<div ng-animate="'slideInLeft'" class="animated">
+
+  <h2>Choose a Region</h2>
+
+  <div class="list-container">
+    <ul class="list-group">
+      <li ng-repeat="item in regionData" class="list-group-item"
+          ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}"
+          ui-sref="region({ region: item.country })">{{ item.country }} ({{ item.biz_count }})</li>
+    </ul>
+  </div>
+
+</div>
+
+
+{% endverbatim %}

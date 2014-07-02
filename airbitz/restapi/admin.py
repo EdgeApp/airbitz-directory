@@ -19,11 +19,11 @@ from airbitz import settings
 from directory.models import Business, BusinessHours, Category, SocialId
 from restapi import api
 
-log=logging.getLogger("airbitz." + __name__)
+log = logging.getLogger("airbitz." + __name__)
 
-DEFAULT_PAGE_SIZE=20
+DEFAULT_PAGE_SIZE = 20
 
-PERMS=(auth.SessionAuthentication,)
+PERMS = (auth.SessionAuthentication,)
 
 class EchoField(fields.Field):
     type_name = 'EchoField'
@@ -446,3 +446,62 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+# FRONT PAGE QUERIES
+class RegionCountSerializer(serializers.ModelSerializer):
+    country = fields.CharField(source='country', required=False)
+    biz_count = fields.IntegerField()
+
+    class Meta:
+        model = Business
+        fields = ('country', 'biz_count',)
+
+
+
+# class RegionQuery(ListCreateAPIView):
+#     serializer_class = RegionSerializer
+#     model = Business
+#     allow_empty = True
+#
+#     def get_queryset(self):
+#         country =
+#
+#         q = Business.objects.filter(status="PUB", country__in=country_list)
+#         q = q.values('country').annotate(biz_count=Count('country')).order_by('-biz_count')
+#
+#         return q
+
+
+
+class RegionCountQuery(ListCreateAPIView):
+    serializer_class = RegionCountSerializer
+    model = Business
+    allow_empty = True
+
+    def get_queryset(self):
+        country_list = settings.FP_ACTIVE_COUNTRIES
+
+        q = Business.objects.filter(status="PUB", country__in=country_list)
+        q = q.values('country').annotate(biz_count=Count('country')).order_by('-biz_count')
+
+        return q
+
+
+class PublishedIntervalQuery(ListCreateAPIView):
+    serializer_class = AdminBizSerializer
+    model = Business
+    allow_empty = True
+
+    def get_queryset(self):
+        country_list = settings.FP_ACTIVE_COUNTRIES
+
+        interval = settings.FP_QUERY_INTERVAL
+        date1 = datetime.datetime.today()
+        date2 = date1 - interval
+
+        q = Business.objects.filter(status="PUB", country__in=country_list)
+        q = q.filter(modified__lte=date1, modified__gte=date2)
+
+
+        return q

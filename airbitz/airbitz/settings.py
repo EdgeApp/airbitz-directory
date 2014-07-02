@@ -38,6 +38,12 @@ if DEBUG:
 SCREENCAP_ABSOLUTE_URL = 'https://airbitz.co'
 SCREENCAP_INTERVAL = datetime.timedelta(minutes=15)
 
+
+# FRONT PAGE QUERY RELATED
+FP_ACTIVE_COUNTRIES = ['US', 'CA', 'UK', 'DE', 'NL', 'AR', 'BR', 'AT', 'HK', 'AU', 'IT', 'CZ', 'DK', 'GB', 'CH', 'PL']
+FP_QUERY_INTERVAL = datetime.timedelta(days=7)
+
+
 DEPLOY_DATE = '20140502'
 
 # Quick-start development settings - unsuitable for production
@@ -279,12 +285,12 @@ PIPELINE_JS = {
     },
     'home': {
         'source_filenames': (
-            'extras/jvectormap/jquery-jvectormap.js',
-            'extras/jvectormap/maps/jquery-jvectormap-us-aea-en.js',
-            'extras/jvectormap/maps/jquery-jvectormap-ca-lcc-en.js',
-            'extras/jvectormap/maps/jquery-jvectormap-europe-mill-en.js',
+            # 'extras/jvectormap/jquery-jvectormap.js',
+            # 'extras/jvectormap/maps/jquery-jvectormap-us-aea-en.js',
+            # 'extras/jvectormap/maps/jquery-jvectormap-ca-lcc-en.js',
+            # 'extras/jvectormap/maps/jquery-jvectormap-europe-mill-en.js',
+            # 'js/region-map.js',
             'extras/ajaxchimp/jquery.ajaxchimp.js',
-            'js/region-map.js',
             'js/home-ui.js',
         ),
         'output_filename': 'js/home.' + DEPLOY_DATE + '.js',

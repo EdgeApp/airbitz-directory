@@ -20,7 +20,7 @@ jQuery(function($) {
 
     setTimeout(function(){
         $('.et_pb_slide_image').show();
-        $('#general-signup .app-install').addClass('slideInRight');
+        $('#app-store-links .app-install').addClass('slideInRight');
     },1250);
 
     $('.ab-app-cta .app-install').hover(function(){

@@ -1,0 +1,14 @@
+{% verbatim %}
+
+<div ng-animate="slideInLeft" class="animated">
+  <h2>Choose a Sub Region</h2>
+
+  <div class="list-container">
+    <ul class="list-group">
+      <li ng-repeat="(state, count) in region" class="list-group-item">{{ state }} ({{ count }})</li>
+    </ul>
+  </div>
+
+</div>
+{% endverbatim %}
+
