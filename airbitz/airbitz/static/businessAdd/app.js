@@ -3,7 +3,8 @@
 var app = angular.module('addBiz', [
   'ui.router',
   'ngAnimate',
-  'ngAutocomplete'
+  'ngAutocomplete',
+  'ui.bootstrap'
 ]);
 
 app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {

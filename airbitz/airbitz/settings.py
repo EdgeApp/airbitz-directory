@@ -363,6 +363,7 @@ PIPELINE_JS = {
             'angular/angular.js',
             'angular/angular-ui-router.js',
             'angular/angular-animate.js',
+            'angular/ui-bootstrap-tpls-0.11.0.js'
         ),
         'output_filename': 'js/angular.js',
     },
