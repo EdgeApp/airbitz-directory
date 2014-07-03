@@ -5,28 +5,28 @@
 
   <div class="form-group">
     <div class="col-sm-8 input-group-sm">
-      <input ng-model="biz.address" type="text" class="form-control input-sm" id="inputAddress" placeholder="3060 University" />
+      <input ng-model="biz.address" type="text" class="form-control input-sm" id="inputAddress" placeholder="3060 University" tooltip-trigger="focus" tooltip-placement="left" tooltip="Street Address" />
     </div>
     <div class="col-sm-4 input-group-sm">
-      <input ng-model="biz.admin3_name" type="text" class="form-control input-sm" id="inputAdmin3_name" placeholder="San Diego" />
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="col-sm-4 input-group-sm">
-      <input ng-model="biz.postalcode" type="text" class="form-control input-sm" id="inputPostalcode" placeholder="92104" />
-    </div>
-    <div class="col-sm-4 input-group-sm">
-      <input ng-model="biz.admin1_code" type="text" class="form-control input-sm" id="inputAdmin1_code" placeholder="CA" />
-    </div>
-    <div class="col-sm-4 input-group-sm">
-      <input ng-model="biz.admin2_name" type="text" class="form-control input-sm" id="inputAdmin2_name" placeholder="San Diego" />
+      <input ng-model="biz.admin3_name" type="text" class="form-control input-sm" id="inputAdmin3_name" placeholder="San Diego" tooltip-trigger="focus" tooltip-placement="left" tooltip="City" />
     </div>
   </div>
 
   <div class="form-group">
     <div class="col-sm-4 input-group-sm">
-      <input ng-model="biz.country" type="text" class="form-control input-sm" id="inputCountry" placeholder="United States" />
+      <input ng-model="biz.postalcode" type="text" class="form-control input-sm" id="inputPostalcode" placeholder="92104" tooltip-trigger="focus" tooltip-placement="left" tooltip="Postal Code" />
+    </div>
+    <div class="col-sm-4 input-group-sm">
+      <input ng-model="biz.admin1_code" type="text" class="form-control input-sm" id="inputAdmin1_code" placeholder="CA" tooltip-trigger="focus" tooltip-placement="left" tooltip="State/Providence" />
+    </div>
+    <div class="col-sm-4 input-group-sm">
+      <input ng-model="biz.admin2_name" type="text" class="form-control input-sm" id="inputAdmin2_name" placeholder="San Diego" tooltip-trigger="focus" tooltip-placement="left" tooltip="County" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-4 input-group-sm">
+      <input ng-model="biz.country" type="text" class="form-control input-sm" id="inputCountry" placeholder="United States" tooltip-trigger="focus" tooltip-placement="left" tooltip="Country" />
     </div>
   </div>
 </div>
