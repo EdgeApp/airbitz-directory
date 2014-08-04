@@ -2,7 +2,6 @@
 
 $(function() {
 
-
     $('select').select2({ 'width': '200px' });
 
     AB.setup();

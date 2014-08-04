@@ -337,6 +337,7 @@ PIPELINE_JS = {
         'source_filenames': (
             'extras/blur.js/blur.js',
             'extras/select2/select2.js',
+            'extras/backstretch/backstretch.js',
             'js/moment.min.js',
             'extras/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.min.js',
             'extras/bootstrap-datetimepicker-master/build/js/bootstrap-datetimepicker.min.js',

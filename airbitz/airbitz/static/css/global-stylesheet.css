@@ -823,6 +823,10 @@ body .top-bg-noblur {
   /* Opera */
   animation: fadein 2s;
 }
+body .top-bg .backstretch,
+body .top-bg-noblur .backstretch {
+  position: fixed !important;
+}
 @media (min-width: 992px) {
   body .top-bg,
   body .top-bg-noblur {

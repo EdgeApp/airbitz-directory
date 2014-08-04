@@ -28,7 +28,7 @@
 
 
 {% block top_bg %}
-  <div class="top-bg-noblur" style="background: url('{{ STATIC_URL }}img/business-add/metro-city-bg.jpg'); height: 140%;">&nbsp;</div>
+  <div class="top-bg-noblur" style="background-attachment: fixed;">&nbsp;</div>
 {% endblock %}
 
 {% block admin_buttons %}
@@ -89,6 +89,7 @@
   {{ block.super }}
   <script type="text/javascript">
 
+    $('.top-bg-noblur').backstretch('{{ STATIC_URL }}img/business-add/metro-city-bg.jpg');
 
   </script>
 {% endblock %}
