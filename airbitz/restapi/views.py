@@ -66,6 +66,8 @@ class CategoryView(generics.ListAPIView):
     ordering_fields = ('name', 'level')
     authentication_classes = PERMS
     permission_classes = AUTH
+    max_paginate_by = 500
+    paginate_by = 500
 
 class BusinessView(generics.RetrieveAPIView):
     """

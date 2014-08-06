@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.views.generic import RedirectView
 from airbitz import settings
 
 admin.autodiscover()
@@ -29,6 +30,7 @@ urlpatterns = patterns('',
     url(r'^blog/$', 'management.views.redirect_blog', name='mgmt_redirect_blog'),
     url(r'^about/$', 'management.views.redirect_about', name='mgmt_redirect_about'),
     url(r'^button/$', 'management.views.redirect_button', name='mgmt_redirect_button'),
+    url(r'^rsvp/?$', RedirectView.as_view(url='http://www.meetup.com/Bitcoin-in-San-Diego/events/189727482/')),
 )
 
 if settings.DEBUG:
