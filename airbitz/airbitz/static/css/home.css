@@ -31,6 +31,9 @@ body.home header {
 body.home .navbar .logo {
   max-width: none;
 }
+body.home .landing-module .searchStarter h2 {
+  margin-top: 0;
+}
 body.home .ab-app-cta {
   height: 550px;
   margin-bottom: 60px;
@@ -86,88 +89,6 @@ body.home .ab-app-cta .app-slide .app-install .app-screenshot {
     margin-bottom: 60px;
   }
 }
-body.home #general-signup .app-install {
-  margin-bottom: 15px;
-}
-body.home #general-signup .app-install img:first-child {
-  margin: 0 10px;
-}
-@media (max-width: 992px) {
-  body.home #general-signup .app-install img:first-child {
-    margin: 0;
-  }
-}
-body.home .region-areas {
-  text-align: left;
-}
-body.home .region-areas .area-heading {
-  margin-top: 0;
-}
-@media (min-width: 768px) {
-  body.home .region-areas .area-heading {
-    font-size: 20px;
-  }
-}
-@media (min-width: 992px) {
-  body.home .region-areas .area-heading {
-    font-size: 28px;
-  }
-}
-body.home .region-areas .region-tabs {
-  margin-left: 0;
-  padding: 0;
-  border: none;
-}
-body.home .region-areas .region-tabs .active a {
-  color: #ffffff;
-  background: #2291cf;
-  border-color: #2291cf;
-}
-body.home .region-areas .region-tabs li {
-  margin-right: 5px;
-  margin-bottom: 5px;
-}
-body.home .region-areas .region-tabs li a {
-  padding: 5px 9px;
-  background: #eee;
-  border-color: #eee;
-}
-body.home .region-areas .region-coverage {
-  position: absolute;
-  top: 10px;
-  left: 35px;
-}
-body.home .region-areas .region-coverage h3 {
-  margin: 0;
-  padding: 3px 10px;
-  border-radius: 5px;
-  background: #80c341;
-  color: #FFF;
-  font-weight: 600;
-  text-shadow: 0 0 4px;
-}
-body.home .region-areas #other-area-form.row {
-  padding: 15px 0;
-  margin: 0;
-}
-body.home .region-areas #other-area-form {
-  padding: 0;
-  background: rgba(255, 255, 255, 0.7);
-}
-body.home .region-areas #other-area-form h3 {
-  margin-top: 0px;
-}
-body.home #area-form {
-  display: none;
-  margin-top: 15px;
-  margin: 0 10px;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 5px;
-}
-body.home #area-form h3 {
-  margin-top: 0px;
-}
 body.home #top-slider .et_pb_slide_with_image .et_pb_slide_description {
   padding-bottom: 0;
 }
@@ -181,16 +102,6 @@ body.home #top-slider .et_pb_container .et_pb_slide_image {
 @media (max-width: 992px) {
   body.home #top-slider .et_pb_container .et_pb_slide_image {
     top: 140px;
-  }
-}
-body.home #top-slider .et_pb_container .vmap {
-  width: 510px;
-  height: 500px;
-}
-@media (max-width: 992px) {
-  body.home #top-slider .et_pb_container .vmap {
-    width: 360px;
-    height: 360px;
   }
 }
 body.home #top-slider .et_pb_container .et_pb_slide_with_image .et_pb_slide_description,
@@ -245,20 +156,6 @@ body.home #top-slider .et_pb_slide_content .currently-available {
   margin: 0;
   font-weight: normal;
   color: #2291cf;
-}
-body.home #top-slider .et_pb_slide_content .available-regions {
-  overflow: hidden;
-}
-body.home #top-slider .et_pb_slide_content .available-regions a:hover {
-  text-decoration: none;
-}
-body.home #top-slider .et_pb_slide_content .available-regions .label {
-  line-height: 42px;
-}
-body.home #top-slider .et_pb_slide_content .available-regions .label:hover {
-  color: #2291cf;
-  background: white;
-  text-decoration: none;
 }
 body.home #top-slider .et_pb_slide_content #email-signup-form {
   margin: 0 25px;

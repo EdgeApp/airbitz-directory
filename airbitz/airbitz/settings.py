@@ -339,6 +339,13 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/search.' + DEPLOY_DATE + '.js',
     },
+    'search_starter': {
+        'source_filenames': (
+            'searchStarter/app.js',
+            'searchStarter/controllers/.js',
+        ),
+        'output_filename': 'js/search-starter.min.js',
+    },
     'business_add': {
         'source_filenames': (
             'extras/blur.js/blur.js',

@@ -6,7 +6,7 @@
 
   <div class="list-container">
     <ul class="list-group">
-      <li ng-repeat="item in regionData" class="list-group-item"
+      <li ng-repeat="item in regionData" class="region list-group-item"
           ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}"
           ui-sref="region({ region: item.country })">{{ item.country }} ({{ item.biz_count }})</li>
     </ul>

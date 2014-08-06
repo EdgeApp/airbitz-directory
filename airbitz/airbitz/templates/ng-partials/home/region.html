@@ -1,11 +1,14 @@
 {% verbatim %}
 
 <div ng-animate="slideInLeft" class="animated">
-  <h2>Choose a Sub Region</h2>
+  <h2><a href="#"><i class="fa fa-chevron-circle-left"></i></a> Back to Regions</h2>
 
   <div class="list-container">
     <ul class="list-group">
-      <li ng-repeat="(state, count) in region" class="list-group-item">{{ state }} ({{ count }})</li>
+      <li ng-repeat="item in regionDetails" class="subRegion list-group-item" ng-click="subRegionClicked(item.region)">
+        {{ item.region }} ({{ item.biz_count }})
+        {{ regionLookup(item.region) }}
+      </li>
     </ul>
   </div>
 

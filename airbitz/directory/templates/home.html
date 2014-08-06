@@ -118,79 +118,18 @@
         {% compressed_js 'core' %}
         {% compressed_js 'home' %}
         {% compressed_js 'angularjs' %}
+        {% compressed_js 'search_starter' %}
     {% endblock head %}
 
 
+
 <script type="text/javascript">
-  console.log('TRYING...');
-
-  var app = angular.module('abHome', [
-    'ui.router',
-    'ngAnimate'
-  ]);
-
-
-  app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
-    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';   //http://django-angular.readthedocs.org/en/latest/integration.html#xmlhttprequest
-
-    $urlRouterProvider.otherwise('/');
-
-    $stateProvider
-      // route for home
-        .state('home', {
-          url: '/',
-          templateUrl: '../partials/region-list.html',
-          controller: 'abRegCatSearch',
-          resolve: {
-            regionData: function($http){
-              return $http.get('http://127.0.0.1:8000/mgmt/api/biz/regioncount').then(function(res){
-                return res.data.results;
-              });
-            }
-          }
-        })
-        .state('region', {
-          url: "/region/:region",
-          templateUrl: "../partials/region.html",
-          controller: 'abRegShow',
-          resolve: {
-            {#            region: function($http, $stateParams){#}
-            {#              return $http.get('http://127.0.0.1:8000/region/' + $stateParams.region).then(function(res){#}
-            {#                return res.data.region;#}
-            {#              });#}
-            {#            }#}
-            region: function(){ return {
-              'California': 342,
-              'Nevada': 242,
-              'Pennsylvannia': 142,
-              'Alaska': 32
-            }}
-          }
-        })
-
-  });
-
-  app.controller('abRegCatSearch', ['$scope', '$http', 'regionData', function($scope, $http, regionData) {
-
-    console.log('abRegCatSearch CONTROLLER LOADED');
-    $scope.regionData = regionData;
-
-  }]);
-
-  app.controller('abRegShow', ['$scope', 'region', function($scope, region) {
-
-    console.log('abRegShow controller loaded');
-    $scope.region = region;
-
-  }]);
-
-
-
 </script>
 
 
+
 </head>
-<body {% verbatim %}ng-app="abHome"{% endverbatim %} class="home page page-id-145 page-template-default et_fixed_nav et_pb_pagebuilder_layout et_right_sidebar unknown et_includes_sidebar">
+<body {% verbatim %}ng-app="searchStarter"{% endverbatim %} class="home page page-id-145 page-template-default et_fixed_nav et_pb_pagebuilder_layout et_right_sidebar unknown et_includes_sidebar">
 
 {% include '_top_navbar.html' %}
 
@@ -202,12 +141,8 @@
     <div class="row">
 
 
-      <div class="column1 col-lg-4">
-
-      <ui-view></ui-view>
-
-
-
+      <div class="searchStarter column1 col-lg-4">
+        <ui-view></ui-view>
       </div>
 
       <div class="column2 col-lg-4">
@@ -218,7 +153,6 @@
 
       <div class="column3 col-lg-4">
         {% endverbatim %}
-
 
         <img class="alignnone airbitz-slide-logo" alt="airbits logo" src="{{ STATIC_URL }}wp/assets/img/airbitz-slide-logo-fadeout.png">
 

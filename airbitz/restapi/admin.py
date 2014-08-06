@@ -448,7 +448,9 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
 
 
 
-# FRONT PAGE QUERIES
+########################################
+# REGION QUERIES
+########################################
 class RegionCountSerializer(serializers.ModelSerializer):
     country = fields.CharField(source='country', required=False)
     biz_count = fields.IntegerField()
@@ -458,19 +460,33 @@ class RegionCountSerializer(serializers.ModelSerializer):
         fields = ('country', 'biz_count',)
 
 
+class RegionSerializer(serializers.ModelSerializer):
+    region = fields.CharField(source='admin1_code', required=False)
+    biz_count = fields.IntegerField()
 
-# class RegionQuery(ListCreateAPIView):
-#     serializer_class = RegionSerializer
-#     model = Business
-#     allow_empty = True
-#
-#     def get_queryset(self):
-#         country =
-#
-#         q = Business.objects.filter(status="PUB", country__in=country_list)
-#         q = q.values('country').annotate(biz_count=Count('country')).order_by('-biz_count')
-#
-#         return q
+    class Meta:
+        model = Business
+        fields = ('region', 'biz_count')
+
+
+class RegionDetails(ListCreateAPIView):
+    serializer_class = RegionSerializer
+    model = Business
+    allow_empty = True
+    paginate_by = 200
+
+    def get_queryset(self):
+        region = self.kwargs['region']
+        if region is not None:
+            q = Business.objects.filter(status="PUB", country=region)
+            q = q.exclude(admin1_code="")
+        else:
+            q = Business.objects.filter(status="PUB", country='US')
+
+        # q = q.values('admin1_code').annotate(biz_count=Count('admin1_code')).order_by('-biz_count')
+        q = q.values('admin1_code').annotate(biz_count=Count('admin1_code')).order_by('admin1_code')
+
+        return q
 
 
 
@@ -478,11 +494,14 @@ class RegionCountQuery(ListCreateAPIView):
     serializer_class = RegionCountSerializer
     model = Business
     allow_empty = True
+    paginate_by = 200
 
     def get_queryset(self):
         country_list = settings.FP_ACTIVE_COUNTRIES
 
         q = Business.objects.filter(status="PUB", country__in=country_list)
+        q = q.exclude(country="")
+        q = q.exclude(admin1_code="")
         q = q.values('country').annotate(biz_count=Count('country')).order_by('-biz_count')
 
         return q
