@@ -11,7 +11,7 @@ mgmtapi = patterns('',
     url(r'^api/biz/$', a.AdminBusinessView.as_view()),
     url(r'^api/biz/(?P<pk>\d+)/?$', a.AdminBusinessDetails.as_view()),
     url(r'^api/biz/caplist/$', a.ScreencapList.as_view()),
-    url(r'^api/biz/regioncount/$', a.RegionCountQuery.as_view()),
+    url(r'^api/biz/regioncountry/$', a.RegionCountryQuery.as_view()),
     url(r'^api/biz/region/(?P<region>.*)/?$', a.RegionDetails.as_view()),
     url(r'^api/biz/published/$', a.PublishedIntervalQuery.as_view()),
 

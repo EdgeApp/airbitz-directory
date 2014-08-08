@@ -15,6 +15,7 @@ from rest_framework.response import Response
 import logging
 import datetime
 from airbitz import settings
+from airbitz import regions_data
 
 from directory.models import Business, BusinessHours, Category, SocialId
 from restapi import api
@@ -451,16 +452,39 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
 ########################################
 # REGION QUERIES
 ########################################
-class RegionCountSerializer(serializers.ModelSerializer):
-    country = fields.CharField(source='country', required=False)
+class RegionLabel(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        region_code = obj['country']
+
+        if region_code == 'US':
+            region_label = 'United States'
+        elif region_code == 'CA':
+            region_label = 'Canada'
+        elif region_code == 'UK' or region_code == 'GB':
+            region_label = 'United Kingdom'
+        else:
+            for rcode, rlabel in regions_data.ALL_COUNTRIES.items():
+                if region_code == rcode:
+                    region_label = rlabel
+                    break
+                else:
+                    region_label = obj['country']
+
+        return region_label
+
+
+
+class RegionCountrySerializer(serializers.ModelSerializer):
+    country_code = fields.CharField(source='country')
+    country_label = RegionLabel(source='country')
     biz_count = fields.IntegerField()
 
     class Meta:
         model = Business
-        fields = ('country', 'biz_count',)
+        fields = ('country_code', 'country_label', 'biz_count',)
 
 
-class RegionSerializer(serializers.ModelSerializer):
+class RegionDetailsSerializer(serializers.ModelSerializer):
     region = fields.CharField(source='admin1_code', required=False)
     biz_count = fields.IntegerField()
 
@@ -470,7 +494,7 @@ class RegionSerializer(serializers.ModelSerializer):
 
 
 class RegionDetails(ListCreateAPIView):
-    serializer_class = RegionSerializer
+    serializer_class = RegionDetailsSerializer
     model = Business
     allow_empty = True
     paginate_by = 200
@@ -490,8 +514,8 @@ class RegionDetails(ListCreateAPIView):
 
 
 
-class RegionCountQuery(ListCreateAPIView):
-    serializer_class = RegionCountSerializer
+class RegionCountryQuery(ListCreateAPIView):
+    serializer_class = RegionCountrySerializer
     model = Business
     allow_empty = True
     paginate_by = 200
