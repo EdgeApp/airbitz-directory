@@ -463,7 +463,7 @@ class RegionLabel(serializers.Field):
         elif region_code == 'UK' or region_code == 'GB':
             region_label = 'United Kingdom'
         else:
-            for rcode, rlabel in regions_data.ALL_COUNTRIES.items():
+            for rcode, rlabel in regions_data.COUNTRY_LABELS.items():
                 if region_code == rcode:
                     region_label = rlabel
                     break

@@ -344,7 +344,7 @@ ALL_REGIONS.update(EU_REGIONS)
 
 
 
-ALL_COUNTRIES = {
+COUNTRY_LABELS = {
     "AD": "Andorra",
     "AE": "United Arab Emirates",
     "AF": "Afghanistan",
