@@ -164,6 +164,8 @@ class BusinessSerializer(serializers.ModelSerializer):
     state = serializers.CharField(source='admin1_code')
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
+    profile_image = SizedImageField(source='*')
+    square_image = WebImageField(source='*')
     images = BusinessImageSerializer(source='businessimage_set')
     hours = HoursField(source='*')
     categories = CategorySerializer(source='categories')
@@ -177,6 +179,8 @@ class BusinessSerializer(serializers.ModelSerializer):
                   'name',
                   'categories',
                   'social',
+                  'profile_image',
+                  'square_image',
                   'images',
                   'description',
                   'website',
