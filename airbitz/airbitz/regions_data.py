@@ -6,12 +6,20 @@ def get_active_regions_list(region):
         for region_code, data in ACTIVE_REGIONS_SOUTH_AMERICA.items():
             if '-' not in region_code:
                 regions.append((data['name'], data['search']))
-    if region == 'ASIA':
+    elif region == 'ASIA':
         for region_code, data in ACTIVE_REGIONS_ASIA.items():
             if '-' not in region_code:
                 regions.append((data['name'], data['search']))
-    if region == 'EUROPE':
+    elif region == 'SOUTHEAST_ASIA':
+        for region_code, data in ACTIVE_REGIONS_SOUTHEAST_ASIA.items():
+            if '-' not in region_code:
+                regions.append((data['name'], data['search']))
+    elif region == 'EUROPE':
         for region_code, data in ACTIVE_REGIONS_EUROPE.items():
+            if '-' not in region_code:
+                regions.append((data['name'], data['search']))
+    elif region == 'OCEANA':
+        for region_code, data in ACTIVE_REGIONS_OCEANA.items():
             if '-' not in region_code:
                 regions.append((data['name'], data['search']))
     else:
@@ -281,12 +289,17 @@ ACTIVE_REGIONS_EUROPE = {
            'search': 'Germany'},
     'AT': {'name': 'Austria',
            'search': 'Austria'},
+    'IE': {'name': 'Ireland',
+           'search': 'Ireland'},
+
 }
 
 ACTIVE_REGIONS_SOUTH_AMERICA = {
     # South American regions
     'BR': {'name': 'Brazil',
            'search': 'Brazil'},
+    'AR': {'name': 'Argentina',
+           'search': 'Argentina'},
 }
 
 ACTIVE_REGIONS_ASIA = {
@@ -295,12 +308,28 @@ ACTIVE_REGIONS_ASIA = {
            'search': 'Hong Kong'},
 }
 
+ACTIVE_REGIONS_SOUTHEAST_ASIA = {
+    # Southeast Asian regions
+    'PH': {'name': 'Philippines',
+           'search': 'Philippines'},
+}
+
+ACTIVE_REGIONS_OCEANA = {
+    # Oceana regions
+    'AU': {'name': 'Austrailia',
+           'search': 'Austrailia'},
+    'NZ': {'name': 'New Zealand',
+           'search': 'New Zealand'},
+}
+
 ACTIVE_REGIONS = {}
 ACTIVE_REGIONS.update(US_REGIONS)   # all
 ACTIVE_REGIONS.update(CA_REGIONS)   # all
 ACTIVE_REGIONS.update(ACTIVE_REGIONS_EUROPE)            # partial
 ACTIVE_REGIONS.update(ACTIVE_REGIONS_ASIA)              # partial
+ACTIVE_REGIONS.update(ACTIVE_REGIONS_SOUTHEAST_ASIA)    # partial
 ACTIVE_REGIONS.update(ACTIVE_REGIONS_SOUTH_AMERICA)     # partial
+ACTIVE_REGIONS.update(ACTIVE_REGIONS_OCEANA)        # partial
 
 # ALL_REGIONS = dict(US_REGIONS.items() + CA_REGIONS.items() + EU_REGIONS.items())
 ALL_REGIONS = {}
