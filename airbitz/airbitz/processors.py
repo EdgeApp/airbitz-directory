@@ -29,7 +29,9 @@ def active_regions(request):
     return {
         'us_active_regions_list':               get_active_regions_list('US-'),
         'ca_active_regions_list':               get_active_regions_list('CA-'),
-        'eu_active_regions_list':               get_active_regions_list('EUROPE'),
         'south_america_active_regions_list':    get_active_regions_list('SOUTHAMERICA'),
+        'eu_active_regions_list':               get_active_regions_list('EUROPE'),
         'asia_active_regions_list':             get_active_regions_list('ASIA'),
+        'southeast_asia_active_regions_list':   get_active_regions_list('SOUTHEAST_ASIA'),
+        'oceana_active_regions_list':           get_active_regions_list('OCEANA'),
     }
