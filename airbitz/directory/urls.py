@@ -63,9 +63,9 @@ partial_patterns = patterns('',
     url(r'^bizHours.html$', PartialGroupView.as_view(template_name='ng-partials/bizHours.html'), name='biz_hours'),
 
 
-    url(r'^region-list.html$', PartialGroupView.as_view(template_name='ng-partials/home/region-list.html'), name='region_list'),
-    url(r'^cat-list.html$', PartialGroupView.as_view(template_name='ng-partials/home/cat-list.html'), name='cat_list'),
-    url(r'^region.html$', PartialGroupView.as_view(template_name='ng-partials/home/region.html'), name='region_show'),
+    url(r'^region-list.html$', PartialGroupView.as_view(template_name='ng-partials/search-starter/region-list.html'), name='region_list'),
+    url(r'^cat-list.html$', PartialGroupView.as_view(template_name='ng-partials/search-starter/cat-list.html'), name='cat_list'),
+    url(r'^region.html$', PartialGroupView.as_view(template_name='ng-partials/search-starter/region.html'), name='region_show'),
 )
 
 urlpatterns += patterns('',

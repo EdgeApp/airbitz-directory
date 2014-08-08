@@ -452,45 +452,68 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
 ########################################
 # REGION QUERIES
 ########################################
+class CountryLabel(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        country_code = obj['country']
+
+        if country_code == 'US':
+            country_label = 'United States'
+        elif country_code == 'CA':
+            country_label = 'Canada'
+        elif country_code == 'UK' or country_code == 'GB':
+            country_label = 'United Kingdom'
+        else:
+            for ccode, label in regions_data.COUNTRY_LABELS.items():
+                if country_code == ccode:
+                    country_label = label
+                    break
+                else:
+                    country_label = obj['country']
+
+        return country_label
+
+
+class RegionCountrySerializer(serializers.ModelSerializer):
+    country_code = fields.CharField(source='country')
+    country_label = CountryLabel(source='country')
+    biz_count = fields.IntegerField()
+
+    class Meta:
+        model = Business
+        fields = ('biz_count', 'country_code', 'country_label',)
+
+
+
+
 class RegionLabel(serializers.Field):
     def field_to_native(self, obj, field_name):
-        region_code = obj['country']
+        region_code = obj['admin1_code']
 
-        if region_code == 'US':
-            region_label = 'United States'
-        elif region_code == 'CA':
-            region_label = 'Canada'
-        elif region_code == 'UK' or region_code == 'GB':
-            region_label = 'United Kingdom'
+        if region_code == 'AK':
+            region_label = 'Arkansas'
         else:
             for rcode, rlabel in regions_data.COUNTRY_LABELS.items():
                 if region_code == rcode:
                     region_label = rlabel
                     break
                 else:
-                    region_label = obj['country']
+                    region_label = obj['admin1_code']
 
         return region_label
 
 
-
-class RegionCountrySerializer(serializers.ModelSerializer):
-    country_code = fields.CharField(source='country')
-    country_label = RegionLabel(source='country')
-    biz_count = fields.IntegerField()
-
-    class Meta:
-        model = Business
-        fields = ('country_code', 'country_label', 'biz_count',)
-
-
 class RegionDetailsSerializer(serializers.ModelSerializer):
-    region = fields.CharField(source='admin1_code', required=False)
+    country_code = fields.CharField(source='country')
+    country_label = CountryLabel(source='country')
+    region = fields.CharField(source='admin1_code')
+    region_label = RegionLabel(source='admin1_code')
     biz_count = fields.IntegerField()
 
     class Meta:
         model = Business
-        fields = ('region', 'biz_count')
+        fields = ('biz_count', 'region', 'region_label', 'country_code', 'country_label',)
+
+
 
 
 class RegionDetails(ListCreateAPIView):
@@ -500,18 +523,16 @@ class RegionDetails(ListCreateAPIView):
     paginate_by = 200
 
     def get_queryset(self):
-        region = self.kwargs['region']
-        if region is not None:
-            q = Business.objects.filter(status="PUB", country=region)
+        country = self.kwargs['country']
+        if country is not None:
+            q = Business.objects.filter(status="PUB", country=country)
             q = q.exclude(admin1_code="")
         else:
             q = Business.objects.filter(status="PUB", country='US')
 
-        # q = q.values('admin1_code').annotate(biz_count=Count('admin1_code')).order_by('-biz_count')
-        q = q.values('admin1_code').annotate(biz_count=Count('admin1_code')).order_by('admin1_code')
+        q = q.values('country', 'admin1_code').annotate(biz_count=Count('admin1_code')).order_by('admin1_code')
 
         return q
-
 
 
 class RegionCountryQuery(ListCreateAPIView):
