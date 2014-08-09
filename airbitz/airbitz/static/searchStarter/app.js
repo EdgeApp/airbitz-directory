@@ -67,11 +67,11 @@ app.controller('abRegionDetails', ['$scope', 'region', function($scope, region) 
   console.log('abRegionDetails controller loaded');
   $scope.regionDetails = region;
 
-  $scope.subRegionClicked = function(name){
+  $scope.subRegionClicked = function(region, country){
     var $location = $('#input-location');
     var $search = $('#search-button');
 
-    $location.val(name);
+    $location.val(region + ', ' + country);
 
     $search.addClass('animated fadeInUp');
     $location.css({

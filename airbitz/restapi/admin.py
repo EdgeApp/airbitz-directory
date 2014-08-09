@@ -488,16 +488,35 @@ class RegionCountrySerializer(serializers.ModelSerializer):
 class RegionLabel(serializers.Field):
     def field_to_native(self, obj, field_name):
         region_code = obj['admin1_code']
+        country_code = obj['country']
 
-        if region_code == 'AK':
-            region_label = 'Arkansas'
+        region_label = ''
+
+        '''
+        List any subregions that have been defined for a country code
+        '''
+        if country_code == 'US':
+            sub_regions = regions_data.US_REGIONS
+        elif country_code == 'CA':
+            sub_regions = regions_data.CA_REGIONS
         else:
-            for rcode, rlabel in regions_data.COUNTRY_LABELS.items():
-                if region_code == rcode:
-                    region_label = rlabel
+            sub_regions = False
+
+        if sub_regions:
+            for rcode, rdata in sub_regions.items():
+                if country_code + '-' + region_code == rcode:
+                    print '*************'
+                    region_label = rdata['name']
+                    print 'MATCHED', rcode, '==', country_code + '-' + region_code
+                    print '*************'
                     break
                 else:
+                    print 'NO MATCH', rcode, '!==', country_code + '-' + region_code
                     region_label = obj['admin1_code']
+        else:
+            region_label = obj['admin1_code']
+
+
 
         return region_label
 
@@ -505,8 +524,10 @@ class RegionLabel(serializers.Field):
 class RegionDetailsSerializer(serializers.ModelSerializer):
     country_code = fields.CharField(source='country')
     country_label = CountryLabel(source='country')
+
     region = fields.CharField(source='admin1_code')
     region_label = RegionLabel(source='admin1_code')
+
     biz_count = fields.IntegerField()
 
     class Meta:
@@ -530,7 +551,7 @@ class RegionDetails(ListCreateAPIView):
         else:
             q = Business.objects.filter(status="PUB", country='US')
 
-        q = q.values('country', 'admin1_code').annotate(biz_count=Count('admin1_code')).order_by('admin1_code')
+        q = q.values('country', 'admin1_code').annotate(biz_count=Count('admin1_code')).order_by('-biz_count')
 
         return q
 

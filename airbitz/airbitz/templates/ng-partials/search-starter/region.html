@@ -5,8 +5,8 @@
 
   <div class="list-container">
     <ul class="list-group">
-      <li ng-repeat="item in regionDetails" class="subRegion list-group-item" ng-click="subRegionClicked(item.region)">
-        {{ item.region }} ({{ item.biz_count }})
+      <li ng-repeat="item in regionDetails" class="subRegion list-group-item" ng-click="subRegionClicked(item.region_label, item.country_label)">
+        {{ item.region_label }} <span class="pull-right">({{ item.biz_count }})</span>
         {{ regionLookup(item.region) }}
       </li>
     </ul>
