@@ -20,7 +20,7 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider){
         controller: 'abRegionList',
         resolve: {
           regionData: function($http){
-            return $http.get('http://127.0.0.1:8000/mgmt/api/biz/regioncountry').then(function(res){
+            return $http.get('/mgmt/api/biz/countries').then(function(res){
               var results = res.data.results;
               return results;
             });
