@@ -40,7 +40,6 @@ SCREENCAP_INTERVAL = datetime.timedelta(minutes=15)
 
 
 # FRONT PAGE QUERY RELATED
-FP_ACTIVE_COUNTRIES = ['US', 'CA', 'UK', 'DE', 'NL', 'AR', 'BR', 'AT', 'HK', 'AU', 'IT', 'CZ', 'DK', 'GB', 'CH', 'PL']
 FP_QUERY_INTERVAL = datetime.timedelta(days=7)
 
 

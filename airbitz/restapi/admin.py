@@ -455,16 +455,17 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
 class CountryLabel(serializers.Field):
     def field_to_native(self, obj, field_name):
         country_code = obj['country']
+        country_label = obj['country']
 
-        if country_code == 'US':
+        if country_code.lower() == 'US'.lower():
             country_label = 'United States'
-        elif country_code == 'CA':
+        elif country_code.lower() == 'CA'.lower():
             country_label = 'Canada'
-        elif country_code == 'UK' or country_code == 'GB':
+        elif country_code.lower() == 'UK'.lower() or country_code.lower() == 'GB'.lower():
             country_label = 'United Kingdom'
         else:
-            for ccode, label in regions_data.COUNTRY_LABELS.items():
-                if country_code == ccode:
+            for ccode, label in regions_data.ALL_COUNTRY_LABELS.items():
+                if country_code.lower() == ccode.lower():
                     country_label = label
                     break
                 else:
@@ -487,31 +488,52 @@ class RegionCountrySerializer(serializers.ModelSerializer):
 
 class RegionLabel(serializers.Field):
     def field_to_native(self, obj, field_name):
-        region_code = obj['admin1_code']
-        country_code = obj['country']
+        region_code = obj['admin1_code'].strip()
+        country_code = obj['country'].strip()
+        # remove periods
+        region_code = region_code.replace('.', '')
+        country_code = country_code.replace('.', '')
 
         region_label = ''
 
         '''
         List any subregions that have been defined for a country code
         '''
-        if country_code == 'US':
+        if country_code.upper() == 'US':
             sub_regions = regions_data.US_REGIONS
-        elif country_code == 'CA':
+        elif country_code.upper() == 'CA':
             sub_regions = regions_data.CA_REGIONS
+        elif country_code.upper() == 'AU':
+            sub_regions = regions_data.AU_REGIONS
+        elif country_code.upper() == 'DE':
+            sub_regions = regions_data.DE_REGIONS
+        elif country_code.upper() == 'NL':
+            sub_regions = regions_data.NL_REGIONS
+        elif country_code.upper() == 'AR':
+            sub_regions = regions_data.AR_REGIONS
+        elif country_code.upper() == 'BR':
+            sub_regions = regions_data.BR_REGIONS
+        elif country_code.upper() == 'CH':
+            sub_regions = regions_data.CH_REGIONS
+        elif country_code.upper() == 'AT':
+            sub_regions = regions_data.AT_REGIONS
+        elif country_code.upper() == 'NZ':
+            sub_regions = regions_data.NZ_REGIONS
+        elif country_code.upper() == 'PH':
+            sub_regions = regions_data.PH_REGIONS
         else:
             sub_regions = False
 
         if sub_regions:
             for rcode, rdata in sub_regions.items():
-                if country_code + '-' + region_code == rcode:
-                    print '*************'
+                if country_code.lower() + '-' + region_code.lower() == rcode.lower():
                     region_label = rdata['name']
-                    print 'MATCHED', rcode, '==', country_code + '-' + region_code
-                    print '*************'
+                    # print '*************'
+                    # print 'MATCHED', rcode, '==', country_code + '-' + region_code
+                    # print '*************'
                     break
                 else:
-                    print 'NO MATCH', rcode, '!==', country_code + '-' + region_code
+                    # print 'NO MATCH', rcode, '!==', country_code + '-' + region_code
                     region_label = obj['admin1_code']
         else:
             region_label = obj['admin1_code']
@@ -551,7 +573,7 @@ class RegionDetails(ListCreateAPIView):
         else:
             q = Business.objects.filter(status="PUB", country='US')
 
-        q = q.values('country', 'admin1_code').annotate(biz_count=Count('admin1_code')).order_by('-biz_count')
+        q = q.values('country', 'admin1_code').annotate(biz_count=Count('admin1_code')).order_by('admin1_code')
 
         return q
 
@@ -563,7 +585,7 @@ class RegionCountryQuery(ListCreateAPIView):
     paginate_by = 200
 
     def get_queryset(self):
-        country_list = settings.FP_ACTIVE_COUNTRIES
+        country_list = regions_data.get_active_country_codes()
 
         q = Business.objects.filter(status="PUB", country__in=country_list)
         q = q.exclude(country="")
@@ -579,7 +601,7 @@ class PublishedIntervalQuery(ListCreateAPIView):
     allow_empty = True
 
     def get_queryset(self):
-        country_list = settings.FP_ACTIVE_COUNTRIES
+        country_list = regions_data.get_active_country_codes()
 
         interval = settings.FP_QUERY_INTERVAL
         date1 = datetime.datetime.today()
