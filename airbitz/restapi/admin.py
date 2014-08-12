@@ -573,7 +573,7 @@ class RegionDetails(ListCreateAPIView):
         else:
             q = Business.objects.filter(status="PUB", country='US')
 
-        q = q.values('country', 'admin1_code').annotate(biz_count=Count('admin1_code')).order_by('admin1_code')
+        q = q.values('country', 'admin1_code').annotate(biz_count=Count('admin1_code')).order_by('-biz_count')
 
         return q
 
@@ -588,8 +588,8 @@ class RegionCountryQuery(ListCreateAPIView):
         country_list = regions_data.get_active_country_codes()
 
         q = Business.objects.filter(status="PUB", country__in=country_list)
-        q = q.exclude(country="")
-        q = q.exclude(admin1_code="")
+        # q = q.exclude(country="")
+        # q = q.exclude(admin1_code="")
         q = q.values('country').annotate(biz_count=Count('country')).order_by('-biz_count')
 
         return q
