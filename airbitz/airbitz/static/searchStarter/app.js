@@ -44,7 +44,7 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider){
 });
 
 
-app.controller('abRegionList', ['$scope', '$http', 'regionData', function($scope, $http, regionData) {
+app.controller('abRegionList', ['$scope', '$http', 'SimpleCache', 'regionData', function($scope, $http, SimpleCache, regionData) {
 //  console.log('abRegionList CONTROLLER LOADED');
   $scope.regionData = regionData;
   $scope.bizCount = function() {
@@ -85,14 +85,17 @@ app.controller('abRegionList', ['$scope', '$http', 'regionData', function($scope
         '-o-transition': 'border 500ms ease-out'
       });
     }, 1000);
+
+    SimpleCache.put('country', region)
   }
 
 }]);
 
 
-app.controller('abRegionDetails', ['$scope', 'region', function($scope, region) {
+app.controller('abRegionDetails', ['$scope', 'SimpleCache', 'region', function($scope, SimpleCache, region) {
 //  console.log('abRegionDetails controller loaded');
   $scope.regionDetails = region;
+  $scope.country = SimpleCache.get('country');
 
   $scope.bizCount = function() {
     var count = 0;
@@ -130,5 +133,22 @@ app.controller('abRegionDetails', ['$scope', 'region', function($scope, region) 
 
   };
 
+
+}]);
+
+app.service('SimpleCache', ['$rootScope', function() {
+  var cache = {};
+
+  this.put = function(key, value) {
+    cache[key] = value;
+  };
+
+  this.remove = function(key) {
+    delete cache[key];
+  };
+
+  this.get = function(key) {
+    return cache[key] || null;
+  };
 
 }]);
