@@ -33,7 +33,7 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider){
         controller: 'abRegionDetails',
         resolve: {
           region: function($http, $stateParams){
-            return $http.get('http://127.0.0.1:8000/mgmt/api/biz/country/' + $stateParams.region).then(function(res){
+            return $http.get('/mgmt/api/biz/country/' + $stateParams.region).then(function(res){
 //              console.log('OUTPUT:');
 //              console.log(res.data.results);
               return res.data.results;
