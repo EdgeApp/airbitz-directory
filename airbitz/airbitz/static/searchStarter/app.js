@@ -124,6 +124,8 @@ app.controller('abRegionDetails', ['$scope', 'region', function($scope, region) 
         '-moz-transition': 'border 500ms ease-out',
         '-o-transition': 'border 500ms ease-out'
       });
+
+      $search.click();
     }, 1000);
 
   };
