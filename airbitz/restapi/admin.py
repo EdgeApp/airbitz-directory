@@ -595,20 +595,57 @@ class RegionCountryQuery(ListCreateAPIView):
         return q
 
 
-class PublishedIntervalQuery(ListCreateAPIView):
-    serializer_class = AdminBizSerializer
+
+class MetaResponse(Response):
+    def __init__(self, data=None, meta=None, *args, **kwargs):
+        newdata = {
+            'meta': meta
+        }
+        if data:
+            newdata['results'] = data
+        super(MetaResponse, self).__init__(data=newdata, *args, **kwargs)
+
+
+class PublishedDetailsSerializer(serializers.ModelSerializer):
+    country_code = fields.CharField(source='country')
+    country_label = CountryLabel(source='country')
+
+    biz_count = fields.IntegerField()
+
+    class Meta:
+        model = Business
+        fields = ('biz_count', 'country_code', 'country_label',)
+
+
+class PublishedDetails(ListCreateAPIView):
+    serializer_class = PublishedDetailsSerializer
     model = Business
     allow_empty = True
 
-    def get_queryset(self):
-        country_list = regions_data.get_active_country_codes()
+    def get(self, request, *args, **kwargs):
 
-        interval = settings.FP_QUERY_INTERVAL
+        try:
+            interval = datetime.timedelta(days=int(self.kwargs['days']))
+        except KeyError:
+            interval = settings.FP_QUERY_INTERVAL
+
+        country_list = regions_data.get_active_country_codes()
         date1 = datetime.datetime.today()
         date2 = date1 - interval
 
         q = Business.objects.filter(status="PUB", country__in=country_list)
-        q = q.filter(modified__lte=date1, modified__gte=date2)
+
+        published = q.filter(published__gte=date2)
+        updated = q.filter(published__lte=date2, modified__lte=date1, modified__gte=date2)
+
+        country_counts = q.values('country').annotate(biz_count=Count('country')).order_by('-biz_count')
 
 
-        return q
+        meta = {
+            'biz_total': q.count(),
+            'biz_published': published.count(),
+            'biz_updated': updated.count(),
+        }
+        serialized = PublishedDetailsSerializer(data=country_counts)
+
+        return MetaResponse(data=serialized.data, meta=meta)

@@ -39,12 +39,6 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider){
               return res.data.results;
             });
           }
-//          region: function(){ return {
-//            'California': 342,
-//            'Nevada': 242,
-//            'Pennsylvannia': 142,
-//            'Alaska': 32
-//          }}
         }
       })
 });
