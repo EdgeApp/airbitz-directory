@@ -376,17 +376,43 @@ body.home {
     background: url('/static/img/skyline-airbitz.jpg') no-repeat center;
     background-size: cover;
 
+    .label {
+        padding: .1em .3em .1em;
+        line-height: 1.5;
+    }
+
     .column1 {
         
         .list-container {
             max-height: 500px;
             overflow-y: scroll;
+            cursor: pointer;
+            border-radius: 0;
 
             .list-group {
                 margin: 0;
+                border-radius: 0;
 
+                .list-group-item.header {
+                    background: @gray;
+                    color: white;
+                    cursor: inherit;
+
+                    &:hover {
+                        background: @gray;
+                        margin-left: 0;
+                    }
+
+                    .back-button {
+                        &:hover {
+                            color: @brand-primary !important;
+                        }
+                    }
+                }
                 .list-group-item {
-                    background: rgba(255, 255, 255, .5);
+                    border-radius: 0;
+                    padding: 5px 15px;
+                    background: rgba(255, 255, 255, .7);
                     -webkit-transition: all .15s;
                     -moz-transition: all .15s;
                     -ms-transition: all .15s;
@@ -395,6 +421,7 @@ body.home {
 
                     &:hover {
                         background: rgba(255, 255, 255, 1);
+                        margin-left: -2px;
                     }
                 }
             }
@@ -402,11 +429,14 @@ body.home {
     }
 
     .column2 {
+        padding: 25px;
         text-align: center;
     }
     .column3 {
 
-        .airbitz-slide-logo {}
+        .airbitz-slide-logo {
+            margin-bottom: 25px;
+        }
         #bitcoin-logo {
             float: left;
             width: 75px;

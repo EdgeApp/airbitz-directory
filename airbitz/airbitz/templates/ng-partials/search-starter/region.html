@@ -1,12 +1,21 @@
 {% verbatim %}
 
 <div ng-animate="slideInLeft" class="animated slideInLeft">
-  <h3><a href="#"><i class="fa fa-chevron-circle-left"></i></a> Back to Countries</h3>
+
+  <h3><span class="label-primary label">{{ bizCount() }}</span> Businesses<br/>Accepting Bitcoin in {{  }}</h3>
+
+  <div class="list-container">
+    <ul class="list-group">
+      <li class="header list-group-item">
+        <a href="#"><i class="back-button fa fa-chevron-circle-left" style="color: white;"></i></a> State/Province <span class="pull-right">Count</span>
+      </li>
+    </ul>
+  </div>
 
   <div class="list-container">
     <ul class="list-group">
       <li ng-repeat="item in regionDetails" class="subRegion list-group-item" ng-click="subRegionClicked(item.region_label, item.country_label)">
-        {{ item.region_label }} <span class="pull-right">({{ item.biz_count }})</span>
+        {{ item.region_label }} <span class="label label-default pull-right">{{ item.biz_count }}</span>
         {{ regionLookup(item.region) }}
       </li>
     </ul>
