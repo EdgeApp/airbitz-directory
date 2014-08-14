@@ -18,9 +18,41 @@ jQuery(function($) {
         callback: afterEmailSubmission
     });
 
+    $('#app-demo-slides').mouseenter(function() {
+        $('#see-app-in-action').css('visibility', 'visible');
+        $('#see-app-in-action').addClass('pulse infinite');
+    });
+
+    $("#app-in-action").jqueryVideoLightning({
+        width: "1280px",
+        height: "720px",
+        autoplay: 1,
+        backdrop_opacity: .8
+    });
+
+
+    $('#app-demo-slides').carouFredSel({
+      width: 238,
+      height: 360,
+      auto: {
+        play: true
+      },
+      scroll: {
+        pauseOnHover: true,
+        fx: 'crossfade',
+        duration: 800,
+        onBefore: function() {
+          $('#see-app-in-action').css('visibility', 'hidden');
+          $('#see-app-in-action').removeClass('pulse infinite');
+        }
+      }
+    });
+
     setTimeout(function(){
+        var $appStoreLinks = $('#app-store-links');
         $('.et_pb_slide_image').show();
-        $('#app-store-links .app-install').addClass('slideInRight');
+        $appStoreLinks.css('visibility', 'visible');
+        $appStoreLinks.addClass('slideInLeft');
     },1250);
 
     $('.ab-app-cta .app-install').hover(function(){

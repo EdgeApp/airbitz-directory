@@ -239,6 +239,9 @@ body.home #footer .social-icons a:hover {
   text-align: center;
   color: #003E61;
 }
+.landing-module .column1 #app-store-links {
+  visibility: hidden;
+}
 .landing-module .column1 .signup-area .form-group .control-label {
   display: block !important;
   margin: 5px auto;
@@ -250,6 +253,32 @@ body.home #footer .social-icons a:hover {
 .landing-module .column2 {
   padding: 25px;
   text-align: center;
+}
+.landing-module .column2 #app-in-action {
+  visibility: hidden;
+  position: absolute;
+  top: 200px;
+  margin: 0 auto;
+  z-index: 1;
+  left: 7px;
+  -webkit-box-shadow: 0 0 35px 10px black;
+  -moz-box-shadow: 0 0 35px 10px black;
+  box-shadow: 0 0 35px 10px black;
+}
+.landing-module .column2 .iphone-slider {
+  position: relative;
+  width: 236px;
+  height: 500px;
+  margin: 30px auto 0;
+  padding: 70px 0 0 0;
+  background: url('../img/landing/iphone-slider/iphone5s_1up.png');
+}
+.landing-module .column2 .iphone-slider .slide {
+  width: 200px;
+  height: 360px;
+  background: black;
+  text-align: center;
+  color: white;
 }
 .landing-module .column3 .list-container {
   max-height: 500px;

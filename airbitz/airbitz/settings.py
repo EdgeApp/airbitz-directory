@@ -284,12 +284,9 @@ PIPELINE_JS = {
     },
     'home': {
         'source_filenames': (
-            # 'extras/jvectormap/jquery-jvectormap.js',
-            # 'extras/jvectormap/maps/jquery-jvectormap-us-aea-en.js',
-            # 'extras/jvectormap/maps/jquery-jvectormap-ca-lcc-en.js',
-            # 'extras/jvectormap/maps/jquery-jvectormap-europe-mill-en.js',
-            # 'js/region-map.js',
             'extras/ajaxchimp/jquery.ajaxchimp.js',
+            'extras/carouFredSel-6.2.1/jquery.carouFredSel-6.2.1-packed.js',
+            'extras/jquery-video-lightning/jquery-video-lightning.min.js',
             'js/home-ui.js',
         ),
         'output_filename': 'js/home.' + DEPLOY_DATE + '.js',

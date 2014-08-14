@@ -411,6 +411,7 @@ body.home {
         }
 
         #app-store-links {
+            visibility: hidden;
         }
 
         .signup-area {
@@ -432,6 +433,35 @@ body.home {
     .column2 {
         padding: 25px;
         text-align: center;
+
+        #app-in-action {
+            visibility: hidden;
+            position: absolute;
+            top: 200px;
+            margin: 0 auto;
+            z-index: 1;
+            left: 7px;
+            -webkit-box-shadow: 0 0 35px 10px black;
+            -moz-box-shadow: 0 0 35px 10px black;
+            box-shadow: 0 0 35px 10px black;
+        }
+
+        .iphone-slider {
+            position: relative;
+            width: 236px;
+            height: 500px;
+            margin: 30px auto 0;
+            padding: 70px 0 0 0;
+            background: url('../img/landing/iphone-slider/iphone5s_1up.png');
+
+            .slide {
+                width: 200px;
+                height: 360px;
+                background: black;
+                text-align: center;
+                color: white;
+            }
+        }
     }
 
     .column3 {
