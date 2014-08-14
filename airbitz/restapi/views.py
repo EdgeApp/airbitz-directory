@@ -236,6 +236,6 @@ class LocationSuggest(APIView):
         ll = self.request.QUERY_PARAMS.get('ll', None)
         ip = api.getRequestIp(request)
         a = api.ApiProcess(ll=ll, ip=ip)
-        results = a.suggestNearText()[:DEFAULT_PAGE_SIZE]
+        results = a.suggestNearText()
         return Response({ 'near':  results })
 

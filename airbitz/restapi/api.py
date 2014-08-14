@@ -153,6 +153,7 @@ class Location(object):
                 if not self.boundingContains(self.sortPoint):
                     self.sortPoint = centroid
         if ll:
+            self.ip_accurate = True
             geoloc = parseGeoLocation(ll)
             if geoloc:
                 self.userPoint = geoloc;
