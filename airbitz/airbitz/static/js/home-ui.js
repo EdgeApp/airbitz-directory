@@ -23,7 +23,7 @@ jQuery(function($) {
         $('#see-app-in-action').addClass('pulse infinite');
     });
 
-    $("#app-in-action").jqueryVideoLightning({
+    $("#see-app-in-action").jqueryVideoLightning({
         width: "1280px",
         height: "720px",
         autoplay: 1,
