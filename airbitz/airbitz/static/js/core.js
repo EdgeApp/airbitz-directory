@@ -35,8 +35,8 @@ function getMapMarkerContent(marker, m) {
   AB.setLL = function() {
     var geo = AB.Geo.latestLocation();
     var $ll = $('#ll');
-    if (geo) {
-      var ll = geo['coords']['latitude'] + ',' + geo['coords']['longitude'];
+    if (geo && geo.coords) {
+      var ll = geo.coords.latitude + ',' + geo.coords.longitude;
       if ($ll.length) {
         $ll.val(ll);
       } else {
@@ -192,7 +192,6 @@ function getMapMarkerContent(marker, m) {
       }
     });
     selector.on('typeahead:selected', function (object, datum) {
-      AB.setNear();
       if (datum.type === 'business' && datum.id) {
         location.href = '/biz/' + datum.id;
       }
@@ -256,7 +255,6 @@ function getMapMarkerContent(marker, m) {
         }
       }]);
       var updatePlace = function() {
-        AB.setNear();
         $('input.term').typeahead('destroy');
         AB.addPlaceSearch($('input.term'));
       };
@@ -294,10 +292,19 @@ function getMapMarkerContent(marker, m) {
         }   
       }   
       var that = this;
-      if (navigator.geolocation) {
+      var now = AB.now();
+      var then = AB.Util.getCookie('geo_timestamp');
+      if (navigator.geolocation 
+          && (then == null || now - then > AB.geoTimeout)) {
+        var options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };
+        AB.Util.setCookie('geo_timestamp', AB.now(), 1); 
         navigator.geolocation.getCurrentPosition(function(geo) {
           that.postPosition(geo, cb);
-        });
+        }, function(err) { }, options);
       }   
     },  
     postPosition: function(geo, cb) {
