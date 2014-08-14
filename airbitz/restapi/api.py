@@ -464,7 +464,7 @@ def processCountry(row):
         return DEF_COUNTRY
     
 def processCity(row):
-    accuracy = False
+    accuracy = True
     try:
         v = row.strip().split(",")
         if v[1].strip() == 'N/A':
