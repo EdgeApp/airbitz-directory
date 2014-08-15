@@ -207,6 +207,9 @@ body.home #footer .social-icons a:hover {
   text-align: center;
   color: white;
 }
+.landing-module .searchStarter {
+  margin: 0 15px;
+}
 .landing-module .column3 #who-accepts-bitcoin {
   margin-top: 100px;
   text-align: center;
