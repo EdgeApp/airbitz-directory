@@ -34,18 +34,6 @@ body.home {
     }
 
 
-    .landing-module {
-
-        .searchStarter {
-            
-            h2 {
-                margin-top: 0;
-            }
-        }
-
-    }
-
-
 
     // APP DOWNLOAD CALL TO ACTION
     .ab-app-cta {
@@ -108,220 +96,9 @@ body.home {
         }
     }
 
-    // CONTENT AREA
-
-//    #general-signup {
-//
-//        .app-install {
-//            margin-bottom: 15px;
-//
-//            img:first-child {
-//                margin: 0 10px;
-//
-//                @media (max-width: @screen-md) {
-//                    margin: 0;
-//                }
-//            }
-//        }
-//    }
 
 
 
-//    .region-areas {
-//        text-align: left;
-//
-//        .area-heading {
-//            margin-top: 0;
-//
-//            @media (min-width: @screen-sm) {
-//                font-size: 20px;
-//            }
-//            @media (min-width: @screen-md) {
-//                font-size: 28px;
-//            }
-//        }
-//        .region-tabs {
-//            margin-left: 0;
-//            padding: 0;
-//            border: none;
-//
-//            .active a {
-//                color: #ffffff;
-//                background: @brand-primary;
-//                border-color: @brand-primary;
-//            }
-//            li {
-//                margin-right: 5px;
-//                margin-bottom: 5px;
-//                a {
-//                    padding: 5px 9px;
-//                    background: #eee;
-//                    border-color: #eee;
-//                }
-//            }
-//        }
-//        .region-coverage {
-//            position: absolute;
-//            top: 10px;
-//            left: 35px;
-//            h3 {
-//                margin: 0;
-//                padding: 3px 10px;
-//                border-radius: 5px;
-//                background: @ab-green;
-//                color: #FFF;
-//                font-weight: 600;
-//                text-shadow: 0 0 4px;
-//            }
-//        }
-//        #other-area-form.row {
-//            padding: 15px 0;
-//            margin: 0;
-//        }
-//        #other-area-form {
-//            padding: 0;
-//            background: rgba(255, 255, 255, .7);
-//
-//            h3 {
-//                margin-top: 0px;
-//            }
-//        }
-//    }
-
-
-//    #area-form {
-//        display: none;
-//        margin-top: 15px;
-//        margin: 0 10px;
-//        padding: 10px;
-//        background: rgba(255, 255, 255, .7);
-//        border-radius: 5px;
-//
-//        h3 {
-//            margin-top: 0px;
-//        }
-//    }
-
-
-    #top-slider {
-
-        .et_pb_slide_with_image .et_pb_slide_description {
-            padding-bottom: 0;
-        }
-
-        .et_pb_container {
-            min-height: 1000px;
-
-            .et_pb_slide_image {
-                display: none;
-                top: 240px;
-
-                @media (max-width: @screen-md) {
-                    top: 140px;
-                }
-            }
-
-//            .vmap {
-//                width: 510px;
-//                height: 500px;
-//
-//                @media (max-width: @screen-md) {
-//                    width: 360px;
-//                    height: 360px;
-//                }
-//            }
-            .et_pb_slide_with_image
-            .et_pb_slide_description,
-            .et_pb_slide_video {
-                width: 46%;
-            }
-            @media (max-width: @screen-md ) {
-                width: 90%;
-            }
-        }
-
-        .et_pb_slide_content {
-
-            .airbitz-slide-logo {
-                margin-bottom: 20px;
-            }
-            .bitcoin-directory-wallet {
-                width: 500px;
-                margin: 0 auto;
-
-                h2 {
-                    margin: 0;
-                    font-size: 36px;
-
-                    @media (max-width: @screen-lg) {
-                        font-size: 30px;
-                    }
-                    @media (max-width: @screen-md) {
-                        font-size: 20px;
-                    }
-                }
-                @media (max-width: @screen-sm) {
-                    width: 400px;
-                }
-            }
-            .slide-text {
-                margin-bottom: 20px;
-
-                @media (max-width: 767px) {
-                    text-align: center !important;
-                }
-                @media (max-width: @screen-md) {
-                    font-size: 16px;
-                }
-            }
-            .currently-available {
-                margin: 0;
-                font-weight: normal;
-                color: @brand-primary;
-            }
-//            .available-regions {
-//                overflow: hidden;
-//
-//                a {
-//                    &:hover {
-//                        text-decoration: none;
-//                    }
-//                }
-//                .label {
-//                    line-height: 42px;
-//
-//                    &:hover {
-//                        color: @brand-primary;
-//                        background: white;
-//                        text-decoration: none;
-//                    }
-//                }
-//            }
-
-            #email-signup-form {
-                margin: 0 25px;
-
-                .form-group {
-                    margin-bottom: 5px;
-
-                    label {
-                        text-align: center;
-                        width: 100%;
-                        padding: 3px 7px;
-                        text-align: center;
-                        font-size: 14px;
-                        font-weight: 400;
-                        border-radius: 5px;
-                        background: rgba(255, 255, 255, 0.9);
-                        text-transform: capitalize;
-                    }
-                    #inputEmailWallet {
-                        text-align: center;
-                    }
-                }
-            }
-        }
-    }
 
     #bottom-slider {
 
@@ -376,12 +153,20 @@ body.home {
     background: url('/static/img/skyline-airbitz.jpg') no-repeat center;
     background-size: cover;
 
+    @media (max-width: @screen-md) {
+        height: auto;
+        margin-top: 118px;
+        padding: 50px 0;
+    }
+
+    @media (max-width: @screen-sm) {
+        margin-top: 55px;
+    }
+
     .label {
         padding: .1em .3em .1em;
         line-height: 1.5;
     }
-
-
 
     .column1 {
 
@@ -415,6 +200,8 @@ body.home {
         }
 
         .signup-area {
+            max-width: 360px;
+            margin: 0 auto;
 
             .form-group {
 
@@ -447,6 +234,7 @@ body.home {
         }
 
         .iphone-slider {
+            visibility: hidden;
             position: relative;
             width: 236px;
             height: 500px;
@@ -465,6 +253,19 @@ body.home {
     }
 
     .column3 {
+        #who-accepts-bitcoin {
+            margin-top: 100px;
+            text-align: center;
+
+            img {
+                width: 150px;
+                margin-left: 25px;
+            }
+        }
+        
+        #accepting-bitcoin {
+            visibility: hidden;
+        }
 
         .list-container {
             max-height: 500px;

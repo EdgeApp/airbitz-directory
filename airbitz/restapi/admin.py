@@ -588,7 +588,7 @@ class RegionCountryQuery(ListCreateAPIView):
         country_list = regions_data.get_active_country_codes()
 
         q = Business.objects.filter(status="PUB", country__in=country_list)
-        q = q.exclude(admin1_code="") # we remove blank cities to prevent confusion when seeing the country total
+        # q = q.exclude(admin1_code="") # we remove blank cities to prevent confusion when seeing the country total
         q = q.values('country').annotate(biz_count=Count('country')).order_by('-biz_count')
 
         return q

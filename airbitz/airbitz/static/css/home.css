@@ -31,9 +31,6 @@ body.home header {
 body.home .navbar .logo {
   max-width: none;
 }
-body.home .landing-module .searchStarter h2 {
-  margin-top: 0;
-}
 body.home .ab-app-cta {
   height: 550px;
   margin-bottom: 60px;
@@ -89,93 +86,6 @@ body.home .ab-app-cta .app-slide .app-install .app-screenshot {
     margin-bottom: 60px;
   }
 }
-body.home #top-slider .et_pb_slide_with_image .et_pb_slide_description {
-  padding-bottom: 0;
-}
-body.home #top-slider .et_pb_container {
-  min-height: 1000px;
-}
-body.home #top-slider .et_pb_container .et_pb_slide_image {
-  display: none;
-  top: 240px;
-}
-@media (max-width: 992px) {
-  body.home #top-slider .et_pb_container .et_pb_slide_image {
-    top: 140px;
-  }
-}
-body.home #top-slider .et_pb_container .et_pb_slide_with_image .et_pb_slide_description,
-body.home #top-slider .et_pb_container .et_pb_slide_video {
-  width: 46%;
-}
-@media (max-width: 992px) {
-  body.home #top-slider .et_pb_container {
-    width: 90%;
-  }
-}
-body.home #top-slider .et_pb_slide_content .airbitz-slide-logo {
-  margin-bottom: 20px;
-}
-body.home #top-slider .et_pb_slide_content .bitcoin-directory-wallet {
-  width: 500px;
-  margin: 0 auto;
-}
-body.home #top-slider .et_pb_slide_content .bitcoin-directory-wallet h2 {
-  margin: 0;
-  font-size: 36px;
-}
-@media (max-width: 1200px) {
-  body.home #top-slider .et_pb_slide_content .bitcoin-directory-wallet h2 {
-    font-size: 30px;
-  }
-}
-@media (max-width: 992px) {
-  body.home #top-slider .et_pb_slide_content .bitcoin-directory-wallet h2 {
-    font-size: 20px;
-  }
-}
-@media (max-width: 768px) {
-  body.home #top-slider .et_pb_slide_content .bitcoin-directory-wallet {
-    width: 400px;
-  }
-}
-body.home #top-slider .et_pb_slide_content .slide-text {
-  margin-bottom: 20px;
-}
-@media (max-width: 767px) {
-  body.home #top-slider .et_pb_slide_content .slide-text {
-    text-align: center !important;
-  }
-}
-@media (max-width: 992px) {
-  body.home #top-slider .et_pb_slide_content .slide-text {
-    font-size: 16px;
-  }
-}
-body.home #top-slider .et_pb_slide_content .currently-available {
-  margin: 0;
-  font-weight: normal;
-  color: #2291cf;
-}
-body.home #top-slider .et_pb_slide_content #email-signup-form {
-  margin: 0 25px;
-}
-body.home #top-slider .et_pb_slide_content #email-signup-form .form-group {
-  margin-bottom: 5px;
-}
-body.home #top-slider .et_pb_slide_content #email-signup-form .form-group label {
-  width: 100%;
-  padding: 3px 7px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 400;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.9);
-  text-transform: capitalize;
-}
-body.home #top-slider .et_pb_slide_content #email-signup-form .form-group #inputEmailWallet {
-  text-align: center;
-}
 body.home #bottom-slider .et_pb_slide_content {
   padding: 15px 0px;
   border-radius: 10px;
@@ -214,6 +124,18 @@ body.home #footer .social-icons a:hover {
   background: url('/static/img/skyline-airbitz.jpg') no-repeat center;
   background-size: cover;
 }
+@media (max-width: 992px) {
+  .landing-module {
+    height: auto;
+    margin-top: 118px;
+    padding: 50px 0;
+  }
+}
+@media (max-width: 768px) {
+  .landing-module {
+    margin-top: 55px;
+  }
+}
 .landing-module .label {
   padding: .1em .3em .1em;
   line-height: 1.5;
@@ -242,6 +164,10 @@ body.home #footer .social-icons a:hover {
 .landing-module .column1 #app-store-links {
   visibility: hidden;
 }
+.landing-module .column1 .signup-area {
+  max-width: 360px;
+  margin: 0 auto;
+}
 .landing-module .column1 .signup-area .form-group .control-label {
   display: block !important;
   margin: 5px auto;
@@ -266,6 +192,7 @@ body.home #footer .social-icons a:hover {
   box-shadow: 0 0 35px 10px black;
 }
 .landing-module .column2 .iphone-slider {
+  visibility: hidden;
   position: relative;
   width: 236px;
   height: 500px;
@@ -279,6 +206,17 @@ body.home #footer .social-icons a:hover {
   background: black;
   text-align: center;
   color: white;
+}
+.landing-module .column3 #who-accepts-bitcoin {
+  margin-top: 100px;
+  text-align: center;
+}
+.landing-module .column3 #who-accepts-bitcoin img {
+  width: 150px;
+  margin-left: 25px;
+}
+.landing-module .column3 #accepting-bitcoin {
+  visibility: hidden;
 }
 .landing-module .column3 .list-container {
   max-height: 500px;
