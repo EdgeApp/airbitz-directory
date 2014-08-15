@@ -183,10 +183,10 @@ body.home #footer .social-icons a:hover {
 .landing-module .column2 #see-app-in-action {
   visibility: hidden;
   position: absolute;
-  top: 200px;
+  top: 230px;
   margin: 0 auto;
   z-index: 1;
-  left: 7px;
+  left: 84px;
   -webkit-box-shadow: 0 0 35px 10px black;
   -moz-box-shadow: 0 0 35px 10px black;
   box-shadow: 0 0 35px 10px black;
@@ -200,7 +200,7 @@ body.home #footer .social-icons a:hover {
   padding: 70px 0 0 0;
   background: url('../img/landing/iphone-slider/iphone5s_1up.png');
 }
-.landing-module .column2 .iphone-slider .slide {
+.landing-module .column2 .iphone-slider #app-demo-slides .slide {
   width: 200px;
   height: 360px;
   background: black;
