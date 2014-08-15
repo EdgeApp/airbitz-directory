@@ -152,6 +152,7 @@ body.home {
     padding-top: 25px;
     background: url('/static/img/skyline-airbitz.jpg') no-repeat center;
     background-size: cover;
+    background-attachment: fixed;
 
     @media (max-width: @screen-md) {
         height: auto;
@@ -204,6 +205,11 @@ body.home {
 
         #app-store-links {
             visibility: hidden;
+
+            .app-store {
+                margin-bottom: 10px;
+                text-align: left;
+            }
         }
 
         .signup-area {
