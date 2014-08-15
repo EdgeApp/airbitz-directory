@@ -67,7 +67,7 @@ jQuery(function($) {
         $(this).find('.app-screenshot').removeClass('pulse');
     });
 
-    $('#who-accepts-bitcoin').mouseenter(function() {
+    $('#reveal-who-accepts-bitcoin').mouseenter(function() {
         $('#who-accepts-bitcoin').hide();
         $('#accepting-bitcoin').css('visibility', 'visible');
         $('#accepting-bitcoin').addClass('animated bounceInDown');
