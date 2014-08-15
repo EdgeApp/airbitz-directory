@@ -268,6 +268,7 @@ PIPELINE_JS = {
         'source_filenames': (
             'js/jquery-1.11.0.min.js',
             'bootstrap/js/bootstrap.min.js',
+            'extras/jquery-cookie-master/src/jquery.cookie.js',
             'js/modernizr.js',
             'js/bowser.js',
             'js/enquire.js',
