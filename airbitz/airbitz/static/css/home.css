@@ -136,6 +136,11 @@ body.home #footer .social-icons a:hover {
     margin-top: 55px;
   }
 }
+@media (max-width: 768px) {
+  .landing-module .container {
+    width: auto;
+  }
+}
 .landing-module .label {
   padding: .1em .3em .1em;
   line-height: 1.5;
