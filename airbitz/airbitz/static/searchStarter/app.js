@@ -95,7 +95,8 @@ app.controller('abRegionList', ['$scope', '$http', 'SimpleCache', 'regionData', 
 app.controller('abRegionDetails', ['$scope', 'SimpleCache', 'region', function($scope, SimpleCache, region) {
 //  console.log('abRegionDetails controller loaded');
   $scope.regionDetails = region;
-  $scope.country = SimpleCache.get('country');
+  $scope.url_country_code = document.location.href.split('/')[document.location.href.split('/').length - 1];
+  $scope.country = SimpleCache.get('country') || $scope.url_country_code;
 
   $scope.bizCount = function() {
     var count = 0;
