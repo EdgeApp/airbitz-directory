@@ -123,6 +123,7 @@ body.home #footer .social-icons a:hover {
   padding-top: 25px;
   background: url('/static/img/skyline-airbitz.jpg') no-repeat center;
   background-size: cover;
+  background-attachment: fixed;
 }
 @media (max-width: 992px) {
   .landing-module {
@@ -168,6 +169,10 @@ body.home #footer .social-icons a:hover {
 }
 .landing-module .column1 #app-store-links {
   visibility: hidden;
+}
+.landing-module .column1 #app-store-links .app-store {
+  margin-bottom: 20px;
+  text-align: left;
 }
 .landing-module .column1 .signup-area {
   max-width: 360px;
