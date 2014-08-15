@@ -24,8 +24,6 @@ jQuery(function($) {
     });
 
     $("#see-app-in-action").jqueryVideoLightning({
-        width: "1280px",
-        height: "720px",
         autoplay: 1,
         backdrop_opacity: .8
     });
