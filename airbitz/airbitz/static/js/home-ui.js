@@ -67,12 +67,26 @@ jQuery(function($) {
         $(this).find('.app-screenshot').removeClass('pulse');
     });
 
-    $('#reveal-who-accepts-bitcoin').mouseenter(function() {
-        $('#who-accepts-bitcoin').hide();
-        $('#accepting-bitcoin').css('visibility', 'visible');
-        $('#accepting-bitcoin').addClass('animated bounceInDown');
-    });
+    if($.cookie('accepting-bitcoin', Number) > 1) {
+      showWhoAcceptsBitcoin();
+    } else{
+      $('#reveal-who-accepts-bitcoin').mouseenter(function() {
+          showWhoAcceptsBitcoin();
+      });
+    }
 
+    function showWhoAcceptsBitcoin() {
+      $('#who-accepts-bitcoin').hide();
+      $('#accepting-bitcoin').css('visibility', 'visible');
+      $('#accepting-bitcoin').addClass('animated bounceInDown');
+      hasBeenSeen('accepting-bitcoin');
+    }
+
+    function hasBeenSeen(thing) {
+      var count = $.cookie(thing, Number) || 0;
+      var newCount = ++count;
+      $.cookie(thing, newCount, {expires: 1});
+    }
 
 
 });
