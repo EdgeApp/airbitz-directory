@@ -38,7 +38,12 @@ if DEBUG:
 SCREENCAP_ABSOLUTE_URL = 'https://airbitz.co'
 SCREENCAP_INTERVAL = datetime.timedelta(minutes=15)
 
-DEPLOY_DATE = '20140502'
+
+# FRONT PAGE QUERY RELATED
+FP_QUERY_INTERVAL = datetime.timedelta(days=7)
+
+
+DEPLOY_DATE = '20140814'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -263,6 +268,7 @@ PIPELINE_JS = {
         'source_filenames': (
             'js/jquery-1.11.0.min.js',
             'bootstrap/js/bootstrap.min.js',
+            'extras/jquery-cookie-master/src/jquery.cookie.js',
             'js/modernizr.js',
             'js/bowser.js',
             'js/enquire.js',
@@ -279,12 +285,9 @@ PIPELINE_JS = {
     },
     'home': {
         'source_filenames': (
-            'extras/jvectormap/jquery-jvectormap.js',
-            'extras/jvectormap/maps/jquery-jvectormap-us-aea-en.js',
-            'extras/jvectormap/maps/jquery-jvectormap-ca-lcc-en.js',
-            'extras/jvectormap/maps/jquery-jvectormap-europe-mill-en.js',
             'extras/ajaxchimp/jquery.ajaxchimp.js',
-            'js/region-map.js',
+            'extras/carouFredSel-6.2.1/jquery.carouFredSel-6.2.1-packed.js',
+            'extras/jquery-video-lightning/jquery-video-lightning.min.js',
             'js/home-ui.js',
         ),
         'output_filename': 'js/home.' + DEPLOY_DATE + '.js',
@@ -332,6 +335,13 @@ PIPELINE_JS = {
             'js/directory.js',
         ),
         'output_filename': 'js/search.' + DEPLOY_DATE + '.js',
+    },
+    'search_starter': {
+        'source_filenames': (
+            'searchStarter/app.js',
+            'searchStarter/controllers/.js',
+        ),
+        'output_filename': 'js/search-starter.min.js',
     },
     'business_add': {
         'source_filenames': (

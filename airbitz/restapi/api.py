@@ -7,6 +7,7 @@ import logging
 import subprocess
 
 from directory.models import Business, Category
+from airbitz.region_definitions import ALL_COUNTRY_LABELS
 import locapi
 
 log=logging.getLogger("airbitz." + __name__)
@@ -15,7 +16,7 @@ DEF_SRID=4326
 DEF_COUNTRY="US"
 DEF_POINT=Point((-117.124603, 33.028400))
 DEF_IP='24.152.191.12'
-DEF_LOC_STR='San Francisco, CA, United States'
+DEF_LOC_STR='United States'
 
 CURRENT_LOCATION='Current Location'
 
@@ -118,10 +119,15 @@ class Location(object):
         self.sortPoint = DEF_POINT
         self.userPoint = DEF_POINT
         self.userCountry = DEF_COUNTRY
+        self.ip_accurate = True
         # Start by IP Lookup to find point
         if ip:
-            self.sortPoint = processGeoIp(ip)
-            self.userPoint = self.sortPoint
+            (point, country, accurate) = processGeoIp(ip)
+            self.userCountry = country
+            self.ip_accurate = accurate
+            if point:
+                self.sortPoint = point 
+                self.userPoint = point
         if not self.sortPoint:
             self.sortPoint = DEF_POINT
             self.userPoint = DEF_POINT
@@ -145,9 +151,9 @@ class Location(object):
                 self.admin = admin
                 self.bounding = bounding
                 if not self.boundingContains(self.sortPoint):
-                    print centroid
                     self.sortPoint = centroid
         if ll:
+            self.ip_accurate = True
             geoloc = parseGeoLocation(ll)
             if geoloc:
                 self.userPoint = geoloc;
@@ -390,10 +396,11 @@ class ApiProcess(object):
         return filter(lambda x : x is not None, sqs)[:10]
 
     def suggestNearText(self):
-        point = self.userLocation()
-        nearText = nearTextFromPoint(point)
-        if nearText:
-            return nearText
+        if self.location.ip_accurate:
+            point = self.userLocation()
+            nearText = nearTextFromPoint(point)
+            if nearText:
+                return nearText
         if self.location.ip:
             nearText = ipToLocationString(self.location.ip)
         if nearText:
@@ -404,10 +411,13 @@ def getRequestIp(request):
     return request.META['REMOTE_ADDR']
 
 def ipToLocationString(ip):
-    point = processGeoIp(ip)
-    if point:
+    (point, country, accurate) = processGeoIp(ip)
+    if point and accurate:
         return nearTextFromPoint(point)
-    return DEF_LOC_STR
+    if ALL_COUNTRY_LABELS.has_key(country):
+        return ALL_COUNTRY_LABELS[country]
+    else:
+        return DEF_LOC_STR
 
 def nearTextFromPoint(point):
     try:
@@ -421,16 +431,20 @@ def processGeoIp(ip):
         ip = localToPublicIp()
     proc = subprocess.Popen(['geoiplookup', ip], stdout=subprocess.PIPE)
     data = proc.stdout.read()
+    country = None
     for line in data.split('\n'):
         row = line.split(':')
         if len(row) == 2:
-            data = None
+            point = None
+            accuracy = True
             (k, v) = (row[0], row[1])
-            if k.__contains__("City"):
-                data = processRow(v)
-            if data:
-                return data
-    return None
+            if k.__contains__("Country"):
+                country = processCountry(v)
+            elif k.__contains__("City"):
+                (point, accuracy) = processCity(v)
+            if point:
+                return (point, country, accuracy)
+    return (None, country, False)
 
 def localToPublicIp():
     """ This should only be called during development """
@@ -442,17 +456,27 @@ def localToPublicIp():
         log.warn('unable to look up ip')
     # Just return a default IP
     return DEF_IP
-    
-def processRow(row):
+
+def processCountry(row):
     try:
         v = row.strip().split(",")
+        return v[0]
+    except:
+        return DEF_COUNTRY
+    
+def processCity(row):
+    accuracy = True
+    try:
+        v = row.strip().split(",")
+        if v[1].strip() == 'N/A':
+            accuracy = False
         lat, lon = float(v[4]), float(v[5])
-        return Point(lon, lat)
+        return (Point(lon, lat), accuracy)
     except Exception as e:
         try:
             lat, lon = float(v[5]), float(v[6])
-            return Point(lon, lat)
+            return (Point(lon, lat), accuracy)
         except:
             log.warn(e)
-    return None
+    return (None, accuracy)
 

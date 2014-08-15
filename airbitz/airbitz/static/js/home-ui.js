@@ -18,9 +18,45 @@ jQuery(function($) {
         callback: afterEmailSubmission
     });
 
+    $('#app-demo-slides').mouseenter(function() {
+        $('#see-app-in-action').css('visibility', 'visible');
+        $('#see-app-in-action').addClass('bounceInDown');
+    });
+
+    $("#see-app-in-action").jqueryVideoLightning({
+        autoplay: 1,
+        backdrop_opacity: .8
+    });
+
+
+    $('#app-demo-slides').carouFredSel({
+      width: 238,
+      height: 360,
+      auto: {
+        play: true
+      },
+      scroll: {
+        pauseOnHover: true,
+        fx: 'crossfade',
+        duration: 800,
+        onBefore: function() {
+          $('#see-app-in-action').css('visibility', 'hidden');
+          $('#see-app-in-action').removeClass('pulse');
+        }
+      }
+    });
+
     setTimeout(function(){
+        var $appStoreLinks = $('#app-store-links');
+        var $iphoneSlider = $('.iphone-slider');
+
         $('.et_pb_slide_image').show();
-        $('#general-signup .app-install').addClass('slideInRight');
+        $appStoreLinks.css('visibility', 'visible');
+        $appStoreLinks.addClass('slideInLeft');
+
+        $iphoneSlider.css('visibility', 'visible');
+        $iphoneSlider.addClass('animated bounceInDown');
+
     },1250);
 
     $('.ab-app-cta .app-install').hover(function(){
@@ -30,6 +66,27 @@ jQuery(function($) {
         $(this).find('.app-store').removeClass('pulse infinite');
         $(this).find('.app-screenshot').removeClass('pulse');
     });
+
+    if($.cookie('accepting-bitcoin', Number) > 1) {
+      showWhoAcceptsBitcoin();
+    } else{
+      $('#reveal-who-accepts-bitcoin').mouseenter(function() {
+          showWhoAcceptsBitcoin();
+      });
+    }
+
+    function showWhoAcceptsBitcoin() {
+      $('#who-accepts-bitcoin').hide();
+      $('#accepting-bitcoin').css('visibility', 'visible');
+      $('#accepting-bitcoin').addClass('animated bounceInDown');
+      hasBeenSeen('accepting-bitcoin');
+    }
+
+    function hasBeenSeen(thing) {
+      var count = $.cookie(thing, Number) || 0;
+      var newCount = ++count;
+      $.cookie(thing, newCount, {expires: 1});
+    }
 
 
 });

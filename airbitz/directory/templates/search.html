@@ -15,7 +15,7 @@
         // FOR REGION MAP
         var activeRegions = {{ active_regions|safe }}
         var allRegions = {{ all_regions|safe }}
-	</script>
+	  </script>
 {% endblock javascript_headers %}
 
 {% block body %}
@@ -36,10 +36,10 @@
                     <div class="pagination-area">
                         {% bootstrap_paginate page_obj range=10 %}
                     </div>
-                    <div class="pagination-info">
-                        <strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_left }}</strong> Shown on Map
-                    </div>
                 {% endif %}
+                    <div class="pagination-info row">
+                        <strong>{{ results_info.total }}</strong> Total Results Found
+                    </div>
             </div>
         </div>
 
@@ -52,14 +52,14 @@
         </div>
     </div><!-- /.results-area -->
 
-    {% if results_info.total > results_info.results_per_page %}
-        <div class="pagination-area">
-            {% bootstrap_paginate page_obj range=10 %}
-        </div>
-        <div class="pagination-info">
-            <strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_left }}</strong> Shown on Map
-        </div>
-    {% endif %}
+      {% if results_info.total > results_info.results_per_page %}
+          <div class="pagination-area">
+              {% bootstrap_paginate page_obj range=10 %}
+          </div>
+      {% endif %}
+          <div class="pagination-info row">
+              <strong>{{ results_info.total }}</strong> Total Results Found
+          </div>
 
     {% else %}
 
@@ -72,10 +72,10 @@
                 <div class="pagination-area row">
                     {% bootstrap_paginate page_obj range=10 %}
                 </div>
+            {% endif %}
                 <div class="pagination-info row">
                     <strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_left }}</strong> Shown on Map
                 </div>
-            {% endif %}
 
             {% block results_list_items %}
                 {% for biz in results %}
@@ -87,10 +87,10 @@
                 <div class="pagination-area row">
                     {% bootstrap_paginate page_obj range=10 %}
                 </div>
-                <div class="pagination-info">
+            {% endif %}
+                <div class="pagination-info row">
                     <strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_left }}</strong> Shown on Map
                 </div>
-            {% endif %}
 
         </div>
         <div class="location-search-info hidden-xs col-sm-6">

@@ -58,6 +58,14 @@ partial_patterns = patterns('',
     url(r'^finishedThankYou.html$', PartialGroupView.as_view(template_name='ng-partials/add-biz/finishedThankYou.html'), name='finished_thank_you'),
     url(r'^collectAllInfo.html$', PartialGroupView.as_view(template_name='ng-partials/add-biz/collectAllInfo.html'), name='collect_all_info'),
     url(r'^bizQuery.html$', PartialGroupView.as_view(template_name='ng-partials/add-biz/bizQuery.html'), name='biz_query'),
+    url(r'^placeLookup.html$', PartialGroupView.as_view(template_name='ng-partials/placeLookup.html'), name='place_lookup'),
+    url(r'^collectInfo.html$', PartialGroupView.as_view(template_name='ng-partials/collectInfo.html'), name='collection_info'),
+    url(r'^bizHours.html$', PartialGroupView.as_view(template_name='ng-partials/bizHours.html'), name='biz_hours'),
+
+
+    url(r'^region-list.html$', PartialGroupView.as_view(template_name='ng-partials/search-starter/region-list.html'), name='region_list'),
+    url(r'^cat-list.html$', PartialGroupView.as_view(template_name='ng-partials/search-starter/cat-list.html'), name='cat_list'),
+    url(r'^region.html$', PartialGroupView.as_view(template_name='ng-partials/search-starter/region.html'), name='region_show'),
 )
 
 urlpatterns += patterns('',

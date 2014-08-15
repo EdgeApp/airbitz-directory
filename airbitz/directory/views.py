@@ -5,6 +5,7 @@ from django.http import Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from airbitz import regions_data
 from airbitz.regions_data import ACTIVE_REGIONS, ALL_REGIONS
 
 from airbitz.settings import GOOGLE_MAP_KEY
@@ -60,6 +61,7 @@ def landing(request):
     context = {
         'active_regions': ACTIVE_REGIONS,
         'all_regions': ALL_REGIONS,
+        'biz_total': Business.objects.filter(status="PUB", country__in=regions_data.get_active_country_codes()).count(),
     }
     return render_to_response('home.html', RequestContext(request, context))
 

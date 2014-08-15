@@ -117,286 +117,247 @@
         {% compressed_css 'home' %}
         {% compressed_js 'core' %}
         {% compressed_js 'home' %}
+        {% compressed_js 'angularjs' %}
+        {% compressed_js 'search_starter' %}
     {% endblock head %}
 
-{#    <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-content/themes/airbitz/js/custom-script.js?ver=3.8.1'></script>#}
+
+
+<script type="text/javascript">
+</script>
+
+
 
 </head>
-<body class="home page page-id-145 page-template-default et_fixed_nav et_pb_pagebuilder_layout et_right_sidebar unknown et_includes_sidebar">
+<body {% verbatim %}ng-app="searchStarter"{% endverbatim %} class="home page page-id-145 page-template-default et_fixed_nav et_pb_pagebuilder_layout et_right_sidebar unknown et_includes_sidebar">
 
 {% include '_top_navbar.html' %}
 
-<div id="main-content">
+<div class="landing-module container-fluid">
 
-    <article id="post-145" class="post-145 page type-page status-publish hentry">
+  <div class="container">
+
+    <div class="row">
+
+      <div class="column1 col-md-4">
+
+        <div class="bitcoin-directory-wallet row">
+          <div class="col-xs-12">
+            <img class="alignnone airbitz-logo" alt="airbitz logo" src="{{ STATIC_URL }}img/logo.png">
+            <h2>Bitcoin Business Directory</h2>
+            <h2>+ Bitcoin Wallet <em style="color: #777">(Avail Soon)</em></h2>
+          </div>
+        </div>
+
+        <div class="signup-area row">
+          <div class="col-sm-12">
+            <form id="email-signup-form" class="form" role="form">
+              <div class="form-group">
+                <label for="inputEmailWallet" class="control-label"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Sign Up for Our Wallet Launch</label>
+                <input type="email" class="inputEmail form-control input-lg" id="inputEmailWallet" placeholder="Your Email">
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-danger btn-block">Sign Up for Wallet Launch</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div id="app-store-links" class="animated row">
+          <div class="app-install col-sm-12 text-center animated">
+            <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
+              <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
+            </a>
+            <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
+              <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /.column1 -->
 
 
-        <div class="entry-content">
-            <div class="et_pb_section et_pb_fullwidth_section" style='background-color:#2291cf;'>
-			    <div id="top-slider" class="et_pb_slider">
-			        <div class="et_pb_slides">
-{#				        <div class="et_pb_slide et_pb_slide_with_image et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#dbe9ef; background-image:url({{ STATIC_URL }}wp/assets/img/sd-skyline-cropped-overlay.jpg);'>#}
-				        <div class="et_pb_slide et_pb_slide_with_image et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#dbe9ef; background-image:url({{ STATIC_URL }}img/skyline-airbitz.jpg);'>
-			                <div class="et_pb_container clearfix">
-				                <div class="et_pb_slide_image">
-{#                                    {% include '_home_app_install_cta.html' %}#}
+      <div class="column2 col-md-4">
 
+        <a id="see-app-in-action" class="animated btn-primary btn-lg btn" data-video-id="y-OjBQTDzPcmg" href="#"><i class="fa fa-video-camera"></i> See Airbitz in Action</a>
 
-                                    <div class="region-areas">
-                                        <h3 class="area-heading heading-clean">Click to Search or Request Regions</h3>
-
-                                        <!-- Tab nav -->
-                                        <ul class="region-tabs nav nav-pills">
-                                          <li class="active tab-button" id="button-region-us"><a href="#region-us" data-toggle="tab">U.S.</a></li>
-                                          <li><a class="tab-button" id="button-region-ca" href="#region-ca" data-toggle="tab">Canada</a></li>
-                                          <li><a class="tab-button" id="button-region-eu" href="#region-eu" data-toggle="tab">Europe</a></li>
-                                          <li><a class="tab-button" id="button-region-other" href="#region-other" id="region-other-area-form" data-toggle="tab">Other</a></li>
-                                        </ul><!-- ./nav-tabs -->
-
-                                        <!-- Tab panes -->
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="region-us">
-                                                <div class="vmap" id="vmap-us">
-                                                    <div class="region-coverage">
-                                                        <h3><i class="fa fa-check-circle-o"></i> 100% COVERAGE</h3>
-                                                    </div>
-                                                </div>
-                                            </div><!-- ./tab-pane -->
-
-                                            <div class="tab-pane" id="region-ca">
-                                                <div class="vmap" id="vmap-ca">
-                                                    <div class="region-coverage">
-                                                        <h3><i class="fa fa-check-circle-o"></i> 100% COVERAGE</h3>
-                                                    </div>
-                                                </div>
-                                            </div><!-- ./tab-pane -->
-
-                                            <div class="tab-pane" id="region-eu">
-                                                <div class="vmap" id="vmap-eu"></div>
-                                            </div><!-- ./tab-pane -->
-
-                                            <div class="tab-pane" id="region-other">
-
-                                                <div id="other-area-form" class="animated text-left row">
-                                                    <form id="region-signup-form-other" class="col-sm-12" role="form">
-                                                        <h3><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Hear About Bitcoin Businesses Launching</h3>
-                                                        <div class="form-group">
-                                                            <div class="form-group">
-                                                                <label for="inputEmailRegion" class="control-label">Email address</label>
-                                                                <input type="email" id="inputEmailRegion" class="inputEmail form-control" placeholder="Your Email">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="other-area-request-input" class="control-label">Your Region</label>
-                                                                <input type="text" id="other-area-request-input" class="inputText form-control" name="REGION" placeholder="Bejing, China or Moscow, Russia ..etc">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="checkbox">
-                                                            <label>
-                                                                <input disabled="true" type="checkbox" checked="checked"> Notify me when this area is covered!
-                                                            </label>
-                                                        </div>
-                                                        <button type="submit" class="btn btn-info">Request Now</button>
-                                                        <button id="cancelOther" type="button" class="btn btn-danger">Cancel</button>
-                                                    </form>
-                                                </div>
-
-                                            </div><!-- ./tab-pane -->
-                                        </div><!-- ./tab-content -->
-                                    </div><!-- ./region-areas -->
-
-                                </div>
-				                <div class="et_pb_slide_description">
-                                    <div class="et_pb_slide_content">
-                                        <img class="alignnone airbitz-slide-logo" alt="airbits logo" src="{{ STATIC_URL }}wp/assets/img/airbitz-slide-logo-fadeout.png">
-                                        <div class="bitcoin-directory-wallet row">
-                                            <img class="alignnone" id="bitcoin-logo" alt="bitcoin" src="{{ STATIC_URL }}wp/assets/img/bitcoin-icon-logo_white-bg.png" width="128" height="128">
-                                            <h2>Bitcoin Business Directory</h2>
-                                            <h2>+ Bitcoin Wallet <em style="color: #777">(Avail Soon)</em></h2>
-                                        </div>
-                                        <p class="slide-text">
-                                            Bitcoin Made Safe, Simple, and Secure.<br>
-                                            Bitcoin Businesses at Your Fingertips.
-                                        </p>
-
-                                        <div id="area-form" class="animated row">
-                                            <form id="region-signup-form" class="col-sm-12" role="form">
-                                                <h3>Request Area <span id="area-request" class="label label-info"></span></h3>
-                                                <div class="form-group">
-                                                    <label for="inputEmailRegion" class="control-label"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Hear About Bitcoin Businesses in Your Area</label>
-                                                    <input type="email" id="inputEmailRegion" class="inputEmail form-control" placeholder="Your Email">
-                                                    <input type="hidden" id="area-request-input" name="REGION" value="">
-                                                </div>
-
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input disabled="true" type="checkbox" checked="checked"> Notify me when this area is covered!
-                                                    </label>
-                                                </div>
-                                                <button type="submit" class="btn btn-info">Request Now</button>
-                                                <button id="cancelEmail" class="btn btn-danger">Cancel</button>
-                                            </form>
-                                        </div>
+        <div class="iphone-slider">
+          <ul id="app-demo-slides">
+            <li class="slide">
+              <img src="{{ STATIC_URL }}img/landing/iphone-slider/slide1.jpg" alt="Bitcoin Business Directory App"/>
+            </li>
+            <li class="slide">
+              <img src="{{ STATIC_URL }}img/landing/iphone-slider/slide2.jpg" alt="Bitcoin Business Directory App"/>
+            </li>
+            <li class="slide">
+              <img src="{{ STATIC_URL }}img/landing/iphone-slider/slide3.jpg" alt="Bitcoin Business Directory App"/>
+            </li>
+            <li class="slide">
+              <img src="{{ STATIC_URL }}img/landing/iphone-slider/slide4.jpg" alt="Bitcoin Business Directory App"/>
+            </li>
+          </ul>
+        </div>
+{#        <img src="{{ STATIC_URL }}img/landing/iphone5s_1up.png" alt=""/>#}
+{#        <iframe width="390" height="219" src="//www.youtube.com/embed/OjBQTDzPcmg" frameborder="0" allowfullscreen></iframe>#}
+      </div><!-- /.column2 -->
 
 
 
-                                        <div id="general-signup" class="animated row">
-                                            <div class="app-install col-sm-12 text-center animated fadeOut">
-                                                <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
-                                                    <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
-                                                </a>
-                                                <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
-                                                    <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
-                                                </a>
-                                            </div>
-                                            <form id="email-signup-form" class="form" role="form">
-                                                <div class="form-group">
-                                                    <label for="inputEmailWallet" class="control-label"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Sign up here for wallet launch</label>
-                                                    <input type="email" class="inputEmail form-control input-lg" id="inputEmailWallet" placeholder="Your Email">
-                                                </div>
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-lg btn-success btn-block">Sign Up for Wallet Launch</button>
-                                                </div>
-                                            </form>
-                                        </div>
+      <div class="searchStarter column3 col-md-4">
+        <div id="who-accepts-bitcoin">
+          <img class="alignnone" alt="airBitz Bitcoin Business Directory" src="{{ STATIC_URL }}img/landing/bitcoin-directory-map.png" width="200" height="200" />
+          <h2>Who is Already Accepting Bitcoin?</h2>
+          <a id="reveal-who-accepts-bitcoin" class="btn-success btn-lg btn animated infinite pulse" href="">You Won't Believe It!</a>
+        </div>
+        <div id="accepting-bitcoin">
+        {% verbatim %}
+          <ui-view></ui-view>
+        {% endverbatim %}
+        </div>
+      </div><!-- /.column3 -->
 
 
 
-				                    </div> <!-- .et_pb_slide_content -->
-			                    </div> <!-- .et_pb_slide_description -->
 
-		</div> <!-- .et_pb_container -->
+    </div><!-- /.row -->
 
-			</div> <!-- .et_pb_slides -->
-		</div> <!-- .et_pb_slider -->
-		<section id="main_tagline" class="et_pb_fullwidth_header et_pb_bg_layout_dark et_pb_text_align_center">
-			<div class="et_pb_row">
-				<h1>Connecting People and Businesses Through Bitcoin</h1>
-
-			</div>
-		</section>
-
-		</div> <!-- .et_pb_section --><div class="et_pb_section" style='background-color:#ffffff;'>
-
-        <div class="et_pb_row">
-            <div class="et_pb_column et_pb_column_4_4">
-                {% include '_home_app_install_cta.html' %}
-            </div> <!-- .et_pb_column -->
-        </div> <!-- .et_pb_row -->
-
-        <div class="et_pb_row">
-			<div class="et_pb_column et_pb_column_1_4">
-			<div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
-			<div class="et_pb_blurb_content">
-				<div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/bitcoin-wallet.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" /></div>
-				<h3>Intuitive &amp; Powerful Wallet</h3>
-
-<p>User-first wallet architecture streamlines and simplifies your transactions without sacrificing features.</p>
-
-			</div> <!-- .et_pb_blurb_content -->
-		</div> <!-- .et_pb_blurb -->
-		</div> <!-- .et_pb_column --><div class="et_pb_column et_pb_column_1_4">
-			<div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
-			<div class="et_pb_blurb_content">
-				<div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/clound-synced.png" alt="Bitcoin Cloud Backup" class="et-waypoint et_pb_animation_top" /></div>
-				<h3>Protect Bitcoins Against Loss or Damage</h3>
-
-<p>Your wallet is synced to our cloud servers and your other devices &#8211; but first, we encrypt the data on your device.</p>
-
-			</div> <!-- .et_pb_blurb_content -->
-		</div> <!-- .et_pb_blurb -->
-		</div> <!-- .et_pb_column --><div class="et_pb_column et_pb_column_1_4">
-			<div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
-			<div class="et_pb_blurb_content">
-				<div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/bitcoin-privacy.png" alt="Bitcoin Privacy" class="et-waypoint et_pb_animation_top" /></div>
-				<h3>Enhanced Privacy</h3>
-
-<p>Client side encryption means ZERO access to user data by Airbitz servers or employees as well as anyone but the wallet user.</p>
-
-			</div> <!-- .et_pb_blurb_content -->
-		</div> <!-- .et_pb_blurb -->
-		</div> <!-- .et_pb_column --><div class="et_pb_column et_pb_column_1_4">
-			<div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
-			<div class="et_pb_blurb_content">
-				<div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/local-bitcoin-directory.png" alt="Bitcoin Business Directory" class="et-waypoint et_pb_animation_top" /></div>
-				<h3>Worldwide Directory of Web and Local Businesses</h3>
-
-<p>Find the best places accepting bitcoin using a powerful, fluid, and beautiful mobile and web interface.</p>
-
-			</div> <!-- .et_pb_blurb_content -->
-		</div> <!-- .et_pb_blurb -->
-		</div> <!-- .et_pb_column -->
-		</div> <!-- .et_pb_row -->
-
-		</div> <!-- .et_pb_section --><div class="et_pb_section et_pb_fullwidth_section">
-			<div id="bottom-slider" class="et_pb_slider">
-			<div class="et_pb_slides">
-				<div class="et_pb_slide et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#ffffff;background-image:url({{ STATIC_URL }}wp/assets/img/btc-directory-map.jpg);'>
-			<div class="et_pb_container clearfix">
-
-				<div class="et_pb_slide_description">
-
-					<div class="et_pb_slide_content">
-<h2>Find Places That Are Bitcoin Friendly &amp;</h2>
-<h2>Effortlessly Use Bitcoins With Your Mobile Device</h2>
+  </div>
 </div>
 
-				</div> <!-- .et_pb_slide_description -->
-			</div> <!-- .et_pb_container -->
 
-		</div> <!-- .et_pb_slide -->
+<div id="main-content">
 
-			</div> <!-- .et_pb_slides -->
-		</div> <!-- .et_pb_slider -->
+  <article id="post-145" class="post-145 page type-page status-publish hentry">
+    <div class="entry-content">
+      <div class="et_pb_section et_pb_fullwidth_section" style='background-color:#2291cf;'>
+
+        <section id="main_tagline" class="et_pb_fullwidth_header et_pb_bg_layout_dark et_pb_text_align_center">
+          <div class="et_pb_row">
+            <h1>Connecting People to <span class="label label-success" style="padding: .2em .3em .2em; font-size: 100%;">{{ biz_total }}</span> Businesses Through Bitcoin</h1>
+          </div>
+        </section><!-- /#main_tagline-->
+
+      </div> <!-- .et_pb_section --><div class="et_pb_section" style='background-color:#ffffff;'>
+
+      <div class="et_pb_row">
+        <div class="et_pb_column et_pb_column_4_4">
+          {% include '_home_app_install_cta.html' %}
+        </div> <!-- .et_pb_column -->
+      </div> <!-- .et_pb_row -->
+
+      <div class="et_pb_row">
+        <div class="et_pb_column et_pb_column_1_4">
+          <div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
+            <div class="et_pb_blurb_content">
+              <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/bitcoin-wallet.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" /></div>
+              <h3>Intuitive &amp; Powerful Wallet</h3>
+
+              <p>User-first wallet architecture streamlines and simplifies your transactions without sacrificing features.</p>
+
+            </div> <!-- .et_pb_blurb_content -->
+          </div> <!-- .et_pb_blurb -->
+        </div> <!-- .et_pb_column --><div class="et_pb_column et_pb_column_1_4">
+        <div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
+          <div class="et_pb_blurb_content">
+            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/clound-synced.png" alt="Bitcoin Cloud Backup" class="et-waypoint et_pb_animation_top" /></div>
+            <h3>Protect Bitcoins Against Loss or Damage</h3>
+
+            <p>Your wallet is synced to our cloud servers and your other devices &#8211; but first, we encrypt the data on your device.</p>
+
+          </div> <!-- .et_pb_blurb_content -->
+        </div> <!-- .et_pb_blurb -->
+      </div> <!-- .et_pb_column --><div class="et_pb_column et_pb_column_1_4">
+        <div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
+          <div class="et_pb_blurb_content">
+            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/bitcoin-privacy.png" alt="Bitcoin Privacy" class="et-waypoint et_pb_animation_top" /></div>
+            <h3>Enhanced Privacy</h3>
+
+            <p>Client side encryption means ZERO access to user data by Airbitz servers or employees as well as anyone but the wallet user.</p>
+
+          </div> <!-- .et_pb_blurb_content -->
+        </div> <!-- .et_pb_blurb -->
+      </div> <!-- .et_pb_column --><div class="et_pb_column et_pb_column_1_4">
+        <div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
+          <div class="et_pb_blurb_content">
+            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/local-bitcoin-directory.png" alt="Bitcoin Business Directory" class="et-waypoint et_pb_animation_top" /></div>
+            <h3>Worldwide Directory of Web and Local Businesses</h3>
+
+            <p>Find the best places accepting bitcoin using a powerful, fluid, and beautiful mobile and web interface.</p>
+
+          </div> <!-- .et_pb_blurb_content -->
+        </div> <!-- .et_pb_blurb -->
+      </div> <!-- .et_pb_column -->
+      </div> <!-- .et_pb_row -->
+
+    </div> <!-- .et_pb_section --><div class="et_pb_section et_pb_fullwidth_section">
+      <div id="bottom-slider" class="et_pb_slider">
+        <div class="et_pb_slides">
+          <div class="et_pb_slide et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#ffffff;background-image:url({{ STATIC_URL }}wp/assets/img/btc-directory-map.jpg);'>
+            <div class="et_pb_container clearfix">
+
+              <div class="et_pb_slide_description">
+
+                <div class="et_pb_slide_content">
+                  <h2>Find Places That Are Bitcoin Friendly &amp;</h2>
+                  <h2>Effortlessly Use Bitcoins With Your Mobile Device</h2>
+                </div>
+
+              </div> <!-- .et_pb_slide_description -->
+            </div> <!-- .et_pb_container -->
+
+          </div> <!-- .et_pb_slide -->
+
+        </div> <!-- .et_pb_slides -->
+      </div> <!-- .et_pb_slider -->
 
 
-		</div> <!-- .et_pb_section --><div class="et_pb_section" style='background-color:#ffffff;'>
-			<div class="et_pb_row">
-			<div class="et_pb_column et_pb_column_4_4">
-			<div class="et_pb_text et_pb_bg_layout_light et_pb_text_align_left">
+    </div> <!-- .et_pb_section --><div class="et_pb_section" style='background-color:#ffffff;'>
+      <div class="et_pb_row">
+        <div class="et_pb_column et_pb_column_4_4">
+          <div class="et_pb_text et_pb_bg_layout_light et_pb_text_align_left">
 
-		<h2>Bitcoin Wallet App <em style="color: #777">(Will be Available Soon)</em></h2>
-		<p>The airBitz mobile digital wallet is a decentralized, secure, private, synchronized, and backed up Bitcoin wallet.  A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:</p>
+            <h2>Bitcoin Wallet App <em style="color: #777">(Will be Available Soon)</em></h2>
+            <p>The airBitz mobile digital wallet is a decentralized, secure, private, synchronized, and backed up Bitcoin wallet.  A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:</p>
 
-		<div id="wallet-icon" class="app-icon-image">
-			<img class="alignnone" alt="airBits Mobile App" src="{{ STATIC_URL }}wp/assets/img/airbitz-app-256.png" width="175" height="175" />
-		</div>
-		<ul class="features-list">
-			<li>Auto-synced wallets across multiple devices</li>
-			<li>Cloud backups</li>
-			<li>Financial tracking and reporting with exports to popular financial software</li>
-			<li>Simplification of the wallet interface to use user-selected wallet names (vs. cryptic Bitcoin addresses)</li>
-			<li>Local, client side encryption, providing ZERO access to user data by Airbitz servers, employees, or anyone but the wallet user</li>
-			<li>Dynamic addresses change with every transaction to significantly increase wallet privacy</li>
-			<li>Industry standard, incredibly strong, AES256 data encryption</li>
-			<li>GPU resistant "password key stretching" to make brute force password hacking insanely difficult</li>
-		</ul>
-		<br style="clear: both;" />
+            <div id="wallet-icon" class="app-icon-image">
+              <img class="alignnone" alt="airBits Mobile App" src="{{ STATIC_URL }}wp/assets/img/airbitz-app-256.png" width="175" height="175" />
+            </div>
+            <ul class="features-list">
+              <li>Auto-synced wallets across multiple devices</li>
+              <li>Cloud backups</li>
+              <li>Financial tracking and reporting with exports to popular financial software</li>
+              <li>Simplification of the wallet interface to use user-selected wallet names (vs. cryptic Bitcoin addresses)</li>
+              <li>Local, client side encryption, providing ZERO access to user data by Airbitz servers, employees, or anyone but the wallet user</li>
+              <li>Dynamic addresses change with every transaction to significantly increase wallet privacy</li>
+              <li>Industry standard, incredibly strong, AES256 data encryption</li>
+              <li>GPU resistant "password key stretching" to make brute force password hacking insanely difficult</li>
+            </ul>
+            <br style="clear: both;" />
 
-		<h2>Bitcoin Business Directory</h2>
-		<p>The airBitz wallet also includes a business directory to help consumers find merchants and websites that accept bitcoin as payment. Some of its powerful features include:</p>
+            <h2>Bitcoin Business Directory</h2>
+            <p>The airBitz wallet also includes a business directory to help consumers find merchants and websites that accept bitcoin as payment. Some of its powerful features include:</p>
 
-		<div id="directory-icon" class="app-icon-image">
-			<img class="alignnone" alt="airBitz Bitcoin Business Directory" src="{{ STATIC_URL }}wp/assets/img/bitcoin-directory-map.png" width="200" height="200" />
-		</div>
-		<ul class="features-list" style="">
-			<li>Advanced search ability by proximity, business name, category, city, state, or country</li>
-			<li>Inclusion of web based bitcoin businesses such as online merchants and exchange services</li>
-			<li>Fluid interface with high resolution imagery for each business</li>
-			<li>The most comprehensive listing of bitcoin businesses with businesses updated daily</li>
-			<li>Alerts of new businesses in your area accepting bitcoin</li>
-		</ul>
-		<br style="clear: both;" />
+            <div id="directory-icon" class="app-icon-image">
+              <img class="alignnone" alt="airBitz Bitcoin Business Directory" src="{{ STATIC_URL }}wp/assets/img/bitcoin-directory-map.png" width="200" height="200" />
+            </div>
+            <ul class="features-list" style="">
+              <li>Advanced search ability by proximity, business name, category, city, state, or country</li>
+              <li>Inclusion of web based bitcoin businesses such as online merchants and exchange services</li>
+              <li>Fluid interface with high resolution imagery for each business</li>
+              <li>The most comprehensive listing of bitcoin businesses with businesses updated daily</li>
+              <li>Alerts of new businesses in your area accepting bitcoin</li>
+            </ul>
+            <br style="clear: both;" />
 
-		</div> <!-- .et_pb_text -->
-		</div> <!-- .et_pb_column -->
-		</div> <!-- .et_pb_row -->
+          </div> <!-- .et_pb_text -->
+        </div> <!-- .et_pb_column -->
+      </div> <!-- .et_pb_row -->
 
-		</div> <!-- .et_pb_section -->
-        </div> <!-- .entry-content -->
+    </div> <!-- .et_pb_section -->
+    </div> <!-- .entry-content -->
 
 
-    </article> <!-- .et_pb_post -->
+  </article> <!-- .et_pb_post -->
 
 
 

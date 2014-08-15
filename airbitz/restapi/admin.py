@@ -15,15 +15,16 @@ from rest_framework.response import Response
 import logging
 import datetime
 from airbitz import settings
+from airbitz import regions_data
 
 from directory.models import Business, BusinessHours, Category, SocialId
 from restapi import api
 
-log=logging.getLogger("airbitz." + __name__)
+log = logging.getLogger("airbitz." + __name__)
 
-DEFAULT_PAGE_SIZE=20
+DEFAULT_PAGE_SIZE = 20
 
-PERMS=(auth.SessionAuthentication,)
+PERMS = (auth.SessionAuthentication,)
 
 class EchoField(fields.Field):
     type_name = 'EchoField'
@@ -446,3 +447,204 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+########################################
+# REGION QUERIES
+########################################
+class CountryLabel(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        country_code = obj['country']
+        country_label = obj['country']
+
+        if country_code.lower() == 'US'.lower():
+            country_label = 'United States'
+        elif country_code.lower() == 'CA'.lower():
+            country_label = 'Canada'
+        elif country_code.lower() == 'UK'.lower() or country_code.lower() == 'GB'.lower():
+            country_label = 'United Kingdom'
+        else:
+            for ccode, label in regions_data.ALL_COUNTRY_LABELS.items():
+                if country_code.lower() == ccode.lower():
+                    country_label = label
+                    break
+                else:
+                    country_label = obj['country']
+
+        return country_label
+
+
+class RegionCountrySerializer(serializers.ModelSerializer):
+    country_code = fields.CharField(source='country')
+    country_label = CountryLabel(source='country')
+    biz_count = fields.IntegerField()
+
+    class Meta:
+        model = Business
+        fields = ('biz_count', 'country_code', 'country_label',)
+
+
+
+
+class RegionLabel(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        region_code = obj['admin1_code'].strip()
+        country_code = obj['country'].strip()
+        # remove periods
+        region_code = region_code.replace('.', '')
+        country_code = country_code.replace('.', '')
+
+        region_label = ''
+
+        '''
+        List any subregions that have been defined for a country code
+        '''
+        if country_code.upper() == 'US':
+            sub_regions = regions_data.US_REGIONS
+        elif country_code.upper() == 'CA':
+            sub_regions = regions_data.CA_REGIONS
+        elif country_code.upper() == 'AU':
+            sub_regions = regions_data.AU_REGIONS
+        elif country_code.upper() == 'DE':
+            sub_regions = regions_data.DE_REGIONS
+        elif country_code.upper() == 'NL':
+            sub_regions = regions_data.NL_REGIONS
+        elif country_code.upper() == 'AR':
+            sub_regions = regions_data.AR_REGIONS
+        elif country_code.upper() == 'BR':
+            sub_regions = regions_data.BR_REGIONS
+        elif country_code.upper() == 'CH':
+            sub_regions = regions_data.CH_REGIONS
+        elif country_code.upper() == 'AT':
+            sub_regions = regions_data.AT_REGIONS
+        elif country_code.upper() == 'NZ':
+            sub_regions = regions_data.NZ_REGIONS
+        elif country_code.upper() == 'PH':
+            sub_regions = regions_data.PH_REGIONS
+        else:
+            sub_regions = False
+
+        if sub_regions:
+            for rcode, rdata in sub_regions.items():
+                if country_code.lower() + '-' + region_code.lower() == rcode.lower():
+                    region_label = rdata['name']
+                    # print '*************'
+                    # print 'MATCHED', rcode, '==', country_code + '-' + region_code
+                    # print '*************'
+                    break
+                else:
+                    # print 'NO MATCH', rcode, '!==', country_code + '-' + region_code
+                    region_label = obj['admin1_code']
+        else:
+            region_label = obj['admin1_code']
+
+
+
+        return region_label
+
+
+class RegionDetailsSerializer(serializers.ModelSerializer):
+    country_code = fields.CharField(source='country')
+    country_label = CountryLabel(source='country')
+
+    region = fields.CharField(source='admin1_code')
+    region_label = RegionLabel(source='admin1_code')
+
+    biz_count = fields.IntegerField()
+
+    class Meta:
+        model = Business
+        fields = ('biz_count', 'region', 'region_label', 'country_code', 'country_label',)
+
+
+
+
+class RegionDetails(ListCreateAPIView):
+    serializer_class = RegionDetailsSerializer
+    model = Business
+    allow_empty = True
+    paginate_by = 200
+
+    def get_queryset(self):
+        country = self.kwargs['country']
+        if country is not None:
+            q = Business.objects.filter(status="PUB", country=country)
+            q = q.exclude(admin1_code="")
+        else:
+            q = Business.objects.filter(status="PUB", country='US')
+
+        q = q.values('country', 'admin1_code').annotate(biz_count=Count('admin1_code')).order_by('-biz_count')
+
+        return q
+
+
+class RegionCountryQuery(ListCreateAPIView):
+    serializer_class = RegionCountrySerializer
+    model = Business
+    allow_empty = True
+    paginate_by = 200
+
+    def get_queryset(self):
+        country_list = regions_data.get_active_country_codes()
+
+        q = Business.objects.filter(status="PUB", country__in=country_list)
+        # q = q.exclude(admin1_code="") # we remove blank cities to prevent confusion when seeing the country total
+        q = q.values('country').annotate(biz_count=Count('country')).order_by('-biz_count')
+
+        return q
+
+
+
+class MetaResponse(Response):
+    def __init__(self, data=None, meta=None, *args, **kwargs):
+        newdata = {
+            'meta': meta
+        }
+        if data:
+            newdata['results'] = data
+        super(MetaResponse, self).__init__(data=newdata, *args, **kwargs)
+
+
+class PublishedDetailsSerializer(serializers.ModelSerializer):
+    country_code = fields.CharField(source='country')
+    country_label = CountryLabel(source='country')
+
+    biz_count = fields.IntegerField()
+
+    class Meta:
+        model = Business
+        fields = ('biz_count', 'country_code', 'country_label',)
+
+
+class PublishedDetails(ListCreateAPIView):
+    serializer_class = PublishedDetailsSerializer
+    model = Business
+    allow_empty = True
+
+    def get(self, request, *args, **kwargs):
+
+        try:
+            interval = datetime.timedelta(days=int(self.kwargs['days']))
+        except KeyError:
+            interval = settings.FP_QUERY_INTERVAL
+
+        country_list = regions_data.get_active_country_codes()
+        date1 = datetime.datetime.today()
+        date2 = date1 - interval
+
+        q = Business.objects.filter(status="PUB", country__in=country_list)
+
+        published = q.filter(published__gte=date2)
+        updated = q.filter(published__lte=date2, modified__lte=date1, modified__gte=date2)
+
+        country_counts = q.values('country').annotate(biz_count=Count('country')).order_by('-biz_count')
+
+
+        meta = {
+            'biz_total': q.count(),
+            'biz_published': published.count(),
+            'biz_updated': updated.count(),
+        }
+        serialized = PublishedDetailsSerializer(data=country_counts)
+
+        return MetaResponse(data=serialized.data, meta=meta)

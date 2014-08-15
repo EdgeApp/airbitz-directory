@@ -1,0 +1,27 @@
+{% verbatim %}
+
+<div class="animated slideInRight">
+
+  <h3>Who Accepts Bitcoin Today?<br />
+    <span class="biz-count label-primary label">{{ bizCount() }}</span> Businesses in <span class="biz-count label-primary label">{{ regionData.length }}</span> Countries </h3>
+
+  <div class="list-container">
+    <ul class="list-group">
+      <li class="header list-group-item">
+        Country <span class="pull-right">Count</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="list-container">
+    <ul class="list-group">
+      <li ng-repeat="item in regionData" class="region list-group-item" ui-sref="region({ region: item.country_code })" ng-click="regionClicked(item.country_label)">
+        {{ item.country_label }} <span class="label label-default pull-right">{{ item.biz_count }}</span>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+
+{% endverbatim %}

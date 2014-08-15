@@ -80,50 +80,69 @@
           <li><a class="tab-button" id="button-region-ca-list" href="#region-ca-list" data-toggle="tab">Canada</a></li>
           <li><a class="tab-button" id="button-region-eu-list" href="#region-eu-list" data-toggle="tab">Europe</a></li>
           <li><a class="tab-button" id="button-region-asia-list" href="#region-asia-list" data-toggle="tab">Asia</a></li>
+          <li><a class="tab-button" id="button-region-southeast-asia-list" href="#region-southeast-asia-list" data-toggle="tab">Southeast Asia</a></li>
           <li><a class="tab-button" id="button-region-south-america-list" href="#region-south-america-list" data-toggle="tab">South America</a></li>
+          <li><a class="tab-button" id="button-region-oceana-list" href="#region-oceana-list" data-toggle="tab">Oceana</a></li>
         </ul><!-- ./nav-tabs -->
 
         <!-- Tab panes -->
         <div class="tab-content">
             <div class="tab-pane active" id="region-us-list">
-                <ul class="list-unstyled">
+                <ul class="list-group">
                 {% for region in us_active_regions_list %}
-                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                    <a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}"><li class="list-group-item">{{ region.0 }}</li></a>
                 {% endfor %}
                 </ul>
             </div><!-- ./tab-pane -->
 
             <div class="tab-pane" id="region-ca-list">
-                <ul class="list-unstyled">
+                <ul class="list-group">
                 {% for region in ca_active_regions_list %}
-                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}">{{ region.0 }}</a></li>
-                {% endfor %}
-                </ul>
-            </div><!-- ./tab-pane -->
-
-            <div class="tab-pane" id="region-eu-list">
-                <ul class="list-unstyled">
-                {% for region in eu_active_regions_list %}
-                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}">{{ region.0 }}</a></li>
-                {% endfor %}
-                </ul>
-            </div><!-- ./tab-pane -->
-
-            <div class="tab-pane" id="region-asia-list">
-                <ul class="list-unstyled">
-                {% for region in asia_active_regions_list %}
-                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}">{{ region.0 }}</a></li>
+                    <a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}"><li class="list-group-item">{{ region.0 }}</li></a>
                 {% endfor %}
                 </ul>
             </div><!-- ./tab-pane -->
 
             <div class="tab-pane" id="region-south-america-list">
-                <ul class="list-unstyled">
+                <ul class="list-group">
                 {% for region in south_america_active_regions_list %}
-                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}">{{ region.0 }}</a></li>
+                    <a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}"><li class="list-group-item">{{ region.0 }}</li></a>
                 {% endfor %}
                 </ul>
             </div><!-- ./tab-pane -->
+
+            <div class="tab-pane" id="region-eu-list">
+                <ul class="list-group">
+                {% for region in eu_active_regions_list %}
+                    <a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}"><li class="list-group-item">{{ region.0 }}</li></a>
+                {% endfor %}
+                </ul>
+            </div><!-- ./tab-pane -->
+
+            <div class="tab-pane" id="region-asia-list">
+                <ul class="list-group">
+                {% for region in asia_active_regions_list %}
+                    <a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}"><li class="list-group-item">{{ region.0 }}</li></a>
+                {% endfor %}
+                </ul>
+            </div><!-- ./tab-pane -->
+
+            <div class="tab-pane" id="region-southeast-asia-list">
+                <ul class="list-group">
+                {% for region in southeast_asia_active_regions_list %}
+                    <a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}"><li class="list-group-item">{{ region.0 }}</li></a>
+                {% endfor %}
+                </ul>
+            </div><!-- ./tab-pane -->
+
+            <div class="tab-pane" id="region-oceana-list">
+                <ul class="list-group">
+                {% for region in oceana_active_regions_list %}
+                    <a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}"><li class="list-group-item">{{ region.0 }}</li></a>
+                {% endfor %}
+                </ul>
+            </div><!-- ./tab-pane -->
+
         </div>
     </div>
 

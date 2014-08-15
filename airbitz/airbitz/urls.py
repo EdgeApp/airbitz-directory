@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.views.generic import RedirectView
 from airbitz import settings
 
 admin.autodiscover()
@@ -10,6 +11,10 @@ mgmtapi = patterns('',
     url(r'^api/biz/$', a.AdminBusinessView.as_view()),
     url(r'^api/biz/(?P<pk>\d+)/?$', a.AdminBusinessDetails.as_view()),
     url(r'^api/biz/caplist/$', a.ScreencapList.as_view()),
+    url(r'^api/biz/countries/$', a.RegionCountryQuery.as_view()),
+    url(r'^api/biz/country/(?P<country>.*)/?$', a.RegionDetails.as_view()),
+    url(r'^api/biz/published/$', a.PublishedDetails.as_view()),
+    url(r'^api/biz/published/(?P<days>\d+)/?$', a.PublishedDetails.as_view()),
 
     url(r'^api/cat/$', a.AdminCategory.as_view()),
     url(r'^api/cat/(?P<pk>\d+)/?$', a.AdminCategoryDetail.as_view()),
@@ -26,6 +31,7 @@ urlpatterns = patterns('',
     url(r'^blog/$', 'management.views.redirect_blog', name='mgmt_redirect_blog'),
     url(r'^about/$', 'management.views.redirect_about', name='mgmt_redirect_about'),
     url(r'^button/$', 'management.views.redirect_button', name='mgmt_redirect_button'),
+    url(r'^rsvp/?$', RedirectView.as_view(url='http://www.meetup.com/Bitcoin-in-San-Diego/events/189727482/')),
 )
 
 if settings.DEBUG:

@@ -66,6 +66,8 @@ class CategoryView(generics.ListAPIView):
     ordering_fields = ('name', 'level')
     authentication_classes = PERMS
     permission_classes = AUTH
+    max_paginate_by = 500
+    paginate_by = 500
 
 class BusinessView(generics.RetrieveAPIView):
     """
@@ -234,6 +236,6 @@ class LocationSuggest(APIView):
         ll = self.request.QUERY_PARAMS.get('ll', None)
         ip = api.getRequestIp(request)
         a = api.ApiProcess(ll=ll, ip=ip)
-        results = a.suggestNearText()[:DEFAULT_PAGE_SIZE]
+        results = a.suggestNearText()
         return Response({ 'near':  results })
 

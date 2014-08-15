@@ -28,32 +28,46 @@ function getMapMarkerContent(marker, m) {
   var root = this;
   var AB = root.AB = {};
 
+  AB.geoTimeout = 1000 * 60 * 60 * 1;
   AB.now = function() {
     return (new Date()).getTime();
   }
-  AB.setNear = function() {
-    var n = $('input.location').val() || '';
-    if (n) {
-      localStorage.setItem("location", n);
-      localStorage.setItem("nearDate", AB.now());
+  AB.setLL = function() {
+    var geo = AB.Geo.latestLocation();
+    var $ll = $('#ll');
+    if (geo && geo.coords) {
+      var ll = geo.coords.latitude + ',' + geo.coords.longitude;
+      if ($ll.length) {
+        $ll.val(ll);
+      } else {
+        $('<input>')
+          .attr('type','hidden')
+          .attr('name', 'll')
+          .attr('id', 'll')
+          .attr('value', ll)
+          .appendTo('#navbar-search');
+      }
+    } else {
+      $ll.remove();
     }
   };
-  AB.getNear = function() {
-      var loc = localStorage.getItem("location");
-      var then = localStorage.getItem("nearDate");
-      if (loc && then && AB.now() - then < 1000 * 60) {
-        return loc;
-      } else {
-        return null;
-      }
+  AB.setNear = function() {
+    if (AB.Geo.latestLocation()) {
+      AB.setLL();
+    } else {
+      AB.Geo.requestLocation(function(geo) {
+        AB.setLL();
+        $.getJSON('/api/v1/location-suggest/?ll=' + ll).done(function(data) {
+          if (data && data.near) {
+            $('input.location').val(data.near);
+          }
+        });
+      });
+    }
   };
   AB.setup = function() {
-    if (false && supports_html5_storage()) {
-      var loc = AB.getNear()
-      if (loc) {
-        $('input.location').val(loc);
-      }
-    }
+    AB.setNear();
+
     $.ajaxSetup({
         crossDomain: false,
         beforeSend: function(xhr, settings) {
@@ -178,7 +192,6 @@ function getMapMarkerContent(marker, m) {
       }
     });
     selector.on('typeahead:selected', function (object, datum) {
-      AB.setNear();
       if (datum.type === 'business' && datum.id) {
         location.href = '/biz/' + datum.id;
       }
@@ -206,6 +219,7 @@ function getMapMarkerContent(marker, m) {
             return { text: s, value: s };
         });
       };
+
       var engine = new Bloodhound({
         datumTokenizer: function(d) { return d; }, 
         queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -241,7 +255,6 @@ function getMapMarkerContent(marker, m) {
         }
       }]);
       var updatePlace = function() {
-        AB.setNear();
         $('input.term').typeahead('destroy');
         AB.addPlaceSearch($('input.term'));
       };
@@ -254,6 +267,50 @@ function getMapMarkerContent(marker, m) {
       });
       selector.change(updatePlace);
       selector.blur(updatePlace);
+  };
+  var Geo = AB.Geo = { 
+    latestLocation: function() {
+      var cookie = Util.getCookie('geo');
+      try {
+        var geo = JSON.parse(cookie);
+      } catch (e) {
+        console.log(e);
+      }   
+      return geo;
+    },  
+    requestLocation: function(cb) {
+      var now = new Date();
+      var geo = this.latestLocation();
+      if (geo) {
+        try {
+            var then = new Date(geo.timestamp).getTime();
+            if (now - then < AB.geoTimeout) {
+                return;
+            }   
+        } catch (e) {
+            console.log(e);
+        }   
+      }   
+      var that = this;
+      var now = AB.now();
+      var then = AB.Util.getCookie('geo_timestamp');
+      if (navigator.geolocation 
+          && (then == null || now - then > AB.geoTimeout)) {
+        var options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };
+        AB.Util.setCookie('geo_timestamp', AB.now(), 1); 
+        navigator.geolocation.getCurrentPosition(function(geo) {
+          that.postPosition(geo, cb);
+        }, function(err) { }, options);
+      }   
+    },  
+    postPosition: function(geo, cb) {
+      Util.setCookie('geo', JSON.stringify(geo), 1); 
+      cb(geo);
+    }   
   };
   var Util = AB.Util = {
       csrfSafeMethod: function(method) {
