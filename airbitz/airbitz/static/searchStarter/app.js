@@ -84,7 +84,7 @@ app.controller('abRegionList', ['$scope', '$http', 'SimpleCache', 'regionData', 
         '-moz-transition': 'border 500ms ease-out',
         '-o-transition': 'border 500ms ease-out'
       });
-    }, 1000);
+    }, 2000);
 
     SimpleCache.put('country', region)
   }
@@ -98,13 +98,15 @@ app.controller('abRegionDetails', ['$scope', 'SimpleCache', 'region', function($
   $scope.url_country_code = document.location.href.split('/')[document.location.href.split('/').length - 1];
   $scope.country = SimpleCache.get('country') || $scope.url_country_code;
 
+  $('#accepting-bitcoin .loading-spinner').hide();
+
   $scope.bizCount = function() {
     var count = 0;
     for(var i=0; i < region.length; i++) {
       count += region[i].biz_count;
     }
     return count;
-  }
+  };
 
   $scope.subRegionClicked = function(region, country){
     var $location = $('#input-location');
@@ -128,12 +130,19 @@ app.controller('abRegionDetails', ['$scope', 'SimpleCache', 'region', function($
         '-moz-transition': 'border 500ms ease-out',
         '-o-transition': 'border 500ms ease-out'
       });
+    }, 2000);
 
-      $search.click();
-    }, 1000);
+    $scope.showLoading();
+    $search.click();
 
   };
 
+  $scope.showLoading = function() {
+    var $loadingSpinner = $('#accepting-bitcoin .loading-spinner');
+    $loadingSpinner.show();
+    $loadingSpinner.addClass('animated fadeInUp');
+    $('#accepting-bitcoin .list-container').css('opacity', '.5');
+  };
 
 }]);
 

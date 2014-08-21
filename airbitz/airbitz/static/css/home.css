@@ -122,6 +122,7 @@ body.home #footer .social-icons a:hover {
   margin-top: 172px;
   padding-top: 25px;
   background: url('/static/img/skyline-airbitz.jpg') no-repeat center;
+  background: #eee;
   background-size: cover;
   background-attachment: fixed;
 }
@@ -228,6 +229,36 @@ body.home #footer .social-icons a:hover {
 .landing-module .column3 #accepting-bitcoin {
   visibility: hidden;
 }
+.landing-module .column3 .loading-spinner {
+  z-index: 1;
+  position: absolute;
+  top: calc(50% - 40px);
+  left: calc(50% - 100px);
+  width: 200px;
+  height: 80px;
+  margin: 0 auto;
+  text-align: center;
+}
+.landing-module .column3 .loading-spinner .fa-spinner {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 5px;
+  font-size: 70px;
+  color: #2291cf;
+}
+.landing-module .column3 .loading-spinner .spinner-background {
+  position: absolute;
+  top: calc(50% - 15px);
+  left: calc(50% - 100px);
+  height: 30px;
+  width: 30px;
+  background: url('../img/favicon.png') no-repeat;
+  background-size: 30px;
+}
+.landing-module .column3 .loading-spinner .spinner-text {
+  font-size: 16px;
+  font-weight: 600;
+}
 .landing-module .column3 .list-container {
   max-height: 500px;
   overflow-y: auto;
@@ -248,6 +279,7 @@ body.home #footer .social-icons a:hover {
   padding-left: 15px;
   border-left: none;
   background: #555555;
+  color: white;
 }
 .landing-module .column3 .list-container .list-group .list-group-item.header .back-button:hover {
   color: #2291cf !important;
@@ -267,6 +299,7 @@ body.home #footer .social-icons a:hover {
   background: #ffffff;
   border-left: 5px solid #2291cf;
   padding-left: 10px;
+  color: #2291cf;
 }
 .landing-module .column3 .list-container .list-group .list-group-item:hover .label {
   background: #2291cf;

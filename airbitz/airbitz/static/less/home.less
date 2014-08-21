@@ -151,6 +151,7 @@ body.home {
     margin-top: 172px;
     padding-top: 25px;
     background: url('/static/img/skyline-airbitz.jpg') no-repeat center;
+    background: #eee;
     background-size: cover;
     background-attachment: fixed;
 
@@ -288,6 +289,29 @@ body.home {
             visibility: hidden;
         }
 
+        .loading-spinner {
+            z-index: 1;
+            position: absolute;
+            top: calc(~'50% - 40px');
+            left: calc(~'50% - 100px');
+            width: 200px;
+            height: 80px;
+            margin: 0 auto;
+            text-align: center;
+
+            .fa-spinner {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 5px;
+                font-size: 70px;
+                color: @ab-blue;
+            }
+            .spinner-text {
+                font-size: 16px;
+                font-weight: 600;
+            }
+        }
+
         .list-container {
             max-height: 500px;
             overflow-y: auto;
@@ -308,6 +332,7 @@ body.home {
                         padding-left: 15px;
                         border-left: none;
                         background: @gray;
+                        color: white;
                     }
 
                     .back-button {
@@ -331,6 +356,7 @@ body.home {
                         background: rgba(255, 255, 255, 1);
                         border-left: 5px solid @ab-blue;
                         padding-left: 10px;
+                        color: @ab-blue;
 
                         .label {
                             background: @ab-blue;
