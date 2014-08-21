@@ -246,15 +246,6 @@ body.home #footer .social-icons a:hover {
   font-size: 70px;
   color: #2291cf;
 }
-.landing-module .column3 .loading-spinner .spinner-background {
-  position: absolute;
-  top: calc(50% - 15px);
-  left: calc(50% - 100px);
-  height: 30px;
-  width: 30px;
-  background: url('../img/favicon.png') no-repeat;
-  background-size: 30px;
-}
 .landing-module .column3 .loading-spinner .spinner-text {
   font-size: 16px;
   font-weight: 600;

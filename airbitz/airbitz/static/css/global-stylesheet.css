@@ -2,7 +2,7 @@
   font-size: 14px;
 }
 .navbar .navbar-nav > li > a {
-  color: #2291cf;
+  color: white;
 }
 .navbar .navbar-nav > li > a {
   padding-top: 16px;
@@ -82,25 +82,33 @@
   }
 }
 .navbar-ab {
-  background-color: white;
-  border: #eee;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: #2291cf;
+  border-bottom: 1px solid #02a4e2;
 }
 .navbar-ab .navbar-brand {
   padding: 0;
 }
 .navbar-ab .navbar-brand .logo {
-  height: 40px;
-  margin-top: 5px;
+  height: 30px;
+  margin-top: 10px;
   margin-left: 15px;
 }
+.navbar-ab .navbar-nav > .active a,
+.navbar-ab .navbar-nav > .active > a:hover,
+.navbar-ab .navbar-nav > .active > a:focus {
+  background-color: red;
+}
 .navbar-ab .navbar-nav > li > a {
-  color: #2291cf;
+  color: white;
+  font-weight: 600;
+}
+.navbar-ab .navbar-nav > li > a:hover {
+  background-color: #02a4e2;
 }
 .navbar-ab .navbar-nav > .open > a,
 .navbar-ab .navbar-nav > .open > a:hover,
 .navbar-ab .navbar-nav > .open > a:focus {
-  background: #80c341;
+  background: #02a4e2;
   color: white;
 }
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
@@ -124,7 +132,7 @@
   position: relative;
   top: 7px;
   left: -5px;
-  color: #999999;
+  color: #eeeeee;
 }
 @media (max-width: 1200px) {
   #navbar-search #help-search {
@@ -145,12 +153,36 @@
     display: none;
   }
 }
+.ab-bootstrap-dropdown-item {
+  padding-left: 15px;
+  color: #2291cf;
+  background-color: #fff;
+  border-left: 5px solid #2291cf;
+}
+.dropdown-menu > li > a,
+.dropdown-submenu span {
+  transition: all .15s;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-submenu span:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu span:focus {
+  padding-left: 15px;
+  color: #2291cf;
+  background-color: #fff;
+  border-left: 5px solid #2291cf;
+}
+.dropdown-submenu.et-show-dropdown > span {
+  padding-left: 15px;
+  color: #2291cf;
+  background-color: #fff;
+  border-left: 5px solid #2291cf;
+}
 .typeahead,
 .tt-query,
 .tt-hint {
   padding: 8px 12px;
   line-height: 20px;
-  border: 2px solid #ccc;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;

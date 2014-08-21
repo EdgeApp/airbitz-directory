@@ -7,7 +7,7 @@
     font-size: 14px;
 
     .navbar-nav > li > a {
-        color: @brand-primary;
+        color: white;
     }
     .navbar-nav>li>a {
         padding-top: 16px;
@@ -108,16 +108,16 @@
 
 
 .navbar-ab {
-    background-color: white;
-    border: #eee;
-    box-shadow: 0 0 10px rgba(0,0,0,.5);
+    background-color: @ab-blue;
+    border-bottom: 1px solid @ab-blue-light;
+//    box-shadow: 0 0 10px rgba(0,0,0,.5);
 
     .navbar-brand {
         padding: 0;
 
         .logo {
-            height: 40px;
-            margin-top: 5px;
+            height: 30px;
+            margin-top: 10px;
             margin-left: 15px;
         }
     }
@@ -126,15 +126,21 @@
     .navbar-nav > .active > a:hover,
     .navbar-nav > .active > a:focus {
 //        background-color: rgba(0,0,0,.7);
+        background-color: red;
     }
     .navbar-nav > li > a {
-        color: @ab-blue;
+        color: white;
+        font-weight: 600;
+
+        &:hover {
+            background-color: @ab-blue-light;
+        }
     }
 
     .navbar-nav > .open > a,
     .navbar-nav > .open > a:hover,
     .navbar-nav > .open > a:focus {
-        background: @ab-green;
+        background: @ab-blue-light;
         color: white;
     }
 }
@@ -168,7 +174,7 @@
         position: relative;
         top: 7px;
         left: -5px;
-        color: @gray-light;
+        color: @gray-lighter;
 
         @media (max-width: 1200px) {
             display: none;
@@ -195,4 +201,22 @@
             display: none;
         }
     }
+}
+
+
+// custom bootstrap/theme dropdown styles
+.dropdown-menu > li > a,
+.dropdown-submenu span {
+    transition: all .15s;
+
+    &:hover,
+    &:focus {
+        padding-left: 15px;
+        .ab-bootstrap-dropdown-item;
+    }
+}
+
+.dropdown-submenu.et-show-dropdown > span {
+    padding-left: 15px;
+    .ab-bootstrap-dropdown-item;
 }
