@@ -1,14 +1,16 @@
 {% verbatim %}
 
-<div class="animated slideInRight">
+<h3 class="heading-text animated flipInX">
+  Who Accepts Bitcoin Today?<br />
+  <span class="biz-count label-primary label">{{ bizCount() }}</span> Businesses in <span class="biz-count label-primary label">{{ regionData.length }}</span> Countries
+</h3>
 
-  <h3>Who Accepts Bitcoin Today?<br />
-    <span class="biz-count label-primary label">{{ bizCount() }}</span> Businesses in <span class="biz-count label-primary label">{{ regionData.length }}</span> Countries </h3>
+<div class="animated fadeInRight">
 
   <div class="list-container">
     <ul class="list-group">
       <li class="header list-group-item">
-        Country <span class="pull-right">Count</span>
+        Country
       </li>
     </ul>
   </div>

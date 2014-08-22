@@ -68,7 +68,7 @@ app.controller('abRegionList', ['$scope', '$http', 'SimpleCache', 'regionData', 
 
     $location.val(region);
 
-    $search.addClass('animated fadeInUp');
+    $search.addClass('animated flash');
     $location.css({
       'border-color': '#2291cf',
       '-webkit-transition': 'border 100ms ease-out',
@@ -114,7 +114,7 @@ app.controller('abRegionDetails', ['$scope', 'SimpleCache', 'region', function($
 
     $location.val(region + ', ' + country);
 
-    $search.addClass('animated fadeInUp');
+//    $search.addClass('animated fadeInUp');
     $location.css({
       'border-color': '#2291cf',
       '-webkit-transition': 'border 100ms ease-out',
@@ -123,7 +123,7 @@ app.controller('abRegionDetails', ['$scope', 'SimpleCache', 'region', function($
     });
 
     setTimeout(function(){
-      $search.removeClass('animated fadeInUp');
+      $search.removeClass('animated flash');
       $location.css({
         'border-color': '#ccc',
         '-webkit-transition': 'border 500ms ease-out',
@@ -141,7 +141,7 @@ app.controller('abRegionDetails', ['$scope', 'SimpleCache', 'region', function($
     var $loadingSpinner = $('#accepting-bitcoin .loading-spinner');
     $loadingSpinner.show();
     $loadingSpinner.addClass('animated fadeInUp');
-    $('#accepting-bitcoin .list-container').css('opacity', '.5');
+    $('#accepting-bitcoin .list-container').css('opacity', '.3');
   };
 
 }]);

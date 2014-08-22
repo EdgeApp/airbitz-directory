@@ -146,14 +146,28 @@ body.home {
 }
 
 
+.frosted-container() {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    border: 1px solid #FFF;
+}
+
+
 .landing-module {
-    height: 700px;
+    min-height: 700px;
     margin-top: 172px;
-    padding-top: 25px;
-    background: url('/static/img/skyline-airbitz.jpg') no-repeat center;
-    background: #eee;
+    padding: 25px 0;
+//    background: url('https://airbitz.co/media/business_images/8466_kglu65My1LlIq3c_HVUXCnsRWPMiTGoAN2FleH9sgS8.jpg') no-repeat center;
+//    background: url('https://airbitz.co/media/business_images/775628_10151449781721320_1875629856_o.jpg') no-repeat center;
+//    background: url('https://airbitz.co/media/business_images/1496207_10152173480693841_1452893426_o_1_1_1.jpg') no-repeat center;
+//    background: url('http://38.media.tumblr.com/5c0a918c9f6b05db6002fb50cc0eacb8/tumblr_naj3mgttxL1st5lhmo1_1280.jpg') no-repeat center;
+//    background: url('http://38.media.tumblr.com/48b91f8ac34b6c31d817f65ad9402015/tumblr_n8zm0d48Jx1st5lhmo1_1280.jpg') no-repeat center;
+//    background: url('http://38.media.tumblr.com/19a1925ae010acf1628c081bdb5d5597/tumblr_naj3gayWkL1st5lhmo1_1280.jpg') no-repeat center;
+//    background: url('http://38.media.tumblr.com/2c1a9d53169f1eca25b2a0b8238744c9/tumblr_n9hxdqatsK1st5lhmo1_1280.jpg') no-repeat center;
+//    background: url('http://31.media.tumblr.com/17b062d8170b0cd6e1b4a63db7e20df1/tumblr_n8zm9idM4J1st5lhmo1_1280.jpg') no-repeat center;
+//    background: url('http://31.media.tumblr.com/1f4b6f2234572bbffe8cb3b889e7f756/tumblr_n8gxy7HNfy1st5lhmo1_1280.jpg') no-repeat center;
+    background: url('../img/landing/landing-module-bg.jpg') no-repeat center fixed;
     background-size: cover;
-    background-attachment: fixed;
 
     @media (max-width: @screen-md) {
         height: auto;
@@ -178,30 +192,18 @@ body.home {
     }
 
     .column1 {
+        margin-top: 60px;
+        .frosted-container;
 
-        #bitcoin-logo {
-            float: left;
-            width: 75px;
-            margin-right: 10px;
+        .airbitz-logo {
+            display: block;
+            width: 250px;
+            margin: 20px auto;
+            text-align: center;
         }
 
-        .bitcoin-directory-wallet {
-            margin-top: 10px;
-            text-align: center;
-
-            h2 {
-                margin-top: 0px;
-                font-size: 30px;
-            }
-            .airbitz-logo {
-                width: 250px;
-                margin-bottom: 20px;
-            }
-            .slide-text {
-                text-align: center;
-                color: #003E61;
-            }
-
+        .directory-link {
+            color: @ab-blue;
         }
 
         #app-store-links {
@@ -212,6 +214,22 @@ body.home {
                 text-align: left;
             }
         }
+
+        .bitcoin-directory-wallet {
+            margin-top: 10px;
+            text-align: center;
+
+            h2 {
+                margin-top: 0px;
+                font-size: 30px;
+            }
+            .slide-text {
+                text-align: center;
+                color: #003E61;
+            }
+
+        }
+
 
         .signup-area {
             max-width: 360px;
@@ -255,6 +273,7 @@ body.home {
             margin: 30px auto 0;
             padding: 70px 0 0 0;
             background: url('../img/landing/iphone-slider/iphone5s_1up.png');
+            border-radius: 40px;
 
             #app-demo-slides {
 
@@ -274,10 +293,16 @@ body.home {
 //        margin: 0 15px;
     }
 
+    h3 {
+        margin-top: 0;
+    }
     .column3 {
         #who-accepts-bitcoin {
+            visibility: hidden;
             margin-top: 100px;
             text-align: center;
+            padding: 15px;
+            .frosted-container;
 
             img {
                 width: 150px;
@@ -287,22 +312,31 @@ body.home {
         
         #accepting-bitcoin {
             visibility: hidden;
+
+            .heading-text {
+                padding: 15px;
+                .frosted-container
+            }
         }
 
         .loading-spinner {
             z-index: 1;
             position: absolute;
-            top: calc(~'50% - 40px');
-            left: calc(~'50% - 100px');
-            width: 200px;
-            height: 80px;
+            top: calc(~'50% - 70px');
+            left: calc(~'50% - 80px');
+            width: 160px;
+            height: 140px;
             margin: 0 auto;
+            padding: 10px;
             text-align: center;
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
 
             .fa-spinner {
-                width: 70px;
+                display: block;
+                margin: 0 auto 5px;
+                width: 100%;
                 height: 70px;
-                margin-bottom: 5px;
                 font-size: 70px;
                 color: @ab-blue;
             }
@@ -335,17 +369,13 @@ body.home {
                         color: white;
                     }
 
-                    .back-button {
-                        &:hover {
-                            color: @brand-primary !important;
-                        }
-                    }
                 }
+
                 .list-group-item {
                     border-radius: 0;
                     border: none;
                     padding: 5px 15px;
-                    background: rgba(255, 255, 255, .7);
+                    background: rgba(255, 255, 255, .8);
                     -webkit-transition: all .15s;
                     -moz-transition: all .15s;
                     -ms-transition: all .15s;
@@ -364,6 +394,10 @@ body.home {
                     }
                 }
             }
+        }
+
+        .back-button {
+            margin-top: 10px;
         }
     }
 }

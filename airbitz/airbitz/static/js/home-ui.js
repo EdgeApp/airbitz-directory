@@ -60,16 +60,23 @@ jQuery(function($) {
     },1250);
 
     $('.ab-app-cta .app-install').hover(function(){
-        $(this).find('.app-store').addClass('pulse infinite');
-        $(this).find('.app-screenshot').addClass('pulse');
+        $(this).find('.app-store').css({
+            'zoom': '110%',
+            'transition': 'all .25s',
+            '-webkit-transition': 'all .25s',
+            '-moz-transition': 'all .25s',
+            '-0-transition': 'all .25s',
+        });
     }, function(){
-        $(this).find('.app-store').removeClass('pulse infinite');
-        $(this).find('.app-screenshot').removeClass('pulse');
+        $(this).find('.app-store').css({
+          'zoom': '100%',
+        });
     });
 
     if($.cookie('accepting-bitcoin', Number) > 1) {
       showWhoAcceptsBitcoin();
     } else{
+      $('#who-accepts-bitcoin').css('visibility', 'visible');
       $('#reveal-who-accepts-bitcoin').mouseenter(function() {
           showWhoAcceptsBitcoin();
       });
@@ -79,14 +86,20 @@ jQuery(function($) {
       $('#who-accepts-bitcoin').hide();
       $('#accepting-bitcoin').css('visibility', 'visible');
       $('#accepting-bitcoin').addClass('animated bounceInDown');
-      hasBeenSeen('accepting-bitcoin');
+      hasBeenSeen('accepting-bitcoin', 1);
     }
 
-    function hasBeenSeen(thing) {
+    function hasBeenSeen(thing, expiration) {
       var count = $.cookie(thing, Number) || 0;
       var newCount = ++count;
-      $.cookie(thing, newCount, {expires: 1});
+      $.cookie(thing, newCount, {expires: expiration});
     }
 
+//    $('.column1, .column3 #who-accepts-bitcoin, ').blurjs({
+//        source: '.landing-module',
+//        radius: '20',
+//        overlay: 'rgba(255,255,255,0.5)',
+//        cache: true,
+//    });
 
 });

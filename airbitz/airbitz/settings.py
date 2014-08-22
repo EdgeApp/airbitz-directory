@@ -285,6 +285,7 @@ PIPELINE_JS = {
     },
     'home': {
         'source_filenames': (
+            'extras/blur.js/blur.js',
             'extras/ajaxchimp/jquery.ajaxchimp.js',
             'extras/carouFredSel-6.2.1/jquery.carouFredSel-6.2.1-packed.js',
             'extras/jquery-video-lightning/jquery-video-lightning.min.js',
