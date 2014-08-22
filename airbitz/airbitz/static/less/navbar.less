@@ -35,9 +35,8 @@
 
 
 #nav-mobile {
-    background-color: white;
-    border: #eee;
-    box-shadow: 0 0 10px rgba(0,0,0,.5);
+    background-color: @ab-blue;
+    border-bottom: 1px solid #eee;
 
     #mobile-nav-close {
 
@@ -49,9 +48,14 @@
     .navbar-header {
         width: 60px;
         float: left;
+        
+        .navbar-brand {
+            padding-left: 7px;
 
-        .logo {
-            height: 20px;
+            .logo {
+                height: 20px;
+                margin-right: 10px;
+            }
         }
     }
 
@@ -90,10 +94,21 @@
             }
             .form-group.term {
 
+                .tt-dropdown-menu {
+                    margin-top: 40px !important;
+                }
             }
             .form-group.location {
                 display: none;
             }
+        }
+    }
+
+    .navbar-toggle {
+        background: white;
+
+        .icon-bar {
+            background: #555;
         }
     }
 
@@ -102,6 +117,25 @@
         @media (max-width: 767px) {
             clear: both;
             width: 100%;
+        }
+
+        .navbar-nav {
+            li > a {
+                &:hover {
+                    color: white;
+                    background: @ab-blue-light;
+                }
+            }
+
+            .dropdown-menu {
+                background: white;
+
+                li > a {
+                }
+                
+                .dropdown-header {
+                }
+            }
         }
     }
 }
@@ -212,11 +246,11 @@
     &:hover,
     &:focus {
         padding-left: 15px;
-        .ab-bootstrap-dropdown-item;
+        .ab-hover-item;
     }
 }
 
 .dropdown-submenu.et-show-dropdown > span {
     padding-left: 15px;
-    .ab-bootstrap-dropdown-item;
+    .ab-hover-item;
 }
