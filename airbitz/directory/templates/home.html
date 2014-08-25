@@ -430,7 +430,17 @@
 
     <script type="text/javascript">
 
-      $('.landing-module').backstretch('{{ STATIC_URL }}img/landing/landing-module-bg.jpg');
+      $('.landing-module').backstretch(
+        [
+          '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',
+{#          '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',#}
+{#          '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'#}
+        ],
+          {
+            duration: 6000,
+            fade: 500
+          }
+      );
 
     </script>
 
