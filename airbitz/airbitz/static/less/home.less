@@ -147,7 +147,7 @@ body.home {
 
 
 .frosted-container() {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     border: 1px solid #FFF;
 }
@@ -157,17 +157,11 @@ body.home {
     min-height: 700px;
     margin-top: 172px;
     padding: 25px 0;
-//    background: url('https://airbitz.co/media/business_images/8466_kglu65My1LlIq3c_HVUXCnsRWPMiTGoAN2FleH9sgS8.jpg') no-repeat center;
-//    background: url('https://airbitz.co/media/business_images/775628_10151449781721320_1875629856_o.jpg') no-repeat center;
-//    background: url('https://airbitz.co/media/business_images/1496207_10152173480693841_1452893426_o_1_1_1.jpg') no-repeat center;
-//    background: url('http://38.media.tumblr.com/5c0a918c9f6b05db6002fb50cc0eacb8/tumblr_naj3mgttxL1st5lhmo1_1280.jpg') no-repeat center;
-//    background: url('http://38.media.tumblr.com/48b91f8ac34b6c31d817f65ad9402015/tumblr_n8zm0d48Jx1st5lhmo1_1280.jpg') no-repeat center;
-//    background: url('http://38.media.tumblr.com/19a1925ae010acf1628c081bdb5d5597/tumblr_naj3gayWkL1st5lhmo1_1280.jpg') no-repeat center;
-//    background: url('http://38.media.tumblr.com/2c1a9d53169f1eca25b2a0b8238744c9/tumblr_n9hxdqatsK1st5lhmo1_1280.jpg') no-repeat center;
-//    background: url('http://31.media.tumblr.com/17b062d8170b0cd6e1b4a63db7e20df1/tumblr_n8zm9idM4J1st5lhmo1_1280.jpg') no-repeat center;
-//    background: url('http://31.media.tumblr.com/1f4b6f2234572bbffe8cb3b889e7f756/tumblr_n8gxy7HNfy1st5lhmo1_1280.jpg') no-repeat center;
-    background: url('../img/landing/landing-module-bg.jpg') no-repeat center fixed;
-    background-size: cover;
+//    background: url('../img/landing/landing-module-bg.jpg') no-repeat center center fixed;
+//    -webkit-background-size: cover;
+//    -moz-background-size: cover;
+//    -o-background-size: cover;
+//    background-size: cover;
 
     @media (max-width: @screen-md) {
         height: auto;
@@ -178,6 +172,17 @@ body.home {
     @media (max-width: @screen-sm) {
         margin-top: 55px;
     }
+
+    /* iPads (landscape) ----------- */
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+//        height: 500px;
+    }
+
+    /* iPads (portrait) ----------- */
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+        height: 1200px;
+    }
+
 
     .container {
 
@@ -191,15 +196,47 @@ body.home {
         line-height: 1.5;
     }
 
+    h2 {
+        margin-top: 0px;
+        font-size: 30px;
+
+        /* iPads (landscape) ----------- */
+        @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+            font-size: 26px;
+        }
+        /* iPads (portrait) ----------- */
+        @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+            font-size: 26px;
+        }
+    }
+
     .column1 {
         margin-top: 60px;
         .frosted-container;
+
+        /* iPads (landscape) ----------- */
+        @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+        }
+        /* iPads (portrait) ----------- */
+        @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+            width: 400px;
+            margin: 40px auto 20px;
+        }
 
         .airbitz-logo {
             display: block;
             width: 250px;
             margin: 20px auto;
             text-align: center;
+
+            /* iPads (landscape) ----------- */
+            @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+                width: 175px;
+            }
+            /* iPads (portrait) ----------- */
+            @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+                width: 175px;
+            }
         }
 
         .directory-link {
@@ -212,6 +249,14 @@ body.home {
             .app-store {
                 margin-bottom: 10px;
                 text-align: left;
+
+                /* iPads (landscape) ----------- */
+                @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+                    width: 140px;
+                }
+                /* iPads (portrait) ----------- */
+                @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+                }
             }
         }
 
@@ -219,10 +264,6 @@ body.home {
             margin-top: 10px;
             text-align: center;
 
-            h2 {
-                margin-top: 0px;
-                font-size: 30px;
-            }
             .slide-text {
                 text-align: center;
                 color: #003E61;
@@ -297,12 +338,23 @@ body.home {
         margin-top: 0;
     }
     .column3 {
+
+        /* iPads (portrait) ----------- */
+        @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+            width: 330px !important;
+        }
+
         #who-accepts-bitcoin {
             visibility: hidden;
             margin-top: 100px;
             text-align: center;
             padding: 15px;
             .frosted-container;
+
+            /* iPads (portrait) ----------- */
+            @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+                margin-top: 60px;
+            }
 
             img {
                 width: 150px;
@@ -313,9 +365,18 @@ body.home {
         #accepting-bitcoin {
             visibility: hidden;
 
-            .heading-text {
+            h3.heading-text {
                 padding: 15px;
-                .frosted-container
+                .frosted-container;
+
+                /* iPads (landscape) ----------- */
+                 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+                    font-size: 18px;
+                }
+                /* iPads (portrait) ----------- */
+                 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+                    font-size: 20px;
+                }
             }
         }
 
@@ -375,7 +436,7 @@ body.home {
                     border-radius: 0;
                     border: none;
                     padding: 5px 15px;
-                    background: rgba(255, 255, 255, .8);
+                    background: rgba(255, 255, 255, .9);
                     -webkit-transition: all .15s;
                     -moz-transition: all .15s;
                     -ms-transition: all .15s;

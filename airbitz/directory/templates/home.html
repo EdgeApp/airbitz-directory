@@ -135,7 +135,9 @@
 
         <img class="alignnone airbitz-logo" alt="airbitz logo" src="{{ STATIC_URL }}img/logo.png">
 
-        <h2 class="text-center">Bitcoin Business Directory <em style="color: #777">(<a class="directory-link" href="./search?term=&location=Current+Location">Available Right Now)</em></h2>
+        <h2 class="text-center">Bitcoin Business Directory<br />
+          <em style="color: #777">(<a class="directory-link" href="./search?term=&location=Current+Location">Avail Right Now)</em>
+        </h2>
         <div id="app-store-links" class="animated row">
           <div class="app-install col-sm-12 text-center animated">
             <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
@@ -171,7 +173,7 @@
       </div><!-- /.column1 -->
 
 
-      <div class="column2 col-md-4">
+      <div class="column2 col-md-4 col-sm-6">
 
         <a id="see-app-in-action" class="animated btn-primary btn-lg btn" data-video-id="y-OjBQTDzPcmg" href="#"><i class="fa fa-video-camera"></i> See Airbitz in Action</a>
 
@@ -200,7 +202,7 @@
 
 
 
-      <div class="searchStarter column3 col-md-4">
+      <div class="searchStarter column3 col-md-4 col-sm-6">
         <div id="who-accepts-bitcoin">
           <img class="alignnone" alt="airBitz Bitcoin Business Directory" src="{{ STATIC_URL }}img/landing/bitcoin-directory-map.png" width="200" height="200" />
           <h2>Who is Already Accepting Bitcoin?</h2>
@@ -426,7 +428,11 @@
     });
     </script>
 
+    <script type="text/javascript">
 
+      $('.landing-module').backstretch('{{ STATIC_URL }}img/landing/landing-module-bg.jpg');
+
+    </script>
 
 </body>
 </html>
