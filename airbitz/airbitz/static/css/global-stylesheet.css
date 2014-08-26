@@ -4,9 +4,11 @@
 .navbar .navbar-nav > li > a {
   color: white;
 }
-.navbar .navbar-nav > li > a {
-  padding-top: 30px;
-  padding-bottom: 14px;
+@media (min-width: 992px) {
+  .navbar .navbar-nav > li > a {
+    padding-top: 30px;
+    padding-bottom: 14px;
+  }
 }
 .navbar .typeahead,
 .navbar .tt-query,
@@ -28,7 +30,7 @@
 }
 #nav-mobile #mobile-nav-close {
   position: absolute;
-  top: 0px;
+  top: 5px;
   left: -50px;
 }
 #nav-mobile .navbar-header {
@@ -36,21 +38,22 @@
   float: left;
 }
 #nav-mobile .navbar-header .navbar-brand {
-  padding-left: 7px;
+  padding: 15px 0 5px 15px;
 }
 #nav-mobile .navbar-header .navbar-brand .logo {
-  height: 20px;
+  height: 30px;
   margin-right: 10px;
 }
 #nav-mobile .mobile-search-form {
   position: relative;
   float: left;
   width: auto;
-  margin-left: 15px;
+  margin-left: 25px;
   padding: 0 15px;
 }
 #nav-mobile .mobile-search-form .navbar-form {
   float: right;
+  margin-bottom: 5px;
   padding: 2px 0 0 0;
   border-bottom: none;
   border-top: none;
