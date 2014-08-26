@@ -154,10 +154,10 @@ body.home {
 
 
 .landing-module {
-    min-height: 700px;
-    margin-top: 172px;
+    height: 900px;
+    margin-top: 152px;
     padding: 25px 0;
-//    background: url('../img/landing/landing-module-bg.jpg') no-repeat center center fixed;
+//    background: url('../img/landing/landing-module-bg-1.jpg') no-repeat center center fixed;
 //    -webkit-background-size: cover;
 //    -moz-background-size: cover;
 //    -o-background-size: cover;
@@ -198,15 +198,10 @@ body.home {
 
     h2 {
         margin-top: 0px;
-        font-size: 30px;
+        font-size: 26px;
 
-        /* iPads (landscape) ----------- */
-        @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
-            font-size: 26px;
-        }
-        /* iPads (portrait) ----------- */
-        @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-            font-size: 26px;
+        @media (min-width: @screen-lg-min) {
+            font-size: 30px;
         }
     }
 
@@ -214,28 +209,23 @@ body.home {
         margin-top: 60px;
         .frosted-container;
 
-        /* iPads (landscape) ----------- */
-        @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+        @media (max-width: @screen-sm-max) {
+            width: 400px;
+            margin: 0px auto;
         }
         /* iPads (portrait) ----------- */
         @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-            width: 400px;
-            margin: 40px auto 20px;
+            margin-top: 40px;
         }
 
         .airbitz-logo {
             display: block;
-            width: 250px;
+            width: 175px;
             margin: 20px auto;
             text-align: center;
 
-            /* iPads (landscape) ----------- */
-            @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
-                width: 175px;
-            }
-            /* iPads (portrait) ----------- */
-            @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-                width: 175px;
+            @media (min-width: @screen-lg-min) {
+                width: 250px;
             }
         }
 
@@ -247,17 +237,18 @@ body.home {
             visibility: hidden;
 
             .app-store {
+                width: 140px;
                 margin-bottom: 10px;
                 text-align: left;
 
-                /* iPads (landscape) ----------- */
-                @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
-                    width: 140px;
-                }
-                /* iPads (portrait) ----------- */
-                @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+                @media (min-width: @screen-lg-min) {
+                    width: auto;
                 }
             }
+        }
+
+        hr {
+            border-color: #999;
         }
 
         .bitcoin-directory-wallet {
@@ -331,13 +322,13 @@ body.home {
 
 
     .searchStarter {
-//        margin: 0 15px;
+        padding: 0;
     }
-
     h3 {
         margin-top: 0;
     }
     .column3 {
+        margin-top: 60px;
 
         /* iPads (portrait) ----------- */
         @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
@@ -346,7 +337,7 @@ body.home {
 
         #who-accepts-bitcoin {
             visibility: hidden;
-            margin-top: 100px;
+//            margin-top: 100px;
             text-align: center;
             padding: 15px;
             .frosted-container;
@@ -354,7 +345,7 @@ body.home {
             /* iPads (portrait) ----------- */
             @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
                 margin-top: 60px;
-            }
+            }            
 
             img {
                 width: 150px;
@@ -365,17 +356,17 @@ body.home {
         #accepting-bitcoin {
             visibility: hidden;
 
+            @media (min-width: @screen-sm-min) and (max-width: @screen-md-min) {
+                padding-right: 50px;
+            }
+
             h3.heading-text {
                 padding: 15px;
+                font-size: 18px;
                 .frosted-container;
 
-                /* iPads (landscape) ----------- */
-                 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
-                    font-size: 18px;
-                }
-                /* iPads (portrait) ----------- */
-                 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-                    font-size: 20px;
+                @media (min-width: @screen-lg-min) {
+                    font-size: 24px;
                 }
             }
         }
@@ -408,11 +399,15 @@ body.home {
         }
 
         .list-container {
-            max-height: 500px;
+            max-height: 380px !important;
             overflow-y: auto;
             cursor: pointer;
             border-radius: 0;
 
+            @media (min-width: @screen-lg-min) {
+                max-height: 430px !important;
+            }
+            
             .list-group {
                 margin: 0;
                 border-radius: 0;

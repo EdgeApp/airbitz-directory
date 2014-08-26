@@ -50,6 +50,8 @@ jQuery(function($) {
         var $appStoreLinks = $('#app-store-links');
         var $iphoneSlider = $('.iphone-slider');
 
+        $('.landing-module').backstretch('resize');
+
         $('.et_pb_slide_image').show();
         $appStoreLinks.css('visibility', 'visible');
         $appStoreLinks.addClass('slideInLeft');
@@ -99,7 +101,7 @@ jQuery(function($) {
 //        source: '.landing-module',
 //        radius: '20',
 //        overlay: 'rgba(255,255,255,0.5)',
-//        cache: true,
+//         cache: true,
 //    });
 
 });

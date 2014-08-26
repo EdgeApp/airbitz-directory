@@ -118,8 +118,8 @@ body.home #footer .social-icons a:hover {
   }
 }
 .landing-module {
-  min-height: 700px;
-  margin-top: 172px;
+  height: 900px;
+  margin-top: 152px;
   padding: 25px 0;
   /* iPads (landscape) ----------- */
   /* iPads (portrait) ----------- */
@@ -152,18 +152,11 @@ body.home #footer .social-icons a:hover {
 }
 .landing-module h2 {
   margin-top: 0px;
-  font-size: 30px;
-  /* iPads (landscape) ----------- */
-  /* iPads (portrait) ----------- */
+  font-size: 26px;
 }
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+@media (min-width: 1200px) {
   .landing-module h2 {
-    font-size: 26px;
-  }
-}
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
-  .landing-module h2 {
-    font-size: 26px;
+    font-size: 30px;
   }
 }
 .landing-module .column1 {
@@ -171,31 +164,28 @@ body.home #footer .social-icons a:hover {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   border: 1px solid #FFF;
-  /* iPads (landscape) ----------- */
   /* iPads (portrait) ----------- */
+}
+@media (max-width: 991px) {
+  .landing-module .column1 {
+    width: 400px;
+    margin: 0px auto;
+  }
 }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   .landing-module .column1 {
-    width: 400px;
-    margin: 40px auto 20px;
+    margin-top: 40px;
   }
 }
 .landing-module .column1 .airbitz-logo {
   display: block;
-  width: 250px;
+  width: 175px;
   margin: 20px auto;
   text-align: center;
-  /* iPads (landscape) ----------- */
-  /* iPads (portrait) ----------- */
 }
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+@media (min-width: 1200px) {
   .landing-module .column1 .airbitz-logo {
-    width: 175px;
-  }
-}
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
-  .landing-module .column1 .airbitz-logo {
-    width: 175px;
+    width: 250px;
   }
 }
 .landing-module .column1 .directory-link {
@@ -205,15 +195,17 @@ body.home #footer .social-icons a:hover {
   visibility: hidden;
 }
 .landing-module .column1 #app-store-links .app-store {
+  width: 140px;
   margin-bottom: 10px;
   text-align: left;
-  /* iPads (landscape) ----------- */
-  /* iPads (portrait) ----------- */
 }
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+@media (min-width: 1200px) {
   .landing-module .column1 #app-store-links .app-store {
-    width: 140px;
+    width: auto;
   }
+}
+.landing-module .column1 hr {
+  border-color: #999;
 }
 .landing-module .column1 .bitcoin-directory-wallet {
   margin-top: 10px;
@@ -267,10 +259,14 @@ body.home #footer .social-icons a:hover {
   text-align: center;
   color: white;
 }
+.landing-module .searchStarter {
+  padding: 0;
+}
 .landing-module h3 {
   margin-top: 0;
 }
 .landing-module .column3 {
+  margin-top: 60px;
   /* iPads (portrait) ----------- */
 }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
@@ -280,7 +276,6 @@ body.home #footer .social-icons a:hover {
 }
 .landing-module .column3 #who-accepts-bitcoin {
   visibility: hidden;
-  margin-top: 100px;
   text-align: center;
   padding: 15px;
   background: rgba(255, 255, 255, 0.9);
@@ -300,22 +295,21 @@ body.home #footer .social-icons a:hover {
 .landing-module .column3 #accepting-bitcoin {
   visibility: hidden;
 }
+@media (min-width: 768px) and (max-width: 992px) {
+  .landing-module .column3 #accepting-bitcoin {
+    padding-right: 50px;
+  }
+}
 .landing-module .column3 #accepting-bitcoin h3.heading-text {
   padding: 15px;
+  font-size: 18px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   border: 1px solid #FFF;
-  /* iPads (landscape) ----------- */
-  /* iPads (portrait) ----------- */
 }
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+@media (min-width: 1200px) {
   .landing-module .column3 #accepting-bitcoin h3.heading-text {
-    font-size: 18px;
-  }
-}
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
-  .landing-module .column3 #accepting-bitcoin h3.heading-text {
-    font-size: 20px;
+    font-size: 24px;
   }
 }
 .landing-module .column3 .loading-spinner {
@@ -344,10 +338,15 @@ body.home #footer .social-icons a:hover {
   font-weight: 600;
 }
 .landing-module .column3 .list-container {
-  max-height: 500px;
+  max-height: 380px !important;
   overflow-y: auto;
   cursor: pointer;
   border-radius: 0;
+}
+@media (min-width: 1200px) {
+  .landing-module .column3 .list-container {
+    max-height: 430px !important;
+  }
 }
 .landing-module .column3 .list-container .list-group {
   margin: 0;

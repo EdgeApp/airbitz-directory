@@ -136,7 +136,7 @@
         <img class="alignnone airbitz-logo" alt="airbitz logo" src="{{ STATIC_URL }}img/logo.png">
 
         <h2 class="text-center">Bitcoin Business Directory<br />
-          <em style="color: #777">(<a class="directory-link" href="./search?term=&location=Current+Location">Avail Right Now)</em>
+          <em style="color: #777">(<a class="directory-link" href="./search?term=&location=Current+Location">Search Online</a>)</em>
         </h2>
         <div id="app-store-links" class="animated row">
           <div class="app-install col-sm-12 text-center animated">
@@ -149,9 +149,13 @@
           </div>
         </div>
 
+        <hr/>
+
         <div class="bitcoin-directory-wallet row">
           <div class="col-xs-12">
-            <h2>Bitcoin Wallet <em style="color: #777">(Avail Soon)</em></h2>
+            <h2>Bitcoin Wallet<br />
+              <em style="color: #777">(Coming Soon)</em>
+            </h2>
           </div>
 
           <div class="signup-area row">
@@ -206,7 +210,7 @@
         <div id="who-accepts-bitcoin">
           <img class="alignnone" alt="airBitz Bitcoin Business Directory" src="{{ STATIC_URL }}img/landing/bitcoin-directory-map.png" width="200" height="200" />
           <h2>Who is Already Accepting Bitcoin?</h2>
-          <a id="reveal-who-accepts-bitcoin" class="btn-success btn-lg btn animated infinite pulse" href="">You Won't Believe It!</a>
+          <a id="reveal-who-accepts-bitcoin" class="btn-success btn-lg btn animated infinite pulse" href="">Find Out</a>
         </div>
         <div id="accepting-bitcoin">
         {% verbatim %}
@@ -433,12 +437,12 @@
       $('.landing-module').backstretch(
         [
           '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',
-{#          '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',#}
-{#          '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'#}
+          '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',
+          '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'
         ],
           {
             duration: 6000,
-            fade: 500
+            fade: 1500
           }
       );
 
