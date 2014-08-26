@@ -5,8 +5,8 @@
   color: white;
 }
 .navbar .navbar-nav > li > a {
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 30px;
+  padding-bottom: 14px;
 }
 .navbar .typeahead,
 .navbar .tt-query,
@@ -108,9 +108,11 @@
   padding: 0;
 }
 .navbar-ab .navbar-brand .logo {
-  height: 30px;
-  margin-top: 10px;
-  margin-left: 15px;
+  width: 80px;
+  margin: 12px 10px 5px 15px;
+}
+.navbar-ab #navbar-search {
+  margin: 20px 0 5px 0;
 }
 .navbar-ab .navbar-nav > .active a,
 .navbar-ab .navbar-nav > .active > a:hover,
@@ -844,7 +846,7 @@ body {
   height: 100%;
   /* required for sticky footer */
   margin: 0;
-  padding-top: 75px;
+  padding-top: 85px;
   font: 14px/24px "Open Sans", Helvetica, Arial, sans-serif;
 }
 body .heading-clean {
