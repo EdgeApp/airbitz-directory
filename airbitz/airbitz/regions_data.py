@@ -85,8 +85,8 @@ ACTIVE_REGIONS_SOUTHEAST_ASIA = {
 
 ACTIVE_REGIONS_OCEANA = {
     # Oceana regions
-    'AU': {'name': 'Austrailia',
-           'search': 'Austrailia'},
+    'AU': {'name': 'Australia',
+           'search': 'Australia'},
     'NZ': {'name': 'New Zealand',
            'search': 'New Zealand'},
 }
