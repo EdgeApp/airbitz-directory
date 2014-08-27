@@ -138,7 +138,7 @@ body.home #footer .social-icons a:hover {
 }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   .landing-module {
-    height: 1200px;
+    height: 1300px;
   }
 }
 @media (max-width: 768px) {
@@ -168,12 +168,13 @@ body.home #footer .social-icons a:hover {
 }
 @media (max-width: 991px) {
   .landing-module .column1 {
-    width: 400px;
+    width: 90%;
     margin: 0px auto;
   }
 }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   .landing-module .column1 {
+    width: 400px;
     margin-top: 40px;
   }
 }
@@ -266,12 +267,25 @@ body.home #footer .social-icons a:hover {
   margin-top: 0;
 }
 .landing-module .column3 {
-  margin-top: 60px;
+  width: 90%;
+  margin: 60px auto;
   /* iPads (portrait) ----------- */
+}
+@media (max-width: 991px) {
+  .landing-module .column3 {
+    width: 330px;
+    margin-top: 60px;
+  }
+}
+@media (min-width: 991px) {
+  .landing-module .column3 {
+    width: 33.33333333%;
+  }
 }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   .landing-module .column3 {
-    width: 330px !important;
+    width: 330px;
+    margin-top: 0;
   }
 }
 .landing-module .column3 #who-accepts-bitcoin {
@@ -294,10 +308,16 @@ body.home #footer .social-icons a:hover {
 }
 .landing-module .column3 #accepting-bitcoin {
   visibility: hidden;
+  /* iPads (portrait) ----------- */
 }
 @media (min-width: 768px) and (max-width: 992px) {
   .landing-module .column3 #accepting-bitcoin {
     padding-right: 50px;
+  }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  .landing-module .column3 #accepting-bitcoin {
+    margin-top: 60px;
   }
 }
 .landing-module .column3 #accepting-bitcoin h3.heading-text {
