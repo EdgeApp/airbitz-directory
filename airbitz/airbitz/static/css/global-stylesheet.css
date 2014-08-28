@@ -753,9 +753,9 @@
 }
 /* Set the fixed height of the footer here */
 #footer {
-  height: 60px;
-  margin-top: -60px;
-  padding: 20px 0;
+  height: 110px;
+  margin-top: 0px;
+  padding: 10px 0;
   background-color: #2291cf;
   color: #fff;
   border-top: 2px solid #eee;
@@ -811,15 +811,13 @@
     text-align: center;
   }
 }
+#footer .schema-markup {
+  font-weight: 300;
+}
 footer#main-footer {
   display: block;
   padding: 15px 0 5px;
   background-color: transparent;
-}
-@media only screen and (min-width: 979px) {
-  footer#main-footer {
-    padding-top: 60px;
-  }
 }
 footer#main-footer #footer-bottom {
   position: fixed;
@@ -827,11 +825,6 @@ footer#main-footer #footer-bottom {
   width: 100%;
   z-index: 99999;
   background-color: #2291cf;
-}
-@media only screen and (max-width: 980px) {
-  footer#main-footer #footer-bottom {
-    position: static;
-  }
 }
 footer#main-footer #footer-bottom #footer-info {
   color: #fff;

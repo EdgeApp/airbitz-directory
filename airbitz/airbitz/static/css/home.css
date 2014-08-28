@@ -96,22 +96,6 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   font-size: 36px;
   font-weight: 600;
 }
-body.home #footer {
-  color: #222222;
-}
-body.home #footer a {
-  color: #2291cf;
-}
-body.home #footer a:hover {
-  color: black;
-  text-decoration: underline;
-}
-body.home #footer .social-icons {
-  margin-top: 5px;
-}
-body.home #footer .social-icons a:hover {
-  text-decoration: none;
-}
 @media (min-width: 1200px) {
   body.home {
     margin-top: -80px;

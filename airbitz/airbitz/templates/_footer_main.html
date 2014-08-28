@@ -1,28 +1,36 @@
 <div id="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <ul class="social-icons">
-                    <li class="social-icon">
-                        <a href="https://www.facebook.com/airbitz">
-                            <i class="fa fa-facebook-square"></i> <span class="social-text">Facebook</span>
-                        </a>
-                    </li>
-                    <li class="social-icon">
-                        <a href="https://twitter.com/airbitz">
-                            <i class="fa fa-twitter-square"></i> <span class="social-text">Twitter</span>
-                        </a>
-                    </li>
-                    <li class="social-icon">
-                        <a href="https://plus.google.com/118173667510609425617" rel="publisher">
-                            <i class="fa fa-google-plus-square"></i> <span class="social-text">Google</span>
-                        </a>
-                    </li>
-                </ul>
-                <div class="site-copy-info">
-                    &copy; {% now "Y" %} | AirBitz Inc | <a href="{% url 'landing' %}" title="Secure Bitcoin Wallet">Secure Bitcoin Wallet</a>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <ul class="social-icons">
+          <li class="social-icon">
+            <a href="https://www.facebook.com/airbitz">
+              <i class="fa fa-facebook-square"></i> <span class="social-text">Facebook</span>
+            </a>
+          </li>
+          <li class="social-icon">
+            <a href="https://twitter.com/airbitz">
+              <i class="fa fa-twitter-square"></i> <span class="social-text">Twitter</span>
+            </a>
+          </li>
+          <li class="social-icon">
+            <a href="https://plus.google.com/118173667510609425617" rel="publisher">
+              <i class="fa fa-google-plus-square"></i> <span class="social-text">Google</span>
+            </a>
+          </li>
+        </ul>
+        <div class="site-copy-info">
+          &copy; {% now "Y" %} AirBitz Inc | <a href="{% url 'landing' %}" title="Secure Bitcoin Wallet">Secure Bitcoin Wallet</a>
+          <div class="schema-markup" itemscope itemtype="http://schema.org/LocalBusiness">
+            <span itemprop="name"><strong>Airbitz</strong></span>
+            <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+              <span itemprop="streetAddress">3919 30th Street</span>
+              <span itemprop="addressLocality">San Diego</span> <span itemprop="addressRegion">CA</span> <span itemprop="postalCode">92104</span><br>
+              <span itemprop="telephone">619-800-0540</span>
+            </span>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
