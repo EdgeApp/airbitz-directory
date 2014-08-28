@@ -228,6 +228,11 @@ body.home #footer .social-icons a:hover {
 .landing-module .column1 .signup-area .form-group .form-control {
   text-align: center;
 }
+@media (max-width: 767px) {
+  .landing-module .column1 .signup-area .form-group .btn-lg.btn-block {
+    font-size: 15px;
+  }
+}
 .landing-module .column2 {
   position: relative;
   padding: 25px;
