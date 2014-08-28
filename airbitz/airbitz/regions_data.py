@@ -63,6 +63,16 @@ ACTIVE_REGIONS_EUROPE = {
 
 }
 
+ACTIVE_REGIONS_NORTH_AMERICA = {
+    # South American regions
+    'US': {'name': 'United States',
+           'search': 'United States'},
+    'CA': {'name': 'Canada',
+           'search': 'Canada'},
+    'PR': {'name': 'Puerto Rico',
+           'search': 'Puerto Rico'},
+}
+
 ACTIVE_REGIONS_SOUTH_AMERICA = {
     # South American regions
     'BR': {'name': 'Brazil',
@@ -97,6 +107,7 @@ ACTIVE_REGIONS.update(CA_REGIONS)   # all
 ACTIVE_REGIONS.update(ACTIVE_REGIONS_EUROPE)            # partial
 ACTIVE_REGIONS.update(ACTIVE_REGIONS_ASIA)              # partial
 ACTIVE_REGIONS.update(ACTIVE_REGIONS_SOUTHEAST_ASIA)    # partial
+ACTIVE_REGIONS.update(ACTIVE_REGIONS_NORTH_AMERICA)     # partial
 ACTIVE_REGIONS.update(ACTIVE_REGIONS_SOUTH_AMERICA)     # partial
 ACTIVE_REGIONS.update(ACTIVE_REGIONS_OCEANA)        # partial
 
