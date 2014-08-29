@@ -52,11 +52,11 @@
 {% endblock admin_buttons %}
 
 {% block body %}
-
+  <div itemscope itemtype="http://schema.org/LocalBusiness">{# Schema.org container #}
 
     <div class="row" style="margin-bottom: 30px;">
         <div class="biz-info-header col-xs-12">
-            <h1 class="biz-name">{{ biz.name }}{% if biz.admin3_name %} <span class="biz-region">({{ biz.admin3_name }})</span>{% endif %}</h1>
+            <h1 itemprop="name" class="biz-name">{{ biz.name }}{% if biz.admin3_name %} <span class="biz-region">({{ biz.admin3_name }})</span>{% endif %}</h1>
         </div>
 
         <div class="biz-info-one col-md-6">
@@ -65,7 +65,7 @@
                 <div class="categories col-xs-12">
                     {% for c in biz.categories.all %}
                         <a class="biz-cat-link" href="{% url 'search' %}?term={{ c.name }}&location={{ location }}">
-                            <span class="label label-primary">{{c.name}}</span>
+                            <span class="label label-primary" itemprop="department" itemscope itemtype="http://schema.org/{{c.name}}">{{c.name}}</span>
                         </a>
                     {% endfor %}
                 </div>
@@ -87,7 +87,7 @@
 
     <div class="row">
 
-        <div class="biz-info-two col-sm-8 col-md-4">
+        <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress" class="biz-info-two col-sm-8 col-md-4">
             <div class="panel panel-default">
 
                 {% if biz.address or biz.center.x %}
@@ -122,26 +122,26 @@
 
                     {% if biz.address %}
                     <div class="biz-address-street" title="{{ biz.address }}">
-                        <i class="biz-address-marker-icon fa fa-map-marker"></i> {{ biz.address }}
+                        <i class="biz-address-marker-icon fa fa-map-marker"></i> <span itemprop="streetAddress">{{ biz.address }}</span>
                     </div>
                     {% endif %}
 
                     {% if biz.admin3_name %}
                     <div class="biz-address-city-state">
                         {% if not biz.address %}<i class="biz-address-marker-icon fa fa-map-marker"></i>{% endif %}
-                        {{ biz.admin3_name }}, {{ biz.admin1_code }} {{ biz.postalcode }}
+                        <span itemprop="addressLocality">{{ biz.admin3_name }}</span>, <span itemprop="addressRegion">{{ biz.admin1_code }}</span> {{ biz.postalcode }}
                     </div>
                     {% endif %}
 
                     {% if biz.country %}
                     <div class="biz-address-country">
-                        {{ biz.country }}
+                        <span itemprop="addressCountry">{{ biz.country }}
                     </div>
                     {% endif %}
 
                     {% if biz.phone %}
                     <div class="biz-phone single-line">
-                        <i class="fa fa-phone"></i> <a href="tel:{{ biz.phone }}">{{ biz.phone }}</a>
+                        <i class="fa fa-phone"></i> <a href="tel:{{ biz.phone }}"><span itemprop="telephone" content="{{ biz.phone }}">{{ biz.phone }}</span></a>
                     </div>
                     {% endif %}
 
@@ -156,6 +156,7 @@
                         <p class="biz-description">
                             {{ biz.description|urlizetrunc:40|linebreaksbr }}
                         </p>
+                        <span itemprop="description" class="hidden">{{ biz.description }}</span>
                     {% endif %}
                 </div>
 
@@ -190,6 +191,7 @@
 
         </div>
     </div>
+  </div>{# /Schema.org container #}
 
 
     {% if results %}
