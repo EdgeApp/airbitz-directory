@@ -386,14 +386,17 @@ def redirect_about(request):
     return HttpResponseRedirect('https://go.airbitz.co/about/')
 
 def redirect_button(request):
-    referer = request.META['HTTP_REFERER']
-    parsed_referer = urlparse(referer)
-    domain = '{uri.netloc}'.format(uri=parsed_referer)
-    b_match = Business.objects.filter(website__icontains=domain)
-    if b_match:
-        biz_id = b_match[0].id
-        return HttpResponseRedirect(request.build_absolute_uri(reverse('business_info', args=[biz_id])))
-    else:
+    try:
+        referer = request.META['HTTP_REFERER']
+        parsed_referer = urlparse(referer)
+        domain = '{uri.netloc}'.format(uri=parsed_referer)
+        b_match = Business.objects.filter(website__icontains=domain)
+        if b_match:
+            biz_id = b_match[0].id
+            return HttpResponseRedirect(request.build_absolute_uri(reverse('business_info', args=[biz_id])))
+        else:
+            redirect_url = request.build_absolute_uri(reverse('landing'))
+            return HttpResponseRedirect(redirect_url)
+    except KeyError: # couldn't get referrer (googlebot crawl)
         redirect_url = request.build_absolute_uri(reverse('landing'))
         return HttpResponseRedirect(redirect_url)
-
