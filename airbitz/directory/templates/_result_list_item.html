@@ -28,29 +28,37 @@
                 {% empty %}
                     <span class="label label-warning">Uncategorized</span>
                 {% endfor %}
+
+
+                <div class="biz-type pull-right">
+                  {% if biz.has_physical_business %}
+                    <span class="btn btn-xs btn-danger pull-right" title="Local Bitcoin Business">
+                      {% if biz.distance %}
+                          <i class="fa fa-map-marker"></i> {{ biz.distance.mi|floatformat:2 }}mi
+                      {% else %}
+                          <i class="fa fa-map-marker"></i>
+                      {% endif %}
+                    </span>
+                  {% endif %}
+
+                  {% if biz.has_online_business %}
+                    <span class="btn btn-xs btn-warning pull-right" title="Web Bitcoin Business">
+                      <i class="fa fa-globe"></i>
+                    </span>
+                  {% endif %}
+                </div>
+
+
             </div>
 
-            {% if biz.gmap_directions_url %}
-                <div class="biz-location">
-                    {% if biz.address %}
-                        <span class="biz-address-street"><i class="fa fa-map-marker"></i> {{ biz.address }}</span>
-                    {% elif biz.admin3_name %}
-                        <span class="biz-address-city"><i class="fa fa-map-marker"></i> {{ biz.admin3_name }}</span>
-                    {% endif %}
-                    {% if biz.gmap_directions_url %}
-                        &nbsp;
-                        <a class="btn btn-xs btn-danger pull-right" href="{{ biz.gmap_directions_url }}" target="_blank" title="Get Directions to {{ biz.name }}">
-                            {% if biz.distance %}
-                                <i class="fa fa-crosshairs"></i> {{ biz.distance.mi|floatformat:2 }}mi
-                            {% else %}
-                                Directions
-                            {% endif %}
-                        </a>
-                    {% endif %}
-                </div>
-            {% else %}
-                <br />
-            {% endif %}
+
+            <div class="biz-location">
+                {% if biz.address %}
+                    <span class="biz-address-street"><i class="fa fa-map-marker"></i> {{ biz.address }}</span>
+                {% elif biz.admin3_name %}
+                    <span class="biz-address-city"><i class="fa fa-map-marker"></i> {{ biz.admin3_name }}</span>
+                {% endif %}
+            </div>
         </div>
 
         <div class="biz-description">

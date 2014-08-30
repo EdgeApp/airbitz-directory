@@ -72,7 +72,10 @@ def business_search(request):
     location = request.GET.get('location', None)
     ip = api.getRequestIp(request)
     a = api.ApiProcess(locationStr=location, ll=ll, ip=ip)
-    results = a.searchDirectory(term=term, category=category)
+    s_type = request.GET.get('s_type', None)
+    # results = a.searchDirectory(term=term, category=category) # old search
+
+    results = a.searchDirectoryNew(term=term, category=category, s_type=s_type) # new search
 
     request.session['nearText'] = location
     if location == 'On the Web':
@@ -102,6 +105,8 @@ def business_search(request):
     }
 
     context = {
+        'term': term,
+        'location': location,
         'results': results,
         'mapkey': GOOGLE_MAP_KEY,
         'userLocation': a.userLocation(),

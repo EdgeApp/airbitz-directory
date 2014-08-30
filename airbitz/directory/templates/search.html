@@ -16,6 +16,38 @@
         var activeRegions = {{ active_regions|safe }}
         var allRegions = {{ all_regions|safe }}
 	  </script>
+
+    {# clickable panel headings #}
+    <script>
+      $(document).on('click', '.panel-heading span.clickable', function (e) {
+          var $this = $(this);
+          if (!$this.hasClass('panel-collapsed')) {
+              $this.parents('.panel').find('.panel-body').slideUp();
+              $this.addClass('panel-collapsed');
+              $this.find('i').removeClass('glyphicon-minus').addClass('glyphicon-plus');
+          } else {
+              $this.parents('.panel').find('.panel-body').slideDown();
+              $this.removeClass('panel-collapsed');
+              $this.find('i').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+          }
+      });
+      $(document).on('click', '.panel div.clickable', function (e) {
+          var $this = $(this);
+          if (!$this.hasClass('panel-collapsed')) {
+              $this.parents('.panel').find('.panel-body').slideUp();
+              $this.addClass('panel-collapsed');
+              $this.find('i').removeClass('glyphicon-minus').addClass('glyphicon-plus');
+          } else {
+              $this.parents('.panel').find('.panel-body').slideDown();
+              $this.removeClass('panel-collapsed');
+              $this.find('i').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+          }
+      });
+      $(document).ready(function () {
+          $('.panel-heading span.clickable').click();
+          $('.panel div.clickable').click();
+      });
+    </script>
 {% endblock javascript_headers %}
 
 {% block body %}
@@ -63,19 +95,58 @@
 
     {% else %}
 
+
     <div class="results-map-list row">
         <div class="col-sm-6">
-            <h1 class="search-title hidden-xs hidden-sm row">Bitcoin Business Search Results</h1>
-            <h1 class="search-title visible-xs visible-sm row">Search Results</h1>
+            <div class="row">
+              <h1 class="search-title hidden-xs hidden-sm">Bitcoin Business Results</h1>
+              <h1 class="search-title visible-xs visible-sm">Search Results</h1>
+            </div>
+
+            <div class="row">
+              <h4>You Searched <span class="term label label-primary">{{ term }}</span> near <span class="location label label-default">{{ location }}</span></h4>
+              <h5>Found: {{ results_info.total }}</h5>
+            </div>
+
+            <div class="search-info row">
+
+              <div class="search-filters panel panel-default">
+                  <div class="panel-heading clickable">
+                      <h3 class="panel-title">Search Filters</h3>
+                      <span class="pull-right "><i class="fa fa-chevron-circle-down"></i></span>
+                  </div>
+                  <div class="panel-body">
+                      <form class="form-horizontal" role="form">
+                        <legend>Business Types</legend>
+                        <div class="radio pull-left">
+                          <label>
+                            <input type="radio" name="s_type" value="" checked> <i class="fa fa-asterisk"></i> All
+                          </label>
+                        </div>
+                        <div class="radio pull-left">
+                          <label>
+                            <input type="radio" name="s_type" value="local"> <i class="fa fa-map-marker"></i> Local
+                          </label>
+                        </div>
+                        <div class="radio pull-left">
+                          <label>
+                            <input type="radio" name="s_type" value="web"> <i class="fa fa-globe"></i> Web
+                          </label>
+                        </div>
+                      </form>
+                  </div>
+              </div>
+
+            </div>
 
             {% if results_info.total > results_info.results_per_page %}
                 <div class="pagination-area row">
-                    {% bootstrap_paginate page_obj range=10 %}
+                    {% bootstrap_paginate page_obj range=8 %}
                 </div>
             {% endif %}
-                <div class="pagination-info row">
-                    <strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_left }}</strong> Shown on Map
-                </div>
+{#                <div class="pagination-info row">#}
+{#                    <strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_left }}</strong> Shown on Map#}
+{#                </div>#}
 
             {% block results_list_items %}
                 {% for biz in results %}

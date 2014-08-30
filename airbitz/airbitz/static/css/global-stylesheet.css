@@ -660,6 +660,9 @@
 .results-map-list .biz-meta {
   margin: 6px 0;
 }
+.results-map-list .biz-meta .biz-type span {
+  margin-left: 5px;
+}
 .results-map-list .biz-meta .biz-location {
   margin-top: 8px;
 }
@@ -912,6 +915,37 @@ body a.biz-cat-link:hover {
 }
 body a.biz-cat-link .label:hover {
   background: #003e61;
+}
+.search-filters .panel-heading i.fa {
+  font-size: 18px;
+  line-height: 32px;
+}
+.search-filters legend {
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.search-filters .radio {
+  margin-right: 15px;
+}
+.clickable {
+  cursor: pointer;
+}
+.clickable .glyphicon {
+  background: rgba(0, 0, 0, 0.15);
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+.panel-heading span {
+  margin-top: -23px;
+  font-size: 15px;
+}
+a.clickable {
+  color: inherit;
+}
+a.clickable:hover {
+  text-decoration: none;
 }
 .hidden-temp {
   opacity: 0;

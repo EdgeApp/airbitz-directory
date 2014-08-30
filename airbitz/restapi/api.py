@@ -271,6 +271,53 @@ class ApiProcess(object):
             sqs = sorted(sqs, key=lambda x: x.object.distance)
         return [s.object for s in sqs]
 
+
+    # NEW SEARCH (CURRENTLY EXPERIMENTAL FOR WEB ONLY)
+    def searchDirectoryNew(self, term=None, geobounds=None, radius=None, category=None, sort=None, s_type=None):
+        sqs = SearchQuerySet().models(Business)
+        geopoly = parseGeoBounds(geobounds)
+        if term:
+            formatted = wildcardFormat(term)
+            sqs = sqs.filter(SQ(categories=term)
+                           | SQ(name=term)
+                           | SQ(name=formatted)
+                           | SQ(description=term))
+        if category:
+            sqs = self.querySetAddCategories(sqs, category)
+        # Remove we never want to filter strictly on a category
+        # if self.isExactCategory(term):
+        #     sqs = sqs.filter(categories=term)
+
+        print 'S_TYPE =', s_type
+
+        if s_type is None:
+            print 'FILTER: None'
+
+        elif s_type == 'web':
+            print 'FILTER: Web'
+            sqs = sqs.filter(SQ(has_online_business=True))
+
+        elif s_type == 'local':
+            print 'FILTER: Local'
+            sqs = sqs.filter(SQ(has_physical_business=True))
+
+        if self.location.country():
+            sqs = sqs.narrow('country:' + self.location.country())
+            if self.location.admin1():
+                sqs = sqs.narrow('admin1_code:' + self.location.admin1())
+        sqs = sqs.distance('location', self.userLocation())
+
+        if term:
+            sqs = sqs.order_by('-score')
+        else:
+            sqs = sqs.order_by('distance')
+        sqs = sqs.load_all()
+
+        return [s.object for s in sqs]
+
+
+
+
     def __filer_on_web__(self, sqs):
         inCountry = []
         outCountry = []
