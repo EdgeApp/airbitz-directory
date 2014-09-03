@@ -64,12 +64,6 @@ $(function() {
 
 
     // SEARCH FILTER UI
-    var $s_type = getParameterByName('s_type');
-    var $searchFilterButton = $('.search-filters .search-filter-button button');
-    var $selected = $('.search-filters input[name=s_type]:checked').val();
-    var $searchForms = $('.navbar-form');
-
-
     function getParameterByName(name) {
       name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
       var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -77,9 +71,25 @@ $(function() {
       return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
-    function checkSearchFilters(){
 
-      $searchForms.append('<input type="hidden" name="s_type" value="' + $selected + '">');
+    var $s_type = getParameterByName('s_type');
+    var $searchFilterButton = $('.search-filters .search-filter-button button');
+    var $searchForms = $('.navbar-form');
+
+
+    function updateSearchTypeFormField(selected){
+      if($('.s_type_filter').length) {
+        $('.s_type_filter').val(selected);
+      } else {
+        $searchForms.append('<input class="s_type_filter" type="hidden" name="s_type" value="' + selected + '">');
+      }
+    }
+
+    function checkSearchFilters(){
+      var $selected = $('.search-filters input[name=s_type]:checked').val();
+
+      updateSearchTypeFormField($selected);
+
       if($s_type !== $selected) {
         $searchFilterButton.show();
       } else {
@@ -88,23 +98,43 @@ $(function() {
     }
 
     function searchFilterInit(){
-
+      var $searchFilters = $('.search-filters');
       $searchFilterButton.hide();
 
       $('.search-filters input[name="s_type"]')
           .filter('[value="' + $s_type + '"]').prop('checked', true);
 
+      updateSearchTypeFormField($s_type);
+
+      $('.search-info .term').on('click', function(){
+
+          $('#input-name-category').select();
+
+      });
+
+      $('.search-info .location').on('click', function(){
+        $('#input-location').focus();
+      });
+
+      $searchFilters.on('change', function(){
+        checkSearchFilters();
+        return true;
+      });
+
+      $searchFilterButton.on('click', function(e){
+        e.preventDefault();
+        $('#search-button').click();
+        return true;
+      });
+
+      $searchFilters.fadeIn(2000);
     }
 
     searchFilterInit();
 
-    $('.search-filters').on('change', function(){
-      checkSearchFilters();
-    });
 
-    $searchFilterButton.on('click', function(){
-      $('#search-button').click();
-    });
+
+
 
 
     // SEARCH AND NEARBY GRID

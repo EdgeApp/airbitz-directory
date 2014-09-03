@@ -88,8 +88,20 @@ body {
 } // body
 
 
+.search-info {
+
+    .label {
+        border: 1px solid white;
+
+        &:hover {
+            border: 1px solid black;
+        }
+    }
+}
+
 // SEARCH FILTER AREA
 .search-filters {
+    display: none;
 
     .panel-heading {
 
@@ -109,7 +121,13 @@ body {
         margin-right: 15px;
     }
     
+    .s-type-filter {
+        margin-left: 0;
+        margin-bottom: 0;
+    }
+
     .search-filter-button {
+        margin-top: 10px;
         margin-bottom: 0;
     }
 }

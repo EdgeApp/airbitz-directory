@@ -916,6 +916,15 @@ body a.biz-cat-link:hover {
 body a.biz-cat-link .label:hover {
   background: #003e61;
 }
+.search-info .label {
+  border: 1px solid white;
+}
+.search-info .label:hover {
+  border: 1px solid black;
+}
+.search-filters {
+  display: none;
+}
 .search-filters .panel-heading i.fa {
   font-size: 18px;
   line-height: 32px;
@@ -928,7 +937,12 @@ body a.biz-cat-link .label:hover {
 .search-filters .radio {
   margin-right: 15px;
 }
+.search-filters .s-type-filter {
+  margin-left: 0;
+  margin-bottom: 0;
+}
 .search-filters .search-filter-button {
+  margin-top: 10px;
   margin-bottom: 0;
 }
 .clickable {

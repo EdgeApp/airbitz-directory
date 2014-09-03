@@ -103,14 +103,13 @@
               <h1 class="search-title visible-xs visible-sm">Search Results</h1>
             </div>
 
-            <div class="row">
-              <h4>You Searched <span class="term label label-primary">{{ term }}</span> near <span class="location label label-default">{{ location }}</span></h4>
-              <h5>Found: {{ results_info.total }}</h5>
-            </div>
 
             <div class="search-info row">
+              <h4>You Searched <span class="term label label-warning clickable">{{ term }}</span> near <span class="location label label-default clickable">{{ location }}</span></h4>
+              <h5>Found: {{ results_info.total }}</h5>
 
-              <div class="search-filters panel panel-default">
+              <div class="search-filters panel panel-primary">
+
                   <div class="panel-heading clickable">
                       <h3 class="panel-title">Search Filters</h3>
                       <span class="pull-right "><i class="fa fa-chevron-circle-down"></i></span>
@@ -118,20 +117,22 @@
                   <div class="panel-body">
                       <form class="form-horizontal" role="form">
                         <legend>Business Types</legend>
-                        <div class="radio pull-left">
-                          <label>
-                            <input type="radio" name="s_type" value="" checked> <i class="fa fa-asterisk"></i> All
-                          </label>
-                        </div>
-                        <div class="radio pull-left">
-                          <label>
-                            <input type="radio" name="s_type" value="local"> <i class="fa fa-map-marker"></i> Local
-                          </label>
-                        </div>
-                        <div class="radio pull-left">
-                          <label>
-                            <input type="radio" name="s_type" value="web"> <i class="fa fa-globe"></i> Web
-                          </label>
+                        <div class="s-type-filter form-group">
+                          <div class="radio pull-left">
+                            <label>
+                              <input type="radio" name="s_type" value="" checked> <i class="fa fa-asterisk"></i> All
+                            </label>
+                          </div>
+                          <div class="radio pull-left">
+                            <label>
+                              <input type="radio" name="s_type" value="local"> <i class="fa fa-map-marker"></i> Local
+                            </label>
+                          </div>
+                          <div class="radio pull-left">
+                            <label>
+                              <input type="radio" name="s_type" value="web"> <i class="fa fa-globe"></i> Web
+                            </label>
+                          </div>
                         </div>
                         <div class="search-filter-button form-group">
                           <div class="col-sm-12">
@@ -140,8 +141,8 @@
                         </div>
                       </form>
                   </div>
-              </div>
 
+              </div>
             </div>
 
             {% if results_info.total > results_info.results_per_page %}
