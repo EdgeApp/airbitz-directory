@@ -61,6 +61,52 @@ $(function() {
         });
     });
 
+
+
+    // SEARCH FILTER UI
+    var $s_type = getParameterByName('s_type');
+    var $searchFilterButton = $('.search-filters .search-filter-button button');
+    var $selected = $('.search-filters input[name=s_type]:checked').val();
+    var $searchForms = $('.navbar-form');
+
+
+    function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+          results = regex.exec(location.search);
+      return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    function checkSearchFilters(){
+
+      $searchForms.append('<input type="hidden" name="s_type" value="' + $selected + '">');
+      if($s_type !== $selected) {
+        $searchFilterButton.show();
+      } else {
+        $searchFilterButton.hide();
+      }
+    }
+
+    function searchFilterInit(){
+
+      $searchFilterButton.hide();
+
+      $('.search-filters input[name="s_type"]')
+          .filter('[value="' + $s_type + '"]').prop('checked', true);
+
+    }
+
+    searchFilterInit();
+
+    $('.search-filters').on('change', function(){
+      checkSearchFilters();
+    });
+
+    $searchFilterButton.on('click', function(){
+      $('#search-button').click();
+    });
+
+
     // SEARCH AND NEARBY GRID
     $('.results-map-list .biz-address-street').dotdotdot({
         height: parseInt( $('.results-map-list .biz-address-street').css('line-height'), 10) * 1, //this is the line height

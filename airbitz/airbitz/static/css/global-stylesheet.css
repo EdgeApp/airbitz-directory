@@ -928,6 +928,9 @@ body a.biz-cat-link .label:hover {
 .search-filters .radio {
   margin-right: 15px;
 }
+.search-filters .search-filter-button {
+  margin-bottom: 0;
+}
 .clickable {
   cursor: pointer;
 }
