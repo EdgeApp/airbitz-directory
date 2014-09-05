@@ -326,14 +326,9 @@ PIPELINE_JS = {
     'search': {
         'source_filenames': (
             'extras/gmaps/gmaps.js',
-            'extras/jvectormap/jquery-jvectormap.js',
-            'extras/jvectormap/maps/jquery-jvectormap-us-aea-en.js',
-            'extras/jvectormap/maps/jquery-jvectormap-ca-lcc-en.js',
-            'extras/jvectormap/maps/jquery-jvectormap-europe-mill-en.js',
             'extras/masonry/masonry.pkgd.min.js',
             'extras/blur.js/blur.js',
             'extras/ajaxchimp/jquery.ajaxchimp.js',
-            'js/region-map.js',
             'js/directory.js',
         ),
         'output_filename': 'js/search.' + DEPLOY_DATE + '.js',
