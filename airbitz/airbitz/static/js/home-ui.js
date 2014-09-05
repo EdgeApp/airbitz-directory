@@ -97,11 +97,27 @@ jQuery(function($) {
       $.cookie(thing, newCount, {expires: expiration});
     }
 
-//    $('.column1, .column3 #who-accepts-bitcoin, ').blurjs({
-//        source: '.landing-module',
-//        radius: '20',
-//        overlay: 'rgba(255,255,255,0.5)',
-//         cache: true,
-//    });
+    $('#jump-who-accepts-bitcoin').on('click', function(){
+      showWhoAcceptsBitcoin();
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+      $('#accepting-bitcoin').removeClass('animated bounceInDown pulse');
+      setTimeout(function() {
+        $('#accepting-bitcoin').addClass('animated pulse');
+      }, 750);
+      return false;
+    });
+
+
+    // display navbar after first scroll and hide if all the way at top
+    $(window).scroll(function() {
+      var y = $(window).scrollTop();
+
+      if (y > 50) {
+        console.log('show');
+        $('#nav-desktop').css({'visibility': 'visible'});
+      } else {
+        $('#nav-desktop').css({'visibility': 'hidden'});
+      }
+    });
 
 });

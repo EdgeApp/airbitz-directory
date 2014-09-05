@@ -66,6 +66,9 @@ app.controller('abRegionList', ['$scope', '$http', 'SimpleCache', 'regionData', 
     var $location = $('#input-location');
     var $search = $('#search-button');
 
+    $('.landing-module').css({'margin-top': '70px'});
+    $('#nav-desktop').css({'visibility': 'visible'});
+
     $location.val(region);
 
     $search.addClass('animated flash');
@@ -111,6 +114,9 @@ app.controller('abRegionDetails', ['$scope', 'SimpleCache', 'region', function($
   $scope.subRegionClicked = function(region, country){
     var $location = $('#input-location');
     var $search = $('#search-button');
+
+    $('.landing-module').css({'margin-top': '70px'});
+    $('#nav-desktop').css({'visibility': 'visible'});
 
     $location.val(region + ', ' + country);
 
