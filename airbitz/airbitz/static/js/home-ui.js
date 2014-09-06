@@ -115,8 +115,11 @@ jQuery(function($) {
       if (y > 50) {
         console.log('show');
         $('#nav-desktop').css({'visibility': 'visible'});
+        $('#nav-desktop').removeClass('fadeOutUp');
+        $('#nav-desktop').addClass('animated fadeInDown');
       } else {
-        $('#nav-desktop').css({'visibility': 'hidden'});
+        $('#nav-desktop').removeClass('fadeInDown');
+        $('#nav-desktop').addClass('fadeOutUp');
       }
     });
 
