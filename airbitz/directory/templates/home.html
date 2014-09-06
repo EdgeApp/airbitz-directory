@@ -153,25 +153,29 @@
 
         <div class="bitcoin-directory-wallet row">
           <div class="col-xs-12">
-            <h2>Bitcoin Wallet<br />
-              <em style="color: #777">(Coming Soon)</em>
-            </h2>
-          </div>
-
-          <div class="signup-area row">
-            <div class="col-sm-12">
-              <form id="email-signup-form" class="form" role="form">
-                <div class="form-group">
-                  <label for="inputEmailWallet" class="control-label"></label>
-                  <input type="email" class="inputEmail form-control input-lg" id="inputEmailWallet" placeholder="Your Email">
-                </div>
-                <div class="form-group">
-                  <button type="submit" class="btn btn-lg btn-danger btn-block">Notify Me When Wallet is Ready!</button>
-                </div>
-              </form>
-            </div>
+            <h2>Bitcoin Wallet</h2>
+              <a class="btn-success btn-lg btn" target="_blank" title="airBitz Beta Sign Up" href="https://go.airbitz.co/beta-tester/"><i class="fa fa-flask"></i> Beta Test Wallet Now</a>
           </div>
         </div>
+
+        <div class="or-area">
+          <div class="left-line">&nbsp</div><h2>or</h2><div class="right-line">&nbsp;</div>
+        </div>
+
+        <div class="signup-area row">
+          <div class="col-sm-12">
+            <form id="email-signup-form" class="form" role="form">
+              <div class="form-group">
+                <label for="inputEmailWallet" class="control-label"></label>
+                <input type="email" class="inputEmail form-control input-lg" id="inputEmailWallet" placeholder="Your Email">
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-danger btn-block">Email When Wallet is Finished!</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
 
 
       </div><!-- /.column1 -->
@@ -203,8 +207,6 @@
             </li>
           </ul>
         </div>
-{#        <img src="{{ STATIC_URL }}img/landing/iphone5s_1up.png" alt=""/>#}
-{#        <iframe width="390" height="219" src="//www.youtube.com/embed/OjBQTDzPcmg" frameborder="0" allowfullscreen></iframe>#}
       </div><!-- /.column2 -->
 
 
@@ -321,34 +323,54 @@
 
 
     </div> <!-- .et_pb_section --><div class="et_pb_section" style='background-color:#ffffff;'>
-      <div class="et_pb_row">
+      <div class="airbitz-feature-details et_pb_row">
         <div class="et_pb_column et_pb_column_4_4">
           <div class="et_pb_text et_pb_bg_layout_light et_pb_text_align_left">
 
-            <h2>Bitcoin Wallet App <em style="color: #777">(Will be Available Soon)</em></h2>
+            <h2>Bitcoin Wallet App <em style="color: #777">(<a title="airBitz Beta Sign Up" href="https://go.airbitz.co/beta-tester/">Beta Testing Now!</a>)</em></h2>
             <p>The airBitz mobile digital wallet is a decentralized, secure, private, synchronized, and backed up Bitcoin wallet.  A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:</p>
 
             <div id="wallet-icon" class="app-icon-image">
               <img class="alignnone" alt="airBits Mobile App" src="{{ STATIC_URL }}wp/assets/img/airbitz-app-256.png" width="175" height="175" />
             </div>
+            <div class="airbitz-video">
+              <iframe width="390" height="219" src="//www.youtube.com/embed/OjBQTDzPcmg" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <h3 class="wallet-beta-signup">
+              Eight months in the making and we are proud to launch the beta release of our Android Bitcoin wallet. With the same powerful core as our iOS wallet, we're sure you'll love all the functionality (see below) we've baked into our wallet.<br /><br />
+              <a class="btn-success btn-lg btn" target="_blank" title="airBitz Beta Sign Up" href="https://go.airbitz.co/beta-tester/"><i class="fa fa-flask"></i> Beta Test Sign Up</a>
+            </h3>
+
             <ul class="features-list">
-              <li>Auto-synced wallets across multiple devices</li>
-              <li>Cloud backups</li>
-              <li>Financial tracking and reporting with exports to popular financial software</li>
-              <li>Simplification of the wallet interface to use user-selected wallet names (vs. cryptic Bitcoin addresses)</li>
-              <li>Local, client side encryption, providing ZERO access to user data by Airbitz servers, employees, or anyone but the wallet user</li>
-              <li>Dynamic addresses change with every transaction to significantly increase wallet privacy</li>
-              <li>Industry standard, incredibly strong, AES256 data encryption</li>
-              <li>GPU resistant "password key stretching" to make brute force password hacking insanely difficult</li>
+              <li>Simple account creation using just a login & password (no printing or emailing of PDFs, writing down passphrases or adding encryption settings)</li>
+              <li>Hierarchical Deterministic wallets with changing addresses per transaction</li>
+              <li>Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)</li>
+              <li>Multiple fiat currency support. Assign a fiat currency per wallet.</li>
+              <li>User editable transaction meta-data (payee, category, fiat value, & notes)</li>
+              <li>Search transactions by payee, category, amount, or notes</li>
+              <li>Built-in calculator for easy conversions</li>
+              <li>Quick UI to transfer funds between wallets in an account</li>
+              <li>Automatic wallet backup and multi-device synchronization</li>
+              <li>Decentralized server architecture. Wallets work even if Airbitz servers are down.</li>
+              <li>Integration with the Airbitz Business directory to auto-complete business meta data for transactions</li>
+              <li>Local client-side encryption (S-Crypt password hashing & AES256 encryption) of all user keys and data</li>
+              <li>Zero-knowledge & Zero-access to user funds, keys, or data by Airbitz or 3rd parties</li>
+              <li>Open-source release in Q4 of 2014</li>
             </ul>
             <br style="clear: both;" />
 
-            <h2>Bitcoin Business Directory</h2>
+            <h2>Bitcoin Business Directory (<a class="directory-link" href="./search?term=&location=Current+Location">Search Bitcoin Businesses Online</a>)</h2>
             <p>The airBitz wallet also includes a business directory to help consumers find merchants and websites that accept bitcoin as payment. Some of its powerful features include:</p>
 
             <div id="directory-icon" class="app-icon-image">
               <img class="alignnone" alt="airBitz Bitcoin Business Directory" src="{{ STATIC_URL }}wp/assets/img/bitcoin-directory-map.png" width="200" height="200" />
             </div>
+            <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
+              <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
+            </a>
+            <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
+              <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
+            </a>
             <ul class="features-list" style="">
               <li>Advanced search ability by proximity, business name, category, city, state, or country</li>
               <li>Inclusion of web based bitcoin businesses such as online merchants and exchange services</li>
@@ -356,6 +378,7 @@
               <li>The most comprehensive listing of bitcoin businesses with businesses updated daily</li>
               <li>Alerts of new businesses in your area accepting bitcoin</li>
             </ul>
+            <button id="jump-who-accepts-bitcoin" class="btn-success btn-lg btn animated infinite pulse" href="">See Who Accepts Bitcoin</button>
             <br style="clear: both;" />
 
           </div> <!-- .et_pb_text -->
