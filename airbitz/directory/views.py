@@ -1,10 +1,12 @@
 import datetime
 from django.contrib.gis.measure import D
 from django.db.models import Q
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from urllib import urlencode
+import urllib
 from airbitz import regions_data
 from airbitz.regions_data import ACTIVE_REGIONS, ALL_REGIONS
 
@@ -154,3 +156,28 @@ def test(request, url=None):
     context = {
     }
     return render_to_response('test-angular.html', RequestContext(request, context))
+
+
+
+
+# TODO: REMOVE FROM directory/urls.py AND directory/views.py AFTER TESTING
+
+def redirect_btc(request):
+
+    address = request.GET['address']
+    url = 'bitcoin:' + address
+    print '\n------------------------------------\n'
+    print 'ADDRESS:', address
+    print 'URL BUILT:', url
+    print '\n------------------------------------\n'
+
+    response = HttpResponse("", status=302)
+    response['Location'] = str(url)
+    return response
+
+
+def btc_link(request, url=None):
+
+    context = {
+    }
+    return render_to_response('btc-link.html', RequestContext(request, context))

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load imagekit %}
+{% load humanize %}
+{% load compressed %}
+{% load absolute %}
+{% load ab_custom_tags %}
+
+{% block html_open_tag %}ng-app=""{% endblock html_open_tag %}{# angular initialization #}
+{% block addthis_sharing %}{% endblock %}{# remove addthis #}
+
+{% block head %}
+  {{ block.super }}
+{% endblock %}
+
+{% block title %}Create a Bitcoin Business Listing{% endblock title %}
+{% block meta_description %}Easily create a business listing for a Bitcoin friendly business in just a couple middingminutes.{% endblock meta_description %}
+{% block meta_news_keywords %}{{ biz.admin3_name }} Bitcoin Business, Accepts Bitcoin, Business Listing{% endblock meta_news_keywords %}
+
+{% block og_title %}Create a Bitcoin Business Listing{% endblock og_title %}
+{% block og_description %}Easily create a business listing for a Bitcoin friendly business in just a couple minutes.{% endblock og_description %}
+{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-business.jpg{% endblock og_image %}
+
+{% block twitter_title %}Create a Bitcoin Business Listing{% endblock twitter_title %}
+{% block twitter_description %}Easily create a business listing for a Bitcoin friendly business in just a couple minutes.{% endblock twitter_description %}
+{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-business.jpg{% endblock twitter_image_src %}
+
+
+
+{% block top_bg %}
+{% endblock %}
+
+{% block admin_buttons %}
+  {{ block.super }}
+  {% if user.is_superuser %}{% endif %}
+{% endblock admin_buttons %}
+
+{% block body %}
+
+  <div class="row">
+    <div class="biz-info-header col-xs-12">
+      <h1 class="biz-name">
+        <img class="alignnone" id="bitcoin-logo" alt="bitcoin" src="{{ STATIC_URL }}wp/assets/img/bitcoin-icon-logo_white-bg.png" width="64" height="64">&nbsp;Your Bitcoin Links
+      </h1>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-12">
+      <a href="bitcoin://1Em5hYnDHwRa411t3MgvpKhjMTPBXFGf2j?amount=0.021523&label=Pman%20Pueydogger%20-%20Airbitz">bitcoin://1Em5hYnDHwRa411t3MgvpKhjMTPBXFGf2j?amount=0.021523&label=Pman%20Pueydogger%20-%20Airbitz</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <a href="bitcoin:1Em5hYnDHwRa411t3MgvpKhjMTPBXFGf2j?amount=0.021523&label=Pman%20Pueydogger%20-%20Airbitz">bitcoin:1Em5hYnDHwRa411t3MgvpKhjMTPBXFGf2j?amount=0.021523&label=Pman%20Pueydogger%20-%20Airbitz</a>
+    </div>
+  </div>
+
+
+
+{% endblock %}
+
+{% block javascript_headers %}
+  {{ block.super }}
+{% endblock javascript_headers %}
+
+{% block javascript %}
+  {{ block.super }}
+  <script type="text/javascript">
+
+  </script>
+{% endblock %}
+

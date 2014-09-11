@@ -6,9 +6,11 @@ urlpatterns = patterns('',
     url(r'^search$', 'directory.views.business_search', name='search'),
     url(r'^biz/(?P<bizId>\d+)/$', 'directory.views.business_info', name='business_info'),
     url(r'^add-biz/?$', 'directory.views.add_business', name='business_add'),
-    url(r'^home2/$', 'directory.views.home_v2', name='home_v2'),
     url(r'^home/$', 'directory.views.landing', name='home'),
-    url(r'^test/$', 'directory.views.test', name='test'),
+    url(r'^blf/$', 'directory.views.redirect_btc', name='redirect_btc'),
+    url(r'^btc-link/$', 'directory.views.btc_link', name='btc_link'),
+    # url(r'^home2/$', 'directory.views.home_v2', name='home_v2'),
+    # url(r'^test/$', 'directory.views.test', name='test'),
     url(r'^$', 'directory.views.landing', name='landing'),
 )
 
