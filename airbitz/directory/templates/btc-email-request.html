@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load imagekit %}
+{% load humanize %}
+{% load compressed %}
+{% load absolute %}
+{% load ab_custom_tags %}
+
+{% block html_open_tag %}ng-app=""{% endblock html_open_tag %}{# angular initialization #}
+{% block addthis_sharing %}{% endblock %}{# remove addthis #}
+
+{% block head %}
+  {{ block.super }}
+{% endblock %}
+
+
+{% block top_bg %}
+{% endblock %}
+
+
+
+{% block body %}
+
+
+
+<iframe src="./template-email-request.html" style="width: 100%; height: 1000px;"></iframe>
+
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+  {{ block.super }}
+  <script type="text/javascript">
+  </script>
+{% endblock %}
+

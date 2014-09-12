@@ -151,18 +151,10 @@ def add_business(request, url=None):
     return render_to_response('business_add.html', RequestContext(request, context))
 
 
-def test(request, url=None):
-
-    context = {
-    }
-    return render_to_response('test-angular.html', RequestContext(request, context))
 
 
 
-
-# TODO: REMOVE FROM directory/urls.py AND directory/views.py AFTER TESTING
-
-def redirect_btc(request):
+def redirect_blf(request):
 
     address = request.GET['address']
     url = 'bitcoin:' + address
@@ -176,8 +168,14 @@ def redirect_btc(request):
     return response
 
 
-def btc_link(request, url=None):
+def btc_email_request(request):
 
     context = {
     }
-    return render_to_response('btc-link.html', RequestContext(request, context))
+    return render_to_response('btc-email-request.html', RequestContext(request, context))
+
+def email_request_template(request):
+
+    context = {
+    }
+    return render_to_response('template-email-request.html', RequestContext(request, context))
