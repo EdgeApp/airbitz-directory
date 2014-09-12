@@ -1,3 +1,4 @@
+{% load static %}
             <nav id="nav-desktop" class="navbar navbar-ab navbar-fixed-top hidden-xs hidden-sm" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="container">
@@ -9,7 +10,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="{% url 'landing' %}">
-                            <img class="logo" src="{{ STATIC_URL }}img/logo-nav.png" alt="Airbitz" />
+                            <img class="logo" src="{% static 'img/logo-nav.png' %}" alt="Airbitz" />
                         </a>
                     </div>
 
@@ -124,7 +125,7 @@
 
                     <div class="navbar-header">
                         <a class="navbar-brand" href="{% url 'landing' %}">
-                            <img class="logo" src="{{ STATIC_URL }}img/logo-nav.png" alt="Airbitz" />
+                            <img class="logo" src="{% static "img/logo-nav.png" %}" alt="Airbitz" />
                         </a>
                         <a id="mobile-nav-close" class="btn btn-lg" href="#"><i class="fa fa-chevron-up"></i></a>
                     </div>
