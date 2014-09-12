@@ -78,6 +78,7 @@ a:hover {
   background: #80c341;
   color: #fff;
   border: 1px dashed #80c341;
+  font-size: 14px;
 }
 #body-table .payment-instructions td {
   padding: 10px 0;
