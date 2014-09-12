@@ -1,5 +1,9 @@
 * {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font: 14px Verdana, Arial, Helvetica, sans-serif;
+}
+h2 {
+  font-size: 20px;
+  font-weight: bold;
 }
 body {
   background: #eee;
@@ -69,6 +73,11 @@ a:hover {
   width: 90px;
   font-weight: bold;
 }
+@media only screen and (min-width: 250px) and (max-width: 480px) {
+  #body-table .transaction-details .green.right {
+    font-size: 10px;
+  }
+}
 #body-table .payment-instructions {
   width: 98% !important;
   background: #80c341;
@@ -96,7 +105,7 @@ a:hover {
   }
 }
 #body-table .app-store {
-  height: 149px;
+  width: 149px;
   height: 50px;
 }
 #body-table .bottom-section {
@@ -106,7 +115,7 @@ a:hover {
 #body-table .viewWebsite p {
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font: 14px Arial, Helvetica, sans-serif;
   color: #555555;
 }
 @media only screen and (max-width: 640px) {

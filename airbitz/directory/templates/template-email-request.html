@@ -9,7 +9,6 @@
 * {
   font: 14px Verdana, Arial, Helvetica, sans-serif;
 }
-
 h2 {
   font-size: 20px;
   font-weight: bold;
@@ -82,6 +81,11 @@ a:hover {
   width: 90px;
   font-weight: bold;
 }
+@media only screen and (min-width: 250px) and (max-width: 480px) {
+  #body-table .transaction-details .green.right {
+    font-size: 10px;
+  }
+}
 #body-table .payment-instructions {
   width: 98% !important;
   background: #80c341;
@@ -109,7 +113,7 @@ a:hover {
   }
 }
 #body-table .app-store {
-  height: 149px;
+  width: 149px;
   height: 50px;
 }
 #body-table .bottom-section {

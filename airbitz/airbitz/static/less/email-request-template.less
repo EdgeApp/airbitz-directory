@@ -9,7 +9,14 @@
 @ab-blue-light: #02A4E2;
 
 
-* {font-family: Verdana, Arial, Helvetica, sans-serif;}
+* {
+  font: 14px Verdana, Arial, Helvetica, sans-serif;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
 
 body {
     background: #eee;
@@ -23,7 +30,6 @@ a {
         text-decoration: underline;
     }
 }
-
 
 .left {
     text-align: left;
@@ -40,7 +46,6 @@ a {
 .blue {
     color: @ab-blue;
 }
-
 
 #header-table {
     margin-top: 40px;
@@ -89,7 +94,11 @@ a {
             font-weight: bold;
         }
 
-
+        .green.right {
+            @media only screen and (min-width: 250px) and (max-width: 480px) {
+                font-size: 10px;
+            }
+        }
     }
 
     .payment-instructions {
@@ -122,7 +131,7 @@ a {
     }
 
     .app-store {
-        height: 149px;    
+        width: 149px;
         height: 50px;
     }
     
@@ -136,7 +145,7 @@ a {
         p {
             margin: 0;
             padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
+            font: 14px Arial, Helvetica, sans-serif;
             color: #555555;
         }
     }
