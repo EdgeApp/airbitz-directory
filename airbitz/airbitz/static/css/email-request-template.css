@@ -66,17 +66,12 @@ a:hover {
 @media only screen and (min-width: 250px) and (max-width: 480px) {
   #body-table .transaction-details td {
     padding: 2px 5px;
-    font-size: 10px;
+    font-size: 10px !important;
   }
 }
 #body-table .transaction-details .label {
   width: 90px;
   font-weight: bold;
-}
-@media only screen and (min-width: 250px) and (max-width: 480px) {
-  #body-table .transaction-details .green.right {
-    font-size: 10px;
-  }
 }
 #body-table .payment-instructions {
   width: 98% !important;
