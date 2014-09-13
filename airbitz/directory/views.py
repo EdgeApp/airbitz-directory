@@ -153,29 +153,30 @@ def add_business(request, url=None):
 
 
 
-
+# handles email redirects for desktop or android gmail
 def redirect_blf(request):
 
     address = request.GET['address']
     url = 'bitcoin:' + address
-    print '\n------------------------------------\n'
-    print 'ADDRESS:', address
-    print 'URL BUILT:', url
-    print '\n------------------------------------\n'
-
+    # print '\n------------------------------------\n'
+    # print 'ADDRESS:', address
+    # print 'URL BUILT:', url
+    # print '\n------------------------------------\n'
     response = HttpResponse("", status=302)
     response['Location'] = str(url)
     return response
 
 
 def btc_email_request(request):
-
-    context = {
-    }
+    context = {}
     return render_to_response('btc-email-request.html', RequestContext(request, context))
 
 def email_request_template(request):
-
-    context = {
-    }
+    context = {}
     return render_to_response('template-email-request.html', RequestContext(request, context))
+
+
+# app download fallback page
+def app_download(request):
+    context = {}
+    return render_to_response('app-download.html')

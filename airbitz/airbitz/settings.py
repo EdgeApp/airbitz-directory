@@ -218,6 +218,16 @@ PIPELINE_CSS = {
             'media': 'screen,projection',
         },
     },
+    'app_download': {
+        'source_filenames': (
+            'css/animate.css',
+            'css/app-download.css',
+        ),
+        'output_filename': 'css/app-download.' + DEPLOY_DATE + '.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
     'search': {
         'source_filenames': (
             'css/animate.css',

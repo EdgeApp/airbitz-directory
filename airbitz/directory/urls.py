@@ -3,6 +3,7 @@ from django.conf import settings
 from django.views.generic import TemplateView
 
 urlpatterns = patterns('',
+    url(r'^app', 'directory.views.app_download', name='app_download'),
     url(r'^search$', 'directory.views.business_search', name='search'),
     url(r'^biz/(?P<bizId>\d+)/$', 'directory.views.business_info', name='business_info'),
     url(r'^add-biz/?$', 'directory.views.add_business', name='business_add'),
