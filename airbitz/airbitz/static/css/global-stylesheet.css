@@ -394,7 +394,7 @@
 .biz-info-header .biz-name {
   letter-spacing: -1.5px;
   font-size: 42px;
-  font-weight: 900;
+  font-weight: 700;
 }
 .biz-info-header .biz-region {
   font-weight: 300;
@@ -503,7 +503,7 @@
   }
 }
 .results-header h2 {
-  font-weight: 900;
+  font-weight: 700;
   margin: 60px 0 30px 0;
 }
 .results-header .icon-bitcoin-map {
@@ -512,7 +512,7 @@
 .results-area .search-title {
   margin-top: 20px;
   margin-bottom: 10px;
-  font-weight: 900;
+  font-weight: 700;
 }
 .location-search-info .map-container {
   top: 90px;
@@ -590,7 +590,7 @@
 }
 .results-map-list .search-title {
   margin-bottom: 10px;
-  font-weight: 900;
+  font-weight: 700;
   color: #333333;
 }
 .results-map-list .result-list-item {
@@ -635,7 +635,7 @@
 }
 .results-map-list .biz-name {
   font-size: 24px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: -1.25px;
   margin: 0;
 }
@@ -719,7 +719,7 @@
   -o-transition: 0.3s ease;
 }
 .biz-result .biz-name {
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: -1px;
 }
 .biz-result .biz-name a {
