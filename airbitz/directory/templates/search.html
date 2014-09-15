@@ -30,11 +30,11 @@
     <div class="results-area">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="search-title hidden-xs hidden-sm">Bitcoin Businesses On the Web</h1>
-                <h1 class="search-title visible-xs visible-sm">Search Results</h1>
+                <h1 class="search-title visible-lg-block">Bitcoin Businesses On the Web</h1>
+                <h1 class="search-title visible-xs-block visible-sm-block visible-md-block">Search Results</h1>
                 {% if results_info.total > results_info.results_per_page %}
                     <div class="pagination-area">
-                        {% bootstrap_paginate page_obj range=10 %}
+                        {% bootstrap_paginate page_obj range=8 %}
                     </div>
                 {% endif %}
                     <div class="pagination-info row">
@@ -54,7 +54,7 @@
 
       {% if results_info.total > results_info.results_per_page %}
           <div class="pagination-area">
-              {% bootstrap_paginate page_obj range=10 %}
+              {% bootstrap_paginate page_obj range=8 %}
           </div>
       {% endif %}
           <div class="pagination-info row">
@@ -70,7 +70,7 @@
 
             {% if results_info.total > results_info.results_per_page %}
                 <div class="pagination-area row">
-                    {% bootstrap_paginate page_obj range=10 %}
+                    {% bootstrap_paginate page_obj range=8 %}
                 </div>
             {% endif %}
                 <div class="pagination-info row">
@@ -85,7 +85,7 @@
 
             {% if results_info.total > results_info.results_per_page %}
                 <div class="pagination-area row">
-                    {% bootstrap_paginate page_obj range=10 %}
+                    {% bootstrap_paginate page_obj range=8 %}
                 </div>
             {% endif %}
                 <div class="pagination-info row">
