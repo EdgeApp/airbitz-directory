@@ -1,10 +1,12 @@
 import datetime
 from django.contrib.gis.measure import D
 from django.db.models import Q
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from urllib import urlencode
+import urllib
 from airbitz import regions_data
 from airbitz.regions_data import ACTIVE_REGIONS, ALL_REGIONS
 
@@ -154,8 +156,32 @@ def add_business(request, url=None):
     return render_to_response('business_add.html', RequestContext(request, context))
 
 
-def test(request, url=None):
 
-    context = {
-    }
-    return render_to_response('test-angular.html', RequestContext(request, context))
+
+# handles email redirects for desktop or android gmail
+def redirect_blf(request):
+
+    address = request.GET['address']
+    url = 'bitcoin:' + address
+    # print '\n------------------------------------\n'
+    # print 'ADDRESS:', address
+    # print 'URL BUILT:', url
+    # print '\n------------------------------------\n'
+    response = HttpResponse("", status=302)
+    response['Location'] = str(url)
+    return response
+
+
+def btc_email_request(request):
+    context = {}
+    return render_to_response('btc-email-request.html', RequestContext(request, context))
+
+def email_request_template(request):
+    context = {}
+    return render_to_response('template-email-request.html', RequestContext(request, context))
+
+
+# app download fallback page
+def app_download(request):
+    context = {}
+    return render_to_response('app-download.html')

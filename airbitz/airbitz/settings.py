@@ -43,7 +43,7 @@ SCREENCAP_INTERVAL = datetime.timedelta(minutes=15)
 FP_QUERY_INTERVAL = datetime.timedelta(days=7)
 
 
-DEPLOY_DATE = '20140828'
+DEPLOY_DATE = '20140905'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -214,6 +214,16 @@ PIPELINE_CSS = {
             'css/home.css',
         ),
         'output_filename': 'css/home.' + DEPLOY_DATE + '.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+    'app_download': {
+        'source_filenames': (
+            'css/animate.css',
+            'css/app-download.css',
+        ),
+        'output_filename': 'css/app-download.' + DEPLOY_DATE + '.css',
         'extra_context': {
             'media': 'screen,projection',
         },

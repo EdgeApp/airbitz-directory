@@ -3,12 +3,16 @@ from django.conf import settings
 from django.views.generic import TemplateView
 
 urlpatterns = patterns('',
+    url(r'^app', 'directory.views.app_download', name='app_download'),
     url(r'^search$', 'directory.views.business_search', name='search'),
     url(r'^biz/(?P<bizId>\d+)/$', 'directory.views.business_info', name='business_info'),
     url(r'^add-biz/?$', 'directory.views.add_business', name='business_add'),
-    url(r'^home2/$', 'directory.views.home_v2', name='home_v2'),
     url(r'^home/$', 'directory.views.landing', name='home'),
-    url(r'^test/$', 'directory.views.test', name='test'),
+    url(r'^blf/$', 'directory.views.redirect_blf', name='redirect_blf'),
+    url(r'^btc-email-request/$', 'directory.views.btc_email_request', name='btc_email_request'),
+    url(r'^btc-email-request/template-email-request.html/$', 'directory.views.email_request_template', name='email_request_template'),
+    # url(r'^home2/$', 'directory.views.home_v2', name='home_v2'),
+    # url(r'^test/$', 'directory.views.test', name='test'),
     url(r'^$', 'directory.views.landing', name='landing'),
 )
 

@@ -33,6 +33,55 @@ body.home {
         }
     }
 
+    #nav-desktop {
+        visibility: hidden;
+    }
+
+
+    #main-content {
+
+        .page {
+
+            .airbitz-feature-details {
+
+                .features-list,
+                .wallet-beta-signup {
+                    margin:15px 0 0 225px;
+
+                    @media only screen and (max-width:980px){
+                        float:none;
+                        margin:25px 0;
+                    }
+                }
+
+                .airbitz-video {
+                    margin-left: 225px;
+
+                    @media only screen and (max-width:980px){
+                        margin: 20px 0 0 0;
+                    }
+                }
+
+                .app-store {
+                    margin-left: 15px;
+
+                    @media only screen and (max-width:980px){
+                        margin-left: 0;
+                    }
+                }
+
+                #jump-who-accepts-bitcoin {
+                    margin-left: 225px;
+
+                    @media only screen and (max-width:980px){
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+    }
+
+
 
 
     // APP DOWNLOAD CALL TO ACTION
@@ -134,13 +183,8 @@ body.home {
 
 .landing-module {
     height: 900px;
-    margin-top: 120px;
+    margin-top: 50px;
     padding: 65px 0;
-//    background: url('../img/landing/landing-module-bg-1.jpg') no-repeat center center fixed;
-//    -webkit-background-size: cover;
-//    -moz-background-size: cover;
-//    -o-background-size: cover;
-//    background-size: cover;
 
     @media (max-width: @screen-md) {
         height: auto;
@@ -242,6 +286,36 @@ body.home {
 
         }
 
+        .or-area {
+            float: left;
+            width: 100%;
+            margin-top: 20px;
+            
+            .left-line,
+            .right-line {
+                width: 100%;
+                width: 35%;
+                background: #aaa;
+                margin: 15px 10px 0 10px;
+                height: 2px;
+            }
+            .left-line {
+                float: left;
+            }
+            .right-line {
+                float: right;
+            }
+            h2 {
+                float: left;
+                width: 16%;
+                text-align: center;
+                color: #aaa;
+                
+                @media(max-width: @screen-sm-max) and (min-width: @screen-sm-min) {
+                    width: 22%;
+                }
+            }
+        }
 
         .signup-area {
             max-width: 360px;

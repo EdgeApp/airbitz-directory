@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load imagekit %}
+{% load humanize %}
+{% load compressed %}
+{% load absolute %}
+{% load ab_custom_tags %}
+
+{% block javascript_headers %}
+  {{ block.super }}
+  {% compressed_js 'app_download' %}
+  {% compressed_css 'app_download' %}
+
+  <script type="text/javascript">
+    if(bowser.android) {
+      window.location.href = 'https://play.google.com/store/apps/details?id=com.airbitz'
+    }
+    if(bowser.ios) {
+      window.location.href = 'https://itunes.apple.com/us/app/airbitz/id843536046'
+    }
+  </script>
+{% endblock javascript_headers %}
+
+{% block title %}Airbitz Bitcoin Mobile App {% endblock %}
+
+{% block search %}{% endblock %}
+
+{% block body %}
+
+  <div class="app-store-links row">
+    <h1 class="text-center">Download Airbitz Bitcoin Wallet and Directory</h1>
+    <div class="col-sm-3">&nbsp;</div>
+    <div class="col-sm-6 text-center">
+      <a href="https://itunes.apple.com/us/app/airbitz/id843536046">
+        <img class="app-store" src="https://airbitz.co/static/wp/assets/img/available-on-apple-app-store.png" alt="Airbitz on iOS"></a>
+      <a href="https://play.google.com/store/apps/details?id=com.airbitz">
+        <img class="app-store" src="https://airbitz.co/static/wp/assets/img/available-on-android.png" alt="Airbitz on Android"></a>
+    </div>
+    <div class="col-sm-3">&nbsp;</div>
+  </div>
+
+  <div class="promo-video row">
+    <div class="col-sm-12 text-center embed-responsive embed-responsive-16by9">
+      <iframe src="//www.youtube.com/embed/E3Z7-ya-h5Y" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+{% endblock %}
