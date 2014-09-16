@@ -37,7 +37,7 @@
                         {% bootstrap_paginate page_obj range=8 %}
                     </div>
                 {% endif %}
-                    <div class="pagination-info row">
+                    <div class="pagination-info row" style="margin: 0;">
                         <strong>{{ results_info.total }}</strong> Total Results Found
                     </div>
             </div>
@@ -57,7 +57,7 @@
               {% bootstrap_paginate page_obj range=8 %}
           </div>
       {% endif %}
-          <div class="pagination-info row">
+          <div class="pagination-info row" style="margin: 0;">
               <strong>{{ results_info.total }}</strong> Total Results Found
           </div>
 
