@@ -536,7 +536,9 @@
   }
 }
 .location-search-info .map-container #map .map-marker-popup {
-  max-width: 300px;
+  width: 300px;
+  height: 85px;
+  overflow: hidden;
 }
 .location-search-info .map-container #map .map-marker-popup .map-marker-image {
   float: left;
