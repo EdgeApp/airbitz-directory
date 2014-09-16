@@ -111,8 +111,10 @@ def business_search(request):
         'was_search': True,
         'page_obj': paginator.page(page_num),
         'results_info': results_info,
-        'active_regions': ACTIVE_REGIONS,
-        'all_regions': ALL_REGIONS,
+
+        # RELATED: REMOVING REGION MAP
+        # 'active_regions': ACTIVE_REGIONS,
+        # 'all_regions': ALL_REGIONS,
 
     }
     return render_to_response('search.html', RequestContext(request, context))
