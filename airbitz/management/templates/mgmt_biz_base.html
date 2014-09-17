@@ -1,5 +1,8 @@
 {% extends 'base_mgmt.html' %}
 
+{% load imagekit %}
+{% load ab_custom_tags %}
+
 {% block admin_buttons %}
     {{ block.super }}
     <a class="btn btn-primary pull-right" href="{% url 'business_info' biz.id %}" style="margin-left: 5px;" title="View Business Listing">
@@ -24,10 +27,79 @@
     </div>
     <div class="admin-og-image row">
         <div class="col-sm-3">
-            <a href="{{ MEDIA_URL }}screencaps/biz-{{ biz.id }}.jpg" target="_blank">
-                <img class="img-responsive" src="{{ MEDIA_URL }}screencaps/biz-{{ biz.id }}.jpg" />
-            </a>
+            <h3 class="preview-label">Business Details</h3>
+            <div class="preview-area web-listing">
+              <a href="{{ MEDIA_URL }}screencaps/biz-{{ biz.id }}.jpg" target="_blank">
+                  <img class="default-bg" data-src="holder.js/200x200/ab-blue/text:Add Image" title="Click to Add Web Image" alt="Add Image">
+                  <img class="img-responsive" src="{{ MEDIA_URL }}screencaps/biz-{{ biz.id }}.jpg" />
+              </a>
+            </div>
         </div>
+
+        <div class="col-sm-3">
+          <h3 class="preview-label">Mobile Thumbnails</h3>
+          <div class="preview-area mobile-thumbnail">
+            <div class="distance-label"><span>200 miles</span></div>
+            <div class="biz-info-label">
+              <span>{{ biz.name }}</span>
+              <span>{{ biz.address }}</span>
+            </div>
+            {% with biz.mobile_landing_image.mobile_thumbnail as mobile_thumbnail %}
+            {% if biz.mobile_landing_image %}
+              <img src="{{ MEDIA_URL }}{{ mobile_thumbnail }}" alt=""/>
+            {% else %}
+              <img data-src="holder.js/320x112/ab-blue/text:{{ biz.name }}" class="biz-img" title="{{ biz.name }}" alt="{{ biz.name }}">
+            {% endif %}
+          </div>
+
+          <div class="preview-area mobile-landing-image">
+            <div class="distance-label"><span>200 miles</span></div>
+            <div class="biz-info-label">
+              <span>{{ biz.categories.all.0.name }}</span>
+            </div>
+            {% if biz.mobile_landing_image %}
+              <img src="{{ MEDIA_URL }}{{ mobile_thumbnail }}" alt=""/>
+            {% else %}
+              <img data-src="holder.js/320x112/ab-blue/text:{{ biz.name }}" class="biz-img" title="{{ biz.name }}" alt="{{ biz.name }}">
+            {% endif %}
+            {% endwith %}
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <h3 class="preview-label">Map Marker</h3>
+          <div class="preview-area google-map-marker">
+            <div class="map-marker-popup">
+                <div class="map-marker-image">
+                  <a href="{% url 'business_info' biz.id %}">
+                    {% if biz.landing_image %}
+                      {% generateimage 'ab:searchresultthumb' source=biz.landing_image.web_photo as th %}
+                      <img src="{{ th.url }}" alt=""/>
+                    {% else %}
+                      <img data-src="holder.js/65x65/ab-blue/text:Add Image" class="biz-img" title="Click to Add Web Image" alt="Add Image">
+                    {% endif %}
+                  </a>
+                </div>
+                <div class="map-marker-info">
+                  <div class="map-marker-name">{{ biz.name }}</div>
+                  <div class="map-marker-address">{{ biz.address }}</div>
+                  <div class="map-marker-links"><a href="{% url 'business_info' biz.id %}">View Listing</a>
+                      &nbsp;|&nbsp;<a href="{{ biz.gmap_directions_url }}" target="_blank">Get Directions</a>
+                  </div>
+                </div>
+                <div class="map-marker-categories">
+                  {% for c in biz.categories.all %}
+                    <a class="biz-cat-link" href="{% url 'search' %}?term={{ c.name }}&location={{ location }}">
+                        <span class="label label-primary">{{ c.name }}</span>
+                    </a>
+                  {% empty %}
+                    <span class="label label-warning">Uncategorized</span>
+                  {% endfor %}
+                </div>
+            </div>
+          </div>
+        </div>
+
     </div>
     {% block bizbody %}
     {% endblock bizbody %}
