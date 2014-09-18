@@ -76,6 +76,20 @@ function formatCountry(country) {
   }
 }
 
+function activateUpdateButtons(inputId) {
+  $('.updateWithOrigValue').on('click', function(e){
+    e.preventDefault();
+    console.log(this.getAttribute('data-orig-value'));
+    $(this).siblings('input').val(this.getAttribute('data-orig-value'));
+  });
+
+  $('.updateWithNewValue').on('click', function(e){
+    e.preventDefault();
+    console.log(this.getAttribute('data-new-value'));
+    $(this).siblings('input').val(this.getAttribute('data-new-value'));
+  });
+}
+
 function setInputValue(cssId, inputValue) {
   var cssIdNew = 'input' + cssId.toTitleCase();
 
@@ -85,8 +99,6 @@ function setInputValue(cssId, inputValue) {
   }
 
   if (document.getElementById(cssId)) {
-    console.log('Setting value of: #' + cssId);
-
     var inputElement = document.getElementById(cssId);
     var origVal = inputElement.value;
     if (typeof inputValue == 'undefined') {
@@ -96,6 +108,13 @@ function setInputValue(cssId, inputValue) {
     if (origVal == inputValue) {
       return true;
     } else {
+
+
+      $('#'+cssId).parent().append('<button class="updateButton updateWithOrigValue btn btn-primary btn-xs" data-orig-value="' + origVal + '"><i class="fa fa-refresh"></i> ' + origVal + '</button>');
+      $('#'+cssId).parent().append('<button class="updateButton updateWithNewValue btn btn-success btn-xs" data-new-value="' + inputValue + '"><i class="fa fa-google-plus"></i> ' + inputValue + '</button>');
+      activateUpdateButtons('#' + cssId);
+
+
       inputElement.value = inputValue;
 
       // Show that fields were updated and when focused remove effect
@@ -106,7 +125,7 @@ function setInputValue(cssId, inputValue) {
       });
     }
   } else {
-    console.log('setInputValue() failed to set value. Cannot find element: #' + cssId + 'or' + cssIdNew);
+    console.log('setInputValue() failed to set value. Cannot find element: #' + cssId + ' or ' + cssIdNew);
   }
 }
 
@@ -144,6 +163,9 @@ function holdInputsForUndo() {
 }
 
 function fillInAddress() {
+  // remove previously created update buttons
+  $('button.updateButton').remove();
+
   // Get the place details from the autocomplete object
   var place = autocomplete.getPlace();
   var street_address = [];
@@ -215,13 +237,13 @@ function fillInAddress() {
   setInputValue('admin1_code', admin1_code); // state
   setInputValue('postalcode', postalcode); // zip
   setInputValue('country', formatCountry(country)); // country
-  setInputValue('latitude', place.geometry.location.lat().toFixed(7)); // country
-  setInputValue('longitude', place.geometry.location.lng().toFixed(7)); // country
+  setInputValue('latitude', place.geometry.location.lat().toFixed(7)); // lat
+  setInputValue('longitude', place.geometry.location.lng().toFixed(7)); // lon
   setInputValue('phone', phone); // phone
 
-  setInputValue('name', place.name); // phone
-  setInputValue('website', place.website); // phone
-  setInputValue('googlePlusUrl', place.url); // phone
+  setInputValue('name', place.name); // name
+  setInputValue('website', place.website); // website
+  setInputValue('googlePlusUrl', place.url); // google+
 
   updateLatLng();
 }

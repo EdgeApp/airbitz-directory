@@ -369,3 +369,15 @@ table.dataTable .popover hr {
 .modal-body {
   max-width: 1000px;
 }
+.updateWithOrigValue {
+  margin-right: 3px;
+}
+#valueUpdateCheck .field-name {
+  font-weight: 900;
+}
+#valueUpdateCheck .new-value {
+  color: #2291cf;
+}
+#valueUpdateCheck .old-value {
+  color: #d9534f;
+}

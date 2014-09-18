@@ -204,10 +204,16 @@
           <div class="form-group">
             <label>Lat/Lon:</label>
             <div class="form-inline">
-              <input type="text" style="width: 120px" class="form-control" id="latitude" name="latitude" value="{{ biz.center.y }}" onclick="this.select()" />
-              <input type="text" style="width: 120px" class="form-control" id="longitude" name="longitude" value="{{ biz.center.x }}" onclick="this.select()" />
-              <button class="btn btn-default geocode-address"><i class="fa fa-arrow-down"></i> Geocode</button>
-              <button class="btn btn-default geocode-latlon"><i class="fa fa-arrow-up"></i> Reverse Geocode</button>
+              <div>
+                <input type="text" style="width: 120px" class="form-control" id="latitude" name="latitude" value="{{ biz.center.y }}" onclick="this.select()" />
+              </div>
+              <div>
+                <input type="text" style="width: 120px" class="form-control" id="longitude" name="longitude" value="{{ biz.center.x }}" onclick="this.select()" />
+              </div>
+              <div>
+                <button class="btn btn-default geocode-address"><i class="fa fa-arrow-down"></i> Geocode</button>
+                <button class="btn btn-default geocode-latlon"><i class="fa fa-arrow-up"></i> Reverse Geocode</button>
+              </div>
             </div>
           </div>
           <div class="form-group">
