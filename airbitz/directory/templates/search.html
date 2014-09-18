@@ -62,7 +62,6 @@
         <div class="col-sm-6">
             <h1 class="search-title hidden-xs hidden-sm row">Bitcoin Business Search Results</h1>
             <h1 class="search-title visible-xs visible-sm row">Search Results</h1>
-
             {% if results_info.total > results_info.results_per_page %}
                 <div class="pagination-area row">
                     {% bootstrap_paginate page_obj range=8 %}
@@ -83,9 +82,17 @@
                     {% bootstrap_paginate page_obj range=8 %}
                 </div>
             {% endif %}
+
+            {% if results %}
                 <div class="pagination-info row">
                     <strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_left }}</strong> Shown on Map
                 </div>
+
+            {% else %}
+              <div class="row">
+                {% include '_results_not_found.html' %}
+              </div>
+            {% endif %}
 
         </div>
         <div class="location-search-info hidden-xs col-sm-6">
