@@ -6,20 +6,25 @@
 {% block title %}Search{% endblock title %}
 
 
+{% block html_open_tag %}ng-app="searchStarter"{% endblock html_open_tag %}
+
 {% block javascript_headers %}
     {{ block.super }}
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={% if not DEBUG %}{{ mapkey }}{% endif %}&sensor=false"> </script>
     {% compressed_js 'search' %}
     {% compressed_css 'search' %}
+    {% compressed_js 'angularjs' %}
+    {% compressed_js 'search_starter' %}
+    {% compressed_css 'search_starter' %}
 {% endblock javascript_headers %}
 
 {% block body %}
 
-{#{% if not results %} {# NO RESULTS #}
-{##}
-{#    {% include '_results_not_found.html' %}#}
-{##}
-{#{% else %}  {# SHOW RESULTS #}
+{% if not results %}{# NO RESULTS #}
+  <div class="results-area results-not-found">
+    {% include '_results_not_found.html' %}
+  </div>
+{% else %}  {# SHOW RESULTS #}
 
     {% if request.GET.location == 'On the Web' %}
     <div class="results-area">
@@ -83,16 +88,9 @@
                 </div>
             {% endif %}
 
-            {% if results %}
                 <div class="pagination-info row">
                     <strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_left }}</strong> Shown on Map
                 </div>
-
-            {% else %}
-              <div class="row">
-                {% include '_results_not_found.html' %}
-              </div>
-            {% endif %}
 
         </div>
         <div class="location-search-info hidden-xs col-sm-6">
@@ -104,7 +102,7 @@
 
     {% endif %}
 
-{#{% endif %} {# END OF RESULTS #}
+{% endif %}{# END OF RESULTS #}
 
 {% endblock %}
 
