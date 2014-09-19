@@ -2,7 +2,7 @@ import datetime
 from django.contrib.gis.measure import D
 from django.db.models import Q
 from django.http import Http404, HttpResponseRedirect, HttpResponse
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from urllib import urlencode
@@ -76,6 +76,10 @@ def business_search(request):
     a = api.ApiProcess(locationStr=location, ll=ll, ip=ip)
     results = a.searchDirectory(term=term, category=category)
 
+    if not results:
+        return redirect('search_no_results')
+
+
     request.session['nearText'] = location
     if location == 'On the Web':
         results_per_page = 30
@@ -119,6 +123,10 @@ def business_search(request):
     }
     return render_to_response('search.html', RequestContext(request, context))
 
+
+def business_search_no_results(request):
+    context = {}
+    return render_to_response('search-no-results.html', RequestContext(request, context))
 
 def business_info(request, bizId):
     biz = get_biz(request, pk=bizId)

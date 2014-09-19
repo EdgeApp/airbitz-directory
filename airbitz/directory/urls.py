@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 urlpatterns = patterns('',
     url(r'^app', 'directory.views.app_download', name='app_download'),
     url(r'^search$', 'directory.views.business_search', name='search'),
+    url(r'^search/no-results/?$', 'directory.views.business_search_no_results', name='search_no_results'),
     url(r'^biz/(?P<bizId>\d+)/$', 'directory.views.business_info', name='business_info'),
     url(r'^add-biz/?$', 'directory.views.add_business', name='business_add'),
     url(r'^home/$', 'directory.views.landing', name='home'),
