@@ -1,5 +1,7 @@
 /*jshint devel:true */
 
+var screen_lg = "screen and (min-width: 992px)";
+
 function afterEmailSubmission(resp){
   if (resp.result === 'success') {
     $('.inputEmail').val('');
@@ -9,6 +11,8 @@ function afterEmailSubmission(resp){
 
 
 jQuery(function($) {
+  $('#nav-desktop').hide();
+
   $('#email-signup-form').on('click', function() {
     $.ajaxSetup({ crossDomain: true });
   });
@@ -67,11 +71,11 @@ jQuery(function($) {
       'transition': 'all .25s',
       '-webkit-transition': 'all .25s',
       '-moz-transition': 'all .25s',
-      '-0-transition': 'all .25s',
+      '-0-transition': 'all .25s'
     });
   }, function(){
     $(this).find('.app-store').css({
-      'zoom': '100%',
+      'zoom': '100%'
     });
   });
 
@@ -108,19 +112,23 @@ jQuery(function($) {
   });
 
 
-  // display navbar after first scroll and hide if all the way at top
-  $(window).scroll(function() {
-    var y = $(window).scrollTop();
+  // display navbar after 5 seconds
+  enquire.register(screen_lg, function() {
+    setTimeout(function () {
+      $('#nav-desktop').css({
+        'visibility': 'visible',
+        'display': 'block'
+      });
 
-    if (y > 50) {
-      console.log('show');
-      $('#nav-desktop').css({'visibility': 'visible'});
-      $('#nav-desktop').removeClass('fadeOutUp');
       $('#nav-desktop').addClass('animated fadeInDown');
-    } else {
-      $('#nav-desktop').removeClass('fadeInDown');
-      $('#nav-desktop').addClass('fadeOutUp');
-    }
+
+      $('.landing-module .container').css({
+        'margin-top': '40px',
+        '-webkit-transition': 'margin 1000ms ease-out',
+        '-moz-transition': 'margin 1000ms ease-out',
+        '-o-transition': 'margin 1000ms ease-out'
+      });
+    }, 5000);
   });
 
 });
