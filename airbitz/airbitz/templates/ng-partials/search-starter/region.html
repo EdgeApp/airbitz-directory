@@ -5,7 +5,7 @@
   Accepting Bitcoin in <span class="label-primary label">{{ country }}</span>
 </h3>
 
-<div class="animated fadeInRight">
+<div class="module animated fadeInRight">
 
   <div class="loading-spinner">
     <i class="fa fa-spinner fa-spin"></i>
@@ -16,9 +16,6 @@
     <ul class="list-group">
       <li class="header list-group-item">Area</li>
     </ul>
-  </div>
-
-  <div class="list-container">
     <ul class="list-group">
       <li ng-repeat="item in regionDetails" class="subRegion list-group-item" ng-click="subRegionClicked(item.region_label, item.country_label)">
         {{ item.region_label }} <span class="label label-default pull-right">{{ item.biz_count }}</span>
