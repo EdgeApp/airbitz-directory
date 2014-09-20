@@ -9,9 +9,7 @@
 
   <div class="list-container">
     <ul class="list-group">
-      <li class="header list-group-item">
-        Country
-      </li>
+      <li class="header list-group-item">Search Country</li>
     </ul>
     <ul class="list-group">
       <li ng-repeat="item in regionData" class="region list-group-item" ui-sref="region({ region: item.country_code })" ng-click="regionClicked(item.country_label)">

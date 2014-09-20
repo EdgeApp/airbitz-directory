@@ -1,12 +1,10 @@
 <h2 class="search-title"><i class="fa fa-exclamation-triangle"></i> Sorry We Could Not Find Anything</h2>
-<h3>Why not try some of these searches:</h3>
 
 <div class="row">
-
-  <div class="module animated fadeInRight">
-    <div class="list-container col-sm-4">
+  <div class="module animated fadeInRight col-sm-4">
+    <div class="list-container">
       <ul class="list-group">
-        <li class="header list-group-item">Common Searches</li>
+        <li class="header list-group-item">Search Popular</li>
       </ul>
       <ul class="category-list-search list-group">
         <li class="list-group-item"><i class="fa fa-map-marker"></i>&nbsp;<a href="{% url 'landing' %}search?term=&location=Current+Location">Local Businesses</a></li>
@@ -25,6 +23,7 @@
   </div>
 
   <div class="module animated fadeInRight col-sm-4">
+    <h3 style="margin-top: 0;">Get Listed</h3>
     <img class="img-responsive" src="{{ STATIC_URL }}img/no-results/local-business.jpg" alt="Local Bitcon"/>
     <a style="margin-top: 10px;" class="btn btn-block btn-success" href="https://go.airbitz.co/submit-business/"><i class="fa fa-plus"></i> List a Business</a>
     <p style="margin: 10px 0">Do you know of or own a business that accepts payments in Bitcoin?</p>

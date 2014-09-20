@@ -1,0 +1,68 @@
+body {
+  background: #dbe9ef url('/static/img/skyline-airbitz.jpg') fixed;
+}
+.biz-result .glyphicon {
+  margin-right: 5px;
+}
+.biz-result .thumbnail {
+  margin-bottom: 20px;
+  padding: 0px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.biz-result .thumbnail .thumb-bg {
+  height: 224px;
+  max-height: 650px;
+  background: white;
+  position: relative;
+  overflow: hidden;
+}
+.biz-result .thumbnail .thumb-bg .biz-img {
+  width: 100%;
+  margin: 0 auto;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.biz-result .thumbnail .thumb-bg .biz-img:hover {
+  transition: 0.3s ease;
+  -webkit-transition: 0.3s ease;
+  -moz-transition: 0.3s ease;
+  -ms-transition: 0.3s ease;
+  -o-transition: 0.3s ease;
+}
+.biz-result .biz-name {
+  font-weight: 700;
+  letter-spacing: -1.25px;
+}
+.biz-result .biz-name a {
+  color: #333333;
+}
+.biz-result .biz-name a:hover {
+  text-decoration: none;
+  color: #2291cf;
+  -webkit-transition: 0.5s ease;
+  -moz-transition: 0.5s ease;
+  -ms-transition: 0.5s ease;
+  -o-transition: 0.5s ease;
+}
+.biz-result .biz-categories {
+  line-height: 20px;
+}
+.biz-result .biz-description {
+  opacity: 0;
+  height: 90px;
+  margin: 5px 0 4px;
+}
+.biz-result .thumbnail {
+  margin-bottom: 40px;
+}
+.biz-result .thumbnail .thumb-bg {
+  height: auto;
+}
+.biz-result .biz-description {
+  height: auto;
+}

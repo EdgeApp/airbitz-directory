@@ -172,3 +172,28 @@
         width: 80px;
     }
 }
+
+.results-grid {
+
+    .biz-name {
+
+        font-weight: 700;
+        letter-spacing: -1.25px;
+        margin: 0;
+
+        a {
+            color: @gray-dark;
+
+            &:hover {
+                text-decoration: none;
+                color: @brand-primary;
+                .transition();
+            }
+        }
+        @media (max-width: @screen-md-min) {
+            margin-bottom: 10px;
+            letter-spacing: 0px;
+            font-size: 20px;
+        }
+    }
+}

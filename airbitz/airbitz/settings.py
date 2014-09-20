@@ -231,9 +231,20 @@ PIPELINE_CSS = {
     'search': {
         'source_filenames': (
             'css/animate.css',
-            'css/search-results.css',
+            'css/results-map-list.css',
+            'css/results-grid.css',
         ),
         'output_filename': 'css/search.' + DEPLOY_DATE + '.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+    'search_no_results': {
+        'source_filenames': (
+            'css/animate.css',
+            'css/search-no-results.css',
+        ),
+        'output_filename': 'css/search-no-results.' + DEPLOY_DATE + '.css',
         'extra_context': {
             'media': 'screen,projection',
         },

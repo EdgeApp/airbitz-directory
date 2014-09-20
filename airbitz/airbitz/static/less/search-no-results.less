@@ -6,10 +6,9 @@
 @import "mixins.less";
 
 body {
-    background-color: #dbe9ef;
-    background-image: url(/static/img/skyline-airbitz.jpg);
-    background-attachment: fixed;
+    background: #dbe9ef url('/static/img/skyline-airbitz.jpg') fixed;
 }
+
 .module {
 
     .list-container {
@@ -47,5 +46,14 @@ body {
 
     .heading-text {
         display: none;
+    }
+}
+
+.no-results-area {
+
+    .search-title {
+        margin-top: 20px;
+        margin-bottom: 30px;
+        font-weight: 700;
     }
 }
