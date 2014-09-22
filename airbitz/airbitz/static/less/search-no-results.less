@@ -1,0 +1,59 @@
+@import "../bootstrap/less/variables.less";
+@import "../bootstrap/less/mixins.less";
+
+// BELOW OVERWRITES IS IN ADDITION TO BOOTSTRAP LESS
+@import "variables.less";
+@import "mixins.less";
+
+body {
+    background: #dbe9ef url('/static/img/skyline-airbitz.jpg') fixed;
+}
+
+.module {
+
+    .list-container {
+        .ab-searchStarter-list-container();
+
+        .category-list-search {
+            padding-left: 0;
+
+            .list-group-item {
+                color: @brand-primary;
+
+                i {
+                    margin-right: 5px;
+                    color: @gray-dark;
+
+                    &:hover {
+                        color: @brand-primary;
+                        text-decoration: none;
+                    }
+                }
+                a {
+                    color: @gray-dark;
+
+                    &:hover {
+                        color: @brand-primary;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.area-list-search {
+
+    .heading-text {
+        display: none;
+    }
+}
+
+.no-results-area {
+
+    .search-title {
+        margin-top: 20px;
+        margin-bottom: 30px;
+        font-weight: 700;
+    }
+}

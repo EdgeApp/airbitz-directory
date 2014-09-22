@@ -1,0 +1,38 @@
+body {
+  background: #dbe9ef url('/static/img/skyline-airbitz.jpg') fixed;
+}
+.module .list-container {
+  cursor: pointer;
+  overflow-y: auto;
+  border-radius: 0;
+  margin-bottom: 10px;
+}
+.module .list-container .category-list-search {
+  padding-left: 0;
+}
+.module .list-container .category-list-search .list-group-item {
+  color: #2291cf;
+}
+.module .list-container .category-list-search .list-group-item i {
+  margin-right: 5px;
+  color: #333333;
+}
+.module .list-container .category-list-search .list-group-item i:hover {
+  color: #2291cf;
+  text-decoration: none;
+}
+.module .list-container .category-list-search .list-group-item a {
+  color: #333333;
+}
+.module .list-container .category-list-search .list-group-item a:hover {
+  color: #2291cf;
+  text-decoration: none;
+}
+.area-list-search .heading-text {
+  display: none;
+}
+.no-results-area .search-title {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-weight: 700;
+}

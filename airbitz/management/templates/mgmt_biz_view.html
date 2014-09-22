@@ -4,835 +4,818 @@
 {% block title%} {{ biz.name }} {% endblock %}
 
 {% block head %}
-    {{ block.super }}
-    {% compressed_css 'management' %}
-
-    <style>
-        .floatingAlert {
-            margin-left: auto;
-            margin-right: auto;
-            position: fixed;
-            top: 60px;
-            width: 80%;
-            z-index: 100000;
-            box-shadow: 1px 1px 2px #DDD;
-        }
-        .parsley-error-list {
-            color: red;
-            font-weight: bold;
-        }
-        .modal-dialog {
-            width: 1000px;
-        }
-
-        .modal-body {
-                max-width: 1000px;
-        }
-    </style>
+  {{ block.super }}
+  {% compressed_css 'management' %}
 {% endblock head %}
 
 {% block search %}
-    {{ block.super }}
+  {{ block.super }}
 {% endblock search %}
 
 {% block admin_buttons %}
-    {{ block.super }}
+  {{ block.super }}
 {% endblock admin_buttons %}
 
 {% block bizbody %}
-<div id="bizapp">
-    <form id="bizForm">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="alertsdiv"></div>
-        </div>
+  <div id="bizapp">
+  <form id="bizForm">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="alertsdiv"></div>
     </div>
-    <div class="row">
-        <div class="col-sm-12" style="text-align: center; padding-bottom: 10px;">
-            <div class="btn-group">
-                <a class="save btn btn-success">Save</a>
-                <a class="btn btn-default" href="{% url 'mgmt_biz_edit' biz.id %}">Edit</a>
-            </div>
-        </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12" style="text-align: center; padding-bottom: 10px;">
+      <div class="btn-group">
+        <a class="save btn btn-success">Save</a>
+        <a class="btn btn-default" href="{% url 'mgmt_biz_edit' biz.id %}">Edit</a>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel panel-default">
-                <input type="hidden" name="landing_image" id="landing_image" value="{{ biz.landing_image_id|default:"" }}" />
-                <input type="hidden" name="mobile_landing_image" id="mobile_landing_image" value="{{ biz.mobile_landing_image_id|default:"" }}" />
-                <div class="panel-heading"></div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="form-group col-sm-3">
-                                    <label for="status">Status:</label>
-                                    <select id="status" name="status" />
-                                        {% for s in STATUS_CHOICES %}
-                                            <option value="{{ s.0 }}">{{ s.1 }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-sm-3">
-                                    <label for="published-time">Published:</label>
-                                    <input type="text" class="disabled form-control" id="published-time" name="published" value="{{ published }}" title="{{ published }}" disabled="disabled" />
-                                </div>
-
-                                <div class="form-group col-sm-3">
-                                    <label for="modified-time">Modified:</label>
-                                    <input type="text" class="disabled form-control" id="modified-time" name="modified" value="{{ modified }}" title="{{ modified }}" disabled="disabled" />
-                                </div>
-
-                                <div class="form-group col-sm-3">
-                                    <label for="created-time">Created:</label>
-                                    <input type="text" class="disabled form-control" id="created-time" name="created" value="{{ created }}" title="{{ created }}" disabled="disabled" />
-                                </div>
-
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Name:</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                       value="{{ biz.name }}" required />
-                            </div>
-                            <div>
-                                <label>Description:</label>
-                                <div>
-                                    <textarea class="form-control" rows="5" id="description" name="description">{{ biz.description }}</textarea>
-                                </div>
-                            </div>
-                            <div>
-                                <label>Admin Notes:</label>
-                                <div>
-                                    <textarea class="form-control" rows="5" id="admin_notes" name="admin_notes">{{ biz.admin_notes }}</textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div>
-                                <label for="categories">Categories:</label>
-                                <div>
-                                    <input id="categories" value="{% for c in biz.categories.all %}{{c.id}},{% endfor %} " />
-                                </div>
-                            </div>
-                            <div>
-                                <label for="phone">Phone:</label>
-                                <input type="text" class="form-control" id="phone" name="phone"
-                                       value="{{ biz.phone|default:"" }}" />
-                            </div>
-                            <div>
-                                <label for="website">Website:</label>
-                                <input type="url" class="form-control" id="website" name="website"
-                                       value="{{ biz.website }}"
-                                       parsley-trigger="change" parsley-type="url" />
-                            </div>
-                            <div class="form-horizontal">
-                                <label for="has_physical_business">Has Physical Business:</label>
-                                <input type="checkbox" id="has_physical_business" name="has_physical_business" {% if biz.has_physical_business %}checked{% endif %} />
-                            </div>
-                            <div class="form-horizontal">
-                                <label for="has_online_business">Has Online Business:</label>
-                                <input type="checkbox" id="has_online_business" name="has_online_business" {% if biz.has_online_business %}checked{% endif %} />
-                            </div>
-                            <div>
-                                <label for="has_bitcoin_discount">Bitcoin Discount:</label>
-                                <input type="number" class="form-control" id="has_bitcoin_discount" name="has_bitcoin_discount"
-                                       value="{{ biz.has_bitcoin_discount }}"
-                                       parsley-trigger="change" parsley-type="number" />
-                            </div>
-                        </div>
-                    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <input type="hidden" name="landing_image" id="landing_image" value="{{ biz.landing_image_id|default:"" }}" />
+        <input type="hidden" name="mobile_landing_image" id="mobile_landing_image" value="{{ biz.mobile_landing_image_id|default:"" }}" />
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="form-group col-sm-3">
+                  <label for="status">Status:</label>
+                  <select id="status" name="status" />
+                  {% for s in STATUS_CHOICES %}
+                    <option value="{{ s.0 }}">{{ s.1 }}</option>
+                  {% endfor %}
+                  </select>
                 </div>
+
+                <div class="form-group col-sm-3">
+                  <label for="published-time">Published:</label>
+                  <input type="text" class="disabled form-control" id="published-time" name="published" value="{{ published }}" title="{{ published }}" disabled="disabled" />
+                </div>
+
+                <div class="form-group col-sm-3">
+                  <label for="modified-time">Modified:</label>
+                  <input type="text" class="disabled form-control" id="modified-time" name="modified" value="{{ modified }}" title="{{ modified }}" disabled="disabled" />
+                </div>
+
+                <div class="form-group col-sm-3">
+                  <label for="created-time">Created:</label>
+                  <input type="text" class="disabled form-control" id="created-time" name="created" value="{{ created }}" title="{{ created }}" disabled="disabled" />
+                </div>
+
+              </div>
+              <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name"
+                       value="{{ biz.name }}" required />
+              </div>
+              <div>
+                <label>Description:</label>
+                <div>
+                  <textarea class="form-control" rows="5" id="description" name="description">{{ biz.description }}</textarea>
+                </div>
+              </div>
+              <div>
+                <label>Admin Notes:</label>
+                <div>
+                  <textarea class="form-control" rows="5" id="admin_notes" name="admin_notes">{{ biz.admin_notes }}</textarea>
+                </div>
+              </div>
             </div>
+            <div class="col-sm-6">
+              <div>
+                <label for="categories">Categories:</label>
+                <div>
+                  <input id="categories" value="{% for c in biz.categories.all %}{{c.id}},{% endfor %} " />
+                </div>
+              </div>
+              <div>
+                <label for="phone">Phone:</label>
+                <input type="text" class="form-control" id="phone" name="phone"
+                       value="{{ biz.phone|default:"" }}" />
+              </div>
+              <div>
+                <label for="website">Website:</label>
+                <input type="url" class="form-control" id="website" name="website"
+                       value="{{ biz.website }}"
+                       parsley-trigger="change" parsley-type="url" />
+              </div>
+              <div class="form-horizontal">
+                <label for="has_physical_business">Has Physical Business:</label>
+                <input type="checkbox" id="has_physical_business" name="has_physical_business" {% if biz.has_physical_business %}checked{% endif %} />
+              </div>
+              <div class="form-horizontal">
+                <label for="has_online_business">Has Online Business:</label>
+                <input type="checkbox" id="has_online_business" name="has_online_business" {% if biz.has_online_business %}checked{% endif %} />
+              </div>
+              <div>
+                <label for="has_bitcoin_discount">Bitcoin Discount:</label>
+                <input type="number" class="form-control" id="has_bitcoin_discount" name="has_bitcoin_discount"
+                       value="{{ biz.has_bitcoin_discount }}"
+                       parsley-trigger="change" parsley-type="number" />
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="panel panel-default" id="social-list">
+        <div class="panel-heading">SOCIAL
+          <a class="btn btn-sm btn-default social-add pull-right"><span class="glyphicon glyphicon-plus" ></span> Add Social</a>
+          <a class="btn btn-sm btn-default pull-right" href="{% url 'mgmt_biz_social_edit' biz.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel panel-default" id="hours-list">
+        <div class="panel-heading">HOURS
+          <a class="btn btn-sm btn-default hours-add pull-right"><span class="glyphicon glyphicon-plus" ></span> Add Hours</a>
+          <a class="btn btn-sm btn-default pull-right" href="{% url 'mgmt_biz_hours_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" ></span> Edit</a>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Day of Week</th>
+              <th>Start</th>
+              <th>End</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="panel panel-default" id="social-list">
-                <div class="panel-heading">SOCIAL
-                    <a class="btn btn-sm btn-default social-add pull-right"><span class="glyphicon glyphicon-plus" ></span> Add Social</a>
-                    <a class="btn btn-sm btn-default pull-right" href="{% url 'mgmt_biz_social_edit' biz.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="panel panel-default" id="hours-list">
-                <div class="panel-heading">HOURS
-                    <a class="btn btn-sm btn-default hours-add pull-right"><span class="glyphicon glyphicon-plus" ></span> Add Hours</a>
-                    <a class="btn btn-sm btn-default pull-right" href="{% url 'mgmt_biz_hours_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" ></span> Edit</a>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Day of Week</th>
-                                <th>Start</th>
-                                <th>End</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    <div class="admin-location col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">LOCATION
+          <a class="pull-right" href="{% url 'mgmt_biz_loc_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" /></a>
         </div>
+        <div class="panel-body">
 
-        <div class="admin-location col-sm-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">LOCATION
-                    <a class="pull-right" href="{% url 'mgmt_biz_loc_edit' biz.id %}"><span class="glyphicon glyphicon-pencil" /></a>
-                    </div>
-                <div class="panel-body">
+          <div class="location-lookup form-group">
+            <label for="autocomplete"><i class="fa fa-map-marker"></i> Lookup via Google Places
+              <a class="pull-right btn btn-xs btn-danger" id="undoAutocomplete"><i class="fa fa-refresh"></i> Undo</a>
+              <a class="pull-right btn btn-xs btn-info" id="lookupName" style="margin-right: 5px;"><i class="fa fa-bolt"></i> Use Name</a>
+            </label>
 
-                    <div class="location-lookup form-group">
-                        <label for="autocomplete"><i class="fa fa-map-marker"></i> Lookup via Google Places
-                            <a class="pull-right btn btn-xs btn-danger" id="undoAutocomplete"><i class="fa fa-refresh"></i> Undo</a>
-                            <a class="pull-right btn btn-xs btn-info" id="lookupName" style="margin-right: 5px;"><i class="fa fa-bolt"></i> Use Name</a>
-                        </label>
+            <input type="text" id="autocomplete" class="form-control" />
+          </div>
 
-                        <input type="text" id="autocomplete" class="form-control" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address">Address:</label>
-                        <input type="text" id="address" name="address" class="form-control" value="{{ biz.address|default:"" }}" />
-                    </div>
-                    <div class="form-group">
-                        <label for="admin3_name">City:</label>
-                        <input type="text" id="admin3_name" name="admin3_name" class="form-control" value="{{ biz.admin3_name|default:"" }}" />
-                    </div>
-                    <div class="form-group">
-                        <label for="admin2_name">County:
-                            <a class="pull-right btn btn-xs btn-primary" id="copy-city"><i class="fa fa-arrow-down"></i> Copy City</a>
-                        </label>
-                        <input type="text" id="admin2_name" name="admin2_name" class="form-control" value="{{ biz.admin2_name|default:"" }}" />
-                    </div>
-                    <div class="form-group">
-                        <label for="admin1_code">State:</label>
-                        <input type="text" id="admin1_code" name="admin1_code" class="form-control" value="{{ biz.admin1_code|default:"" }}" />
-                    </div>
-                    <div class="form-group">
-                        <label for="postalcode">Postal Code:</label>
-                        <input type="text" id="postalcode" name="postalcode" class="form-control" value="{{ biz.postalcode|default:"" }}" />
-                    </div>
-                    <div class="form-group">
-                        <label for="country">Country:</label>
-                        <input type="text" id="country" name="country" class="form-control" value="{{ biz.country|default:"" }}" />
-                    </div>
-                    <div class="form-group">
-                        <label>Lat/Lon:</label>
-                        <div class="form-inline">
-                            <input type="text" style="width: 120px" class="form-control" id="latitude" name="latitude" value="{{ biz.center.y }}" onclick="this.select()" />
-                            <input type="text" style="width: 120px" class="form-control" id="longitude" name="longitude" value="{{ biz.center.x }}" onclick="this.select()" />
-                            <button class="btn btn-default geocode-address"><i class="fa fa-arrow-down"></i> Geocode</button>
-                            <button class="btn btn-default geocode-latlon"><i class="fa fa-arrow-up"></i> Reverse Geocode</button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" style="width: 200px" class="form-control" id="latlng" name="latitude" value="{{ biz.center.y }},{{ biz.center.x }}" onclick="this.select()" />
-                    </div>
-                </div>
+          <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" class="form-control" value="{{ biz.address|default:"" }}" />
+          </div>
+          <div class="form-group">
+            <label for="admin3_name">City:</label>
+            <input type="text" id="admin3_name" name="admin3_name" class="form-control" value="{{ biz.admin3_name|default:"" }}" />
+          </div>
+          <div class="form-group">
+            <label for="admin2_name">County:
+              <a class="pull-right btn btn-xs btn-primary" id="copy-city"><i class="fa fa-arrow-down"></i> Copy City</a>
+            </label>
+            <input type="text" id="admin2_name" name="admin2_name" class="form-control" value="{{ biz.admin2_name|default:"" }}" />
+          </div>
+          <div class="form-group">
+            <label for="admin1_code">State:</label>
+            <input type="text" id="admin1_code" name="admin1_code" class="form-control" value="{{ biz.admin1_code|default:"" }}" />
+          </div>
+          <div class="form-group">
+            <label for="postalcode">Postal Code:</label>
+            <input type="text" id="postalcode" name="postalcode" class="form-control" value="{{ biz.postalcode|default:"" }}" />
+          </div>
+          <div class="form-group">
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" class="form-control" value="{{ biz.country|default:"" }}" />
+          </div>
+          <div class="form-group">
+            <label>Lat/Lon:</label>
+            <div class="form-inline">
+              <div>
+                <input type="text" style="width: 120px" class="form-control" id="latitude" name="latitude" value="{{ biz.center.y }}" onclick="this.select()" />
+              </div>
+              <div>
+                <input type="text" style="width: 120px" class="form-control" id="longitude" name="longitude" value="{{ biz.center.x }}" onclick="this.select()" />
+              </div>
+              <div>
+                <button class="btn btn-default geocode-address"><i class="fa fa-arrow-down"></i> Geocode</button>
+                <button class="btn btn-default geocode-latlon"><i class="fa fa-arrow-up"></i> Reverse Geocode</button>
+              </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">BIZ CONTACT</div>
-                <div class="panel-body">
-                    <div>
-                        <label for="contact1_email">Contact 1:</label>
-                        <input type="text" class="form-control" id="contact1_email" name="contact1_email"
-                                value="{{ biz.contact1_email|default:"" }}" />
-                    </div>
-                    <div>
-                        <label for="contact2_email">Contact 2:</label>
-                        <input type="text" class="form-control" id="contact2_email" name="contact2_email"
-                                value="{{ biz.contact2_email|default:"" }}" />
-                    </div>
-                </div>
-            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" style="width: 200px" class="form-control" id="latlng" name="latitude" value="{{ biz.center.y }},{{ biz.center.x }}" onclick="this.select()" />
+          </div>
         </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">BIZ CONTACT</div>
+        <div class="panel-body">
+          <div>
+            <label for="contact1_email">Contact 1:</label>
+            <input type="text" class="form-control" id="contact1_email" name="contact1_email"
+                   value="{{ biz.contact1_email|default:"" }}" />
+          </div>
+          <div>
+            <label for="contact2_email">Contact 2:</label>
+            <input type="text" class="form-control" id="contact2_email" name="contact2_email"
+                   value="{{ biz.contact2_email|default:"" }}" />
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel panel-default" id="social-list">
-                <div class="panel-heading">IMAGES
-                    <div class="btn-group pull-right">
-                        <a class="btn btn-default btn-sm" href="{% url 'mgmt_biz_image_link' biz.id %}">From Link</a>
-                        <a class="btn btn-default btn-sm" href="{% url 'mgmt_biz_image_add' biz.id %}">From Desktop</a>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div id="images-list" class="thumbnails"></div>
-                </div>
-            </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default" id="social-list">
+        <div class="panel-heading">IMAGES
+          <div class="btn-group pull-right">
+            <a class="btn btn-default btn-sm" href="{% url 'mgmt_biz_image_link' biz.id %}">From Link</a>
+            <a class="btn btn-default btn-sm" href="{% url 'mgmt_biz_image_add' biz.id %}">From Desktop</a>
+          </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12" style="text-align: center; padding-bottom: 10px;">
-            <div class="btn-group">
-                <a class="save btn btn-success">Save</a>
-                <a class="btn btn-default" href="{% url 'mgmt_biz_edit' biz.id %}">Edit</a>
-            </div>
+        <div class="panel-body">
+          <div id="images-list" class="thumbnails"></div>
         </div>
+      </div>
     </div>
-    </form>
-</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12" style="text-align: center; padding-bottom: 10px;">
+      <div class="btn-group">
+        <a class="save btn btn-success">Save</a>
+        <a class="btn btn-default" href="{% url 'mgmt_biz_edit' biz.id %}">Edit</a>
+      </div>
+    </div>
+  </div>
+  </form>
+  </div>
 {% endblock %}
 
 {% block javascript_headers %}
-    {{ block.super }}
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&v=3.exp&libraries=places"></script>
-    {% compressed_js 'management' %}
-    {% compressed_js 'googlePlaceAutocomplete' %}
+  {{ block.super }}
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&v=3.exp&libraries=places"></script>
+  {% compressed_js 'management' %}
+  {% compressed_js 'googlePlaceAutocomplete' %}
 {% endblock javascript_headers %}
 
 {% block javascript %}
-    {{ block.super }}
-    <script id="hours-row" type="text/x-handlebars-template">
-        <td>
-            <input type="hidden" name="id"
-                   value="{% templatetag openvariable %} id {% templatetag closevariable %}">
-            <select name="dayOfWeek">
-                <option value="sunday">Sunday</option>
-                <option value="monday">Monday</option>
-                <option value="tuesday">Tuesday</option>
-                <option value="wednesday">Wednesday</option>
-                <option value="thursday">Thursday</option>
-                <option value="friday">Friday</option>
-                <option value="saturday">Saturday</option>
-            </select>
-        </td>
-        <td>
-            <input type="text" name="hourStart" class="form-control"
-                   value="{% templatetag openvariable %} hourStart {% templatetag closevariable %}"/>
-        </td>
-        <td>
-            <input type="text" name="hourEnd" class="form-control"
-                   value="{% templatetag openvariable %} hourEnd {% templatetag closevariable %}"/>
-        </td>
-        <td><button class="destroy btn btn-sm btn-default delete"><span class=" glyphicon glyphicon-trash"></span></button></td>
-    </script>
+  {{ block.super }}
+  <script id="hours-row" type="text/x-handlebars-template">
+    <td>
+      <input type="hidden" name="id"
+             value="{% templatetag openvariable %} id {% templatetag closevariable %}">
+      <select name="dayOfWeek">
+        <option value="sunday">Sunday</option>
+        <option value="monday">Monday</option>
+        <option value="tuesday">Tuesday</option>
+        <option value="wednesday">Wednesday</option>
+        <option value="thursday">Thursday</option>
+        <option value="friday">Friday</option>
+        <option value="saturday">Saturday</option>
+      </select>
+    </td>
+    <td>
+      <input type="text" name="hourStart" class="form-control"
+             value="{% templatetag openvariable %} hourStart {% templatetag closevariable %}"/>
+    </td>
+    <td>
+      <input type="text" name="hourEnd" class="form-control"
+             value="{% templatetag openvariable %} hourEnd {% templatetag closevariable %}"/>
+    </td>
+    <td><button class="destroy btn btn-sm btn-default delete"><span class=" glyphicon glyphicon-trash"></span></button></td>
+  </script>
 
-    <script id="social-row" type="text/x-handlebars-template">
-        <td>
-            <div class="col-sm-12">
-                <input type="text" name="social_url" class="form-control"
-                       parsley-trigger="change" parsley-type="url"
-                       value="{% templatetag openvariable %} social_url {% templatetag closevariable %}"/>
-            </div>
-        </td>
-        <td>
-            <input type="hidden" name="id"
-                   value="{% templatetag openvariable %} id {% templatetag closevariable %}">
-            <select name="social_type">
-                {% for s in SOCIAL_TYPES %}
-                    <option value="{{ s.0 }}">{{ s.1 }} </option>
-                {% endfor %}
-                <option value="foursquare">Foursquare</option>
-                <option value="facebook">Facebook</option>
-                <option value="yelp">Yelp</option>
-            </select>
-        </td>
-        <td>
-            <input type="text" name="social_id" class="form-control" value="{% templatetag openvariable %} social_id {% templatetag closevariable %}"/>
-        </td>
-        <td>
-            <button class="destroy btn btn-sm btn-default delete"><span class="glyphicon glyphicon-trash"></span></button>
-        </td>
-    </script>
+  <script id="social-row" type="text/x-handlebars-template">
+    <td>
+      <div class="col-sm-12">
+        <input type="text" name="social_url" class="form-control"
+               parsley-trigger="change" parsley-type="url"
+               value="{% templatetag openvariable %} social_url {% templatetag closevariable %}"/>
+      </div>
+    </td>
+    <td>
+      <input type="hidden" name="id"
+             value="{% templatetag openvariable %} id {% templatetag closevariable %}">
+      <select name="social_type">
+        {% for s in SOCIAL_TYPES %}
+          <option value="{{ s.0 }}">{{ s.1 }} </option>
+        {% endfor %}
+        <option value="foursquare">Foursquare</option>
+        <option value="facebook">Facebook</option>
+        <option value="yelp">Yelp</option>
+      </select>
+    </td>
+    <td>
+      <input type="text" name="social_id" class="form-control" value="{% templatetag openvariable %} social_id {% templatetag closevariable %}"/>
+    </td>
+    <td>
+      <button class="destroy btn btn-sm btn-default delete"><span class="glyphicon glyphicon-trash"></span></button>
+    </td>
+  </script>
 
-    <script id="images-row" type="text/x-handlebars-template">
-        <div class="col-xs-6 col-md-3">
-            <input type="hidden" name="id"
-                   value="{% templatetag openvariable %} this.id {% templatetag closevariable %}">
-            <img class="img-thumbnail" src="{% templatetag openvariable %} this.image {% templatetag closevariable %}" />
-            <div class="bottom-overlay">
-                <div class="row">
-                    <span class="image-crop btn pull-left btn-primary btn-link" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}"><span class="glyphicon glyphicon-wrench"></span></span>
-                    &nbsp;
-                    <a class="btn btn-default pull-left select-image" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}" >Web</i></a>
-                    &nbsp;
-                    <a class="btn btn-default pull-left select-mobile-image" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}" >Mobile</i></a>
+  <script id="images-row" type="text/x-handlebars-template">
+    <div class="col-xs-6 col-md-3">
+      <input type="hidden" name="id"
+             value="{% templatetag openvariable %} this.id {% templatetag closevariable %}">
+      <img class="img-thumbnail" src="{% templatetag openvariable %} this.image {% templatetag closevariable %}" />
+      <div class="bottom-overlay">
+        <div class="row">
+          <span class="image-crop btn pull-left btn-primary btn-link" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}"><span class="glyphicon glyphicon-wrench"></span></span>
+          &nbsp;
+          <a class="btn btn-default pull-left select-image" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}" >Web</i></a>
+          &nbsp;
+          <a class="btn btn-default pull-left select-mobile-image" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}" >Mobile</i></a>
 
-                    <span class="image-delete btn btn-danger btn-link pull-right" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}"><span class="glyphicon glyphicon-trash"></span></span>
-                    &nbsp;
-                    <a class="btn btn-default btn-link pull-right" href="/mgmt/biz/view/{{ biz.id }}/images/edit/{% templatetag openvariable %} this.id {% templatetag closevariable %}"><span class="glyphicon glyphicon-pencil"></span></a>
-                </div>
-            </div>
+          <span class="image-delete btn btn-danger btn-link pull-right" data-image-id="{% templatetag openvariable %} this.id {% templatetag closevariable %}"><span class="glyphicon glyphicon-trash"></span></span>
+          &nbsp;
+          <a class="btn btn-default btn-link pull-right" href="/mgmt/biz/view/{{ biz.id }}/images/edit/{% templatetag openvariable %} this.id {% templatetag closevariable %}"><span class="glyphicon glyphicon-pencil"></span></a>
         </div>
-        <div id="{% templatetag openvariable %} this.id {% templatetag closevariable %}-modal" class="modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h4> Web </h4>
-                                <img class="img-web" style="width: 400px; height: 400px" src="{% templatetag openvariable %} this.image {% templatetag closevariable %}" />
-                                <input type="hidden" readonly class="web_photo_x1" value="{% templatetag openvariable %} web_photo_x1 {% templatetag closevariable %}"/>
-                                <input type="hidden" readonly class="web_photo_y1" value="{% templatetag openvariable %} web_photo_y1 {% templatetag closevariable %}"/>
-                                <input type="hidden" readonly class="web_photo_x2" value="{% templatetag openvariable %} web_photo_x2 {% templatetag closevariable %}"/>
-                                <input type="hidden" readonly class="web_photo_y2" value="{% templatetag openvariable %} web_photo_y2 {% templatetag closevariable %}"/>
-                            </div>
-                            <div class="col-sm-6">
-                                <h4> Mobile </h4>
-                                <img class="img-mobile" style="width: 400px; height: 400px" src="{% templatetag openvariable %} this.image {% templatetag closevariable %}" />
-                                <input type="hidden" class="mobile_photo_x1" value="{% templatetag openvariable %} mobile_photo_x1 {% templatetag closevariable %}"/>
-                                <input type="hidden" class="mobile_photo_y1" value="{% templatetag openvariable %} mobile_photo_y1 {% templatetag closevariable %}"/>
-                                <input type="hidden" class="mobile_photo_x2" value="{% templatetag openvariable %} mobile_photo_x2 {% templatetag closevariable %}"/>
-                                <input type="hidden" class="mobile_photo_y2" value="{% templatetag openvariable %} mobile_photo_y2 {% templatetag closevariable %}"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="modal-close btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
+      </div>
+    </div>
+    <div id="{% templatetag openvariable %} this.id {% templatetag closevariable %}-modal" class="modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <h4> Web </h4>
+                <img class="img-web" style="width: 400px; height: 400px" src="{% templatetag openvariable %} this.image {% templatetag closevariable %}" />
+                <input type="hidden" readonly class="web_photo_x1" value="{% templatetag openvariable %} web_photo_x1 {% templatetag closevariable %}"/>
+                <input type="hidden" readonly class="web_photo_y1" value="{% templatetag openvariable %} web_photo_y1 {% templatetag closevariable %}"/>
+                <input type="hidden" readonly class="web_photo_x2" value="{% templatetag openvariable %} web_photo_x2 {% templatetag closevariable %}"/>
+                <input type="hidden" readonly class="web_photo_y2" value="{% templatetag openvariable %} web_photo_y2 {% templatetag closevariable %}"/>
+              </div>
+              <div class="col-sm-6">
+                <h4> Mobile </h4>
+                <img class="img-mobile" style="width: 400px; height: 400px" src="{% templatetag openvariable %} this.image {% templatetag closevariable %}" />
+                <input type="hidden" class="mobile_photo_x1" value="{% templatetag openvariable %} mobile_photo_x1 {% templatetag closevariable %}"/>
+                <input type="hidden" class="mobile_photo_y1" value="{% templatetag openvariable %} mobile_photo_y1 {% templatetag closevariable %}"/>
+                <input type="hidden" class="mobile_photo_x2" value="{% templatetag openvariable %} mobile_photo_x2 {% templatetag closevariable %}"/>
+                <input type="hidden" class="mobile_photo_y2" value="{% templatetag openvariable %} mobile_photo_y2 {% templatetag closevariable %}"/>
+              </div>
             </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="modal-close btn btn-default" data-dismiss="modal">Close</button>
+          </div>
         </div>
-    </script>
+      </div>
+    </div>
+  </script>
 
-    <script>
-        $(function() {
+  <script>
+  $(function() {
 
-            function copyCity() {
-                var city = $('#admin3_name').val();
-                $('#admin2_name').val(city);
+    function copyCity() {
+      var city = $('#admin3_name').val();
+      $('#admin2_name').val(city);
+    }
+
+    $('#copy-city').on('click', function(){
+      copyCity();
+    });
+
+    var ifEmpty = function(s) {
+      return (s === null || s === '') ? null : s;
+    };
+    var DAYS_OF_WEEK = [
+      "sunday", "monday", "tuesday", "wednesday",
+      "thursday", "friday", "saturday"
+    ];
+    var Business = Backbone.Model.extend({
+      defaults: function() {
+        return {
+          name: "",
+          description: ""
+        };
+      },
+      url: function() {
+        return '/mgmt/api/biz/' + this.id + '/';
+      },
+    });
+    var biz = new Business({id: {{ biz.id }} });
+    biz.fetch()
+
+    var ImageView = Backbone.View.extend({
+      events: {
+        "click .select-image":  "selectWebImage",
+        "click .select-mobile-image":  "selectMobileImage",
+        "click .image-delete":  "deleteImage",
+        "click .image-crop":  "cropImage",
+        "click .modal-close":  "modalClose"
+      },
+      tagName:  "div",
+      template: Handlebars.compile($('#images-row').html()),
+      initialize: function() { },
+      render: function(data) {
+        this.data = data;
+        this.$el.html(this.template(data));
+        return this;
+      },
+
+      webPreview: function(img, selection) {
+        if (!selection.width || !selection.height) {
+          return;
+        }
+        var scaleX = 100 / selection.width;
+        var scaleY = 100 / selection.height;
+
+        console.log(this.$el.html());
+        this.$el.find('.web_photo_x1').val(selection.x1 * 2.0);
+        this.$el.find('.web_photo_y1').val(selection.y1 * 2.0);
+        this.$el.find('.web_photo_x2').val(selection.x2 * 2.0);
+        this.$el.find('.web_photo_y2').val(selection.y2 * 2.0);
+      },
+
+      mobilePreview: function(img, selection) {
+        if (!selection.width || !selection.height) {
+          return;
+        }
+        var scaleX = 100 / selection.width;
+        var scaleY = 100 / selection.height;
+        this.$el.find('.mobile_photo_x1').val(selection.x1 * 2.0);
+        this.$el.find('.mobile_photo_y1').val(selection.y1 * 2.0);
+        this.$el.find('.mobile_photo_x2').val(selection.x2 * 2.0);
+        this.$el.find('.mobile_photo_y2').val(selection.y2 * 2.0);
+      },
+      selectWebImage: function() {
+        $('.select-image').removeAttr("disabled");
+        this.$el.find('.select-image').attr("disabled", "disabled");
+        $('#landing_image').val(this.data.id);
+      },
+      selectMobileImage: function() {
+        $('.select-mobile-image').removeAttr("disabled");
+        this.$el.find('.select-mobile-image').attr("disabled", "disabled");
+        $('#mobile_landing_image').val(this.data.id);
+      },
+      deleteImage: function() {
+        if (confirm('Are you sure you want to delete this image?')) {
+          this.$el.remove();
+        };
+      },
+      cropImage: function() {
+        var that = this;
+        var w = this.$el.find('.img-web').imgAreaSelect({
+          instance: true,
+          handles: true,
+          show: true,
+          aspectRatio: '1:1',
+          onInit: function(img, selection) {
+            that.webPreview(img, selection);
+          },
+          onSelectChange: function(img, selection) {
+            that.webPreview(img, selection);
+          }
+        });
+        setTimeout(function() {
+          w.setSelection(
+                  that.data.web_photo_x1 / 2.0, that.data.web_photo_y1 / 2.0,
+                  that.data.web_photo_x2 / 2.0, that.data.web_photo_y2 / 2.0,
+              true);
+          w.update();
+          that.webPreview(w, w.getSelection(true));
+        }, 500);
+
+        var m = this.$el.find('.img-mobile').imgAreaSelect({
+          instance: true,
+          handles: true,
+          show: true,
+          aspectRatio: '2:1',
+          onSelectChange: function(img, selection) {
+            that.mobilePreview(img, selection);
+          }
+        });
+        setTimeout(function() {
+          m.setSelection(
+                  that.data.mobile_photo_x1 / 2.0, that.data.mobile_photo_y1 / 2.0,
+                  that.data.mobile_photo_x2 / 2.0, that.data.mobile_photo_y2 / 2.0,
+              true);
+          m.update();
+          that.mobilePreview(m, m.getSelection(true));
+        }, 500);
+
+        $('#' + this.data.id + '-modal').modal('show');
+        $('#' + this.data.id + '-modal').on('hide.bs.modal', function (e) {
+          that.imgSelectClose();
+        })
+      },
+      modalClose: function() {
+        $('#' + this.data.id + '-modal').modal('hide');
+        this.imgSelectClose();
+      },
+      imgSelectClose: function() {
+        this.$el.find('.img-web').imgAreaSelect({
+          'remove': true
+        });
+        this.$el.find('.img-mobile').imgAreaSelect({
+          'remove': true
+        });
+      }
+    });
+
+    var SocialView = Backbone.View.extend({
+      events: {
+        "click .delete":  "deleteSocial"
+      },
+      tagName:  "tr",
+      template: Handlebars.compile($('#social-row').html()),
+      initialize: function() { },
+      render: function(data) {
+        this.$el.html(this.template(data));
+        if (data.social_type) {
+          this.$el.find('select[name="social_type"]').val(data.social_type);
+        } else {
+          this.$el.find('select[name="social_type"]').val("yelp");
+        }
+        this.$el.find('select').select2({ width: '150px' });
+        return this;
+      },
+      deleteSocial: function() {
+        this.$el.remove();
+      }
+    });
+
+    var HoursView = Backbone.View.extend({
+      events: {
+        "click .delete":  "deleteHours",
+
+        "keyup input[name='hourStart']": "copyHourStart",
+        "keyup input[name='hourEnd']": "copyHourEnd"
+      },
+      tagName:  "tr",
+      template: Handlebars.compile($('#hours-row').html()),
+      initialize: function() { },
+      findJoins: function(selector) {
+        var that = this;
+        return  $(selector).filter(function(i) {
+          return $(this) != that.$el && $(this).val() === '';
+        });
+      },
+      copyHourStart: function() {
+        var v = this.$el.find("input[name='hourStart']").val();
+        if (!this.joinedStart) {
+          this.joinedStart = this.findJoins("input[name='hourStart']");
+        }
+        this.joinedStart.each(function() {
+          $(this).val(v);
+        });
+      },
+      copyHourEnd: function() {
+        var v = this.$el.find("input[name='hourEnd']").val();
+        if (!this.joinedEnd) {
+          this.joinedEnd = this.findJoins("input[name='hourEnd']");
+        }
+        this.joinedEnd.each(function() {
+          $(this).val(v);
+        });
+      },
+      render: function(data) {
+        this.$el.html(this.template(data));
+        if (data.dayOfWeek) {
+          this.$el.find('select[name="dayOfWeek"]').val(data.dayOfWeek);
+        } else {
+          this.$el.find('select[name="dayOfWeek"]').val("sunday");
+        }
+        this.$el.find('select').select2({ width: '150px' });
+        return this;
+      },
+      deleteHours: function() {
+        this.$el.remove();
+      }
+    });
+
+    var AppView = Backbone.View.extend({
+      el: $("#bizapp"),
+      events: {
+        "click .save":  "saveBusiness",
+        "click .hours-add": "addHours",
+        "click .social-add": "addSocial"
+      },
+      initialize: function() {
+        this.listenTo(biz, 'change', this.render);
+      },
+      addToHours: function(row) {
+        $("#hours-list tbody:last").append(row);
+      },
+      addToSocial: function(row) {
+        $("#social-list tbody:last").append(row);
+      },
+      addToImage: function(row) {
+        $("#images-list").append(row);
+      },
+      render: function() {
+        var that = this;
+        var hours = biz.get("hours");
+        $("#hours-list tbody").html(''); // Clear hours
+        if (hours.length > 0) {
+          $.map(hours, function(m) {
+            var view = new HoursView();
+            that.addToHours(view.render(m).el);
+          });
+        } else {
+          $.map(DAYS_OF_WEEK, function(m) {
+            var h = { "dayOfWeek": m };
+            var view = new HoursView();
+            that.addToHours(view.render(h).el);
+          });
+        }
+        var social = biz.get("social");
+        $("#social-list tbody").html('');
+        $.map(social, function(m) {
+          var view = new SocialView();
+          that.addToSocial(view.render(m).el);
+        });
+
+        $("#images-list").html('');
+        var images = biz.get("images");
+        $.map(images, function(m) {
+          var view = new ImageView();
+          that.addToImage(view.render(m).el);
+        });
+        var landImage = $('#landing_image').val();
+        if (landImage) {
+          $('.select-image[data-image-id="' + landImage + '"]').attr("disabled", "disabled");
+        }
+        var mobileImage = $('#mobile_landing_image').val();
+        if (mobileImage) {
+          $('.select-mobile-image[data-image-id="' + mobileImage + '"]').attr("disabled", "disabled");
+        }
+      },
+      addHours: function() {
+        var data = {};
+        var view = new HoursView();
+        this.addToHours(view.render({}).el);
+        view.$el.find('input[name="dayOfWeek"]').focus();
+      },
+      addSocial: function() {
+        var data = {};
+        var view = new SocialView();
+        this.addToSocial(view.render({}).el);
+        view.$el.find('input[name="social_url"]').focus();
+      },
+      saveBusiness: function() {
+        $('#bizapp form').parsley('validate');
+        if (!$('#bizapp form').parsley('isValid')) {
+          this.flash('alert-danger', 'Errors exist in form! Please correct!');
+          return;
+        }
+        var obj = {};
+        obj['name'] = $('#name').val();
+        obj['description'] = $('#description').val();
+        obj['admin_notes'] = $('#admin_notes').val();
+        obj['status'] = $('#status').select2('val');
+        obj['landing_image'] = $('#landing_image').val();
+        obj['mobile_landing_image'] = $('#mobile_landing_image').val();
+        obj['phone'] = $('#phone').val();
+        obj['contact1_email'] = $('#contact1_email').val();
+        obj['contact2_email'] = $('#contact2_email').val();
+        obj['website'] = $('#website').val();
+        obj['has_physical_business'] = $('#has_physical_business').is(':checked');
+        obj['has_online_business'] = $('#has_online_business').is(':checked');
+        obj['has_bitcoin_discount'] = $('#has_bitcoin_discount').val();
+        obj['address'] = $('#address').val();
+        obj['admin1_code'] = $('#admin1_code').val();
+        obj['admin2_name'] = $('#admin2_name').val();
+        obj['admin3_name'] = $('#admin3_name').val();
+        obj['postalcode'] = $('#postalcode').val();
+        obj['country'] = $('#country').val();
+        obj['center'] = {
+          latitude: parseFloat($('#latitude').val()),
+          longitude: parseFloat($('#longitude').val())
+        };
+        var cats = $.map($('#categories').select2('data'), function(m) {
+          return { id: m.id, name: m.text };
+        });
+        var social = $('#social-list tbody tr').map(function(i, e) {
+          return {
+            'id': parseInt($(this).find('input[name="id"]').val() || 0),
+            'social_type': $(this).find('select[name="social_type"]').select2('val'),
+            'social_id': $(this).find('input[name="social_id"]').val(),
+            'social_url': $(this).find('input[name="social_url"]').val()
+          };
+        }).toArray();
+        var hours = $('#hours-list tbody tr').map(function(i, e) {
+          return {
+            'id': parseInt($(this).find('input[name="id"]').val() || 0),
+            'dayOfWeek': $(this).find('select[name="dayOfWeek"]').select2('val'),
+            'hourStart': ifEmpty($(this).find('input[name="hourStart"]').val()),
+            'hourEnd': ifEmpty($(this).find('input[name="hourEnd"]').val())
+          }
+        }).toArray();
+        var images = $('#images-list div').map(function(i, e) {
+          return {
+            'id': parseInt($(this).find('input[name="id"]').val() || 0),
+            'mobile_photo_x1': $(this).find('.mobile_photo_x1').val() || null,
+            'mobile_photo_y1': $(this).find('.mobile_photo_y1').val() || null,
+            'mobile_photo_x2': $(this).find('.mobile_photo_x2').val() || null,
+            'mobile_photo_y2': $(this).find('.mobile_photo_y2').val() || null,
+            'web_photo_x1': $(this).find('.web_photo_x1').val() || null,
+            'web_photo_y1': $(this).find('.web_photo_y1').val() || null,
+            'web_photo_x2': $(this).find('.web_photo_x2').val() || null,
+            'web_photo_y2': $(this).find('.web_photo_y2').val() || null
+          };
+        }).toArray();
+        console.log(images);
+        obj['categories'] = cats;
+        obj['social'] = social;
+        obj['hours'] = hours;
+        obj['images'] = images;
+        biz.set(obj);
+
+        $('.save').html('<i class="fa fa-spinner fa-spin"></i> Saving');
+        var that = this;
+        biz.save({}, {
+          success: function() {
+            $('.save').html('Save');
+            var $ogImg = $('.admin-og-image img');
+            $ogImg.attr('src', $ogImg.attr('src') + '?' + Math.random());
+
+            // update modified time in gui
+            var currentModifiedTime = moment.utc(moment(), 'MM/DD/YY HH:mm:ss').zone(7);
+            $('#modified-time').val(currentModifiedTime.calendar()).css('color', 'blue');
+
+            if (obj['status'] === 'PUB') {
+              $('#published-time').val(currentModifiedTime.calendar()).css('color', 'blue');
             }
 
-            $('#copy-city').on('click', function(){
-                copyCity();
-            });
-
-            var ifEmpty = function(s) {
-                return (s === null || s === '') ? null : s;
-            };
-            var DAYS_OF_WEEK = [
-                "sunday", "monday", "tuesday", "wednesday",
-                "thursday", "friday", "saturday"
-            ];
-            var Business = Backbone.Model.extend({
-                defaults: function() {
-                    return {
-                        name: "",
-                        description: ""
-                    };
-                },
-                url: function() {
-                    return '/mgmt/api/biz/' + this.id + '/';
-                },
-            });
-            var biz = new Business({id: {{ biz.id }} });
-            biz.fetch()
-
-            var ImageView = Backbone.View.extend({
-                events: {
-                    "click .select-image":  "selectWebImage",
-                    "click .select-mobile-image":  "selectMobileImage",
-                    "click .image-delete":  "deleteImage",
-                    "click .image-crop":  "cropImage",
-                    "click .modal-close":  "modalClose"
-                },
-                tagName:  "div",
-                template: Handlebars.compile($('#images-row').html()),
-                initialize: function() { },
-                render: function(data) {
-                    this.data = data;
-                    this.$el.html(this.template(data));
-                    return this;
-                },
-
-                webPreview: function(img, selection) {
-                    if (!selection.width || !selection.height) {
-                        return;
-                    }
-                    var scaleX = 100 / selection.width;
-                    var scaleY = 100 / selection.height;
-
-                    console.log(this.$el.html());
-                    this.$el.find('.web_photo_x1').val(selection.x1 * 2.0);
-                    this.$el.find('.web_photo_y1').val(selection.y1 * 2.0);
-                    this.$el.find('.web_photo_x2').val(selection.x2 * 2.0);
-                    this.$el.find('.web_photo_y2').val(selection.y2 * 2.0);
-                },
-
-                mobilePreview: function(img, selection) {
-                    if (!selection.width || !selection.height) {
-                        return;
-                    }
-                    var scaleX = 100 / selection.width;
-                    var scaleY = 100 / selection.height;
-                    this.$el.find('.mobile_photo_x1').val(selection.x1 * 2.0);
-                    this.$el.find('.mobile_photo_y1').val(selection.y1 * 2.0);
-                    this.$el.find('.mobile_photo_x2').val(selection.x2 * 2.0);
-                    this.$el.find('.mobile_photo_y2').val(selection.y2 * 2.0);
-                },
-                selectWebImage: function() {
-                    $('.select-image').removeAttr("disabled");
-                    this.$el.find('.select-image').attr("disabled", "disabled");
-                    $('#landing_image').val(this.data.id);
-                },
-                selectMobileImage: function() {
-                    $('.select-mobile-image').removeAttr("disabled");
-                    this.$el.find('.select-mobile-image').attr("disabled", "disabled");
-                    $('#mobile_landing_image').val(this.data.id);
-                },
-                deleteImage: function() {
-                    if (confirm('Are you sure you want to delete this image?')) {
-                        this.$el.remove();
-                    };
-                },
-                cropImage: function() {
-                    var that = this;
-                    var w = this.$el.find('.img-web').imgAreaSelect({
-                        instance: true,
-                        handles: true,
-                        show: true,
-                        aspectRatio: '1:1',
-                        onInit: function(img, selection) {
-                            that.webPreview(img, selection);
-                        },
-                        onSelectChange: function(img, selection) {
-                            that.webPreview(img, selection);
-                        }
-                    });
-                    setTimeout(function() {
-                        w.setSelection(
-                            that.data.web_photo_x1 / 2.0, that.data.web_photo_y1 / 2.0,
-                            that.data.web_photo_x2 / 2.0, that.data.web_photo_y2 / 2.0,
-                            true);
-                        w.update();
-                        that.webPreview(w, w.getSelection(true));
-                    }, 500);
-
-                    var m = this.$el.find('.img-mobile').imgAreaSelect({
-                        instance: true,
-                        handles: true,
-                        show: true,
-                        aspectRatio: '2:1',
-                        onSelectChange: function(img, selection) {
-                            that.mobilePreview(img, selection);
-                        }
-                    });
-                    setTimeout(function() {
-                        m.setSelection(
-                            that.data.mobile_photo_x1 / 2.0, that.data.mobile_photo_y1 / 2.0,
-                            that.data.mobile_photo_x2 / 2.0, that.data.mobile_photo_y2 / 2.0,
-                            true);
-                        m.update();
-                        that.mobilePreview(m, m.getSelection(true));
-                    }, 500);
-
-                    $('#' + this.data.id + '-modal').modal('show');
-                    $('#' + this.data.id + '-modal').on('hide.bs.modal', function (e) {
-                        that.imgSelectClose();
-                    })
-                },
-                modalClose: function() {
-                    $('#' + this.data.id + '-modal').modal('hide');
-                    this.imgSelectClose();
-                },
-                imgSelectClose: function() {
-                    this.$el.find('.img-web').imgAreaSelect({
-                        'remove': true
-                    });
-                    this.$el.find('.img-mobile').imgAreaSelect({
-                        'remove': true
-                    });
-                }
-            });
-
-            var SocialView = Backbone.View.extend({
-                events: {
-                    "click .delete":  "deleteSocial"
-                },
-                tagName:  "tr",
-                template: Handlebars.compile($('#social-row').html()),
-                initialize: function() { },
-                render: function(data) {
-                    this.$el.html(this.template(data));
-                    if (data.social_type) {
-                        this.$el.find('select[name="social_type"]').val(data.social_type);
-                    } else {
-                        this.$el.find('select[name="social_type"]').val("yelp");
-                    }
-                    this.$el.find('select').select2({ width: '150px' });
-                    return this;
-                },
-                deleteSocial: function() {
-                    this.$el.remove();
-                }
-            });
-
-            var HoursView = Backbone.View.extend({
-                events: {
-                    "click .delete":  "deleteHours",
-
-                    "keyup input[name='hourStart']": "copyHourStart",
-                    "keyup input[name='hourEnd']": "copyHourEnd"
-                },
-                tagName:  "tr",
-                template: Handlebars.compile($('#hours-row').html()),
-                initialize: function() { },
-                findJoins: function(selector) {
-                    var that = this;
-                    return  $(selector).filter(function(i) {
-                        return $(this) != that.$el && $(this).val() === '';
-                    });
-                },
-                copyHourStart: function() {
-                    var v = this.$el.find("input[name='hourStart']").val();
-                    if (!this.joinedStart) {
-                        this.joinedStart = this.findJoins("input[name='hourStart']");
-                    }
-                    this.joinedStart.each(function() {
-                        $(this).val(v);
-                    });
-                },
-                copyHourEnd: function() {
-                    var v = this.$el.find("input[name='hourEnd']").val();
-                    if (!this.joinedEnd) {
-                        this.joinedEnd = this.findJoins("input[name='hourEnd']");
-                    }
-                    this.joinedEnd.each(function() {
-                        $(this).val(v);
-                    });
-                },
-                render: function(data) {
-                    this.$el.html(this.template(data));
-                    if (data.dayOfWeek) {
-                        this.$el.find('select[name="dayOfWeek"]').val(data.dayOfWeek);
-                    } else {
-                        this.$el.find('select[name="dayOfWeek"]').val("sunday");
-                    }
-                    this.$el.find('select').select2({ width: '150px' });
-                    return this;
-                },
-                deleteHours: function() {
-                    this.$el.remove();
-                }
-            });
-
-            var AppView = Backbone.View.extend({
-                el: $("#bizapp"),
-                events: {
-                    "click .save":  "saveBusiness",
-                    "click .hours-add": "addHours",
-                    "click .social-add": "addSocial"
-                },
-                initialize: function() {
-                    this.listenTo(biz, 'change', this.render);
-                },
-                addToHours: function(row) {
-                    $("#hours-list tbody:last").append(row);
-                },
-                addToSocial: function(row) {
-                    $("#social-list tbody:last").append(row);
-                },
-                addToImage: function(row) {
-                    $("#images-list").append(row);
-                },
-                render: function() {
-                    var that = this;
-                    var hours = biz.get("hours");
-                    $("#hours-list tbody").html(''); // Clear hours
-                    if (hours.length > 0) {
-                        $.map(hours, function(m) {
-                            var view = new HoursView();
-                            that.addToHours(view.render(m).el);
-                        });
-                    } else {
-                        $.map(DAYS_OF_WEEK, function(m) {
-                            var h = { "dayOfWeek": m };
-                            var view = new HoursView();
-                            that.addToHours(view.render(h).el);
-                        });
-                    }
-                    var social = biz.get("social");
-                    $("#social-list tbody").html('');
-                    $.map(social, function(m) {
-                        var view = new SocialView();
-                        that.addToSocial(view.render(m).el);
-                    });
-
-                    $("#images-list").html('');
-                    var images = biz.get("images");
-                    $.map(images, function(m) {
-                        var view = new ImageView();
-                        that.addToImage(view.render(m).el);
-                    });
-                    var landImage = $('#landing_image').val();
-                    if (landImage) {
-                        $('.select-image[data-image-id="' + landImage + '"]').attr("disabled", "disabled");
-                    }
-                    var mobileImage = $('#mobile_landing_image').val();
-                    if (mobileImage) {
-                        $('.select-mobile-image[data-image-id="' + mobileImage + '"]').attr("disabled", "disabled");
-                    }
-                },
-                addHours: function() {
-                    var data = {};
-                    var view = new HoursView();
-                    this.addToHours(view.render({}).el);
-                    view.$el.find('input[name="dayOfWeek"]').focus();
-                },
-                addSocial: function() {
-                    var data = {};
-                    var view = new SocialView();
-                    this.addToSocial(view.render({}).el);
-                    view.$el.find('input[name="social_url"]').focus();
-                },
-                saveBusiness: function() {
-                    $('#bizapp form').parsley('validate');
-                    if (!$('#bizapp form').parsley('isValid')) {
-                        this.flash('alert-danger', 'Errors exist in form! Please correct!');
-                        return;
-                    }
-                    var obj = {};
-                    obj['name'] = $('#name').val();
-                    obj['description'] = $('#description').val();
-                    obj['admin_notes'] = $('#admin_notes').val();
-                    obj['status'] = $('#status').select2('val');
-                    obj['landing_image'] = $('#landing_image').val();
-                    obj['mobile_landing_image'] = $('#mobile_landing_image').val();
-                    obj['phone'] = $('#phone').val();
-                    obj['contact1_email'] = $('#contact1_email').val();
-                    obj['contact2_email'] = $('#contact2_email').val();
-                    obj['website'] = $('#website').val();
-                    obj['has_physical_business'] = $('#has_physical_business').is(':checked');
-                    obj['has_online_business'] = $('#has_online_business').is(':checked');
-                    obj['has_bitcoin_discount'] = $('#has_bitcoin_discount').val();
-                    obj['address'] = $('#address').val();
-                    obj['admin1_code'] = $('#admin1_code').val();
-                    obj['admin2_name'] = $('#admin2_name').val();
-                    obj['admin3_name'] = $('#admin3_name').val();
-                    obj['postalcode'] = $('#postalcode').val();
-                    obj['country'] = $('#country').val();
-                    obj['center'] = {
-                        latitude: parseFloat($('#latitude').val()),
-                        longitude: parseFloat($('#longitude').val())
-                    };
-                    var cats = $.map($('#categories').select2('data'), function(m) {
-                        return { id: m.id, name: m.text };
-                    });
-                    var social = $('#social-list tbody tr').map(function(i, e) {
-                        return {
-                            'id': parseInt($(this).find('input[name="id"]').val() || 0),
-                            'social_type': $(this).find('select[name="social_type"]').select2('val'),
-                            'social_id': $(this).find('input[name="social_id"]').val(),
-                            'social_url': $(this).find('input[name="social_url"]').val()
-                        };
-                    }).toArray();
-                    var hours = $('#hours-list tbody tr').map(function(i, e) {
-                        return {
-                            'id': parseInt($(this).find('input[name="id"]').val() || 0),
-                            'dayOfWeek': $(this).find('select[name="dayOfWeek"]').select2('val'),
-                            'hourStart': ifEmpty($(this).find('input[name="hourStart"]').val()),
-                            'hourEnd': ifEmpty($(this).find('input[name="hourEnd"]').val())
-                        }
-                    }).toArray();
-                    var images = $('#images-list div').map(function(i, e) {
-                        return {
-                            'id': parseInt($(this).find('input[name="id"]').val() || 0),
-                            'mobile_photo_x1': $(this).find('.mobile_photo_x1').val() || null,
-                            'mobile_photo_y1': $(this).find('.mobile_photo_y1').val() || null,
-                            'mobile_photo_x2': $(this).find('.mobile_photo_x2').val() || null,
-                            'mobile_photo_y2': $(this).find('.mobile_photo_y2').val() || null,
-                            'web_photo_x1': $(this).find('.web_photo_x1').val() || null,
-                            'web_photo_y1': $(this).find('.web_photo_y1').val() || null,
-                            'web_photo_x2': $(this).find('.web_photo_x2').val() || null,
-                            'web_photo_y2': $(this).find('.web_photo_y2').val() || null
-                        };
-                    }).toArray();
-                    console.log(images);
-                    obj['categories'] = cats;
-                    obj['social'] = social;
-                    obj['hours'] = hours;
-                    obj['images'] = images;
-                    biz.set(obj);
-
-                    $('.save').html('<i class="fa fa-spinner fa-spin"></i> Saving');
-                    var that = this;
-                    biz.save({}, {
-                        success: function() {
-                            $('.save').html('Save');
-                            var $ogImg = $('.admin-og-image img');
-                            $ogImg.attr('src', $ogImg.attr('src') + '?' + Math.random());
-
-                            // update modified time in gui
-                            var currentModifiedTime = moment.utc(moment(), 'MM/DD/YY HH:mm:ss').zone(7);
-                            $('#modified-time').val(currentModifiedTime.calendar()).css('color', 'blue');
-
-                            if (obj['status'] === 'PUB') {
-                                $('#published-time').val(currentModifiedTime.calendar()).css('color', 'blue');
-                            }
-
-                            that.flash('alert-success', 'Successfullly updated business ' + modifiedTime.calendar() + '.');
-                        },
-                        error: function() {
-                            alert('An error occurred.');
-                            that.flash('alert-danger', 'Unable to save form!');
-                        }
-                    });
-                },
-                flash: function(classes, msg) {
-                    var $d = $('<div class="floatingAlert alert-dismissable alert ' + classes + '">' +
-                                msg +
-                             '</div>');
-                    $('.alertsdiv').html($d);
-                    $d.delay(2000).fadeOut("slow", function() {
-                            $d.remove();
-                    });
-                }
-            });
-            AB.setup();
-            $.ajax({
-                dataType: 'json',
-                contentType: 'json',
-                type: "GET",
-                url: "/mgmt/api/cat/?page_size=2000"
-            }).done(function(data) {
-                var d = data.results.map(function(m) {
-                    return { id: m.id, text: m.name };
-                });
-                var startId = 0;
-                $('#categories').select2({
-                    width: '100%',
-                    multiple: true,
-                    data : d,
-                    createSearchChoice: function(term, data) {
-                        return { id: startId--, text: term };
-                    }
-                });
-            });
-            $('#status').select2({
-                width: '200px'
-            }).select2('val', '{{ biz.status }}');
-
-            var app = new AppView();
-            $('#bizForm input').bind("keypress", function(e) {
-                if (e.keyCode == 13) {
-                    e.preventDefault();
-                    return false;
-                }
-            });
-            $(document).bind('keydown', 'ctrl+return', function(e) {
-                e.preventDefault();
-                app.saveBusiness();
-            });
-            $('input,textarea').bind('keydown', 'ctrl+return', function(e) {
-                e.preventDefault();
-                app.saveBusiness();
-            });
-            $(document).bind('keydown', 'tab+s', function() {
-                app.addSocial();
-            });
-            $(document).bind('keydown', 'tab+h', function() {
-                app.addHours();
-            });
+            that.flash('alert-success', 'Successfullly updated business ' + modifiedTime.calendar() + '.');
+          },
+          error: function() {
+            alert('An error occurred.');
+            that.flash('alert-danger', 'Unable to save form!');
+          }
         });
-    </script>
+      },
+      flash: function(classes, msg) {
+        var $d = $('<div class="floatingAlert alert-dismissable alert ' + classes + '">' +
+            msg +
+            '</div>');
+        $('.alertsdiv').html($d);
+        $d.delay(2000).fadeOut("slow", function() {
+          $d.remove();
+        });
+      }
+    });
+    AB.setup();
+    $.ajax({
+      dataType: 'json',
+      contentType: 'json',
+      type: "GET",
+      url: "/mgmt/api/cat/?page_size=2000"
+    }).done(function(data) {
+      var d = data.results.map(function(m) {
+        return { id: m.id, text: m.name };
+      });
+      var startId = 0;
+      $('#categories').select2({
+        width: '100%',
+        multiple: true,
+        data : d,
+        createSearchChoice: function(term, data) {
+          return { id: startId--, text: term };
+        }
+      });
+    });
+    $('#status').select2({
+      width: '200px'
+    }).select2('val', '{{ biz.status }}');
+
+    var app = new AppView();
+    $('#bizForm input').bind("keypress", function(e) {
+      if (e.keyCode == 13) {
+        e.preventDefault();
+        return false;
+      }
+    });
+    $(document).bind('keydown', 'ctrl+return', function(e) {
+      e.preventDefault();
+      app.saveBusiness();
+    });
+    $('input,textarea').bind('keydown', 'ctrl+return', function(e) {
+      e.preventDefault();
+      app.saveBusiness();
+    });
+    $(document).bind('keydown', 'tab+s', function() {
+      app.addSocial();
+    });
+    $(document).bind('keydown', 'tab+h', function() {
+      app.addHours();
+    });
+  });
+  </script>
 {% endblock javascript %}
 

@@ -1,3 +1,14 @@
+@import "../bootstrap/less/variables.less";
+@import "../bootstrap/less/mixins.less";
+
+// BELOW OVERWRITES IS IN ADDITION TO BOOTSTRAP LESS
+@import "variables.less";
+@import "mixins.less";
+
+body {
+    background: #dbe9ef url('/static/img/skyline-airbitz.jpg') fixed;
+}
+
 .biz-result {
 
     .glyphicon { margin-right:5px; }
@@ -26,11 +37,11 @@
     }
 
     .biz-name {
-        font-weight: 900;
-        letter-spacing: -1px;
+        font-weight: 700;
+        letter-spacing: -1.25px;
 
         a {
-            color: #333;
+            color: @gray-dark;
 
             &:hover {
                 text-decoration: none;
@@ -41,22 +52,21 @@
     }
 
     .biz-categories {
-        height: 25px;
         line-height: 20px;
     }
 
     .biz-description {
         opacity: 0;
         height: 90px;
-        margin: 0 0 4px;
+        margin: 5px 0 4px;
     }
 }
 
 
 
-
 // MASONRY VERSION
 .biz-result {
+
     .thumbnail {
         margin-bottom: 40px;
 

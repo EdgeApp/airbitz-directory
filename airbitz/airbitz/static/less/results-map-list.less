@@ -1,11 +1,12 @@
-// ON THE WEB
-.results-area {
+@import "../bootstrap/less/variables.less";
+@import "../bootstrap/less/mixins.less";
 
-    .search-title {
-        margin-top: 20px;
-        margin-bottom: 10px;
-        font-weight: 900;
-    }
+// BELOW OVERWRITES IS IN ADDITION TO BOOTSTRAP LESS
+@import "variables.less";
+@import "mixins.less";
+
+body {
+    background: #dbe9ef url('/static/img/skyline-airbitz.jpg') fixed;
 }
 
 // LOCAL BUSINESS
@@ -30,7 +31,9 @@
             }
 
             .map-marker-popup {
-                max-width: 300px;
+                width: 300px;
+                height: 85px;
+                overflow: hidden;
 
                 .map-marker-image {
                     float: left;
@@ -96,7 +99,8 @@
 
     .search-title {
         margin-bottom: 10px;
-        font-weight: 900;
+        font-size: 28px;
+        font-weight: 700;
         color: @gray-dark;
     }
 
@@ -139,7 +143,7 @@
 
     .biz-name {
         font-size: 24px;
-        font-weight: 900;
+        font-weight: 700;
         letter-spacing: -1.25px;
         margin: 0;
 

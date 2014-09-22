@@ -43,7 +43,7 @@ SCREENCAP_INTERVAL = datetime.timedelta(minutes=15)
 FP_QUERY_INTERVAL = datetime.timedelta(days=7)
 
 
-DEPLOY_DATE = '20140905'
+DEPLOY_DATE = '20140918'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -231,9 +231,29 @@ PIPELINE_CSS = {
     'search': {
         'source_filenames': (
             'css/animate.css',
-            'css/search-results.css',
+            'css/results-map-list.css',
+            'css/results-grid.css',
         ),
         'output_filename': 'css/search.' + DEPLOY_DATE + '.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+    'search_no_results': {
+        'source_filenames': (
+            'css/animate.css',
+            'css/search-no-results.css',
+        ),
+        'output_filename': 'css/search-no-results.' + DEPLOY_DATE + '.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+    'search_starter': {
+        'source_filenames': (
+            'css/ng-searchStarter.css',
+        ),
+        'output_filename': 'css/ng-searchStarter.' + DEPLOY_DATE + '.css',
         'extra_context': {
             'media': 'screen,projection',
         },

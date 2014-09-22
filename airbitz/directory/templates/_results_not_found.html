@@ -1,169 +1,33 @@
-<div class="row" style="margin-top: 20px;">
-    <div class="col-sm-8">
-        {% if request.GET.term %}
-            <h3 style="margin-top: 0;">You searched for <span class="label label-info">{{ request.GET.term }}</span> near <i class="fa fa-map-marker"></i> {{ location }}</h3>
-        {% else %}
-            <h3 style="margin-top: 0;">You searched for any businesses in <i class="fa fa-map-marker"></i> {{ location }}</h3>
-        {% endif %}
-        <h4 style="color: #D9534F; margin-top: 0;"><i class="fa fa-info-circle"></i> Unfortunately we don't have any listings that match that query</h4>
+<h2 class="search-title"><i class="fa fa-exclamation-triangle"></i> Sorry We Could Not Find Anything</h2>
+
+<div class="row">
+  <div class="module animated fadeInRight col-sm-4">
+    <div class="list-container">
+      <ul class="list-group">
+        <li class="header list-group-item">Search Popular</li>
+      </ul>
+      <ul class="category-list-search list-group">
+        <li class="list-group-item"><i class="fa fa-map-marker"></i>&nbsp;<a href="{% url 'landing' %}search?term=&location=Current+Location">Local Businesses</a></li>
+        <li class="list-group-item"><i class="fa fa-globe"></i>&nbsp;<a href="{% url 'landing' %}search?term=&location=On+the+Web">Businesses On the Web</a></li>
+        <li class="list-group-item"><i class="fa fa-cutlery"></i>&nbsp;<a href="{% url 'landing' %}search?term=Restaurants+%26+Food+Trucks&location=Current+Location">Restaurants & Food Trucks</a></li>
+        <li class="list-group-item"><i class="fa fa-beer"></i>&nbsp;<a href="{% url 'landing' %}search?term=Bar&location=Current+Location">Bars & Nightclubs</a></li>
+        <li class="list-group-item"><i class="fa fa-building-o"></i>&nbsp;<a href="{% url 'landing' %}search?term=Hotels+%26+Lodging&location=Current+Location">Hotels & Lodging</a></li>
+      </ul>
     </div>
+  </div>
 
-    <div class="col-sm-4">
-        <h3 style="margin-top: 0;">Know a business that takes Bitcoin?</h3>
-        <a class="btn btn-lg btn-success" href="https://go.airbitz.co/submit-business/" target="_blank">Get a Business Listed</a>
-    </div>
-</div>
+  <div class="searchStarter area-list-search col-sm-4">
+  {% verbatim %}
+    <ui-view></ui-view>
+  {% endverbatim %}
+  </div>
 
-<div class="results-not-found row">
-
-    <div class="region-areas col-sm-8">
-        <h3 class="area-heading heading-clean">Click to Search or Request Regions</h3>
-
-        <!-- Tab nav -->
-        <ul class="region-tabs nav nav-pills">
-          <li class="active tab-button" id="button-region-us"><a href="#region-us" data-toggle="tab">U.S.</a></li>
-          <li><a class="tab-button" id="button-region-ca" href="#region-ca" data-toggle="tab">Canada</a></li>
-          <li><a class="tab-button" id="button-region-eu" href="#region-eu" data-toggle="tab">Europe</a></li>
-          <li><a class="tab-button" id="button-region-other" href="#region-other" id="region-other-area-form" data-toggle="tab">Other</a></li>
-        </ul><!-- ./nav-tabs -->
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div class="tab-pane active" id="region-us">
-                <div class="vmap" id="vmap-us"></div>
-            </div><!-- ./tab-pane -->
-
-            <div class="tab-pane" id="region-ca">
-                <div class="vmap" id="vmap-ca"></div>
-            </div><!-- ./tab-pane -->
-
-            <div class="tab-pane" id="region-eu">
-                <div class="vmap" id="vmap-eu"></div>
-            </div><!-- ./tab-pane -->
-
-            <div class="tab-pane" id="region-other">
-
-                <div id="other-area-form" class="animated text-left row">
-                    <form id="region-signup-form-other" class="col-sm-12" role="form">
-                        <h3><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Hear About Bitcoin Businesses Launching</h3>
-                        <div class="row">
-                            <div class="form-group col-sm-6">
-                                <label for="inputEmailRegion" class="control-label">Email address</label>
-                                <input type="email" id="inputEmailRegion" class="inputEmail form-control" placeholder="Your Email">
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label for="other-area-request-input" class="control-label">Your Region</label>
-                                <input type="text" id="other-area-request-input" class="inputText form-control" name="REGION" placeholder="Bejing, China or Moscow, Russia ..etc">
-                            </div>
-                        </div>
-
-                        <div class="checkbox">
-                            <label>
-                                <input disabled="true" type="checkbox" checked="checked"> Notify me when this area is covered!
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-info">Request Now</button>
-                        <button id="cancelOther" type="button" class="btn btn-danger">Cancel</button>
-                    </form>
-                </div>
-
-            </div><!-- ./tab-pane -->
-        </div><!-- ./tab-content -->
-    </div><!-- ./region-areas -->
-
-    <div class="area-list animated col-sm-4">
-        <h3>Active Regions</h3>
-
-        <!-- Tab nav -->
-        <ul class="region-tabs nav nav-pills">
-          <li class="active tab-button" id="button-region-us-list"><a href="#region-us-list" data-toggle="tab">U.S.</a></li>
-          <li><a class="tab-button" id="button-region-ca-list" href="#region-ca-list" data-toggle="tab">Canada</a></li>
-          <li><a class="tab-button" id="button-region-eu-list" href="#region-eu-list" data-toggle="tab">Europe</a></li>
-          <li><a class="tab-button" id="button-region-asia-list" href="#region-asia-list" data-toggle="tab">Asia</a></li>
-          <li><a class="tab-button" id="button-region-southeast-asia-list" href="#region-southeast-asia-list" data-toggle="tab">Southeast Asia</a></li>
-          <li><a class="tab-button" id="button-region-south-america-list" href="#region-south-america-list" data-toggle="tab">South America</a></li>
-          <li><a class="tab-button" id="button-region-oceana-list" href="#region-oceana-list" data-toggle="tab">Oceana</a></li>
-        </ul><!-- ./nav-tabs -->
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div class="tab-pane active" id="region-us-list">
-                <ul class="list-group">
-                {% for region in us_active_regions_list %}
-                    <a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}"><li class="list-group-item">{{ region.0 }}</li></a>
-                {% endfor %}
-                </ul>
-            </div><!-- ./tab-pane -->
-
-            <div class="tab-pane" id="region-ca-list">
-                <ul class="list-group">
-                {% for region in ca_active_regions_list %}
-                    <a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}"><li class="list-group-item">{{ region.0 }}</li></a>
-                {% endfor %}
-                </ul>
-            </div><!-- ./tab-pane -->
-
-            <div class="tab-pane" id="region-south-america-list">
-                <ul class="list-group">
-                {% for region in south_america_active_regions_list %}
-                    <a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}"><li class="list-group-item">{{ region.0 }}</li></a>
-                {% endfor %}
-                </ul>
-            </div><!-- ./tab-pane -->
-
-            <div class="tab-pane" id="region-eu-list">
-                <ul class="list-group">
-                {% for region in eu_active_regions_list %}
-                    <a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}"><li class="list-group-item">{{ region.0 }}</li></a>
-                {% endfor %}
-                </ul>
-            </div><!-- ./tab-pane -->
-
-            <div class="tab-pane" id="region-asia-list">
-                <ul class="list-group">
-                {% for region in asia_active_regions_list %}
-                    <a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}"><li class="list-group-item">{{ region.0 }}</li></a>
-                {% endfor %}
-                </ul>
-            </div><!-- ./tab-pane -->
-
-            <div class="tab-pane" id="region-southeast-asia-list">
-                <ul class="list-group">
-                {% for region in southeast_asia_active_regions_list %}
-                    <a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}"><li class="list-group-item">{{ region.0 }}</li></a>
-                {% endfor %}
-                </ul>
-            </div><!-- ./tab-pane -->
-
-            <div class="tab-pane" id="region-oceana-list">
-                <ul class="list-group">
-                {% for region in oceana_active_regions_list %}
-                    <a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin {{ region.1 }}"><li class="list-group-item">{{ region.0 }}</li></a>
-                {% endfor %}
-                </ul>
-            </div><!-- ./tab-pane -->
-
-        </div>
-    </div>
-
-
-    <div id="area-form" class="animated col-sm-4">
-        <form id="region-signup-form" class="col-sm-12" role="form" style="padding-left: 0; padding-right: 0;">
-            <h3>Request Area <span id="area-request" class="label label-info"></span></h3>
-            <div class="form-group">
-                <label for="inputEmailRegion" class="control-label"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Hear About Bitcoin Businesses in Your Area</label>
-                <input type="email" id="inputEmailRegion" class="inputEmail form-control" placeholder="Your Email">
-                <input type="hidden" id="area-request-input" name="REGION" value="">
-            </div>
-
-            <div class="checkbox">
-                <label>
-                    <input disabled="true" type="checkbox" checked="checked"> Notify me when this area is covered!
-                </label>
-            </div>
-            <button type="submit" class="btn btn-info">Request Now</button>
-            <button id="cancelEmail" class="btn btn-danger">Cancel</button>
-        </form>
-    </div>
+  <div class="module animated fadeInRight col-sm-4">
+    <h3 style="margin-top: 0;">Get Listed</h3>
+    <img class="img-responsive" src="{{ STATIC_URL }}img/no-results/local-business.jpg" alt="Local Bitcon"/>
+    <a style="margin-top: 10px;" class="btn btn-block btn-success" href="https://go.airbitz.co/submit-business/"><i class="fa fa-plus"></i> List a Business</a>
+    <p style="margin: 10px 0">Do you know of or own a business that accepts payments in Bitcoin?</p>
+    <p>Listing a business only takes a minute.</p>
+  </div>
 
 </div>

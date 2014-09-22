@@ -24,6 +24,156 @@
 .pagination {
   margin-bottom: 0;
 }
+.preview-area .distance-label {
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  width: 85px;
+  height: 18px;
+  padding: 0 10px;
+  background: #56ae37;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #56ae37 0%, #56ae37 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #56ae37), color-stop(100%, #56ae37));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #56ae37 0%, #56ae37 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #56ae37 0%, #56ae37 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #56ae37 0%, #56ae37 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #56ae37 0%, #56ae37 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#56ae37', endColorstr='#56ae37', GradientType=0);
+  /* IE6-9 */
+  box-shadow: 0 0 3px #000;
+}
+.preview-area .distance-label span {
+  display: inline-block;
+  position: relative;
+  top: -3px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  text-shadow: 1px 0 0 #000;
+}
+.preview-area .biz-info-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding-left: 5px;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.01) 1%, rgba(0, 0, 0, 0.65) 99%, rgba(0, 0, 0, 0.65) 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(1%, rgba(0, 0, 0, 0.01)), color-stop(99%, rgba(0, 0, 0, 0.65)), color-stop(100%, rgba(0, 0, 0, 0.65)));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.01) 1%, rgba(0, 0, 0, 0.65) 99%, rgba(0, 0, 0, 0.65) 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.01) 1%, rgba(0, 0, 0, 0.65) 99%, rgba(0, 0, 0, 0.65) 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.01) 1%, rgba(0, 0, 0, 0.65) 99%, rgba(0, 0, 0, 0.65) 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.01) 1%, rgba(0, 0, 0, 0.65) 99%, rgba(0, 0, 0, 0.65) 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#a6000000', GradientType=0);
+  /* IE6-9 */
+}
+.preview-area .biz-info-label span {
+  display: block;
+  position: relative;
+  margin-bottom: 3px;
+  color: white;
+  line-height: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-shadow: 1px 0 0 #000;
+}
+.web-listing {
+  position: relative;
+  height: 200px;
+  margin-bottom: 20px;
+}
+.web-listing img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.mobile-thumbnail {
+  position: relative;
+  width: 320px;
+  height: 85px;
+  background: #ccff00;
+  outline: 1px solid #0063dc;
+  overflow: hidden;
+}
+.mobile-thumbnail img {
+  width: 320px;
+  height: 160px;
+  margin-top: -48px;
+}
+.mobile-landing-image {
+  position: relative;
+  width: 320px;
+  height: 160px;
+  margin: 5px 0;
+  background: #ccff00;
+  outline: 1px solid #0063dc;
+}
+.mobile-landing-image img {
+  width: 320px;
+  height: 160px;
+}
+.google-map-marker {
+  padding: 5px 5px 3px 5px;
+  border: 1px solid #999;
+  border-radius: 5px;
+  background: #fff;
+}
+.google-map-marker .map-marker-popup {
+  width: 300px;
+  height: 90px;
+  overflow: hidden;
+}
+.google-map-marker .map-marker-popup .map-marker-image {
+  float: left;
+  margin-right: 10px;
+}
+.google-map-marker .map-marker-popup .map-marker-image img {
+  width: 65px;
+  height: 65px;
+}
+.google-map-marker .map-marker-popup .map-marker-info {
+  float: left;
+  max-width: 215px;
+  height: 65px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.google-map-marker .map-marker-popup .map-marker-name {
+  font: "Open Sans";
+  font-size: 18px;
+  font-weight: 400;
+}
+.google-map-marker .map-marker-popup .map-marker-links a {
+  margin-top: 0;
+}
+.google-map-marker .map-marker-popup .map-marker-address {
+  line-height: 12px;
+}
+.google-map-marker .map-marker-popup .map-marker-categories {
+  float: left;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.google-map-marker .map-marker-popup .map-marker-categories .map-marker-cat {
+  float: left;
+  margin-right: 4px;
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 11px;
+}
 .updated-field {
   box-shadow: 0 0 8px #2291cf;
 }
@@ -32,7 +182,7 @@
 }
 .admin-heads-up .biz-name {
   margin: 0;
-  font-weight: 900;
+  font-weight: 700;
 }
 #bizForm .panel label {
   width: 100%;
@@ -199,4 +349,35 @@ table.dataTable .popover hr {
 .select2-container-multi .select2-choices .select2-search-choice {
   background: #2291cf;
   color: #ffffff;
+}
+.floatingAlert {
+  margin-left: auto;
+  margin-right: auto;
+  position: fixed;
+  top: 60px;
+  width: 80%;
+  z-index: 100000;
+  box-shadow: 1px 1px 2px #DDD;
+}
+.parsley-error-list {
+  color: red;
+  font-weight: bold;
+}
+.modal-dialog {
+  width: 1000px;
+}
+.modal-body {
+  max-width: 1000px;
+}
+.updateWithOrigValue {
+  margin-right: 3px;
+}
+#valueUpdateCheck .field-name {
+  font-weight: 900;
+}
+#valueUpdateCheck .new-value {
+  color: #2291cf;
+}
+#valueUpdateCheck .old-value {
+  color: #d9534f;
 }

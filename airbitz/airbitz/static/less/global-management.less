@@ -7,6 +7,7 @@
 
 @import "bootstrap-overrides.less";
 
+@import "management-previews.less";
 
 .updated-field {
     box-shadow: 0 0 8px @brand-primary;
@@ -18,7 +19,7 @@
 
     .biz-name {
         margin: 0;
-        font-weight: 900;
+        font-weight: 700;
     }
 }
 
@@ -232,9 +233,45 @@ table.dataTable {
 .select2-container-multi .select2-choices .select2-search-choice {
     background: @brand-primary;
     color: #ffffff;
+}
 
-//    .select2-search-choice-close {
-//        background: url('select2_white.png') right top no-repeat;
-//    }
+
+.floatingAlert {
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
+    top: 60px;
+    width: 80%;
+    z-index: 100000;
+    box-shadow: 1px 1px 2px #DDD;
+}
+.parsley-error-list {
+    color: red;
+    font-weight: bold;
+}
+.modal-dialog {
+    width: 1000px;
+}
+
+.modal-body {
+        max-width: 1000px;
+}
+
+
+
+.updateWithOrigValue {
+    margin-right: 3px;
+}
+#valueUpdateCheck {
+
+    .field-name {
+        font-weight: 900;
+    }
+    .new-value {
+        color: @brand-primary;
+    }
+    .old-value {
+        color: @brand-danger;
+    }
 
 }
