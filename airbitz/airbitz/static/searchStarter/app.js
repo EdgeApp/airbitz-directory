@@ -101,7 +101,7 @@ app.controller('abRegionDetails', ['$scope', 'SimpleCache', 'region', function($
   $scope.url_country_code = document.location.href.split('/')[document.location.href.split('/').length - 1];
   $scope.country = SimpleCache.get('country') || $scope.url_country_code;
 
-  $('#accepting-bitcoin .loading-spinner').hide();
+  $('.searchStarter .loading-spinner').hide();
 
   $scope.bizCount = function() {
     var count = 0;
@@ -113,12 +113,14 @@ app.controller('abRegionDetails', ['$scope', 'SimpleCache', 'region', function($
 
   $scope.subRegionClicked = function(region, country){
     var $location = $('#input-location');
+    var $term = $('#input-name-category');
     var $search = $('#search-button');
 
     $('.landing-module').css({'margin-top': '70px'});
     $('#nav-desktop').css({'visibility': 'visible'});
 
     $location.val(region + ', ' + country);
+    $term.val('');
 
 //    $search.addClass('animated fadeInUp');
     $location.css({
@@ -144,10 +146,10 @@ app.controller('abRegionDetails', ['$scope', 'SimpleCache', 'region', function($
   };
 
   $scope.showLoading = function() {
-    var $loadingSpinner = $('#accepting-bitcoin .loading-spinner');
+    var $loadingSpinner = $('.searchStarter .loading-spinner');
     $loadingSpinner.show();
     $loadingSpinner.addClass('animated fadeInUp');
-    $('#accepting-bitcoin .list-container').css('opacity', '.3');
+    $('.searchStarter .list-container').css('opacity', '.3');
   };
 
 }]);

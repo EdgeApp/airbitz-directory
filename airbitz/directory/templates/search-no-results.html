@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load compressed %}
+
+{% block title %}Search - No Results Found{% endblock title %}
+
+
+{% block html_open_tag %}ng-app="searchStarter"{% endblock html_open_tag %}
+
+{% block javascript_headers %}
+    {{ block.super }}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={% if not DEBUG %}{{ mapkey }}{% endif %}&sensor=false"> </script>
+    {% compressed_js 'angularjs' %}
+    {% compressed_js 'search_starter' %}
+{% endblock javascript_headers %}
+
+{% block body_tag %}style="background: #dbe9ef url('/static/img/skyline-airbitz.jpg') fixed;"{% endblock body_tag %}
+
+{% block main_content %}
+
+
+  <div class="no-results-area">
+    {% include '_results_not_found.html' %}
+  </div>
+
+
+{% endblock main_content %}
+
+
+{% block javascript %}
+    {{ block.super }}
+{% endblock %}

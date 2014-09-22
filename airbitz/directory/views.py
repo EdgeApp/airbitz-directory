@@ -2,7 +2,7 @@ import datetime
 from django.contrib.gis.measure import D
 from django.db.models import Q
 from django.http import Http404, HttpResponseRedirect, HttpResponse
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from urllib import urlencode
@@ -67,14 +67,31 @@ def landing(request):
     }
     return render_to_response('home.html', RequestContext(request, context))
 
-def business_search(request):
-    term = request.GET.get('term', None)
-    category = request.GET.get('category', None)
-    ll = request.GET.get('ll', None)
-    location = request.GET.get('location', None)
+def business_search(request, arg_term=None, arg_category=None, arg_location=None, arg_ll=None):
+    if arg_term:
+        term = arg_term
+    else:
+        term = request.GET.get('term', None)
+    if arg_category:
+        category = arg_category
+    else:
+        category = request.GET.get('category', None)
+    if arg_ll:
+        ll = arg_ll
+    else:
+        ll = request.GET.get('ll', None)
+    if arg_location:
+        location = arg_location
+    else:
+        location = request.GET.get('location', None)
+
     ip = api.getRequestIp(request)
     a = api.ApiProcess(locationStr=location, ll=ll, ip=ip)
     results = a.searchDirectory(term=term, category=category)
+
+    if not results:
+        return redirect('search_no_results')
+
 
     request.session['nearText'] = location
     if location == 'On the Web':
@@ -119,6 +136,10 @@ def business_search(request):
     }
     return render_to_response('search.html', RequestContext(request, context))
 
+
+def business_search_no_results(request):
+    context = {}
+    return render_to_response('search-no-results.html', RequestContext(request, context))
 
 def business_info(request, bizId):
     biz = get_biz(request, pk=bizId)

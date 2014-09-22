@@ -51,7 +51,7 @@
             {% compressed_css 'global' %}
         {% endblock head %}
     </head>
-    <body>
+    <body {% block body_tag %}{% endblock body_tag %}>
         <div id="wrap">
             {% block top_bg %}{% endblock %}
 
@@ -93,8 +93,8 @@
                     {% endif %}
                 {% endblock message %}
 
-                {% block body %}
-                {% endblock body %}
+                {% block main_content %}
+                {% endblock main_content %}
             </div><!-- /.container -->
 
 

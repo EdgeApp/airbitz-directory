@@ -5,108 +5,95 @@
 
 {% block title %}Search{% endblock title %}
 
-
 {% block javascript_headers %}
     {{ block.super }}
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={% if not DEBUG %}{{ mapkey }}{% endif %}&sensor=false"> </script>
     {% compressed_js 'search' %}
-    {% compressed_css 'search' %}
 {% endblock javascript_headers %}
 
-{% block body %}
+{% block body_tag %}style="background: #dbe9ef url('/static/img/skyline-airbitz.jpg') fixed;"{% endblock body_tag %}
 
-{#{% if not results %} {# NO RESULTS #}
-{##}
-{#    {% include '_results_not_found.html' %}#}
-{##}
-{#{% else %}  {# SHOW RESULTS #}
+{% block main_content %}
 
-    {% if request.GET.location == 'On the Web' %}
+
+  {% if request.GET.location == 'On the Web' %}
     <div class="results-area">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1 class="search-title visible-lg-block">Bitcoin Businesses On the Web</h1>
-                <h1 class="search-title visible-xs-block visible-sm-block visible-md-block">Search Results</h1>
-                {% if results_info.total > results_info.results_per_page %}
-                    <div class="pagination-area">
-                        {% bootstrap_paginate page_obj range=8 %}
-                    </div>
-                {% endif %}
-                    <div class="pagination-info row" style="margin: 0;">
-                        <strong>{{ results_info.total }}</strong> Total Results Found
-                    </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="search-title visible-lg-block">Bitcoin Businesses On the Web</h1>
+          <h1 class="search-title visible-xs-block visible-sm-block visible-md-block">Search Results</h1>
+          {% if results_info.total > results_info.results_per_page %}
+            <div class="pagination-area">
+              {% bootstrap_paginate page_obj range=8 %}
             </div>
+          {% endif %}
+          <div class="pagination-info row" style="margin: 0;">
+            <strong>{{ results_info.total }}</strong> Total Results Found
+          </div>
         </div>
+      </div>
 
-        <div class="results-grid list-group row">
-            {% block result_grid_items %}
-                {% for rbiz in results %}
-                    {% include '_result_grid_item.html' %}
-                {% endfor %}
-            {% endblock result_grid_items %}
-        </div>
+      <div class="results-grid list-group row">
+        {% block result_grid_items %}
+          {% for rbiz in results %}
+            {% include '_result_grid_item.html' %}
+          {% endfor %}
+        {% endblock result_grid_items %}
+      </div>
     </div><!-- /.results-area -->
 
-      {% if results_info.total > results_info.results_per_page %}
-          <div class="pagination-area">
-              {% bootstrap_paginate page_obj range=8 %}
-          </div>
-      {% endif %}
-          <div class="pagination-info row" style="margin: 0;">
-              <strong>{{ results_info.total }}</strong> Total Results Found
-          </div>
-
-    {% else %}
-
-    <div class="results-map-list row">
-        <div class="col-sm-6">
-            <h1 class="search-title hidden-xs hidden-sm row">Bitcoin Business Search Results</h1>
-            <h1 class="search-title visible-xs visible-sm row">Search Results</h1>
-            {% if results_info.total > results_info.results_per_page %}
-                <div class="pagination-area row">
-                    {% bootstrap_paginate page_obj range=8 %}
-                </div>
-            {% endif %}
-                <div class="pagination-info row">
-                    <strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_left }}</strong> Shown on Map
-                </div>
-
-            {% block results_list_items %}
-                {% for biz in results %}
-                    {% include '_result_list_item.html' %}
-                {% endfor %}
-            {% endblock results_list_items %}
-
-            {% if results_info.total > results_info.results_per_page %}
-                <div class="pagination-area row">
-                    {% bootstrap_paginate page_obj range=8 %}
-                </div>
-            {% endif %}
-
-            {% if results %}
-                <div class="pagination-info row">
-                    <strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_left }}</strong> Shown on Map
-                </div>
-
-            {% else %}
-              <div class="row">
-                {% include '_results_not_found.html' %}
-              </div>
-            {% endif %}
-
-        </div>
-        <div class="location-search-info hidden-xs col-sm-6">
-            <div class="map-container" data-spy="affix" data-offset-top="0">
-                <div id="map"></div>
-            </div>
-        </div>
+    {% if results_info.total > results_info.results_per_page %}
+      <div class="pagination-area">
+        {% bootstrap_paginate page_obj range=8 %}
+      </div>
+    {% endif %}
+    <div class="pagination-info row" style="margin: 0;">
+      <strong>{{ results_info.total }}</strong> Total Results Found
     </div>
 
-    {% endif %}
+  {% else %}
 
-{#{% endif %} {# END OF RESULTS #}
+    <div class="results-map-list row">
+      <div class="col-sm-6">
+        <h1 class="search-title hidden-xs hidden-sm row">Bitcoin Business Search Results</h1>
+        <h1 class="search-title visible-xs visible-sm row">Search Results</h1>
+        {% if results_info.total > results_info.results_per_page %}
+          <div class="pagination-area row">
+            {% bootstrap_paginate page_obj range=8 %}
+          </div>
+        {% endif %}
+        <div class="pagination-info row">
+          <strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_left }}</strong> Shown on Map
+        </div>
 
-{% endblock %}
+        {% block results_list_items %}
+          {% for biz in results %}
+            {% include '_result_list_item.html' %}
+          {% endfor %}
+        {% endblock results_list_items %}
+
+        {% if results_info.total > results_info.results_per_page %}
+          <div class="pagination-area row">
+            {% bootstrap_paginate page_obj range=8 %}
+          </div>
+        {% endif %}
+
+        <div class="pagination-info row">
+          <strong>{{ results_info.total }}</strong> Total Results Found, <strong>{{ results_info.results_left }}</strong> Shown on Map
+        </div>
+
+      </div>
+      <div class="location-search-info hidden-xs col-sm-6">
+        <div class="map-container" data-spy="affix" data-offset-top="0">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+
+  {% endif %}
+
+
+{% endblock main_content %}
 
 
 {% block javascript %}

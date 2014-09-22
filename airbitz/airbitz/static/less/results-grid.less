@@ -1,3 +1,10 @@
+@import "../bootstrap/less/variables.less";
+@import "../bootstrap/less/mixins.less";
+
+// BELOW OVERWRITES IS IN ADDITION TO BOOTSTRAP LESS
+@import "variables.less";
+@import "mixins.less";
+
 .biz-result {
 
     .glyphicon { margin-right:5px; }
@@ -27,10 +34,10 @@
 
     .biz-name {
         font-weight: 700;
-        letter-spacing: -1px;
+        letter-spacing: -1.25px;
 
         a {
-            color: #333;
+            color: @gray-dark;
 
             &:hover {
                 text-decoration: none;
@@ -53,9 +60,9 @@
 
 
 
-
 // MASONRY VERSION
 .biz-result {
+
     .thumbnail {
         margin-bottom: 40px;
 

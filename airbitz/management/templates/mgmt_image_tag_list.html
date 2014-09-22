@@ -20,7 +20,7 @@
     {{ block.super }}
 {% endblock search %}
 
-{% block body %}
+{% block main_content %}
     <div class="row">
         <div class="col-sm-12">
             <a class="pull-right btn-sm btn btn-default" href="{% url 'mgmt_image_tag_add' %}">Add Tag</a>
@@ -66,5 +66,5 @@
             </div>
         </div>
     </div>
-{% endblock %}
+{% endblock main_content %}
 

@@ -36,7 +36,7 @@
     {% if user.is_superuser %}{% endif %}
 {% endblock admin_buttons %}
 
-{% block body %}
+{% block main_content %}
 
 
     <div class="row" style="margin-bottom: 30px;">
@@ -79,7 +79,7 @@
     <div class="row">
     </div>
 
-{% endblock %}
+{% endblock main_content %}
 
 {% block javascript_headers %}
     {{ block.super }}

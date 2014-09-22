@@ -71,11 +71,11 @@ jQuery(function($) {
       'transition': 'all .25s',
       '-webkit-transition': 'all .25s',
       '-moz-transition': 'all .25s',
-      '-0-transition': 'all .25s',
+      '-0-transition': 'all .25s'
     });
   }, function(){
     $(this).find('.app-store').css({
-      'zoom': '100%',
+      'zoom': '100%'
     });
   });
 

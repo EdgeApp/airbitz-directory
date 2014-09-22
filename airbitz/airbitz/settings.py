@@ -200,7 +200,6 @@ PIPELINE_CSS = {
             'bootstrap/css/bootstrap.css',
             'extras/font-awesome/css/font-awesome.min.css',
             'extras/swipebox-master/source/swipebox.css',
-            'extras/jvectormap/jquery-jvectormap.css',
             'css/global-stylesheet.css',
         ),
         'output_filename': 'css/global.' + DEPLOY_DATE + '.css',
@@ -231,9 +230,29 @@ PIPELINE_CSS = {
     'search': {
         'source_filenames': (
             'css/animate.css',
-            'css/search-results.css',
+            'css/results-map-list.css',
+            'css/results-grid.css',
         ),
         'output_filename': 'css/search.' + DEPLOY_DATE + '.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+    'search_no_results': {
+        'source_filenames': (
+            'css/animate.css',
+            'css/search-no-results.css',
+        ),
+        'output_filename': 'css/search-no-results.' + DEPLOY_DATE + '.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+    'search_starter': {
+        'source_filenames': (
+            'css/ng-searchStarter.css',
+        ),
+        'output_filename': 'css/ng-searchStarter.' + DEPLOY_DATE + '.css',
         'extra_context': {
             'media': 'screen,projection',
         },
@@ -322,10 +341,6 @@ PIPELINE_JS = {
     'directory': {
         'source_filenames': (
             'extras/gmaps/gmaps.js',
-            'extras/jvectormap/jquery-jvectormap.js',
-            'extras/jvectormap/maps/jquery-jvectormap-us-aea-en.js',
-            'extras/jvectormap/maps/jquery-jvectormap-ca-lcc-en.js',
-            'extras/jvectormap/maps/jquery-jvectormap-europe-mill-en.js',
             'extras/masonry/masonry.pkgd.min.js',
             'extras/blur.js/blur.js',
             'extras/ajaxchimp/jquery.ajaxchimp.js',
