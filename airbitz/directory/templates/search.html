@@ -12,7 +12,9 @@
     {% compressed_css 'search' %}
 {% endblock javascript_headers %}
 
-{% block body %}
+{% block body_tag %}style="background: #dbe9ef url('/static/img/skyline-airbitz.jpg') fixed;"{% endblock body_tag %}
+
+{% block main_content %}
 
 
   {% if request.GET.location == 'On the Web' %}
@@ -92,7 +94,7 @@
   {% endif %}
 
 
-{% endblock %}
+{% endblock main_content %}
 
 
 {% block javascript %}

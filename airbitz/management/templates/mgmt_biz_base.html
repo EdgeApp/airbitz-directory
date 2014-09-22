@@ -14,7 +14,7 @@
     <a class="btn btn-default pull-right" href="{% url 'mgmt_biz_view' biz.id %}">Data</a>
 {% endblock admin_buttons %}
 
-{% block body %}
+{% block main_content %}
     <div class="admin-heads-up row">
     {% if DEBUG %}
         <div class="col-sm-12">
@@ -103,7 +103,7 @@
     </div>
     {% block bizbody %}
     {% endblock bizbody %}
-{% endblock body %}
+{% endblock main_content %}
 
 {% block javascript %}
     {{ block.super }}

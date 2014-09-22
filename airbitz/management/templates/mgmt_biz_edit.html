@@ -9,7 +9,7 @@
     {% compressed_css 'management' %}
 {% endblock head %}
 
-{% block body %}
+{% block main_content %}
     <div class="row">
         <div class="col-sm-12">
             {% if img %}
@@ -55,7 +55,7 @@
             {% endif %}
         </div>
     </div>
-{% endblock %}
+{% endblock main_content %}
 
 {% block javascript_headers %}
     {{ block.super }}

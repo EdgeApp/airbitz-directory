@@ -15,7 +15,9 @@
     {% compressed_css 'search_starter' %}
 {% endblock javascript_headers %}
 
-{% block body %}
+{% block body_tag %}style="background: #dbe9ef url('/static/img/skyline-airbitz.jpg') fixed;"{% endblock body_tag %}
+
+{% block main_content %}
 
 
   <div class="no-results-area">
@@ -23,7 +25,7 @@
   </div>
 
 
-{% endblock %}
+{% endblock main_content %}
 
 
 {% block javascript %}
