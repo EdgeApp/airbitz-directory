@@ -9,7 +9,6 @@
     {{ block.super }}
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={% if not DEBUG %}{{ mapkey }}{% endif %}&sensor=false"> </script>
     {% compressed_js 'search' %}
-    {% compressed_css 'search' %}
 {% endblock javascript_headers %}
 
 {% block body_tag %}style="background: #dbe9ef url('/static/img/skyline-airbitz.jpg') fixed;"{% endblock body_tag %}
