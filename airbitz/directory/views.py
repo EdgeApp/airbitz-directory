@@ -67,11 +67,24 @@ def landing(request):
     }
     return render_to_response('home.html', RequestContext(request, context))
 
-def business_search(request):
-    term = request.GET.get('term', None)
-    category = request.GET.get('category', None)
-    ll = request.GET.get('ll', None)
-    location = request.GET.get('location', None)
+def business_search(request, arg_term=None, arg_category=None, arg_location=None, arg_ll=None):
+    if arg_term:
+        term = arg_term
+    else:
+        term = request.GET.get('term', None)
+    if arg_category:
+        category = arg_category
+    else:
+        category = request.GET.get('category', None)
+    if arg_ll:
+        ll = arg_ll
+    else:
+        ll = request.GET.get('ll', None)
+    if arg_location:
+        location = arg_location
+    else:
+        location = request.GET.get('location', None)
+
     ip = api.getRequestIp(request)
     a = api.ApiProcess(locationStr=location, ll=ll, ip=ip)
     results = a.searchDirectory(term=term, category=category)
