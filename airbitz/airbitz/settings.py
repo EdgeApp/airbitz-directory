@@ -200,7 +200,6 @@ PIPELINE_CSS = {
             'bootstrap/css/bootstrap.css',
             'extras/font-awesome/css/font-awesome.min.css',
             'extras/swipebox-master/source/swipebox.css',
-            'extras/jvectormap/jquery-jvectormap.css',
             'css/global-stylesheet.css',
         ),
         'output_filename': 'css/global.' + DEPLOY_DATE + '.css',
@@ -342,10 +341,6 @@ PIPELINE_JS = {
     'directory': {
         'source_filenames': (
             'extras/gmaps/gmaps.js',
-            'extras/jvectormap/jquery-jvectormap.js',
-            'extras/jvectormap/maps/jquery-jvectormap-us-aea-en.js',
-            'extras/jvectormap/maps/jquery-jvectormap-ca-lcc-en.js',
-            'extras/jvectormap/maps/jquery-jvectormap-europe-mill-en.js',
             'extras/masonry/masonry.pkgd.min.js',
             'extras/blur.js/blur.js',
             'extras/ajaxchimp/jquery.ajaxchimp.js',

@@ -51,7 +51,7 @@
     {% endif %}
 {% endblock admin_buttons %}
 
-{% block body %}
+{% block main_content %}
   <div itemscope itemtype="http://schema.org/LocalBusiness">{# Schema.org container #}
 
     <div class="row" style="margin-bottom: 30px;">
@@ -209,7 +209,7 @@
         </div>
     {% endif %}
 
-{% endblock %}
+{% endblock main_content %}
 
 {% block javascript_headers %}
     {{ block.super }}

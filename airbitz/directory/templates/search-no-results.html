@@ -9,13 +9,13 @@
 {% block javascript_headers %}
     {{ block.super }}
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={% if not DEBUG %}{{ mapkey }}{% endif %}&sensor=false"> </script>
-    {% compressed_css 'search_no_results' %}
     {% compressed_js 'angularjs' %}
     {% compressed_js 'search_starter' %}
-    {% compressed_css 'search_starter' %}
 {% endblock javascript_headers %}
 
-{% block body %}
+{% block body_tag %}style="background: #dbe9ef url('/static/img/skyline-airbitz.jpg') fixed;"{% endblock body_tag %}
+
+{% block main_content %}
 
 
   <div class="no-results-area">
@@ -23,7 +23,7 @@
   </div>
 
 
-{% endblock %}
+{% endblock main_content %}
 
 
 {% block javascript %}

@@ -20,7 +20,7 @@
     {{ block.super }}
 {% endblock search %}
 
-{% block body %}
+{% block main_content %}
     <div class="row">
         <div class="col-sm-12">
             <a class="pull-right btn-sm btn btn-default" href="{% url 'mgmt_category_add' %}">Add Category</a>
@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-{% endblock %}
+{% endblock main_content %}
 
 {% block javascript_headers %}
     {{ block.super }}
