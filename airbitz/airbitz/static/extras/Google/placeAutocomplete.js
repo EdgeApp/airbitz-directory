@@ -76,6 +76,23 @@ function formatCountry(country) {
   }
 }
 
+function formatFieldValue(field, value) {
+  console.log('FORMATTING ' + field + ':' + value + ' =');
+  switch(field){
+    case 'address':
+      console.log(formatStreetAddress(value));
+      return formatStreetAddress(value);
+    case 'county':
+      console.log(formatCounty(value));
+      return formatCounty(value);
+    case 'country':
+      console.log(formatCountry(value));
+      return formatCountry(value);
+    default:
+      return value;
+  }
+}
+
 function activateUpdateButtons(inputId) {
   $('.updateWithOrigValue').on('click', function(e){
     e.preventDefault();
@@ -101,6 +118,8 @@ function setInputValue(cssId, inputValue) {
   if (document.getElementById(cssId)) {
     var inputElement = document.getElementById(cssId);
     var origVal = inputElement.value;
+    console.log('*ORIG ' + cssId + ': ' + origVal);
+
     if (typeof inputValue == 'undefined') {
       inputValue = ''
     }
@@ -109,9 +128,8 @@ function setInputValue(cssId, inputValue) {
       return true;
     } else {
 
-
-      $('#'+cssId).parent().append('<button class="updateButton updateWithOrigValue btn btn-primary btn-xs" data-orig-value="' + origVal + '"><i class="fa fa-refresh"></i> ' + origVal + '</button>');
-      $('#'+cssId).parent().append('<button class="updateButton updateWithNewValue btn btn-success btn-xs" data-new-value="' + inputValue + '"><i class="fa fa-google-plus"></i> ' + inputValue + '</button>');
+      $('#' + cssId).parent().append('<button class="updateButton updateWithOrigValue btn btn-primary btn-xs" data-orig-value="' + origVal + '"><i class="fa fa-refresh"></i> ' + origVal + '</button>');
+      $('#' + cssId).parent().append('<button class="updateButton updateWithNewValue btn btn-success btn-xs" data-new-value="' + inputValue + '"><i class="fa fa-google-plus"></i> ' + inputValue + '</button>');
       activateUpdateButtons('#' + cssId);
 
 
@@ -127,6 +145,12 @@ function setInputValue(cssId, inputValue) {
   } else {
     console.log('setInputValue() failed to set value. Cannot find element: #' + cssId + ' or ' + cssIdNew);
   }
+}
+
+function checkOrigValue(cssId) {
+  var inputElement = document.getElementById(cssId);
+  var origVal = inputElement.value;
+  console.log('ORIG ' + cssId + ': ' + origVal);
 }
 
 function lookupName() {
@@ -163,6 +187,7 @@ function holdInputsForUndo() {
 }
 
 function fillInAddress() {
+  holdInputsForUndo();
   // remove previously created update buttons
   $('button.updateButton').remove();
 
@@ -173,12 +198,12 @@ function fillInAddress() {
 
   console.log(place);
 
-  for (var component in componentForm) {
-    if (document.getElementById(component)) {
-      document.getElementById(component).value = '';
-      document.getElementById(component).disabled = false;
-    }
-  }
+//  for (var component in componentForm) {
+//    if (document.getElementById(component)) {
+//      document.getElementById(component).value = '';
+//      document.getElementById(component).disabled = false;
+//    }
+//  }
 
   // Get each component of the address from the place details
   // and get the corresponding values to set the inputs to
@@ -216,27 +241,23 @@ function fillInAddress() {
     if (componentForm[addressType]) {
       if (document.getElementById(addressType)) {
         var val = place.address_components[i][componentForm[addressType]];
-        document.getElementById(addressType).value = val;
+        setInputValue(addressType, val);
       }
     }
   }
-
-
-  holdInputsForUndo();
 
   // Get phone number if available
   if (place.formatted_phone_number) {
     phone = place.international_phone_number;
   }
 
-  // Clear address fields
-//    document.getElementById('address').value = '';
-  setInputValue('address', formatStreetAddress(street_address)); // street address
+
+  setInputValue('address', formatFieldValue('address', street_address)); // street address
   setInputValue('admin3_name', admin3_name); // city
-  setInputValue('admin2_name', formatCounty(admin2_name)); // county
+  setInputValue('admin2_name', formatFieldValue('county', admin2_name)); // county
   setInputValue('admin1_code', admin1_code); // state
   setInputValue('postalcode', postalcode); // zip
-  setInputValue('country', formatCountry(country)); // country
+  setInputValue('country', formatFieldValue('country', country)); // country
   setInputValue('latitude', place.geometry.location.lat().toFixed(7)); // lat
   setInputValue('longitude', place.geometry.location.lng().toFixed(7)); // lon
   setInputValue('phone', phone); // phone
@@ -325,9 +346,9 @@ $('.geocode-latlon').click(function(e) {
 
       holdInputsForUndo();
 
-      setInputValue('address', formatStreetAddress(street_address)); // street address
+      setInputValue('address', formatFieldValue('address', street_address)); // street address
       setInputValue('admin3_name', admin3_name); // city
-      setInputValue('admin2_name', formatCounty(admin2_name)); // county
+      setInputValue('admin2_name', formatFieldValue('county', admin2_name)); // county
       setInputValue('admin1_code', admin1_code); // state
       setInputValue('postalcode', postalcode); // zip
       setInputValue('country', country); // country
