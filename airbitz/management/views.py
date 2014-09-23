@@ -400,3 +400,8 @@ def redirect_button(request):
     except KeyError: # couldn't get referrer (googlebot crawl)
         redirect_url = request.build_absolute_uri(reverse('landing'))
         return HttpResponseRedirect(redirect_url)
+
+
+def page_privacy_policy(request):
+    context = {}
+    return render_to_response('page_privacy-policy.html', RequestContext(request, context))
