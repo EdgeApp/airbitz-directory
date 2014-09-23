@@ -46,7 +46,7 @@
             </div>
             {% with biz.mobile_landing_image.mobile_thumbnail as mobile_thumbnail %}
             {% if biz.mobile_landing_image %}
-              <img src="{{ MEDIA_URL }}{{ mobile_thumbnail }}" alt=""/>
+              <img src="{{ mobile_thumbnail.url }}" alt="Mobile Thumbnail"/>
             {% else %}
               <img data-src="holder.js/320x112/ab-blue/text:{{ biz.name }}" class="biz-img" title="{{ biz.name }}" alt="{{ biz.name }}">
             {% endif %}
@@ -58,7 +58,7 @@
               <span>{{ biz.categories.all.0.name }}</span>
             </div>
             {% if biz.mobile_landing_image %}
-              <img src="{{ MEDIA_URL }}{{ mobile_thumbnail }}" alt=""/>
+              <img src="{{ mobile_thumbnail.url }}" alt="Mobile Thumbnail"/>
             {% else %}
               <img data-src="holder.js/320x112/ab-blue/text:{{ biz.name }}" class="biz-img" title="{{ biz.name }}" alt="{{ biz.name }}">
             {% endif %}
