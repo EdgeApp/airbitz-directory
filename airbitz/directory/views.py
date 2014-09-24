@@ -141,7 +141,9 @@ def business_search_no_results(request):
     context = {}
     return render_to_response('search-no-results.html', RequestContext(request, context))
 
-def business_info(request, bizId):
+def business_info(request, bizId, slug=None):
+    print slug
+
     biz = get_biz(request, pk=bizId)
     imgs = BusinessImage.objects.filter(business=biz)
 

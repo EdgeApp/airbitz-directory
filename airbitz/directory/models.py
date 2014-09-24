@@ -8,6 +8,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.formats import time_format
 from django.utils.http import urlquote_plus
+from django.utils.text import slugify
 from imagekit.models import ImageSpecField
 from rest_framework.authtoken.models import Token
 import os
@@ -121,6 +122,7 @@ class ImageTag(models.Model):
 class Business(models.Model):
     status = models.CharField(max_length=5, choices=STATUS_CHOICES, default='DR')
     name = models.CharField(max_length=200, blank=False)
+    slug = models.SlugField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     website = models.URLField(max_length=2000, blank=True, null=True)
     phone = models.CharField(max_length=200, blank=True, null=True)
@@ -165,6 +167,20 @@ class Business(models.Model):
         else:
             print '** CANNOT CREATE SCREENCAP UNLESS PUBLISHED **'
             return False
+
+    def get_slug(self):
+        if self.slug:
+            return self.slug
+        else:
+            name_slug = slugify(self.name)
+            city_field = self.admin3_name
+            if city_field:
+                city_slug = slugify(city_field)
+                slug = city_slug + '-' + name_slug
+            else:
+                slug = name_slug
+
+            return slug
 
     @property
     def lookupStatus(self):
