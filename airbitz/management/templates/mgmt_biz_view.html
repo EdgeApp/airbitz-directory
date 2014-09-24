@@ -741,8 +741,12 @@
         biz.save({}, {
           success: function() {
             $('.save').html('Save');
-            var $ogImg = $('.admin-og-image img');
-            $ogImg.attr('src', $ogImg.attr('src') + '?' + Math.random());
+
+            // update all preview images
+            var $previewImages = $('.preview-images img');
+            $previewImages.each(function(){
+              this.attr('src', this.attr('src') + '?' + Math.random());
+            });
 
             // update modified time in gui
             var currentModifiedTime = moment.utc(moment(), 'MM/DD/YY HH:mm:ss').zone(7);
