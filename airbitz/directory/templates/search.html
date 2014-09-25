@@ -108,7 +108,7 @@
                 cats: '{% for c in biz.categories.all %}<span class="map-marker-cat label label-primary">{{c.name}}</span>{% empty %}<span class="label label-warning">Uncategorized</span>{% endfor %}',
                 address: '{{ biz.address }}',
                 img: '{% if biz.landing_image %}{% thumbnail "65x65" biz.landing_image.image -- class="marker-img" %}{% endif %}',
-                url: '{% url 'business_info' biz.id %}',
+                url: '{{ biz.get_absolute_url }}',
                 directions_url: '{{ biz.gmap_directions_url }}'
             },
         {% endfor %}

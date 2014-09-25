@@ -5,7 +5,7 @@
 
 {% block admin_buttons %}
     {{ block.super }}
-    <a class="btn btn-primary pull-right" href="{% url 'business_info' biz.id %}" style="margin-left: 5px;" title="View Business Listing">
+    <a class="btn btn-primary pull-right" href="{{ biz.get_absolute_url }}" style="margin-left: 5px;" title="View Business Listing">
         <i class="fa fa-file-o"></i> View</a>
     <a id="mgmt_biz_copy" class="btn btn-success pull-right" href="javascript:void(0)" title="Copy Business Listing">
         <i class="fa fa-copy"></i> Copy</a>
@@ -71,7 +71,7 @@
           <div class="preview-area google-map-marker">
             <div class="map-marker-popup">
                 <div class="map-marker-image">
-                  <a href="{% url 'business_info' biz.id %}">
+                  <a href="{{ biz.get_absolute_url }}">
                     {% if biz.landing_image %}
                       {% generateimage 'ab:searchresultthumb' source=biz.landing_image.web_photo as th %}
                       <img src="{{ th.url }}" alt=""/>
@@ -83,7 +83,7 @@
                 <div class="map-marker-info">
                   <div class="map-marker-name">{{ biz.name }}</div>
                   <div class="map-marker-address">{{ biz.address }}</div>
-                  <div class="map-marker-links"><a href="{% url 'business_info' biz.id %}">View Listing</a>
+                  <div class="map-marker-links"><a href="{{ biz.get_absolute_url }}">View Listing</a>
                       &nbsp;|&nbsp;<a href="{{ biz.gmap_directions_url }}" target="_blank">Get Directions</a>
                   </div>
                 </div>

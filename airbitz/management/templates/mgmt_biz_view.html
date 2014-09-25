@@ -72,6 +72,11 @@
                 <input type="text" class="form-control" id="name" name="name"
                        value="{{ biz.name }}" required />
               </div>
+              <div class="form-group">
+                <label class="label-slug" for="slug">Slug/Permalink (<a href="{{ biz.get_absolute_url }}">{{ biz.get_absolute_url }}</a>)</label>
+                <input type="text" class="form-control" id="slug" name="slug"
+                       value="{{ biz.slug }}" required />
+              </div>
               <div>
                 <label>Description:</label>
                 <div>
@@ -675,6 +680,7 @@
         }
         var obj = {};
         obj['name'] = $('#name').val();
+        obj['slug'] = $('#slug').val();
         obj['description'] = $('#description').val();
         obj['admin_notes'] = $('#admin_notes').val();
         obj['status'] = $('#status').select2('val');
@@ -742,11 +748,16 @@
           success: function() {
             $('.save').html('Save');
 
-            // update all preview images
+            // update all preview images or interactive fields
             var $previewImages = $('.preview-images img');
             $previewImages.each(function(){
-              this.attr('src', this.attr('src') + '?' + Math.random());
+              $(this).attr('src', $(this).attr('src') + '?' + Math.random());
             });
+
+            var $slugLink = $('.label-slug a');
+            var absolute_slug = '/biz/' + biz.id + '/' + obj.slug
+            $slugLink.text(absolute_slug);
+            $slugLink.attr('href', absolute_slug);
 
             // update modified time in gui
             var currentModifiedTime = moment.utc(moment(), 'MM/DD/YY HH:mm:ss').zone(7);
@@ -756,7 +767,7 @@
               $('#published-time').val(currentModifiedTime.calendar()).css('color', 'blue');
             }
 
-            that.flash('alert-success', 'Successfullly updated business ' + modifiedTime.calendar() + '.');
+            that.flash('alert-success', 'Successfullly updated business ' + currentModifiedTime.calendar() + '.');
           },
           error: function() {
             alert('An error occurred.');

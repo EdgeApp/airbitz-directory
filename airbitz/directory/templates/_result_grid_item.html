@@ -6,7 +6,7 @@
     {% endif %}
 
     <div class="thumbnail">
-        <a href="{% url 'business_info' rbiz.id %}" title="{{ rbiz.name }}">
+        <a href="{{ rbiz.get_absolute_url }}" title="{{ rbiz.name }}">
             <div class="thumb-bg">
                 {% if rbiz.landing_image %}
                     <img class="biz-img img-responsive group list-group-image" src="{{ rbiz.landing_image.url }}" alt="{{ rbiz.name }}"/>
@@ -17,7 +17,7 @@
         </a>
         <div class="caption">
             <h3 class="biz-name single-line group inner list-group-item-heading" title="{{ rbiz.name }}">
-                <a href="{% url 'business_info' rbiz.id %}" title="{{ rbiz.name }}">{{ rbiz.name }}</a>
+                <a href="{{ rbiz.get_absolute_url }}" title="{{ rbiz.name }}">{{ rbiz.name }}</a>
             </h3>
             <div class="biz-categories">
                 {% for c in rbiz.categories.all %}
