@@ -1,7 +1,8 @@
 import datetime
 from django.contrib.gis.measure import D
+from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.http import Http404, HttpResponseRedirect, HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -50,7 +51,13 @@ def get_biz_hours(biz):
     return week_of_hours
 
 def get_biz(request, *args, **kwargs):
+    print 'QUERY ARGS:', args
+    print 'QUERY KWARGS:', kwargs
+
     biz = get_object_or_404(Business, **kwargs)
+
+    print biz
+
     if request.user.is_superuser or biz.status == 'PUB':
         return biz
     else:
@@ -141,10 +148,13 @@ def business_search_no_results(request):
     context = {}
     return render_to_response('search-no-results.html', RequestContext(request, context))
 
-def business_info(request, bizId, slug=None):
-    print slug
+def business_info(request, biz_id=None, biz_slug=None):
 
-    biz = get_biz(request, pk=bizId)
+    biz = get_biz(request, pk=biz_id)
+
+    if not biz_slug == biz.slug:
+        return HttpResponsePermanentRedirect(biz.get_absolute_url())
+
     imgs = BusinessImage.objects.filter(business=biz)
 
     nearby = []

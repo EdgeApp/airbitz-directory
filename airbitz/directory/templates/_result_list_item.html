@@ -6,7 +6,7 @@
         {% if biz.has_bitcoin_discount > 0 %}
             <span class="biz-discount label label-success" title="Discount for Bitcoin"><i class="fa fa-bitcoin"></i> {{ biz.has_bitcoin_discount|decimal_to_percent }} Discount</span>
         {% endif %}
-        <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">
+        <a href="{{ biz.get_absolute_url }}" title="{{ biz.name }}">
         {% if biz.landing_image %}
             {% generateimage 'ab:searchresultthumb' source=biz.landing_image.web_photo as th %}
             <img src="{{ th.url }}" class="biz-img" title="{{ biz.name }}" alt="{{ biz.name }}" />
@@ -16,7 +16,7 @@
         </a>
 
         <h2 class="biz-name single-line" title="{{ biz.name }}">
-            <a href="{% url 'business_info' biz.id %}" title="{{ biz.name }}">{{ biz.name }}</a>
+            <a href="{{ biz.get_absolute_url }}" title="{{ biz.name }}">{{ biz.name }}</a>
         </h2>
 
         <div class="biz-meta">

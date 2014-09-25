@@ -17,6 +17,7 @@ import urllib
 import logging
 
 from airbitz import settings
+from directory.slug import unique_slugify
 from imgprocessors import DEF_ADMIN_PROC, DEF_MOBILE_PROC
 
 logger = logging.getLogger(__name__)
@@ -168,19 +169,8 @@ class Business(models.Model):
             print '** CANNOT CREATE SCREENCAP UNLESS PUBLISHED **'
             return False
 
-    def get_slug(self):
-        if self.slug:
-            return self.slug
-        else:
-            name_slug = slugify(self.name)
-            city_field = self.admin3_name
-            if city_field:
-                city_slug = slugify(city_field)
-                slug = city_slug + '-' + name_slug
-            else:
-                slug = name_slug
-
-            return slug
+    def get_absolute_url(self):
+        return '/biz/%s/%s' % (self.id, self.get_slug)
 
     @property
     def lookupStatus(self):
@@ -193,13 +183,13 @@ class Business(models.Model):
             s = self.address
         if self.admin3_name:
             if len(s) > 0: s+= ', '
-            s += self.admin3_name 
+            s += self.admin3_name
         if self.admin2_name:
             if len(s) > 0: s+= ', '
-            s += self.admin2_name 
+            s += self.admin2_name
         if self.admin1_code:
             if len(s) > 0: s+= ', '
-            s += self.admin1_code 
+            s += self.admin1_code
         return s
 
     @property
@@ -218,6 +208,20 @@ class Business(models.Model):
             destination = self.name
         return gmaps_url + urlquote_plus(destination)
 
+    @property
+    def get_slug(self):
+        if self.slug:
+            return self.slug
+        else:
+            name_slug = slugify(self.name)
+            city_slug = slugify(self.admin3_name)
+            if city_slug:
+                slug = '%s-%s' % (name_slug, city_slug)
+            else:
+                slug = name_slug
+
+            return slug
+
     # override default save and check for published to set a publish date
     def save(self, *args, **kwargs):
         try:
@@ -232,6 +236,10 @@ class Business(models.Model):
                     self.published = None
         except Business.DoesNotExist:
             pass
+
+        # if there is no existing slug we will generate one
+        if not self.slug:
+            unique_slugify(self, self.get_slug)
 
         super(Business, self).save(*args, **kwargs)    # Call the "real" save() method.
 
