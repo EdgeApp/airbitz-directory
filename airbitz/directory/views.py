@@ -198,6 +198,10 @@ def email_request_template(request):
     context = {}
     return render_to_response('template-email-request.html', RequestContext(request, context))
 
+def email_request_template_android(request):
+    context = {}
+    return render_to_response('template-email-request_android.html', RequestContext(request, context))
+
 
 # app download fallback page
 def app_download(request):
