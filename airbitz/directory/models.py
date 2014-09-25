@@ -214,8 +214,8 @@ class Business(models.Model):
             return self.slug
         else:
             name_slug = slugify(self.name)
-            city_slug = slugify(self.admin3_name)
-            if city_slug:
+            if self.admin3_name:
+                city_slug = slugify(self.admin3_name)
                 slug = '%s-%s' % (name_slug, city_slug)
             else:
                 slug = name_slug
