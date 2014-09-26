@@ -8,6 +8,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.formats import time_format
 from django.utils.http import urlquote_plus
+from django.utils.text import slugify
 from imagekit.models import ImageSpecField
 from rest_framework.authtoken.models import Token
 import os
@@ -16,6 +17,7 @@ import urllib
 import logging
 
 from airbitz import settings
+from directory.slug import unique_slugify
 from imgprocessors import DEF_ADMIN_PROC, DEF_MOBILE_PROC
 
 logger = logging.getLogger(__name__)
@@ -121,6 +123,7 @@ class ImageTag(models.Model):
 class Business(models.Model):
     status = models.CharField(max_length=5, choices=STATUS_CHOICES, default='DR')
     name = models.CharField(max_length=200, blank=False)
+    slug = models.SlugField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     website = models.URLField(max_length=2000, blank=True, null=True)
     phone = models.CharField(max_length=200, blank=True, null=True)
@@ -166,6 +169,12 @@ class Business(models.Model):
             print '** CANNOT CREATE SCREENCAP UNLESS PUBLISHED **'
             return False
 
+    def get_absolute_url(self):
+        if self.status == 'PUB':
+            return '/biz/%s/%s' % (self.id, self.get_slug)
+        else:
+            return '/biz/%s' % self.id
+
     @property
     def lookupStatus(self):
         return lookupChoice(self.status, STATUS_CHOICES)
@@ -177,13 +186,13 @@ class Business(models.Model):
             s = self.address
         if self.admin3_name:
             if len(s) > 0: s+= ', '
-            s += self.admin3_name 
+            s += self.admin3_name
         if self.admin2_name:
             if len(s) > 0: s+= ', '
-            s += self.admin2_name 
+            s += self.admin2_name
         if self.admin1_code:
             if len(s) > 0: s+= ', '
-            s += self.admin1_code 
+            s += self.admin1_code
         return s
 
     @property
@@ -202,6 +211,43 @@ class Business(models.Model):
             destination = self.name
         return gmaps_url + urlquote_plus(destination)
 
+    @property
+    def get_slug(self):
+        if self.slug:
+            return self.slug
+        else:
+            name_slug = slugify(self.name)
+            # if online only we append category to name
+            if self.has_online_business and not self.has_physical_business:
+                # if category use first one
+                if self.categories:
+                    try:
+                        cat_slug = slugify(self.categories.first().name)
+                        print 'CAT_SLUG', cat_slug
+                        slug = '%s-%s' % (name_slug, cat_slug)
+                    except AttributeError:
+                        slug = name_slug
+                # if no category just use name
+                else:
+                    slug = name_slug
+            else:
+                # check for city
+                if self.admin3_name:
+                    city_slug = slugify(self.admin3_name)
+                    slug = '%s-%s' % (name_slug, city_slug)
+                # if no city use category
+                else:
+                    # if category use first one
+                    if self.categories:
+                        cat_slug = slugify(self.categories.first().name)
+                        print 'CAT_SLUG', cat_slug
+                        slug = '%s-%s' % (name_slug, cat_slug)
+                    # if no category just use name
+                    else:
+                        slug = name_slug
+
+            return slug
+
     # override default save and check for published to set a publish date
     def save(self, *args, **kwargs):
         try:
@@ -216,6 +262,11 @@ class Business(models.Model):
                     self.published = None
         except Business.DoesNotExist:
             pass
+
+        # if business is published and there is no existing slug we will generate one
+        if self.status == 'PUB':
+            if not self.slug:
+                unique_slugify(self, self.get_slug)
 
         super(Business, self).save(*args, **kwargs)    # Call the "real" save() method.
 

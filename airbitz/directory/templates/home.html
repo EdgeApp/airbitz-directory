@@ -135,9 +135,7 @@
 
         <img class="alignnone airbitz-logo" alt="airbitz logo" src="{{ STATIC_URL }}img/logo.png">
 
-        <h2 class="text-center">Bitcoin Business Directory<br />
-          <em style="color: #777">(<a class="directory-link" href="./search?term=&location=Current+Location">Search Online</a>)</em>
-        </h2>
+        <h2 class="text-center">Bitcoin Business Directory</h2>
         <div id="app-store-links" class="animated row">
           <div class="app-install col-sm-12 text-center animated">
             <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
@@ -184,8 +182,7 @@
       <div class="column2 col-md-4 col-sm-6">
 
         <div class="button-centerer">
-          <a id="see-app-in-action" class="animated btn-primary btn-lg btn" data-video-id="y-OjBQTDzPcmg" href="#"><i class="fa fa-video-camera"></i> See Airbitz in Action<br><img
-              src="{{ STATIC_URL }}img/landing/iphone-slider/video-preview.png" alt="Airbitz Video Preview" style="margin-top: 10px;"/></a>
+          <img id="see-app-in-action" data-video-id="y-OjBQTDzPcmg" src="{{ STATIC_URL }}img/landing/play-overlay.png" alt="Play Video"/>
         </div>
 
         <div class="iphone-slider">
@@ -215,7 +212,7 @@
         <div id="who-accepts-bitcoin">
           <img class="alignnone" alt="airBitz Bitcoin Business Directory" src="{{ STATIC_URL }}img/landing/bitcoin-directory-map.png" width="200" height="200" />
           <h2>Who is Already Accepting Bitcoin?</h2>
-          <a id="reveal-who-accepts-bitcoin" class="btn-success btn-lg btn animated infinite pulse" href="">Find Out</a>
+          <a id="reveal-who-accepts-bitcoin" class="btn-success btn-lg btn" href="">Find Out</a>
         </div>
         <div id="accepting-bitcoin">
         {% verbatim %}
@@ -359,7 +356,7 @@
             </ul>
             <br style="clear: both;" />
 
-            <h2>Bitcoin Business Directory (<a class="directory-link" href="./search?term=&location=Current+Location">Search Bitcoin Businesses Online</a>)</h2>
+            <h2>Bitcoin Business Directory</h2>
             <p>The airBitz wallet also includes a business directory to help consumers find merchants and websites that accept bitcoin as payment. Some of its powerful features include:</p>
 
             <div id="directory-icon" class="app-icon-image">
@@ -378,7 +375,6 @@
               <li>The most comprehensive listing of bitcoin businesses with businesses updated daily</li>
               <li>Alerts of new businesses in your area accepting bitcoin</li>
             </ul>
-            <button id="jump-who-accepts-bitcoin" class="btn-success btn-lg btn animated infinite pulse" href="">See Who Accepts Bitcoin</button>
             <br style="clear: both;" />
 
           </div> <!-- .et_pb_text -->
@@ -459,21 +455,25 @@
     </script>
 
     <script type="text/javascript">
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+
+      var bgImages = [
+        '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',
+        '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',
+        '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'
+      ];
 
       $('.landing-module').backstretch(
-        [
-          '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',
-          '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',
-          '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'
-        ],
+        bgImages[getRandomInt(0, bgImages.length)]
+        ,
           {
             duration: 6000,
             fade: 1500
           }
       );
-
     </script>
 
 </body>
 </html>
-<!-- Localized -->

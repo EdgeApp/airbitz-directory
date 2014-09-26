@@ -31,9 +31,6 @@ body.home header {
 body.home .navbar .logo {
   max-width: none;
 }
-body.home #nav-desktop {
-  visibility: hidden;
-}
 body.home #main-content .page .airbitz-feature-details .features-list,
 body.home #main-content .page .airbitz-feature-details .wallet-beta-signup {
   margin: 15px 0 0 225px;
@@ -141,7 +138,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 }
 .landing-module {
   height: 900px;
-  margin-top: 50px;
+  margin-top: 90px;
   padding: 65px 0;
   /* iPads (landscape) ----------- */
   /* iPads (portrait) ----------- */
@@ -292,7 +289,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 }
 .landing-module .column2 .button-centerer {
   position: absolute;
-  top: 200px;
+  top: 250px;
   left: 0;
   width: 100%;
 }
@@ -301,9 +298,6 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   position: relative;
   margin: 0 auto;
   z-index: 1;
-  -webkit-box-shadow: 0 0 35px 10px black;
-  -moz-box-shadow: 0 0 35px 10px black;
-  box-shadow: 0 0 35px 10px black;
 }
 .landing-module .column2 .iphone-slider {
   visibility: hidden;
