@@ -459,13 +459,19 @@
     </script>
 
     <script type="text/javascript">
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+
+      var bgImages = [
+        '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',
+        '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',
+        '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'
+      ];
 
       $('.landing-module').backstretch(
-        [
-          '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',
-          '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',
-          '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'
-        ],
+        bgImages[getRandomInt(0, bgImages.length)]
+        ,
           {
             duration: 6000,
             fade: 1500
