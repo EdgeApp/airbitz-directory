@@ -9,19 +9,19 @@ function supports_html5_storage() {
 }
 
 function getMapMarkerContent(marker, m) {
-    var html = 
+  var html =
       '<div class="map-marker-popup">' +
-        '<div class="map-marker-image"><a href="' + m.url + '">' + m.img + '</a></div>' +
-        '<div class="map-marker-info">' +
-          '<div class="map-marker-name">' + m.name + '</div>' +
-          '<div class="map-marker-address">' + m.address + '</div>' +
-          '<div class="map-marker-links"><a href="' + m.url + '">View Listing</a> | ' +
-              '<a href="' + m.directions_url + '" target="_blank">Get Directions</a>' + 
-          '</div>' +
-        '</div>' +
-        '<div class="map-marker-categories">' + m.cats + '</div>' +
+      '<div class="map-marker-image"><a href="' + m.url + '">' + m.img + '</a></div>' +
+      '<div class="map-marker-info">' +
+      '<div class="map-marker-name">' + m.name + '</div>' +
+      '<div class="map-marker-address">' + m.address + '</div>' +
+      '<div class="map-marker-links"><a href="' + m.url + '">View Listing</a> | ' +
+      '<a href="' + m.directions_url + '" target="_blank">Get Directions</a>' +
+      '</div>' +
+      '</div>' +
+      '<div class="map-marker-categories">' + m.cats + '</div>' +
       '</div>';
-    return html;
+  return html;
 }
 
 (function() {
@@ -41,11 +41,11 @@ function getMapMarkerContent(marker, m) {
         $ll.val(ll);
       } else {
         $('<input>')
-          .attr('type','hidden')
-          .attr('name', 'll')
-          .attr('id', 'll')
-          .attr('value', ll)
-          .appendTo('#navbar-search');
+            .attr('type','hidden')
+            .attr('name', 'll')
+            .attr('id', 'll')
+            .attr('value', ll)
+            .appendTo('#navbar-search');
       }
     } else {
       $ll.remove();
@@ -69,13 +69,13 @@ function getMapMarkerContent(marker, m) {
     AB.setNear();
 
     $.ajaxSetup({
-        crossDomain: false,
-        beforeSend: function(xhr, settings) {
-            if (!AB.Util.csrfSafeMethod(settings.type)) {
-                xhr.setRequestHeader("X-CSRFToken", $('meta[name="csrf-token"]').attr('content'));
-            }
-            xhr.setRequestHeader("Authorization", "Token 0ccff150ed4633136f04eab2d8454d928e6ff584");
+      crossDomain: false,
+      beforeSend: function(xhr, settings) {
+        if (!AB.Util.csrfSafeMethod(settings.type)) {
+          xhr.setRequestHeader("X-CSRFToken", $('meta[name="csrf-token"]').attr('content'));
         }
+        xhr.setRequestHeader("Authorization", "Token 0ccff150ed4633136f04eab2d8454d928e6ff584");
+      }
     });
   };
   AB.addMap = function(selector, zoom, lat, lon, markers, polygon) {
@@ -97,10 +97,10 @@ function getMapMarkerContent(marker, m) {
         if (m.lat && m.lon) {
           var loc = new google.maps.LatLng(m.lat, m.lon);
           var marker = new google.maps.Marker({
-              position: loc,
-              map: map,
-              title: m.name,
-              animation: google.maps.Animation.DROP // TODO: ran out of time - https://developers.google.com/maps/documentation/javascript/examples/marker-animations-iteration
+            position: loc,
+            map: map,
+            title: m.name,
+            animation: google.maps.Animation.DROP // TODO: ran out of time - https://developers.google.com/maps/documentation/javascript/examples/marker-animations-iteration
           });
 
           var ref = m;
@@ -138,7 +138,7 @@ function getMapMarkerContent(marker, m) {
       }
       if (markers && markers.length > 1) {
         map.fitBounds(bounds);
-        map.panToBounds(bounds); 
+        map.panToBounds(bounds);
       }
     }
     google.maps.event.addDomListener(window, 'load', initialize);
@@ -155,7 +155,7 @@ function getMapMarkerContent(marker, m) {
         url: '/api/v1/autocomplete-business/?location=' + encodeURIComponent(loc),
         filter: function(data) {
           var m = $.map(data.results, function(e, i) {
-              return { type: e.type, name: e.text, value: e.text };
+            return { type: e.type, name: e.text, value: e.text };
           });
           return m;
         }
@@ -165,13 +165,13 @@ function getMapMarkerContent(marker, m) {
         replace: function (url, uriEncodedQuery) {
           q = url.replace(/%QUERY/, uriEncodedQuery)
           if ($('input.location').val()) {
-              q += "&location=" + encodeURIComponent(loc);
+            q += "&location=" + encodeURIComponent(loc);
           }
           return q;
         },
         filter: function(data) {
           return $.map(data.results, function(e, i) {
-              return { type: e.type, name: e.text, value: e.text, id: e.bizId };
+            return { type: e.type, name: e.text, value: e.text, id: e.bizId };
           });
         },
         rateLimitWait: 100
@@ -188,7 +188,7 @@ function getMapMarkerContent(marker, m) {
       name: 'business',
       source: engine.ttAdapter(),
       template: function(datum) {
-          return '<p>' + datum.name + '</p>';
+        return '<p>' + datum.name + '</p>';
       }
     });
     selector.on('typeahead:selected', function (object, datum) {
@@ -201,144 +201,144 @@ function getMapMarkerContent(marker, m) {
     });
   };
   AB.addLocationSearch = function(selector, locSelector) {
-      var values = ['On the Web', 'Current Location'];
-      var defaultString = '';
-      $.each(values, function(val) {
-        return defaultString += val + ' ';
+    var values = ['On the Web', 'Current Location'];
+    var defaultString = '';
+    $.each(values, function(val) {
+      return defaultString += val + ' ';
+    });
+    var local = new Bloodhound({
+      datumTokenizer: function(d) { return defaultString.split(/\s+/); },
+      queryTokenizer: function(d) { return defaultString.split(/\s+/); },
+      local: $.map(values, function(val) {
+        return { text: val, value: val };
+      })
+    });
+    local.initialize();
+    var locFilter = function(data) {
+      return data.results.map(function(s, i) {
+        return { text: s, value: s };
       });
-      var local = new Bloodhound({
-        datumTokenizer: function(d) { return defaultString.split(/\s+/); },
-        queryTokenizer: function(d) { return defaultString.split(/\s+/); },
-        local: $.map(values, function(val) {
-          return { text: val, value: val };
-        })
-      });
-      local.initialize();
-      var locFilter = function(data) {
-        return data.results.map(function(s, i) {
-            return { text: s, value: s };
-        });
-      };
+    };
 
-      var engine = new Bloodhound({
-        datumTokenizer: function(d) { return d; }, 
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        minLength: 0,
-        prefetch: {
-          url: '/api/v1/autocomplete-location/',
-          filter: locFilter
-        },
-        remote: {
-          url: '/api/v1/autocomplete-location/?term=%QUERY',
-          filter: locFilter,
-          rateLimitWait: 100
-        }
-      });
-      engine.initialize();
-      selector.typeahead({
-        minLength: 0,
-        hint: false,
-        highlight: true
-      }, [ {
-        displaykey: 'text',
-        name: 'always',
-        source: local.ttAdapter(),
-        templates: function(datum) {
-          return datum.text;
-        }
-      }, {
-        displaykey: 'text',
-        name: 'location',
-        source: engine.ttAdapter(),
-        templates: function(datum) {
-          return datum.text;
-        }
-      }]);
-      var updatePlace = function() {
-        $('input.term').typeahead('destroy');
-        AB.addPlaceSearch($('input.term'));
-      };
-      selector.on('typeahead:selected', function (object, datum) {
-        $(this).val(datum.text);
-        updatePlace();
-      });
-      selector.click(function() {
-        $(this).select();
-      });
-      selector.change(updatePlace);
-      selector.blur(updatePlace);
+    var engine = new Bloodhound({
+      datumTokenizer: function(d) { return d; },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      minLength: 0,
+      prefetch: {
+        url: '/api/v1/autocomplete-location/',
+        filter: locFilter
+      },
+      remote: {
+        url: '/api/v1/autocomplete-location/?term=%QUERY',
+        filter: locFilter,
+        rateLimitWait: 100
+      }
+    });
+    engine.initialize();
+    selector.typeahead({
+      minLength: 0,
+      hint: false,
+      highlight: true
+    }, [ {
+      displaykey: 'text',
+      name: 'always',
+      source: local.ttAdapter(),
+      templates: function(datum) {
+        return datum.text;
+      }
+    }, {
+      displaykey: 'text',
+      name: 'location',
+      source: engine.ttAdapter(),
+      templates: function(datum) {
+        return datum.text;
+      }
+    }]);
+    var updatePlace = function() {
+      $('input.term').typeahead('destroy');
+      AB.addPlaceSearch($('input.term'));
+    };
+    selector.on('typeahead:selected', function (object, datum) {
+      $(this).val(datum.text);
+      updatePlace();
+    });
+    selector.click(function() {
+      $(this).select();
+    });
+    selector.change(updatePlace);
+    selector.blur(updatePlace);
   };
-  var Geo = AB.Geo = { 
+  var Geo = AB.Geo = {
     latestLocation: function() {
       var cookie = Util.getCookie('geo');
       try {
         var geo = JSON.parse(cookie);
       } catch (e) {
         console.log(e);
-      }   
+      }
       return geo;
-    },  
+    },
     requestLocation: function(cb) {
       var now = new Date();
       var geo = this.latestLocation();
       if (geo) {
         try {
-            var then = new Date(geo.timestamp).getTime();
-            if (now - then < AB.geoTimeout) {
-                return;
-            }   
+          var then = new Date(geo.timestamp).getTime();
+          if (now - then < AB.geoTimeout) {
+            return;
+          }
         } catch (e) {
-            console.log(e);
-        }   
-      }   
+          console.log(e);
+        }
+      }
       var that = this;
       var now = AB.now();
       var then = AB.Util.getCookie('geo_timestamp');
-      if (navigator.geolocation 
+      if (navigator.geolocation
           && (then == null || now - then > AB.geoTimeout)) {
         var options = {
           enableHighAccuracy: true,
           timeout: 5000,
           maximumAge: 0
         };
-        AB.Util.setCookie('geo_timestamp', AB.now(), 1); 
+        AB.Util.setCookie('geo_timestamp', AB.now(), 1);
         navigator.geolocation.getCurrentPosition(function(geo) {
           that.postPosition(geo, cb);
         }, function(err) { }, options);
-      }   
-    },  
+      }
+    },
     postPosition: function(geo, cb) {
-      Util.setCookie('geo', JSON.stringify(geo), 1); 
+      Util.setCookie('geo', JSON.stringify(geo), 1);
       cb(geo);
-    }   
+    }
   };
   var Util = AB.Util = {
-      csrfSafeMethod: function(method) {
-          return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-      },
-      setCookie: function(c_name, value, exdays) {
-          var exdate = new Date();
-          exdate.setDate(exdate.getDate() + exdays);
-          var c_value = escape(value) + ((exdays===null) ? "" : "; expires="+exdate.toUTCString());
-          document.cookie=c_name + "=" + c_value;
-      },
-      getCookie: function(c_name) {
-          var c_value = document.cookie;
-          var c_start = c_value.indexOf(" " + c_name + "=");
-          if (c_start == -1) {
-              c_start = c_value.indexOf(c_name + "=");
-          }
-          if (c_start == -1) {
-              c_value = null;
-          } else {
-              c_start = c_value.indexOf("=", c_start) + 1;
-              var c_end = c_value.indexOf(";", c_start);
-              if (c_end == -1) {
-              c_end = c_value.length;
-              }
-              c_value = unescape(c_value.substring(c_start,c_end));
-          }
-          return c_value;
+    csrfSafeMethod: function(method) {
+      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    },
+    setCookie: function(c_name, value, exdays) {
+      var exdate = new Date();
+      exdate.setDate(exdate.getDate() + exdays);
+      var c_value = escape(value) + ((exdays===null) ? "" : "; expires="+exdate.toUTCString());
+      document.cookie=c_name + "=" + c_value;
+    },
+    getCookie: function(c_name) {
+      var c_value = document.cookie;
+      var c_start = c_value.indexOf(" " + c_name + "=");
+      if (c_start == -1) {
+        c_start = c_value.indexOf(c_name + "=");
       }
+      if (c_start == -1) {
+        c_value = null;
+      } else {
+        c_start = c_value.indexOf("=", c_start) + 1;
+        var c_end = c_value.indexOf(";", c_start);
+        if (c_end == -1) {
+          c_end = c_value.length;
+        }
+        c_value = unescape(c_value.substring(c_start,c_end));
+      }
+      return c_value;
+    }
   };
 }).call(this);
