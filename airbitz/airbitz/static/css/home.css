@@ -31,9 +31,6 @@ body.home header {
 body.home .navbar .logo {
   max-width: none;
 }
-body.home #nav-desktop {
-  visibility: hidden;
-}
 body.home #main-content .page .airbitz-feature-details .features-list,
 body.home #main-content .page .airbitz-feature-details .wallet-beta-signup {
   margin: 15px 0 0 225px;
@@ -141,7 +138,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 }
 .landing-module {
   height: 900px;
-  margin-top: 50px;
+  margin-top: 90px;
   padding: 65px 0;
   /* iPads (landscape) ----------- */
   /* iPads (portrait) ----------- */

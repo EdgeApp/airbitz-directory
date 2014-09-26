@@ -11,8 +11,6 @@ function afterEmailSubmission(resp){
 
 
 jQuery(function($) {
-  $('#nav-desktop').hide();
-
   $('#email-signup-form').on('click', function() {
     $.ajaxSetup({ crossDomain: true });
   });
@@ -116,22 +114,22 @@ jQuery(function($) {
 
 
   // display navbar after 5 seconds
-  enquire.register(screen_lg, function() {
-    setTimeout(function () {
-      $('#nav-desktop').css({
-        'visibility': 'visible',
-        'display': 'block'
-      });
-
-      $('#nav-desktop').addClass('animated fadeInDown');
-
-      $('.landing-module .container').css({
-        'margin-top': '40px',
-        '-webkit-transition': 'margin 1000ms ease-out',
-        '-moz-transition': 'margin 1000ms ease-out',
-        '-o-transition': 'margin 1000ms ease-out'
-      });
-    }, 5000);
-  });
+//  enquire.register(screen_lg, function() {
+//    setTimeout(function () {
+//      $('#nav-desktop').css({
+//        'visibility': 'visible',
+//        'display': 'block'
+//      });
+//
+//      $('#nav-desktop').addClass('animated fadeInDown');
+//
+//      $('.landing-module .container').css({
+//        'margin-top': '40px',
+//        '-webkit-transition': 'margin 1000ms ease-out',
+//        '-moz-transition': 'margin 1000ms ease-out',
+//        '-o-transition': 'margin 1000ms ease-out'
+//      });
+//    }, 5000);
+//  });
 
 });
