@@ -51,12 +51,10 @@ def get_biz_hours(biz):
     return week_of_hours
 
 def get_biz(request, *args, **kwargs):
-    print 'QUERY ARGS:', args
-    print 'QUERY KWARGS:', kwargs
-
+    # print 'QUERY ARGS:', args
+    # print 'QUERY KWARGS:', kwargs
     biz = get_object_or_404(Business, **kwargs)
-
-    print biz
+    # print biz
 
     if request.user.is_superuser or biz.status == 'PUB':
         return biz
