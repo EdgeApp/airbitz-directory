@@ -94,7 +94,7 @@ jQuery(function($) {
     $('#who-accepts-bitcoin').hide();
     $('#accepting-bitcoin').css('visibility', 'visible');
     $('#accepting-bitcoin').addClass('animated bounceInDown');
-    hasBeenSeen('accepting-bitcoin', 1);
+    hasBeenSeen('accepting-bitcoin', 30);
   }
 
   function hasBeenSeen(thing, expiration) {
@@ -103,15 +103,16 @@ jQuery(function($) {
     $.cookie(thing, newCount, {expires: expiration});
   }
 
-  $('#jump-who-accepts-bitcoin').on('click', function(){
-    showWhoAcceptsBitcoin();
-    $("html, body").animate({ scrollTop: 0 }, "slow");
-    $('#accepting-bitcoin').removeClass('animated bounceInDown pulse');
-    setTimeout(function() {
-      $('#accepting-bitcoin').addClass('animated pulse');
-    }, 750);
-    return false;
-  });
+// EXMAPLE BUTTON SCROLL AND DRAW ATTENTION
+//  $('#jump-who-accepts-bitcoin').on('click', function(){
+//    showWhoAcceptsBitcoin();
+//    $("html, body").animate({ scrollTop: 0 }, "slow");
+//    $('#accepting-bitcoin').removeClass('animated bounceInDown pulse');
+//    setTimeout(function() {
+//      $('#accepting-bitcoin').addClass('animated pulse');
+//    }, 750);
+//    return false;
+//  });
 
 
   // display navbar after 5 seconds
