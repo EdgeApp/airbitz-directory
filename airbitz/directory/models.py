@@ -170,7 +170,10 @@ class Business(models.Model):
             return False
 
     def get_absolute_url(self):
-        return '/biz/%s/%s' % (self.id, self.get_slug)
+        if self.status == 'PUB':
+            return '/biz/%s/%s' % (self.id, self.get_slug)
+        else:
+            return '/biz/%s' % self.id
 
     @property
     def lookupStatus(self):
@@ -214,11 +217,31 @@ class Business(models.Model):
             return self.slug
         else:
             name_slug = slugify(self.name)
-            if self.admin3_name:
-                city_slug = slugify(self.admin3_name)
-                slug = '%s-%s' % (name_slug, city_slug)
+            # if online only we append category to name
+            if self.has_online_business and not self.has_physical_business:
+                # if category use first one
+                if self.categories:
+                    cat_slug = slugify(self.categories.first().name)
+                    print 'CAT_SLUG', cat_slug
+                    slug = '%s-%s' % (name_slug, cat_slug)
+                # if no category just use name
+                else:
+                    slug = name_slug
             else:
-                slug = name_slug
+                # check for city
+                if self.admin3_name:
+                    city_slug = slugify(self.admin3_name)
+                    slug = '%s-%s' % (name_slug, city_slug)
+                # if no city use category
+                else:
+                    # if category use first one
+                    if self.categories:
+                        cat_slug = slugify(self.categories.first().name)
+                        print 'CAT_SLUG', cat_slug
+                        slug = '%s-%s' % (name_slug, cat_slug)
+                    # if no category just use name
+                    else:
+                        slug = name_slug
 
             return slug
 
@@ -237,9 +260,10 @@ class Business(models.Model):
         except Business.DoesNotExist:
             pass
 
-        # if there is no existing slug we will generate one
-        if not self.slug:
-            unique_slugify(self, self.get_slug)
+        # if business is published and there is no existing slug we will generate one
+        if self.status == 'PUB':
+            if not self.slug:
+                unique_slugify(self, self.get_slug)
 
         super(Business, self).save(*args, **kwargs)    # Call the "real" save() method.
 

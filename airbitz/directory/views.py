@@ -152,8 +152,9 @@ def business_info(request, biz_id=None, biz_slug=None):
 
     biz = get_biz(request, pk=biz_id)
 
-    if not biz_slug == biz.slug:
-        return HttpResponsePermanentRedirect(biz.get_absolute_url())
+    if biz.status == 'PUB':
+        if not biz_slug == biz.slug:
+            return HttpResponsePermanentRedirect(biz.get_absolute_url())
 
     imgs = BusinessImage.objects.filter(business=biz)
 
