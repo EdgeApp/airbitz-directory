@@ -221,9 +221,12 @@ class Business(models.Model):
             if self.has_online_business and not self.has_physical_business:
                 # if category use first one
                 if self.categories:
-                    cat_slug = slugify(self.categories.first().name)
-                    print 'CAT_SLUG', cat_slug
-                    slug = '%s-%s' % (name_slug, cat_slug)
+                    try:
+                        cat_slug = slugify(self.categories.first().name)
+                        print 'CAT_SLUG', cat_slug
+                        slug = '%s-%s' % (name_slug, cat_slug)
+                    except AttributeError:
+                        slug = name_slug
                 # if no category just use name
                 else:
                     slug = name_slug
