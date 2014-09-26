@@ -24,7 +24,8 @@ jQuery(function($) {
 
   $('#app-demo-slides').mouseenter(function() {
     $('#see-app-in-action').css('visibility', 'visible');
-    $('#see-app-in-action').addClass('bounceInDown');
+    $('#see-app-in-action').removeClass('animated fadeOut');
+    $('#see-app-in-action').addClass('animated fadeIn');
   });
 
   $("#see-app-in-action").jqueryVideoLightning({
@@ -45,7 +46,8 @@ jQuery(function($) {
       duration: 800,
       onBefore: function() {
         $('#see-app-in-action').css('visibility', 'hidden');
-        $('#see-app-in-action').removeClass('pulse');
+        $('#see-app-in-action').removeClass('animated fadeIn');
+        $('#see-app-in-action').addClass('animated fadeOut');
       }
     }
   });

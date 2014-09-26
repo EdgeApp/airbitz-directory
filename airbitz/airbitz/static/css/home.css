@@ -292,7 +292,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 }
 .landing-module .column2 .button-centerer {
   position: absolute;
-  top: 200px;
+  top: 250px;
   left: 0;
   width: 100%;
 }
@@ -301,9 +301,6 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   position: relative;
   margin: 0 auto;
   z-index: 1;
-  -webkit-box-shadow: 0 0 35px 10px black;
-  -moz-box-shadow: 0 0 35px 10px black;
-  box-shadow: 0 0 35px 10px black;
 }
 .landing-module .column2 .iphone-slider {
   visibility: hidden;
