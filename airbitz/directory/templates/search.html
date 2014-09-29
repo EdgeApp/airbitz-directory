@@ -3,7 +3,8 @@
 {% load compressed %}
 {% load bootstrap_pagination %}
 
-{% block title %}Search{% endblock title %}
+
+{% block title %}Bitcoin {{ term }} in {{ location }}{% endblock title %}
 
 {% block javascript_headers %}
     {{ block.super }}
