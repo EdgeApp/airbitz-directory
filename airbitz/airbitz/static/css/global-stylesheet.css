@@ -1,3 +1,18 @@
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background-color: #2291cf;
+}
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+  background-color: #2291cf;
+}
+.nav .nav-divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
 .navbar {
   font-size: 14px;
 }
@@ -715,6 +730,9 @@
 }
 .results-map-list .biz-meta {
   margin: 6px 0;
+}
+.results-map-list .biz-meta .biz-type span {
+  margin-left: 5px;
 }
 .results-map-list .biz-meta .biz-location {
   margin-top: 8px;
