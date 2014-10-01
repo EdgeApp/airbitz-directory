@@ -20,11 +20,6 @@ body.home .h6 {
     margin-top: -60px !important;
   }
 }
-@media (min-width: 992px) {
-  body.home {
-    margin-top: -120px !important;
-  }
-}
 body.home header {
   display: none;
 }
@@ -137,9 +132,8 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   }
 }
 .landing-module {
-  height: 900px;
-  margin-top: 90px;
-  padding: 65px 0;
+  height: 630px;
+  margin-top: 125px;
   /* iPads (landscape) ----------- */
   /* iPads (portrait) ----------- */
 }
@@ -160,6 +154,14 @@ body.home #bottom-slider .et_pb_slide_description h2 {
     height: 1300px;
   }
 }
+.landing-module h3 {
+  margin-top: 0;
+}
+.landing-module .container {
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #444;
+}
 @media (max-width: 768px) {
   .landing-module .container {
     width: auto;
@@ -178,218 +180,111 @@ body.home #bottom-slider .et_pb_slide_description h2 {
     font-size: 30px;
   }
 }
-.landing-module .column1 {
+.landing-module .download-signup {
   margin-top: 60px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  border: 1px solid #FFF;
   /* iPads (portrait) ----------- */
 }
 @media (max-width: 991px) {
-  .landing-module .column1 {
+  .landing-module .download-signup {
     width: 90%;
     margin: 0px auto;
   }
 }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
-  .landing-module .column1 {
+  .landing-module .download-signup {
     width: 400px;
     margin-top: 40px;
   }
 }
-.landing-module .column1 .airbitz-logo {
+.landing-module .download-signup .airbitz-logo {
   display: block;
   width: 175px;
   margin: 20px auto;
   text-align: center;
 }
 @media (min-width: 1200px) {
-  .landing-module .column1 .airbitz-logo {
+  .landing-module .download-signup .airbitz-logo {
     width: 250px;
   }
 }
-.landing-module .column1 .directory-link {
+.landing-module .download-signup .directory-link {
   color: #2291cf;
 }
-.landing-module .column1 #app-store-links {
+.landing-module .download-signup #app-store-links {
   visibility: hidden;
 }
-.landing-module .column1 #app-store-links .app-store {
+.landing-module .download-signup #app-store-links .app-store {
   width: 140px;
   margin-bottom: 10px;
   text-align: left;
+  box-shadow: 0 0 19px #FFF;
+  border-radius: 8px;
 }
 @media (min-width: 1200px) {
-  .landing-module .column1 #app-store-links .app-store {
+  .landing-module .download-signup #app-store-links .app-store {
     width: auto;
   }
 }
-.landing-module .column1 hr {
+.landing-module .download-signup hr {
   border-color: #999;
 }
-.landing-module .column1 .bitcoin-directory-wallet {
-  margin-top: 10px;
-  text-align: center;
+.landing-module .download-signup h2 {
+  color: #fff;
+  text-shadow: 1px 0 1px #000;
 }
-.landing-module .column1 .bitcoin-directory-wallet .slide-text {
-  text-align: center;
-  color: #003E61;
-}
-.landing-module .column1 .or-area {
-  float: left;
-  width: 100%;
-  margin-top: 20px;
-}
-.landing-module .column1 .or-area .left-line,
-.landing-module .column1 .or-area .right-line {
-  width: 100%;
-  width: 35%;
-  background: #aaa;
-  margin: 15px 10px 0 10px;
-  height: 2px;
-}
-.landing-module .column1 .or-area .left-line {
-  float: left;
-}
-.landing-module .column1 .or-area .right-line {
-  float: right;
-}
-.landing-module .column1 .or-area h2 {
-  float: left;
-  width: 16%;
+.landing-module .download-signup .and-heading {
   text-align: center;
   color: #aaa;
 }
-@media (max-width: 991px) and (min-width: 768px) {
-  .landing-module .column1 .or-area h2 {
-    width: 22%;
-  }
-}
-.landing-module .column1 .signup-area {
+.landing-module .download-signup .signup-area {
   max-width: 360px;
   margin: 0 auto;
 }
-.landing-module .column1 .signup-area .form-group .control-label {
+.landing-module .download-signup .signup-area .form-group .control-label {
   display: block !important;
   margin: 5px auto;
   text-align: center;
 }
-.landing-module .column1 .signup-area .form-group .form-control {
+.landing-module .download-signup .signup-area .form-group .form-control {
   text-align: center;
 }
 @media (max-width: 767px) {
-  .landing-module .column1 .signup-area .form-group .btn-lg.btn-block {
+  .landing-module .download-signup .signup-area .form-group .btn-lg.btn-block {
     font-size: 15px;
   }
 }
-.landing-module .column2 {
+.landing-module .iphone-app-slider {
   position: relative;
   padding: 25px;
   text-align: center;
 }
-.landing-module .column2 .button-centerer {
+.landing-module .iphone-app-slider .button-centerer {
   position: absolute;
   top: 250px;
   left: 0;
   width: 100%;
 }
-.landing-module .column2 #see-app-in-action {
+.landing-module .iphone-app-slider #see-app-in-action {
   visibility: hidden;
   position: relative;
+  width: 80px;
   margin: 0 auto;
   z-index: 1;
 }
-.landing-module .column2 .iphone-slider {
+.landing-module .iphone-app-slider .iphone-slider {
   visibility: hidden;
   position: relative;
-  width: 236px;
+  width: 241px;
   height: 500px;
   margin: 30px auto 0;
-  padding: 70px 0 0 0;
-  background: url('../img/landing/iphone-slider/iphone5s_1up.png');
+  padding: 60px 0 0 15px;
+  background: url('../img/landing/ios-bitcoin-wallet.png');
   border-radius: 40px;
 }
-.landing-module .column2 .iphone-slider #app-demo-slides .slide {
-  width: 200px;
-  height: 360px;
-  background: black;
+.landing-module .iphone-app-slider .iphone-slider #app-demo-slides .slide {
+  width: 214px;
+  height: 380px;
+  background: #333;
   text-align: center;
   color: white;
-}
-.landing-module .searchStarter {
-  padding: 0;
-}
-.landing-module h3 {
-  margin-top: 0;
-}
-.landing-module .column3 {
-  width: 90%;
-  margin: 60px auto;
-  /* iPads (portrait) ----------- */
-}
-@media (max-width: 767px) {
-  .landing-module .column3 {
-    width: 90%;
-  }
-}
-@media (min-width: 768px) and (max-width: 991px) {
-  .landing-module .column3 {
-    width: 330px;
-    margin-top: 60px;
-  }
-}
-@media (min-width: 991px) {
-  .landing-module .column3 {
-    width: 33.33333333%;
-  }
-}
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
-  .landing-module .column3 {
-    width: 330px;
-    margin-top: 0;
-  }
-}
-.landing-module .column3 #who-accepts-bitcoin {
-  visibility: hidden;
-  text-align: center;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  border: 1px solid #FFF;
-  /* iPads (portrait) ----------- */
-}
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
-  .landing-module .column3 #who-accepts-bitcoin {
-    margin-top: 60px;
-  }
-}
-.landing-module .column3 #who-accepts-bitcoin img {
-  width: 150px;
-  margin-left: 25px;
-}
-.landing-module .column3 #accepting-bitcoin {
-  visibility: hidden;
-  /* iPads (portrait) ----------- */
-}
-@media (min-width: 768px) and (max-width: 992px) {
-  .landing-module .column3 #accepting-bitcoin {
-    padding-right: 50px;
-  }
-}
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
-  .landing-module .column3 #accepting-bitcoin {
-    margin-top: 60px;
-  }
-}
-.landing-module .column3 #accepting-bitcoin h3.heading-text {
-  padding: 15px;
-  font-size: 18px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  border: 1px solid #FFF;
-}
-@media (min-width: 1200px) {
-  .landing-module .column3 #accepting-bitcoin h3.heading-text {
-    font-size: 24px;
-  }
 }

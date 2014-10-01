@@ -131,106 +131,47 @@
 
     <div class="row">
 
-      <div class="column1 col-md-4">
+      <div class="column1 col-md-6">
 
-        <img class="alignnone airbitz-logo" alt="airbitz logo" src="{{ STATIC_URL }}img/logo.png">
-
-        <h2 class="text-center">Bitcoin Business Directory</h2>
-        <div id="app-store-links" class="animated row">
-          <div class="app-install col-sm-12 text-center animated">
-            <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
-              <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
-            </a>
-            <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
-              <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
-            </a>
-          </div>
-        </div>
-
-        <hr/>
-
-        <div class="bitcoin-directory-wallet row">
-          <div class="col-xs-12">
-            <h2>Bitcoin Wallet</h2>
-              <a class="btn-success btn-lg btn" target="_blank" title="airBitz Beta Sign Up" href="https://go.airbitz.co/beta-tester/"><i class="fa fa-flask"></i> Beta Test Wallet Now</a>
-          </div>
-        </div>
-
-        <div class="or-area">
-          <div class="left-line">&nbsp</div><h2>or</h2><div class="right-line">&nbsp;</div>
-        </div>
-
-        <div class="signup-area row">
-          <div class="col-sm-12">
-            <form id="email-signup-form" class="form" role="form">
-              <div class="form-group">
-                <label for="inputEmailWallet" class="control-label"></label>
-                <input type="email" class="inputEmail form-control input-lg" id="inputEmailWallet" placeholder="Your Email">
-              </div>
-              <div class="form-group">
-                <button type="submit" class="btn btn-lg btn-danger btn-block">Email When Wallet is Finished!</button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-
+        {% include '_home-iphone-app-slider.html' %}
 
       </div><!-- /.column1 -->
 
 
-      <div class="column2 col-md-4 col-sm-6">
+      <div class="column2 col-md-6">
 
-        <div class="button-centerer">
-          <img id="see-app-in-action" data-video-id="y-OjBQTDzPcmg" src="{{ STATIC_URL }}img/landing/play-overlay.png" alt="Play Video"/>
-        </div>
+        {% include '_home-download-signup.html' %}
 
-        <div class="iphone-slider">
-          <ul id="app-demo-slides">
-            <li class="slide">
-              <img src="{{ STATIC_URL }}img/landing/iphone-slider/slide1.jpg" alt="Bitcoin Business Directory App"/>
-            </li>
-            <li class="slide">
-              <img src="{{ STATIC_URL }}img/landing/iphone-slider/slide2.jpg" alt="Bitcoin Business Directory App"/>
-            </li>
-            <li class="slide">
-              <img src="{{ STATIC_URL }}img/landing/iphone-slider/slide3.jpg" alt="Bitcoin Business Directory App"/>
-            </li>
-            <li class="slide">
-              <img src="{{ STATIC_URL }}img/landing/iphone-slider/slide4.jpg" alt="Bitcoin Business Directory App"/>
-            </li>
-            <li class="slide">
-              <img src="{{ STATIC_URL }}img/landing/iphone-slider/slide5.jpg" alt="Bitcoin Business Directory App"/>
-            </li>
-          </ul>
-        </div>
       </div><!-- /.column2 -->
 
-
-
-      <div class="searchStarter column3 col-md-4 col-sm-6">
-        <div id="who-accepts-bitcoin">
-          <img class="alignnone" alt="airBitz Bitcoin Business Directory" src="{{ STATIC_URL }}img/landing/bitcoin-directory-map.png" width="200" height="200" />
-          <h2>Who is Already Accepting Bitcoin?</h2>
-          <a id="reveal-who-accepts-bitcoin" class="btn-success btn-lg btn" href="">Find Out</a>
-        </div>
-        <div id="accepting-bitcoin">
-        {% verbatim %}
-          <ui-view></ui-view>
-        {% endverbatim %}
-        </div>
-      </div><!-- /.column3 -->
-
-
-
-
     </div><!-- /.row -->
+
 
   </div>
 </div>
 
 
 <div id="main-content">
+
+{#  <div class="container">#}
+{##}
+{#    <div class="row">#}
+{#      <div id="who-accepts-bitcoin col-sm-6">#}
+{#          <img class="alignnone" alt="airBitz Bitcoin Business Directory" src="{{ STATIC_URL }}img/landing/bitcoin-directory-map.png" width="200" height="200" />#}
+{#          <h2>Who is Already Accepting Bitcoin?</h2>#}
+{#          <a id="reveal-who-accepts-bitcoin" class="btn-success btn-lg btn" href="">Find Out</a>#}
+{#        </div>#}
+{##}
+{#      <div class="searchStarter col-sm-6">#}
+{#        <div id="accepting-bitcoin">#}
+{#          {% verbatim %}#}
+{#          <ui-view></ui-view>#}
+{#          {% endverbatim %}#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{##}
+{#  </div>#}
 
   <article id="post-145" class="post-145 page type-page status-publish hentry">
     <div class="entry-content">
@@ -461,8 +402,8 @@
 
       var bgImages = [
         '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',
-        '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',
-        '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'
+{#        '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',#}
+{#        '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'#}
       ];
 
       $('.landing-module').backstretch(

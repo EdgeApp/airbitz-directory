@@ -26,15 +26,15 @@ jQuery(function($) {
     $('#see-app-in-action').addClass('animated fadeIn');
   });
 
-  $("#see-app-in-action").jqueryVideoLightning({
+  $("#app-demo-slides").jqueryVideoLightning({
     autoplay: 1,
     backdrop_opacity: .8
   });
 
 
   $('#app-demo-slides').carouFredSel({
-    width: 238,
-    height: 360,
+    width: 212,
+    height: 378,
     auto: {
       play: true
     },
