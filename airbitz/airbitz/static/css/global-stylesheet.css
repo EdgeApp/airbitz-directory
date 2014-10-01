@@ -41,7 +41,7 @@
 }
 #nav-mobile {
   background-color: #2291cf;
-  border-bottom: 1px solid #eee;
+  border-bottom: none;
 }
 #nav-mobile #mobile-nav-close {
   position: absolute;

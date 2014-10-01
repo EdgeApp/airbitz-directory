@@ -146,7 +146,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 }
 @media (max-width: 768px) {
   .landing-module {
-    padding-top: 100px;
+    padding-top: 30x;
   }
 }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
@@ -180,30 +180,12 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 }
 .landing-module .download-signup {
   margin-top: 60px;
-  /* iPads (portrait) ----------- */
-}
-@media (max-width: 991px) {
-  .landing-module .download-signup {
-    width: 90%;
-    margin: 0px auto;
-  }
-}
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
-  .landing-module .download-signup {
-    width: 400px;
-    margin-top: 40px;
-  }
 }
 .landing-module .download-signup .airbitz-logo {
   display: block;
-  width: 175px;
+  width: 250px;
   margin: 20px auto;
   text-align: center;
-}
-@media (min-width: 1200px) {
-  .landing-module .download-signup .airbitz-logo {
-    width: 250px;
-  }
 }
 .landing-module .download-signup .directory-link {
   color: #2291cf;
