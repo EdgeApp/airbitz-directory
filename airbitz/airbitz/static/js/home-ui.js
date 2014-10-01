@@ -26,7 +26,7 @@ jQuery(function($) {
     $('#see-app-in-action').addClass('animated fadeIn');
   });
 
-  $("#app-demo-slides").jqueryVideoLightning({
+  $("#see-app-in-action").jqueryVideoLightning({
     autoplay: 1,
     backdrop_opacity: .8
   });
