@@ -146,7 +146,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 }
 @media (max-width: 768px) {
   .landing-module {
-    padding-top: 30x;
+    padding-top: 30px;
   }
 }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
@@ -154,8 +154,14 @@ body.home #bottom-slider .et_pb_slide_description h2 {
     height: 1300px;
   }
 }
-.landing-module h3 {
-  margin-top: 0;
+.landing-module h2 {
+  margin-top: 0px;
+  font-size: 26px;
+}
+@media (min-width: 1200px) {
+  .landing-module h2 {
+    font-size: 30px;
+  }
 }
 .landing-module .container {
   height: 100%;
@@ -168,15 +174,6 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 .landing-module .label {
   padding: .1em .3em .1em;
   line-height: 1.5;
-}
-.landing-module h2 {
-  margin-top: 0px;
-  font-size: 26px;
-}
-@media (min-width: 1200px) {
-  .landing-module h2 {
-    font-size: 30px;
-  }
 }
 .landing-module .download-signup {
   margin-top: 60px;
@@ -191,6 +188,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   color: #2291cf;
 }
 .landing-module .download-signup #app-store-links {
+  margin: 10px 0;
   visibility: hidden;
 }
 .landing-module .download-signup #app-store-links .app-store {
@@ -206,9 +204,12 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   }
 }
 .landing-module .download-signup hr {
+  width: 60%;
   border-color: #999;
 }
 .landing-module .download-signup h2 {
+  margin: 0;
+  line-height: 26px;
   color: #fff;
   text-shadow: 1px 0 1px #000;
 }
@@ -261,9 +262,14 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   border-radius: 40px;
 }
 .landing-module .iphone-app-slider .iphone-slider #app-demo-slides .slide {
+  position: relative;
   width: 214px;
   height: 380px;
   background: #333;
   text-align: center;
   color: white;
+}
+.landing-module .iphone-app-slider .iphone-slider #app-demo-slides .slide .slide-title {
+  display: none;
+  position: absolute;
 }

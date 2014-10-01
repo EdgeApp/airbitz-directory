@@ -41,7 +41,7 @@ jQuery(function($) {
     scroll: {
       pauseOnHover: true,
       fx: 'crossfade',
-      duration: 800,
+      duration: 1600,
       onBefore: function() {
         $('#see-app-in-action').css('visibility', 'hidden');
         $('#see-app-in-action').removeClass('animated fadeIn');

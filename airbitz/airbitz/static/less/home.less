@@ -209,8 +209,13 @@ body.home {
         height: 1300px;
     }
 
-    h3 {
-        margin-top: 0;
+    h2 {
+        margin-top: 0px;
+        font-size: 26px;
+
+        @media (min-width: @screen-lg-min) {
+            font-size: 30px;
+        }
     }
 
     .container {
@@ -226,14 +231,6 @@ body.home {
         line-height: 1.5;
     }
 
-    h2 {
-        margin-top: 0px;
-        font-size: 26px;
-
-        @media (min-width: @screen-lg-min) {
-            font-size: 30px;
-        }
-    }
 
     .download-signup {
         margin-top: 60px;
@@ -250,6 +247,7 @@ body.home {
         }
 
         #app-store-links {
+            margin: 10px 0;
             visibility: hidden;
 
             .app-store {
@@ -266,9 +264,12 @@ body.home {
         }
 
         hr {
+            width: 60%;
             border-color: #999;
         }
         h2 {
+            margin: 0;
+            line-height: 26px;
             color: #fff;
             text-shadow: 1px 0 1px #000;
         }
@@ -334,11 +335,17 @@ body.home {
             #app-demo-slides {
 
                 .slide {
+                    position: relative;
                     width: 214px;
                     height: 380px;
                     background: #333;
                     text-align: center;
                     color: white;
+
+                    .slide-title {
+                        display: none;
+                        position: absolute;
+                    }
                 }
             }
         }
