@@ -152,7 +152,6 @@
 
 <div class="container-fluid section-learn-more">
 
-  <div class="container" style="padding: 40px;">
     <div class="row">
       {#  <img class="alignnone airbitz-logo" alt="airbitz logo" src="{{ STATIC_URL }}img/logo-mono-white.png">#}
       <div class="row" style="margin-bottom: 10px">
@@ -166,9 +165,8 @@
         </div>
       </div>
     </div>
-  </div>
 
-</div>
+</div><!-- /.container-fluid -->
 
 
 <div class="container-fluid section-directory-coverage">
@@ -177,10 +175,11 @@
 
     <div class="row">
       <div id="who-accepts-bitcoin" class="text-center col-sm-6">
+        <h2>Airbitz Bitcoin Directory</h2>
         <img style="padding: 0 0 0 35px;" class="alignnone" alt="Airbitz Bitcoin Business Directory" src="{{ STATIC_URL }}img/landing/bitcoin-directory-map.png" width="200" height="200" />
-        <h1 style="line-height: 60px;">
-          Connecting People to <span class="label label-success" style="padding: .2em .3em .2em; font-size: 100%;">{{ biz_total }}</span> Businesses Accepting Bitcoin
-        </h1>
+        <h2>
+          Connecting You to <span class="label label-success" style="padding: .2em .3em .2em; font-size: 100%;">{{ biz_total }}</span> Businesses Accepting Bitcoin
+        </h2>
       </div>
 
       <hr class="visible-xs-block" />

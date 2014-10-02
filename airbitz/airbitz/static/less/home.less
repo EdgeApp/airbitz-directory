@@ -349,9 +349,14 @@ body.home {
 
 
 .section-learn-more {
-
+    padding: 40px;
+    
     .ui-group-buttons {
         zoom: 1.25;
+        
+        @media (max-width: @screen-xs-max) {
+            zoom: 1;
+        }
     }
 }
 
@@ -359,7 +364,11 @@ body.home {
     padding: 40px 0;
     background: @ab-blue-dark;
     color: white;
-    
+
+    h2 {
+        font-size: 36px;
+        line-height: 60px;
+    }
     hr {
         margin: 40px 0;
     }

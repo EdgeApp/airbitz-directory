@@ -271,13 +271,25 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   display: none;
   position: absolute;
 }
+.section-learn-more {
+  padding: 40px;
+}
 .section-learn-more .ui-group-buttons {
   zoom: 1.25;
+}
+@media (max-width: 767px) {
+  .section-learn-more .ui-group-buttons {
+    zoom: 1;
+  }
 }
 .section-directory-coverage {
   padding: 40px 0;
   background: #003e61;
   color: white;
+}
+.section-directory-coverage h2 {
+  font-size: 36px;
+  line-height: 60px;
 }
 .section-directory-coverage hr {
   margin: 40px 0;
