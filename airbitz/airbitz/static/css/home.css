@@ -296,7 +296,10 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 }
 .section-directory-coverage .label-primary,
 .section-directory-coverage .label-success {
-  text-shadow: 1px 0 1px ;
+  text-shadow: 0 0 1px #777777;
+}
+.section-app-install {
+  padding: 40px;
 }
 .searchStarter.dark .heading-text {
   text-align: center;

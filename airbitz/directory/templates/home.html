@@ -150,29 +150,25 @@
 </div><!-- /.landing-module -->
 
 
-<div class="container-fluid section-learn-more">
-
-    <div class="row">
-      {#  <img class="alignnone airbitz-logo" alt="airbitz logo" src="{{ STATIC_URL }}img/logo-mono-white.png">#}
-      <div class="row" style="margin-bottom: 10px">
-        <div class="col-xs-12 text-center">
-          <h2>Learn More About Airbitz</h2>
-          <div class="ui-group-buttons">
-            <button id="learn-more-wallet" type="button" class="btn btn-success btn-lg">Bitcoin Wallet</button>
-            <div class="or or-lg"></div>
-            <button id="learn-more-directory" type="button" class="btn btn-primary btn-lg">Directory Map</button>
-          </div>
+<div class="section-learn-more container-fluid">
+  <div class="row">
+    {#  <img class="alignnone airbitz-logo" alt="airbitz logo" src="{{ STATIC_URL }}img/logo-mono-white.png">#}
+    <div class="row" style="margin-bottom: 10px">
+      <div class="col-xs-12 text-center">
+        <h2>Learn More About Airbitz</h2>
+        <div class="ui-group-buttons">
+          <button id="learn-more-wallet" type="button" class="btn btn-success btn-lg">Bitcoin Wallet</button>
+          <div class="or or-lg"></div>
+          <button id="learn-more-directory" type="button" class="btn btn-primary btn-lg">Directory Map</button>
         </div>
       </div>
     </div>
-
+  </div>
 </div><!-- /.container-fluid -->
 
 
-<div class="container-fluid section-directory-coverage">
-
+<div class="section-directory-coverage container-fluid">
   <div class="container">
-
     <div class="row">
       <div id="who-accepts-bitcoin" class="text-center col-sm-6">
         <h2>Airbitz Bitcoin Directory</h2>
@@ -193,12 +189,17 @@
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
+</div><!-- /.container-fluid -->
 
+
+<div class="section-app-install container-fluid">
+  <div class="container">
+    {% include '_home_app_install_cta.html' %}
+  </div>
 </div>
+
 
 
 <div id="main-content">
@@ -208,7 +209,7 @@
 
       <div class="et_pb_row">
         <div class="et_pb_column et_pb_column_4_4">
-          {% include '_home_app_install_cta.html' %}
+
         </div> <!-- .et_pb_column -->
       </div> <!-- .et_pb_row -->
 
@@ -427,6 +428,14 @@
       $('.landing-module').backstretch(
         bgImages[getRandomInt(0, bgImages.length)]
         ,
+          {
+            duration: 3000,
+            fade: 1500
+          }
+      );
+
+      $('.section-directory-coverage').backstretch(
+          '{{ STATIC_URL }}img/landing/search-directory-module-bg.jpg',
           {
             duration: 3000,
             fade: 1500
