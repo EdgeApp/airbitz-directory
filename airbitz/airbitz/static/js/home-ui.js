@@ -28,10 +28,9 @@ jQuery(function($) {
     $('#see-app-in-action').addClass('animated fadeIn');
   });
 
-  $("#see-app-in-action").jqueryVideoLightning({
-    autoplay: 1,
-    backdrop_opacity: .8
-  });
+
+  // home page lightbox video
+  $('.iphone-app-slider .video').magnificPopup({type: 'iframe'});
 
 
   $('#app-demo-slides').carouFredSel({
