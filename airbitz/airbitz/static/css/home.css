@@ -189,7 +189,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   width: 140px;
   margin-bottom: 10px;
   text-align: left;
-  box-shadow: 0 0 19px #FFF;
+  box-shadow: 0 0 10px #FFF;
   border-radius: 8px;
 }
 @media (min-width: 1200px) {
@@ -279,36 +279,30 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   background: #003e61;
   color: white;
 }
+.section-directory-coverage hr {
+  margin: 40px 0;
+}
+.section-directory-coverage .label-primary,
+.section-directory-coverage .label-success {
+  text-shadow: 1px 0 1px ;
+}
+.searchStarter.dark .heading-text {
+  text-align: center;
+}
 .searchStarter.dark .heading-text .label-primary {
   background: #80c342;
   color: white;
 }
-.searchStarter.dark .module .list-container {
-  cursor: pointer;
-  overflow-y: auto;
-  border-radius: 0;
-  margin-bottom: 10px;
+.searchStarter.dark .module .list-container .list-group {
   max-height: 300px !important;
 }
 @media (min-width: 1200px) {
-  .searchStarter.dark .module .list-container {
+  .searchStarter.dark .module .list-container .list-group {
     max-height: 300px !important;
   }
 }
-.searchStarter.dark .module .list-container .list-group {
-  margin: 0;
-  border-radius: 0;
-}
 .searchStarter.dark .module .list-container .list-group .list-group-item {
-  border-radius: 0;
-  border: none;
-  padding: 5px 15px;
   background: transparent;
-  -webkit-transition: all .15s;
-  -moz-transition: all .15s;
-  -ms-transition: all .15s;
-  -o-transition: all .15s;
-  transition: all .15s;
 }
 .searchStarter.dark .module .list-container .list-group .list-group-item .label {
   background: white;
@@ -325,22 +319,16 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   color: white;
 }
 .searchStarter.dark .module .list-container .list-group .list-group-item.header {
-  position: fixed;
-  width: 100%;
-  z-index: 2;
-  background: #555555;
-  color: white;
-  cursor: inherit;
-  background: #eeeeee;
-  margin-top: 0;
-  color: #222222;
+  background: transparent;
+  border-bottom: 1px solid #ffffff;
+  font-weight: 800;
 }
 .searchStarter.dark .module .list-container .list-group .list-group-item.header:hover {
-  margin-left: 0;
   padding-left: 15px;
+  color: #ffffff;
+  background: transparent;
   border-left: none;
-  background: #eeeeee;
 }
 .searchStarter.dark .module .back-button {
-  margin: 10px 0 20px 0;
+  color: #f0ad4e;
 }

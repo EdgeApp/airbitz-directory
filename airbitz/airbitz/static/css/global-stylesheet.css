@@ -549,7 +549,6 @@
 }
 .module .list-container {
   cursor: pointer;
-  overflow-y: auto;
   border-radius: 0;
   margin-bottom: 10px;
 }
@@ -852,7 +851,6 @@
 }
 .module .list-container {
   cursor: pointer;
-  overflow-y: auto;
   border-radius: 0;
   margin-bottom: 10px;
   max-height: 380px !important;
@@ -865,6 +863,13 @@
 .module .list-container .list-group {
   margin: 0;
   border-radius: 0;
+  overflow-y: auto;
+  max-height: 400px !important;
+}
+@media (min-width: 1200px) {
+  .module .list-container .list-group {
+    max-height: 450px !important;
+  }
 }
 .module .list-container .list-group .list-group-item {
   border-radius: 0;
@@ -877,9 +882,6 @@
   -o-transition: all .15s;
   transition: all .15s;
 }
-.module .list-container .list-group .list-group-item:first-child {
-  margin-top: 35px;
-}
 .module .list-container .list-group .list-group-item:hover {
   background: #ffffff;
   border-left: 5px solid #2291cf;
@@ -890,8 +892,6 @@
   background: #2291cf;
 }
 .module .list-container .list-group .list-group-item.header {
-  position: fixed;
-  width: 100%;
   z-index: 2;
   background: #555555;
   color: white;

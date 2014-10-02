@@ -244,7 +244,7 @@ body.home {
                 width: 140px;
                 margin-bottom: 10px;
                 text-align: left;
-                box-shadow: 0 0 19px #FFF;
+                box-shadow: 0 0 10px #FFF;
                 border-radius: 8px;
 
                 @media (min-width: @screen-lg-min) {
@@ -359,6 +359,14 @@ body.home {
     padding: 40px 0;
     background: @ab-blue-dark;
     color: white;
+    
+    hr {
+        margin: 40px 0;
+    }
+    .label-primary,
+    .label-success {
+        text-shadow: 1px 0 1px ;
+    }
 }
 
 
@@ -368,6 +376,8 @@ body.home {
 .searchStarter.dark {
 
     .heading-text {
+        text-align: center;
+
         .label-primary {
             background: @ab-green;
             color: white;
@@ -377,27 +387,18 @@ body.home {
     .module {
 
         .list-container {
-            .ab-searchStarter-list-container();
-            max-height: 300px !important;
 
-            @media (min-width: @screen-lg-min) {
-                max-height: 300px !important;
-            }
 
             .list-group {
-                margin: 0;
-                border-radius: 0;
+                max-height: 300px !important;
+
+                @media (min-width: @screen-lg-min) {
+                    max-height: 300px !important;
+                }
 
                 .list-group-item {
-                    border-radius: 0;
-                    border: none;
-                    padding: 5px 15px;
                     background: transparent;
-                    -webkit-transition: all .15s;
-                    -moz-transition: all .15s;
-                    -ms-transition: all .15s;
-                    -o-transition: all .15s;
-                    transition: all .15s;
+
 
                     .label {
                         background: white;
@@ -418,16 +419,15 @@ body.home {
                 }
 
                 .list-group-item.header {
-                    .ab-searchStarter-header();
-                    background: @gray-lighter;
-                    margin-top: 0;
-                    color: @gray-darker;
+                    background: transparent;
+                    border-bottom: 1px solid #ffffff;
+                    font-weight: 800;
 
                     &:hover {
-                        margin-left: 0;
                         padding-left: 15px;
+                        color: #ffffff;
+                        background: transparent;
                         border-left: none;
-                        background: @gray-lighter;
                     }
 
                 }
@@ -435,7 +435,7 @@ body.home {
         }
 
         .back-button {
-            margin: 10px 0 20px 0;
+            color: @brand-warning;
         }
     }
 }
