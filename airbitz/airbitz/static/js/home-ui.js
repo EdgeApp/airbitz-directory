@@ -89,15 +89,12 @@ $('.newsletter-signup').on('mouseover', function(){
 
 
 
-// EXMAPLE BUTTON SCROLL AND DRAW ATTENTION
-//  $('#jump-who-accepts-bitcoin').on('click', function(){
-//    showWhoAcceptsBitcoin();
-//    $("html, body").animate({ scrollTop: 0 }, "slow");
-//    $('#accepting-bitcoin').removeClass('animated bounceInDown pulse');
-//    setTimeout(function() {
-//      $('#accepting-bitcoin').addClass('animated pulse');
-//    }, 750);
-//    return false;
-//  });
+// BUTTON SCROLL AND DRAW ATTENTION
+  $('#learn-more-wallet').on('click', function(){
+    $("html, body").animate({ scrollTop: $('#features-wallet').offset().top - 100 }, "slow");
+  });
+  $('#learn-more-directory').on('click', function(){
+    $("html, body").animate({ scrollTop: $('#features-directory').offset().top - 100 }, "slow");
+  });
 
 });

@@ -44,13 +44,16 @@ body.home {
 
             .airbitz-feature-details {
 
-                .features-list,
-                .wallet-beta-signup {
+                .features-list {
                     margin:15px 0 0 225px;
+                    list-style: disc;
 
                     @media only screen and (max-width:980px){
                         float:none;
                         margin:25px 0;
+                    }
+                    li {
+                        margin-bottom: 10px;
                     }
                 }
 
@@ -344,9 +347,17 @@ body.home {
     }
 }
 
+
+.section-learn-more {
+
+    .ui-group-buttons {
+        zoom: 1.25;
+    }
+}
+
 .section-directory-coverage {
     padding: 40px 0;
-    background: @brand-primary;
+    background: @ab-blue-dark;
     color: white;
 }
 
@@ -394,10 +405,10 @@ body.home {
                     }
 
                     &:hover {
-                        background: rgba(255, 255, 255, 1);
+                        background: none;
                         border-left: 5px solid @ab-green;
                         padding-left: 10px;
-                        color: @ab-blue;
+                        color: @ab-green;
 
                         .label {
                             background: @ab-green;
@@ -408,14 +419,15 @@ body.home {
 
                 .list-group-item.header {
                     .ab-searchStarter-header();
+                    background: @gray-lighter;
                     margin-top: 0;
+                    color: @gray-darker;
 
                     &:hover {
                         margin-left: 0;
                         padding-left: 15px;
                         border-left: none;
-                        background: @ab-green;
-                        color: white;
+                        background: @gray-lighter;
                     }
 
                 }

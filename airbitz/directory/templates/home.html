@@ -150,6 +150,27 @@
 </div><!-- /.landing-module -->
 
 
+<div class="container-fluid section-learn-more">
+
+  <div class="container" style="padding: 40px;">
+    <div class="row">
+      {#  <img class="alignnone airbitz-logo" alt="airbitz logo" src="{{ STATIC_URL }}img/logo-mono-white.png">#}
+      <div class="row" style="margin-bottom: 10px">
+        <div class="col-xs-12 text-center">
+          <h2>Learn More About Airbitz</h2>
+          <div class="ui-group-buttons">
+            <button id="learn-more-wallet" type="button" class="btn btn-success btn-lg">Bitcoin Wallet</button>
+            <div class="or or-lg"></div>
+            <button id="learn-more-directory" type="button" class="btn btn-primary btn-lg">Directory Map</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
 <div class="container-fluid section-directory-coverage">
 
   <div class="container">
@@ -190,9 +211,9 @@
         </div> <!-- .et_pb_column -->
       </div> <!-- .et_pb_row -->
 
-      <div class="et_pb_row">
+      <div id="features-app" class="et_pb_row">
 
-        <h2 class="text-center" style="margin-bottom: 30px;">Airbitz Directory + Upcoming Wallet Product Features</h2>
+        <h2 class="text-center" style="margin-bottom: 30px;">Airbitz Bitcoin Wallet Features</h2>
 
         <div class="et_pb_column et_pb_column_1_4">
           <div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
@@ -264,7 +285,7 @@
         <div class="et_pb_column et_pb_column_4_4">
           <div class="et_pb_text et_pb_bg_layout_light et_pb_text_align_left">
 
-            <h2>Bitcoin Wallet App <em style="color: #777">(<a title="Airbitz Beta Sign Up" href="https://go.airbitz.co/beta-tester/">Beta Testing Now!</a>)</em></h2>
+            <h2 id="features-wallet">Bitcoin Wallet App</h2>
             <p>The Airbitz mobile digital wallet is a decentralized, secure, private, synchronized, and backed up Bitcoin wallet.  A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:</p>
 
             <div id="wallet-icon" class="app-icon-image">
@@ -273,10 +294,6 @@
             <div class="airbitz-video">
               <iframe width="390" height="219" src="//www.youtube.com/embed/OjBQTDzPcmg" frameborder="0" allowfullscreen></iframe>
             </div>
-            <h3 class="wallet-beta-signup">
-              Eight months in the making and we are proud to launch the beta release of our Android Bitcoin wallet. With the same powerful core as our iOS wallet, we're sure you'll love all the functionality (see below) we've baked into our wallet.<br /><br />
-              <a class="btn-success btn-lg btn" target="_blank" title="Airbitz Beta Sign Up" href="https://go.airbitz.co/beta-tester/"><i class="fa fa-flask"></i> Beta Test Sign Up</a>
-            </h3>
 
             <ul class="features-list">
               <li>Simple account creation using just a login & password (no printing or emailing of PDFs, writing down passphrases or adding encryption settings)</li>
@@ -296,7 +313,7 @@
             </ul>
             <br style="clear: both;" />
 
-            <h2>Bitcoin Business Directory</h2>
+            <h2 id="features-directory">Bitcoin Business Directory</h2>
             <p>The Airbitz wallet also includes a business directory to help consumers find merchants and websites that accept bitcoin as payment. Some of its powerful features include:</p>
 
             <div id="directory-icon" class="app-icon-image">

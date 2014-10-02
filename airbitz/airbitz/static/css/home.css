@@ -26,16 +26,18 @@ body.home header {
 body.home .navbar .logo {
   max-width: none;
 }
-body.home #main-content .page .airbitz-feature-details .features-list,
-body.home #main-content .page .airbitz-feature-details .wallet-beta-signup {
+body.home #main-content .page .airbitz-feature-details .features-list {
   margin: 15px 0 0 225px;
+  list-style: disc;
 }
 @media only screen and (max-width: 980px) {
-  body.home #main-content .page .airbitz-feature-details .features-list,
-  body.home #main-content .page .airbitz-feature-details .wallet-beta-signup {
+  body.home #main-content .page .airbitz-feature-details .features-list {
     float: none;
     margin: 25px 0;
   }
+}
+body.home #main-content .page .airbitz-feature-details .features-list li {
+  margin-bottom: 10px;
 }
 body.home #main-content .page .airbitz-feature-details .airbitz-video {
   margin-left: 225px;
@@ -269,9 +271,12 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   display: none;
   position: absolute;
 }
+.section-learn-more .ui-group-buttons {
+  zoom: 1.25;
+}
 .section-directory-coverage {
   padding: 40px 0;
-  background: #2291cf;
+  background: #003e61;
   color: white;
 }
 .searchStarter.dark .heading-text .label-primary {
@@ -310,10 +315,10 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   color: #555555;
 }
 .searchStarter.dark .module .list-container .list-group .list-group-item:hover {
-  background: #ffffff;
+  background: none;
   border-left: 5px solid #80c342;
   padding-left: 10px;
-  color: #2291cf;
+  color: #80c342;
 }
 .searchStarter.dark .module .list-container .list-group .list-group-item:hover .label {
   background: #80c342;
@@ -326,14 +331,15 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   background: #555555;
   color: white;
   cursor: inherit;
+  background: #eeeeee;
   margin-top: 0;
+  color: #222222;
 }
 .searchStarter.dark .module .list-container .list-group .list-group-item.header:hover {
   margin-left: 0;
   padding-left: 15px;
   border-left: none;
-  background: #80c342;
-  color: white;
+  background: #eeeeee;
 }
 .searchStarter.dark .module .back-button {
   margin: 10px 0 20px 0;
