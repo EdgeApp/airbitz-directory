@@ -821,6 +821,9 @@
 .biz-result .biz-description {
   height: auto;
 }
+.heading-text {
+  line-height: 32px;
+}
 .module .loading-spinner {
   z-index: 1;
   position: absolute;
@@ -843,6 +846,7 @@
   color: #2291cf;
 }
 .module .loading-spinner .spinner-text {
+  color: #555555;
   font-size: 16px;
   font-weight: 600;
 }
@@ -862,18 +866,6 @@
   margin: 0;
   border-radius: 0;
 }
-.module .list-container .list-group .list-group-item.header {
-  background: #555555;
-  color: white;
-  cursor: inherit;
-}
-.module .list-container .list-group .list-group-item.header:hover {
-  margin-left: 0;
-  padding-left: 15px;
-  border-left: none;
-  background: #555555;
-  color: white;
-}
 .module .list-container .list-group .list-group-item {
   border-radius: 0;
   border: none;
@@ -885,6 +877,9 @@
   -o-transition: all .15s;
   transition: all .15s;
 }
+.module .list-container .list-group .list-group-item:first-child {
+  margin-top: 35px;
+}
 .module .list-container .list-group .list-group-item:hover {
   background: #ffffff;
   border-left: 5px solid #2291cf;
@@ -893,6 +888,22 @@
 }
 .module .list-container .list-group .list-group-item:hover .label {
   background: #2291cf;
+}
+.module .list-container .list-group .list-group-item.header {
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+  background: #555555;
+  color: white;
+  cursor: inherit;
+  margin-top: 0;
+}
+.module .list-container .list-group .list-group-item.header:hover {
+  margin-left: 0;
+  padding-left: 15px;
+  border-left: none;
+  background: #555555;
+  color: white;
 }
 .module .back-button {
   margin: 10px 0 20px 0;

@@ -69,14 +69,6 @@ body.home {
                         margin-left: 0;
                     }
                 }
-
-                #jump-who-accepts-bitcoin {
-                    margin-left: 225px;
-
-                    @media only screen and (max-width:980px){
-                        margin-left: 0;
-                    }
-                }
             }
         }
     }
@@ -146,9 +138,6 @@ body.home {
     }
 
 
-
-
-
     #bottom-slider {
 
         .et_pb_slide_content {
@@ -165,8 +154,6 @@ body.home {
             }
         }
     }
-
-
 
     @media (min-width: @screen-lg) {
         margin-top: -80px;
@@ -270,7 +257,7 @@ body.home {
         h2 {
             margin: 0;
             line-height: 26px;
-            color: #fff;
+            color: #ffffff;
             text-shadow: 1px 0 1px #000;
         }
         .and-heading {
@@ -280,6 +267,11 @@ body.home {
         .signup-area {
             max-width: 360px;
             margin: 0 auto;
+
+            .newsletter-signup {
+                color: #ffffff;
+                text-shadow: 1px 0 1px #000;
+            }
 
             .form-group {
 
@@ -348,6 +340,90 @@ body.home {
                     }
                 }
             }
+        }
+    }
+}
+
+.section-directory-coverage {
+    padding: 40px 0;
+    background: @brand-primary;
+    color: white;
+}
+
+
+
+
+
+.searchStarter.dark {
+
+    .heading-text {
+        .label-primary {
+            background: @ab-green;
+            color: white;
+        }
+    }
+
+    .module {
+
+        .list-container {
+            .ab-searchStarter-list-container();
+            max-height: 300px !important;
+
+            @media (min-width: @screen-lg-min) {
+                max-height: 300px !important;
+            }
+
+            .list-group {
+                margin: 0;
+                border-radius: 0;
+
+                .list-group-item {
+                    border-radius: 0;
+                    border: none;
+                    padding: 5px 15px;
+                    background: transparent;
+                    -webkit-transition: all .15s;
+                    -moz-transition: all .15s;
+                    -ms-transition: all .15s;
+                    -o-transition: all .15s;
+                    transition: all .15s;
+
+                    .label {
+                        background: white;
+                        color: @gray;
+                    }
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 1);
+                        border-left: 5px solid @ab-green;
+                        padding-left: 10px;
+                        color: @ab-blue;
+
+                        .label {
+                            background: @ab-green;
+                            color: white;
+                        }
+                    }
+                }
+
+                .list-group-item.header {
+                    .ab-searchStarter-header();
+                    margin-top: 0;
+
+                    &:hover {
+                        margin-left: 0;
+                        padding-left: 15px;
+                        border-left: none;
+                        background: @ab-green;
+                        color: white;
+                    }
+
+                }
+            }
+        }
+
+        .back-button {
+            margin: 10px 0 20px 0;
         }
     }
 }
