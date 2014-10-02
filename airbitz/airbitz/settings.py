@@ -43,7 +43,7 @@ SCREENCAP_INTERVAL = datetime.timedelta(minutes=15)
 FP_QUERY_INTERVAL = datetime.timedelta(days=7)
 
 
-DEPLOY_DATE = '20140918'
+DEPLOY_DATE = '20141022'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
