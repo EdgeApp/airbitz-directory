@@ -155,7 +155,8 @@
     {#  <img class="alignnone airbitz-logo" alt="airbitz logo" src="{{ STATIC_URL }}img/logo-mono-white.png">#}
     <div class="row" style="margin-bottom: 10px">
       <div class="col-xs-12 text-center">
-        <h2>Learn More About Airbitz</h2>
+        <h2 class="tagline">Simply Secure, Private & Powerful</h2>
+{#        <h2 class="learn-more">Learn More About Airbitz</h2>#}
         <div class="ui-group-buttons">
           <button id="learn-more-wallet" type="button" class="btn btn-success btn-lg">Bitcoin Wallet</button>
           <div class="or or-lg"></div>
@@ -207,6 +208,56 @@
 </div>
 
 
+<div class="section-app-features container-fluid">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h2><img src="{{ STATIC_URL }}img/landing/icons/tools_64px.png" alt="Ease of Use"/> Ease of Use</h2>
+        <ul>
+          <li>Supports Bluetooth Low Energy (BLE) to transfer funds instead of scanning QR codes</li>
+          <li>Simple account creation using just a login & password (no printing or emailing of PDFs, writing down passphrases or adding encryption settings)</li>
+          <li>Automatic wallet encryption, backup, and multi-device synchronization</li>
+          <li>Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)</li>
+          <li>Integration with the Airbitz Business directory to auto-complete business meta data for transactions</li>
+          <li>User editable transaction data (payee, category, fiat value, & notes)</li>
+          <li>Built in transaction search by payee, category, or notes</li>
+          <li>Quick UI to transfer funds between wallets in an account</li>
+          <li>Multiple fiat currency support. Assign a fiat currency per wallet</li>
+          <li>Decentralized server architecture. Wallets work even if Airbitz servers are down</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h2><img src="{{ STATIC_URL }}img/landing/icons/key_64px.png" alt="Privacy"/> Privacy</h2>
+        <ul>
+          <li>Hierarchical Deterministic wallets with changing addresses per transaction</li>
+          <li>Local client-side encryption (S-Crypt password hashing & AES256 encryption) of all user keys and data</li>
+          <li>No user info required to use wallet (no name, address, email, or phone number)</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h2><img src="{{ STATIC_URL }}img/landing/icons/lock_64px.png" alt="Security"/> Security</h2>
+        <ul>
+          <li>Native C/C++ code for super strong encryption and password hashing (S-Crypt password hashing & AES256 encryption)</li>
+          <li>Local client-side encryption using user generated login & password </li>
+          <li>Open-source release on Oct 31, 2014</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 
 <div id="main-content">
@@ -227,7 +278,8 @@
         <div class="et_pb_column et_pb_column_1_4">
           <div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
             <div class="et_pb_blurb_content">
-              <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/bitcoin-wallet.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" /></div>
+              <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}img/landing/icons/wallet_64px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" /></div>
+{#              <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/bitcoin-wallet.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" /></div>#}
               <h3>Intuitive &amp; Powerful Wallet</h3>
 
               <p>User-first wallet architecture streamlines and simplifies your transactions without sacrificing features.</p>
@@ -237,7 +289,8 @@
         </div> <!-- .et_pb_column --><div class="et_pb_column et_pb_column_1_4">
         <div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
           <div class="et_pb_blurb_content">
-            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/clound-synced.png" alt="Bitcoin Cloud Backup" class="et-waypoint et_pb_animation_top" /></div>
+            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}img/landing/icons/upload_64px.png" alt="Bitcoin Cloud Backup" class="et-waypoint et_pb_animation_top" /></div>
+{#            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/clound-synced.png" alt="Bitcoin Cloud Backup" class="et-waypoint et_pb_animation_top" /></div>#}
             <h3>Protect Bitcoins Against Loss or Damage</h3>
 
             <p>Your wallet is synced to our cloud servers and your other devices &#8211; but first, we encrypt the data on your device.</p>
@@ -247,7 +300,8 @@
       </div> <!-- .et_pb_column --><div class="et_pb_column et_pb_column_1_4">
         <div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
           <div class="et_pb_blurb_content">
-            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/bitcoin-privacy.png" alt="Bitcoin Privacy" class="et-waypoint et_pb_animation_top" /></div>
+            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}img/landing/icons/shield_64px.png" alt="Bitcoin Privacy" class="et-waypoint et_pb_animation_top" /></div>
+{#            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/bitcoin-privacy.png" alt="Bitcoin Privacy" class="et-waypoint et_pb_animation_top" /></div>#}
             <h3>Enhanced Privacy</h3>
 
             <p>Client side encryption means ZERO access to user data by Airbitz servers or employees as well as anyone but the wallet user.</p>
@@ -257,7 +311,8 @@
       </div> <!-- .et_pb_column --><div class="et_pb_column et_pb_column_1_4">
         <div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
           <div class="et_pb_blurb_content">
-            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/local-bitcoin-directory.png" alt="Bitcoin Business Directory" class="et-waypoint et_pb_animation_top" /></div>
+            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}img/landing/icons/map_64px.png" alt="Bitcoin Business Directory" class="et-waypoint et_pb_animation_top" /></div>
+{#            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/local-bitcoin-directory.png" alt="Bitcoin Business Directory" class="et-waypoint et_pb_animation_top" /></div>#}
             <h3>Worldwide Directory of Web and Local Businesses</h3>
 
             <p>Find the best places accepting bitcoin using a powerful, fluid, and beautiful mobile and web interface.</p>
@@ -267,29 +322,40 @@
       </div> <!-- .et_pb_column -->
       </div> <!-- .et_pb_row -->
 
-    </div> <!-- .et_pb_section --><div class="et_pb_section et_pb_fullwidth_section">
-      <div id="bottom-slider" class="et_pb_slider">
-        <div class="et_pb_slides">
-          <div class="et_pb_slide et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#ffffff;background-image:url({{ STATIC_URL }}wp/assets/img/btc-directory-map.jpg);'>
-            <div class="et_pb_container clearfix">
-
-              <div class="et_pb_slide_description">
-
-                <div class="et_pb_slide_content">
-                  <h2>Find Places That Are Bitcoin Friendly &amp;</h2>
-                  <h2>Effortlessly Use Bitcoins With Your Mobile Device</h2>
-                </div>
-
-              </div> <!-- .et_pb_slide_description -->
-            </div> <!-- .et_pb_container -->
-
-          </div> <!-- .et_pb_slide -->
-
-        </div> <!-- .et_pb_slides -->
-      </div> <!-- .et_pb_slider -->
+    </div> <!-- .et_pb_section -->
 
 
-    </div> <!-- .et_pb_section --><div class="et_pb_section" style='background-color:#ffffff;'>
+    <div class="section-bitcoin-directory container-fluid">
+      <div class="container text-center">
+        <h2>Find Places That Are Bitcoin Friendly &amp;</h2>
+        <h2>Effortlessly Use Bitcoins With Your Mobile Device</h2>
+      </div>
+    </div>
+
+{#    <div class="et_pb_section et_pb_fullwidth_section">#}
+{#      <div id="bottom-slider" class="et_pb_slider">#}
+{#        <div class="et_pb_slides">#}
+{#          <div class="et_pb_slide et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#ffffff;background-image:url({{ STATIC_URL }}wp/assets/img/btc-directory-map.jpg);'>#}
+{#            <div class="et_pb_container clearfix">#}
+{##}
+{#              <div class="et_pb_slide_description">#}
+{##}
+{#                <div class="et_pb_slide_content">#}
+{#                  <h2>Find Places That Are Bitcoin Friendly &amp;</h2>#}
+{#                  <h2>Effortlessly Use Bitcoins With Your Mobile Device</h2>#}
+{#                </div>#}
+{##}
+{#              </div> <!-- .et_pb_slide_description -->#}
+{#            </div> <!-- .et_pb_container -->#}
+{##}
+{#          </div> <!-- .et_pb_slide -->#}
+{##}
+{#        </div> <!-- .et_pb_slides -->#}
+{#      </div> <!-- .et_pb_slider -->#}
+{#    </div> <!-- .et_pb_section -->#}
+
+
+    <div class="et_pb_section" style='background-color:#ffffff;'>
       <div class="airbitz-feature-details et_pb_row">
         <div class="et_pb_column et_pb_column_4_4">
           <div class="et_pb_text et_pb_bg_layout_light et_pb_text_align_left">
@@ -427,7 +493,7 @@
 
       var bgImages = [
         '{{ STATIC_URL }}img/landing/landing-module-bg-coffee-dark.jpg',
-{#        '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',#}
+        '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',
 {#        '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',#}
 {#        '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'#}
       ];
@@ -443,6 +509,14 @@
 
       $('.section-directory-coverage').backstretch(
           '{{ STATIC_URL }}img/landing/search-directory-module-bg.jpg',
+          {
+            duration: 3000,
+            fade: 1500
+          }
+      );
+
+      $('.section-bitcoin-directory').backstretch(
+          '{{ STATIC_URL }}img/landing/bitcoin-directory-module-bg.jpg',
           {
             duration: 3000,
             fade: 1500
