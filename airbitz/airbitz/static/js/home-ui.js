@@ -31,6 +31,7 @@ jQuery(function($) {
 
   // home page lightbox video
   $('.iphone-app-slider .video').magnificPopup({type: 'iframe'});
+  $('.container .video').magnificPopup({type: 'iframe'});
 
 
   $('#app-demo-slides').carouFredSel({
@@ -90,10 +91,10 @@ $('.newsletter-signup').on('mouseover', function(){
 
 // BUTTON SCROLL AND DRAW ATTENTION
   $('#learn-more-wallet').on('click', function(){
-    $("html, body").animate({ scrollTop: $('#features-wallet').offset().top - 100 }, "slow");
+    $("html, body").animate({ scrollTop: $('#features-wallet').offset().top - 75 }, "slow");
   });
   $('#learn-more-directory').on('click', function(){
-    $("html, body").animate({ scrollTop: $('#features-directory').offset().top - 100 }, "slow");
+    $("html, body").animate({ scrollTop: $('#features-directory').offset().top - 75 }, "slow");
   });
 
 });

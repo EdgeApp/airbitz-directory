@@ -151,20 +151,21 @@
 
 
 <div class="section-learn-more container-fluid">
+
   <div class="row">
-    {#  <img class="alignnone airbitz-logo" alt="airbitz logo" src="{{ STATIC_URL }}img/logo-mono-white.png">#}
-    <div class="row" style="margin-bottom: 10px">
-      <div class="col-xs-12 text-center">
-        <h2 class="tagline">Simply Secure, Private & Powerful</h2>
-{#        <h2 class="learn-more">Learn More About Airbitz</h2>#}
-        <div class="ui-group-buttons">
-          <button id="learn-more-wallet" type="button" class="btn btn-success btn-lg">Bitcoin Wallet</button>
-          <div class="or or-lg"></div>
-          <button id="learn-more-directory" type="button" class="btn btn-primary btn-lg">Directory Map</button>
-        </div>
+    <div class="col-xs-12 text-center">
+      <h2 class="tagline">Simply Secure, Private & Powerful</h2>
+      {#        <h2 class="learn-more">Learn More About Airbitz</h2>#}
+      <div class="ui-group-buttons">
+        <button id="learn-more-wallet" type="button" class="btn btn-success btn-lg">Bitcoin Wallet</button>
+        <div class="or or-lg"></div>
+        <button id="learn-more-directory" type="button" class="btn btn-primary btn-lg">Directory Map</button>
       </div>
     </div>
   </div>
+
+  {% include '_home-main-features.html' %}
+
 </div><!-- /.section-learn-more -->
 
 
@@ -172,10 +173,10 @@
   <div class="container">
     <div class="row">
       <div id="who-accepts-bitcoin" class="text-center col-sm-6">
-        <h2>Airbitz Bitcoin Directory</h2>
+        <h2>Airbitz Business Directory</h2>
         <img style="padding: 0 0 0 35px;" class="alignnone" alt="Airbitz Bitcoin Business Directory" src="{{ STATIC_URL }}img/landing/bitcoin-directory-map.png" width="200" height="200" />
         <h2>
-          Connecting You to <span class="label label-success" style="padding: .2em .3em .2em; font-size: 100%;">{{ biz_total }}</span> Businesses Accepting Bitcoin
+          Connecting You to <span class="label label-success" style="padding: .2em .3em .2em; font-size: 100%;">{{ biz_total }}</span> Businesses Accepting Bitcoin Around the World
         </h2>
       </div>
 
@@ -195,9 +196,124 @@
 </div><!-- /.section-directory-coverage -->
 
 
-<div class="section-app-install container-fluid">
-  {% include '_home_app_install_cta.html' %}
-</div><!-- /.section-app-install -->
+
+{#<div class="section-app-install container-fluid">#}
+{#  {% include '_home_app_install_cta.html' %}#}
+{#</div><!-- /.section-app-install -->#}
+
+
+
+{#<div id="features-directory" class="section-bitcoin-directory container-fluid">#}
+{#  <div class="container text-center">#}
+{#    <h2>Find Places That Are Bitcoin Friendly &amp;</h2>#}
+{#    <h2>Effortlessly Use Bitcoins With Your Mobile Device</h2>#}
+{#  </div>#}
+{#</div>#}
+
+<div class="section-bitcoin-directory-details container">
+  <div class="row">
+    <h2>
+      <img src="{{ STATIC_URL }}img/landing/icons/map_64px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory
+    </h2>
+    <p>The Airbitz mobile app also includes a business directory to help consumers find merchants and websites that accept bitcoin as payment. Some of its powerful features include:</p>
+
+    <div class="row" style="margin: 30px 0;">
+        <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
+          <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
+        </a>
+        <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
+          <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
+        </a>
+        <a class="video btn btn-primary btn-lg" href="https://www.youtube.com/watch?v=OjBQTDzPcmg"><i class="fa fa-video-camera"></i>&nbsp;See App Video</a>
+    </div>
+
+    <div class="row" style="margin-top: 40px;">
+      <div class="col-sm-12">
+        <ul class="features-list">
+          <li>Advanced search ability by proximity, business name, category, city, state, or country</li>
+          <li>Inclusion of web based bitcoin businesses such as online merchants and exchange services</li>
+          <li>Fluid interface with high resolution imagery for each business</li>
+          <li>The most comprehensive listing of bitcoin businesses with businesses updated daily</li>
+          <li>Alerts of new businesses in your area accepting bitcoin</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<div id="features-wallet" class="section-bitcoin-wallet container-fluid" style="margin-top: 40px;">
+  <div class="container text-center">
+    <h2>Decentralized, Secure, Private, Synchronized, Backed up Bitcoin</h2>
+  </div>
+</div>
+
+<div class="section-bitcoin-wallet-details container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>
+        <img src="{{ STATIC_URL }}img/landing/icons/wallet_64px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Airbitz Bitcoin Wallet
+      </h2>
+      <p>The Airbitz mobile digital wallet is a decentralized, secure, private, synchronized, and backed up Bitcoin wallet.  A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:</p>
+    </div>
+  </div>
+
+  <div class="row" style="margin: 30px 0;">
+      <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
+        <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
+      </a>
+      <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
+        <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
+      </a>
+      <a class="video btn btn-primary btn-lg" href="https://www.youtube.com/watch?v=OjBQTDzPcmg"><i class="fa fa-video-camera"></i>&nbsp;See App Video</a>
+  </div>
+
+  <div class="row" style="margin-top: 40px;">
+    <div class="col-sm-12">
+      <h3><img src="{{ STATIC_URL }}img/landing/icons/tools_32px.png" alt="Ease of Use"/> Ease of Use</h3>
+      <ul>
+        <li>Supports Bluetooth Low Energy (BLE) to transfer funds instead of scanning QR codes</li>
+        <li>Simple account creation using just a login & password (no printing or emailing of PDFs, writing down passphrases or adding encryption settings)</li>
+        <li>Automatic wallet encryption, backup, and multi-device synchronization</li>
+        <li>Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)</li>
+        <li>Integration with the Airbitz Business directory to auto-complete business meta data for transactions</li>
+        <li>User editable transaction data (payee, category, fiat value, & notes)</li>
+        <li>Built in transaction search by payee, category, or notes</li>
+        <li>Quick UI to transfer funds between wallets in an account</li>
+        <li>Multiple fiat currency support. Assign a fiat currency per wallet</li>
+        <li>Decentralized server architecture. Wallets work even if Airbitz servers are down</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h3><img src="{{ STATIC_URL }}img/landing/icons/key_32px.png" alt="Privacy"/> Privacy</h3>
+      <ul>
+        <li>Hierarchical Deterministic wallets with changing addresses per transaction</li>
+        <li>Local client-side encryption (S-Crypt password hashing & AES256 encryption) of all user keys and data</li>
+        <li>No user info required to use wallet (no name, address, email, or phone number)</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h3><img src="{{ STATIC_URL }}img/landing/icons/lock_32px.png" alt="Security"/> Security</h3>
+      <ul>
+        <li>Native C/C++ code for super strong encryption and password hashing (S-Crypt password hashing & AES256 encryption)</li>
+        <li>Local client-side encryption using user generated login & password </li>
+        <li>Open-source release on Oct 31, 2014</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
 
 
@@ -208,220 +324,15 @@
 </div>
 
 
-<div class="section-app-features container-fluid">
-  <div class="container">
-
-    <div class="row">
-      <div class="col-sm-12">
-        <h2><img src="{{ STATIC_URL }}img/landing/icons/tools_64px.png" alt="Ease of Use"/> Ease of Use</h2>
-        <ul>
-          <li>Supports Bluetooth Low Energy (BLE) to transfer funds instead of scanning QR codes</li>
-          <li>Simple account creation using just a login & password (no printing or emailing of PDFs, writing down passphrases or adding encryption settings)</li>
-          <li>Automatic wallet encryption, backup, and multi-device synchronization</li>
-          <li>Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)</li>
-          <li>Integration with the Airbitz Business directory to auto-complete business meta data for transactions</li>
-          <li>User editable transaction data (payee, category, fiat value, & notes)</li>
-          <li>Built in transaction search by payee, category, or notes</li>
-          <li>Quick UI to transfer funds between wallets in an account</li>
-          <li>Multiple fiat currency support. Assign a fiat currency per wallet</li>
-          <li>Decentralized server architecture. Wallets work even if Airbitz servers are down</li>
-        </ul>
-      </div>
-    </div>
-
-    <hr/>
-
-    <div class="row">
-      <div class="col-sm-12">
-        <h2><img src="{{ STATIC_URL }}img/landing/icons/key_64px.png" alt="Privacy"/> Privacy</h2>
-        <ul>
-          <li>Hierarchical Deterministic wallets with changing addresses per transaction</li>
-          <li>Local client-side encryption (S-Crypt password hashing & AES256 encryption) of all user keys and data</li>
-          <li>No user info required to use wallet (no name, address, email, or phone number)</li>
-        </ul>
-      </div>
-    </div>
-
-    <hr/>
-
-    <div class="row">
-      <div class="col-sm-12">
-        <h2><img src="{{ STATIC_URL }}img/landing/icons/lock_64px.png" alt="Security"/> Security</h2>
-        <ul>
-          <li>Native C/C++ code for super strong encryption and password hashing (S-Crypt password hashing & AES256 encryption)</li>
-          <li>Local client-side encryption using user generated login & password </li>
-          <li>Open-source release on Oct 31, 2014</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-</div>
 
 
 
-<div id="main-content">
-
-  <article id="post-145" class="post-145 page type-page status-publish hentry">
-    <div class="entry-content">
-
-      <div class="et_pb_row">
-        <div class="et_pb_column et_pb_column_4_4">
-
-        </div> <!-- .et_pb_column -->
-      </div> <!-- .et_pb_row -->
-
-      <div id="features-app" class="et_pb_row">
-
-        <h2 class="text-center" style="margin-bottom: 30px;">Airbitz Bitcoin Wallet Features</h2>
-
-        <div class="et_pb_column et_pb_column_1_4">
-          <div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
-            <div class="et_pb_blurb_content">
-              <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}img/landing/icons/wallet_64px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" /></div>
-{#              <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/bitcoin-wallet.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" /></div>#}
-              <h3>Intuitive &amp; Powerful Wallet</h3>
-
-              <p>User-first wallet architecture streamlines and simplifies your transactions without sacrificing features.</p>
-
-            </div> <!-- .et_pb_blurb_content -->
-          </div> <!-- .et_pb_blurb -->
-        </div> <!-- .et_pb_column --><div class="et_pb_column et_pb_column_1_4">
-        <div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
-          <div class="et_pb_blurb_content">
-            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}img/landing/icons/upload_64px.png" alt="Bitcoin Cloud Backup" class="et-waypoint et_pb_animation_top" /></div>
-{#            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/clound-synced.png" alt="Bitcoin Cloud Backup" class="et-waypoint et_pb_animation_top" /></div>#}
-            <h3>Protect Bitcoins Against Loss or Damage</h3>
-
-            <p>Your wallet is synced to our cloud servers and your other devices &#8211; but first, we encrypt the data on your device.</p>
-
-          </div> <!-- .et_pb_blurb_content -->
-        </div> <!-- .et_pb_blurb -->
-      </div> <!-- .et_pb_column --><div class="et_pb_column et_pb_column_1_4">
-        <div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
-          <div class="et_pb_blurb_content">
-            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}img/landing/icons/shield_64px.png" alt="Bitcoin Privacy" class="et-waypoint et_pb_animation_top" /></div>
-{#            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/bitcoin-privacy.png" alt="Bitcoin Privacy" class="et-waypoint et_pb_animation_top" /></div>#}
-            <h3>Enhanced Privacy</h3>
-
-            <p>Client side encryption means ZERO access to user data by Airbitz servers or employees as well as anyone but the wallet user.</p>
-
-          </div> <!-- .et_pb_blurb_content -->
-        </div> <!-- .et_pb_blurb -->
-      </div> <!-- .et_pb_column --><div class="et_pb_column et_pb_column_1_4">
-        <div class="et_pb_blurb et_pb_bg_layout_light et_pb_text_align_center">
-          <div class="et_pb_blurb_content">
-            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}img/landing/icons/map_64px.png" alt="Bitcoin Business Directory" class="et-waypoint et_pb_animation_top" /></div>
-{#            <div class="et_pb_main_blurb_image"><img src="{{ STATIC_URL }}wp/assets/img/local-bitcoin-directory.png" alt="Bitcoin Business Directory" class="et-waypoint et_pb_animation_top" /></div>#}
-            <h3>Worldwide Directory of Web and Local Businesses</h3>
-
-            <p>Find the best places accepting bitcoin using a powerful, fluid, and beautiful mobile and web interface.</p>
-
-          </div> <!-- .et_pb_blurb_content -->
-        </div> <!-- .et_pb_blurb -->
-      </div> <!-- .et_pb_column -->
-      </div> <!-- .et_pb_row -->
-
-    </div> <!-- .et_pb_section -->
-
-
-    <div class="section-bitcoin-directory container-fluid">
-      <div class="container text-center">
-        <h2>Find Places That Are Bitcoin Friendly &amp;</h2>
-        <h2>Effortlessly Use Bitcoins With Your Mobile Device</h2>
-      </div>
-    </div>
-
-{#    <div class="et_pb_section et_pb_fullwidth_section">#}
-{#      <div id="bottom-slider" class="et_pb_slider">#}
-{#        <div class="et_pb_slides">#}
-{#          <div class="et_pb_slide et_pb_bg_layout_light et_pb_media_alignment_center" style='background-color:#ffffff;background-image:url({{ STATIC_URL }}wp/assets/img/btc-directory-map.jpg);'>#}
-{#            <div class="et_pb_container clearfix">#}
-{##}
-{#              <div class="et_pb_slide_description">#}
-{##}
-{#                <div class="et_pb_slide_content">#}
-{#                  <h2>Find Places That Are Bitcoin Friendly &amp;</h2>#}
-{#                  <h2>Effortlessly Use Bitcoins With Your Mobile Device</h2>#}
-{#                </div>#}
-{##}
-{#              </div> <!-- .et_pb_slide_description -->#}
-{#            </div> <!-- .et_pb_container -->#}
-{##}
-{#          </div> <!-- .et_pb_slide -->#}
-{##}
-{#        </div> <!-- .et_pb_slides -->#}
-{#      </div> <!-- .et_pb_slider -->#}
-{#    </div> <!-- .et_pb_section -->#}
-
-
-    <div class="et_pb_section" style='background-color:#ffffff;'>
-      <div class="airbitz-feature-details et_pb_row">
-        <div class="et_pb_column et_pb_column_4_4">
-          <div class="et_pb_text et_pb_bg_layout_light et_pb_text_align_left">
-
-            <h2 id="features-wallet">Bitcoin Wallet App</h2>
-            <p>The Airbitz mobile digital wallet is a decentralized, secure, private, synchronized, and backed up Bitcoin wallet.  A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:</p>
-
-            <div id="wallet-icon" class="app-icon-image">
-              <img class="alignnone" alt="airBits Mobile App" src="{{ STATIC_URL }}wp/assets/img/airbitz-app-256.png" width="175" height="175" />
-            </div>
-            <div class="airbitz-video">
-              <iframe width="390" height="219" src="//www.youtube.com/embed/OjBQTDzPcmg" frameborder="0" allowfullscreen></iframe>
-            </div>
-
-            <ul class="features-list">
-              <li>Simple account creation using just a login & password (no printing or emailing of PDFs, writing down passphrases or adding encryption settings)</li>
-              <li>Hierarchical Deterministic wallets with changing addresses per transaction</li>
-              <li>Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)</li>
-              <li>Multiple fiat currency support. Assign a fiat currency per wallet.</li>
-              <li>User editable transaction meta-data (payee, category, fiat value, & notes)</li>
-              <li>Search transactions by payee, category, amount, or notes</li>
-              <li>Built-in calculator for easy conversions</li>
-              <li>Quick UI to transfer funds between wallets in an account</li>
-              <li>Automatic wallet backup and multi-device synchronization</li>
-              <li>Decentralized server architecture. Wallets work even if Airbitz servers are down.</li>
-              <li>Integration with the Airbitz Business directory to auto-complete business meta data for transactions</li>
-              <li>Local client-side encryption (S-Crypt password hashing & AES256 encryption) of all user keys and data</li>
-              <li>Zero-knowledge & Zero-access to user funds, keys, or data by Airbitz or 3rd parties</li>
-              <li>Open-source release in Q4 of 2014</li>
-            </ul>
-            <br style="clear: both;" />
-
-            <h2 id="features-directory">Bitcoin Business Directory</h2>
-            <p>The Airbitz wallet also includes a business directory to help consumers find merchants and websites that accept bitcoin as payment. Some of its powerful features include:</p>
-
-            <div id="directory-icon" class="app-icon-image">
-              <img class="alignnone" alt="Airbitz Bitcoin Business Directory" src="{{ STATIC_URL }}wp/assets/img/bitcoin-directory-map.png" width="200" height="200" />
-            </div>
-            <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
-              <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
-            </a>
-            <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
-              <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
-            </a>
-            <ul class="features-list" style="">
-              <li>Advanced search ability by proximity, business name, category, city, state, or country</li>
-              <li>Inclusion of web based bitcoin businesses such as online merchants and exchange services</li>
-              <li>Fluid interface with high resolution imagery for each business</li>
-              <li>The most comprehensive listing of bitcoin businesses with businesses updated daily</li>
-              <li>Alerts of new businesses in your area accepting bitcoin</li>
-            </ul>
-            <br style="clear: both;" />
-
-          </div> <!-- .et_pb_text -->
-        </div> <!-- .et_pb_column -->
-      </div> <!-- .et_pb_row -->
-
-    </div> <!-- .et_pb_section -->
-    </div> <!-- .entry-content -->
-
-
-  </article> <!-- .et_pb_post -->
 
 
 
-</div> <!-- #main-content -->
+
+
+
 
 {% block footer %}
     {% include '_footer_main.html' %}
@@ -502,8 +413,8 @@
         bgImages[getRandomInt(0, bgImages.length)]
         ,
           {
-            duration: 3000,
-            fade: 1500
+            duration: 2000,
+            fade: 1000
           }
       );
 
@@ -516,6 +427,22 @@
       );
 
       $('.section-bitcoin-directory').backstretch(
+          '{{ STATIC_URL }}img/landing/bitcoin-directory-module-bg.jpg',
+          {
+            duration: 3000,
+            fade: 1500
+          }
+      );
+
+      $('.section-bitcoin-wallet').backstretch(
+          '{{ STATIC_URL }}img/landing/section-bitcoin-wallet-details-bg.jpg',
+          {
+            duration: 3000,
+            fade: 1500
+          }
+      );
+
+      $('.section-testimonials').backstretch(
           '{{ STATIC_URL }}img/landing/bitcoin-directory-module-bg.jpg',
           {
             duration: 3000,

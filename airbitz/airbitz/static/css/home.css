@@ -218,16 +218,19 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   color: #ffffff;
   text-shadow: 1px 0 1px #000;
 }
-.landing-module .download-signup .signup-area .form-group .control-label {
+.landing-module .download-signup .signup-area #email-signup-form {
+  display: none;
+}
+.landing-module .download-signup .signup-area #email-signup-form .form-group .control-label {
   display: block !important;
   margin: 5px auto;
   text-align: center;
 }
-.landing-module .download-signup .signup-area .form-group .form-control {
+.landing-module .download-signup .signup-area #email-signup-form .form-group .form-control {
   text-align: center;
 }
 @media (max-width: 767px) {
-  .landing-module .download-signup .signup-area .form-group .btn-lg.btn-block {
+  .landing-module .download-signup .signup-area #email-signup-form .form-group .btn-lg.btn-block {
     font-size: 15px;
   }
 }
@@ -271,8 +274,15 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   display: none;
   position: absolute;
 }
-.section-learn-more {
-  padding: 40px;
+.section-learn-more,
+.section-directory-coverage,
+.section-bitcoin-directory-details,
+.section-app-install,
+.section-app-features,
+.section-testimonials,
+.section-bitcoin-wallet,
+.section-bitcoin-wallet-details {
+  padding: 40px 0;
 }
 .section-learn-more .tagline {
   font-size: 48px;
@@ -283,6 +293,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 }
 .section-learn-more .ui-group-buttons {
   zoom: 1.25;
+  margin: 35px 0;
 }
 @media (max-width: 767px) {
   .section-learn-more .ui-group-buttons {
@@ -290,7 +301,6 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   }
 }
 .section-directory-coverage {
-  padding: 40px 0;
   background: #003e61;
   color: white;
 }
@@ -304,9 +314,6 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 .section-directory-coverage .label-primary,
 .section-directory-coverage .label-success {
   text-shadow: 0 0 1px #777777;
-}
-.section-app-install {
-  padding: 40px;
 }
 .searchStarter.dark .heading-text {
   text-align: center;
@@ -355,7 +362,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   color: #f0ad4e;
 }
 .section-testimonials {
-  padding: 40px 0;
+  margin-top: 60px;
   background: #333333;
 }
 .section-testimonials h2 {
@@ -371,21 +378,30 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   font-size: 36px;
   margin: 30px 0;
 }
-.section-app-features {
-  padding: 40px 0;
-}
-.section-app-features h2 {
-  font-size: 48px;
-}
-.section-app-features h2 img {
-  margin-right: 20px;
-}
-.section-app-features ul {
-  padding-left: 20px;
+.section-bitcoin-directory-details ul {
   list-style: disc;
+  padding-left: 38px;
 }
-.section-app-features ul li {
-  margin-bottom: 15px;
+.section-bitcoin-directory-details ul li {
+  margin-bottom: 10px;
+}
+.section-bitcoin-wallet h2 {
+  padding: 100px 0;
+  color: white;
+  text-shadow: 0 0 1px #000;
+}
+.section-bitcoin-wallet-details h3 img {
+  padding-right: 10px;
+}
+.section-bitcoin-wallet-details hr {
+  margin-bottom: 5px;
+}
+.section-bitcoin-wallet-details ul {
+  list-style: disc;
+  padding-left: 38px;
+}
+.section-bitcoin-wallet-details ul li {
+  margin-bottom: 10px;
 }
 .carousel-control.left,
 .carousel-control.right {
@@ -401,7 +417,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 .block-text {
   background-color: #fff;
   border-radius: 5px;
-  box-shadow: 0 2px 0 #2c2222;
+  box-shadow: 0 2px 0 #555;
   color: #626262;
   font-size: 14px;
   margin-top: 27px;
@@ -460,7 +476,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   background: white;
 }
 .person-text a {
-  color: #2291cf;
+  color: #333333;
   display: block;
   font-size: 14px;
   margin-top: 3px;
