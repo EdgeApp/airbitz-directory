@@ -225,6 +225,8 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   display: block !important;
   margin: 5px auto;
   text-align: center;
+  color: #ffffff;
+  text-shadow: 1px 0 1px #000;
 }
 .landing-module .download-signup .signup-area #email-signup-form .form-group .form-control {
   text-align: center;
