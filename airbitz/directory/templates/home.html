@@ -17,106 +17,106 @@
 <html lang="en-US" prefix="og: http://ogp.me/ns#">
 <!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
-	<meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+  <meta charset="UTF-8" />
 
-    {% block head_seo_social %}
+  {% block head_seo_social %}
 
-        {% block seo_meta %}
-            <title>{% block title %}Bitcoin Wallet, Map, and Business Directory{% endblock title %} | Airbitz</title>
-            <meta name="description" content="{% block meta_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock meta_description %}">
-            <meta name="news_keywords" content="{% block meta_news_keywords %}Local Bitcoin Business,Bitcoin Food,Bitcoin Friendly Business{% endblock meta_news_keywords %}">
-        {% endblock seo_meta %}
+    {% block seo_meta %}
+      <title>{% block title %}Bitcoin Wallet, Map, and Business Directory{% endblock title %} | Airbitz</title>
+      <meta name="description" content="{% block meta_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock meta_description %}">
+      <meta name="news_keywords" content="{% block meta_news_keywords %}Local Bitcoin Business,Bitcoin Food,Bitcoin Friendly Business{% endblock meta_news_keywords %}">
+    {% endblock seo_meta %}
 
-        {% block og_meta %}
-            <meta property="og:title" content="{% block og_title %}Airbitz Bitcoin Wallet and Directory{% endblock og_title %}">
-            <meta property="og:description" content="{% block og_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock og_description %}">
-            <meta property="og:type" content="{% block og_type %}Article{% endblock og_type %}">
-            <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock og_url %}">
-            <meta property="og:image" content="{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock og_image %}">
-            <meta property="og:site_name" content="{% block og_site_name %}Airbitz{% endblock og_site_name %}">
-    {#        <meta property="fb:admins" content="{% block og_fb_admins %}{% endblock og_fb_admins %}">#}
-        {% endblock og_meta %}
+    {% block og_meta %}
+      <meta property="og:title" content="{% block og_title %}Airbitz Bitcoin Wallet and Directory{% endblock og_title %}">
+      <meta property="og:description" content="{% block og_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock og_description %}">
+      <meta property="og:type" content="{% block og_type %}Article{% endblock og_type %}">
+      <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock og_url %}">
+      <meta property="og:image" content="{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock og_image %}">
+      <meta property="og:site_name" content="{% block og_site_name %}Airbitz{% endblock og_site_name %}">
+      {#        <meta property="fb:admins" content="{% block og_fb_admins %}{% endblock og_fb_admins %}">#}
+    {% endblock og_meta %}
 
-        {% block twitter_meta %}
-            <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock twitter_card %}">
-            <meta name="twitter:site" content="{% block twitter_site %}@airbitz{% endblock twitter_site %}">
-            <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet and Directory{% endblock twitter_title %}">
-            <meta name="twitter:description" content="{% block twitter_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock twitter_description %}">
-            <meta name="twitter:creator" content="{% block twitter_creator %}@airbitz{% endblock twitter_creator %}">
-            <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock twitter_image_src %}">
-            <meta name="twitter:domain" content="{% block twitter_domain %}{{ request.META.HTTP_HOST }}{% endblock twitter_domain %}">
-            <meta name="twitter:url" content="{% block twitter_url %}{{ request.build_absolute_uri }}{% endblock twitter_url %}">
-            <meta name="twitter:author" content="{% block twitter_author %}@airbitz{% endblock twitter_author %}">
-        {% endblock twitter_meta %}
+    {% block twitter_meta %}
+      <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock twitter_card %}">
+      <meta name="twitter:site" content="{% block twitter_site %}@airbitz{% endblock twitter_site %}">
+      <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet and Directory{% endblock twitter_title %}">
+      <meta name="twitter:description" content="{% block twitter_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock twitter_description %}">
+      <meta name="twitter:creator" content="{% block twitter_creator %}@airbitz{% endblock twitter_creator %}">
+      <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock twitter_image_src %}">
+      <meta name="twitter:domain" content="{% block twitter_domain %}{{ request.META.HTTP_HOST }}{% endblock twitter_domain %}">
+      <meta name="twitter:url" content="{% block twitter_url %}{{ request.build_absolute_uri }}{% endblock twitter_url %}">
+      <meta name="twitter:author" content="{% block twitter_author %}@airbitz{% endblock twitter_author %}">
+    {% endblock twitter_meta %}
 
-    {% endblock head_seo_social %}
+  {% endblock head_seo_social %}
 
-    <!--[if lt IE 9]>
+  <!--[if lt IE 9]>
 	<script src="{{ STATIC_URL }}wp/wp-content/themes/Divi/js/html5.js" type="text/javascript"></script>
 	<![endif]-->
 
-    <script type="text/javascript">//<![CDATA[
-    // Google Analytics for WordPress by Yoast v4.3.4 | http://yoast.com/wordpress/google-analytics/
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-47697034-1']);
-                    _gaq.push(['_trackPageview']);
-    (function () {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  <script type="text/javascript">//<![CDATA[
+  // Google Analytics for WordPress by Yoast v4.3.4 | http://yoast.com/wordpress/google-analytics/
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-47697034-1']);
+  _gaq.push(['_trackPageview']);
+  (function () {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(ga, s);
-    })();
-    //]]></script>
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+  //]]></script>
 
-    <meta content="Airbitz v.0.1" name="generator"/><link rel='stylesheet' id='custom-style-css'  href='{{ STATIC_URL }}wp/wp-content/themes/airbitz/css/custom-ver=3.8.1.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='divi-fonts-css'  href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,700,800%7CRaleway:400,200,100,500,700,800,900&subset=latin,latin-ext' type='text/css' media='all' />
-    <link rel='stylesheet' id='et-gf-source-sans-pro-css'  href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic&subset=latin,latin-ext' type='text/css' media='all' />
-    <link rel='stylesheet' id='divi-style-css'  href='{{ STATIC_URL }}wp/wp-content/themes/airbitz/style-ver=3.8.1.css' type='text/css' media='all' />
+  <meta content="Airbitz v.0.1" name="generator"/><link rel='stylesheet' id='custom-style-css'  href='{{ STATIC_URL }}wp/wp-content/themes/airbitz/css/custom-ver=3.8.1.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='divi-fonts-css'  href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,700,800%7CRaleway:400,200,100,500,700,800,900&subset=latin,latin-ext' type='text/css' media='all' />
+  <link rel='stylesheet' id='et-gf-source-sans-pro-css'  href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic&subset=latin,latin-ext' type='text/css' media='all' />
+  <link rel='stylesheet' id='divi-style-css'  href='{{ STATIC_URL }}wp/wp-content/themes/airbitz/style-ver=3.8.1.css' type='text/css' media='all' />
 
-    <link rel='stylesheet' id='et-shortcodes-css-css'  href='{{ STATIC_URL }}wp/wp-content/themes/Divi/epanel/shortcodes/css/shortcodes-ver=3.0.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='et-shortcodes-responsive-css-css'  href='{{ STATIC_URL }}wp/wp-content/themes/Divi/epanel/shortcodes/css/shortcodes_responsive-ver=3.0.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='et-shortcodes-css-css'  href='{{ STATIC_URL }}wp/wp-content/themes/Divi/epanel/shortcodes/css/shortcodes-ver=3.0.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='et-shortcodes-responsive-css-css'  href='{{ STATIC_URL }}wp/wp-content/themes/Divi/epanel/shortcodes/css/shortcodes_responsive-ver=3.0.css' type='text/css' media='all' />
 
-    <link rel="EditURI" type="application/rsd+xml" title="RSD" href="xmlrpc-rsd.php.html" />
-    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{{ STATIC_URL }}wp/wp-includes/wlwmanifest.xml" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <meta name="mobile-web-app-capable" content="yes">
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="xmlrpc-rsd.php.html" />
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{{ STATIC_URL }}wp/wp-includes/wlwmanifest.xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta name="mobile-web-app-capable" content="yes">
 
-    <style>
-        a { color: #2291cf; }
-        body { color: #666666; }
-        .et_pb_counter_amount, .et_pb_featured_table .et_pb_pricing_heading, .et_pb_pricing_table_button, .comment-reply-link, .form-submit input { background-color: #80c341; }
-        .woocommerce a.button.alt, .woocommerce-page a.button.alt, .woocommerce button.button.alt, .woocommerce-page button.button.alt, .woocommerce input.button.alt, .woocommerce-page input.button.alt, .woocommerce #respond input#submit.alt, .woocommerce-page #respond input#submit.alt, .woocommerce #content input.button.alt, .woocommerce-page #content input.button.alt, .woocommerce a.button, .woocommerce-page a.button, .woocommerce button.button, .woocommerce-page button.button, .woocommerce input.button, .woocommerce-page input.button, .woocommerce #respond input#submit, .woocommerce-page #respond input#submit, .woocommerce #content input.button, .woocommerce-page #content input.button, .woocommerce-message, .woocommerce-error, .woocommerce-info { background: #80c341 !important; }
-        #et_search_icon:hover, .mobile_menu_bar:before, .footer-widget h4, .et-social-icon a:hover, .et_pb_sum, .et_pb_pricing li a, .et_overlay:before, .entry-summary p.price ins, .woocommerce div.product span.price, .woocommerce-page div.product span.price, .woocommerce #content div.product span.price, .woocommerce-page #content div.product span.price, .woocommerce div.product p.price, .woocommerce-page div.product p.price, .woocommerce #content div.product p.price, .woocommerce-page #content div.product p.price { color: #80c341 !important; }
-        .woocommerce .star-rating span:before, .woocommerce-page .star-rating span:before { color: #80c341 !important; }
-        #main-footer { background-color: #2e2e2e; }
-        #top-menu a { color: #666666; }
-        #top-menu li.current-menu-ancestor > a, #top-menu li.current-menu-item > a { color: #2291cf; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Source Sans Pro', Helvetica, Arial, Lucida, sans-serif; }body, input, textarea, select { font-family: 'Source Sans Pro', Helvetica, Arial, Lucida, sans-serif; }
-    </style>
+  <style>
+    a { color: #2291cf; }
+    body { color: #666666; }
+    .et_pb_counter_amount, .et_pb_featured_table .et_pb_pricing_heading, .et_pb_pricing_table_button, .comment-reply-link, .form-submit input { background-color: #80c341; }
+    .woocommerce a.button.alt, .woocommerce-page a.button.alt, .woocommerce button.button.alt, .woocommerce-page button.button.alt, .woocommerce input.button.alt, .woocommerce-page input.button.alt, .woocommerce #respond input#submit.alt, .woocommerce-page #respond input#submit.alt, .woocommerce #content input.button.alt, .woocommerce-page #content input.button.alt, .woocommerce a.button, .woocommerce-page a.button, .woocommerce button.button, .woocommerce-page button.button, .woocommerce input.button, .woocommerce-page input.button, .woocommerce #respond input#submit, .woocommerce-page #respond input#submit, .woocommerce #content input.button, .woocommerce-page #content input.button, .woocommerce-message, .woocommerce-error, .woocommerce-info { background: #80c341 !important; }
+    #et_search_icon:hover, .mobile_menu_bar:before, .footer-widget h4, .et-social-icon a:hover, .et_pb_sum, .et_pb_pricing li a, .et_overlay:before, .entry-summary p.price ins, .woocommerce div.product span.price, .woocommerce-page div.product span.price, .woocommerce #content div.product span.price, .woocommerce-page #content div.product span.price, .woocommerce div.product p.price, .woocommerce-page div.product p.price, .woocommerce #content div.product p.price, .woocommerce-page #content div.product p.price { color: #80c341 !important; }
+    .woocommerce .star-rating span:before, .woocommerce-page .star-rating span:before { color: #80c341 !important; }
+    #main-footer { background-color: #2e2e2e; }
+    #top-menu a { color: #666666; }
+    #top-menu li.current-menu-ancestor > a, #top-menu li.current-menu-item > a { color: #2291cf; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Source Sans Pro', Helvetica, Arial, Lucida, sans-serif; }body, input, textarea, select { font-family: 'Source Sans Pro', Helvetica, Arial, Lucida, sans-serif; }
+  </style>
 
-    <style type="text/css">
-        .recentcomments a { display:inline !important; padding:0 !important; margin:0 !important; }
-    </style>
+  <style type="text/css">
+    .recentcomments a { display:inline !important; padding:0 !important; margin:0 !important; }
+  </style>
 
-    <link rel="icon" type="image/png" href="{{ STATIC_URL }}img/favicon.ico">
+  <link rel="icon" type="image/png" href="{{ STATIC_URL }}img/favicon.ico">
 
-    {% block head %}
-        {% compressed_css 'global' %}
-        {% compressed_css 'home' %}
-        {% compressed_js 'core' %}
-        {% compressed_js 'home' %}
-        {% compressed_js 'angularjs' %}
-        {% compressed_js 'search_starter' %}
-    {% endblock head %}
+  {% block head %}
+    {% compressed_css 'global' %}
+    {% compressed_css 'home' %}
+    {% compressed_js 'core' %}
+    {% compressed_js 'home' %}
+    {% compressed_js 'angularjs' %}
+    {% compressed_js 'search_starter' %}
+  {% endblock head %}
 
 
 
-<script type="text/javascript">
-</script>
+  <script type="text/javascript">
+  </script>
 
 
 
@@ -169,7 +169,7 @@
 </div><!-- /.section-learn-more -->
 
 
-<div class="section-directory-coverage container-fluid">
+<div id="features-directory" class="section-directory-coverage container-fluid">
   <div class="container">
     <div class="row">
       <div id="who-accepts-bitcoin" class="text-center col-sm-6">
@@ -217,15 +217,7 @@
     </h2>
     <p>The Airbitz mobile app also includes a business directory to help consumers find merchants and websites that accept bitcoin as payment. Some of its powerful features include:</p>
 
-    <div class="row" style="margin: 30px 0;">
-        <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
-          <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
-        </a>
-        <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
-          <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
-        </a>
-        <a class="video btn btn-primary btn-lg" href="https://www.youtube.com/watch?v=OjBQTDzPcmg"><i class="fa fa-video-camera"></i>&nbsp;See App Video</a>
-    </div>
+    {% include '_home-app-download-preview.html' %}
 
     <div class="row" style="margin-top: 40px;">
       <div class="col-sm-12">
@@ -246,7 +238,8 @@
 
 <div id="features-wallet" class="section-bitcoin-wallet container-fluid" style="margin-top: 40px;">
   <div class="container text-center">
-    <h2>Decentralized, Secure, Private, Synchronized, Backed up Bitcoin</h2>
+    {#    <h2>Decentralized, Secure, Private, Synchronized, Backed up Bitcoin</h2>#}
+    <h2>&nbsp;</h2>
   </div>
 </div>
 
@@ -260,15 +253,7 @@
     </div>
   </div>
 
-  <div class="row" style="margin: 30px 0;">
-      <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
-        <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
-      </a>
-      <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
-        <img class="app-store animated" src="{{ STATIC_URL }}wp/assets/img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
-      </a>
-      <a class="video btn btn-primary btn-lg" href="https://www.youtube.com/watch?v=OjBQTDzPcmg"><i class="fa fa-video-camera"></i>&nbsp;See App Video</a>
-  </div>
+  {% include '_home-app-download-preview.html' %}
 
   <div class="row" style="margin-top: 40px;">
     <div class="col-sm-12">
@@ -335,7 +320,7 @@
 
 
 {% block footer %}
-    {% include '_footer_main.html' %}
+  {% include '_footer_main.html' %}
 {% endblock footer %}
 
 <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-content/themes/Divi/js/jquery.fitvids.js?ver=1.0'></script>
@@ -344,114 +329,114 @@
 <script type='text/javascript' src='{{ STATIC_URL }}wp/wp-content/themes/Divi/js/custom.js?ver=1.0'></script>
 
 
-    <script type="text/javascript">
-    $(function() {
-        AB.setup();
-        AB.addLocationSearch($('input.location'));
-        AB.addPlaceSearch($('input.term'));
+<script type="text/javascript">
+  $(function() {
+    AB.setup();
+    AB.addLocationSearch($('input.location'));
+    AB.addPlaceSearch($('input.term'));
 
 
-        // Include the UserVoice JavaScript SDK (only needed once on a page)
-        UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/sf1HfQGz9aR6JlwkmTvKbQ.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+    // Include the UserVoice JavaScript SDK (only needed once on a page)
+    UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/sf1HfQGz9aR6JlwkmTvKbQ.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
 
-        //
-        // UserVoice Javascript SDK developer documentation:
-        // https://www.uservoice.com/o/javascript-sdk
-        //
+    //
+    // UserVoice Javascript SDK developer documentation:
+    // https://www.uservoice.com/o/javascript-sdk
+    //
 
-        // Set colors
-        UserVoice.push(['set', {
-          accent_color: '#448dd6',
-          trigger_color: 'white',
-          trigger_background_color: '#6aba2e'
-        }]);
+    // Set colors
+    UserVoice.push(['set', {
+      accent_color: '#448dd6',
+      trigger_color: 'white',
+      trigger_background_color: '#6aba2e'
+    }]);
 
-        // Identify the user and pass traits
-        // To enable, replace sample data with actual user traits and uncomment the line
-        UserVoice.push(['identify', {
-          //email:      'john.doe@example.com', // User’s email address
-          //name:       'John Doe', // User’s real name
-          //created_at: 1364406966, // Unix timestamp for the date the user signed up
-          //id:         123, // Optional: Unique id of the user (if set, this should not change)
-          //type:       'Owner', // Optional: segment your users by type
-          //account: {
-          //  id:           123, // Optional: associate multiple users with a single account
-          //  name:         'Acme, Co.', // Account name
-          //  created_at:   1364406966, // Unix timestamp for the date the account was created
-          //  monthly_rate: 9.99, // Decimal; monthly rate of the account
-          //  ltv:          1495.00, // Decimal; lifetime value of the account
-          //  plan:         'Enhanced' // Plan name for the account
-          //}
-        }]);
+    // Identify the user and pass traits
+    // To enable, replace sample data with actual user traits and uncomment the line
+    UserVoice.push(['identify', {
+      //email:      'john.doe@example.com', // User’s email address
+      //name:       'John Doe', // User’s real name
+      //created_at: 1364406966, // Unix timestamp for the date the user signed up
+      //id:         123, // Optional: Unique id of the user (if set, this should not change)
+      //type:       'Owner', // Optional: segment your users by type
+      //account: {
+      //  id:           123, // Optional: associate multiple users with a single account
+      //  name:         'Acme, Co.', // Account name
+      //  created_at:   1364406966, // Unix timestamp for the date the account was created
+      //  monthly_rate: 9.99, // Decimal; monthly rate of the account
+      //  ltv:          1495.00, // Decimal; lifetime value of the account
+      //  plan:         'Enhanced' // Plan name for the account
+      //}
+    }]);
 
-        // Add default trigger to the bottom-right corner of the window:
-        UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-right' }]);
+    // Add default trigger to the bottom-right corner of the window:
+    UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-right' }]);
 
-        // Or, use your own custom trigger:
-        //UserVoice.push(['addTrigger', '#id', { mode: 'contact' }]);
+    // Or, use your own custom trigger:
+    //UserVoice.push(['addTrigger', '#id', { mode: 'contact' }]);
 
-        // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
-        UserVoice.push(['autoprompt', {}]);
+    // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
+    UserVoice.push(['autoprompt', {}]);
 
 
-    });
-    </script>
+  });
+</script>
 
-    <script type="text/javascript">
-      function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min)) + min;
+<script type="text/javascript">
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  var bgImages = [
+    '{{ STATIC_URL }}img/landing/landing-module-bg-coffee-dark.jpg',
+    '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',
+    {#        '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',#}
+    {#        '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'#}
+  ];
+
+  $('.landing-module').backstretch(
+      bgImages[getRandomInt(0, bgImages.length)]
+      ,
+      {
+        duration: 2000,
+        fade: 1000
       }
+  );
 
-      var bgImages = [
-        '{{ STATIC_URL }}img/landing/landing-module-bg-coffee-dark.jpg',
-        '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',
-{#        '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',#}
-{#        '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'#}
-      ];
+  $('.section-directory-coverage').backstretch(
+      '{{ STATIC_URL }}img/landing/search-directory-module-bg.jpg',
+      {
+        duration: 3000,
+        fade: 1500
+      }
+  );
 
-      $('.landing-module').backstretch(
-        bgImages[getRandomInt(0, bgImages.length)]
-        ,
-          {
-            duration: 2000,
-            fade: 1000
-          }
-      );
+  $('.section-bitcoin-directory').backstretch(
+      '{{ STATIC_URL }}img/landing/bitcoin-directory-module-bg.jpg',
+      {
+        duration: 3000,
+        fade: 1500
+      }
+  );
 
-      $('.section-directory-coverage').backstretch(
-          '{{ STATIC_URL }}img/landing/search-directory-module-bg.jpg',
-          {
-            duration: 3000,
-            fade: 1500
-          }
-      );
+  $('.section-bitcoin-wallet').backstretch(
+      '{{ STATIC_URL }}img/landing/section-bitcoin-wallet-details-bg.jpg',
+      {
+        duration: 3000,
+        fade: 1500
+      }
+  );
 
-      $('.section-bitcoin-directory').backstretch(
-          '{{ STATIC_URL }}img/landing/bitcoin-directory-module-bg.jpg',
-          {
-            duration: 3000,
-            fade: 1500
-          }
-      );
-
-      $('.section-bitcoin-wallet').backstretch(
-          '{{ STATIC_URL }}img/landing/section-bitcoin-wallet-details-bg.jpg',
-          {
-            duration: 3000,
-            fade: 1500
-          }
-      );
-
-      $('.section-testimonials').backstretch(
-          '{{ STATIC_URL }}img/landing/bitcoin-directory-module-bg.jpg',
-          {
-            duration: 3000,
-            fade: 1500
-          }
-      );
+  $('.section-testimonials').backstretch(
+      '{{ STATIC_URL }}img/landing/bitcoin-directory-module-bg.jpg',
+      {
+        duration: 3000,
+        fade: 1500
+      }
+  );
 
 
-    </script>
+</script>
 
 </body>
 </html>

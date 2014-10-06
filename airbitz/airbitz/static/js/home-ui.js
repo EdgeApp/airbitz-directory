@@ -91,10 +91,10 @@ $('.newsletter-signup').on('mouseover', function(){
 
 // BUTTON SCROLL AND DRAW ATTENTION
   $('#learn-more-wallet').on('click', function(){
-    $("html, body").animate({ scrollTop: $('#features-wallet').offset().top - 75 }, "slow");
+    $("html, body").animate({ scrollTop: $('#features-wallet').offset().top - 65 }, "slow");
   });
   $('#learn-more-directory').on('click', function(){
-    $("html, body").animate({ scrollTop: $('#features-directory').offset().top - 75 }, "slow");
+    $("html, body").animate({ scrollTop: $('#features-directory').offset().top - 65 }, "slow");
   });
 
 });
