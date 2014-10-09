@@ -104,6 +104,13 @@ class CategoryJsonSerializer(serializers.Field):
         else:
             return []
 
+class BusinessImageJson(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        if obj.images_json:
+            return json.loads(obj.images_json)
+        else:
+            return []
+
 class SocialSerializer(serializers.Field):
     def field_to_native(self, obj, field_name):
         if obj.social_json:
@@ -156,7 +163,7 @@ class BusinessSerializer(serializers.ModelSerializer):
     city = serializers.CharField(source='admin3_name')
     profile_image = SizedImageField(source='*')
     square_image = WebImageField(source='*')
-    # images = BusinessImageSerializer(source='businessimage_set')
+    images = BusinessImageJson(source='*')
     hours = HoursField(source='*')
     categories = CategoryJsonSerializer(source='*')
     social = SocialSerializer(source='socialid_set')
@@ -171,7 +178,7 @@ class BusinessSerializer(serializers.ModelSerializer):
                   'social',
                   'profile_image',
                   'square_image',
-                  # 'images',
+                  'images',
                   'description',
                   'website',
                   'phone',
