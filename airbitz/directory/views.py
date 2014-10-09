@@ -6,13 +6,15 @@ from django.http import Http404, HttpResponseRedirect, HttpResponse, HttpRespons
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.contrib.gis.measure import Distance
 from urllib import urlencode
 import urllib
+import json
 from airbitz import regions_data
 from airbitz.regions_data import ACTIVE_REGIONS, ALL_REGIONS
 
 from airbitz.settings import GOOGLE_MAP_KEY
-from directory.models import Business, BusinessImage
+from directory.models import Business, BusinessImage, SocialId
 # from management.views import isManager
 from restapi import api
 from directory.models import STATUS_CHOICES, SOCIAL_TYPES
@@ -124,6 +126,16 @@ def business_search(request, arg_term=None, arg_category=None, arg_location=None
         'results_left': results_left,
         'results_per_page': results_per_page
     }
+    # populate missing fields from DB
+    for r in results:
+        biz = Business.objects.get(pk=r.pk)
+        r.get_absolute_url = biz.get_absolute_url()
+        r.center = biz.center
+        r.gmap_directions_url = biz.gmap_directions_url
+        r.social = SocialId.objects.filter(business=biz)
+        r.landing_image = biz.landing_image
+        r.mobile_landing_image = biz.mobile_landing_image
+        r.categories = biz.categories
 
     context = {
         'results': results,

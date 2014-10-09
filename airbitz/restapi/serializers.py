@@ -3,35 +3,22 @@ from rest_framework import fields
 from rest_framework import pagination
 from rest_framework import serializers
 
-from directory.models import Business, BusinessImage, \
-                             Category, SocialId
+from directory.models import Business, BusinessImage, Category
 from location.models import GeoNameZip
+
+import json
 
 class SizedImageField(serializers.Field):
     def field_to_native(self, obj, field_name):
-        image = obj.mobile_landing_image
-        if image:
-            return {
-                'image': image.mobile_photo.url,
-                'width': image.mobile_photo.width,
-                'height': image.mobile_photo.height,
-                'bounding_box': {'x': 0.0, 'y': 0.0, 'height': 0.25, 'width': 1.0},
-                'thumbnail': image.mobile_thumbnail.url,
-            }
+        if obj.mobile_image_json:
+            return json.loads(obj.mobile_image_json)
         else:
             return {}
 
 class WebImageField(serializers.Field):
     def field_to_native(self, obj, field_name):
-        image = obj.landing_image
-        if image:
-            return {
-                'image': image.web_photo.url,
-                'width': image.web_photo.width,
-                'height': image.web_photo.height,
-                'bounding_box': {'x': 0.0, 'y': 0.0, 'height': 0.25, 'width': 1.0},
-                'thumbnail': image.web_photo.url,
-            }
+        if obj.landing_image_json:
+            return json.loads(obj.landing_image_json)
         else:
             return {}
 
@@ -111,19 +98,23 @@ class BusinessImageSerializer(serializers.ModelSerializer):
         model = BusinessImage
         fields = ('image', 'height', 'width', 'thumbnail', 'bounding_box', 'tags', )
 
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ('name', 'level', )
+class CategorySerializer(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        if obj.category_json:
+            return json.loads(obj.category_json)
+        else:
+            return []
 
-class SocialSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SocialId
-        fields = ('social_type', 'social_id', 'social_url')
+class SocialSerializer(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        if obj.social_json:
+            return json.loads(obj.social_json)
+        else:
+            return []
 
 class MiniBusinessSerializer(serializers.ModelSerializer):
-    bizId = serializers.Field(source='pk')
-    categories = CategorySerializer(source='categories')
+    bizId = serializers.Field(source='bizId')
+    categories = CategorySerializer(source='*')
     social = SocialSerializer(source='socialid_set')
     profile_image = SizedImageField(source='*')
     square_image = WebImageField(source='*')
@@ -160,7 +151,7 @@ class PaginatedMiniBizSerializer(pagination.PaginationSerializer):
         object_serializer_class = MiniBusinessSerializer
 
 class BusinessSerializer(serializers.ModelSerializer):
-    bizId = serializers.Field(source='pk')
+    bizId = serializers.Field(source='bizId')
     state = serializers.CharField(source='admin1_code')
     county = serializers.CharField(source='admin2_name')
     city = serializers.CharField(source='admin3_name')
@@ -168,7 +159,7 @@ class BusinessSerializer(serializers.ModelSerializer):
     square_image = WebImageField(source='*')
     images = BusinessImageSerializer(source='businessimage_set')
     hours = HoursField(source='*')
-    categories = CategorySerializer(source='categories')
+    categories = CategorySerializer(source='*')
     social = SocialSerializer(source='socialid_set')
     location = PointField()
     distance = DistanceField(source='*')

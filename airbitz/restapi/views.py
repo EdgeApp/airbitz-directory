@@ -131,7 +131,6 @@ class SearchView(generics.ListAPIView):
         sort --  0: default, best match. 1: sort based off distance
         api_key -- API Key
     """
-    queryset = Business.objects.all()
     serializer_class = serializers.MiniBusinessSerializer
     paginate_by = DEFAULT_PAGE_SIZE
     paginate_by_param = 'page_size'
@@ -150,7 +149,7 @@ class SearchView(generics.ListAPIView):
 
         a = api.ApiProcess(locationStr=location, ll=ll)
         return a.searchDirectory(term=term, geobounds=bounds, \
-                                   radius=radius, category=category, sort=sort)
+                                 radius=radius, category=category, sort=sort)
 
 
 class AutoCompleteBusiness(APIView):

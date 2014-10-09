@@ -244,9 +244,6 @@ class ApiProcess(object):
                            | SQ(description=term))
         if category:
             sqs = self.querySetAddCategories(sqs, category)
-        # Remove we never want to filter strictly on a category
-        # if self.isExactCategory(term):
-        #     sqs = sqs.filter(categories=term)
         if self.location.isWebOnly():
             sqs = sqs.filter(SQ(has_online_business=True) & SQ(has_physical_business=False))
         elif self.location.isOnWeb():
@@ -256,7 +253,6 @@ class ApiProcess(object):
                 sqs = sqs.order_by('-has_bitcoin_discount', '-score')
             else:
                 sqs = sqs.order_by('-score')
-            sqs = sqs.load_all()
             sqs = self.__filer_on_web__(sqs)
         else:
             sqs = sqs.narrow('has_physical_business:true')
@@ -266,16 +262,16 @@ class ApiProcess(object):
                     sqs = sqs.narrow('admin1_code:' + self.location.admin1())
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
-            sqs = sqs.load_all()
+            # TODO: remove __geolocation_filter__ and sorted
             sqs = self.__geolocation_filter__(sqs, geopoly, radius)
-            sqs = sorted(sqs, key=lambda x: x.object.distance)
-        return [s.object for s in sqs]
+            sqs = sorted(sqs, key=lambda x: x.distance)
+        return sqs
 
     def __filer_on_web__(self, sqs):
         inCountry = []
         outCountry = []
         for s in sqs:
-            if s.object.country == self.location.userCountry:
+            if s.country == self.location.userCountry:
                 inCountry.append(s)
             else:
                 outCountry.append(s)
@@ -283,17 +279,20 @@ class ApiProcess(object):
 
     def __geolocation_filter__(self, sqs, geopoly, radius):
         newsqs = []
+        for s in sqs:
+            newsqs.append(s)
+        return sqs
         if self.location.hasBounding:
             # Do we have a bounding box?
             for s in sqs:
-                s.object.distance = s.distance
-                s.object.bounded = False
+                s.distance = s.distance
+                s.bounded = False
                 if s.location:
-                    s.object.distance = Distance(m=s.location.distance(self.location.userPoint) * locapi.DEG_TO_M)
-                    s.object.sortDistance = Distance(m=s.location.distance(self.location.sortPoint) * locapi.DEG_TO_M)
+                    s.distance = Distance(m=s.location.distance(self.location.userPoint) * locapi.DEG_TO_M)
+                    s.sortDistance = Distance(m=s.location.distance(self.location.sortPoint) * locapi.DEG_TO_M)
                     if self.location.boundingContains(s.location):
                         # Its within the bounding box 
-                        s.object.bounded = True
+                        s.bounded = True
                         self.__append_if_within__(newsqs, s, poly=geopoly, radius=radius)
                     elif self.location.boundingExpandedContains(s.location):
                         # Outside of bounding, but within the DEF_RADIUS
@@ -301,11 +300,11 @@ class ApiProcess(object):
             return newsqs
         else:
             for s in sqs:
-                s.object.distance = s.distance
-                s.object.bounded = False
+                s.distance = s.distance
+                s.bounded = False
                 if s.location:
-                    s.object.distance = Distance(m=s.location.distance(self.location.userPoint) * locapi.DEG_TO_M)
-                    s.object.sortDistance = Distance(m=s.location.distance(self.location.sortPoint) * locapi.DEG_TO_M)
+                    s.distance = Distance(m=s.location.distance(self.location.userPoint) * locapi.DEG_TO_M)
+                    s.sortDistance = Distance(m=s.location.distance(self.location.sortPoint) * locapi.DEG_TO_M)
                     self.__append_if_within__(newsqs, s, poly=geopoly, radius=radius)
             return newsqs
 
@@ -314,7 +313,7 @@ class ApiProcess(object):
             if poly.contains(obj.location):
                 ls.append(obj)
         elif radius:
-            if obj.object.sortDistance.m < radius:
+            if obj.sortDistance.m < radius:
                 ls.append(obj)
         else:
             ls.append(obj)
