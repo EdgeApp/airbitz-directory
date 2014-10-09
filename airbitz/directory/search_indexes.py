@@ -2,7 +2,7 @@ from haystack import indexes
 
 import json
 
-from directory.models import Business, BusinessHours, Category, SocialId
+from directory.models import Business, BusinessHours, BusinessImage, Category, SocialId
 
 class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     bizId = indexes.IntegerField(model_attr='pk', indexed=False)
@@ -27,6 +27,7 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     landing_image_json = indexes.CharField(null=True, indexed=False)
     social_json = indexes.CharField(null=True, indexed=False)
     hours_json = indexes.CharField(null=True, indexed=False)
+    images_json = indexes.CharField(null=True, indexed=False)
 
     location = indexes.LocationField(model_attr='center', null=True)
 
@@ -55,24 +56,32 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_landing_image_json(self, obj):
         if not obj.landing_image:
             return {}
-        image = obj.landing_image
-        return json.dumps({
-                'image': image.mobile_photo.url,
-                'width': image.mobile_photo.width,
-                'height': image.mobile_photo.height,
-                'bounding_box': {'x': 0.0, 'y': 0.0, 'height': 0.25, 'width': 1.0},
-                'thumbnail': image.mobile_thumbnail.url})
+        return json.dumps(self.serialize_image(obj.landing_image.mobile_photo))
 
     def prepare_mobile_image_json(self, obj):
         if not obj.mobile_landing_image:
             return {}
-        image = obj.mobile_landing_image
-        return json.dumps({
-                'image': image.web_photo.url,
-                'width': image.web_photo.width,
-                'height': image.web_photo.height,
+        return json.dumps(self.serialize_image(obj.mobile_landing_image.web_photo))
+
+    def prepare_images_json(self, obj):
+        ls = []
+        for b in BusinessImage.objects.filter(business=obj):
+            tags = [t.name for t in b.tags.all()]
+            ls.append({
+                'image': b.mobile_photo.url,
+                'height': b.mobile_photo.height,
+                'width': b.mobile_photo.width,
+                'thumbnail': b.mobile_thumbnail.url,
                 'bounding_box': {'x': 0.0, 'y': 0.0, 'height': 0.25, 'width': 1.0},
-                'thumbnail': image.web_photo.url})
+                'tags': tags })
+        return json.dumps(ls)
+
+    def serialize_image(self, image):
+        return { 'image': image.url,
+                 'width': image.width,
+                 'height': image.height,
+                 'bounding_box': {'x': 0.0, 'y': 0.0, 'height': 0.25, 'width': 1.0},
+                 'thumbnail': image.url }
 
     def prepare_social_json(self, obj):
         ls = []
