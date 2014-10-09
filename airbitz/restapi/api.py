@@ -9,6 +9,7 @@ import subprocess
 from directory.models import Business, Category
 from airbitz.region_definitions import ALL_COUNTRY_LABELS
 import locapi
+import json
 
 log=logging.getLogger("airbitz." + __name__)
 
@@ -22,7 +23,12 @@ CURRENT_LOCATION='Current Location'
 
 def autocompleteSerialize(row):
     if row.model.__name__ == 'Business':
-        return { 'type': 'business', 'bizId': row.pk, 'text': row.content_auto }
+        image = json.loads(row.landing_image_json)
+        if image.has_key('thumbnail'):
+            thumbnail = image['thumbnail']
+        else:
+            thumbnail = None
+        return { 'type': 'business', 'bizId': row.pk, 'text': row.content_auto, 'profile_image': thumbnail }
     else:
         return { 'type': 'category', 'text': row.content_auto }
 
