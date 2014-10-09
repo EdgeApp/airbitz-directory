@@ -75,8 +75,9 @@ class PointField(fields.Field):
     type_name = 'PointField'
 
     def field_to_native(self, obj, field_name):
-        if obj.center:
-            return {'latitude': obj.center.y, 'longitude': obj.center.x}
+        if obj.location:
+            print obj.location
+            return {'latitude': obj.location.y, 'longitude': obj.location.x}
         else:
             return None
 
