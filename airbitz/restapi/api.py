@@ -235,7 +235,6 @@ class ApiProcess(object):
 
     def searchDirectory(self, term=None, geobounds=None, radius=None, category=None, sort=None):
         sqs = SearchQuerySet().models(Business)
-        geopoly = parseGeoBounds(geobounds)
         if term:
             formatted = wildcardFormat(term)
             sqs = sqs.filter(SQ(categories=term) 
@@ -253,7 +252,6 @@ class ApiProcess(object):
                 sqs = sqs.order_by('-has_bitcoin_discount', '-score')
             else:
                 sqs = sqs.order_by('-score')
-            sqs = self.__filer_on_web__(sqs)
         else:
             sqs = sqs.narrow('has_physical_business:true')
             if self.location.country():
@@ -262,9 +260,6 @@ class ApiProcess(object):
                     sqs = sqs.narrow('admin1_code:' + self.location.admin1())
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
-            # TODO: remove __geolocation_filter__ and sorted
-            sqs = self.__geolocation_filter__(sqs, geopoly, radius)
-            sqs = sorted(sqs, key=lambda x: x.distance)
         return sqs
 
     def __filer_on_web__(self, sqs):
