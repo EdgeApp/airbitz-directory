@@ -129,6 +129,7 @@ def business_search(request, arg_term=None, arg_category=None, arg_location=None
     # populate missing fields from DB
     for r in results:
         biz = Business.objects.get(pk=r.pk)
+        r.has_bitcoin_discount = biz.has_bitcoin_discount
         r.get_absolute_url = biz.get_absolute_url()
         r.center = biz.center
         r.gmap_directions_url = biz.gmap_directions_url

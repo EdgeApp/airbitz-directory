@@ -9,9 +9,16 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     name = indexes.CharField(model_attr='name', boost=1.2)
     description = indexes.CharField(model_attr='description', null=True)
+
+    website = indexes.CharField(model_attr='website', null=True)
+    address = indexes.CharField(model_attr='address', null=True)
+    phone = indexes.CharField(model_attr='phone', null=True)
+    postalcode = indexes.CharField(model_attr='postalcode', null=True)
+
     country = indexes.CharField(model_attr='country', null=True)
     admin1_code = indexes.CharField(model_attr='admin1_code', null=True)
     admin2_name = indexes.CharField(model_attr='admin2_name', null=True)
+    admin3_name = indexes.CharField(model_attr='admin3_name', null=True)
 
     categories = indexes.MultiValueField()
 
@@ -30,6 +37,7 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
 
     def prepare(self, obj):
         data = super(BusinessIndex, self).prepare(obj)
+        data['bizId'] = obj.pk
         minLevel = min([c.level for c in obj.categories.all()], 0)
         if minLevel >= 1:
             data['boost'] = (1.0 + (1.0 / minLevel))
