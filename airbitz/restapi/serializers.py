@@ -98,7 +98,12 @@ class BusinessImageSerializer(serializers.ModelSerializer):
         model = BusinessImage
         fields = ('image', 'height', 'width', 'thumbnail', 'bounding_box', 'tags', )
 
-class CategorySerializer(serializers.Field):
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('name', 'level', )
+
+class CategoryJsonSerializer(serializers.Field):
     def field_to_native(self, obj, field_name):
         if obj.category_json:
             return json.loads(obj.category_json)
@@ -114,7 +119,7 @@ class SocialSerializer(serializers.Field):
 
 class MiniBusinessSerializer(serializers.ModelSerializer):
     bizId = serializers.Field(source='bizId')
-    categories = CategorySerializer(source='*')
+    categories = CategoryJsonSerializer(source='*')
     social = SocialSerializer(source='socialid_set')
     profile_image = SizedImageField(source='*')
     square_image = WebImageField(source='*')
@@ -159,7 +164,7 @@ class BusinessSerializer(serializers.ModelSerializer):
     square_image = WebImageField(source='*')
     images = BusinessImageSerializer(source='businessimage_set')
     hours = HoursField(source='*')
-    categories = CategorySerializer(source='*')
+    categories = CategoryJsonSerializer(source='*')
     social = SocialSerializer(source='socialid_set')
     location = PointField()
     distance = DistanceField(source='*')
