@@ -2,7 +2,7 @@ from haystack import indexes
 
 import json
 
-from directory.models import Business, Category, SocialId
+from directory.models import Business, BusinessHours, Category, SocialId
 
 class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     bizId = indexes.IntegerField(model_attr='pk', indexed=False)
@@ -10,15 +10,15 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     name = indexes.CharField(model_attr='name', boost=1.2)
     description = indexes.CharField(model_attr='description', null=True)
 
-    website = indexes.CharField(model_attr='website', null=True)
-    address = indexes.CharField(model_attr='address', null=True)
-    phone = indexes.CharField(model_attr='phone', null=True)
-    postalcode = indexes.CharField(model_attr='postalcode', null=True)
+    website = indexes.CharField(model_attr='website')
+    address = indexes.CharField(model_attr='address')
+    phone = indexes.CharField(model_attr='phone')
+    postalcode = indexes.CharField(model_attr='postalcode')
 
-    country = indexes.CharField(model_attr='country', null=True)
-    admin1_code = indexes.CharField(model_attr='admin1_code', null=True)
-    admin2_name = indexes.CharField(model_attr='admin2_name', null=True)
-    admin3_name = indexes.CharField(model_attr='admin3_name', null=True)
+    country = indexes.CharField(model_attr='country')
+    admin1_code = indexes.CharField(model_attr='admin1_code')
+    admin2_name = indexes.CharField(model_attr='admin2_name')
+    admin3_name = indexes.CharField(model_attr='admin3_name')
 
     categories = indexes.MultiValueField()
 
@@ -26,6 +26,7 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     mobile_image_json = indexes.CharField(null=True, indexed=False)
     landing_image_json = indexes.CharField(null=True, indexed=False)
     social_json = indexes.CharField(null=True, indexed=False)
+    hours_json = indexes.CharField(null=True, indexed=False)
 
     location = indexes.LocationField(model_attr='center', null=True)
 
@@ -38,6 +39,7 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare(self, obj):
         data = super(BusinessIndex, self).prepare(obj)
         data['bizId'] = obj.pk
+
         minLevel = min([c.level for c in obj.categories.all()], 0)
         if minLevel >= 1:
             data['boost'] = (1.0 + (1.0 / minLevel))
@@ -78,6 +80,16 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
             ls.append({'social_type': s.social_type,
                        'social_id': s.social_id,
                        'social_url': s.social_url})
+        return json.dumps(ls)
+
+    def prepare_hours_json(self, obj):
+        ls = []
+        for s in BusinessHours.objects.filter(business=obj):
+            ls.append({'dayOfWeek': s.lookupDayOfWeek,
+                       'dayNumber': s.lookupDayNumber,
+                       'hourStart': str(s.hourStart),
+                       'hourEnd': str(s.hourEnd)})
+        ls = sorted(ls, lambda x, y: x['dayNumber'] - y['dayNumber']) 
         return json.dumps(ls)
 
     def get_model(self):

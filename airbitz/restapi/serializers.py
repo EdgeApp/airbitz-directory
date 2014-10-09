@@ -23,17 +23,11 @@ class WebImageField(serializers.Field):
             return {}
 
 class HoursField(serializers.Field):
-    def serial(self, obj):
-        return {
-            'dayOfWeek': obj.lookupDayOfWeek,
-            'hourStart': obj.hourStart,
-            'hourEnd': obj.hourEnd 
-        }
-
     def field_to_native(self, obj, field_name):
-        ls = obj.businesshours_set.all()
-        ls = sorted(ls, lambda x, y: x.lookupDayNumber - y.lookupDayNumber) 
-        return [self.serial(t) for t in ls]
+        if obj.hours_json:
+            return json.loads(obj.hours_json)
+        else:
+            return []
 
 class ImageTagsField(serializers.Field):
     def field_to_native(self, obj, field_name):
@@ -76,7 +70,6 @@ class PointField(fields.Field):
 
     def field_to_native(self, obj, field_name):
         if obj.location:
-            print obj.location
             return {'latitude': obj.location.y, 'longitude': obj.location.x}
         else:
             return None
@@ -163,7 +156,7 @@ class BusinessSerializer(serializers.ModelSerializer):
     city = serializers.CharField(source='admin3_name')
     profile_image = SizedImageField(source='*')
     square_image = WebImageField(source='*')
-    images = BusinessImageSerializer(source='businessimage_set')
+    # images = BusinessImageSerializer(source='businessimage_set')
     hours = HoursField(source='*')
     categories = CategoryJsonSerializer(source='*')
     social = SocialSerializer(source='socialid_set')
@@ -178,7 +171,7 @@ class BusinessSerializer(serializers.ModelSerializer):
                   'social',
                   'profile_image',
                   'square_image',
-                  'images',
+                  # 'images',
                   'description',
                   'website',
                   'phone',

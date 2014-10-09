@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.gis.measure import Distance
+from django.http import Http404
+from haystack.query import SearchQuerySet
 from rest_framework import authentication as auth
 from rest_framework import exceptions
 from rest_framework import generics, filters
@@ -77,13 +79,13 @@ class BusinessView(generics.RetrieveAPIView):
         api_key -- API Key
     """
     serializer_class = serializers.BusinessSerializer
-    pk_url_kwarg = 'bizId'
+    lookup_url_kwarg = 'bizId'
     authentication_classes = PERMS
     permission_classes = AUTH
 
     def get_queryset(self):
-        bizId = int(self.kwargs['bizId'])
-        return Business.objects.filter(id=bizId, status='PUB')
+        bizId = self.kwargs['bizId']
+        return SearchQuerySet().models(Business).filter(django_id=bizId)
 
     def retrieve(self, request, *args, **kwargs):
         """
@@ -91,11 +93,14 @@ class BusinessView(generics.RetrieveAPIView):
         because it uses st_distance_sphere/st_distance_spheriod instead of
         st_distance. Classic!
         """
-        self.object = self.get_object()
-        if self.object.center:
+        try:
+            self.object = self.get_queryset()[0]
+        except:
+            raise Http404
+        if self.object.location:
             ll = self.request.QUERY_PARAMS.get('ll', None)
             a = api.ApiProcess(ll=ll)
-            distance = Distance(m=a.userLocation().distance(self.object.center) * locapi.DEG_TO_M)
+            distance = Distance(m=a.userLocation().distance(self.object.location) * locapi.DEG_TO_M)
             setattr(self.object, 'distance', distance)
         serializer = self.get_serializer(self.object)
         return Response(serializer.data)
