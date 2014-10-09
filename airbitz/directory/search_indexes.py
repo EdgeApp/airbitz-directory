@@ -56,12 +56,12 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_landing_image_json(self, obj):
         if not obj.landing_image:
             return {}
-        return json.dumps(self.serialize_image(obj.landing_image.mobile_photo))
+        return json.dumps(self.serialize_image(obj.landing_image.web_photo))
 
     def prepare_mobile_image_json(self, obj):
         if not obj.mobile_landing_image:
             return {}
-        return json.dumps(self.serialize_image(obj.mobile_landing_image.web_photo))
+        return json.dumps(self.serialize_image(obj.mobile_landing_image.mobile_photo))
 
     def prepare_images_json(self, obj):
         ls = []
