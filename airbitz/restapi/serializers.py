@@ -8,24 +8,6 @@ from location.models import GeoNameZip
 
 import json
 
-class WebImageField(serializers.Field):
-    def field_to_native(self, obj, field_name):
-        if obj.landing_image_json:
-            data = json.loads(obj.landing_image_json)
-            for d in data:
-                if not d.hourEnd:
-                    d.hourEnd = 'None'
-            return data
-        else:
-            return {}
-
-class HoursField(serializers.Field):
-    def field_to_native(self, obj, field_name):
-        if obj.hours_json:
-            return json.loads(obj.hours_json)
-        else:
-            return []
-
 class ImageTagsField(serializers.Field):
     def field_to_native(self, obj, field_name):
         return [t.name for t in obj.tags.all()]
@@ -50,7 +32,6 @@ class LastUpdated(serializers.Field):
     def field_to_native(self, obj, field_name):
         m = Category.objects.all().aggregate(Max('modified'))
         return m['modified__max']
-
 
 class DistanceField(serializers.Field):
     def field_to_native(self, obj, field_name):
@@ -177,7 +158,7 @@ class BusinessSerializer(serializers.ModelSerializer):
     profile_image = JsonSerializer(source='mobile_image_json')
     square_image = JsonSerializer(source='landing_image_json')
     images = JsonSerializer(source='images_json', islist=True)
-    hours = HoursField(source='*')
+    hours = JsonSerializer(source='hours_json', islist=True)
     categories = JsonSerializer(source='category_json', islist=True)
     social = JsonSerializer(source='social_json', islist=True)
     location = PointField()
