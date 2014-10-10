@@ -8,13 +8,6 @@ from location.models import GeoNameZip
 
 import json
 
-class SizedImageField(serializers.Field):
-    def field_to_native(self, obj, field_name):
-        if obj.mobile_image_json:
-            return json.loads(obj.mobile_image_json)
-        else:
-            return {}
-
 class WebImageField(serializers.Field):
     def field_to_native(self, obj, field_name):
         if obj.landing_image_json:
@@ -97,36 +90,44 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ('name', 'level', )
 
-class CategoryJsonSerializer(serializers.Field):
-    def field_to_native(self, obj, field_name):
-        if obj.category_json:
-            return json.loads(obj.category_json)
-        else:
-            return []
+class JsonSerializer(serializers.Field):
+    def __init__(self, islist=False, *args, **kwargs):
+        self.islist = islist
+        super(JsonSerializer, self).__init__(*args, **kwargs)
 
-class BusinessImageJson(serializers.Field):
     def field_to_native(self, obj, field_name):
-        if obj.images_json:
-            return json.loads(obj.images_json)
-        else:
+        val = get_component(obj, self.source) or ''
+        if val:
+            return json.loads(val)
+        elif self.islist:
             return []
+        else:
+            return {}
 
-class SocialSerializer(serializers.Field):
+class CharSerializer(serializers.Field):
     def field_to_native(self, obj, field_name):
-        if obj.social_json:
-            return json.loads(obj.social_json)
-        else:
-            return []
+        return get_component(obj, self.source) or ''
+
+def get_component(obj, attr_name):
+    if isinstance(obj, dict):
+        val = obj.get(attr_name)
+    else:
+        val = getattr(obj, attr_name)
+    return val
 
 class MiniBusinessSerializer(serializers.ModelSerializer):
     bizId = serializers.Field(source='bizId')
-    categories = CategoryJsonSerializer(source='*')
-    social = SocialSerializer(source='socialid_set')
-    profile_image = SizedImageField(source='*')
-    square_image = WebImageField(source='*')
-    state = serializers.CharField(source='admin1_code')
-    county = serializers.CharField(source='admin2_name')
-    city = serializers.CharField(source='admin3_name')
+    address = CharSerializer(source='address')
+    city = CharSerializer(source='admin3_name')
+    state = CharSerializer(source='admin1_code')
+    county = CharSerializer(source='admin2_name')
+    postalcode = CharSerializer(source='postalcode')
+    country = CharSerializer(source='country')
+
+    categories = JsonSerializer(source='category_json', islist=True)
+    social = JsonSerializer(source='social_json', islist=True)
+    profile_image = JsonSerializer(source='mobile_image_json')
+    square_image = JsonSerializer(source='landing_image_json')
     distance = DistanceField(source='*')
     bounded = serializers.BooleanField()
     location = PointField()
@@ -158,15 +159,19 @@ class PaginatedMiniBizSerializer(pagination.PaginationSerializer):
 
 class BusinessSerializer(serializers.ModelSerializer):
     bizId = serializers.Field(source='bizId')
-    state = serializers.CharField(source='admin1_code')
-    county = serializers.CharField(source='admin2_name')
-    city = serializers.CharField(source='admin3_name')
-    profile_image = SizedImageField(source='*')
-    square_image = WebImageField(source='*')
-    images = BusinessImageJson(source='*')
+    address = CharSerializer(source='address')
+    city = CharSerializer(source='admin3_name')
+    state = CharSerializer(source='admin1_code')
+    county = CharSerializer(source='admin2_name')
+    postalcode = CharSerializer(source='postalcode')
+    country = CharSerializer(source='country')
+
+    profile_image = JsonSerializer(source='mobile_image_json')
+    square_image = JsonSerializer(source='landing_image_json')
+    images = JsonSerializer(source='images_json', islist=True)
     hours = HoursField(source='*')
-    categories = CategoryJsonSerializer(source='*')
-    social = SocialSerializer(source='socialid_set')
+    categories = JsonSerializer(source='category_json', islist=True)
+    social = JsonSerializer(source='social_json', islist=True)
     location = PointField()
     distance = DistanceField(source='*')
 
