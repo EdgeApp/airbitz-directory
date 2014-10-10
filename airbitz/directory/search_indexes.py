@@ -91,13 +91,19 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
                        'social_url': s.social_url})
         return json.dumps(ls)
 
+    def hours_clean(self, h):
+        if not h:
+            return None
+        else:
+            return str(h)
+
     def prepare_hours_json(self, obj):
         ls = []
         for s in BusinessHours.objects.filter(business=obj):
             ls.append({'dayOfWeek': s.lookupDayOfWeek,
                        'dayNumber': s.lookupDayNumber,
                        'hourStart': str(s.hourStart),
-                       'hourEnd': str(s.hourEnd)})
+                       'hourEnd': self.hours_clean(s.hourEnd)})
         ls = sorted(ls, lambda x, y: x['dayNumber'] - y['dayNumber']) 
         return json.dumps(ls)
 
