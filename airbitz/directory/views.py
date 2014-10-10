@@ -127,8 +127,12 @@ def business_search(request, arg_term=None, arg_category=None, arg_location=None
         'results_per_page': results_per_page
     }
     # populate missing fields from DB
+    ids = []
     for r in results:
-        biz = Business.objects.get(pk=r.pk)
+        ids.append(r.pk)
+    bizs = dict([(str(b.pk), b) for b in Business.objects.filter(id__in=ids)])
+    for r in results:
+        biz = bizs[r.pk]
         r.has_bitcoin_discount = biz.has_bitcoin_discount
         r.get_absolute_url = biz.get_absolute_url()
         r.center = biz.center
