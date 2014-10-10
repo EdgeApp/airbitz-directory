@@ -11,7 +11,11 @@ import json
 class WebImageField(serializers.Field):
     def field_to_native(self, obj, field_name):
         if obj.landing_image_json:
-            return json.loads(obj.landing_image_json)
+            data = json.loads(obj.landing_image_json)
+            for d in data:
+                if not d.hourEnd:
+                    d.hourEnd = 'None'
+            return data
         else:
             return {}
 
