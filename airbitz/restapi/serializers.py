@@ -123,6 +123,8 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
     county = CharSerializer(source='admin2_name')
     postalcode = CharSerializer(source='postalcode')
     country = CharSerializer(source='country')
+    phone = CharSerializer(source='phone')
+    website = CharSerializer(source='website')
 
     categories = JsonSerializer(source='category_json', islist=True)
     social = JsonSerializer(source='social_json', islist=True)
@@ -141,13 +143,13 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
                   'profile_image',
                   'square_image',
                   'website',
-                  'phone',
                   'address',
                   'city',
-                  'county',
                   'state', 
+                  'county',
                   'postalcode',
                   'country',
+                  'phone',
                   'location', 
                   'distance', 
                   'has_bitcoin_discount', 
@@ -165,6 +167,8 @@ class BusinessSerializer(serializers.ModelSerializer):
     county = CharSerializer(source='admin2_name')
     postalcode = CharSerializer(source='postalcode')
     country = CharSerializer(source='country')
+    phone = CharSerializer(source='phone')
+    website = CharSerializer(source='website')
 
     profile_image = JsonSerializer(source='mobile_image_json')
     square_image = JsonSerializer(source='landing_image_json')
