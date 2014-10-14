@@ -484,6 +484,12 @@ body.home {
     h2 {
         color: white;
     }
+
+    .carousel-inner {
+        .item {
+            min-height: 365px;
+        }
+    }
 }
 
 
@@ -632,14 +638,18 @@ body.home {
     }
     a {
         color: @gray-dark;
+        font-weight: 700;
         display: block;
         font-size: 14px;
         margin-top: 3px;
         text-decoration: underline;
     }
     i {
-        color: #fff;
+        padding: 3px 5px;
+        color: @gray-dark;
+        background: white;
         font-size: 13px;
+        border-radius: 3px;
     }
 }
 
