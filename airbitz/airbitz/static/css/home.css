@@ -370,6 +370,9 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 .section-testimonials h2 {
   color: white;
 }
+.section-testimonials .carousel-inner .item {
+  min-height: 365px;
+}
 .section-bitcoin-directory {
   padding: 90px 0;
 }
@@ -479,14 +482,18 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 }
 .person-text a {
   color: #333333;
+  font-weight: 700;
   display: block;
   font-size: 14px;
   margin-top: 3px;
   text-decoration: underline;
 }
 .person-text i {
-  color: #fff;
+  padding: 3px 5px;
+  color: #333333;
+  background: white;
   font-size: 13px;
+  border-radius: 3px;
 }
 .rel {
   position: relative;
