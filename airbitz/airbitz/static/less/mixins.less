@@ -1,3 +1,5 @@
+@import "../bootstrap/less/mixins.less";
+
 //
 // Custom Mixins
 // --------------------------------------------------
@@ -109,14 +111,12 @@
 
 .ab-searchStarter-list-container() {
     cursor: pointer;
-    overflow-y: auto;
     border-radius: 0;
     margin-bottom: 10px;
 }
 .ab-searchStarter-header() {
+    z-index: 2;
     background: @gray;
     color: white;
     cursor: inherit;
-
-
 }

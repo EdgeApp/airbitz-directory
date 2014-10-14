@@ -11,6 +11,8 @@ function afterEmailSubmission(resp){
 
 
 jQuery(function($) {
+  $('#email-signup-form').hide();
+
   $('#email-signup-form').on('click', function() {
     $.ajaxSetup({ crossDomain: true });
   });
@@ -26,22 +28,22 @@ jQuery(function($) {
     $('#see-app-in-action').addClass('animated fadeIn');
   });
 
-  $("#see-app-in-action").jqueryVideoLightning({
-    autoplay: 1,
-    backdrop_opacity: .8
-  });
+
+  // home page lightbox video
+  $('.iphone-app-slider .video').magnificPopup({type: 'iframe'});
+  $('.container .video').magnificPopup({type: 'iframe'});
 
 
   $('#app-demo-slides').carouFredSel({
-    width: 238,
-    height: 360,
+    width: 212,
+    height: 378,
     auto: {
       play: true
     },
     scroll: {
       pauseOnHover: true,
       fx: 'crossfade',
-      duration: 800,
+      duration: 1600,
       onBefore: function() {
         $('#see-app-in-action').css('visibility', 'hidden');
         $('#see-app-in-action').removeClass('animated fadeIn');
@@ -79,57 +81,20 @@ jQuery(function($) {
     });
   });
 
-  if($.cookie('accepting-bitcoin', Number) > 1) {
-    showWhoAcceptsBitcoin();
-  } else{
-    $('#who-accepts-bitcoin').css('visibility', 'visible');
-    $('#reveal-who-accepts-bitcoin').mouseenter(function() {
-      showWhoAcceptsBitcoin();
-    });
-  }
 
-  function showWhoAcceptsBitcoin() {
-    $('#who-accepts-bitcoin').hide();
-    $('#accepting-bitcoin').css('visibility', 'visible');
-    $('#accepting-bitcoin').addClass('animated bounceInDown');
-    hasBeenSeen('accepting-bitcoin', 30);
-  }
-
-  function hasBeenSeen(thing, expiration) {
-    var count = $.cookie(thing, Number) || 0;
-    var newCount = ++count;
-    $.cookie(thing, newCount, {expires: expiration});
-  }
-
-// EXMAPLE BUTTON SCROLL AND DRAW ATTENTION
-//  $('#jump-who-accepts-bitcoin').on('click', function(){
-//    showWhoAcceptsBitcoin();
-//    $("html, body").animate({ scrollTop: 0 }, "slow");
-//    $('#accepting-bitcoin').removeClass('animated bounceInDown pulse');
-//    setTimeout(function() {
-//      $('#accepting-bitcoin').addClass('animated pulse');
-//    }, 750);
-//    return false;
-//  });
+$('.newsletter-signup').on('mouseover', function(){
+  $('#email-signup-form').fadeIn();
+  $(this).hide();
+});
 
 
-  // display navbar after 5 seconds
-//  enquire.register(screen_lg, function() {
-//    setTimeout(function () {
-//      $('#nav-desktop').css({
-//        'visibility': 'visible',
-//        'display': 'block'
-//      });
-//
-//      $('#nav-desktop').addClass('animated fadeInDown');
-//
-//      $('.landing-module .container').css({
-//        'margin-top': '40px',
-//        '-webkit-transition': 'margin 1000ms ease-out',
-//        '-moz-transition': 'margin 1000ms ease-out',
-//        '-o-transition': 'margin 1000ms ease-out'
-//      });
-//    }, 5000);
-//  });
+
+// BUTTON SCROLL AND DRAW ATTENTION
+  $('#learn-more-wallet').on('click', function(){
+    $("html, body").animate({ scrollTop: $('#features-wallet').offset().top - 65 }, "slow");
+  });
+  $('#learn-more-directory').on('click', function(){
+    $("html, body").animate({ scrollTop: $('#features-directory').offset().top - 65 }, "slow");
+  });
 
 });

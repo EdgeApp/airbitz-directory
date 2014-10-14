@@ -43,7 +43,7 @@ SCREENCAP_INTERVAL = datetime.timedelta(minutes=15)
 FP_QUERY_INTERVAL = datetime.timedelta(days=7)
 
 
-DEPLOY_DATE = '20140918'
+DEPLOY_DATE = '20141022'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -210,6 +210,7 @@ PIPELINE_CSS = {
     'home': {
         'source_filenames': (
             'css/animate.css',
+            'extras/Magnific-Popup-master/dist/magnific-popup.css',
             'css/home.css',
         ),
         'output_filename': 'css/home.' + DEPLOY_DATE + '.css',
@@ -318,7 +319,7 @@ PIPELINE_JS = {
             'extras/backstretch/backstretch.js',
             'extras/ajaxchimp/jquery.ajaxchimp.js',
             'extras/carouFredSel-6.2.1/jquery.carouFredSel-6.2.1-packed.js',
-            'extras/jquery-video-lightning/jquery-video-lightning.min.js',
+            'extras/Magnific-Popup-master/dist/jquery.magnific-popup.js',
             'js/home-ui.js',
         ),
         'output_filename': 'js/home.' + DEPLOY_DATE + '.js',
