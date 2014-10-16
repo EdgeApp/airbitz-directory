@@ -28,7 +28,7 @@ def autocompleteSerialize(row):
             thumbnail = image['thumbnail']
         else:
             thumbnail = None
-        return { 'type': 'business', 'bizId': row.pk, 'text': row.content_auto, 'profile_image': thumbnail }
+        return { 'type': 'business', 'bizId': row.pk, 'text': row.content_auto, 'square_image': thumbnail }
     else:
         return { 'type': 'category', 'text': row.content_auto }
 
