@@ -56,6 +56,6 @@ class Command(BaseCommand):
                 biz.admin3_name = row['city']
             if row.has_key('country'):
                 biz.country = row['country']
-            if row.has_key('phone'):
+            if row.has_key('phone') and len(row['phone']) < 200:
                 biz.phone = row['phone']
             biz.save()
