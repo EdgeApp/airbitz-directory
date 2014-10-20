@@ -8,10 +8,7 @@ from directory.models import Business, BusinessImage, Category
 from location.models import GeoNameZip
 
 from restapi import locapi
-<<<<<<< HEAD
-=======
 from restapi.api import parseGeoLocation
->>>>>>> 92d8efd... Changed distance calculation
 
 import json
 
