@@ -143,7 +143,7 @@ class SearchView(generics.ListAPIView):
     authentication_classes = PERMS
     permission_classes = AUTH
 
-    def get(self, request, *args, **kwargs):
+    def get_queryset(self):
         term = self.request.QUERY_PARAMS.get('term', None)
         location = self.request.QUERY_PARAMS.get('location', None)
         ll = self.request.QUERY_PARAMS.get('ll', None)
@@ -153,10 +153,8 @@ class SearchView(generics.ListAPIView):
         sort = api.toInt(self.request, 'sort', None)
 
         a = api.ApiProcess(locationStr=location, ll=ll)
-        res = a.searchDirectory(term=term, geobounds=bounds, \
-                                radius=radius, category=category, sort=sort)
-        ser = serializers.MiniBusinessSerializer(res, context={'ll': a.location.userPoint}).data
-        return Response(ser)
+        return a.searchDirectory(term=term, geobounds=bounds, \
+                                 radius=radius, category=category, sort=sort)
 
 
 class AutoCompleteBusiness(APIView):
