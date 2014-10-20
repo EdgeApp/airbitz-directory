@@ -2,9 +2,12 @@ from django.db.models import Max
 from rest_framework import fields
 from rest_framework import pagination
 from rest_framework import serializers
+from django.contrib.gis.measure import Distance
 
 from directory.models import Business, BusinessImage, Category
 from location.models import GeoNameZip
+
+from restapi import locapi
 
 import json
 
@@ -35,6 +38,10 @@ class LastUpdated(serializers.Field):
 
 class DistanceField(serializers.Field):
     def field_to_native(self, obj, field_name):
+        if self.context.has_key('ll') and hasattr(obj, 'location'):
+            userLocation = self.context['ll']
+            bizLocation = obj.location
+            return Distance(m=bizLocation.distance(userLocation) * locapi.DEG_TO_M).m
         if hasattr(obj, 'distance') and obj.distance:
             return obj.distance.m
         else:
