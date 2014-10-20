@@ -264,7 +264,7 @@ class ApiProcess(object):
                 sqs = sqs.narrow('country:' + self.location.country());
                 if self.location.admin1():
                     sqs = sqs.narrow('admin1_code:' + self.location.admin1())
-            sqs = sqs.distance('location', self.userLocation())
+            sqs = sqs.distance('location', self.location.userPoint)
             sqs = sqs.order_by('distance')
         return sqs
 
