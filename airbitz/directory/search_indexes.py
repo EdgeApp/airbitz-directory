@@ -56,12 +56,13 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_landing_image_json(self, obj):
         if not obj.landing_image:
             return {}
-        return json.dumps(self.serialize_image(obj.landing_image.web_photo))
+        return json.dumps(self.serialize_image(obj.landing_image.web_photo, obj.landing_image.web_photo))
 
     def prepare_mobile_image_json(self, obj):
         if not obj.mobile_landing_image:
             return {}
-        return json.dumps(self.serialize_image(obj.mobile_landing_image.mobile_photo))
+        return json.dumps(self.serialize_image(obj.mobile_landing_image.mobile_photo,
+                                               obj.mobile_landing_image.mobile_thumbnail))
 
     def prepare_images_json(self, obj):
         ls = []
@@ -76,12 +77,12 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
                 'tags': tags })
         return json.dumps(ls)
 
-    def serialize_image(self, image):
+    def serialize_image(self, image, thumb):
         return { 'image': image.url,
                  'width': image.width,
                  'height': image.height,
                  'bounding_box': {'x': 0.0, 'y': 0.0, 'height': 0.25, 'width': 1.0},
-                 'thumbnail': image.url }
+                 'thumbnail': thumb.url }
 
     def prepare_social_json(self, obj):
         ls = []
