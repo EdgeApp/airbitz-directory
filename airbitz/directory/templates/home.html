@@ -199,15 +199,19 @@
 
 <div class="section-bitcoin-directory-details container">
   <div class="row">
-    <h2>
-      <img src="{{ STATIC_URL }}img/landing/icons/map_64px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory
+    <h2 class="hidden-xs">
+      <img src="{{ STATIC_URL }}img/landing/icons/map_64px.png" alt="Bitcoin Directory" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory
     </h2>
+    <h3 class="visible-xs-block">
+      <img src="{{ STATIC_URL }}img/landing/icons/map_32px.png" alt="Bitcoin Directory" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory
+    </h3>
     <p>The Airbitz mobile app also includes a business directory to help consumers find merchants and websites that accept bitcoin as payment. Some of its powerful features include:</p>
 
     {% include '_home-app-download-preview.html' %}
 
-    <div class="row" style="margin-top: 40px;">
+    <div class="row">
       <div class="col-sm-12">
+        <h3><img src="{{ STATIC_URL }}img/landing/icons/adjustments_32px.png" alt="Directory Features"/> Directory Features</h3>
         <ul class="features-list">
           <li>Advanced search ability by proximity, business name, category, city, state, or country</li>
           <li>Inclusion of web based bitcoin businesses such as online merchants and exchange services</li>
@@ -217,7 +221,6 @@
         </ul>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -231,17 +234,17 @@
 
 <div class="section-bitcoin-wallet-details container">
   <div class="row">
-    <div class="col-sm-12">
-      <h2>
+      <h2 class="hidden-xs">
         <img src="{{ STATIC_URL }}img/landing/icons/wallet_64px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Airbitz Bitcoin Wallet
       </h2>
+      <h3 class="visible-xs-block">
+        <img src="{{ STATIC_URL }}img/landing/icons/wallet_32px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Airbitz Bitcoin Wallet
+      </h3>
       <p>The Airbitz mobile digital wallet is a decentralized, secure, private, synchronized, and backed up Bitcoin wallet.  A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:</p>
-    </div>
-  </div>
 
   {% include '_home-app-download-preview.html' %}
 
-  <div class="row" style="margin-top: 40px;">
+  <div class="row">
     <div class="col-sm-12">
       <h3><img src="{{ STATIC_URL }}img/landing/icons/tools_32px.png" alt="Ease of Use"/> Ease of Use</h3>
       <ul>
@@ -284,6 +287,7 @@
       </ul>
     </div>
   </div>
+    </div>
 </div>
 
 
@@ -375,7 +379,7 @@
 
   var bgImages = [
     '{{ STATIC_URL }}img/landing/landing-module-bg-coffee-dark.jpg',
-    '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',
+    {#        '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',#}
     {#        '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',#}
     {#        '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'#}
   ];
