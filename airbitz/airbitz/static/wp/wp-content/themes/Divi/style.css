@@ -1214,7 +1214,7 @@ img.alignright { display:inline; float:right; margin-left:15px; }
 	.et_pb_section { padding: 50px 0 20px 0;}
 	.et_pb_fullwidth_section { padding: 0; }
 
-	.et_pb_row, .container, .et_pb_container { width: 280px; }
+	.et_pb_row, .container, .et_pb_container { width: 85%; }
 
 	.et_pb_slide_description { padding: 74px 52px; }
 	.et_pb_slide_with_image .et_pb_slide_description { padding-top: 72px; padding-bottom: 72px;}

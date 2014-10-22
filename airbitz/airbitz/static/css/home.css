@@ -55,6 +55,9 @@ body.home #main-content .page .airbitz-feature-details .app-store {
     margin-left: 0;
   }
 }
+body.home .download-preview .video img {
+  width: 190px;
+}
 body.home .ab-app-cta {
   height: 550px;
   margin-bottom: 60px;
