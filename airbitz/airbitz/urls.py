@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.http import HttpResponse
 from django.views.generic import RedirectView
 from airbitz import settings
 
@@ -40,3 +41,9 @@ if settings.DEBUG:
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
            'document_root': settings.MEDIA_ROOT}))
 
+
+# all urls except production servers should be blocked from search engines
+if not settings.PRODUCTION:
+    urlpatterns += patterns('',
+        url(r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /", mimetype="text/plain"))
+    )

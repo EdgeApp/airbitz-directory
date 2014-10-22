@@ -150,12 +150,13 @@
 </div><!-- /.landing-module -->
 
 
-<div class="section-learn-more container-fluid">
+<div class="section-learn-more container">
+
+  <h2 class="tagline text-center">Simply Secure, Private & Powerful</h2>
+  <h2 class="learn-more text-center">Learn More About Airbitz</h2>
 
   <div class="row">
     <div class="col-xs-12 text-center">
-      <h2 class="tagline">Simply Secure, Private & Powerful</h2>
-      {#        <h2 class="learn-more">Learn More About Airbitz</h2>#}
       <div class="ui-group-buttons">
         <button id="learn-more-wallet" type="button" class="btn btn-success btn-lg">Bitcoin Wallet</button>
         <div class="or or-lg"></div>
@@ -196,31 +197,21 @@
 </div><!-- /.section-directory-coverage -->
 
 
-
-{#<div class="section-app-install container-fluid">#}
-{#  {% include '_home_app_install_cta.html' %}#}
-{#</div><!-- /.section-app-install -->#}
-
-
-
-{#<div id="features-directory" class="section-bitcoin-directory container-fluid">#}
-{#  <div class="container text-center">#}
-{#    <h2>Find Places That Are Bitcoin Friendly &amp;</h2>#}
-{#    <h2>Effortlessly Use Bitcoins With Your Mobile Device</h2>#}
-{#  </div>#}
-{#</div>#}
-
 <div class="section-bitcoin-directory-details container">
   <div class="row">
-    <h2>
-      <img src="{{ STATIC_URL }}img/landing/icons/map_64px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory
+    <h2 class="hidden-xs">
+      <img src="{{ STATIC_URL }}img/landing/icons/map_64px.png" alt="Bitcoin Directory" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory
     </h2>
+    <h3 class="visible-xs-block">
+      <img src="{{ STATIC_URL }}img/landing/icons/map_32px.png" alt="Bitcoin Directory" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory
+    </h3>
     <p>The Airbitz mobile app also includes a business directory to help consumers find merchants and websites that accept bitcoin as payment. Some of its powerful features include:</p>
 
     {% include '_home-app-download-preview.html' %}
 
-    <div class="row" style="margin-top: 40px;">
+    <div class="row">
       <div class="col-sm-12">
+        <h3><img src="{{ STATIC_URL }}img/landing/icons/adjustments_32px.png" alt="Directory Features"/> Directory Features</h3>
         <ul class="features-list">
           <li>Advanced search ability by proximity, business name, category, city, state, or country</li>
           <li>Inclusion of web based bitcoin businesses such as online merchants and exchange services</li>
@@ -230,7 +221,6 @@
         </ul>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -238,24 +228,23 @@
 
 <div id="features-wallet" class="section-bitcoin-wallet container-fluid" style="margin-top: 40px;">
   <div class="container text-center">
-    {#    <h2>Decentralized, Secure, Private, Synchronized, Backed up Bitcoin</h2>#}
     <h2>&nbsp;</h2>
   </div>
 </div>
 
 <div class="section-bitcoin-wallet-details container">
   <div class="row">
-    <div class="col-sm-12">
-      <h2>
+      <h2 class="hidden-xs">
         <img src="{{ STATIC_URL }}img/landing/icons/wallet_64px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Airbitz Bitcoin Wallet
       </h2>
+      <h3 class="visible-xs-block">
+        <img src="{{ STATIC_URL }}img/landing/icons/wallet_32px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Airbitz Bitcoin Wallet
+      </h3>
       <p>The Airbitz mobile digital wallet is a decentralized, secure, private, synchronized, and backed up Bitcoin wallet.  A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:</p>
-    </div>
-  </div>
 
   {% include '_home-app-download-preview.html' %}
 
-  <div class="row" style="margin-top: 40px;">
+  <div class="row">
     <div class="col-sm-12">
       <h3><img src="{{ STATIC_URL }}img/landing/icons/tools_32px.png" alt="Ease of Use"/> Ease of Use</h3>
       <ul>
@@ -298,6 +287,7 @@
       </ul>
     </div>
   </div>
+    </div>
 </div>
 
 
@@ -389,7 +379,7 @@
 
   var bgImages = [
     '{{ STATIC_URL }}img/landing/landing-module-bg-coffee-dark.jpg',
-    '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',
+    {#        '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',#}
     {#        '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',#}
     {#        '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'#}
   ];

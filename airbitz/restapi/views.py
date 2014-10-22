@@ -157,6 +157,7 @@ class SearchView(generics.ListAPIView):
                                  radius=radius, category=category, sort=sort)
 
 
+
 class AutoCompleteBusiness(APIView):
     """
         Autocompletes base on business name.
