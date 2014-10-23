@@ -261,9 +261,9 @@ class ApiProcess(object):
         else:
             sqs = sqs.narrow('has_physical_business:true')
             if self.location.country():
-                sqs = sqs.narrow('country:"{0}"'.format(self.location.country()));
+                sqs = sqs.narrow(u'country:"{0}"'.format(self.location.country()));
                 if self.location.admin1():
-                    sqs = sqs.narrow('admin1_code:"{0}"'.format(self.location.admin1()))
+                    sqs = sqs.narrow(u'admin1_code:"{0}"'.format(self.location.admin1()))
             sqs = sqs.distance('location', self.userLocation())
             sqs = sqs.order_by('distance')
         return sqs
