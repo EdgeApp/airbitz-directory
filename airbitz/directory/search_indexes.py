@@ -93,7 +93,7 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
         return json.dumps(ls)
 
     def hours_clean(self, h):
-        if not h:
+        if None == h:
             return None
         else:
             return str(h)
