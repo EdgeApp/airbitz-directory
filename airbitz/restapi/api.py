@@ -266,7 +266,9 @@ class ApiProcess(object):
                     sqs = sqs.narrow(u'admin1_code:"{0}"'.format(self.location.admin1()))
             sqs = sqs.distance('location', self.userLocation())
             if geobounds:
-                sqs = self.__geolocation_filter__(sqs, geobounds, locapi.DEF_RADIUS)
+                bounds = parseGeoBounds(geobounds)
+                sqs = self.__geolocation_filter__(sqs, bounds, locapi.DEF_RADIUS)
+                sqs = sorted(sqs, key=lambda x: x.distance)
             else:
                 sqs = sqs.order_by('distance')
         return sqs
@@ -283,10 +285,7 @@ class ApiProcess(object):
 
     def __geolocation_filter__(self, sqs, geopoly, radius):
         newsqs = []
-        for s in sqs:
-            newsqs.append(s)
-        return sqs
-        if geopoly:
+        if self.location.hasBounding:
             # Do we have a bounding box?
             for s in sqs:
                 s.distance = s.distance
