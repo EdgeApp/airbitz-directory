@@ -265,7 +265,10 @@ class ApiProcess(object):
                 if self.location.admin1():
                     sqs = sqs.narrow(u'admin1_code:"{0}"'.format(self.location.admin1()))
             sqs = sqs.distance('location', self.userLocation())
-            sqs = sqs.order_by('distance')
+            if geobounds:
+                sqs = self.__geolocation_filter__(sqs, geobounds, locapi.DEF_RADIUS)
+            else:
+                sqs = sqs.order_by('distance')
         return sqs
 
     def __filer_on_web__(self, sqs):
@@ -283,7 +286,7 @@ class ApiProcess(object):
         for s in sqs:
             newsqs.append(s)
         return sqs
-        if self.location.hasBounding:
+        if geopoly:
             # Do we have a bounding box?
             for s in sqs:
                 s.distance = s.distance
