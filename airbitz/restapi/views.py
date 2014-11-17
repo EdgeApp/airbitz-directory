@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.gis.measure import Distance
 from django.http import Http404
+from django_statsd.clients import statsd
 from haystack.query import SearchQuerySet
 from rest_framework import authentication as auth
 from rest_framework import exceptions
@@ -151,6 +152,10 @@ class SearchView(generics.ListAPIView):
         bounds = self.request.QUERY_PARAMS.get('bounds', None)
         category = self.request.QUERY_PARAMS.get('category', None)
         sort = api.toInt(self.request, 'sort', None)
+
+        statsd.incr('api:search')
+        if category:
+            statsd.incr('api:search:category:{0}'.format(category))
 
         a = api.ApiProcess(locationStr=location, ll=ll)
         return a.searchDirectory(term=term, geobounds=bounds, \
