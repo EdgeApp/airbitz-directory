@@ -491,6 +491,12 @@ LOGGING = {
             'formatter': 'verbose',
             'filename': '/tmp/django-app.log',
         },
+        'api_file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'verbose',
+            'filename': '/tmp/api.log',
+        },
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
@@ -506,6 +512,11 @@ LOGGING = {
     'loggers': {
         'django.request': {
             'handlers': ['requests'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+       'restapi': {
+            'handlers': ['api_file'],
             'level': 'DEBUG',
             'propagate': True,
         },

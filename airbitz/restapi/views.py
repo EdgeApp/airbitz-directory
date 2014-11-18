@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.gis.measure import Distance
 from django.http import Http404
-from django_statsd.clients import statsd
 from haystack.query import SearchQuerySet
 from rest_framework import authentication as auth
 from rest_framework import exceptions
@@ -16,6 +15,7 @@ from directory.models import Business, BusinessImage, Category
 from restapi import api
 from restapi import locapi
 from restapi import serializers 
+from restapi import tasks
 
 log=logging.getLogger("airbitz." + __name__)
 
@@ -72,6 +72,10 @@ class CategoryView(generics.ListAPIView):
     max_paginate_by = 500
     paginate_by = 500
 
+    def get_queryset(self):
+        tasks.ga_send(self.request, 'api::CategoryView');
+        super(CategoryView, self).get_queryset()
+
 class BusinessView(generics.RetrieveAPIView):
     """
         Retrieve detailed information about a business.
@@ -85,6 +89,8 @@ class BusinessView(generics.RetrieveAPIView):
     permission_classes = AUTH
 
     def get_queryset(self):
+        tasks.ga_send(self.request, 'api::BusinessView');
+
         bizId = self.kwargs['bizId']
         return SearchQuerySet().models(Business).filter(django_id=bizId)
 
@@ -153,9 +159,8 @@ class SearchView(generics.ListAPIView):
         category = self.request.QUERY_PARAMS.get('category', None)
         sort = api.toInt(self.request, 'sort', None)
 
-        statsd.incr('api:search')
-        if category:
-            statsd.incr('api:search:category:{0}'.format(category))
+        # Notify google analytics
+        tasks.ga_send(self.request, 'api::search');
 
         a = api.ApiProcess(locationStr=location, ll=ll)
         return a.searchDirectory(term=term, geobounds=bounds, \
