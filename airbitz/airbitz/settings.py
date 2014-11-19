@@ -93,6 +93,7 @@ INSTALLED_APPS = (
     'location',
     'directory',
     'management',
+    'notifications',
 )
 if DEBUG:
     INSTALLED_APPS += (
