@@ -18,6 +18,7 @@ class Migration(SchemaMigration):
             ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
         ))
+        db.execute("ALTER SEQUENCE notifications_notification_id_seq RESTART 1000")
         db.send_create_signal(u'notifications', ['Notification'])
 
 
