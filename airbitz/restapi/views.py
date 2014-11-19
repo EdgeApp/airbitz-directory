@@ -74,7 +74,7 @@ class CategoryView(generics.ListAPIView):
 
     def get_queryset(self):
         tasks.ga_send(self.request, 'api::CategoryView');
-        super(CategoryView, self).get_queryset()
+        return super(CategoryView, self).get_queryset()
 
 class BusinessView(generics.RetrieveAPIView):
     """
