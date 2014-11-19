@@ -21,7 +21,7 @@ def __ga_post__(path, title, ip=None, version=1,
                 domain='api.airbitz.co'):
     payload=dict(
         v=version,
-        tid=settings.GOOGLE_ANALYTICS_PROPERTY_ID,
+        tid=settings.API_GOOGLE_ANALYTICS_PROPERTY_ID,
         cid=clientid,
         t=hittype,
         dh=domain,
