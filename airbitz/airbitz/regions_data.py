@@ -60,7 +60,8 @@ ACTIVE_REGIONS_EUROPE = {
            'search': 'Switzerland'},
     'IE': {'name': 'Ireland',
            'search': 'Ireland'},
-
+    'RS': {'name': 'Republic of Serbia',
+           'search': 'Republic of Serbia'},
 }
 
 ACTIVE_REGIONS_NORTH_AMERICA = {

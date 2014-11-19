@@ -2,6 +2,8 @@ from django.conf.urls import patterns, url
 
 import views as views
 
+from notifications.views import NotificationView
+
 urlpatterns = patterns('',
      url(r'^business/(?P<bizId>\d+)/$', views.BusinessView.as_view()),
      url(r'^business/(?P<bizId>\d+)/photos/$', views.PhotosView.as_view()),
@@ -14,6 +16,8 @@ urlpatterns = patterns('',
      url(r'^autocomplete-location/?$', views.AutoCompleteLocation.as_view()),
 
      url(r'^search/?$', views.SearchView.as_view()),
+
+     url(r'^notifications/?$', NotificationView.as_view()),
 
 )
 

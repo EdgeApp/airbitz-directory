@@ -34,6 +34,10 @@ Start dev server
     # Access through django dev server via http://localhost:8000/admin/
     vm> python manage.py runserver 0.0.0.0:8000
 
+Start Celery worker
+
+    vm> python manage.py celery worker --loglevel=info
+
 ### Coin Map data
 
     local> vagrant ssh

@@ -13,6 +13,10 @@ import os
 import getpass
 import datetime
 
+# Celery
+import djcelery
+djcelery.setup_loader()
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DB_HOST = 'localhost'
 
@@ -76,6 +80,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.gis',
 
+    'djcelery',
     'haystack',
     'imagekit',
     'pipeline',
@@ -93,6 +98,7 @@ INSTALLED_APPS = (
     'location',
     'directory',
     'management',
+    'notifications',
 )
 if DEBUG:
     INSTALLED_APPS += (
@@ -108,6 +114,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'airbitz.middleware.SessionExpiry',
     'airbitz.middleware.SetRemoteAddr',
+    'django_statsd.middleware.GraphiteRequestTimingMiddleware',
+    'django_statsd.middleware.GraphiteMiddleware',
 )
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
@@ -484,6 +492,12 @@ LOGGING = {
             'formatter': 'verbose',
             'filename': '/tmp/django-app.log',
         },
+        'api_file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'verbose',
+            'filename': '/tmp/api.log',
+        },
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
@@ -502,6 +516,11 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+       'restapi': {
+            'handlers': ['api_file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
        'airbitz': {
             'handlers': ['file', 'mail_admins'],
             'level': 'DEBUG',
@@ -514,5 +533,8 @@ LOGGING = {
 if DEBUG:
     # bogus id unless in production to prevent analytics pollution
     GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-11111111-11'
+    API_GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-11111111-11'
 else:
     GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-47697034-1'
+    API_GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-47697034-3'
+
