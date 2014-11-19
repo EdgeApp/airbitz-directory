@@ -30,6 +30,7 @@ class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
     images_json = indexes.CharField(null=True, indexed=False)
 
     location = indexes.LocationField(model_attr='center', null=True)
+    published = indexes.DateTimeField(model_attr='published', null=True)
 
     has_physical_business = indexes.BooleanField(model_attr='has_physical_business', null=True)
     has_online_business = indexes.BooleanField(model_attr='has_online_business', null=True)
