@@ -38,9 +38,9 @@ class NotificationView(generics.ListAPIView):
         kwargs=dict()
         kwargs['id__gt']=since_id
         if ios_build:
-            kwargs['ios_build__lte']=int(ios_build)
+            kwargs['ios_build__gte']=int(ios_build)
         if android_build:
-            kwargs['android_build__lte']=int(android_build)
+            kwargs['android_build__gte']=int(android_build)
 
         return Notification.objects.filter(**kwargs).order_by('id')
 
