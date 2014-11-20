@@ -239,7 +239,7 @@ class ApiProcess(object):
         else: 
             return False
 
-    def searchDirectory(self, term=None, geobounds=None, radius=None, category=None, sort=None):
+    def searchDirectory(self, term=None, since=None, geobounds=None, radius=None, category=None, sort=None):
         sqs = SearchQuerySet().models(Business)
         if term:
             formatted = wildcardFormat(term)
@@ -247,6 +247,9 @@ class ApiProcess(object):
                            | SQ(name=term) 
                            | SQ(name=formatted) 
                            | SQ(description=term))
+        print since, type(since)
+        if since:
+            sqs = sqs.filter(published__gte=since)
         if category:
             sqs = self.querySetAddCategories(sqs, category)
         if self.location.isWebOnly():

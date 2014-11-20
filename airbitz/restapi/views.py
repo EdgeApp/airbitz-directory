@@ -138,6 +138,7 @@ class SearchView(generics.ListAPIView):
         radius -- search radius in meters 
         bounds -- bounding box of search area. sw_latitude,sw_longitude|ne_latitude,ne_longitude 
         category -- filter by category, can be a comma delimited string such as "Health,Finance" 
+        since -- Only show businesses published since the given datetime
         page_size -- How many businesses each page, defaults to 20, max of 50 
         page -- Which page of data to return 
         sort --  0: default, best match. 1: sort based off distance
@@ -151,20 +152,18 @@ class SearchView(generics.ListAPIView):
     permission_classes = AUTH
 
     def get_queryset(self):
-        term = self.request.QUERY_PARAMS.get('term', None)
-        location = self.request.QUERY_PARAMS.get('location', None)
-        ll = self.request.QUERY_PARAMS.get('ll', None)
-        radius = api.toInt(self.request, 'radius', None)
-        bounds = self.request.QUERY_PARAMS.get('bounds', None)
-        category = self.request.QUERY_PARAMS.get('category', None)
-        sort = api.toInt(self.request, 'sort', None)
+        ser = serializers.SearchSerializer(data=self.request.GET)
+        if not ser.is_valid():
+            return []
+
+        obj=ser.object
 
         # Notify google analytics
         tasks.ga_send(self.request, 'api::search');
 
-        a = api.ApiProcess(locationStr=location, ll=ll)
-        return a.searchDirectory(term=term, geobounds=bounds, \
-                                 radius=radius, category=category, sort=sort)
+        a = api.ApiProcess(locationStr=obj.location, ll=obj.ll)
+        return a.searchDirectory(term=obj.term, geobounds=obj.bounds, since=obj.since, \
+                                 radius=obj.radius, category=obj.category, sort=obj.sort)
 
 
 
