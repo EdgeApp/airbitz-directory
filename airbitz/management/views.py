@@ -13,6 +13,7 @@ from directory.models import STATUS_CHOICES, SOCIAL_TYPES, \
                              Category, ImageTag, \
                              Business, BusinessImage, \
                              BusinessHours, SocialId
+from directory.views import SPECIALS_TAG
 from management.forms import CategoryForm, ImageTagForm, \
                              BusinessForm, BizAddressForm, \
                              BizImageForm, BizImageLinkForm, \
@@ -374,6 +375,23 @@ def image_delete(request, bizId, imgId):
     else:
         raise Http404
 
+@user_passes_test(isManager, login_url=LOGIN_URL)
+def add_special_tag(request, bizId):
+    biz = get_object_or_404(Business, pk=bizId)
+    (cat, _) = Category.objects.get_or_create(name=SPECIALS_TAG)
+    if not biz.categories.filter(id=cat.id).exists():
+        biz.categories.add(cat)
+        biz.save()
+    return HttpResponse('Tag added')
+
+@user_passes_test(isManager, login_url=LOGIN_URL)
+def remove_special_tag(request, bizId):
+    biz = get_object_or_404(Business, pk=bizId)
+    (cat, _) = Category.objects.get_or_create(name=SPECIALS_TAG)
+    if biz.categories.filter(id=cat.id).exists():
+        biz.categories.remove(cat)
+        biz.save()
+    return HttpResponse('Tag removed')
 
 # QUICK REDIRECTIONS (PROBABLY SHOULD BE ITS OWN APP EVENTUALLY)
 def redirect_vote(request):
