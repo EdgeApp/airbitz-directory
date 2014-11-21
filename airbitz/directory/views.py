@@ -2,7 +2,8 @@ import datetime
 from django.contrib.gis.measure import D
 from django.db.models import Q
 from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
-from django.shortcuts import render_to_response, get_object_or_404, redirect
+from django.core.urlresolvers import reverse
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
@@ -68,7 +69,7 @@ def landing(request):
     }
     return render_to_response('home.html', RequestContext(request, context))
 
-def __business_search__(request, arg_term=None, arg_category=None, arg_location=None, 
+def __business_search__(request, action, arg_term=None, arg_category=None, arg_location=None, 
                         arg_ll=None, template='search.html'):
     if arg_term:
         term = arg_term
@@ -92,7 +93,7 @@ def __business_search__(request, arg_term=None, arg_category=None, arg_location=
     results = a.searchDirectory(term=term, category=category)
 
     if not results:
-        return redirect('search_no_results')
+        return business_search_no_results(request, action) 
 
     request.session['nearText'] = location
     if location == 'On the Web':
@@ -137,6 +138,7 @@ def __business_search__(request, arg_term=None, arg_category=None, arg_location=
         r.categories = biz.categories
 
     context = {
+        'search_action': action,
         'results': results,
         'mapkey': GOOGLE_MAP_KEY,
         'userLocation': a.userLocation(),
@@ -144,23 +146,27 @@ def __business_search__(request, arg_term=None, arg_category=None, arg_location=
         'was_search': True,
         'page_obj': paginator.page(page_num),
         'results_info': results_info,
+        'form_action': '/blackfriday',
 
         # RELATED: REMOVING REGION MAP
         # 'active_regions': ACTIVE_REGIONS,
         # 'all_regions': ALL_REGIONS,
-
     }
     return render_to_response(template, RequestContext(request, context))
 
 def business_search(request, *args, **kwargs):
-    return __business_search__(request, *args, **kwargs)
+    return __business_search__(request, reverse('search'), *args, **kwargs)
 
-def blackfriday(request, arg_term=None, arg_category=None, arg_location=None, arg_ll=None):
-    return __business_search__(request, arg_category=SPECIALS_TAG, template="specials.html")
+def blackfriday(request, **kwargs):
+    kwargs['arg_category'] = SPECIALS_TAG
+    kwargs['template'] = 'specials.html'
+    return __business_search__(request, reverse('blackfriday'), **kwargs)
 
 
-def business_search_no_results(request):
-    context = {}
+def business_search_no_results(request, action):
+    context = {
+        'search_action': action
+    }
     return render_to_response('search-no-results.html', RequestContext(request, context))
 
 def business_info(request, biz_id=None, biz_slug=None):
