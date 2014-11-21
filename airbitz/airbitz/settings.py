@@ -82,6 +82,7 @@ INSTALLED_APPS = (
 
     'djcelery',
     'haystack',
+    'celery_haystack',
     'imagekit',
     'pipeline',
     'crispy_forms',
@@ -456,6 +457,8 @@ SWAGGER_SETTINGS = {
 }
 SEARCH_HOST=os.environ.get('SEARCH_HOST', '127.0.0.1')
 SEARCH_PORT=os.environ.get('SEARCH_PORT', '8983')
+
+HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
