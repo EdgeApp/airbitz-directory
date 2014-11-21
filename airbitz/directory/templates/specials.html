@@ -10,6 +10,7 @@
 
 {% block javascript_headers %}
     {{ block.super }}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={% if not DEBUG %}{{ mapkey }}{% endif %}&sensor=false"> </script>
     {% compressed_js 'search' %}
 {% endblock javascript_headers %}
 
@@ -52,3 +53,11 @@
 
 {% endblock main_content %}
 
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $(function() {
+            $('#navbar-search').attr('action', '/blackfriday');
+        });
+    </script>
+{% endblock %}
