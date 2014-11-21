@@ -1,27 +1,21 @@
 import datetime
 from django.contrib.gis.measure import D
-from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import Http404, HttpResponseRedirect, HttpResponse, HttpResponsePermanentRedirect
+from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.contrib.gis.measure import Distance
-from urllib import urlencode
-import urllib
-import json
+
 from airbitz import regions_data
 from airbitz.regions_data import ACTIVE_REGIONS, ALL_REGIONS
-
 from airbitz.settings import GOOGLE_MAP_KEY
 from directory.models import Business, BusinessImage, SocialId
-# from management.views import isManager
-from restapi import api
 from directory.models import STATUS_CHOICES, SOCIAL_TYPES
+from restapi import api
 
 SEARCH_LIMIT = 20
 DISTANCE_LIMIT_KILOMETERS = 20
-
+SPECIALS_TAG='Black Friday'
 
 WEEKDAYS = (
     ('sunday', 'Sun'),
@@ -74,7 +68,8 @@ def landing(request):
     }
     return render_to_response('home.html', RequestContext(request, context))
 
-def business_search(request, arg_term=None, arg_category=None, arg_location=None, arg_ll=None):
+def __business_search__(request, arg_term=None, arg_category=None, arg_location=None, 
+                        arg_ll=None, template='search.html'):
     if arg_term:
         term = arg_term
     else:
@@ -98,7 +93,6 @@ def business_search(request, arg_term=None, arg_category=None, arg_location=None
 
     if not results:
         return redirect('search_no_results')
-
 
     request.session['nearText'] = location
     if location == 'On the Web':
@@ -156,7 +150,13 @@ def business_search(request, arg_term=None, arg_category=None, arg_location=None
         # 'all_regions': ALL_REGIONS,
 
     }
-    return render_to_response('search.html', RequestContext(request, context))
+    return render_to_response(template, RequestContext(request, context))
+
+def business_search(request, *args, **kwargs):
+    return __business_search__(request, *args, **kwargs)
+
+def blackfriday(request, arg_term=None, arg_category=None, arg_location=None, arg_ll=None):
+    return __business_search__(request, arg_category=SPECIALS_TAG, template="specials.html")
 
 
 def business_search_no_results(request):
@@ -233,5 +233,4 @@ def email_request_template_android(request):
 
 # app download fallback page
 def app_download(request):
-    context = {}
     return render_to_response('app-download.html')

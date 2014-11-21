@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load imagekit %}
+{% load compressed %}
+{% load bootstrap_pagination %}
+
+
+{% block title %}Bitcoin {{ term }} in {{ location }}{% endblock title %}
+
+{% block body_tag %}style="background: #dbe9ef url('/static/img/skyline-airbitz.jpg') fixed;"{% endblock body_tag %}
+
+{% block javascript_headers %}
+    {{ block.super }}
+    {% compressed_js 'search' %}
+{% endblock javascript_headers %}
+
+{% block main_content %}
+
+    <div class="results-area">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="search-title visible-lg-block">Black Friday Businesses</h1>
+          <h1 class="search-title visible-xs-block visible-sm-block visible-md-block">Search Results</h1>
+          {% if results_info.total > results_info.results_per_page %}
+            <div class="pagination-area">
+              {% bootstrap_paginate page_obj range=8 %}
+            </div>
+          {% endif %}
+          <div class="pagination-info row" style="margin: 0;">
+            <strong>{{ results_info.total }}</strong> Total Results Found
+          </div>
+        </div>
+      </div>
+
+      <div class="results-grid list-group row">
+        {% block result_grid_items %}
+          {% for rbiz in results %}
+            {% include '_result_grid_item.html' %}
+          {% endfor %}
+        {% endblock result_grid_items %}
+      </div>
+    </div><!-- /.results-area -->
+
+    {% if results_info.total > results_info.results_per_page %}
+      <div class="pagination-area">
+        {% bootstrap_paginate page_obj range=8 %}
+      </div>
+    {% endif %}
+    <div class="pagination-info row" style="margin: 0;">
+      <strong>{{ results_info.total }}</strong> Total Results Found
+    </div>
+
+
+{% endblock main_content %}
+
