@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
@@ -19,7 +19,6 @@ from management.forms import CategoryForm, ImageTagForm, \
                              BizImageForm, BizImageLinkForm, \
                              BizImportForm, HoursFormSet, HoursFormSetHelper, \
                              SocialFormSet, SocialFormHelper
-from time import strftime
 from urlparse import urlparse
 
 import logging
