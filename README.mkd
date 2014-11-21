@@ -6,7 +6,7 @@
 1. Clone airbitz.
 
     git clone git@github.com:paullinator/airbitz-directory.git
-
+1. [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
 ### Start it up
 

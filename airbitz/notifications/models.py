@@ -6,8 +6,12 @@ import logging
 logger = logging.getLogger(__name__)
 
 class Notification(models.Model):
-    ios_build = models.BigIntegerField(blank=True, null=True)
-    android_build = models.BigIntegerField(blank=True, null=True)
+    ios_build_last = models.BigIntegerField(blank=True, null=True)
+    ios_build_first = models.BigIntegerField(blank=True, null=True)
+
+    android_build_last = models.BigIntegerField(blank=True, null=True)
+    android_build_first = models.BigIntegerField(blank=True, null=True)
+
     title = models.CharField(max_length=255)
     message = models.TextField()
     created = models.DateTimeField(auto_now_add=True)

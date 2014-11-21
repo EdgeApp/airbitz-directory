@@ -82,10 +82,10 @@ jQuery(function($) {
   });
 
 
-$('.newsletter-signup').on('mouseover', function(){
-  $('#email-signup-form').fadeIn();
-  $(this).hide();
-});
+  setTimeout(function(){
+    $('.newsletter-signup').hide();
+    $('#email-signup-form').fadeIn();
+  }, 3000);
 
 
 

@@ -213,3 +213,39 @@ class AutoCompleteLocationSerializer(serializers.ModelSerializer):
                   'admin_code1',
                  )
 
+class SearchObject(object):
+    def __init__(self, term=None, location=None, ll=None, radius=None, bounds=None, category=None, since=None, sort=None):
+        self.term=term
+        self.location=location
+        self.ll=ll
+        self.radius=radius
+        self.bounds=bounds
+        self.category=category
+        self.since=since
+        self.sort=sort
+
+class SearchSerializer(serializers.Serializer):
+    term=serializers.CharField(required=False)
+    location=serializers.CharField(required=False)
+    ll=serializers.CharField(required=False)
+    radius=serializers.CharField(required=False)
+    bounds=serializers.CharField(required=False)
+    category=serializers.CharField(required=False)
+    since=serializers.DateTimeField(required=False)
+    sort=serializers.CharField(required=False)
+
+    def restore_object(self, attrs, instance=None):
+        if instance is not None:
+            instance.l1 = attrs.get('l1', instance.l1)
+            instance.term = attrs.get('term', instance.term)
+            instance.location = attrs.get('location', instance.location)
+            instance.ll = attrs.get('ll', instance.ll)
+            instance.radius = attrs.get('radius', instance.radius)
+            instance.bounds = attrs.get('bounds', instance.bounds)
+            instance.category = attrs.get('category', instance.category)
+            instance.since = attrs.get('since', instance.since)
+            instance.sort = attrs.get('sort', instance.sort)
+            return instance
+        return SearchObject(**attrs)
+
+

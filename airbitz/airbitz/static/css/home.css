@@ -204,6 +204,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   width: 60%;
   border-color: #999;
 }
+.landing-module .download-signup h1,
 .landing-module .download-signup h2 {
   margin: 0;
   line-height: 26px;
@@ -302,7 +303,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 }
 @media (max-width: 767px) {
   .section-learn-more .ui-group-buttons {
-    zoom: 1;
+    zoom: .9;
   }
 }
 .section-directory-coverage {
