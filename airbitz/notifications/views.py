@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework import authentication as auth
 from rest_framework import generics
 from rest_framework import permissions as perm
@@ -19,8 +20,6 @@ class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
         fields = ('id',
-                  'ios_build',
-                  'android_build',
                   'title',
                   'message',
                   )
@@ -35,12 +34,17 @@ class NotificationView(generics.ListAPIView):
         ios_build = self.request.QUERY_PARAMS.get('ios_build', None)
         android_build = self.request.QUERY_PARAMS.get('android_build', None)
 
-        kwargs=dict()
-        kwargs['id__gt']=since_id
+        q = Q(id__gt=since_id)
         if ios_build:
-            kwargs['ios_build__gte']=int(ios_build)
+            # ios_build_first <= ios_build <= ios_build_last
+            q = q & Q(ios_build_last__gte=int(ios_build))
+            q = q & (Q(ios_build_first__isnull=True) | Q(ios_build_first__lte=ios_build))
         if android_build:
-            kwargs['android_build__gte']=int(android_build)
+            # android_build_first <= android_build <= android_build_last
+            q = q & Q(android_build_last__gte=int(android_build))
+            q = q & (Q(android_build_first__isnull=True) | Q(android_build_first__lte=android_build))
+        if not android_build and not ios_build:
+            q = q & Q(android_build_last__isnull=True) & Q(ios_build_last__isnull=True)
 
-        return Notification.objects.filter(**kwargs).order_by('id')
+        return Notification.objects.filter(q).order_by('id')
 
