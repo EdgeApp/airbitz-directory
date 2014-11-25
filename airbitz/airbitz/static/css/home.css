@@ -200,8 +200,12 @@ body.home #bottom-slider .et_pb_slide_description h2 {
     width: auto;
   }
 }
+.landing-module .download-signup .social-follow {
+  padding-left: 22px;
+}
 .landing-module .download-signup hr {
   width: 60%;
+  margin: 10px auto;
   border-color: #999;
 }
 .landing-module .download-signup h1,
