@@ -11,6 +11,14 @@ $(function() {
 
   if(bowser.android || bowser.ios) {
 
+    if(bowser.ios) {
+      $('.install-button').attr('href', 'https://itunes.apple.com/us/app/bitcoin-wallet-map-directory/id843536046?mt=8');
+    }
+
+    if(bowser.android) {
+      $('.install-button').attr('href', 'https://play.google.com/store/apps/details?id=com.airbitz');
+    }
+
     // utility function to increment a cookie counter by 1
     function hasBeenSeen(thing) {
       var count = $.cookie(thing, Number) || 0;
