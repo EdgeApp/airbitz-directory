@@ -303,7 +303,7 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 }
 @media (max-width: 767px) {
   .section-learn-more .ui-group-buttons {
-    zoom: .9;
+    zoom: .8;
   }
 }
 .section-directory-coverage {
