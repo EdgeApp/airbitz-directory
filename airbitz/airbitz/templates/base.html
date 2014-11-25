@@ -52,6 +52,9 @@
         {% endblock head %}
     </head>
     <body {% block body_tag %}{% endblock body_tag %}>
+
+        {% include '_mobile-app-download.html' %}
+
         <div id="wrap">
             {% block top_bg %}{% endblock %}
 
@@ -180,6 +183,8 @@
             </script>
             <!-- AddThis Smart Layers END -->
             {% endblock addthis_sharing %}
+
+            <script src="https://apis.google.com/js/platform.js" async defer></script>
         {% endblock javascript %}
     </body>
 </html>
