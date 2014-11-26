@@ -317,7 +317,8 @@ PIPELINE_JS = {
             'extras/Readmore.js-master/readmore.min.js',
             'extras/colorbox-master/jquery.colorbox-min.js',
             'extras/swipebox-master/source/jquery.swipebox.min.js',
-            'js/frontend-ui.js'
+            'js/frontend-ui.js',
+            'js/mobile-download-bar.js'
         ),
         'output_filename': 'js/core.' + DEPLOY_DATE + '.js',
     },
