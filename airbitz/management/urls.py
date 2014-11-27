@@ -32,5 +32,8 @@ urlpatterns = patterns('',
     url(r'^biz/view/(?P<bizId>\d+)/images/delete/(?P<imgId>\d+)/$', 'management.views.image_delete', name='mgmt_image_delete'),
 
     url(r'^biz/edit/(?P<bizId>\d+)/images/landing/(?P<imgId>\d+)/$', 'management.views.set_landing_image', name='mgmt_biz_set_landing_image'),
+
+    url(r'^biz/special/(?P<bizId>\d+)/add$', 'management.views.add_special_tag', name='add_special_tag'),
+    url(r'^biz/special/(?P<bizId>\d+)/remove$', 'management.views.remove_special_tag', name='remove_special_tag'),
 )
 

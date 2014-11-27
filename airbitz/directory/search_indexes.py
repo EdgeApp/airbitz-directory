@@ -1,10 +1,11 @@
 from haystack import indexes
+from celery_haystack.indexes import CelerySearchIndex
 
 import json
 
 from directory.models import Business, BusinessHours, BusinessImage, Category, SocialId
 
-class BusinessIndex(indexes.SearchIndex, indexes.Indexable):
+class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
     bizId = indexes.IntegerField(model_attr='pk', indexed=False)
     text = indexes.CharField(document=True, use_template=True)
     name = indexes.CharField(model_attr='name', boost=1.2)

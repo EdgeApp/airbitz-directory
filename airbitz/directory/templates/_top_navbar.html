@@ -101,7 +101,7 @@
         </li>
       </ul>
       {% block search %}
-        <form id="navbar-search" name="search" class="navbar-form text-center" role="search" method="get" action="{% url 'search' %}">
+        <form id="navbar-search" name="search" class="navbar-form text-center" role="search" method="get" action="{{ search_action|default:"/search" }}">
           <i id="help-search" class="fa fa-2x fa-question-circle"></i>
           <div class="form-group">
             <input id="input-name-category" tabindex="1" name="term" type="text" class="term typeahead form-control" placeholder="Business or Category" value="{{ request.GET.term }}"autocomplete="off">

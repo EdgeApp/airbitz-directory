@@ -61,6 +61,7 @@
                                 <thead>
                                     <tr>
                                         <th title="User"><i class="fa fa-user"></i></th>
+                                        <th title="Tag"><i class="fa fa-tag"></i></th>
                                         <th title="Status"><i class="fa fa-spinner"></i></th>
                                         <th title="Name">Name</th>
                                         <th title="Categories">Categories</th>
@@ -78,6 +79,7 @@
                                 <tfoot>
                                     <tr>
                                         <th>User</th>
+                                        <th>Tag</th>
                                         <th>Status</th>
                                         <th>Name</th>
                                         <th>Categories</th>
@@ -183,7 +185,15 @@
 
     });
 
-
+    var toggleSpecial = function(el, bizId) {
+        var url = "/mgmt/biz/special/" + bizId 
+                + (el.checked ? '/add' : '/remove');
+        $.post(url, function(data) {
+        }).fail(function(data) {
+            alert('Unable to tag');
+            el.checked = !el.checked;
+        });
+    };
 
         var tableUrl = "/mgmt/api/biz/";
         var oTable = $('.dataTableCustom').DataTable({
@@ -217,20 +227,40 @@
           "bAutoWidth": false,
           "aoColumns": [
             {"mData": "last_modified_by"},          // 0
-            {"mData": "status"},                    // 1
-            {"mData": "name"},                      // 2
-            {"mData": "categories"},                // 3
-            {"mData": "has_physical_business"},     // 4
-            {"mData": "has_online_business"},       // 5
-            {"mData": "country"},                   // 6
-            {"mData": "admin1_code"},               // 7
-            {"mData": "admin3_name"},               // 8
-            {"mData": "published"},                 // 9
-            {"mData": "modified"},                  // 10
-            {"mData": "created"},                   // 11
+            {"mData": "categories"},                // 1
+            {"mData": "status"},                    // 2
+            {"mData": "name"},                      // 3
+            {"mData": "categories"},                // 4
+            {"mData": "has_physical_business"},     // 5
+            {"mData": "has_online_business"},       // 6
+            {"mData": "country"},                   // 7
+            {"mData": "admin1_code"},               // 8
+            {"mData": "admin3_name"},               // 9
+            {"mData": "published"},                 // 10
+            {"mData": "modified"},                  // 11
+            {"mData": "created"},                   // 12
           ],
           "aoColumnDefs": [ {
             "aTargets":[1],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+              $(nTd).css('text-align', 'center');
+              $(nTd).attr('data-sort', oData['status']);
+            },
+            "mData": null,
+            "mRender": function(data, type, full) {
+                console.log(full.id);
+                var html = '';
+                var checked = false;
+                for (var i = 0; i < data.length; ++i) {
+                    if (data[i].name == 'Black Friday') {
+                        checked = true;
+                    }
+                }
+                html += '<input type="checkbox" ' + (checked ? ' checked ' : '') + ' onclick="toggleSpecial(this, ' + full.id + ')">';
+                return html;
+            }
+          } , {
+            "aTargets":[2],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
               $(nTd).css('text-align', 'center');
               $(nTd).attr('data-sort', oData['status']);
@@ -248,7 +278,7 @@
                 }
             }
           } , {
-            "aTargets":[2],
+            "aTargets":[3],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                 $(nTd).css('text-align', 'left');
 
@@ -266,7 +296,7 @@
                 );
             }
           } , {
-            "aTargets":[3],
+            "aTargets":[4],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
               $(nTd).css('text-align', 'left');
             },
@@ -279,7 +309,7 @@
               return html;
             }
           } , {
-            "aTargets":[4],
+            "aTargets":[5],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                 $(nTd).css('text-align', 'center');
                 $(nTd).attr('data-sort', oData['has_local_business']);
@@ -293,7 +323,7 @@
                 }
             }
           } , {
-            "aTargets":[5],
+            "aTargets":[6],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                 $(nTd).css('text-align', 'center');
                 $(nTd).attr('data-sort', oData['has_physical_business']);
@@ -307,7 +337,7 @@
                 }
             }
           } , {
-            "aTargets":[9],
+            "aTargets":[10],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                 $(nTd).css('text-align', 'left');
                 if (oData['published'] !== null) {
@@ -327,7 +357,7 @@
                 }
             }
           } , {
-            "aTargets":[10],
+            "aTargets":[11],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                 $(nTd).css('text-align', 'left');
                 unixTimestamp = moment(oData['modified']).unix();
@@ -339,7 +369,7 @@
                 return niceTimestamp;
             }
           } , {
-            "aTargets":[11],
+            "aTargets":[12],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                 $(nTd).css('text-align', 'left');
                 unixTimestamp = moment(oData['created']).unix();
@@ -379,17 +409,18 @@
 
         var localStorageColumns = [
             "user",                      // 0
-            "status",                    // 1
-            "name",                      // 2
-            "categories",                // 3
-            "local",                     // 4
-            "web",                       // 5
-            "country",                   // 6
-            "state",                     // 7
-            "city",                      // 8
-            "published",                 // 9
-            "modified",                  // 10
-            "created",                   // 11
+            "tag",                       // 1
+            "status",                    // 2
+            "name",                      // 3
+            "categories",                // 4
+            "local",                     // 5
+            "web",                       // 6
+            "country",                   // 7
+            "state",                     // 8
+            "city",                      // 9
+            "published",                 // 10
+            "modified",                  // 11
+            "created",                   // 12
         ]
 
         function getColumnList () {
