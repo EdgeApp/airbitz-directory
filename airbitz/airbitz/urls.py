@@ -32,6 +32,7 @@ urlpatterns = patterns('',
     url(r'^blog/$', 'management.views.redirect_blog', name='mgmt_redirect_blog'),
     url(r'^about/$', 'management.views.redirect_about', name='mgmt_redirect_about'),
     url(r'^privacy-policy/$', 'management.views.page_privacy_policy', name='page_privacy_policy'),
+    url(r'^bitcoin-wallet/$', 'management.views.page_bitcoin_wallet', name='page_bitcoin_wallet'),
     url(r'^button/$', 'management.views.redirect_button', name='mgmt_redirect_button'),
     url(r'^rsvp/?$', RedirectView.as_view(url='http://www.meetup.com/Bitcoin-in-San-Diego/events/189727482/')),
 )

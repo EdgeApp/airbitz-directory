@@ -60,13 +60,11 @@ $(function() {
           hideMobileAppDownload();
         }
         if(height < 65) {
-          showMobileAppDownload();
+          if($.cookie('mobile-app-download-hidden') == undefined || $.cookie('mobile-app-download-hidden') < 2) {
+            showMobileAppDownload();
+          }
         }
       });
-    }
-
-    if($('.mobile-app-download').is(':visible')) {
-
     }
   }
 

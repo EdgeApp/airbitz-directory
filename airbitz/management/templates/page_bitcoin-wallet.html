@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load compressed %}
+
+
+{% block head_seo_social %}
+
+  {% block seo_meta %}
+    <title>{% block title %}Bitcoin Wallet{% endblock title %} | Airbitz</title>
+    <meta name="description" content="{% block meta_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock meta_description %}">
+    <meta name="news_keywords" content="{% block meta_news_keywords %}Bitcoin, Bitcoin Wallet, Bitcoin Mobile, Mobile Payment, Mobile Banking{% endblock meta_news_keywords %}">
+  {% endblock seo_meta %}
+
+  {% block og_meta %}
+    <meta property="og:title" content="{% block og_title %}Airbitz Bitcoin Wallet & Map{% endblock og_title %}">
+    <meta property="og:description" content="{% block og_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock og_description %}">
+    <meta property="og:type" content="{% block og_type %}Article{% endblock og_type %}">
+    <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock og_url %}">
+    <meta property="og:image" content="{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock og_image %}">
+    <meta property="og:site_name" content="{% block og_site_name %}Airbitz{% endblock og_site_name %}">
+    {#        <meta property="fb:admins" content="{% block og_fb_admins %}{% endblock og_fb_admins %}">#}
+  {% endblock og_meta %}
+
+  {% block twitter_meta %}
+    <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock twitter_card %}">
+    <meta name="twitter:site" content="{% block twitter_site %}@airbitz{% endblock twitter_site %}">
+    <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet & Map{% endblock twitter_title %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock twitter_description %}">
+    <meta name="twitter:creator" content="{% block twitter_creator %}@airbitz{% endblock twitter_creator %}">
+    <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock twitter_image_src %}">
+    <meta name="twitter:domain" content="{% block twitter_domain %}{{ request.META.HTTP_HOST }}{% endblock twitter_domain %}">
+    <meta name="twitter:url" content="{% block twitter_url %}{{ request.build_absolute_uri }}{% endblock twitter_url %}">
+    <meta name="twitter:author" content="{% block twitter_author %}@airbitz{% endblock twitter_author %}">
+  {% endblock twitter_meta %}
+
+{% endblock head_seo_social %}
+
+
+{% block main_content_container %}container-fluid{% endblock main_content_container %}
+
+{% block main_content %}
+
+  <div class="row">
+    <div class="landing-module container-fluid">
+
+      <div class="container">
+
+        <div class="slides row">
+
+          <div class="slide-image col-sm-6">
+            <img src="{{ STATIC_URL }}img/bitcoin-wallet/bitcoin-wallet-0.png" alt="Bitcoin Wallet" class="img-responsive center-block" />
+          </div>
+
+          <div class="slide-text col-sm-6">
+            <h1><img src="{{ STATIC_URL }}img/airbitz-mobile-app-64x64.png" alt="Bitcoin Wallet" class="" />&nbsp;Bitcoin Wallet</h1>
+            <hr/>
+            <ul>
+              <li><i class="fa fa-code"></i> Open Source Code</li>
+              <li><i class="fa fa-key"></i> Keys Encrypted Client Side</li>
+              <li><i class="fa fa-lock"></i> Secure Encrypted Backups</li>
+              <li><i class="fa fa-sitemap"></i> Decentralized Architecture</li>
+              <li><i class="fa fa-eye-slash"></i> No Personal Info Required</li>
+            </ul>
+          </div>
+
+        </div><!-- /.row -->
+
+
+      </div>
+    </div><!-- /.landing-module -->
+  </div>
+
+{#  <div id="features-wallet" class="section-bitcoin-wallet row">#}
+{#    <div class="col-sm-12 text-center">#}
+{#      <h1><img src="{{ STATIC_URL }}img/airbitz-mobile-app-64x64.png" alt="Bitcoin Wallet" class="" />&nbsp;Bitcoin Wallet</h1>#}
+{#      <img src="{{ STATIC_URL }}img/bitcoin-wallet/bitcoin-wallet-0.png" alt="Bitcoin Wallet" class="img-responsive center-block" />#}
+{#    </div>#}
+{#  </div>#}
+
+  <div class="section-bitcoin-wallet-details container">
+    <div class="row">
+      <h2 class="hidden-xs">
+        <img src="{{ STATIC_URL }}img/icons/wallet_64px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Airbitz Bitcoin Wallet Features
+      </h2>
+      <h3 class="visible-xs-block">
+        <img src="{{ STATIC_URL }}img/icons/wallet_32px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Airbitz Bitcoin Wallet Features
+      </h3>
+      <p>The Airbitz mobile digital wallet is a decentralized, secure, private, synchronized, and backed up Bitcoin wallet.  A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:</p>
+
+      {% include '_home-app-download-preview.html' %}
+
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h3><img src="{{ STATIC_URL }}img/icons/lock_32px.png" alt="Security"/> Security</h3>
+          <ul>
+            <li>Native C/C++ code for super strong encryption and password hashing (S-Crypt password hashing & AES256 encryption)</li>
+            <li>Local client-side encryption using user generated login & password </li>
+            <li>Open-source release on Oct 31, 2014</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h3><img src="{{ STATIC_URL }}img/icons/key_32px.png" alt="Privacy"/> Privacy</h3>
+          <ul>
+            <li>Hierarchical Deterministic wallets with changing addresses per transaction</li>
+            <li>Local client-side encryption (S-Crypt password hashing & AES256 encryption) of all user keys and data</li>
+            <li>No user info required to use wallet (no name, address, email, or phone number)</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h3><img src="{{ STATIC_URL }}img/icons/tools_32px.png" alt="Ease of Use"/> Ease of Use</h3>
+          <ul>
+            <li>Supports Bluetooth Low Energy (BLE) to transfer funds instead of scanning QR codes</li>
+            <li>Simple account creation using just a login & password (no printing or emailing of PDFs, writing down passphrases or adding encryption settings)</li>
+            <li>Automatic wallet encryption, backup, and multi-device synchronization</li>
+            <li>Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)</li>
+            <li>Integration with the Airbitz Business directory to auto-complete business meta data for transactions</li>
+            <li>User editable transaction data (payee, category, fiat value, & notes)</li>
+            <li>Built in transaction search by payee, category, or notes</li>
+            <li>Quick UI to transfer funds between wallets in an account</li>
+            <li>Multiple fiat currency support. Assign a fiat currency per wallet</li>
+            <li>Decentralized server architecture. Wallets work even if Airbitz servers are down</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr/>
+
+
+    </div>
+  </div>
+
+
+
+<div class="section-bitcoin-technology-details container">
+    <div class="row">
+      <h2 class="hidden-xs">
+        <img src="{{ STATIC_URL }}img/icons/wallet_64px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Airbitz Core Platform
+      </h2>
+      <h3 class="visible-xs-block">
+        <img src="{{ STATIC_URL }}img/icons/wallet_32px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Airbitz Core Platform
+      </h3>
+      <p>The Airbitz mobile digital wallet is a decentralized, secure, private, synchronized, and backed up Bitcoin wallet.  A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:</p>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h3><img src="{{ STATIC_URL }}img/icons/lock_32px.png" alt="Security"/> Security</h3>
+          <ul>
+            <li>Native C/C++ code for super strong encryption and password hashing (S-Crypt password hashing & AES256 encryption)</li>
+            <li>Local client-side encryption using user generated login & password </li>
+            <li>Open-source release on Oct 31, 2014</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h3><img src="{{ STATIC_URL }}img/icons/key_32px.png" alt="Privacy"/> Privacy</h3>
+          <ul>
+            <li>Hierarchical Deterministic wallets with changing addresses per transaction</li>
+            <li>Local client-side encryption (S-Crypt password hashing & AES256 encryption) of all user keys and data</li>
+            <li>No user info required to use wallet (no name, address, email, or phone number)</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h3><img src="{{ STATIC_URL }}img/icons/tools_32px.png" alt="Ease of Use"/> Ease of Use</h3>
+          <ul>
+            <li>Supports Bluetooth Low Energy (BLE) to transfer funds instead of scanning QR codes</li>
+            <li>Simple account creation using just a login & password (no printing or emailing of PDFs, writing down passphrases or adding encryption settings)</li>
+            <li>Automatic wallet encryption, backup, and multi-device synchronization</li>
+            <li>Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)</li>
+            <li>Integration with the Airbitz Business directory to auto-complete business meta data for transactions</li>
+            <li>User editable transaction data (payee, category, fiat value, & notes)</li>
+            <li>Built in transaction search by payee, category, or notes</li>
+            <li>Quick UI to transfer funds between wallets in an account</li>
+            <li>Multiple fiat currency support. Assign a fiat currency per wallet</li>
+            <li>Decentralized server architecture. Wallets work even if Airbitz servers are down</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr/>
+
+
+    </div>
+  </div>
+
+
+
+
+
+{% endblock main_content %}
+
+
+{% block javascript_headers %}
+  {{ block.super }}
+  {% compressed_js 'bitcoin_wallet' %}
+  {% compressed_css 'bitcoin_wallet' %}
+  <script>
+{#    $('.section-bitcoin-wallet').backstretch(#}
+    $('.landing-module').backstretch(
+      '{{ STATIC_URL }}img/bitcoin-wallet/section-bitcoin-wallet-bg.jpg',
+      {
+        duration: 3000,
+        fade: 1500
+      }
+    );
+  </script>
+{% endblock javascript_headers %}

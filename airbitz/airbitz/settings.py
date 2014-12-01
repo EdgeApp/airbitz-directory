@@ -227,6 +227,17 @@ PIPELINE_CSS = {
             'media': 'screen,projection',
         },
     },
+    'bitcoin_wallet': {
+        'source_filenames': (
+            'css/animate.css',
+            'extras/Magnific-Popup-master/dist/magnific-popup.css',
+            'css/page_bitcoin-wallet.css',
+        ),
+        'output_filename': 'css/bitcoin-wallet.' + DEPLOY_DATE + '.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
     'app_download': {
         'source_filenames': (
             'css/animate.css',
@@ -333,6 +344,17 @@ PIPELINE_JS = {
             'js/home-ui.js',
         ),
         'output_filename': 'js/home.' + DEPLOY_DATE + '.js',
+    },
+    'bitcoin_wallet': {
+        'source_filenames': (
+            'extras/backstretch/backstretch.js',
+            # 'extras/ajaxchimp/jquery.ajaxchimp.js',
+            'extras/carouFredSel-6.2.1/jquery.carouFredSel-6.2.1-packed.js',
+            'extras/Magnific-Popup-master/dist/jquery.magnific-popup.js',
+            'extras/particlesjs/particles.js',
+            'js/page_bitcoin-wallet-ui.js',
+        ),
+        'output_filename': 'js/bitcoin-wallet.' + DEPLOY_DATE + '.js',
     },
     'management': {
         'source_filenames': (
