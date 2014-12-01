@@ -1,0 +1,41 @@
+body {
+  padding-top: 65px;
+}
+.main-content .landing-module .slides {
+  padding: 50px 0;
+}
+.main-content .landing-module .slides .slide-image img {
+  max-height: 400px;
+}
+.main-content .landing-module .slides .slide-text h1,
+.main-content .landing-module .slides .slide-text h2,
+.main-content .landing-module .slides .slide-text h3,
+.main-content .landing-module .slides .slide-text h4 {
+  letter-spacing: -1px;
+}
+.main-content .landing-module .slides .slide-text h1 {
+  font-size: 46px;
+  font-weight: 700;
+}
+.main-content .landing-module .slides .slide-text ul {
+  padding-left: 0;
+}
+.main-content .landing-module .slides .slide-text ul li {
+  margin-bottom: 15px;
+  font-size: 28px;
+  font-weight: 600;
+  list-style: none;
+  letter-spacing: -1px;
+  color: #fff;
+  text-shadow: 1px 1px 2px #000;
+}
+.main-content .landing-module .slides .slide-text ul li i {
+  width: 35px;
+  text-align: center;
+}
+.main-content .section-bitcoin-wallet {
+  min-height: 500px;
+}
+.main-content .section-bitcoin-wallet .container {
+  position: absolute;
+}
