@@ -85,7 +85,7 @@
         {% endif %}
 
 
-            <div class="main-content container">
+            <div class="main-content {% block main_content_container %}container{% endblock main_content_container %}">
                 {% block message %}
                     {% if messages %}
                         <div class="row">
