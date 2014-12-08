@@ -2,6 +2,7 @@ from django.contrib.gis.geos import Point, Polygon
 from django.contrib.gis.measure import Distance
 from haystack.inputs import Clean
 from haystack.query import SearchQuerySet, SQ
+from haystack.utils.geo import D
 
 import logging
 import subprocess
@@ -268,6 +269,8 @@ class ApiProcess(object):
                 if self.location.admin1():
                     sqs = sqs.narrow(u'admin1_code:"{0}"'.format(self.location.admin1()))
             sqs = sqs.distance('location', self.userLocation())
+            if radius:
+                sqs = sqs = sqs.dwithin('location', self.userLocation(), D(m=radius))
             if geobounds:
                 bounds = parseGeoBounds(geobounds)
                 sqs = self.__geolocation_filter__(sqs, bounds, locapi.DEF_RADIUS)
