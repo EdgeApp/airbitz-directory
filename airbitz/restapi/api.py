@@ -244,7 +244,6 @@ class ApiProcess(object):
                            | SQ(name=term)
                            | SQ(name=formatted)
                            | SQ(description=term))
-        print since, type(since)
         if since:
             sqs = sqs.filter(published__gte=since)
         if category:
