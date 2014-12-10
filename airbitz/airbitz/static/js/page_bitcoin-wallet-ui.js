@@ -1,3 +1,8 @@
+/*jshint devel:true */
+
+
+
+$('.container .video').magnificPopup({type: 'iframe'});
 
 
 /* default dom id (particles-js) */

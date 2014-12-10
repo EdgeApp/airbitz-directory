@@ -1,6 +1,12 @@
 body {
   padding-top: 65px;
 }
+ul {
+  padding-left: 15px;
+}
+ul li {
+  margin-bottom: 5px;
+}
 .main-content .landing-module .slides {
   padding: 50px 0;
 }
@@ -33,9 +39,23 @@ body {
   width: 35px;
   text-align: center;
 }
+.main-content .feature-major {
+  margin-bottom: 30px;
+  padding-left: 45px;
+}
+.main-content .feature-media-right {
+  margin-top: 25px;
+  border-left: 3px solid #eee;
+}
 .main-content .section-bitcoin-wallet {
   min-height: 500px;
 }
 .main-content .section-bitcoin-wallet .container {
   position: absolute;
+}
+.main-content #section-bitcoin-wallet-details h2 {
+  margin-bottom: 40px;
+}
+.main-content #section-bitcoin-wallet-platform-details h2 {
+  margin-bottom: 40px;
 }
