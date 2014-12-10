@@ -1,6 +1,17 @@
+@import url(variables.less);
+
 
 body {
     padding-top: 65px;
+}
+
+
+ul {
+    padding-left: 15px;
+
+    li {
+        margin-bottom: 5px;
+    }
 }
 
 .main-content {
@@ -20,8 +31,6 @@ body {
                 h1 {
                     font-size: 46px;
                     font-weight: 700;
-//                    color: #fff;
-//                    text-shadow: 1px 1px 2px #000;
                 }
                 ul {
                     padding-left: 0;
@@ -35,7 +44,7 @@ body {
 //                        text-shadow: 1px 1px 2px #fff;
                         color: #fff;
                         text-shadow: 1px 1px 2px #000;
-                        
+
                         i {
                             width: 35px;
                             text-align: center;
@@ -46,15 +55,39 @@ body {
         }
     }
 
+    .feature-major {
+        margin-bottom: 30px;
+        padding-left: 45px;
+    }
+
+    .feature-media-right {
+        margin-top: 25px;
+        border-left: 3px solid #eee;
+    }
+
     .section-bitcoin-wallet {
         min-height: 500px;
-        
+
         .container {
             position: absolute;
         }
     }
 
-    .section-bitcoin-wallet-details {
+    #section-bitcoin-wallet-header {}
 
+    #section-bitcoin-wallet-details {
+        h2 {
+            margin-bottom: 40px;
+        }
     }
+
+    #section-bitcoin-wallet-platform-header {}
+
+    #section-bitcoin-wallet-platform-details {
+        h2 {
+            margin-bottom: 40px;
+        }
+    }
+
+
 }
