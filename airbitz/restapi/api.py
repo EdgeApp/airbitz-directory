@@ -1,4 +1,4 @@
-from django.contrib.gis.geos import Point, Polygon
+from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import Distance
 from haystack.inputs import Clean
 from haystack.query import SearchQuerySet, SQ
@@ -68,13 +68,9 @@ def parseGeoBounds(bounds):
         (sw,ne) = bounds.split("|")
         sw = sw.split(",")
         ne = ne.split(",")
-        box = {
-            'minlat': float(sw[0]),
-            'minlon': float(sw[1]),
-            'maxlat': float(ne[0]),
-            'maxlon': float(ne[1]),
-        }
-        return Polygon.from_bbox((box['minlon'], box['minlat'], box['maxlon'], box['maxlat']))
+        swp = Point(float(sw[1]), float(sw[0]))
+        nep = Point(float(ne[1]), float(ne[0]))
+        return (swp, nep)
     except Exception as e:
         log.warn(e)
         raise AirbitzApiException('Unable to parse geographic bounds.')
@@ -115,8 +111,8 @@ def toInt(request, key, default):
     return default
 
 class Location(object):
-    """ Takes location data and determines bounding box 
-        and centroid to use during the searches 
+    """ Takes location data and determines bounding box
+        and centroid to use during the searches
         """
     def __init__(self, locationStr=None, ll=None, ip=None):
         self.ip = ip
@@ -133,7 +129,7 @@ class Location(object):
             self.userCountry = country
             self.ip_accurate = accurate
             if point:
-                self.sortPoint = point 
+                self.sortPoint = point
                 self.userPoint = point
         if not self.sortPoint:
             self.sortPoint = DEF_POINT
@@ -197,7 +193,7 @@ class Location(object):
                     return "{0}, {1}, {2}".format(a1l, c)
         except:
             log.warn('error creating geolocation string')
-        return None 
+        return None
 
     @property
     def hasBounding(self):
@@ -237,16 +233,16 @@ class ApiProcess(object):
     def isExactCategory(self, term):
         if term:
             return Category.objects.filter(name__iexact=term).exists()
-        else: 
+        else:
             return False
 
     def searchDirectory(self, term=None, since=None, geobounds=None, radius=None, category=None, sort=None):
         sqs = SearchQuerySet().models(Business)
         if term:
             formatted = wildcardFormat(term)
-            sqs = sqs.filter(SQ(categories=term) 
-                           | SQ(name=term) 
-                           | SQ(name=formatted) 
+            sqs = sqs.filter(SQ(categories=term)
+                           | SQ(name=term)
+                           | SQ(name=formatted)
                            | SQ(description=term))
         print since, type(since)
         if since:
@@ -270,13 +266,11 @@ class ApiProcess(object):
                     sqs = sqs.narrow(u'admin1_code:"{0}"'.format(self.location.admin1()))
             sqs = sqs.distance('location', self.userLocation())
             if radius:
-                sqs = sqs = sqs.dwithin('location', self.userLocation(), D(m=radius))
+                sqs = sqs.dwithin('location', self.userLocation(), D(m=radius))
             if geobounds:
-                bounds = parseGeoBounds(geobounds)
-                sqs = self.__geolocation_filter__(sqs, bounds, locapi.DEF_RADIUS)
-                sqs = sorted(sqs, key=lambda x: x.distance)
-            else:
-                sqs = sqs.order_by('distance')
+                (sw, ne) = parseGeoBounds(geobounds)
+                sqs = sqs.within('location', sw, ne)
+            sqs = sqs.order_by('distance')
         return sqs
 
     def __filer_on_web__(self, sqs):
@@ -300,7 +294,7 @@ class ApiProcess(object):
                     s.distance = Distance(m=s.location.distance(self.location.userPoint) * locapi.DEG_TO_M)
                     s.sortDistance = Distance(m=s.location.distance(self.location.sortPoint) * locapi.DEG_TO_M)
                     if self.location.boundingContains(s.location):
-                        # Its within the bounding box 
+                        # Its within the bounding box
                         s.bounded = True
                         self.__append_if_within__(newsqs, s, poly=geopoly, radius=radius)
                     elif self.location.boundingExpandedContains(s.location):
@@ -335,7 +329,7 @@ class ApiProcess(object):
         if term:
             formatted = wildcardFormat(term)
             sqs = sqs.filter(content_auto=formatted)
-        if location: 
+        if location:
             fits = SQ(django_ct='directory.business')
             if self.location.isWebOnly():
                 fits = fits & SQ(has_online_business=True) & SQ(has_physical_business=False)
@@ -471,7 +465,7 @@ def processCountry(row):
         return v[0]
     except:
         return DEF_COUNTRY
-    
+
 def processCity(row):
     accuracy = True
     try:
