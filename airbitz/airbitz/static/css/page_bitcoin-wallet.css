@@ -57,8 +57,14 @@ ul li {
   position: absolute;
 }
 .main-content #section-bitcoin-wallet-details h2 {
-  margin-bottom: 40px;
+  margin: 40px 0;
+  font-size: 42px;
+  font-weight: 500;
+  color: #003e61;
 }
-.main-content #section-bitcoin-wallet-platform-details h2 {
-  margin-bottom: 40px;
+.main-content #section-bitcoin-wallet-platform-details h1 {
+  margin: 40px 0;
+  font-size: 42px;
+  font-weight: 500;
+  color: #003e61;
 }
