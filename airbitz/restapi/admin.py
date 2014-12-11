@@ -1,4 +1,4 @@
-from django.contrib.gis.geos import Point
+from django.contrib.gis.geos import Point, Polygon
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.db.models import Count
@@ -25,6 +25,24 @@ log = logging.getLogger("airbitz." + __name__)
 DEFAULT_PAGE_SIZE = 20
 
 PERMS = (auth.SessionAuthentication,)
+
+def parseGeoBounds(bounds):
+    if not bounds:
+        return None
+    try:
+        (sw,ne) = bounds.split("|")
+        sw = sw.split(",")
+        ne = ne.split(",")
+        box = {
+            'minlat': float(sw[0]),
+            'minlon': float(sw[1]),
+            'maxlat': float(ne[0]),
+            'maxlon': float(ne[1]),
+        }
+        return Polygon.from_bbox((box['minlon'], box['minlat'], box['maxlon'], box['maxlat']))
+    except Exception as e:
+        log.warn(e)
+        raise api.AirbitzApiException('Unable to parse geographic bounds.')
 
 class EchoField(fields.Field):
     type_name = 'EchoField'
@@ -272,7 +290,7 @@ class AdminBusinessView(ListCreateAPIView):
         if bizStatus:
             q = q.filter(status=bizStatus)
         if bounds:
-            poly = api.parseGeoBounds(bounds)
+            poly = parseGeoBounds(bounds)
             q = q.filter(center__within=poly)
         if sorts:
             l = []
