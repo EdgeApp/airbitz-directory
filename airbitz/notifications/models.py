@@ -20,7 +20,20 @@ class Notification(models.Model):
     def __unicode__(self):
         return "{0}".format(self.message)
 
+class HBitsPromos(models.Model):
+    token = models.CharField(unique=True, max_length=35)
+    message = models.TextField(null=False)
+    tweet = models.TextField(null=False)
+    claimed = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return "{0}".format(self.token)
+
 class NotificationAdmin(admin.ModelAdmin):
     pass
 
+class HBitsPromosAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(Notification, NotificationAdmin)
+admin.site.register(HBitsPromos, HBitsPromosAdmin)

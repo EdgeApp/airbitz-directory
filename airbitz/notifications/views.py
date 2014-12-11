@@ -3,10 +3,11 @@ from rest_framework import authentication as auth
 from rest_framework import generics
 from rest_framework import permissions as perm
 from rest_framework import serializers
+from rest_framework.response import Response
 
 import logging
 
-from notifications.models import Notification
+from notifications.models import Notification, HBitsPromos
 from restapi.views import BetterTokenAuthentication
 
 log=logging.getLogger("airbitz." + __name__)
@@ -47,4 +48,31 @@ class NotificationView(generics.ListAPIView):
             q = q & Q(android_build_last__isnull=True) & Q(ios_build_last__isnull=True)
 
         return Notification.objects.filter(q).order_by('id')
+
+
+class HBitsPromoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HBitsPromos
+        fields = ('token',
+                  'message',
+                  'tweet',
+                  'claimed',
+                  )
+
+class HBitsPromoView(generics.RetrieveAPIView):
+    serializer_class = HBitsPromoSerializer
+    lookup_url_kwarg = 'token'
+    authentication_classes = PERMS
+    permission_classes = AUTH
+
+    def get_queryset(self):
+        return HBitsPromos.objects.filter(token=self.kwargs['token'])
+
+    def retrieve(self, request, *args, **kwargs):
+        try:
+            self.object = self.get_queryset()[0]
+        except:
+            return Response(status=404, data={})
+        serializer = self.get_serializer(self.object)
+        return Response(serializer.data)
 
