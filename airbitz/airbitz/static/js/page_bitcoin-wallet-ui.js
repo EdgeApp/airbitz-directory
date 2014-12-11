@@ -4,6 +4,7 @@
 
 $('.container .video').magnificPopup({type: 'iframe'});
 
+$('.container').fitVids();
 
 /* default dom id (particles-js) */
 //particlesJS();

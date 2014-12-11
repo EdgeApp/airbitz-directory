@@ -41,11 +41,14 @@ ul li {
 }
 .main-content .feature-major {
   margin-bottom: 30px;
-  padding-left: 45px;
 }
 .main-content .feature-media-right {
   margin-top: 25px;
   border-left: 3px solid #eee;
+}
+.main-content .feature-media-left {
+  margin-top: 25px;
+  border-right: 3px solid #eee;
 }
 .main-content .section-bitcoin-wallet {
   min-height: 500px;

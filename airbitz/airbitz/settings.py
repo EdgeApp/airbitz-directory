@@ -352,6 +352,7 @@ PIPELINE_JS = {
             'extras/carouFredSel-6.2.1/jquery.carouFredSel-6.2.1-packed.js',
             'extras/Magnific-Popup-master/dist/jquery.magnific-popup.js',
             'extras/particlesjs/particles.js',
+            'extras/FitVids.js-master/jquery.fitvids.js',
             'js/page_bitcoin-wallet-ui.js',
         ),
         'output_filename': 'js/bitcoin-wallet.' + DEPLOY_DATE + '.js',

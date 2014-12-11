@@ -1,1 +1,1 @@
-$(".container .video").magnificPopup({type:"iframe"});
+$(".container .video").magnificPopup({type:"iframe"}),$(".container").fitVids();
