@@ -39,22 +39,31 @@ ul li {
   width: 35px;
   text-align: center;
 }
-.main-content .feature-major {
+.main-content .feature-section {
   margin-bottom: 30px;
 }
 .main-content .feature-media-right {
   margin-top: 25px;
   border-left: 3px solid #eee;
 }
+.main-content .feature-media-right .row {
+  margin-bottom: 10px;
+}
 .main-content .feature-media-left {
   margin-top: 25px;
   border-right: 3px solid #eee;
+}
+.main-content .feature-media-left .row {
+  margin-bottom: 10px;
 }
 .main-content .section-bitcoin-wallet {
   min-height: 500px;
 }
 .main-content .section-bitcoin-wallet .container {
   position: absolute;
+}
+.main-content #section-bitcoin-wallet-details hr {
+  margin: 40px 0;
 }
 .main-content #section-bitcoin-wallet-details h2 {
   margin: 40px 0;
