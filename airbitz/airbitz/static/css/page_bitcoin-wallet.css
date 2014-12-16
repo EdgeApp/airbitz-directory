@@ -1,10 +1,10 @@
 body {
   padding-top: 65px;
 }
-ul {
+.main-content ul {
   padding-left: 15px;
 }
-ul li {
+.main-content ul li {
   margin-bottom: 5px;
 }
 .main-content .landing-module .slides {
@@ -61,6 +61,11 @@ ul li {
 }
 .main-content .section-bitcoin-wallet .container {
   position: absolute;
+}
+.main-content #section-bitcoin-wallet-download {
+  background: #eee;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 .main-content #section-bitcoin-wallet-details hr {
   margin: 40px 0;
