@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url
 
 import views as views
 
-from notifications.views import NotificationView, HBitsPromoView
+from notifications.views import NotificationView, HBitsPromoView, HBitsPromoMod
 
 urlpatterns = patterns('',
      url(r'^business/(?P<bizId>\d+)/$', views.BusinessView.as_view()),
@@ -19,6 +19,6 @@ urlpatterns = patterns('',
 
      url(r'^notifications/?$', NotificationView.as_view()),
      url(r'^hiddenbits/(?P<token>[a-zA-Z0-9]+)/?$', HBitsPromoView.as_view()),
-
+     url(r'^promo/new/?$', HBitsPromoMod.as_view()),
 )
 

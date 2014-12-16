@@ -4,6 +4,7 @@ from rest_framework import generics
 from rest_framework import permissions as perm
 from rest_framework import serializers
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 import logging
 
@@ -16,6 +17,7 @@ DEFAULT_PAGE_SIZE=20
 
 PERMS=(BetterTokenAuthentication, auth.SessionAuthentication,)
 AUTH=(perm.IsAuthenticated, )
+ADMIN_AUTH=(perm.DjangoModelPermissions, )
 
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -75,4 +77,25 @@ class HBitsPromoView(generics.RetrieveAPIView):
             return Response(status=404, data={})
         serializer = self.get_serializer(self.object)
         return Response(serializer.data)
+
+class HBitsPromoMod(APIView):
+    authentication_classes = PERMS
+    permission_classes = ADMIN_AUTH
+    post_serializer = HBitsPromoSerializer
+
+    queryset = HBitsPromos.objects.all()
+    def post(self, request, *args, **kwargs):
+        ser = self.post_serializer(data=request.DATA)
+        if ser.is_valid():
+            o = ser.object
+            if HBitsPromos.objects.filter(token=o.token).exists():
+                return Response(status=500, data={'detail': 'Record exists'})
+            else:
+                HBitsPromos.objects.create(token=o.token,
+                                        message=o.message,
+                                        tweet=o.tweet,
+                                        claimed=False)
+            return Response(status=201)
+        else:
+            return Response(status=500, data={'detail': 'Invalid input'})
 
