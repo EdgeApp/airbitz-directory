@@ -1,6 +1,11 @@
 body {
   padding-top: 65px;
 }
+@media (max-width: 992px) {
+  body {
+    padding-top: 54px;
+  }
+}
 .main-content ul {
   padding-left: 25px;
 }
@@ -13,6 +18,17 @@ body {
 .main-content .landing-module .slides .slide-image img {
   max-height: 400px;
 }
+@media (max-width: 768px) {
+  .main-content .landing-module .slides .slide-text {
+    width: 400px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 480px) {
+  .main-content .landing-module .slides .slide-text {
+    width: 360px;
+  }
+}
 .main-content .landing-module .slides .slide-text h1,
 .main-content .landing-module .slides .slide-text h2,
 .main-content .landing-module .slides .slide-text h3,
@@ -20,10 +36,22 @@ body {
   letter-spacing: -1px;
 }
 .main-content .landing-module .slides .slide-text h1 {
+  width: auto;
   font-size: 46px;
   font-weight: 700;
 }
+@media (max-width: 992px) {
+  .main-content .landing-module .slides .slide-text h1 {
+    zoom: 0.90;
+  }
+}
+@media (max-width: 480px) {
+  .main-content .landing-module .slides .slide-text h1 {
+    zoom: 0.80;
+  }
+}
 .main-content .landing-module .slides .slide-text ul {
+  width: auto;
   padding-left: 0;
 }
 .main-content .landing-module .slides .slide-text ul li {
@@ -39,19 +67,37 @@ body {
   width: 35px;
   text-align: center;
 }
+@media (max-width: 1200px) {
+  .main-content .landing-module .slides .slide-text ul li {
+    font-size: 26px;
+  }
+}
+@media (max-width: 992px) {
+  .main-content .landing-module .slides .slide-text ul li {
+    font-size: 21px;
+  }
+}
+@media (max-width: 768px) {
+  .main-content .landing-module .slides .slide-text ul li {
+    font-size: 22px;
+  }
+}
+@media (max-width: 480px) {
+  .main-content .landing-module .slides .slide-text ul li {
+    font-size: 20px;
+  }
+}
 .main-content .feature-section {
   margin-bottom: 30px;
 }
 .main-content .feature-media-right {
   margin-top: 25px;
-  border-left: 3px solid #eee;
 }
 .main-content .feature-media-right .row {
   margin-bottom: 10px;
 }
 .main-content .feature-media-left {
   margin-top: 25px;
-  border-right: 3px solid #eee;
 }
 .main-content .feature-media-left .row {
   margin-bottom: 10px;
