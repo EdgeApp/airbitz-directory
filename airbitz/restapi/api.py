@@ -1,5 +1,6 @@
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import Distance
+from django.core.cache import cache
 from haystack.inputs import Clean
 from haystack.query import SearchQuerySet, SQ
 from haystack.utils.geo import D
@@ -236,8 +237,32 @@ class ApiProcess(object):
         else:
             return False
 
-    def searchDirectory(self, term=None, since=None, geobounds=None, radius=None, category=None, sort=None):
+    def exactMatch(self, term):
+        s = "exact_match_{}:{}".format(term, self.location.locationStr)
+        if cache.get(s, True) == False:
+            return (0, [])
+
         sqs = SearchQuerySet().models(Business)
+        sqs = sqs.filter(name=term)
+        sqs = sqs.filter(admin3_name=self.location.locationStr)
+        sqs = sqs.filter(is_searchable=False)
+        sqs = sqs.distance('location', self.userLocation())
+
+        m_len = len(sqs)
+        if m_len == 1:
+            cache.set(s, True, 60 * 60)
+        else:
+            cache.set(s, False, 60 * 60)
+        return m_len, sqs
+
+
+    def searchDirectory(self, term=None, since=None, geobounds=None, radius=None, category=None, sort=None):
+        (len_m, m) = self.exactMatch(term)
+        if len_m == 1:
+            return m
+
+        sqs = SearchQuerySet().models(Business)
+        sqs = sqs.filter(is_searchable=True)
         if term:
             formatted = wildcardFormat(term)
             sqs = sqs.filter(SQ(categories=term)
@@ -329,13 +354,13 @@ class ApiProcess(object):
             formatted = wildcardFormat(term)
             sqs = sqs.filter(content_auto=formatted)
         if location:
-            fits = SQ(django_ct='directory.business')
+            fits = SQ(django_ct='directory.business') & SQ(is_searchable=True)
             if self.location.isWebOnly():
                 fits = fits & SQ(has_online_business=True) & SQ(has_physical_business=False)
             elif self.location.isOnWeb():
                 fits = fits & SQ(has_online_business=True)
         else:
-            fits = SQ(django_ct='directory.business')
+            fits = SQ(django_ct='directory.business') & SQ(is_searchable=True)
         fits = (fits) | SQ(django_ct='directory.category')
         sqs = sqs.filter(fits).models(Business, Category)
         if self.location.isOnWeb() or self.location.isWebOnly():

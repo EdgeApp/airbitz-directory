@@ -122,6 +122,10 @@
                        value="{{ biz.has_bitcoin_discount }}"
                        parsley-trigger="change" parsley-type="number" />
               </div>
+              <div class="form-horizontal">
+                <label for="is_searchable">Is Searchable:</label>
+                <input type="checkbox" id="is_searchable" name="is_searchable" {% if biz.is_searchable %}checked{% endif %} />
+              </div>
             </div>
           </div>
         </div>
@@ -690,6 +694,7 @@
         obj['contact1_email'] = $('#contact1_email').val();
         obj['contact2_email'] = $('#contact2_email').val();
         obj['website'] = $('#website').val();
+        obj['is_searchable'] = $('#is_searchable').is(':checked');
         obj['has_physical_business'] = $('#has_physical_business').is(':checked');
         obj['has_online_business'] = $('#has_online_business').is(':checked');
         obj['has_bitcoin_discount'] = $('#has_bitcoin_discount').val();

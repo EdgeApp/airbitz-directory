@@ -144,6 +144,9 @@ class Business(models.Model):
     has_online_business = models.BooleanField(default=False)
     has_bitcoin_discount = models.DecimalField(default=0.0, decimal_places=3, max_digits=5)
 
+    # Requires Search parameters to match exactly to display
+    is_searchable = models.BooleanField(default=True)
+
     contact1_email = models.EmailField(blank=True)
     contact2_email = models.EmailField(blank=True)
 
