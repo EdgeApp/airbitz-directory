@@ -26,6 +26,11 @@ body.home header {
 body.home .navbar .logo {
   max-width: none;
 }
+body.home #main-content .page p,
+body.home #main-content .page ul li {
+  font-size: 16px;
+  color: #333;
+}
 body.home #main-content .page .airbitz-feature-details .features-list {
   margin: 15px 0 0 225px;
   list-style: disc;
