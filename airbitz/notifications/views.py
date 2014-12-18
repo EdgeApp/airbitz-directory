@@ -57,6 +57,7 @@ class HBitsPromoSerializer(serializers.ModelSerializer):
         model = HBitsPromos
         fields = ('token',
                   'message',
+                  'zero_message',
                   'tweet',
                   'claimed',
                   )
@@ -93,6 +94,7 @@ class HBitsPromoMod(APIView):
             else:
                 HBitsPromos.objects.create(token=o.token,
                                         message=o.message,
+                                        zero_message=o.zero_message,
                                         tweet=o.tweet,
                                         claimed=False)
             return Response(status=201)

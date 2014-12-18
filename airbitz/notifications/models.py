@@ -23,6 +23,7 @@ class Notification(models.Model):
 class HBitsPromos(models.Model):
     token = models.CharField(unique=True, max_length=35)
     message = models.TextField(null=False)
+    zero_message = models.TextField(null=False)
     tweet = models.TextField(null=False)
     claimed = models.BooleanField(default=False)
 
