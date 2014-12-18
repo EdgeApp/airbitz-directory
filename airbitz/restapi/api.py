@@ -7,7 +7,7 @@ from haystack.utils.geo import D
 import logging
 import subprocess
 
-from directory.models import Business, Category
+from directory.models import Business, BusinessImage, Category
 from airbitz.region_definitions import ALL_COUNTRY_LABELS
 import locapi
 import json
@@ -480,4 +480,11 @@ def processCity(row):
         except:
             log.warn(e)
     return (None, accuracy)
+
+def sortedImages(biz_id):
+    images = BusinessImage.objects.filter(business_id=biz_id)
+    images = sorted([(i.isprimary, i) for i in images], key=lambda (i,j): i)
+    images.reverse()
+    return [i for _,i in images]
+
 
