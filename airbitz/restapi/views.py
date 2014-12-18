@@ -125,7 +125,7 @@ class PhotosView(generics.ListAPIView):
 
     def get_queryset(self):
         bizId = int(self.kwargs['bizId'])
-        return BusinessImage.objects.filter(business=bizId)
+        return api.sortedImages(bizId)
 
 
 class SearchView(generics.ListAPIView):

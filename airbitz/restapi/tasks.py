@@ -29,7 +29,7 @@ def __ga_post__(path, title, campaign=None, cid=None, ip=None, version=1,
         dp=urllib.quote_plus(path),
         dt=title)
     if ip:
-        payload['oip'] = ip
+        payload['uip'] = ip
     if useragent:
         payload['ua'] = useragent
 

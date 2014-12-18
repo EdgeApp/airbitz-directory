@@ -3,7 +3,8 @@ from celery_haystack.indexes import CelerySearchIndex
 
 import json
 
-from directory.models import Business, BusinessHours, BusinessImage, Category, SocialId
+from restapi.api import sortedImages
+from directory.models import Business, BusinessHours, Category, SocialId
 
 class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
     bizId = indexes.IntegerField(model_attr='pk', indexed=False)
@@ -68,7 +69,9 @@ class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
 
     def prepare_images_json(self, obj):
         ls = []
-        for b in BusinessImage.objects.filter(business=obj):
+        # Sort by primary
+        images = sortedImages(obj.id)
+        for b in images:
             tags = [t.name for t in b.tags.all()]
             ls.append({
                 'image': b.mobile_photo.url,

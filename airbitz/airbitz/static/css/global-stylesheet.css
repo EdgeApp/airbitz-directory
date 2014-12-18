@@ -183,6 +183,7 @@
 .navbar-ab .navbar-nav > li > a {
   color: white;
   font-weight: 600;
+  letter-spacing: -0.75px;
 }
 .navbar-ab .navbar-nav > li > a:hover {
   background-color: #02a4e2;
@@ -1133,14 +1134,6 @@ body {
   padding-top: 85px;
   font: 14px/24px "Open Sans", Helvetica, Arial, sans-serif;
 }
-body .heading-clean {
-  color: #003e61;
-  font-weight: 400;
-}
-body .jvectormap-label {
-  z-index: 2;
-  padding-bottom: 0;
-}
 body .top-bg,
 body .top-bg-noblur {
   z-index: -1;
@@ -1195,6 +1188,11 @@ body .main-content {
   /* Opera */
   animation: fadein 2s;
 }
+body .main-content p,
+body .main-content ul li {
+  font-size: 16px;
+  color: #333;
+}
 body a.biz-cat-link:hover {
   text-decoration: none;
 }
@@ -1225,13 +1223,6 @@ body a.biz-cat-link .label:hover {
 }
 .hover-request-text {
   color: #80c342;
-}
-.jvectormap-zoomin,
-.jvectormap-zoomout {
-  width: 16px;
-  height: 16px;
-  background: #2291cf;
-  font-size: 14px;
 }
 @keyframes fadein {
   from {

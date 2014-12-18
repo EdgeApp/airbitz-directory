@@ -3,18 +3,23 @@
 
 body {
     padding-top: 65px;
-}
 
-
-ul {
-    padding-left: 15px;
-
-    li {
-        margin-bottom: 5px;
+    @media(max-width: @screen-md) {
+        padding-top: 54px;
     }
 }
 
 .main-content {
+
+    ul {
+        padding-left: 25px;
+
+        li {
+            margin-bottom: 5px;
+        }
+    }
+
+
 
     .landing-module {
         .slides {
@@ -25,16 +30,34 @@ ul {
                 }
             }
             .slide-text {
+
+                @media(max-width: @screen-sm) {
+                    width: 400px;
+                    margin: 0 auto;
+                }
+                @media(max-width: @screen-xs) {
+                    width: 360px;
+                }
+
                 h1,h2,h3,h4 {
                     letter-spacing: -1px;
                 }
                 h1 {
+                    width: auto;
                     font-size: 46px;
                     font-weight: 700;
+
+                    @media(max-width: @screen-md) {
+                        zoom: 0.90;
+                    }
+                    @media(max-width: @screen-xs) {
+                        zoom: 0.80;
+                    }
                 }
                 ul {
+                    width: auto;
                     padding-left: 0;
-
+                    
                     li {
                         margin-bottom: 15px;
                         font-size: 28px;
@@ -49,25 +72,49 @@ ul {
                             width: 35px;
                             text-align: center;
                         }
+
+                        @media(max-width: @screen-lg) {
+                            font-size: 26px;
+                        }
+                        @media(max-width: @screen-md) {
+                            font-size: 21px;
+                        }
+                        @media(max-width: @screen-sm) {
+                            font-size: 22px;
+                        }
+                        @media(max-width: @screen-xs) {
+                            font-size: 20px;
+                        }
                     }
                 }
             }
         }
     }
-
-    .feature-major {
+    
+    .feature-section {
         margin-bottom: 30px;
+    }
+    .feature-major {
+//        margin-bottom: 30px;
 //        padding-left: 45px;
     }
 
     .feature-media-right {
         margin-top: 25px;
-        border-left: 3px solid #eee;
+//        border-left: 3px solid #eee;
+
+        .row {
+            margin-bottom: 10px;
+        }
     }
 
     .feature-media-left {
         margin-top: 25px;
-        border-right: 3px solid #eee;
+//        border-right: 3px solid #eee;
+
+        .row {
+            margin-bottom: 10px;
+        }
     }
 
     .section-bitcoin-wallet {
@@ -80,7 +127,17 @@ ul {
 
     #section-bitcoin-wallet-header {}
 
+    #section-bitcoin-wallet-download {
+        background: #eee;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+    }
+
     #section-bitcoin-wallet-details {
+        hr {
+            margin: 40px 0;
+        }
+        
         h2 {
             margin: 40px 0;
             font-size: 42px;

@@ -160,9 +160,9 @@
   <div class="row">
     <div class="col-xs-12 text-center">
       <div class="ui-group-buttons">
-        <button id="learn-more-wallet" type="button" class="btn btn-success btn-lg">Bitcoin Wallet</button>
+        <a id="learn-more-wallet" type="button" class="btn btn-success btn-lg" href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/">Bitcoin Wallet</a>
         <div class="or or-lg"></div>
-        <button id="learn-more-directory" type="button" class="btn btn-primary btn-lg">Directory Map</button>
+        <a id="learn-more-directory" type="button" class="btn btn-primary btn-lg">Directory Map</a>
       </div>
     </div>
   </div>
@@ -172,12 +172,17 @@
 </div><!-- /.section-learn-more -->
 
 
+
+{% include "_home-bitcoin-wallet.html" %}
+
+
+
 <div id="features-directory" class="section-directory-coverage container-fluid">
   <div class="container">
     <div class="row">
       <div id="who-accepts-bitcoin" class="text-center col-sm-6">
         <h2>Airbitz Business Directory</h2>
-        <img style="padding: 0 0 0 35px;" class="alignnone" alt="Airbitz Bitcoin Business Directory" src="{{ STATIC_URL }}img/landing/bitcoin-directory-map.png" width="200" height="200" />
+        <img style="padding: 0 0 0 35px;" class="alignnone" alt="Airbitz Bitcoin Business Directory" title="Bitcoin Map of Businesses" src="{{ STATIC_URL }}img/landing/bitcoin-directory-map.png" width="200" height="200" />
         <h2>
           Connecting You to <span class="label label-success" style="padding: .2em .3em .2em; font-size: 100%;">{{ biz_total }}</span> Businesses Accepting Bitcoin Around the World
         </h2>
@@ -202,10 +207,10 @@
 <div class="section-bitcoin-directory-details container">
   <div class="row">
     <h2 class="hidden-xs">
-      <img src="{{ STATIC_URL }}img/icons/map_64px.png" alt="Bitcoin Directory" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory
+      <img src="{{ STATIC_URL }}img/icons/map_64px.png" alt="Bitcoin Directory" title="Bitcoin Map" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory
     </h2>
     <h3 class="visible-xs-block">
-      <img src="{{ STATIC_URL }}img/icons/map_32px.png" alt="Bitcoin Directory" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory
+      <img src="{{ STATIC_URL }}img/icons/map_32px.png" alt="Bitcoin Directory" title="Bitcoin Map" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory
     </h3>
     <p>The Airbitz mobile app also includes a business directory to help consumers find merchants and websites that accept bitcoin as payment. Some of its powerful features include:</p>
 
@@ -213,7 +218,7 @@
 
     <div class="row">
       <div class="col-sm-12">
-        <h3><img src="{{ STATIC_URL }}img/icons/adjustments_32px.png" alt="Directory Features"/> Directory Features</h3>
+        <h3><img src="{{ STATIC_URL }}img/icons/adjustments_32px.png" alt="Directory Features" title="Business Directory Features" /> Directory Features</h3>
         <ul class="features-list">
           <li>Advanced search ability by proximity, business name, category, city, state, or country</li>
           <li>Inclusion of web based bitcoin businesses such as online merchants and exchange services</li>
@@ -224,72 +229,6 @@
       </div>
     </div>
   </div>
-</div>
-
-
-
-<div id="features-wallet" class="section-bitcoin-wallet container-fluid" style="margin-top: 40px;">
-  <div class="container text-center">
-    <h2>&nbsp;</h2>
-  </div>
-</div>
-
-<div class="section-bitcoin-wallet-details container">
-  <div class="row">
-      <h2 class="hidden-xs">
-        <img src="{{ STATIC_URL }}img/icons/wallet_64px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Airbitz Bitcoin Wallet
-      </h2>
-      <h3 class="visible-xs-block">
-        <img src="{{ STATIC_URL }}img/icons/wallet_32px.png" alt="Bitcoin Wallet" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Airbitz Bitcoin Wallet
-      </h3>
-      <p>The Airbitz mobile digital wallet is a decentralized, secure, private, synchronized, and backed up Bitcoin wallet.  A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:</p>
-
-  {% include '_home-app-download-preview.html' %}
-
-  <div class="row">
-    <div class="col-sm-12">
-      <h3><img src="{{ STATIC_URL }}img/icons/tools_32px.png" alt="Ease of Use"/> Ease of Use</h3>
-      <ul>
-        <li>Supports Bluetooth Low Energy (BLE) to transfer funds instead of scanning QR codes</li>
-        <li>Simple account creation using just a login & password (no printing or emailing of PDFs, writing down passphrases or adding encryption settings)</li>
-        <li>Automatic wallet encryption, backup, and multi-device synchronization</li>
-        <li>Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)</li>
-        <li>Integration with the Airbitz Business directory to auto-complete business meta data for transactions</li>
-        <li>User editable transaction data (payee, category, fiat value, & notes)</li>
-        <li>Built in transaction search by payee, category, or notes</li>
-        <li>Quick UI to transfer funds between wallets in an account</li>
-        <li>Multiple fiat currency support. Assign a fiat currency per wallet</li>
-        <li>Decentralized server architecture. Wallets work even if Airbitz servers are down</li>
-      </ul>
-    </div>
-  </div>
-
-  <hr/>
-
-  <div class="row">
-    <div class="col-sm-12">
-      <h3><img src="{{ STATIC_URL }}img/icons/key_32px.png" alt="Privacy"/> Privacy</h3>
-      <ul>
-        <li>Hierarchical Deterministic wallets with changing addresses per transaction</li>
-        <li>Local client-side encryption (S-Crypt password hashing & AES256 encryption) of all user keys and data</li>
-        <li>No user info required to use wallet (no name, address, email, or phone number)</li>
-      </ul>
-    </div>
-  </div>
-
-  <hr/>
-
-  <div class="row">
-    <div class="col-sm-12">
-      <h3><img src="{{ STATIC_URL }}img/icons/lock_32px.png" alt="Security"/> Security</h3>
-      <ul>
-        <li>Native C/C++ code for super strong encryption and password hashing (S-Crypt password hashing & AES256 encryption)</li>
-        <li>Local client-side encryption using user generated login & password </li>
-        <li>Open-source release on Oct 31, 2014</li>
-      </ul>
-    </div>
-  </div>
-    </div>
 </div>
 
 

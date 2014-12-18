@@ -30,15 +30,6 @@ body {
     padding-top: 85px;
     font: 14px/24px "Open Sans", Helvetica, Arial, sans-serif;
 
-    .heading-clean {
-        color: @ab-blue-dark;
-        font-weight: 400;
-    }
-    .jvectormap-label {
-        z-index: 2;
-        padding-bottom: 0;
-    }
-
     .top-bg,
     .top-bg-noblur {
         z-index: -1;
@@ -76,6 +67,11 @@ body {
             -ms-animation: fadein 2s; /* Internet Explorer */
              -o-animation: fadein 2s; /* Opera */
                 animation: fadein 2s;
+
+        p, ul li {
+            font-size: 16px;
+            color: #333;
+        }
     }
     a.biz-cat-link {
         &:hover {
@@ -124,13 +120,6 @@ body {
 }
 
 
-// JVECORMAP
-.jvectormap-zoomin, .jvectormap-zoomout {
-    width: 16px;
-    height: 16px;
-    background: @brand-primary;
-    font-size: 14px;
-}
 
 
 
