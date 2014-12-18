@@ -356,6 +356,10 @@ class BusinessImage(models.Model):
         return os.path.join(settings.MEDIA_URL, self.image.url)
 
     @property
+    def isprimary(self):
+        return any(['Primary' == t.name for t in self.tags.all()])
+
+    @property
     def name(self):
         return os.path.basename(self.image.name)
 

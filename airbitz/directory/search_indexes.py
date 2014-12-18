@@ -68,7 +68,13 @@ class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
 
     def prepare_images_json(self, obj):
         ls = []
-        for b in BusinessImage.objects.filter(business=obj):
+        # Sort by primary
+        images = BusinessImage.objects.filter(business=obj)
+        images = sorted([(i.isprimary, i) for i in images], key=lambda (i,j): i)
+        images.reverse()
+        images = [i for _,i in images]
+
+        for b in images:
             tags = [t.name for t in b.tags.all()]
             ls.append({
                 'image': b.mobile_photo.url,
