@@ -16,7 +16,7 @@ from restapi import api
 
 SEARCH_LIMIT = 20
 DISTANCE_LIMIT_KILOMETERS = 20
-SPECIALS_TAG='Black Friday'
+SPECIALS_TAG='Bitcoin Bowl'
 
 WEEKDAYS = (
     ('sunday', 'Sun'),
