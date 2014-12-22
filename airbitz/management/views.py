@@ -397,10 +397,10 @@ def redirect_vote(request):
     return HttpResponseRedirect('https://docs.google.com/a/airbitz.co/forms/d/1XGPghf1OsdgTmrsiEscWqcPjssfDX3u8IE-PBOLebc4/viewform')
 
 def redirect_blog(request):
-    return HttpResponseRedirect('https://go.airbitz.co')
+    return HttpResponseRedirect('https://airbitz.co/go/')
 
 def redirect_about(request):
-    return HttpResponseRedirect('https://go.airbitz.co/about/')
+    return HttpResponseRedirect('https://airbitz.co/go/about/')
 
 def redirect_button(request):
     try:
