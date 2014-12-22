@@ -39,13 +39,15 @@ if DEBUG:
     print 'STAGING:', STAGING
     print 'PRODUCTION:', PRODUCTION
 
+# SEO RELATED
+CANONICAL_BASE = 'https://airbitz.co'
+
 SCREENCAP_ABSOLUTE_URL = 'https://airbitz.co'
 SCREENCAP_INTERVAL = datetime.timedelta(minutes=15)
 
 
 # FRONT PAGE QUERY RELATED
 FP_QUERY_INTERVAL = datetime.timedelta(days=7)
-
 
 DEPLOY_DATE = '20141022'
 
@@ -130,6 +132,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'airbitz.processors.near',
     'airbitz.processors.debug',
     'airbitz.processors.active_regions',
+    'airbitz.processors.get_canonical',
     'absolute.context_processors.absolute'
 )
 

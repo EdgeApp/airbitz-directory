@@ -47,6 +47,7 @@
 
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
             <meta name="mobile-web-app-capable" content="yes">
+            <link rel="canonical" href="{% block canonical_url %}{{ canonical }}{% endblock canonical_url %}">
             <link rel="icon" type="image/png" href="{{ STATIC_URL }}img/favicon.ico">
             {% compressed_css 'global' %}
         {% endblock head %}

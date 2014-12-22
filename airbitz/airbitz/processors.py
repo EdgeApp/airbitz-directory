@@ -35,3 +35,13 @@ def active_regions(request):
         'southeast_asia_active_regions_list':   get_active_regions_list('SOUTHEAST_ASIA'),
         'oceana_active_regions_list':           get_active_regions_list('OCEANA'),
     }
+
+# SEO RELATED
+def get_canonical(request):
+    path = request.get_full_path()
+
+    url = settings.CANONICAL_BASE + path
+
+    return {
+            'canonical': url
+    }
