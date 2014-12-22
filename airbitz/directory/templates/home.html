@@ -102,6 +102,7 @@
     .recentcomments a { display:inline !important; padding:0 !important; margin:0 !important; }
   </style>
 
+  <link rel="canonical" href="{% block canonical_url %}{{ canonical }}{% endblock canonical_url %}">
   <link rel="icon" type="image/png" href="{{ STATIC_URL }}img/favicon.ico">
 
   {% block head %}
