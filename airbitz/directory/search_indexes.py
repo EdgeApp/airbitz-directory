@@ -24,6 +24,8 @@ class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
 
     categories = indexes.MultiValueField()
 
+    is_searchable = indexes.BooleanField(model_attr='is_searchable')
+
     category_json = indexes.CharField(null=True, indexed=False)
     mobile_image_json = indexes.CharField(null=True, indexed=False)
     landing_image_json = indexes.CharField(null=True, indexed=False)
