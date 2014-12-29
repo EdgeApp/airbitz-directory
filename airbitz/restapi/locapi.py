@@ -20,9 +20,14 @@ def admin1Map(l):
         return l
 
 def countryMap(c):
-    print c
     if c == 'GB':
         return 'UK'
+    else:
+        return c
+
+def reverseCountryMap(c):
+    if c == 'UK':
+        return 'GB'
     else:
         return c
 
