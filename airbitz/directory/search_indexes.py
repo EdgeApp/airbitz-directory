@@ -61,13 +61,14 @@ class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
         return [category.name for category in obj.categories.all()]
 
     def prepare_phone(self, obj):
+        if True:
+            return obj.phone
         if not obj.phone:
             return None
         try:
             c = reverseCountryMap(obj.country)
             num = phonenumbers.parse(obj.phone, c)
-            f = phonenumbers.format_number(num, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
-            return f.replace(" ", "-")
+            return phonenumbers.format_number(num, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
         except:
             log.warn('Invalid number {0}:{1}'.format(obj.phone, obj.country))
             return obj.phone
