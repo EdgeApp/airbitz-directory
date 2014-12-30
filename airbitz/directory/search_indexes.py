@@ -2,15 +2,10 @@ from haystack import indexes
 from celery_haystack.indexes import CelerySearchIndex
 
 import json
-import phonenumbers
+from directory import utils
 
 from restapi.api import sortedImages
-from restapi.locapi import reverseCountryMap
 from directory.models import Business, BusinessHours, Category, SocialId
-
-import logging
-
-log=logging.getLogger("airbitz." + __name__)
 
 class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
     bizId = indexes.IntegerField(model_attr='pk', indexed=False)
@@ -61,17 +56,9 @@ class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
         return [category.name for category in obj.categories.all()]
 
     def prepare_phone(self, obj):
-        if True:
-            return obj.phone
         if not obj.phone:
             return None
-        try:
-            c = reverseCountryMap(obj.country)
-            num = phonenumbers.parse(obj.phone, c)
-            return phonenumbers.format_number(num, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
-        except:
-            log.warn('Invalid number {0}:{1}'.format(obj.phone, obj.country))
-            return obj.phone
+        return utils.format_phone(obj.phone, obj.country)
 
     def prepare_category_json(self, obj):
         return json.dumps([{'name': c.name,

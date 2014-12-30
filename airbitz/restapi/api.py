@@ -403,6 +403,7 @@ class ApiProcess(object):
 
     def suggestNearCategories(self):
         sqs = SearchQuerySet().models(Business)
+        sqs = sqs.filter(is_searchable=True)
         if self.location.isWebOnly():
             sqs = sqs.filter(has_online_business=True, has_physical_business=False)
             sqs = sqs.order_by('-has_bitcoin_discount')
