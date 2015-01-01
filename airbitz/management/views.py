@@ -421,14 +421,14 @@ def redirect_button(request):
 
 def page_privacy_policy(request):
     context = {}
-    return render_to_response('page_privacy-policy.html', RequestContext(request, context))
+    return render_to_response('pages/page_privacy-policy.html', RequestContext(request, context))
 
 
 def page_bitcoin_wallet(request):
     context = {}
-    return render_to_response('page_bitcoin-wallet.html', RequestContext(request, context))
+    return render_to_response('pages/page_bitcoin-wallet.html', RequestContext(request, context))
 
 
 def page_bitcoin_wallet_platform(request):
     context = {}
-    return render_to_response('page_bitcoin-wallet-platform.html', RequestContext(request, context))
+    return render_to_response('pages/page_bitcoin-wallet-platform.html', RequestContext(request, context))

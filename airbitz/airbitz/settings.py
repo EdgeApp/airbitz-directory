@@ -227,13 +227,13 @@ PIPELINE_CSS = {
             'media': 'screen,projection',
         },
     },
-    'bitcoin_wallet': {
+    'page_content': {
         'source_filenames': (
             'css/animate.css',
             'extras/Magnific-Popup-master/dist/magnific-popup.css',
-            'css/page_bitcoin-wallet.css',
+            'css/page-content.css',
         ),
-        'output_filename': 'css/bitcoin-wallet.' + DEPLOY_DATE + '.css',
+        'output_filename': 'css/page-conent.' + DEPLOY_DATE + '.css',
         'extra_context': {
             'media': 'screen,projection',
         },
@@ -327,7 +327,6 @@ PIPELINE_JS = {
             'js/typeahead.bundle.js',
             'extras/jQuery.dotdotdot-master/src/js/jquery.dotdotdot.min.js',
             'extras/Readmore.js-master/readmore.min.js',
-            'extras/colorbox-master/jquery.colorbox-min.js',
             'extras/swipebox-master/source/jquery.swipebox.min.js',
             'js/frontend-ui.js',
             'js/mobile-download-bar.js'
@@ -336,7 +335,6 @@ PIPELINE_JS = {
     },
     'home': {
         'source_filenames': (
-            # 'extras/blur.js/blur.js',
             'extras/backstretch/backstretch.js',
             'extras/ajaxchimp/jquery.ajaxchimp.js',
             'extras/carouFredSel-6.2.1/jquery.carouFredSel-6.2.1-packed.js',
@@ -345,17 +343,15 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/home.' + DEPLOY_DATE + '.js',
     },
-    'bitcoin_wallet': {
+    'page_content': {
         'source_filenames': (
             'extras/backstretch/backstretch.js',
-            # 'extras/ajaxchimp/jquery.ajaxchimp.js',
             'extras/carouFredSel-6.2.1/jquery.carouFredSel-6.2.1-packed.js',
             'extras/Magnific-Popup-master/dist/jquery.magnific-popup.js',
-            'extras/particlesjs/particles.js',
             'extras/FitVids.js-master/jquery.fitvids.js',
-            'js/page_bitcoin-wallet-ui.js',
+            'js/page_content.js',
         ),
-        'output_filename': 'js/bitcoin-wallet.' + DEPLOY_DATE + '.js',
+        'output_filename': 'js/page-content.' + DEPLOY_DATE + '.js',
     },
     'management': {
         'source_filenames': (
