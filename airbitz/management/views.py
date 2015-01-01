@@ -429,6 +429,11 @@ def page_bitcoin_wallet(request):
     return render_to_response('pages/page_bitcoin-wallet.html', RequestContext(request, context))
 
 
-def page_bitcoin_wallet_platform(request):
+def page_bitcoin_wallet_api_library(request):
     context = {}
-    return render_to_response('pages/page_bitcoin-wallet-platform.html', RequestContext(request, context))
+    return render_to_response('pages/page_bitcoin-wallet-api-library.html', RequestContext(request, context))
+
+
+def page_bitcoin_wallet_server_api(request):
+    context = {}
+    return render_to_response('pages/page_bitcoin-wallet-server-api.html', RequestContext(request, context))

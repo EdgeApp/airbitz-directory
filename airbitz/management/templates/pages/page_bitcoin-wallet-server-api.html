@@ -5,13 +5,13 @@
 {% block head_seo_social %}
 
   {% block seo_meta %}
-    <title>{% block title %}Bitcoin Wallet API Library{% endblock title %} | Airbitz</title>
+    <title>{% block title %}Bitcoin Wallet Server API{% endblock title %} | Airbitz</title>
     <meta name="description" content="{% block meta_description %}The Airbitz Core (ABC) gives developers the ability to build Bitcoin products such as currency exchanges, ATMs, POS solutions, games, and payroll services that are fully integrated with accounts and wallets from the Airbitz mobile app.{% endblock meta_description %}">
     <meta name="news_keywords" content="{% block meta_news_keywords %}Bitcoin, Bitcoin Wallet, Bitcoin API, Bitcoin Library, Bitcoin Wallet API{% endblock meta_news_keywords %}">
   {% endblock seo_meta %}
 
   {% block og_meta %}
-    <meta property="og:title" content="{% block og_title %}Airbitz Bitcoin Wallet API Library{% endblock og_title %}">
+    <meta property="og:title" content="{% block og_title %}Airbitz Bitcoin Wallet Server API{% endblock og_title %}">
     <meta property="og:description" content="{% block og_description %}The Airbitz Core (ABC) gives developers the ability to build Bitcoin products such as currency exchanges, ATMs, POS solutions, games, and payroll services that are fully integrated with accounts and wallets from the Airbitz mobile app.{% endblock og_description %}">
     <meta property="og:type" content="{% block og_type %}Article{% endblock og_type %}">
     <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock og_url %}">
@@ -23,7 +23,7 @@
   {% block twitter_meta %}
     <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock twitter_card %}">
     <meta name="twitter:site" content="{% block twitter_site %}@airbitz{% endblock twitter_site %}">
-    <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet API Library{% endblock twitter_title %}">
+    <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet Server API{% endblock twitter_title %}">
     <meta name="twitter:description" content="{% block twitter_description %}The Airbitz Core (ABC) gives developers the ability to build Bitcoin products such as currency exchanges, ATMs, POS solutions, games, and payroll services that are fully integrated with accounts and wallets from the Airbitz mobile app.{% endblock twitter_description %}">
     <meta name="twitter:creator" content="{% block twitter_creator %}@airbitz{% endblock twitter_creator %}">
     <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock twitter_image_src %}">
@@ -39,7 +39,7 @@
 
 {% block main_content %}
 
-  {% include 'pages/bitcoin-wallet-platform/_bitcoin-wallet-platform.html' %}
+  {% include 'pages/bitcoin-wallet-platform/_bitcoin_wallet-server-api.html' %}
 
 {% endblock main_content %}
 
