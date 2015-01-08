@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.gis',
 
+    'cumulus',
     'djcelery',
     'haystack',
     'celery_haystack',
@@ -164,8 +165,15 @@ CACHES = {
         "OPTIONS": {
             "CLIENT_CLASS": "redis_cache.client.DefaultClient",
         }
+    },
+    "image_cache": {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'image_cache',
     }
 }
+IMAGEKIT_CACHE_BACKEND="image_cache"
+IMAGEKIT_DEFAULT_CACHEFILE_STRATEGY='imagekit.cachefiles.strategies.Optimistic'
+
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
@@ -178,14 +186,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-if LOCAL:
-    MEDIA_ROOT = '/staging/media'
-    MEDIA_URL = '/media/'
-else:
-    MEDIA_ROOT = os.path.join(os.environ['HOME'], 'media')
-    MEDIA_URL = '/media/'
+MEDIA_ROOT='https://23a9d31d7f8e208557dc-0452de78f0a97d5ef1194f824cf51819.ssl.cf2.rackcdn.com'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.environ['HOME'], 'static')
@@ -573,4 +574,17 @@ if DEBUG:
 else:
     GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-47697034-1'
     API_GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-47697034-3'
+
+
+CUMULUS = {
+    'API_KEY': '4e43f289521849cb8de2734af07943fb',
+    'USERNAME': 'timhorton',
+    'REGION': 'ORD',
+    'CONTAINER': 'DirectoryMedia',
+    'PYRAX_IDENTITY_TYPE': 'rackspace',
+    'USE_SSL': True,
+    'SERVICENET': not LOCAL,
+    'CONTAINER_URI_SSL': 'https://23a9d31d7f8e208557dc-0452de78f0a97d5ef1194f824cf51819.ssl.cf2.rackcdn.com'
+}
+DEFAULT_FILE_STORAGE = 'cumulus.storage.SwiftclientStorage'
 

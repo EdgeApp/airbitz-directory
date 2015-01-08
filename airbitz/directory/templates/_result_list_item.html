@@ -8,8 +8,7 @@
         {% endif %}
         <a href="{{ biz.get_absolute_url }}" title="{{ biz.name }}">
         {% if biz.landing_image %}
-            {% generateimage 'ab:searchresultthumb' source=biz.landing_image.web_photo as th %}
-            <img src="{{ th.url }}" class="biz-img" title="{{ biz.name }}" alt="{{ biz.name }}" />
+            <img src="{{ biz.landing_image.searchresult_image.url }}" class="biz-img" title="{{ biz.name }}" alt="{{ biz.name }}" />
         {% else %}
             <img data-src="holder.js/150x150/ab-blue/text:{{ biz.name }}" class="biz-img" title="{{ biz.name }}" alt="{{ biz.name }}">
         {% endif %}

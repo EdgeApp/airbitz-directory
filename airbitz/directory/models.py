@@ -1,4 +1,4 @@
-import datetime
+from celery import task
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.gis.db import models
@@ -11,6 +11,7 @@ from django.utils.http import urlquote_plus
 from django.utils.text import slugify
 from imagekit.models import ImageSpecField
 from rest_framework.authtoken.models import Token
+import datetime
 import os
 import subprocess32 as subprocess
 import urllib
@@ -263,6 +264,7 @@ class Business(models.Model):
                     self.published = datetime.datetime.now()
                 else:
                     self.published = None
+            biz_update_images(self.id)
         except Business.DoesNotExist:
             pass
 
@@ -311,6 +313,13 @@ class BusinessImage(models.Model):
     web_photo = ImageSpecField(source='image', id='ab:image:web_crop')
     mobile_photo = ImageSpecField(source='image', processors=[DEF_MOBILE_PROC])
     mobile_thumbnail = ImageSpecField(source='image', id='ab:image:mobile_crop')
+
+    topblurred_image = ImageSpecField(source='image', id='ab:topbgblurred')
+    searchresult_image = ImageSpecField(source='image', id='ab:searchresultthumb')
+    gallery_thumb = ImageSpecField(source='image', id='ab:gallerythumb')
+    mapsearch_thumb = ImageSpecField(source='image', id='ab:mapsearchthumbnail')
+    biz_thumb = ImageSpecField(source='image', id='ab:bizthumbnail')
+    admin_thumb = ImageSpecField(source='image', id='ab:adminthumbnail')
 
     height = models.PositiveIntegerField(null=True)
     width = models.PositiveIntegerField(null=True)
@@ -399,6 +408,29 @@ class BusinessHours(models.Model):
 
     def __unicode__(self):
         return u'%s (day=%s)' % (self.business, self.dayOfWeek)
+
+def biz_update_images(bizId):
+    __biz_update__.delay(bizId)
+
+@task()
+def __biz_update__(bizId):
+    biz = Business.objects.get(id=bizId)
+    tryspec(biz.landing_image.topblurred_image)
+    tryspec(biz.landing_image.searchresult_image)
+    tryspec(biz.landing_image.biz_thumb)
+    tryspec(biz.landing_image.mapsearch_thumb)
+    for img in BusinessImage.objects.filter(business=biz):
+        tryspec(img.web_photo)
+        tryspec(img.mobile_photo)
+        tryspec(img.mobile_thumbnail)
+        tryspec(img.gallery_thumb)
+        tryspec(img.admin_thumb)
+
+def tryspec(image):
+    try:
+        image.url
+    except:
+        print 'Unable to find {}'.format(image)
 
 
 class BusinessAdmin(admin.ModelAdmin):

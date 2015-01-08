@@ -117,10 +117,31 @@ class TopBgBlurred(ImageSpec):
 
 register.generator('ab:topbgblurred', TopBgBlurred)
 
-
 class SearchResultThumb(ImageSpec):
     processors = [ResizeToFill(150,150)]
     format = 'JPEG'
     options = {'quality': 80}
 
 register.generator('ab:searchresultthumb', SearchResultThumb)
+
+
+class BizMainThumbnail(ImageSpec):
+    processors = [ResizeToFill(400, 250)]
+    format = 'JPEG'
+    options = {'quality': 60}
+
+register.generator('ab:bizthumbnail', BizMainThumbnail)
+
+class MapSearchThumbnail(ImageSpec):
+    processors = [ResizeToFill(65, 65)]
+    format = 'JPEG'
+    options = {'quality': 60}
+
+register.generator('ab:mapsearchthumbnail', MapSearchThumbnail)
+
+class AdminThumbnail(ImageSpec):
+    processors = [ResizeToFill(380, 250)]
+    format = 'JPEG'
+    options = {'quality': 60}
+
+register.generator('ab:adminthumbnail', AdminThumbnail)

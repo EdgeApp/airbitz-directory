@@ -63,5 +63,5 @@ echo ${txtcmd}"Syncing MEDIA files now"${txtrst}
 echo ""
 
 cd /staging
-rsync --progress --inplace -avz --rsh 'ssh -i /staging/.ssh/prod_keys' $PROD_SERVER_USER@$PROD_SERVER_IP:/home/$PROD_SERVER_USER/media/ /staging/media/
+# rsync --progress --inplace -avz --rsh 'ssh -i /staging/.ssh/prod_keys' $PROD_SERVER_USER@$PROD_SERVER_IP:/home/$PROD_SERVER_USER/media/ /staging/media/
 

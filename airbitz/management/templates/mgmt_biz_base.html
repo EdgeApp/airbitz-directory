@@ -73,8 +73,7 @@
                 <div class="map-marker-image">
                   <a href="{{ biz.get_absolute_url }}">
                     {% if biz.landing_image %}
-                      {% generateimage 'ab:searchresultthumb' source=biz.landing_image.web_photo as th %}
-                      <img src="{{ th.url }}" alt=""/>
+                      <img src="{{ biz.landing_image.searchresult_image.url }}"  />
                     {% else %}
                       <img data-src="holder.js/65x65/ab-blue/text:Add Image" class="biz-img" title="Click to Add Web Image" alt="Add Image">
                     {% endif %}

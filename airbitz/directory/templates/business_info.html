@@ -39,9 +39,8 @@
 
 {% block top_bg %}
     {% if biz.landing_image %}
-        {% generateimage 'ab:topbgblurred' source=biz.landing_image.image as topbg %}
     {% endif %}
-        <div class="top-bg" style="{% if biz.landing_image %}background: url('{{ topbg.url }}');{% endif %}display: none;">&nbsp;</div>
+        <div class="top-bg" style="{% if biz.landing_image %}background: url('{{ biz.landing_image.topblurred_image.url }}');{% endif %}display: none;">&nbsp;</div>
 {% endblock %}
 
 {% block admin_buttons %}
@@ -102,7 +101,7 @@
 
                 <div class="panel-image">
                     <div class="biz-img">
-                         {% thumbnail '400x250' biz.landing_image.image -- class="biz-img img-responsive group list-group-image" %}
+                        <img src="{{ biz.landing_image.biz_thumb.url }}" class="biz-img img-responsive group list-group-image" />
                     </div>
                 </div>
 
@@ -181,9 +180,8 @@
                 {% for img in imgs %}
                     {% if img.image %}
                         <a rel="biz-images" class="biz-gallery-item swipebox" href="{{ img.url }}">
-                            {% generateimage 'ab:gallerythumb' source=img.image as th %}
                             <div class="biz-gallery-img col-xs-12 col-sm-6 col-md-4">
-                                <img src="{{ th.url}} " class="img-responsive" alt="{{ biz.name }}{% if biz.admin3_name %} {{ biz.admin3_name }}{% endif %}" title="{{ biz.name }}{% if biz.admin3_name %} {{ biz.admin3_name }}{% endif %}">
+                                <img src="{{ img.gallery_thumb.url}} " class="img-responsive" alt="{{ biz.name }}{% if biz.admin3_name %} {{ biz.admin3_name }}{% endif %}" title="{{ biz.name }}{% if biz.admin3_name %} {{ biz.admin3_name }}{% endif %}">
                             </div>
                         </a>
                     {% endif %}

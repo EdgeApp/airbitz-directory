@@ -27,7 +27,7 @@
                     <div class="thumbnails">
                     {% for i in images %}
                         <div class="col-xs-6 col-md-3">
-                            {% thumbnail '380x250' i.image -- class="img-thumbnail" %}
+                            <img src="{{ i.admin_thumb }}" class="img-thumbnail" />
                             <div class="bottom-overlay">
                                 <div class="row">
                                     <div class="col-sm-12">
