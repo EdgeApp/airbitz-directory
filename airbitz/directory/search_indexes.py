@@ -2,6 +2,7 @@ from haystack import indexes
 from celery_haystack.indexes import CelerySearchIndex
 
 import json
+from directory import utils
 
 from restapi.api import sortedImages
 from directory.models import Business, BusinessHours, Category, SocialId
@@ -53,6 +54,11 @@ class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
 
     def prepare_categories(self, obj):
         return [category.name for category in obj.categories.all()]
+
+    def prepare_phone(self, obj):
+        if not obj.phone:
+            return None
+        return utils.format_phone(obj.phone, obj.country)
 
     def prepare_category_json(self, obj):
         return json.dumps([{'name': c.name,

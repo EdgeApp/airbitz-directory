@@ -1,129 +1,7 @@
 @import url(variables.less);
 
 
-body {
-    padding-top: 65px;
-
-    @media(max-width: @screen-md) {
-        padding-top: 54px;
-    }
-}
-
 .main-content {
-
-    ul {
-        padding-left: 25px;
-
-        li {
-            margin-bottom: 5px;
-        }
-    }
-
-
-
-    .landing-module {
-        .slides {
-            padding: 50px 0;
-            .slide-image {
-                img {
-                    max-height: 400px;
-                }
-            }
-            .slide-text {
-
-                @media(max-width: @screen-sm) {
-                    width: 400px;
-                    margin: 0 auto;
-                }
-                @media(max-width: @screen-xs) {
-                    width: 360px;
-                }
-
-                h1,h2,h3,h4 {
-                    letter-spacing: -1px;
-                }
-                h1 {
-                    width: auto;
-                    font-size: 46px;
-                    font-weight: 700;
-
-                    @media(max-width: @screen-md) {
-                        zoom: 0.90;
-                    }
-                    @media(max-width: @screen-xs) {
-                        zoom: 0.80;
-                    }
-                }
-                ul {
-                    width: auto;
-                    padding-left: 0;
-                    
-                    li {
-                        margin-bottom: 15px;
-                        font-size: 28px;
-                        font-weight: 600;
-                        list-style: none;
-                        letter-spacing: -1px;
-//                        text-shadow: 1px 1px 2px #fff;
-                        color: #fff;
-                        text-shadow: 1px 1px 2px #000;
-
-                        i {
-                            width: 35px;
-                            text-align: center;
-                        }
-
-                        @media(max-width: @screen-lg) {
-                            font-size: 26px;
-                        }
-                        @media(max-width: @screen-md) {
-                            font-size: 21px;
-                        }
-                        @media(max-width: @screen-sm) {
-                            font-size: 22px;
-                        }
-                        @media(max-width: @screen-xs) {
-                            font-size: 20px;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    .feature-section {
-        margin-bottom: 30px;
-    }
-    .feature-major {
-//        margin-bottom: 30px;
-//        padding-left: 45px;
-    }
-
-    .feature-media-right {
-        margin-top: 25px;
-//        border-left: 3px solid #eee;
-
-        .row {
-            margin-bottom: 10px;
-        }
-    }
-
-    .feature-media-left {
-        margin-top: 25px;
-//        border-right: 3px solid #eee;
-
-        .row {
-            margin-bottom: 10px;
-        }
-    }
-
-    .section-bitcoin-wallet {
-        min-height: 500px;
-
-        .container {
-            position: absolute;
-        }
-    }
 
     #section-bitcoin-wallet-header {}
 
@@ -137,7 +15,7 @@ body {
         hr {
             margin: 40px 0;
         }
-        
+
         h2 {
             margin: 40px 0;
             font-size: 42px;
@@ -145,17 +23,4 @@ body {
             color: @ab-blue-dark;
         }
     }
-
-    #section-bitcoin-wallet-platform-header {}
-
-    #section-bitcoin-wallet-platform-details {
-        h1 {
-            margin: 40px 0;
-            font-size: 42px;
-            font-weight: 500;
-            color: @ab-blue-dark;
-        }
-    }
-
-
 }

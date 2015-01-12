@@ -1,6 +1,7 @@
 from django import template
 from django.template.defaultfilters import stringfilter
 import re
+from directory import utils
 
 register = template.Library()
 
@@ -31,3 +32,8 @@ def decimal_to_percent(decimal):
 
     except ValueError:
         return ''
+
+# Format phone number
+@register.filter(name='format_phone')
+def format_phone(number, country):
+    return utils.format_phone(number, country)

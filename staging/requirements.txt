@@ -7,6 +7,7 @@ Werkzeug==0.9.4
 amqp==1.4.6
 anyjson==0.3.3
 argparse==1.2.1
+beautifulsoup4==4.3.2
 billiard==3.3.0.19
 celery==3.1.16
 celery-haystack==0.8
@@ -35,6 +36,7 @@ geopy==0.98.2
 gunicorn==18.0
 ipython==1.2.1
 kombu==3.0.24
+phonenumbers==7.0.1
 pilkit==1.1.6
 psycopg2==2.5.2
 pysolr==3.1.0

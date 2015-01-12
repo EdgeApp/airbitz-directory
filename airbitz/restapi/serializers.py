@@ -105,6 +105,15 @@ class CharSerializer(serializers.Field):
     def field_to_native(self, obj, field_name):
         return get_component(obj, self.source) or ''
 
+class PhoneSerializer(serializers.Field):
+    def field_to_native(self, obj, field_name):
+        val = get_component(obj, self.source) or ''
+        if self.context.has_key('request') \
+                and self.context['request'].user.username.find('ios') != -1:
+            return val.replace('+', '')
+        else:
+            return val
+
 def get_component(obj, attr_name):
     if isinstance(obj, dict):
         val = obj.get(attr_name)
@@ -120,7 +129,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
     county = CharSerializer(source='admin2_name')
     postalcode = CharSerializer(source='postalcode')
     country = CharSerializer(source='country')
-    phone = CharSerializer(source='phone')
+    phone = PhoneSerializer(source='phone')
     website = CharSerializer(source='website')
 
     categories = JsonSerializer(source='category_json', islist=True)
@@ -164,7 +173,7 @@ class BusinessSerializer(serializers.ModelSerializer):
     county = CharSerializer(source='admin2_name')
     postalcode = CharSerializer(source='postalcode')
     country = CharSerializer(source='country')
-    phone = CharSerializer(source='phone')
+    phone = PhoneSerializer(source='phone')
     website = CharSerializer(source='website')
 
     profile_image = JsonSerializer(source='mobile_image_json')

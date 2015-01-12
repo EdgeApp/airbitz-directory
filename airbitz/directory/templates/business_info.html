@@ -140,9 +140,11 @@
                     {% endif %}
 
                     {% if biz.phone %}
-                    <div class="biz-phone single-line">
-                        <i class="fa fa-phone"></i> <a href="tel:{{ biz.phone }}"><span itemprop="telephone" content="{{ biz.phone }}">{{ biz.phone }}</span></a>
-                    </div>
+                        {% with phone=biz.phone|format_phone:biz.country %}  
+                        <div class="biz-phone single-line">
+                            <i class="fa fa-phone"></i> <a href="tel:{{ phone }}"><span itemprop="telephone" content="{{ phone }}">{{ phone }}</span></a>
+                        </div>
+                        {% endwith %}
                     {% endif %}
 
                     {% if biz.website %}
