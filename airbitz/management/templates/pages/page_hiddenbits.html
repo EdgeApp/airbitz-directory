@@ -39,7 +39,7 @@
 
 {% block main_content %}
 
-  {% include 'pages/hiddenbits/_main_content.html' %}
+  {% include 'pages/hiddenbits/_main.html' %}
 
 {% endblock main_content %}
 
@@ -51,11 +51,11 @@
 
   <script>
     $('#section-bitcoin-wallet-platform-header').backstretch(
-      '{{ STATIC_URL }}img/bitcoin-wallet/section-bitcoin-wallet-platform-bg.jpg',
-      {
-        duration: 3000,
-        fade: 1500
-      }
+        '{{ STATIC_URL }}img/hiddenbits/section-hiddenbits-bg.jpg',
+        {
+          duration: 3000,
+          fade: 1500
+        }
     );
   </script>
 {% endblock javascript_headers %}

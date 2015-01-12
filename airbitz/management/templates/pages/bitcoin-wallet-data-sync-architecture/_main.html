@@ -1,30 +1,35 @@
 
+<div class="row">
+  <div id="section-bitcoin-wallet-platform-header" class="landing-module container-fluid">
+
+    <div class="container">
+
+      <div class="slides row">
+        <br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/>
+      </div><!-- /.row -->
+
+    </div>
+  </div><!-- /.landing-module -->
+</div>
+
+
+<div id="section-bitcoin-wallet-platform-details" class="container">
+
+  <h1 class="hidden-xs">
+    <img src="{{ STATIC_URL }}img/icons/airbitz-platform-icon_64px.png" alt="Airbitz Platform" class="" />&nbsp;&nbsp;{{ page_title }}
+  </h1>
+  <h1 class="visible-xs-block">
+    <img src="{{ STATIC_URL }}img/icons/genius_32px.png" alt="Airbitz Platform" class="" />&nbsp;&nbsp;{{ page_title }}
+  </h1>
+
   <div class="row">
-    <div id="section-bitcoin-wallet-platform-header" class="landing-module container-fluid">
 
-      <div class="container">
-
-        <div class="slides row">
-          <br/><br/><br/><br/><br/><br/>
-          <br/><br/><br/><br/><br/><br/>
-        </div><!-- /.row -->
-
-      </div>
-    </div><!-- /.landing-module -->
-  </div>
-
-
-  <div id="section-bitcoin-wallet-platform-details" class="container">
-    <div class="row">
-      <h1 class="hidden-xs">
-        <img src="{{ STATIC_URL }}img/icons/airbitz-platform-icon_64px.png" alt="Airbitz Platform" class="" />&nbsp;&nbsp;{{ page_title }}
-      </h1>
-      <h1 class="visible-xs-block">
-        <img src="{{ STATIC_URL }}img/icons/genius_32px.png" alt="Airbitz Platform" class="" />&nbsp;&nbsp;{{ page_title }}
-      </h1>
+    <div class="col-md-3">
+      {% include 'sidebars/bitcoin-platform.html' %}
     </div>
 
-    <div class="row">
+    <div class="col-md-9">
       <ul>
         <li>Peer to peer Git servers in cloud accessible via https w/no built in authentication security.</li>
         <li>Client creates random 20 byte sync key (similar to Bittorrent Sync).</li>
@@ -44,4 +49,7 @@
         <li>Client Wallet core randomly chooses a Git server and triggers Push to server on every file change.</li>
       </ul>
     </div>
+
   </div>
+
+</div>

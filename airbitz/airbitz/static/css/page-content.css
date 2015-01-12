@@ -21,6 +21,29 @@ body {
 .main-content h2 {
   margin-top: 50px;
 }
+.main-content #sidebar {
+  width: 100%;
+  padding: 0;
+  background: #fafafa;
+  border: 1px solid #eeeeee;
+}
+.main-content #sidebar li {
+  margin-bottom: 0;
+}
+.main-content #sidebar li a {
+  letter-spacing: -1px;
+}
+.main-content #sidebar li a.active {
+  background: #2291cf;
+  color: white;
+}
+.main-content #sidebar li a:hover,
+.main-content #sidebar li a:active {
+  color: white;
+}
+.main-content .contextual-bg {
+  padding: 10px 15px;
+}
 .main-content .landing-module .slides {
   padding: 50px 0;
 }

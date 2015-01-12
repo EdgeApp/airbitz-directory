@@ -7,7 +7,7 @@
   {% block seo_meta %}
     <title>{% block title %}{{ page_title }}{% endblock title %} | Airbitz</title>
     <meta name="description" content="{% block meta_description %}{{ page_description }}{% endblock meta_description %}">
-    <meta name="news_keywords" content="{% block meta_news_keywords %}Bitcoin, Bitcoin Wallet, Bitcoin API, Bitcoin Library, Bitcoin White Paper{% endblock meta_news_keywords %}">
+    <meta name="news_keywords" content="{% block meta_news_keywords %}Bitcoin, Bitcoin Wallet, Bitcoin API, Bitcoin Library, Bitcoin Wallet API{% endblock meta_news_keywords %}">
   {% endblock seo_meta %}
 
   {% block og_meta %}
@@ -39,7 +39,7 @@
 
 {% block main_content %}
 
-  {% include 'pages/bitcoin-wallet-data-sync-architecture/_main.html' %}
+  {% include 'pages/bitcoin-wallet-client-server-architecture/_main.html' %}
 
 {% endblock main_content %}
 

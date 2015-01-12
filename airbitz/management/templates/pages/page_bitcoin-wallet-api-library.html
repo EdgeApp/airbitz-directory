@@ -5,14 +5,14 @@
 {% block head_seo_social %}
 
   {% block seo_meta %}
-    <title>{% block title %}Bitcoin Wallet API Library{% endblock title %} | Airbitz</title>
-    <meta name="description" content="{% block meta_description %}The Airbitz Core (ABC) gives developers the ability to build Bitcoin products such as currency exchanges, ATMs, POS solutions, games, and payroll services that are fully integrated with accounts and wallets from the Airbitz mobile app.{% endblock meta_description %}">
+    <title>{% block title %}{{ page_title }}{% endblock title %} | Airbitz</title>
+    <meta name="description" content="{% block meta_description %}{{ page_description }}{% endblock meta_description %}">
     <meta name="news_keywords" content="{% block meta_news_keywords %}Bitcoin, Bitcoin Wallet, Bitcoin API, Bitcoin Library, Bitcoin Wallet API{% endblock meta_news_keywords %}">
   {% endblock seo_meta %}
 
   {% block og_meta %}
-    <meta property="og:title" content="{% block og_title %}Airbitz Bitcoin Wallet API Library{% endblock og_title %}">
-    <meta property="og:description" content="{% block og_description %}The Airbitz Core (ABC) gives developers the ability to build Bitcoin products such as currency exchanges, ATMs, POS solutions, games, and payroll services that are fully integrated with accounts and wallets from the Airbitz mobile app.{% endblock og_description %}">
+    <meta property="og:title" content="{% block og_title %}{{ page_title }}{% endblock og_title %}">
+    <meta property="og:description" content="{% block og_description %}{{ page_description }}{% endblock og_description %}">
     <meta property="og:type" content="{% block og_type %}Article{% endblock og_type %}">
     <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock og_url %}">
     <meta property="og:image" content="{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock og_image %}">
@@ -23,8 +23,8 @@
   {% block twitter_meta %}
     <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock twitter_card %}">
     <meta name="twitter:site" content="{% block twitter_site %}@airbitz{% endblock twitter_site %}">
-    <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet API Library{% endblock twitter_title %}">
-    <meta name="twitter:description" content="{% block twitter_description %}The Airbitz Core (ABC) gives developers the ability to build Bitcoin products such as currency exchanges, ATMs, POS solutions, games, and payroll services that are fully integrated with accounts and wallets from the Airbitz mobile app.{% endblock twitter_description %}">
+    <meta name="twitter:title" content="{% block twitter_title %}{{ page_title }}{% endblock twitter_title %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{{ page_description }}{% endblock twitter_description %}">
     <meta name="twitter:creator" content="{% block twitter_creator %}@airbitz{% endblock twitter_creator %}">
     <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock twitter_image_src %}">
     <meta name="twitter:domain" content="{% block twitter_domain %}{{ request.META.HTTP_HOST }}{% endblock twitter_domain %}">
@@ -51,11 +51,11 @@
 
   <script>
     $('#section-bitcoin-wallet-platform-header').backstretch(
-      '{{ STATIC_URL }}img/bitcoin-wallet/section-bitcoin-wallet-api-library-bg.jpg',
-      {
-        duration: 3000,
-        fade: 1500
-      }
+        '{{ STATIC_URL }}img/bitcoin-wallet/section-bitcoin-wallet-platform-bg.jpg',
+        {
+          duration: 3000,
+          fade: 1500
+        }
     );
   </script>
 {% endblock javascript_headers %}
