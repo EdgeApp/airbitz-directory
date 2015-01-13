@@ -67,6 +67,7 @@
                                         <th title="Categories">Categories</th>
                                         <th title="Local Business"><i class="fa fa-building-o"></i></th>
                                         <th title="Web Business"><i class="fa fa-globe"></i></th>
+                                        <th title="Searchable"><i class="fa fa-search"></th>
                                         <th title="Country (country)">Country</th>
                                         <th title="State (admin1_code)">State</th>
                                         <th title="City (admin3_name)">City</th>
@@ -85,6 +86,7 @@
                                         <th>Categories</th>
                                         <th>Local</th>
                                         <th>Web</th>
+                                        <th>Searchable</th>
                                         <th>Country</th>
                                         <th>State</th>
                                         <th>City</th>
@@ -233,12 +235,13 @@
             {"mData": "categories"},                // 4
             {"mData": "has_physical_business"},     // 5
             {"mData": "has_online_business"},       // 6
-            {"mData": "country"},                   // 7
-            {"mData": "admin1_code"},               // 8
-            {"mData": "admin3_name"},               // 9
-            {"mData": "published"},                 // 10
-            {"mData": "modified"},                  // 11
-            {"mData": "created"},                   // 12
+            {"mData": "is_searchable"},             // 7
+            {"mData": "country"},                   // 8
+            {"mData": "admin1_code"},               // 9
+            {"mData": "admin3_name"},               // 10
+            {"mData": "published"},                 // 11
+            {"mData": "modified"},                  // 12
+            {"mData": "created"},                   // 13
           ],
           "aoColumnDefs": [ {
             "aTargets":[1],
@@ -337,7 +340,21 @@
                 }
             }
           } , {
-            "aTargets":[10],
+            "aTargets":[7],
+            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+                $(nTd).css('text-align', 'center');
+                $(nTd).attr('data-sort', oData['is_searchable']);
+            },
+            "mData": null,
+            "mRender": function(data, type, full) {
+                if (data) {
+                    return '<i class="ab-true fa fa-check" title="true"></i>';
+                } else {
+                    return '<i class="ab-false fa fa-times" title="false"></i>';
+                }
+            }
+          } , {
+            "aTargets":[11],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                 $(nTd).css('text-align', 'left');
                 if (oData['published'] !== null) {
@@ -357,7 +374,7 @@
                 }
             }
           } , {
-            "aTargets":[11],
+            "aTargets":[12],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                 $(nTd).css('text-align', 'left');
                 unixTimestamp = moment(oData['modified']).unix();
@@ -369,7 +386,7 @@
                 return niceTimestamp;
             }
           } , {
-            "aTargets":[12],
+            "aTargets":[13],
             "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                 $(nTd).css('text-align', 'left');
                 unixTimestamp = moment(oData['created']).unix();
@@ -415,12 +432,13 @@
             "categories",                // 4
             "local",                     // 5
             "web",                       // 6
-            "country",                   // 7
-            "state",                     // 8
-            "city",                      // 9
-            "published",                 // 10
-            "modified",                  // 11
-            "created",                   // 12
+            "searchable",                // 7
+            "country",                   // 8
+            "state",                     // 9
+            "city",                      // 10
+            "published",                 // 11
+            "modified",                  // 12
+            "created",                   // 13
         ]
 
         function getColumnList () {
