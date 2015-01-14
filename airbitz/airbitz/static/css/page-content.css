@@ -119,6 +119,17 @@ body {
     font-size: 20px;
   }
 }
+.main-content .step {
+  width: 90px;
+  padding: 30px;
+  background: #2291cf;
+  color: #fff;
+  border-radius: 150px;
+  font-size: 30px;
+  line-height: 30px;
+  text-align: center;
+  box-shadow: 0 5px #555;
+}
 .main-content .feature-section {
   margin-bottom: 30px;
 }
