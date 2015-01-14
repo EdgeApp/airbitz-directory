@@ -429,7 +429,7 @@ def page_privacy_policy(request):
 ############################
 def page_card(request):
     context = {
-        'page_title': 'Bitcoin Gift Cards by Airbitz',
+        'page_title': '<strong>Bitcoin Gift Cards</strong> by Airbitz',
         'page_description': 'Airbitz wallet gift cards are one of the easiest ways to share and introduce bitcoin to friends and family.',
     }
     return render_to_response('pages/page_card.html', RequestContext(request, context))
