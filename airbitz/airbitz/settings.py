@@ -91,6 +91,7 @@ INSTALLED_APPS = (
     'bootstrap_pagination',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_throttling',
     'south',
     'rest_framework_swagger',
     'analytical',
@@ -463,7 +464,15 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
+    'DEFAULT_THROTTLE_RATES': {
+        'per_user_throttle': '100/sec',
+        'anon': '100/sec',
+    },
     'PAGINATE_BY': 20
+}
+REST_FRAMEWORK_THROTTLING = {
+    'DEFAULT_NEW_USER_THROTTLE': True,
+    'DEFAULT_NEW_USER_THROTTLE_RATE': '1000000/min',
 }
 SWAGGER_SETTINGS = {
     "exclude_namespaces": ['management'], # List URL namespaces to ignore

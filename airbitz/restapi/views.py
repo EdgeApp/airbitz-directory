@@ -8,6 +8,7 @@ from rest_framework import generics, filters
 from rest_framework import permissions as perm
 from rest_framework.response import Response 
 from rest_framework.views import APIView
+from rest_framework_throttling.throttling import PerUserThrottle
 
 import logging
 
@@ -71,6 +72,7 @@ class CategoryView(generics.ListAPIView):
     permission_classes = AUTH
     max_paginate_by = 500
     paginate_by = 500
+    throttle_classes = (PerUserThrottle, )
 
     def get_queryset(self):
         tasks.ga_send(self.request, 'api::CategoryView');
@@ -87,6 +89,7 @@ class BusinessView(generics.RetrieveAPIView):
     lookup_url_kwarg = 'bizId'
     authentication_classes = PERMS
     permission_classes = AUTH
+    throttle_classes = (PerUserThrottle, )
 
     def get_queryset(self):
         tasks.ga_send(self.request, 'api::BusinessView');
@@ -122,6 +125,7 @@ class PhotosView(generics.ListAPIView):
     serializer_class = serializers.BusinessImageSerializer
     authentication_classes = PERMS
     permission_classes = AUTH
+    throttle_classes = (PerUserThrottle, )
 
     def get_queryset(self):
         bizId = int(self.kwargs['bizId'])
@@ -150,6 +154,7 @@ class SearchView(generics.ListAPIView):
     max_paginate_by = 50
     authentication_classes = PERMS
     permission_classes = AUTH
+    throttle_classes = (PerUserThrottle, )
 
     def get_queryset(self):
         ser = serializers.SearchSerializer(data=self.request.GET)
@@ -179,6 +184,7 @@ class AutoCompleteBusiness(APIView):
     authentication_classes = PERMS
     permission_classes = AUTH
     model = Business
+    throttle_classes = (PerUserThrottle, )
 
     def get(self, request, *args, **kwars):
         term = self.request.QUERY_PARAMS.get('term', None)
@@ -200,6 +206,7 @@ class AutoCompleteLocation(APIView):
     authentication_classes = PERMS
     permission_classes = AUTH
     model = Business
+    throttle_classes = (PerUserThrottle, )
 
     def get(self, request, *args, **kwargs):
         term = self.request.QUERY_PARAMS.get('term', None)
@@ -224,6 +231,7 @@ class CategorySuggest(APIView):
     authentication_classes = PERMS
     permission_classes = AUTH
     model = Business
+    throttle_classes = (PerUserThrottle, )
 
     def get(self, request, *args, **kwars):
         location = self.request.QUERY_PARAMS.get('location', None)
@@ -245,6 +253,7 @@ class LocationSuggest(APIView):
     authentication_classes = PERMS
     permission_classes = AUTH
     model = Business
+    throttle_classes = (PerUserThrottle, )
 
     def get(self, request, *args, **kwargs):
         ll = self.request.QUERY_PARAMS.get('ll', None)

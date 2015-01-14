@@ -128,6 +128,12 @@
       </analyzer>
     </fieldType>
 
+    <fieldType name="text_kw" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+      </analyzer>
+    </fieldType>
+
     <fieldType name="text_ws" class="solr.TextField" positionIncrementGap="100">
       <analyzer>
         <tokenizer class="solr.WhitespaceTokenizerFactory"/>
@@ -211,7 +217,33 @@
 
     <field name="osm_id" type="text_en" indexed="true" stored="true" multiValued="false" />
 
+    <field name="website" type="text_en" indexed="true" stored="true" multiValued="false" />
+
+    <field name="description" type="text_en" indexed="true" stored="true" multiValued="false" />
+
+    <field name="social_json" type="string" indexed="false" stored="true" multiValued="false" />
+
+    <field name="address" type="text_en" indexed="true" stored="true" multiValued="false" />
+
+    <field name="category_json" type="string" indexed="false" stored="true" multiValued="false" />
+
+    <field name="is_searchable" type="boolean" indexed="true" stored="true" multiValued="false" />
+
+    <field name="phone" type="text_en" indexed="true" stored="true" multiValued="false" />
+
+    <field name="images_json" type="string" indexed="false" stored="true" multiValued="false" />
+
+    <field name="hours_json" type="string" indexed="false" stored="true" multiValued="false" />
+
+    <field name="categories" type="text_en" indexed="true" stored="true" multiValued="true" />
+
+    <field name="bizId" type="long" indexed="false" stored="true" multiValued="false" />
+
+    <field name="mobile_image_json" type="string" indexed="false" stored="true" multiValued="false" />
+
     <field name="name" type="text_en" indexed="true" stored="true" multiValued="false" />
+
+    <field name="landing_image_json" type="string" indexed="false" stored="true" multiValued="false" />
 
     <field name="has_bitcoin_discount" type="text_en" indexed="true" stored="true" multiValued="false" />
 
@@ -219,9 +251,7 @@
 
     <field name="has_physical_business" type="boolean" indexed="true" stored="true" multiValued="false" />
 
-    <field name="categories" type="text_en" indexed="true" stored="true" multiValued="true" />
-
-    <field name="description" type="text_en" indexed="true" stored="true" multiValued="false" />
+    <field name="published" type="date" indexed="true" stored="true" multiValued="false" />
 
 
    <field name="_version_" type="long" indexed="true" stored="true"/>
