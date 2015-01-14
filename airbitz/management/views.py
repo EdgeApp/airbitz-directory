@@ -476,8 +476,8 @@ def clean_gdoc_html(html=None, images=True):
 
 def page_bitcoin_wallet(request):
     context = {
-        'page_title': '',
-        'page_description': '',
+        'page_title': 'Bitcoin Wallet',
+        'page_description': 'Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.',
     }
     return render_to_response('pages/page_bitcoin-wallet.html', RequestContext(request, context))
 
