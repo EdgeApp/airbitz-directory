@@ -130,6 +130,12 @@ body {
   text-align: center;
   box-shadow: 0 5px #555;
 }
+@media (max-width: 768px) {
+  .main-content .step {
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+}
 .main-content .feature-section {
   margin-bottom: 30px;
 }
