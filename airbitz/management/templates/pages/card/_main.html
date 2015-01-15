@@ -25,11 +25,6 @@
     {{ page_title|safe }}
   </h1>
 
-
-  <style>
-    hr {
-      margin: 40px 0;}
-  </style>
   <div class="row">
 
     <div class="col-xs-12">
@@ -39,8 +34,9 @@
       <hr/>
 
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
           <div class="step">1</div>
+          <h3 class="step-description">Install</h3>
         </div>
         <div class="col-sm-10">
 
@@ -71,16 +67,18 @@
       <hr/>
 
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
           <div class="step">2</div>
+          <h3 class="step-description">Login</h3>
         </div>
         <div class="col-sm-10">
           <div class="row">
             <div class="col-sm-4">
-              <p><strong>Login to the Airbitz Wallet mobile app or create an account tapping <code>Wallets</code> on the bottom bar.</strong></p>
+              <p><strong>Tap <code>Request</code> on the bottom bar.</strong></p>
+              <p><strong><code>Login</code> or <code>Create an Account</code>.</strong></p>
             </div>
             <div class="col-sm-4">
-              <img class="img-thumbnail" src="{{ STATIC_URL }}img/card/airbitz-wallet-button.jpg" alt="Airbitz Wallet Button" />
+              <img class="img-thumbnail" src="{{ STATIC_URL }}img/card/airbitz-request-button.jpg" alt="Airbitz Bitcoin Request" />
             </div>
             <div class="col-sm-4">
               <img class="img-thumbnail" src="{{ STATIC_URL }}img/card/airbitz-create-account.jpg" alt="Airbitz Create Account" />
@@ -92,18 +90,15 @@
       <hr/>
 
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
           <div class="step">3</div>
+          <h3 class="step-description">Import</h3>
         </div>
         <div class="col-sm-10">
 
           <div class="row">
             <div class="col-sm-4">
-              <p><strong>Tap <code>Request</code> on the bottom bar.</strong></p>
-              <p><strong>Then tap <code>Import</code>.</strong></p>
-            </div>
-            <div class="col-sm-4">
-              <img class="img-thumbnail" src="{{ STATIC_URL }}img/card/airbitz-request-button.jpg" alt="Airbitz Bitcoin Request" />
+              <p><strong>Tap <code>Import</code>.</strong></p>
             </div>
             <div class="col-sm-4">
               <img class="img-thumbnail" src="{{ STATIC_URL }}img/card/airbitz-import-button.jpg" alt="Airbitz Wallet Import" />
@@ -116,14 +111,15 @@
       <hr/>
 
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
           <div class="step">4</div>
+          <h3 class="step-description">Scan</h3>
         </div>
         <div class="col-sm-10">
 
           <div class="row">
             <div class="col-sm-4">
-              <p><strong>Scan the QR code on the Airbitz Bitcoin Gift Card</strong></p>
+              <p><strong><code>Scan the QR code</code> on the Bitcoin Gift Card using your phones camera.</strong></p>
             </div>
             <div class="col-sm-4">
               <img class="img-thumbnail" src="{{ STATIC_URL }}img/card/airbitz-request-import.jpg" alt="Airbitz Scan QR Code" />

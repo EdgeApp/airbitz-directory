@@ -21,6 +21,10 @@ body {
 .main-content h2 {
   margin-top: 50px;
 }
+.main-content hr {
+  margin: 40px 0;
+  border-color: #aaa;
+}
 .main-content #sidebar {
   width: 100%;
   padding: 0;
@@ -121,6 +125,7 @@ body {
 }
 .main-content .step {
   width: 90px;
+  margin: 0 auto;
   padding: 30px;
   background: #2291cf;
   color: #fff;
@@ -132,9 +137,11 @@ body {
 }
 @media (max-width: 768px) {
   .main-content .step {
-    margin: 0 auto;
     margin-bottom: 30px;
   }
+}
+.main-content .step-description {
+  margin-bottom: 30px;
 }
 .main-content .feature-section {
   margin-bottom: 30px;
