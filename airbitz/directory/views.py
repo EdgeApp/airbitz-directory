@@ -90,7 +90,7 @@ def __business_search__(request, action, arg_term=None, arg_category=None, arg_l
 
     ip = api.getRequestIp(request)
     a = api.ApiProcess(locationStr=location, ll=ll, ip=ip)
-    results = a.searchDirectory(term=term, category=category)
+    results = a.searchDirectory(term=term, category=category, show_hidden=False)
 
     if not results:
         return business_search_no_results(request, action) 
