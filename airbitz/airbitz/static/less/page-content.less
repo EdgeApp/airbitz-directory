@@ -1,0 +1,176 @@
+@import url(variables.less);
+
+
+body {
+    padding-top: 65px;
+
+    @media(max-width: @screen-md) {
+        padding-top: 54px;
+    }
+}
+
+.main-content {
+
+    p {
+        margin-bottom: 15px;
+    }
+
+    ul,ol {
+        font-size: 16px;
+        padding-left: 25px;
+
+        li {
+            margin-bottom: 15px;
+        }
+    }
+
+    h2 {
+        margin-top: 50px;
+    }
+
+    hr {
+        margin: 40px 0;
+        border-color: #aaa;
+    }
+    #sidebar {
+        width: 100%;
+        padding: 0;
+        background: #fafafa;
+        border: 1px solid #eeeeee;
+
+        li {
+            margin-bottom: 0;
+
+            a {
+                letter-spacing: -1px;
+
+                &.active {
+                    background: @ab-blue;
+                    color: white;
+                }
+                &:hover, &:active {
+                    color: white;
+                }
+            }
+        }
+    }
+    
+    .contextual-bg {
+        padding: 10px 15px;
+    }
+    
+    .landing-module {
+        .slides {
+            padding: 50px 0;
+            .slide-image {
+                img {
+                    max-height: 400px;
+                }
+            }
+            .slide-text {
+
+                @media(max-width: @screen-sm) {
+                    width: 400px;
+                    margin: 0 auto;
+                }
+                @media(max-width: @screen-xs) {
+                    width: 360px;
+                }
+
+                h1,h2,h3,h4 {
+                    letter-spacing: -1px;
+                }
+                h1 {
+                    width: auto;
+                    font-size: 46px;
+                    font-weight: 700;
+
+                    @media(max-width: @screen-md) {
+                        zoom: 0.90;
+                    }
+                    @media(max-width: @screen-xs) {
+                        zoom: 0.80;
+                    }
+                }
+                ul {
+                    width: auto;
+                    padding-left: 0;
+
+                    li {
+                        margin-bottom: 15px;
+                        font-size: 28px;
+                        font-weight: 600;
+                        list-style: none;
+                        letter-spacing: -1px;
+//                        text-shadow: 1px 1px 2px #fff;
+                        color: #fff;
+                        text-shadow: 1px 1px 2px #000;
+
+                        i {
+                            width: 35px;
+                            text-align: center;
+                        }
+
+                        @media(max-width: @screen-lg) {
+                            font-size: 26px;
+                        }
+                        @media(max-width: @screen-md) {
+                            font-size: 21px;
+                        }
+                        @media(max-width: @screen-sm) {
+                            font-size: 22px;
+                        }
+                        @media(max-width: @screen-xs) {
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .step {
+        width: 90px;
+        margin: 0 auto;
+        padding: 30px;
+        background: @ab-blue;
+        color: #fff;
+        border-radius: 150px;
+        font-size: 30px;
+        line-height: 30px;
+        text-align: center;
+        box-shadow: 0 5px #555;
+
+        @media(max-width: @screen-sm) {
+            margin-bottom: 30px;
+        }
+    }
+    
+    .step-description {
+        margin-bottom: 30px;
+    }
+
+    .feature-section {
+        margin-bottom: 30px;
+    }
+
+    .feature-media-right {
+        margin-top: 25px;
+
+        .row {
+            margin-bottom: 10px;
+        }
+    }
+
+    .feature-media-left {
+        margin-top: 25px;
+
+        .row {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+
+@import url(page_bitcoin-wallet.less);
+@import url(page_bitcoin-wallet-platform.less);

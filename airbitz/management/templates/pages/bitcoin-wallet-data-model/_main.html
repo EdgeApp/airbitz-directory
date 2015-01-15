@@ -1,0 +1,44 @@
+
+{#  <div class="row">#}
+{#    <div id="section-bitcoin-wallet-platform-header" class="landing-module container-fluid">#}
+{##}
+{#      <div class="container">#}
+{##}
+{#        <div class="slides row">#}
+{#          <br/><br/><br/><br/><br/><br/>#}
+{#          <br/><br/><br/><br/><br/><br/>#}
+{#        </div><!-- /.row -->#}
+{##}
+{#      </div>#}
+{#    </div><!-- /.landing-module -->#}
+{#  </div>#}
+
+
+<div id="section-bitcoin-wallet-platform-details" class="container">
+
+  <h1 class="hidden-xs">
+    <img src="{{ STATIC_URL }}img/icons/airbitz-platform-icon_64px.png" alt="Airbitz Platform" class="" />&nbsp;&nbsp;Bitcoin Wallet Data Model
+  </h1>
+  <h1 class="visible-xs-block">
+    <img src="{{ STATIC_URL }}img/icons/genius_32px.png" alt="Airbitz Platform" class="" />&nbsp;&nbsp;Bitcoin Wallet Data Model
+  </h1>
+
+  <div class="row">
+
+    <div class="col-md-3">
+      {% include 'sidebars/bitcoin-platform.html' %}
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="row">
+        <div class="col-sm-12">
+          {{ gdoc_style|safe }}
+          {{ gdoc_body|safe }}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

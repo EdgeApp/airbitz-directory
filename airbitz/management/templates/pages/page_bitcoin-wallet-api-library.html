@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load compressed %}
+{% load absolute %}
+
+{% block head_seo_social %}
+
+  {% block seo_meta %}
+    <title>{% block title %}{{ page_title|striptags }}{% endblock title %} | Airbitz</title>
+    <meta name="description" content="{% block meta_description %}{{ page_description|striptags }}{% endblock meta_description %}">
+    <meta name="news_keywords" content="{% block meta_news_keywords %}Bitcoin, Bitcoin Wallet, Bitcoin API, Bitcoin Library, Bitcoin Wallet API{% endblock meta_news_keywords %}">
+  {% endblock seo_meta %}
+
+  {% block og_meta %}
+    <meta property="og:title" content="{% block og_title %}{{ page_title|striptags }}{% endblock og_title %}">
+    <meta property="og:description" content="{% block og_description %}{{ page_description|striptags }}{% endblock og_description %}">
+    <meta property="og:type" content="{% block og_type %}Article{% endblock og_type %}">
+    <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock og_url %}">
+    <meta property="og:image" content="{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock og_image %}">
+    <meta property="og:site_name" content="{% block og_site_name %}Airbitz{% endblock og_site_name %}">
+    {#        <meta property="fb:admins" content="{% block og_fb_admins %}{% endblock og_fb_admins %}">#}
+  {% endblock og_meta %}
+
+  {% block twitter_meta %}
+    <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock twitter_card %}">
+    <meta name="twitter:site" content="{% block twitter_site %}@airbitz{% endblock twitter_site %}">
+    <meta name="twitter:title" content="{% block twitter_title %}{{ page_title|striptags }}{% endblock twitter_title %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{{ page_description|striptags }}{% endblock twitter_description %}">
+    <meta name="twitter:creator" content="{% block twitter_creator %}@airbitz{% endblock twitter_creator %}">
+    <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock twitter_image_src %}">
+    <meta name="twitter:domain" content="{% block twitter_domain %}{{ request.META.HTTP_HOST }}{% endblock twitter_domain %}">
+    <meta name="twitter:url" content="{% block twitter_url %}{{ request.build_absolute_uri }}{% endblock twitter_url %}">
+    <meta name="twitter:author" content="{% block twitter_author %}@airbitz{% endblock twitter_author %}">
+  {% endblock twitter_meta %}
+
+{% endblock head_seo_social %}
+
+
+{% block main_content_container %}container-fluid{% endblock main_content_container %}
+
+{% block main_content %}
+
+  {% include 'pages/bitcoin-wallet-api-library/_main.html' %}
+
+{% endblock main_content %}
+
+
+{% block javascript_headers %}
+  {{ block.super }}
+  {% compressed_js 'page_content' %}
+  {% compressed_css 'page_content' %}
+
+  <script>
+    $('#section-bitcoin-wallet-platform-header').backstretch(
+        '{{ STATIC_URL }}img/bitcoin-wallet/section-bitcoin-wallet-platform-bg.jpg',
+        {
+          duration: 3000,
+          fade: 1500
+        }
+    );
+  </script>
+{% endblock javascript_headers %}
