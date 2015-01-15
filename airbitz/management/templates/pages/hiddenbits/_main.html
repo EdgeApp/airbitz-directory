@@ -23,11 +23,6 @@
     {{ page_title|safe }}
   </h1>
 
-
-  <style>
-    hr {
-      margin: 40px 0;}
-  </style>
   <div class="row">
 
     <div class="col-xs-12">
@@ -42,8 +37,9 @@
       <hr/>
 
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
           <div class="step">1</div>
+          <h3 class="step-description">Install</h3>
         </div>
         <div class="col-sm-10">
 
@@ -72,16 +68,14 @@
       <hr/>
 
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
           <div class="step">2</div>
+          <h3 class="step-description">Follow</h3>
         </div>
         <div class="col-sm-10">
-
-          <p><strong>Follow Airbitz on Twitter for Clues.</strong></p>
-          <p>
-            <a href="https://twitter.com/airbitz" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @airbitz</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-          </p>
+          <p><strong>Follow us and retweet this tweet.  The city with the most retweets will be the next chosen city.</strong></p>
+          <blockquote class="twitter-tweet" data-cards="hidden" lang="en"><p>We are hiding <a href="https://twitter.com/hashtag/bitcoin?src=hash">#bitcoin</a> in cities near you. Use Airbitz wallet to find the <a href="https://twitter.com/hashtag/hiddenbits?src=hash">#hiddenbits</a>. Follow us for daily clues! <a href="http://t.co/2r2GNzfUTt">pic.twitter.com/2r2GNzfUTt</a></p>&mdash; Airbitz Inc (@Airbitz) <a href="https://twitter.com/Airbitz/status/555477093828415488">January 14, 2015</a></blockquote>
+          <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
         </div>
       </div>
@@ -89,19 +83,23 @@
       <hr/>
 
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
           <div class="step">3</div>
+          <h3 class="step-description">Listen</h3>
         </div>
         <div class="col-sm-10">
 
           <div class="row">
             <div class="col-sm-4">
               <p><strong>Listen for clues on Twitter then use the Airbitz directory to search for the clues.</strong></p>
-              <blockquote class="twitter-tweet" data-cards="hidden" lang="en"><p>MT <a href="https://twitter.com/btcchina">@BTCChina</a> &quot;<a href="https://twitter.com/hashtag/Bitcoin?src=hash">#Bitcoin</a> is one of the 11 most exciting new <a href="https://twitter.com/hashtag/tech?src=hash">#tech</a> moving from deceptive to disruptive this year. <a href="http://t.co/3C6zEqiZEA">http://t.co/3C6zEqiZEA</a> <a href="https://twitter.com/hashtag/btc?src=hash">#btc</a></p>&mdash; Airbitz Inc (@Airbitz) <a href="https://twitter.com/Airbitz/status/554736090599677952">January 12, 2015</a></blockquote>
+              <blockquote class="twitter-tweet" data-conversation="none" data-cards="hidden" lang="en"><p><a href="https://twitter.com/Airbitz">@Airbitz</a> **EXAMPLE** DAILY CLUE: Search for &quot;Red Pill Smoothies&quot; in &quot;Cypherpunkville&quot; to find todays <a href="https://twitter.com/hashtag/hiddenbits?src=hash">#hiddenbits</a> <a href="http://t.co/23puESkMUH">pic.twitter.com/23puESkMUH</a></p>&mdash; Airbitz Inc (@Airbitz) <a href="https://twitter.com/Airbitz/status/555622063373697024">January 15, 2015</a></blockquote>
               <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
             <div class="col-sm-4">
               <img class="img-thumbnail" src="{{ STATIC_URL }}img/hiddenbits/directory-clue-search.jpg" alt="Airbitz Clue Search" />
+            </div>
+            <div class="col-sm-4">
+              <img class="img-thumbnail" src="{{ STATIC_URL }}img/hiddenbits/directory-clue-result.jpg" alt="Airbitz Clue Search" />
             </div>
           </div>
 
@@ -111,21 +109,46 @@
       <hr/>
 
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
           <div class="step">4</div>
+          <h3 class="step-description">Go Visit</h3>
         </div>
         <div class="col-sm-10">
 
           <div class="row">
             <div class="col-sm-4">
-              <p><strong>Physically visit the Hiddenbits location and follow the instructions inside the listing carefully.</strong></p>
+              <p><strong>Physically visit the Hiddenbits location.</strong></p>
+              <p><strong>When you arrive follow the instructions in the listing description carefully.</strong></p>
+            </div>
+            <div class="col-sm-4">
+              <img class="img-thumbnail" src="{{ STATIC_URL }}img/hiddenbits/directory-listing-directions.jpg" alt="Airbitz Request Import"/>
+            </div>
+            <div class="col-sm-4">
+              <img class="img-thumbnail" src="{{ STATIC_URL }}img/hiddenbits/directory-listing-instructions.jpg" alt="Airbitz QR Scan"/>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="row">
+        <div class="col-sm-2 text-center">
+          <div class="step">5</div>
+          <h3 class="step-description">Redeem</h3>
+        </div>
+        <div class="col-sm-10">
+
+          <div class="row">
+            <div class="col-sm-4">
               <a class="btn btn-lg btn-success" href="{% url 'page_card' %}">How to Redeem</a>
               <br/>
               <br/>
               <blockquote>
-                <p>Login to the Airbitz Wallet mobile app or create an account tapping <code>Wallets</code> on the bottom bar.</p>
-                <p>Tap <code>Request</code> on the bottom bar, then tap <code>Import</code>.</p>
-                <p>Scan the QR code on the Airbitz Bitcoin Gift Card</p>
+                <p><strong>Login to the Airbitz Wallet mobile app or create an account by tapping <code>Request</code> on the bottom bar.</strong></p>
+                <p><strong>Then tap <code>Import</code>.</strong></p>
+                <p><strong>Scan the QR code on the Airbitz Bitcoin Gift Card</strong></p>
               </blockquote>
             </div>
             <div class="col-sm-4">
@@ -142,14 +165,15 @@
       <hr/>
 
       <div class="row">
-        <div class="col-sm-2">
-          <div class="step">5</div>
+        <div class="col-sm-2 text-center">
+          <div class="step">6</div>
+          <h3 class="step-description">Share</h3>
         </div>
         <div class="col-sm-10">
 
           <div class="row">
             <div class="col-sm-4">
-              <p><strong>Share your success via Twitter and double your Hiddenbits reward!</strong></p>
+              <p><strong>Share your success via Twitter and we will boost your Hiddenbits reward!</strong></p>
             </div>
             <div class="col-sm-4">
               <img class="img-thumbnail" src="{{ STATIC_URL }}img/hiddenbits/twitter-hiddenbits-tweet.jpg" alt="Hiddenbits Tweet"/>

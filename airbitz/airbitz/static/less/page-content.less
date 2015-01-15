@@ -28,6 +28,10 @@ body {
         margin-top: 50px;
     }
 
+    hr {
+        margin: 40px 0;
+        border-color: #aaa;
+    }
     #sidebar {
         width: 100%;
         padding: 0;
@@ -127,6 +131,7 @@ body {
 
     .step {
         width: 90px;
+        margin: 0 auto;
         padding: 30px;
         background: @ab-blue;
         color: #fff;
@@ -137,9 +142,12 @@ body {
         box-shadow: 0 5px #555;
 
         @media(max-width: @screen-sm) {
-            margin: 0 auto;
             margin-bottom: 30px;
         }
+    }
+    
+    .step-description {
+        margin-bottom: 30px;
     }
 
     .feature-section {
