@@ -437,7 +437,7 @@ def page_card(request):
 def page_hiddenbits(request):
     context = {
         'page_title': '<strong>Hiddenbits</strong> - Social Bitcoin Scavenger Hunt',
-        'page_description': 'Hiddenbits bitcoin scavenger hung is a promotion sponsored by Airbitz Bitcoin Wallet.',
+        'page_description': 'Hiddenbits bitcoin scavenger hunt is a promotion sponsored by Airbitz Bitcoin Wallet.',
     }
     return render_to_response('pages/page_hiddenbits.html', RequestContext(request, context))
 
