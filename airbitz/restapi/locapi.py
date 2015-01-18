@@ -4,9 +4,12 @@ from django.core.cache import cache
 from requests import Session, Request
 
 import difflib
+import logging
 import math
 
 from airbitz import settings
+
+log=logging.getLogger("airbitz." + __name__)
 
 DEF_RADIUS=Distance(mi=100)
 EARTHS_MEAN_RADIUS=6371000
@@ -65,17 +68,21 @@ def cacheRequest(url, params):
         return res
 
 def googleBestMatch(txt, loc=None):
-    res = googleAutocomplete(txt, loc)
-    if len(res['predictions']) == 0:
-        return None
-    ls = []
-    for row in res['predictions']:
-        ratio = difflib.SequenceMatcher(None, row['description'], txt).ratio()
-        ls.append((ratio, row))
-    # Sort desc by accuracy 1 is perfect match
-    ls.sort(lambda (x1, x2), (y1, y2): int(y1 * 100) - int(x1 * 100))
-    # Return most accurate
-    return ls[0][1]
+    try:
+        res = googleAutocomplete(txt, loc)
+        if len(res['predictions']) == 0:
+            return None
+        ls = []
+        for row in res['predictions']:
+            ratio = difflib.SequenceMatcher(None, row['description'], txt).ratio()
+            ls.append((ratio, row))
+        # Sort desc by accuracy 1 is perfect match
+        ls.sort(lambda (x1, x2), (y1, y2): int(y1 * 100) - int(x1 * 100))
+        # Return most accurate
+        return ls[0][1]
+    except:
+        log.warn('Google error')
+    return None
 
 def buildNearbyPoints(loc, steps=8):
     ps = []
