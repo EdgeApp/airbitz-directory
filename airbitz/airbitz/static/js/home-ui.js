@@ -85,7 +85,7 @@ jQuery(function($) {
   setTimeout(function(){
     $('.newsletter-signup').hide();
     $('#email-signup-form').fadeIn();
-  }, 3000);
+  }, 5000);
 
 
 
