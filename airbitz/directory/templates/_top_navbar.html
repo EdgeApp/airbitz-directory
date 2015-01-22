@@ -20,7 +20,7 @@
       <ul class="nav navbar-nav navbar-right">
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bitcoin Wallet <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-hover="dropdown">Bitcoin Wallet <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="https://airbitz.co/go/faq">Frequently Asked Questions</a></li>
             <li><a href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/">Bitcoin Wallet</a></li>
@@ -29,7 +29,7 @@
         </li>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bitcoin Directory <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-hover="dropdown">Bitcoin Directory <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li class="dropdown-header">Get Listed</li>
             <li><a href="https://airbitz.co/go/submit-business/">Submit a Business</a></li>
@@ -103,7 +103,7 @@
         </li>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-hover="dropdown">More <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="https://airbitz.co/go/" class="">Blog</a></li>
             <li class="divider"></li>
@@ -113,6 +113,10 @@
         </li>
 
       </ul>
+
+      {% url 'landing' as landing_url %}
+      {% if not request.get_full_path == landing_url %}
+
       {% block search %}
         <form id="navbar-search" name="search" class="navbar-form text-center" role="search" method="get" action="{{ search_action|default:"/search" }}">
           <i id="help-search" class="fa fa-2x fa-question-circle"></i>
@@ -126,6 +130,9 @@
           <a id="add-business-button" tabindex="4" class="btn btn-success" href="https://airbitz.co/go/submit-business/" target="_blank" style="font-weight: 600;"><i class="fa fa-plus"></i> Add Business</a>
         </form>
       {% endblock search %}
+
+      {% endif %}
+
     </div><!-- /.navbar-collapse -->
   </div>
 </nav>
@@ -171,7 +178,7 @@
       <ul class="nav navbar-nav">
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bitcoin Wallet <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-hover="dropdown">Bitcoin Wallet <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="https://airbitz.co/go/faq">Frequently Asked Questions</a></li>
             <li><a href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/">Bitcoin Wallet</a></li>
@@ -180,7 +187,7 @@
         </li>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bitcoin Directory <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-hover="dropdown">Bitcoin Directory <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li class="dropdown-header">Get Listed</li>
             <li><a href="https://airbitz.co/go/submit-business/">Submit a Business</a></li>
@@ -195,7 +202,7 @@
         </li>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-hover="dropdown">More <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="https://airbitz.co/go/" class="">Blog</a></li>
             <li class="divider"></li>

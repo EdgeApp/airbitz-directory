@@ -23,14 +23,14 @@
   {% block head_seo_social %}
 
     {% block seo_meta %}
-      <title>{% block title %}Bitcoin Wallet, Map, and Business Directory Android & iOS{% endblock title %} | Airbitz</title>
-      <meta name="description" content="{% block meta_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock meta_description %}">
+      <title>{% block title %}Bitcoin Wallet for iOS & Android{% endblock title %}</title>
+      <meta name="description" content="{% block meta_description %}Airbitz bitcoin wallet is the most private, easy to use and secure, open source mobile app available.{% endblock meta_description %}">
       <meta name="news_keywords" content="{% block meta_news_keywords %}Local Bitcoin Business,Bitcoin Food,Bitcoin Friendly Business{% endblock meta_news_keywords %}">
     {% endblock seo_meta %}
 
     {% block og_meta %}
-      <meta property="og:title" content="{% block og_title %}Airbitz Bitcoin Wallet and Directory{% endblock og_title %}">
-      <meta property="og:description" content="{% block og_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock og_description %}">
+      <meta property="og:title" content="{% block og_title %}Airbitz Bitcoin Wallet{% endblock og_title %}">
+      <meta property="og:description" content="{% block og_description %}Airbitz bitcoin wallet is the most private, easy to use and secure, open source mobile app available.{% endblock og_description %}">
       <meta property="og:type" content="{% block og_type %}Article{% endblock og_type %}">
       <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock og_url %}">
       <meta property="og:image" content="{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock og_image %}">
@@ -41,8 +41,8 @@
     {% block twitter_meta %}
       <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock twitter_card %}">
       <meta name="twitter:site" content="{% block twitter_site %}@airbitz{% endblock twitter_site %}">
-      <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet and Directory{% endblock twitter_title %}">
-      <meta name="twitter:description" content="{% block twitter_description %}Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.{% endblock twitter_description %}">
+      <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet{% endblock twitter_title %}">
+      <meta name="twitter:description" content="{% block twitter_description %}Airbitz bitcoin wallet is the most private, easy to use and secure, open source mobile app available.{% endblock twitter_description %}">
       <meta name="twitter:creator" content="{% block twitter_creator %}@airbitz{% endblock twitter_creator %}">
       <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock twitter_image_src %}">
       <meta name="twitter:domain" content="{% block twitter_domain %}{{ request.META.HTTP_HOST }}{% endblock twitter_domain %}">
@@ -155,20 +155,18 @@
 
 <div class="section-learn-more container">
 
-  <h2 class="tagline text-center">Simply Secure, Private & Powerful</h2>
-  <h2 class="learn-more text-center">Learn More About Airbitz</h2>
+  <h2 class="tagline text-center"><strong>Bitcoin:</strong> Safe, Simple, Secure</h2>
+  <h2 class="learn-more text-center">Learn More About Airbitz <a id="learn-more-wallet" type="button" class="btn btn-success btn-lg" href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/">Bitcoin Wallet</a></h2>
 
-  <div class="row">
-    <div class="col-xs-12 text-center">
-      <div class="ui-group-buttons">
-        <a id="learn-more-wallet" type="button" class="btn btn-success btn-lg" href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/">Bitcoin Wallet</a>
-        <div class="or or-lg"></div>
-        <a id="learn-more-directory" type="button" class="btn btn-primary btn-lg">Directory Map</a>
-      </div>
-    </div>
-  </div>
+{#  <div class="row">#}
+{#    <div class="col-xs-12 text-center">#}
+{#      <div class="ui-group-buttons">#}
+{#        <a id="learn-more-wallet" type="button" class="btn btn-success btn-lg" href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/">Bitcoin Wallet</a>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
 
-  {% include '_home-main-features.html' %}
+{#  {% include '_home-main-features.html' %}#}
 
 </div><!-- /.section-learn-more -->
 
@@ -178,59 +176,59 @@
 
 
 
-<div id="features-directory" class="section-directory-coverage container-fluid">
-  <div class="container">
-    <div class="row">
-      <div id="who-accepts-bitcoin" class="text-center col-sm-6">
-        <h2>Airbitz Business Directory</h2>
-        <img style="padding: 0 0 0 35px;" class="alignnone" alt="Airbitz Bitcoin Business Directory" title="Bitcoin Map of Businesses" src="{{ STATIC_URL }}img/landing/bitcoin-directory-map.png" width="200" height="200" />
-        <h2>
-          Connecting You to <span class="label label-success" style="padding: .2em .3em .2em; font-size: 100%;">{{ biz_total }}</span> Businesses Accepting Bitcoin Around the World
-        </h2>
-      </div>
-
-      <hr class="visible-xs-block" />
-
-      <div class="col-sm-6">
-        <div class="searchStarter dark" >
-          <div id="accepting-bitcoin">
-            {% verbatim %}
-            <ui-view></ui-view>
-            {% endverbatim %}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div><!-- /.section-directory-coverage -->
-
-
-<div class="section-bitcoin-directory-details container">
-  <div class="row">
-    <h2 class="hidden-xs">
-      <img src="{{ STATIC_URL }}img/icons/map_64px.png" alt="Bitcoin Directory" title="Bitcoin Map" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory
-    </h2>
-    <h3 class="visible-xs-block">
-      <img src="{{ STATIC_URL }}img/icons/map_32px.png" alt="Bitcoin Directory" title="Bitcoin Map" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory
-    </h3>
-    <p>The Airbitz mobile app also includes a business directory to help consumers find merchants and websites that accept bitcoin as payment. Some of its powerful features include:</p>
-
-    {% include '_home-app-download-preview.html' %}
-
-    <div class="row">
-      <div class="col-sm-12">
-        <h3><img src="{{ STATIC_URL }}img/icons/adjustments_32px.png" alt="Directory Features" title="Business Directory Features" /> Directory Features</h3>
-        <ul class="features-list">
-          <li>Advanced search ability by proximity, business name, category, city, state, or country</li>
-          <li>Inclusion of web based bitcoin businesses such as online merchants and exchange services</li>
-          <li>Fluid interface with high resolution imagery for each business</li>
-          <li>The most comprehensive listing of bitcoin businesses with businesses updated daily</li>
-          <li>Alerts of new businesses in your area accepting bitcoin</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+{#<div id="features-directory" class="section-directory-coverage container-fluid">#}
+{#  <div class="container">#}
+{#    <div class="row">#}
+{#      <div id="who-accepts-bitcoin" class="text-center col-sm-6">#}
+{#        <h2>Airbitz Business Directory</h2>#}
+{#        <img style="padding: 0 0 0 35px;" class="alignnone" alt="Airbitz Bitcoin Business Directory" title="Bitcoin Map of Businesses" src="{{ STATIC_URL }}img/landing/bitcoin-directory-map.png" width="200" height="200" />#}
+{#        <h2>#}
+{#          Connecting You to <span class="label label-success" style="padding: .2em .3em .2em; font-size: 100%;">{{ biz_total }}</span> Businesses Accepting Bitcoin Around the World#}
+{#        </h2>#}
+{#      </div>#}
+{##}
+{#      <hr class="visible-xs-block" />#}
+{##}
+{#      <div class="col-sm-6">#}
+{#        <div class="searchStarter dark" >#}
+{#          <div id="accepting-bitcoin">#}
+{#            {% verbatim %}#}
+{#            <ui-view></ui-view>#}
+{#            {% endverbatim %}#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#</div><!-- /.section-directory-coverage -->#}
+{##}
+{##}
+{#<div class="section-bitcoin-directory-details container">#}
+{#  <div class="row">#}
+{#    <h2 class="hidden-xs">#}
+{#      <img src="{{ STATIC_URL }}img/icons/map_64px.png" alt="Bitcoin Directory" title="Bitcoin Map" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory#}
+{#    </h2>#}
+{#    <h3 class="visible-xs-block">#}
+{#      <img src="{{ STATIC_URL }}img/icons/map_32px.png" alt="Bitcoin Directory" title="Bitcoin Map" class="et-waypoint et_pb_animation_top" />&nbsp;&nbsp;Bitcoin Business Directory#}
+{#    </h3>#}
+{#    <p>The Airbitz mobile app also includes a business directory to help consumers find merchants and websites that accept bitcoin as payment. Some of its powerful features include:</p>#}
+{##}
+{#    {% include '_home-app-download-preview.html' %}#}
+{##}
+{#    <div class="row">#}
+{#      <div class="col-sm-12">#}
+{#        <h3><img src="{{ STATIC_URL }}img/icons/adjustments_32px.png" alt="Directory Features" title="Business Directory Features" /> Directory Features</h3>#}
+{#        <ul class="features-list">#}
+{#          <li>Advanced search ability by proximity, business name, category, city, state, or country</li>#}
+{#          <li>Inclusion of web based bitcoin businesses such as online merchants and exchange services</li>#}
+{#          <li>Fluid interface with high resolution imagery for each business</li>#}
+{#          <li>The most comprehensive listing of bitcoin businesses with businesses updated daily</li>#}
+{#          <li>Alerts of new businesses in your area accepting bitcoin</li>#}
+{#        </ul>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
 
 
 
@@ -320,7 +318,7 @@
   }
 
   var bgImages = [
-    '{{ STATIC_URL }}img/landing/landing-module-bg-coffee-dark.jpg',
+    '{{ STATIC_URL }}img/landing/landing-module-bg.jpg',
     {#        '{{ STATIC_URL }}img/landing/landing-module-bg-1.jpg',#}
     {#        '{{ STATIC_URL }}img/landing/landing-module-bg-2.jpg',#}
     {#        '{{ STATIC_URL }}img/landing/landing-module-bg-3.jpg'#}

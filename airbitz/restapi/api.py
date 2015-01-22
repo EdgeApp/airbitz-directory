@@ -256,10 +256,13 @@ class ApiProcess(object):
         return m_len, sqs
 
 
-    def searchDirectory(self, term=None, since=None, geobounds=None, radius=None, category=None, sort=None):
-        (len_m, m) = self.exactMatch(term)
-        if len_m == 1:
-            return m
+    def searchDirectory(self, term=None, since=None, geobounds=None,
+                              radius=None, category=None, sort=None,
+                              show_hidden=True):
+        if show_hidden:
+            (len_m, m) = self.exactMatch(term)
+            if len_m == 1:
+                return m
 
         sqs = SearchQuerySet().models(Business)
         sqs = sqs.filter(is_searchable=True)

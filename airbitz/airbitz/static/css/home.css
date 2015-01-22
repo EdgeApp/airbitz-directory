@@ -213,15 +213,11 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   margin: 10px auto;
   border-color: #999;
 }
-.landing-module .download-signup h1,
-.landing-module .download-signup h2 {
-  margin: 0;
-  line-height: 26px;
+.landing-module .download-signup h1 {
+  margin: 25px 0 25px 0;
+  font-size: 52px;
   color: #ffffff;
   text-shadow: 1px 0 1px #000;
-}
-.landing-module .download-signup .and-heading {
-  text-align: center;
 }
 .landing-module .download-signup .signup-area {
   max-width: 360px;
@@ -309,11 +305,6 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 .section-learn-more .ui-group-buttons {
   zoom: 1.25;
   margin: 35px 0;
-}
-@media (max-width: 767px) {
-  .section-learn-more .ui-group-buttons {
-    zoom: .8;
-  }
 }
 .section-directory-coverage {
   background: #003e61;
