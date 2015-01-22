@@ -306,11 +306,6 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   zoom: 1.25;
   margin: 35px 0;
 }
-@media (max-width: 767px) {
-  .section-learn-more .ui-group-buttons {
-    zoom: .8;
-  }
-}
 .section-directory-coverage {
   background: #003e61;
   color: white;
