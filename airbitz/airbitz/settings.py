@@ -330,6 +330,7 @@ PIPELINE_JS = {
             'extras/jQuery.dotdotdot-master/src/js/jquery.dotdotdot.min.js',
             'extras/Readmore.js-master/readmore.min.js',
             'extras/swipebox-master/source/jquery.swipebox.min.js',
+            'extras/bootstrap-hover-dropdown-master/bootstrap-hover-dropdown.min.js',
             'js/frontend-ui.js',
             'js/mobile-download-bar.js'
         ),
