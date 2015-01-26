@@ -342,6 +342,7 @@ PIPELINE_JS = {
             'extras/ajaxchimp/jquery.ajaxchimp.js',
             'extras/carouFredSel-6.2.1/jquery.carouFredSel-6.2.1-packed.js',
             'extras/Magnific-Popup-master/dist/jquery.magnific-popup.js',
+            'extras/particlesjs/particles.js',
             'js/home-ui.js',
         ),
         'output_filename': 'js/home.' + DEPLOY_DATE + '.js',
