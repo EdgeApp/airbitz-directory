@@ -63,6 +63,10 @@ body.home #main-content .page .airbitz-feature-details .app-store {
 body.home .download-preview .video img {
   width: 190px;
 }
+body.home .download-preview .video img:hover {
+  transition: all 0.5s ease;
+  outline: 3px solid #ff0000;
+}
 body.home .ab-app-cta {
   height: 550px;
   margin-bottom: 60px;
