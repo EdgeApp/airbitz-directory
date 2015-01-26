@@ -88,6 +88,11 @@ jQuery(function($) {
   }, 5000);
 
 
+$(window).resize(function(){
+  $('#landing-particles').hide();
+});
+
+
 if(!bowser.android && !bowser.ios ) {
   /* config dom id (optional) + config particles params */
   particlesJS('landing-particles', {
@@ -137,6 +142,7 @@ if(!bowser.android && !bowser.ios ) {
     retina_detect: true
   });
 }
+
 
 
 // BUTTON SCROLL AND DRAW ATTENTION

@@ -24,13 +24,13 @@
 
     {% block seo_meta %}
       <title>{% block title %}Bitcoin Wallet for iOS & Android{% endblock title %}</title>
-      <meta name="description" content="{% block meta_description %}Airbitz bitcoin wallet is the most private, easy to use and secure, open source mobile app available.{% endblock meta_description %}">
+      <meta name="description" content="{% block meta_description %}The Airbitz mobile Bitcoin wallet is a decentralized, secure, and backed up Bitcoin wallet that provides true financial autonomy & privacy for users. Neither Airbitz nor any 3rd party can access users' funds or data within the Airbitz wallet. A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:{% endblock meta_description %}">
       <meta name="news_keywords" content="{% block meta_news_keywords %}Local Bitcoin Business,Bitcoin Food,Bitcoin Friendly Business{% endblock meta_news_keywords %}">
     {% endblock seo_meta %}
 
     {% block og_meta %}
       <meta property="og:title" content="{% block og_title %}Airbitz Bitcoin Wallet{% endblock og_title %}">
-      <meta property="og:description" content="{% block og_description %}Airbitz bitcoin wallet is the most private, easy to use and secure, open source mobile app available.{% endblock og_description %}">
+      <meta property="og:description" content="{% block og_description %}The Airbitz mobile Bitcoin wallet is a decentralized, secure, and backed up Bitcoin wallet that provides true financial autonomy & privacy for users. Neither Airbitz nor any 3rd party can access users' funds or data within the Airbitz wallet. A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:{% endblock og_description %}">
       <meta property="og:type" content="{% block og_type %}Article{% endblock og_type %}">
       <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock og_url %}">
       <meta property="og:image" content="{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock og_image %}">
@@ -42,7 +42,7 @@
       <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock twitter_card %}">
       <meta name="twitter:site" content="{% block twitter_site %}@airbitz{% endblock twitter_site %}">
       <meta name="twitter:title" content="{% block twitter_title %}Airbitz Bitcoin Wallet{% endblock twitter_title %}">
-      <meta name="twitter:description" content="{% block twitter_description %}Airbitz bitcoin wallet is the most private, easy to use and secure, open source mobile app available.{% endblock twitter_description %}">
+      <meta name="twitter:description" content="{% block twitter_description %}The Airbitz mobile Bitcoin wallet is a decentralized, secure, and backed up Bitcoin wallet that provides true financial autonomy & privacy for users. Neither Airbitz nor any 3rd party can access users' funds or data within the Airbitz wallet. A clean, user-first interface solves many of the usability issues plaguing current wallet solutions, while adding features including:{% endblock twitter_description %}">
       <meta name="twitter:creator" content="{% block twitter_creator %}@airbitz{% endblock twitter_creator %}">
       <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock twitter_image_src %}">
       <meta name="twitter:domain" content="{% block twitter_domain %}{{ request.META.HTTP_HOST }}{% endblock twitter_domain %}">
