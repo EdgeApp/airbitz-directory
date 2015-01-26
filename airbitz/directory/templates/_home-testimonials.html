@@ -1,111 +1,208 @@
 {# http://bootsnipp.com/snippets/featured/carousel-reviews-with-rating #}
-<div class="carousel-reviews">
-  <div class="container">
-    <div class="row">
-      <div id="carousel-reviews" class="carousel slide" data-ride="carousel" data-interval="7000">
+{#<div class="carousel-reviews">#}
+{#  <div class="container">#}
+{#    <div class="row">#}
+{#      <div id="carousel-reviews" class="carousel slide" data-ride="carousel" data-interval="7000">#}
+{##}
+{#        <div class="carousel-inner">#}
+{#          <div class="item active">#}
+{##}
+{#            <div class="col-md-4">#}
+{#              <div class="block-text rel zmin">#}
+{#                <a title="" href="#">Airbitz is sexy!</a>#}
+{#                <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>#}
+{#                <p>Airbitz is the sexiest business directory and sexiest Bitcoin wallet!</p>#}
+{#                <ins class="ab zmin sprite sprite-i-triangle block"></ins>#}
+{#              </div>#}
+{#              <div class="person-text rel">#}
+{#                <img alt="Ryan Singer" src="{{ STATIC_URL }}img/landing/testimonials/ryan-singer.jpg">#}
+{#                <a target="_blank" title="Ryan Singer" href="https://www.linkedin.com/in/ryans">Ryan Singer</a>#}
+{#                <i>Domus Tower, Inc</i>#}
+{#              </div>#}
+{#            </div>#}
+{##}
+{#            <div class="col-md-4">#}
+{#              <div class="block-text rel zmin">#}
+{#                <a title="" href="#">The best bitcoin directory available.</a>#}
+{#                <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>#}
+{#                <p>The best bitcoin directory available. Well designed, easy to use, up to date listings.</p>#}
+{#                <ins class="ab zmin sprite sprite-i-triangle block"></ins>#}
+{#              </div>#}
+{#              <div class="person-text rel">#}
+{#                <img alt="Milan Keser" src="{{ STATIC_URL }}img/landing/testimonials/milan-keser.jpg"/>#}
+{#                <a target="_blank" title="Milan Keser" href="https://plus.google.com/101883471592266316117/posts">Milan Keser</a>#}
+{#                <i>Google Play Store</i>#}
+{#              </div>#}
+{#            </div>#}
+{##}
+{#            <div class="col-md-4">#}
+{#              <div class="block-text rel zmin">#}
+{#                <a title="" href="#">Finally</a>#}
+{#                <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star-empty"></span><span data-value="3" class="glyphicon glyphicon-star-empty"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>#}
+{#                <p><strong>Finally</strong> Looks like we have the perfect wallet app to give power to the people, Craigslist and BitHalo style.</p>#}
+{#                <ins class="ab zmin sprite sprite-i-triangle block"></ins>#}
+{#              </div>#}
+{#              <div class="person-text rel">#}
+{#                <img alt="Nathan Basanese" src="{{ STATIC_URL }}img/landing/testimonials/nathan-basanese.jpg">#}
+{#                <a target="_blank" title="Nathan Basanese" href="https://www.linkedin.com/in/linkednathan">Nathan Basanese</a>#}
+{#                <i>Changetip</i>#}
+{#              </div>#}
+{#            </div>#}
+{##}
+{#          </div>#}
+{##}
+{#          <div class="item">#}
+{##}
+{#            <div class="col-md-4 hidden-sm">#}
+{#              <div class="block-text rel zmin">#}
+{#                <a title="" href="#">Wow!</a>#}
+{#                <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star"></span><span data-value="5" class="glyphicon glyphicon-star"></span>  </span></div>#}
+{#                <p>Wow! Massively impressed with upcoming @Airbitz #bitcoin app! #Cryptolina</p>#}
+{#                <ins class="ab zmin sprite sprite-i-triangle block"></ins>#}
+{#              </div>#}
+{#              <div class="person-text rel">#}
+{#                <img src="{{ STATIC_URL }}img/landing/testimonials/johnathan-danforth.png"/>#}
+{#                <a target="_blank" title="Jonathan Danforth" href="http://twitter.com/jdanforth">Jonathan Danforth</a>#}
+{#                <i>Twitter</i>#}
+{#              </div>#}
+{#            </div>#}
+{##}
+{#            <div class="col-md-4">#}
+{#              <div class="block-text rel zmin">#}
+{#                <a title="" href="#">I am very impressed</a>#}
+{#                <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star-empty"></span><span data-value="3" class="glyphicon glyphicon-star-empty"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>#}
+{#                <p>Love the look, very intuitive, lots of features... I like how you can email or SMS payment requests and how you can export the wallet info in various ways.  Not to mention the directory is WAAAYYYY better then Blockchain's...  This app is going to be a must have for Bitcoineers everywhere.  Well done!</p>#}
+{#                <ins class="ab zmin sprite sprite-i-triangle block"></ins>#}
+{#              </div>#}
+{#              <div class="person-text rel">#}
+{#                <img src="{{ STATIC_URL }}img/landing/testimonials/gabe-higgins.jpg"/>#}
+{#                <a target="_blank" title="Gabe Higgins" href="http://www.cryptoedgesolutions.com/">Gabe Higgins</a>#}
+{#                <i>Crypto Edge Solutions</i>#}
+{#              </div>#}
+{#            </div>#}
+{##}
+{#            <div class="col-md-4">#}
+{#              <div class="block-text rel zmin">#}
+{#                <a title="" href="#">Great app!</a>#}
+{#                <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star-empty"></span><span data-value="3" class="glyphicon glyphicon-star-empty"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>#}
+{#                <p>Just paid for a meal at @thaivillanc with my new @Airbitz app. Very easy to use. Great app! @TriangleBitcoin @coindesk @BitPay</p>#}
+{#                <ins class="ab zmin sprite sprite-i-triangle block"></ins>#}
+{#              </div>#}
+{#              <div class="person-text rel">#}
+{#                <img alt="David Wall" src="https://pbs.twimg.com/profile_images/483795219893063680/lhnJVwyu_reasonably_small.png">#}
+{#                <a target="_blank" title="David Wall" href="https://twitter.com/balao_mo">David Wall</a>#}
+{#                <i>Twitter</i>#}
+{#              </div>#}
+{#            </div>#}
+{##}
+{#          </div>#}
+{##}
+{#        </div>#}
+{##}
+{#        <a class="left carousel-control" href="#carousel-reviews" role="button" data-slide="prev">#}
+{#          <span class="glyphicon glyphicon-chevron-left"></span>#}
+{#        </a>#}
+{#        <a class="right carousel-control" href="#carousel-reviews" role="button" data-slide="next">#}
+{#          <span class="glyphicon glyphicon-chevron-right"></span>#}
+{#        </a>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
 
-        <div class="carousel-inner">
-          <div class="item active">
 
-            <div class="col-md-4">
-              <div class="block-text rel zmin">
-                <a title="" href="#">Airbitz is sexy!</a>
-                <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>
-                <p>Airbitz is the sexiest business directory and sexiest Bitcoin wallet!</p>
-                <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-              </div>
-              <div class="person-text rel">
-                <img alt="Ryan Singer" src="{{ STATIC_URL }}img/landing/testimonials/ryan-singer.jpg">
-                <a target="_blank" title="Ryan Singer" href="https://www.linkedin.com/in/ryans">Ryan Singer</a>
-                <i>Domus Tower, Inc</i>
-              </div>
-            </div>
 
-            <div class="col-md-4">
-              <div class="block-text rel zmin">
-                <a title="" href="#">The best bitcoin directory available.</a>
-                <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>
-                <p>The best bitcoin directory available. Well designed, easy to use, up to date listings.</p>
-                <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-              </div>
-              <div class="person-text rel">
-                <img alt="Milan Keser" src="{{ STATIC_URL }}img/landing/testimonials/milan-keser.jpg"/>
-                <a target="_blank" title="Milan Keser" href="https://plus.google.com/101883471592266316117/posts">Milan Keser</a>
-                <i>Google Play Store</i>
-              </div>
-            </div>
+<div class="container">
 
-            <div class="col-md-4">
-              <div class="block-text rel zmin">
-                <a title="" href="#">Finally</a>
-                <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star-empty"></span><span data-value="3" class="glyphicon glyphicon-star-empty"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>
-                <p><strong>Finally</strong> Looks like we have the perfect wallet app to give power to the people, Craigslist and BitHalo style.</p>
-                <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-              </div>
-              <div class="person-text rel">
-                <img alt="Nathan Basanese" src="{{ STATIC_URL }}img/landing/testimonials/nathan-basanese.jpg">
-                <a target="_blank" title="Nathan Basanese" href="https://www.linkedin.com/in/linkednathan">Nathan Basanese</a>
-                <i>Changetip</i>
-              </div>
-            </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="block-text rel zmin">
+        <a title="" href="#">Airbitz is sexy!</a>
+        <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>
+        <p>Airbitz is the sexiest business directory and sexiest Bitcoin wallet!</p>
+        <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+      </div>
+      <div class="person-text rel">
+        <img alt="Ryan Singer" src="{{ STATIC_URL }}img/landing/testimonials/ryan-singer.jpg">
+        <a target="_blank" title="Ryan Singer" href="https://www.linkedin.com/in/ryans">Ryan Singer</a>
+        <i>Domus Tower, Inc</i>
+      </div>
+    </div>
 
-          </div>
+    <div class="col-md-4">
+      <div class="block-text rel zmin">
+        <a title="" href="#">The best bitcoin directory available.</a>
+        <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>
+        <p>The best bitcoin directory available. Well designed, easy to use, up to date listings.</p>
+        <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+      </div>
+      <div class="person-text rel">
+        <img alt="Milan Keser" src="{{ STATIC_URL }}img/landing/testimonials/milan-keser.jpg"/>
+        <a target="_blank" title="Milan Keser" href="https://plus.google.com/101883471592266316117/posts">Milan Keser</a>
+        <i>Google Play Store</i>
+      </div>
+    </div>
 
-          <div class="item">
-
-            <div class="col-md-4 hidden-sm">
-              <div class="block-text rel zmin">
-                <a title="" href="#">Wow!</a>
-                <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star"></span><span data-value="5" class="glyphicon glyphicon-star"></span>  </span></div>
-                <p>Wow! Massively impressed with upcoming @Airbitz #bitcoin app! #Cryptolina</p>
-                <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-              </div>
-              <div class="person-text rel">
-                <img src="{{ STATIC_URL }}img/landing/testimonials/johnathan-danforth.png"/>
-                <a target="_blank" title="Jonathan Danforth" href="http://twitter.com/jdanforth">Jonathan Danforth</a>
-                <i>Twitter</i>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="block-text rel zmin">
-                <a title="" href="#">I am very impressed</a>
-                <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star-empty"></span><span data-value="3" class="glyphicon glyphicon-star-empty"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>
-                <p>Love the look, very intuitive, lots of features... I like how you can email or SMS payment requests and how you can export the wallet info in various ways.  Not to mention the directory is WAAAYYYY better then Blockchain's...  This app is going to be a must have for Bitcoineers everywhere.  Well done!</p>
-                <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-              </div>
-              <div class="person-text rel">
-                <img src="{{ STATIC_URL }}img/landing/testimonials/gabe-higgins.jpg"/>
-                <a target="_blank" title="Gabe Higgins" href="http://www.cryptoedgesolutions.com/">Gabe Higgins</a>
-                <i>Crypto Edge Solutions</i>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="block-text rel zmin">
-                <a title="" href="#">Great app!</a>
-                <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star-empty"></span><span data-value="3" class="glyphicon glyphicon-star-empty"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>
-                <p>Just paid for a meal at @thaivillanc with my new @Airbitz app. Very easy to use. Great app! @TriangleBitcoin @coindesk @BitPay</p>
-                <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-              </div>
-              <div class="person-text rel">
-                <img alt="David Wall" src="https://pbs.twimg.com/profile_images/483795219893063680/lhnJVwyu_reasonably_small.png">
-                <a target="_blank" title="David Wall" href="https://twitter.com/balao_mo">David Wall</a>
-                <i>Twitter</i>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-        <a class="left carousel-control" href="#carousel-reviews" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-reviews" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
+    <div class="col-md-4">
+      <div class="block-text rel zmin">
+        <a title="" href="#">Finally</a>
+        <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star-empty"></span><span data-value="3" class="glyphicon glyphicon-star-empty"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>
+        <p><strong>Finally</strong> Looks like we have the perfect wallet app to give power to the people, Craigslist and BitHalo style.</p>
+        <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+      </div>
+      <div class="person-text rel">
+        <img alt="Nathan Basanese" src="{{ STATIC_URL }}img/landing/testimonials/nathan-basanese.jpg">
+        <a target="_blank" title="Nathan Basanese" href="https://www.linkedin.com/in/linkednathan">Nathan Basanese</a>
+        <i>Changetip</i>
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-4 hidden-sm">
+      <div class="block-text rel zmin">
+        <a title="" href="#">Wow!</a>
+        <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star"></span><span data-value="5" class="glyphicon glyphicon-star"></span>  </span></div>
+        <p>Wow! Massively impressed with upcoming @Airbitz #bitcoin app! #Cryptolina</p>
+        <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+      </div>
+      <div class="person-text rel">
+        <img src="{{ STATIC_URL }}img/landing/testimonials/johnathan-danforth.png"/>
+        <a target="_blank" title="Jonathan Danforth" href="http://twitter.com/jdanforth">Jonathan Danforth</a>
+        <i>Twitter</i>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="block-text rel zmin">
+        <a title="" href="#">I am very impressed</a>
+        <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star-empty"></span><span data-value="3" class="glyphicon glyphicon-star-empty"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>
+        <p>Love the look, very intuitive, lots of features... I like how you can email or SMS payment requests and how you can export the wallet info in various ways.  Not to mention the directory is WAAAYYYY better then Blockchain's...  This app is going to be a must have for Bitcoineers everywhere.  Well done!</p>
+        <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+      </div>
+      <div class="person-text rel">
+        <img src="{{ STATIC_URL }}img/landing/testimonials/gabe-higgins.jpg"/>
+        <a target="_blank" title="Gabe Higgins" href="http://www.cryptoedgesolutions.com/">Gabe Higgins</a>
+        <i>Crypto Edge Solutions</i>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="block-text rel zmin">
+        <a title="" href="#">Great app!</a>
+        <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star-empty"></span><span data-value="3" class="glyphicon glyphicon-star-empty"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>
+        <p>Just paid for a meal at @thaivillanc with my new @Airbitz app. Very easy to use. Great app! @TriangleBitcoin @coindesk @BitPay</p>
+        <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+      </div>
+      <div class="person-text rel">
+        <img alt="David Wall" src="https://pbs.twimg.com/profile_images/483795219893063680/lhnJVwyu_reasonably_small.png">
+        <a target="_blank" title="David Wall" href="https://twitter.com/balao_mo">David Wall</a>
+        <i>Twitter</i>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+
+
