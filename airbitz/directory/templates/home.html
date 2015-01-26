@@ -110,26 +110,23 @@
     {% compressed_css 'home' %}
     {% compressed_js 'core' %}
     {% compressed_js 'home' %}
-    {% compressed_js 'angularjs' %}
-    {% compressed_js 'search_starter' %}
+{#    {% compressed_js 'angularjs' %}#}
+{#    {% compressed_js 'search_starter' %}#}
   {% endblock head %}
 
 
 
-  <script type="text/javascript">
-  </script>
-
-
 
 </head>
-<body {% verbatim %}ng-app="searchStarter"{% endverbatim %} class="home page page-id-145 page-template-default et_fixed_nav et_pb_pagebuilder_layout et_right_sidebar unknown et_includes_sidebar">
+{#<body {% verbatim %}ng-app="searchStarter"{% endverbatim %} class="home page page-id-145 page-template-default et_fixed_nav et_pb_pagebuilder_layout et_right_sidebar unknown et_includes_sidebar">#}
+<body class="home page page-id-145 page-template-default et_fixed_nav et_pb_pagebuilder_layout et_right_sidebar unknown et_includes_sidebar">
 
 {% include '_mobile-app-download.html' %}
 
 {% include '_top_navbar.html' %}
 
 <div class="landing-module container-fluid">
-
+  <div id="landing-particles" style="position: absolute; width: 100%; height: 100%;"></div>
   <div class="container">
 
     <div class="row">
@@ -156,7 +153,8 @@
 <div class="section-learn-more container">
 
   <h2 class="tagline text-center"><strong>Bitcoin:</strong> Safe, Simple, Secure</h2>
-  <h2 class="learn-more text-center">Learn More About Airbitz <a id="learn-more-wallet" type="button" class="btn btn-success btn-lg" href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/">Bitcoin Wallet</a></h2>
+  <h2 class="learn-more text-center">Learn More About Airbitz</h2>
+  <div class="text-center"><a id="learn-more-wallet" type="button" class="btn btn-success btn-lg" href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/">Bitcoin Wallet</a></div>
 
 {#  <div class="row">#}
 {#    <div class="col-xs-12 text-center">#}
