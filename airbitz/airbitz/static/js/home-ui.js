@@ -105,7 +105,7 @@ if(!bowser.android && !bowser.ios ) {
       nb: 150,
       line_linked: {
         enable_auto: true,
-        distance: 300,
+        distance: 360,
         color: '#fff',
         opacity:.4,
         width: 2,
@@ -117,7 +117,7 @@ if(!bowser.android && !bowser.ios ) {
       },
       anim: {
         enable: true,
-        speed:.75
+        speed: 1.25
       }
     },
     interactivity: {
