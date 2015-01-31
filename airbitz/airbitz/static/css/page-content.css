@@ -140,6 +140,9 @@ body {
     margin-bottom: 30px;
   }
 }
+.main-content .step h4 {
+  font-weight: 700;
+}
 .main-content .step-description {
   margin-bottom: 30px;
 }
