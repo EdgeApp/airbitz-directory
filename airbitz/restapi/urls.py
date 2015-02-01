@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, url
 
 import views as views
+import restapi.admin as a
 
 from notifications.views import NotificationView, HBitsPromoView, HBitsPromoMod
 
@@ -20,5 +21,7 @@ urlpatterns = patterns('',
      url(r'^notifications/?$', NotificationView.as_view()),
      url(r'^hiddenbits/(?P<token>[a-zA-Z0-9]+)/?$', HBitsPromoView.as_view()),
      url(r'^promo/new/?$', HBitsPromoMod.as_view()),
+
+     url(r'^business/submit/?$', a.ThirdPartyBusinessSubmit.as_view()),
 )
 

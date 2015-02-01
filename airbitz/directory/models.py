@@ -418,3 +418,54 @@ admin.site.register(Business, BusinessAdmin)
 admin.site.register(BusinessImage, BusinessImageAdmin)
 admin.site.register(BusinessHours, BusinessHoursAdmin)
 
+
+
+
+##############################
+# TABLE FOR API PUTS/CREATES TO PREVENT LIVE DATA CORRUPTION
+##############################
+class ThirdPartyBusiness(models.Model):
+    provider_id = models.CharField(max_length=200, blank=False, null=False)
+    name = models.CharField(max_length=200, blank=False)
+    provider_url = models.URLField(max_length=2000, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    website = models.URLField(max_length=2000, blank=True, null=True)
+    phone = models.CharField(max_length=200, blank=True, null=True)
+    address = models.CharField(max_length=200, blank=True, null=True)
+    neighborhood = models.CharField(max_length=200, blank=True, null=True)
+    admin3_name = models.CharField(max_length=200, blank=True, null=True) # City
+    admin2_name = models.CharField(max_length=200, blank=True, null=True) # County
+    admin1_code = models.CharField(max_length=200, blank=True, null=True) # State
+    postalcode = models.CharField(max_length=200, blank=True, null=True)
+    country = models.CharField(max_length=200, blank=True, null=True)
+
+    # categories = models.ManyToManyField(Category, blank=True, null=True)
+    # landing_image = models.ForeignKey('BusinessImage', null=True, blank=True,
+    #                                   on_delete=models.SET_NULL, related_name='landing_image_business')
+    # mobile_landing_image = models.ForeignKey('BusinessImage', null=True, blank=True,
+    #                                   on_delete=models.SET_NULL, related_name='mobile_landing_image')
+
+    has_physical_business = models.BooleanField(default=False)  # Brick and Mortar?
+    has_online_business = models.BooleanField(default=False)
+    has_bitcoin_discount = models.DecimalField(default=0.0, decimal_places=3, max_digits=5)
+
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    published = models.DateTimeField(blank=True, null=True)
+
+    # last_modified_by = models.CharField(max_length=200, blank=True, null=True)
+    # admin_notes = models.TextField(blank=True, null=True)
+
+    # PostGis fields
+    # center = models.PointField(blank=True, null=True)
+    # objects = models.GeoManager()
+
+
+    def __unicode__(self):
+        return u'%s (id=%s)' % (self.name, self.pk)
+
+    # override default save and check for published to set a publish date
+    def save(self, *args, **kwargs):
+        pass
+
+        super(ThirdPartyBusiness, self).save(*args, **kwargs)    # Call the "real" save() method.

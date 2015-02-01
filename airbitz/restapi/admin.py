@@ -8,8 +8,8 @@ from rest_framework import fields
 from rest_framework import pagination
 from rest_framework import serializers
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import IsAdminUser
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView, UpdateAPIView
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 
 import logging
@@ -17,7 +17,7 @@ import datetime
 from airbitz import settings
 from airbitz import regions_data
 
-from directory.models import Business, BusinessHours, Category, SocialId
+from directory.models import Business, BusinessHours, Category, SocialId, ThirdPartyBusiness
 from restapi import api
 
 log = logging.getLogger("airbitz." + __name__)
@@ -158,6 +158,7 @@ class ScreencapList(ListCreateAPIView):
     serializer_class = AdminBizSerializer
     model = Business
     allow_empty = True
+
     def get_queryset(self):
         interval = settings.SCREENCAP_INTERVAL
         date1 = datetime.datetime.today()
@@ -467,6 +468,7 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
 
 
 
+
 ########################################
 # REGION QUERIES
 ########################################
@@ -666,3 +668,54 @@ class PublishedDetails(ListCreateAPIView):
         serialized = PublishedDetailsSerializer(data=country_counts)
 
         return MetaResponse(data=serialized.data, meta=meta)
+
+
+
+
+########################################
+# EXTERNAL API (bitpay)
+########################################
+class ThirdPartyBusinessSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ThirdPartyBusiness
+        fields = ('provider_id', 'name', 'description',)
+
+
+class ThirdPartyBusinessSubmit(CreateAPIView):
+    serializer_class = ThirdPartyBusinessSerializer
+    permission_classes = (IsAdminUser,)
+    authentication_classes = PERMS
+    model = ThirdPartyBusiness
+
+    def find_existing(self, request):
+        try:
+            return ThirdPartyBusiness.objects.get(provider_id=request.DATA.get('provider_id'))
+        except Exception as e:
+            print e
+
+        return None
+
+    def create(self, request, *args, **kwargs):
+        instance = self.find_existing(request)
+
+        serializer = self.get_serializer(instance=instance, data=request.DATA, files=request.FILES)
+
+        if serializer.is_valid():
+            self.pre_save(serializer.object)
+            # set pk for update if already exists
+
+            self.object = serializer.save()
+            self.post_save(self.object, created=True)
+            headers = self.get_success_headers(serializer.data)
+
+            if not instance:
+                return Response(serializer.data, status=status.HTTP_201_CREATED,
+                            headers=headers)
+            else:
+                return Response(serializer.data, status=status.HTTP_200_OK,
+                            headers=headers)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
