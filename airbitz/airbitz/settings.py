@@ -330,7 +330,7 @@ PIPELINE_JS = {
             'js/core.js',
             'js/holder.js',
             'js/typeahead.bundle.js',
-            'extras/retinajs-master/src/retina.js',
+            'extras/retinajs-master/retina.js',
             'extras/jQuery.dotdotdot-master/src/js/jquery.dotdotdot.min.js',
             'extras/Readmore.js-master/readmore.min.js',
             'extras/swipebox-master/source/jquery.swipebox.min.js',
