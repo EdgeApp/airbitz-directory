@@ -8,16 +8,19 @@ from rest_framework import fields
 from rest_framework import pagination
 from rest_framework import serializers
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView, UpdateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView, UpdateAPIView, \
+    ListAPIView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 
 import logging
 import datetime
+from rest_framework.views import APIView
 from airbitz import settings
 from airbitz import regions_data
 
-from directory.models import Business, BusinessHours, Category, SocialId, ThirdPartyBusiness
+from directory.models import Business, BusinessHours, Category, SocialId, ThirdPartyBusiness, ThirdPartyBusinessImage, \
+    ThirdPartyBusinessImageTag, ThirdPartyCategory, ExpenseCategory
 from restapi import api
 
 log = logging.getLogger("airbitz." + __name__)
@@ -675,47 +678,119 @@ class PublishedDetails(ListCreateAPIView):
 ########################################
 # EXTERNAL API (bitpay)
 ########################################
-class ThirdPartyBusinessSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = ThirdPartyBusiness
-        fields = ('provider_id', 'name', 'description',)
+class ThirdPartyBusinessImageTagSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=200)
 
 
-class ThirdPartyBusinessSubmit(CreateAPIView):
+class ThirdPartyBusinessImageSerializer(serializers.Serializer):
+    url = serializers.URLField(required=True, max_length=2000)
+    tags = ThirdPartyBusinessImageTagSerializer(required=False, source='tags', many=True)
+
+
+class ThirdPartyCategorySerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=200)
+
+
+class ThirdPartyBusinessSerializer(serializers.Serializer):
+    name = serializers.CharField(required=False, max_length=200)
+    provider_id = serializers.CharField(required=False, max_length=200)
+    provider_url = serializers.CharField(required=False, max_length=200)
+    website = serializers.URLField(required=False, max_length=2000)
+    phone = serializers.CharField(required=False, max_length=200)
+    description = serializers.CharField(required=False)
+    street_address = serializers.CharField(required=False, max_length=200)
+    neighborhood = serializers.CharField(required=False, max_length=200)
+    admin3_name = serializers.CharField(required=False, max_length=200)
+    admin2_name = serializers.CharField(required=False, max_length=200)
+    admin1_code = serializers.CharField(required=False, max_length=200)
+    postalcode = serializers.CharField(required=False, max_length=200)
+    country = serializers.CharField(required=False, max_length=200)
+    physical_business = serializers.CharField(required=False, max_length=200)
+    online_business = serializers.CharField(required=False, max_length=200)
+    bitcoin_discount = serializers.CharField(required=False, max_length=200)
+    score = serializers.CharField(required=False, max_length=200)
+
+    location = AdminPointField(source='location', required=False)
+    categories = ThirdPartyCategorySerializer(required=False, source='categories')
+    expense_category = serializers.CharField(required=False, max_length=200)
+    images = ThirdPartyBusinessImageSerializer(required=False, source='images')
+
+
+class ThirdPartyBusinessSubmit(APIView):
     serializer_class = ThirdPartyBusinessSerializer
     permission_classes = (IsAdminUser,)
-    authentication_classes = PERMS
+    authentication_classes = (auth.TokenAuthentication,)
     model = ThirdPartyBusiness
 
     def find_existing(self, request):
         try:
-            return ThirdPartyBusiness.objects.get(provider_id=request.DATA.get('provider_id'))
+            return ThirdPartyBusiness.objects.get(user=request.user, provider_id=request.DATA.get('provider_id'))
         except Exception as e:
             print e
 
         return None
 
-    def create(self, request, *args, **kwargs):
+    def populate(self, serializer, request):
+        created = False
         instance = self.find_existing(request)
 
-        serializer = self.get_serializer(instance=instance, data=request.DATA, files=request.FILES)
+        if instance is None:
+            instance = ThirdPartyBusiness.objects.create(
+                user=request.user,
+                provider_id=request.DATA['provider_id'],
+                name=request.DATA['name']
+            )
+            created = True
+
+        instance.user = request.user
+        instance.name = serializer.data.get('name')
+        instance.description = serializer.data.get('description')
+        instance.website = serializer.data.get('website')
+        instance.phone = serializer.data.get('phone', None)
+        instance.street_address = serializer.data.get('street_address', None)
+        instance.neighborhood = serializer.data.get('neighborhood', None)
+        instance.admin3_name = serializer.data.get('admin3_name', None)
+        instance.admin2_name = serializer.data.get('admin2_name', None)
+        instance.admin1_code = serializer.data.get('admin1_code', None)
+        instance.postalcode = serializer.data.get('postalcode', None)
+        instance.country = serializer.data.get('country', None)
+        instance.physical_business = serializer.data.get('physical_business', None)
+        instance.online_business = serializer.data.get('online_business', None)
+        instance.bitcoin_discount = serializer.data.get('bitcoin_discount', None)
+        instance.score = serializer.data.get('score', None)
+        instance.location = self.get_value(serializer, 'location')
+
+        for s in serializer.data.get('categories', []):
+            newcat, _ = ThirdPartyCategory.objects.get_or_create(name=s['name'])
+            instance.categories.add(newcat)
+
+        if serializer.data.get('expense_category', None):
+            newexpcat, _ = ExpenseCategory.objects.get_or_create(name=serializer.data.get('expense_category', None))
+            instance.expense_category = newexpcat
+
+        for i in serializer.data.get('images', []):
+            newimg, _ = ThirdPartyBusinessImage.objects.get_or_create(url=i['url'], business=instance)
+
+        instance.save()
+        return created
+
+    def get_value(self, s, field):
+        return s.get_fields().get(field).from_native(s.data.get(field, None))
+
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.DATA, files=request.FILES)
 
         if serializer.is_valid():
-            self.pre_save(serializer.object)
-            # set pk for update if already exists
+            # self.pre_save(serializer.object)
 
-            self.object = serializer.save()
-            self.post_save(self.object, created=True)
-            headers = self.get_success_headers(serializer.data)
-
-            if not instance:
-                return Response(serializer.data, status=status.HTTP_201_CREATED,
-                            headers=headers)
+            # set pk for update if already exists)
+            resp_created = "Feed me more!"
+            resp_updated = "Keep it coming!"
+            if self.populate(serializer, request):
+                return Response(resp_created, status=status.HTTP_201_CREATED)
             else:
-                return Response(serializer.data, status=status.HTTP_200_OK,
-                            headers=headers)
+                return Response(resp_updated, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 

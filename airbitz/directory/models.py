@@ -19,6 +19,7 @@ import logging
 from airbitz import settings
 from directory.slug import unique_slugify
 from imgprocessors import DEF_ADMIN_PROC, DEF_MOBILE_PROC
+from django.contrib.auth.models import User
 
 logger = logging.getLogger(__name__)
 
@@ -401,37 +402,58 @@ class BusinessHours(models.Model):
         return u'%s (day=%s)' % (self.business, self.dayOfWeek)
 
 
-class BusinessAdmin(admin.ModelAdmin):
-    pass
 
-class BusinessImageAdmin(admin.ModelAdmin):
-    pass
 
-class BusinessHoursAdmin(admin.ModelAdmin):
-    pass
 
-class CategoryAdmin(admin.ModelAdmin):
-    pass
-
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Business, BusinessAdmin)
-admin.site.register(BusinessImage, BusinessImageAdmin)
-admin.site.register(BusinessHours, BusinessHoursAdmin)
 
 
 
 
 ##############################
-# TABLE FOR API PUTS/CREATES TO PREVENT LIVE DATA CORRUPTION
+# TABLES FOR API PUTS/CREATES TO PREVENT LIVE DATA CORRUPTION
 ##############################
+class ThirdPartyBusinessImageTag(models.Model):
+    name = models.CharField(max_length=30, blank=False, null=False)
+    description = models.CharField(max_length=2500, null=True)
+
+    def __unicode__(self):
+        return "{0}".format(self.name)
+
+
+class ThirdPartyCategory(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.CharField(max_length=2500, blank=True, null=True)
+    level = models.IntegerField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "{0}".format(self.name)
+
+
+class ExpenseCategory(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.CharField(max_length=2500, blank=True, null=True)
+    level = models.IntegerField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "{0}".format(self.name)
+
+
 class ThirdPartyBusiness(models.Model):
-    provider_id = models.CharField(max_length=200, blank=False, null=False)
+    # required
+    user = models.ForeignKey(User, null=False)
     name = models.CharField(max_length=200, blank=False)
+    provider_id = models.CharField(max_length=200, blank=False, null=False)
+
+    # optional
     provider_url = models.URLField(max_length=2000, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     website = models.URLField(max_length=2000, blank=True, null=True)
     phone = models.CharField(max_length=200, blank=True, null=True)
-    address = models.CharField(max_length=200, blank=True, null=True)
+    street_address = models.CharField(max_length=200, blank=True, null=True)
     neighborhood = models.CharField(max_length=200, blank=True, null=True)
     admin3_name = models.CharField(max_length=200, blank=True, null=True) # City
     admin2_name = models.CharField(max_length=200, blank=True, null=True) # County
@@ -439,26 +461,21 @@ class ThirdPartyBusiness(models.Model):
     postalcode = models.CharField(max_length=200, blank=True, null=True)
     country = models.CharField(max_length=200, blank=True, null=True)
 
-    # categories = models.ManyToManyField(Category, blank=True, null=True)
-    # landing_image = models.ForeignKey('BusinessImage', null=True, blank=True,
-    #                                   on_delete=models.SET_NULL, related_name='landing_image_business')
-    # mobile_landing_image = models.ForeignKey('BusinessImage', null=True, blank=True,
-    #                                   on_delete=models.SET_NULL, related_name='mobile_landing_image')
+    physical_business = models.BooleanField(default=False)  # Brick and Mortar?
+    online_business = models.BooleanField(default=False)
+    bitcoin_discount = models.DecimalField(default=0.0, decimal_places=3, max_digits=5)
+    score = models.IntegerField(default=0, blank=True, null=True)
 
-    has_physical_business = models.BooleanField(default=False)  # Brick and Mortar?
-    has_online_business = models.BooleanField(default=False)
-    has_bitcoin_discount = models.DecimalField(default=0.0, decimal_places=3, max_digits=5)
+    # PostGis fields
+    location = models.PointField(blank=True, null=True)
+    objects = models.GeoManager()
+
+    categories = models.ManyToManyField(ThirdPartyCategory, blank=True, null=True)
+    expense_category = models.ForeignKey(ExpenseCategory, null=True)
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     published = models.DateTimeField(blank=True, null=True)
-
-    # last_modified_by = models.CharField(max_length=200, blank=True, null=True)
-    # admin_notes = models.TextField(blank=True, null=True)
-
-    # PostGis fields
-    # center = models.PointField(blank=True, null=True)
-    # objects = models.GeoManager()
 
 
     def __unicode__(self):
@@ -469,3 +486,64 @@ class ThirdPartyBusiness(models.Model):
         pass
 
         super(ThirdPartyBusiness, self).save(*args, **kwargs)    # Call the "real" save() method.
+
+
+class ThirdPartyBusinessImage(models.Model):
+    url = models.URLField(max_length=2000, blank=True, null=True)
+    tags = models.ManyToManyField(ThirdPartyBusinessImageTag, blank=True, null=True)
+    business = models.ForeignKey(ThirdPartyBusiness, null=False)
+
+
+
+
+##############################
+# DJANGO ADMIN
+##############################
+class CategoryAdmin(admin.ModelAdmin):
+    pass
+
+class BusinessAdmin(admin.ModelAdmin):
+    pass
+
+class BusinessImageAdmin(admin.ModelAdmin):
+    pass
+
+class BusinessHoursAdmin(admin.ModelAdmin):
+    pass
+
+class ThirdPartyBusinessAdmin(admin.ModelAdmin):
+    pass
+
+class ThirdPartyCategoryAdmin(admin.ModelAdmin):
+    pass
+
+class ExpenseCategoryAdmin(admin.ModelAdmin):
+    pass
+
+class ThirdPartyBusinessImageAdmin(admin.ModelAdmin):
+    pass
+
+class ThirdPartyBusinessImageTagAdmin(admin.ModelAdmin):
+    pass
+
+
+
+
+
+
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Business, BusinessAdmin)
+admin.site.register(BusinessImage, BusinessImageAdmin)
+admin.site.register(BusinessHours, BusinessHoursAdmin)
+
+admin.site.register(ThirdPartyBusiness, ThirdPartyBusinessAdmin)
+admin.site.register(ThirdPartyCategory, ThirdPartyCategoryAdmin)
+admin.site.register(ExpenseCategory, ExpenseCategoryAdmin)
+admin.site.register(ThirdPartyBusinessImage, ThirdPartyBusinessImageAdmin)
+admin.site.register(ThirdPartyBusinessImageTag, ThirdPartyBusinessImageTagAdmin)
+
+
+
+
+
+
