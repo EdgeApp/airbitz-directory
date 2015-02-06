@@ -678,17 +678,26 @@ class PublishedDetails(ListCreateAPIView):
 ########################################
 # EXTERNAL API (bitpay)
 ########################################
-class ThirdPartyBusinessImageTagSerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=200)
+
+class ListField(serializers.WritableField):
+
+    def from_native(self, data):
+        if isinstance(data, list):
+            if data:
+                return data
+            else:
+                return []
+        else:
+            msg = self.error_messages['invalid']
+            raise ValidationError(msg)
+
+    def to_native(self, obj):
+        return obj
 
 
 class ThirdPartyBusinessImageSerializer(serializers.Serializer):
     url = serializers.URLField(required=True, max_length=2000)
-    tags = ThirdPartyBusinessImageTagSerializer(required=False, source='tags', many=True)
-
-
-class ThirdPartyCategorySerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=200)
+    tags = ListField(required=False, source='tags')
 
 
 class ThirdPartyBusinessSerializer(serializers.Serializer):
@@ -711,7 +720,7 @@ class ThirdPartyBusinessSerializer(serializers.Serializer):
     score = serializers.CharField(required=False, max_length=200)
 
     location = AdminPointField(source='location', required=False)
-    categories = ThirdPartyCategorySerializer(required=False, source='categories')
+    categories = ListField(required=False, source='categories')
     expense_category = serializers.CharField(required=False, max_length=200)
     images = ThirdPartyBusinessImageSerializer(required=False, source='images')
 
@@ -761,7 +770,7 @@ class ThirdPartyBusinessSubmit(APIView):
         instance.location = self.get_value(serializer, 'location')
 
         for s in serializer.data.get('categories', []):
-            newcat, _ = ThirdPartyCategory.objects.get_or_create(name=s['name'])
+            newcat, _ = ThirdPartyCategory.objects.get_or_create(name=s)
             instance.categories.add(newcat)
 
         if serializer.data.get('expense_category', None):
@@ -770,6 +779,14 @@ class ThirdPartyBusinessSubmit(APIView):
 
         for i in serializer.data.get('images', []):
             newimg, _ = ThirdPartyBusinessImage.objects.get_or_create(url=i['url'], business=instance)
+
+            if i.get('tags'):
+                for t in i.get('tags'):
+                    print t
+                    newtag, _ = ThirdPartyBusinessImageTag.objects.get_or_create(name=t)
+                    newimg.tags.add(newtag)
+
+
 
         instance.save()
         return created
