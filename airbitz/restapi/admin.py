@@ -695,6 +695,19 @@ class ListField(serializers.WritableField):
         return obj
 
 
+class ExpenseField(serializers.WritableField):
+
+    def from_native(self, data):
+        if ExpenseCategory.objects.filter(name=data).exists():
+            return data
+        else:
+            msg = 'Invalid expense category check api/v1/categories/expense for list of valid expense categories.'
+            raise ValidationError(msg)
+
+    def to_native(self, obj):
+        return obj
+
+
 class ListFieldReadOnly(serializers.Field):
 
     def to_native(self, obj):
@@ -727,19 +740,8 @@ class ThirdPartyBusinessSerializer(serializers.Serializer):
 
     location = AdminPointField(source='location', required=False)
     categories = ListField(required=False, source='categories')
-    expense_category = serializers.CharField(required=False, max_length=200)
+    expense_category = ExpenseField(source="expense_category", required=False)
     images = ThirdPartyBusinessImageSerializer(required=False, source='images')
-
-    def is_valid(self):
-        v = super(ThirdPartyBusinessSerializer, self).is_valid()
-
-        if not v:
-            return False
-
-        if self.data.get('expense_category'):
-            return ExpenseCategory.objects.filter(name=self.data.get('expense_category', None)).exists()
-        else:
-            return True
 
 
 class ThirdPartyBusinessSubmit(APIView):
@@ -819,8 +821,8 @@ class ThirdPartyBusinessSubmit(APIView):
             # self.pre_save(serializer.object)
 
             # set pk for update if already exists)
-            resp_created = "Feed me more!"
-            resp_updated = "Keep it coming!"
+            resp_created = "Accepted. You got any more!?!"
+            resp_updated = "Yummy fresh data!  Thank you."
             if self.populate(serializer, request):
                 return Response(resp_created, status=status.HTTP_201_CREATED)
             else:
