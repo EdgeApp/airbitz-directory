@@ -23,5 +23,8 @@ urlpatterns = patterns('',
      url(r'^promo/new/?$', HBitsPromoMod.as_view()),
 
      url(r'^business/submit/?$', a.ThirdPartyBusinessSubmit.as_view()),
+     url(r'^business/list/?$', a.ThirdPartyBusinessList.as_view()),
+     url(r'^business/list/(?P<provider_id>[a-zA-Z0-9]+)/?$', a.ThirdPartyBusinessList.as_view()),
+     url(r'^categories/expense/?$', a.ThirdPartyExpenseCategoriesList.as_view()),
 )
 

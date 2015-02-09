@@ -695,6 +695,12 @@ class ListField(serializers.WritableField):
         return obj
 
 
+class ListFieldReadOnly(serializers.Field):
+
+    def to_native(self, obj):
+        return [o.name for o in obj.all()]
+
+
 class ThirdPartyBusinessImageSerializer(serializers.Serializer):
     url = serializers.URLField(required=True, max_length=2000)
     tags = ListField(required=False, source='tags')
@@ -723,6 +729,17 @@ class ThirdPartyBusinessSerializer(serializers.Serializer):
     categories = ListField(required=False, source='categories')
     expense_category = serializers.CharField(required=False, max_length=200)
     images = ThirdPartyBusinessImageSerializer(required=False, source='images')
+
+    def is_valid(self):
+        v = super(ThirdPartyBusinessSerializer, self).is_valid()
+
+        if not v:
+            return False
+
+        if self.data.get('expense_category'):
+            return ExpenseCategory.objects.filter(name=self.data.get('expense_category', None)).exists()
+        else:
+            return True
 
 
 class ThirdPartyBusinessSubmit(APIView):
@@ -774,7 +791,7 @@ class ThirdPartyBusinessSubmit(APIView):
             instance.categories.add(newcat)
 
         if serializer.data.get('expense_category', None):
-            newexpcat, _ = ExpenseCategory.objects.get_or_create(name=serializer.data.get('expense_category', None))
+            newexpcat = ExpenseCategory.objects.get(name=serializer.data.get('expense_category', None))
             instance.expense_category = newexpcat
 
         for i in serializer.data.get('images', []):
@@ -811,3 +828,83 @@ class ThirdPartyBusinessSubmit(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+class ThirdPartyBusinessImageModelSerializer(serializers.ModelSerializer):
+    tags = ListFieldReadOnly(source='tags')
+
+    class Meta:
+        model = ThirdPartyBusinessImage
+        fields = (
+            'url',
+            'tags',
+        )
+
+
+class ThirdPartyBusinessModelSerializer(serializers.ModelSerializer):
+    location = AdminPointField(source='location', required=False)
+    categories = ListFieldReadOnly(source='categories')
+    expense_category = serializers.CharField(required=False, source='expense_category.name')
+    images = ThirdPartyBusinessImageModelSerializer(required=False, source='thirdpartybusinessimage_set')
+
+    class Meta:
+        model = ThirdPartyBusiness
+        fields = (
+            'provider_id',
+            'name',
+            'description',
+            'website',
+            'phone',
+            'street_address',
+            'neighborhood',
+            'admin3_name',
+            'admin2_name',
+            'admin1_code',
+            'postalcode',
+            'country',
+            'physical_business',
+            'online_business',
+            'bitcoin_discount',
+            'score',
+            'location',
+            'images',
+            'categories',
+            'expense_category',
+        )
+
+
+class ThirdPartyBusinessList(ListAPIView):
+    serializer_class = ThirdPartyBusinessModelSerializer
+    authentication_classes = (auth.TokenAuthentication,)
+    model = ThirdPartyBusiness
+    paginate_by = 1000
+
+    def get_queryset(self):
+        query_args = {}
+        query_args['user'] = self.request.user
+
+        if self.kwargs.has_key('provider_id'):
+            query_args['provider_id'] = self.kwargs['provider_id']
+
+        return ThirdPartyBusiness.objects.filter(**query_args)
+
+
+
+class ExpenseCategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ExpenseCategory
+        fields = (
+            'name',
+            'description',
+        )
+
+
+class ThirdPartyExpenseCategoriesList(ListAPIView):
+    serializer_class = ExpenseCategorySerializer
+    authentication_classes = (auth.TokenAuthentication,)
+    model = ExpenseCategory
+    paginate_by = 1000
+
+    def get_queryset(self):
+        return ExpenseCategory.objects.all()
