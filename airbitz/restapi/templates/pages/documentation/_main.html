@@ -1,0 +1,282 @@
+
+<div class="row">
+  <div id="section-bitcoin-wallet-platform-header" class="landing-module container-fluid">
+
+    <div class="container">
+
+      <div class="slides row">
+        <br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/>
+      </div><!-- /.row -->
+
+    </div>
+  </div><!-- /.landing-module -->
+</div>
+
+
+<div id="section-bitcoin-wallet-platform-details" class="container">
+
+  <h1 class="hidden-xs">
+    <img src="{{ STATIC_URL }}img/icons/map_64px.png" alt="Airbitz Directory API" class="" />&nbsp;&nbsp;Airbitz Directory API
+  </h1>
+  <h1 class="visible-xs-block">
+    <img src="{{ STATIC_URL }}img/icons/map_64px.png" alt="Airbitz Directory API" class="" />&nbsp;&nbsp;Airbitz Directory API
+  </h1>
+
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <p>Airbitz accepts directory submissions via a RESTful api.  Below you will find examples and capabilities for each REST endpoint.</p>
+
+      <h2 id="business-submit">Business Submit</h2>
+      <h3><code>api/v1/business/submit</code></h3>
+      <p>The following is a table of the required and optional parameters for submitting businesses to the Airbitz directory.</p>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-condensed table-hover">
+          <thead>
+          <tr>
+            <th>Param</th>
+            <th>Required</th>
+            <th>Type</th>
+            <th>Description / Example</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><code>provider_id</code></td>
+            <td><code>true</code></td>
+            <td><code>String</code></td>
+            <td>ID for your reference when querying or updating records</td>
+          </tr>
+          <tr>
+            <td><code>name</code></td>
+            <td><code>true</code></td>
+            <td><code>String</code></td>
+            <td>Business name</td>
+          </tr>
+          <tr>
+            <td><code>provider_url</code></td>
+            <td><code>false</code></td>
+            <td><code>String</code></td>
+            <td>URL of listing on external directory to be linked</td>
+          </tr>
+          <tr>
+            <td><code>description</code></td>
+            <td><code>false</code></td>
+            <td><code>String</code></td>
+            <td>Description of business</td>
+          </tr>
+          <tr>
+            <td><code>website</code></td>
+            <td><code>false</code></td>
+            <td><code>String</code></td>
+            <td>Website url of the business</td>
+          </tr>
+          <tr>
+            <td><code>phone</code></td>
+            <td><code>false</code></td>
+            <td><code>String</code></td>
+            <td>Phone number of business</td>
+          </tr>
+          <tr>
+            <td><code>street_address</code></td>
+            <td><code>false</code></td>
+            <td><code>String</code></td>
+            <td>Street address of business</td>
+          </tr>
+          <tr>
+            <td><code>neighborhood</code></td>
+            <td><code>false</code></td>
+            <td><code>String</code></td>
+            <td>Friendly name or nickname for area</td>
+          </tr>
+          <tr>
+            <td><code>admin3_name</code></td>
+            <td><code>false</code></td>
+            <td><code>String</code></td>
+            <td>City name of business</td>
+          </tr>
+          <tr>
+            <td><code>admin2_name</code></td>
+            <td><code>false</code></td>
+            <td><code>String</code></td>
+            <td>County name of business</td>
+          </tr>
+          <tr>
+            <td><code>admin1_code</code></td>
+            <td><code>false</code></td>
+            <td><code>String</code></td>
+            <td>US FIPS 5-2 1st level administrative division code (e.g., state/province)</td>
+          </tr>
+          <tr>
+            <td><code>postalcode</code></td>
+            <td><code>false</code></td>
+            <td><code>String</code></td>
+            <td>Postal code of business</td>
+          </tr>
+          <tr>
+            <td><code>country</code></td>
+            <td><code>false</code></td>
+            <td><code>String</code></td>
+            <td><a href="http://en.wikipedia.org/wiki/ISO_3166-1" target="_blank">ISO 3166-1</a> ISO 3166-1 alpha-2 country code</td>
+          </tr>
+          <tr>
+            <td><code>physical_business</code></td>
+            <td><code>false</code></td>
+            <td><code>Boolean</code></td>
+            <td>Does the business accept bitcoin at brick and mortar locations</td>
+          </tr>
+          <tr>
+            <td><code>online_business</code></td>
+            <td><code>false</code></td>
+            <td><code>Boolean</code></td>
+            <td>Does the business accept bitcoin online</td>
+          </tr>
+          <tr>
+            <td><code>bitcoin_discount</code></td>
+            <td><code>false</code></td>
+            <td><code>Integer</code></td>
+            <td>Percent discount given for bitcoin purchases</td>
+          </tr>
+          <tr>
+            <td><code>score</code></td>
+            <td><code>false</code></td>
+            <td><code>Integer</code></td>
+            <td>Relative score for popularity or bitcoin transaction volume</td>
+          </tr>
+          <tr>
+            <td><code>location</code></td>
+            <td><code>false</code></td>
+            <td><code>Object</code></td>
+            <td>
+
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped table-condensed table-hover">
+                  <thead>
+                  <tr>
+                    <th>Param</th>
+                    <th>Required</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td><code>latitude</code></td>
+                    <td><code>false</code></td>
+                    <td><code>Integer</code></td>
+                    <td>Latitude coordinate of the area centroid</td>
+                  </tr>
+                  <tr>
+                    <td><code>logitude</code></td>
+                    <td><code>false</code></td>
+                    <td><code>Integer</code></td>
+                    <td>Longitude coordinate of the area centroid</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </td>
+          </tr>
+          <tr>
+            <td><code>categories</code></td>
+            <td><code>false</code></td>
+            <td><code>List</code></td>
+            <td>Business category</td>
+          </tr>
+          <tr>
+            <td><code>expense_category</code></td>
+            <td><code>false</code></td>
+            <td><code>String</code></td>
+            <td>Default expense category to tag transactions with</td>
+          </tr>
+          <tr>
+            <td><code>images</code></td>
+            <td><code>false</code></td>
+            <td>
+              <pre>
+                <code>
+[
+  {
+    "url": "http://imgurl.com"
+    "tags": ["primary", "tag1"]
+  },
+  {
+    "url": "http://imgurl.com"
+    "tags": ["tag2", "tag3"]
+  },
+]
+                </code>
+              </pre>
+            </td>
+            <td>
+
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped table-condensed table-hover">
+                  <thead>
+                  <tr>
+                    <th>Param</th>
+                    <th>Required</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td><code>url</code></td>
+                    <td><code>true</code></td>
+                    <td><code>String</code></td>
+                    <td>URL of image for Airbitz to download</td>
+                  </tr>
+                  <tr>
+                    <td><code>tags</code></td>
+                    <td><code>false</code></td>
+                    <td><code>List</code></td>
+                    <td>String list of tags.  Use [<code>"primary"</code>] for main image</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <br/>
+
+      <h3>Example code to POST a business</h3>
+      <pre><code class="JSON">{% include 'examples/business-submit.js' %}</code></pre>
+
+      <hr/>
+
+      <h2 id="business-list">Business List GET</h2>
+      <h3><code>api/v1/business/list</code></h3>
+      <p>Airbitz directory api will also list any businesses that are submitted by any user token.</p>
+      <pre><code class="JSON">{% include 'examples/business-list.js' %}</code></pre>
+
+      <hr/>
+
+      <h2 id="business-list-id">Business List GET with provider_id</h2>
+      <h3><code>api/v1/business/list/provider_id</code></h3>
+      <p>If a specific provider_id is supplied with the business list endpoint only the matching query will be returned.</p>
+      <pre><code class="JSON">{% include 'examples/business-list-id.js' %}</code></pre>
+
+      <hr/>
+
+      <h2 id="categories-expense">Expense Category List GET</h2>
+      <h3><code>api/v1/categories/list</code></h3>
+      <p>If a specific provider_id is supplied with the business list endpoint only the matching query will be returned.</p>
+      <pre><code class="JSON">{% include 'examples/categories-expense.js' %}</code></pre>
+
+      <br/>
+
+      <h3>Example response</h3>
+      <pre><code class="JSON">{% include 'examples/categories-expense-response.json' %}</code></pre>
+
+    </div>
+  </div>
+</div>

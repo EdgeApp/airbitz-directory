@@ -1,0 +1,387 @@
+{
+  "count": 95,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "name": "Expense:Air Travel",
+      "description": ""
+    },
+    {
+      "name": "Expense:Alcohol & Bars",
+      "description": ""
+    },
+    {
+      "name": "Expense:Allowance",
+      "description": ""
+    },
+    {
+      "name": "Expense:Amusement",
+      "description": ""
+    },
+    {
+      "name": "Expense:Arts",
+      "description": ""
+    },
+    {
+      "name": "Expense:ATM Fee",
+      "description": ""
+    },
+    {
+      "name": "Expense:Auto & Transport",
+      "description": ""
+    },
+    {
+      "name": "Expense:Auto Insurance",
+      "description": ""
+    },
+    {
+      "name": "Expense:Auto Payment",
+      "description": ""
+    },
+    {
+      "name": "Expense:Baby Supplies",
+      "description": ""
+    },
+    {
+      "name": "Expense:Babysitter & Daycar",
+      "description": ""
+    },
+    {
+      "name": "Expense:Bank Fee",
+      "description": ""
+    },
+    {
+      "name": "Expense:Bills & Utilities",
+      "description": ""
+    },
+    {
+      "name": "Expense:Books",
+      "description": ""
+    },
+    {
+      "name": "Expense:Books & Supplies",
+      "description": ""
+    },
+    {
+      "name": "Expense:Car Wash",
+      "description": ""
+    },
+    {
+      "name": "Expense:Cash & ATM",
+      "description": ""
+    },
+    {
+      "name": "Expense:Charity",
+      "description": ""
+    },
+    {
+      "name": "Expense:Clothing",
+      "description": ""
+    },
+    {
+      "name": "Expense:Coffee Shops",
+      "description": ""
+    },
+    {
+      "name": "Expense:Credit Card Payment",
+      "description": ""
+    },
+    {
+      "name": "Expense:Dentist",
+      "description": ""
+    },
+    {
+      "name": "Expense:Deposit to Savings",
+      "description": ""
+    },
+    {
+      "name": "Expense:Doctor",
+      "description": ""
+    },
+    {
+      "name": "Expense:Education",
+      "description": ""
+    },
+    {
+      "name": "Expense:Electronics & Software",
+      "description": ""
+    },
+    {
+      "name": "Expense:Entertainment",
+      "description": ""
+    },
+    {
+      "name": "Expense:Eyecare",
+      "description": ""
+    },
+    {
+      "name": "Expense:Fast Food",
+      "description": ""
+    },
+    {
+      "name": "Expense:Fees & Charges",
+      "description": ""
+    },
+    {
+      "name": "Expense:Financial",
+      "description": ""
+    },
+    {
+      "name": "Expense:Financial Advisor",
+      "description": ""
+    },
+    {
+      "name": "Expense:Food & Dining",
+      "description": ""
+    },
+    {
+      "name": "Expense:Furnishings",
+      "description": ""
+    },
+    {
+      "name": "Expense:Gas & Fuel",
+      "description": ""
+    },
+    {
+      "name": "Expense:Gift",
+      "description": ""
+    },
+    {
+      "name": "Expense:Gifts & Donations",
+      "description": ""
+    },
+    {
+      "name": "Expense:Groceries",
+      "description": ""
+    },
+    {
+      "name": "Expense:Gym",
+      "description": ""
+    },
+    {
+      "name": "Expense:Hair",
+      "description": ""
+    },
+    {
+      "name": "Expense:Health & Fitness",
+      "description": ""
+    },
+    {
+      "name": "Expense:HOA Dues",
+      "description": ""
+    },
+    {
+      "name": "Expense:Hobbies",
+      "description": ""
+    },
+    {
+      "name": "Expense:Home",
+      "description": ""
+    },
+    {
+      "name": "Expense:Home Improvement",
+      "description": ""
+    },
+    {
+      "name": "Expense:Home Insurance",
+      "description": ""
+    },
+    {
+      "name": "Expense:Home Phone",
+      "description": ""
+    },
+    {
+      "name": "Expense:Home Services",
+      "description": ""
+    },
+    {
+      "name": "Expense:Home Supplies",
+      "description": ""
+    },
+    {
+      "name": "Expense:Hotel",
+      "description": ""
+    },
+    {
+      "name": "Expense:Interest Exp",
+      "description": ""
+    },
+    {
+      "name": "Expense:Internet",
+      "description": ""
+    },
+    {
+      "name": "Expense:IRA Contribution",
+      "description": ""
+    },
+    {
+      "name": "Expense:Kids",
+      "description": ""
+    },
+    {
+      "name": "Expense:Kids Activities",
+      "description": ""
+    },
+    {
+      "name": "Expense:Late Fee",
+      "description": ""
+    },
+    {
+      "name": "Expense:Laundry",
+      "description": ""
+    },
+    {
+      "name": "Expense:Lawn & Garden",
+      "description": ""
+    },
+    {
+      "name": "Expense:Life Insurance",
+      "description": ""
+    },
+    {
+      "name": "Expense:Misc.",
+      "description": ""
+    },
+    {
+      "name": "Expense:Mobile Phone",
+      "description": ""
+    },
+    {
+      "name": "Expense:Mortgage & Rent",
+      "description": ""
+    },
+    {
+      "name": "Expense:Mortgage Interest",
+      "description": ""
+    },
+    {
+      "name": "Expense:Movies & DVDs",
+      "description": ""
+    },
+    {
+      "name": "Expense:Music",
+      "description": ""
+    },
+    {
+      "name": "Expense:Newspaper & Magazines",
+      "description": ""
+    },
+    {
+      "name": "Expense:Not Sure",
+      "description": ""
+    },
+    {
+      "name": "Expense:Parking",
+      "description": ""
+    },
+    {
+      "name": "Expense:Personal Care",
+      "description": ""
+    },
+    {
+      "name": "Expense:Pet Food & Supplies",
+      "description": ""
+    },
+    {
+      "name": "Expense:Pet Grooming",
+      "description": ""
+    },
+    {
+      "name": "Expense:Pets",
+      "description": ""
+    },
+    {
+      "name": "Expense:Pharmacy",
+      "description": ""
+    },
+    {
+      "name": "Expense:Property",
+      "description": ""
+    },
+    {
+      "name": "Expense:Public Transportation",
+      "description": ""
+    },
+    {
+      "name": "Expense:Registration",
+      "description": ""
+    },
+    {
+      "name": "Expense:Rental Car & Taxi",
+      "description": ""
+    },
+    {
+      "name": "Expense:Restaurants",
+      "description": ""
+    },
+    {
+      "name": "Expense:Service & Parts",
+      "description": ""
+    },
+    {
+      "name": "Expense:Service Fee",
+      "description": ""
+    },
+    {
+      "name": "Expense:Shopping",
+      "description": ""
+    },
+    {
+      "name": "Expense:Spa & Massage",
+      "description": ""
+    },
+    {
+      "name": "Expense:Sporting Good",
+      "description": ""
+    },
+    {
+      "name": "Expense:Sports",
+      "description": ""
+    },
+    {
+      "name": "Expense:Student Loan",
+      "description": ""
+    },
+    {
+      "name": "Expense:Tax",
+      "description": ""
+    },
+    {
+      "name": "Expense:Television",
+      "description": ""
+    },
+    {
+      "name": "Expense:Tolls",
+      "description": ""
+    },
+    {
+      "name": "Expense:Toys",
+      "description": ""
+    },
+    {
+      "name": "Expense:Trade Commissions",
+      "description": ""
+    },
+    {
+      "name": "Expense:Travel",
+      "description": ""
+    },
+    {
+      "name": "Expense:Tuition",
+      "description": ""
+    },
+    {
+      "name": "Expense:Utilities",
+      "description": ""
+    },
+    {
+      "name": "Expense:Vacation",
+      "description": ""
+    },
+    {
+      "name": "Expense:Vet",
+      "description": ""
+    }
+  ]
+}

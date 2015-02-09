@@ -6,6 +6,8 @@ import restapi.admin as a
 from notifications.views import NotificationView, HBitsPromoView, HBitsPromoMod
 
 urlpatterns = patterns('',
+     url(r'^docs/$', 'restapi.views.page_api_v1_documentation'),
+
      url(r'^business/(?P<bizId>\d+)/$', views.BusinessView.as_view()),
      url(r'^business/(?P<bizId>\d+)/photos/$', views.PhotosView.as_view()),
 
