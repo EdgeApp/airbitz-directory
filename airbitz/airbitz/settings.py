@@ -235,7 +235,7 @@ PIPELINE_CSS = {
         'source_filenames': (
             'css/animate.css',
             'extras/Magnific-Popup-master/dist/magnific-popup.css',
-            'extras/prism/prism.css',
+            'extras/highlightjs/highlight.css',
             'css/page-content.css',
         ),
         'output_filename': 'css/page-conent.' + DEPLOY_DATE + '.css',
@@ -356,7 +356,7 @@ PIPELINE_JS = {
             'extras/carouFredSel-6.2.1/jquery.carouFredSel-6.2.1-packed.js',
             'extras/Magnific-Popup-master/dist/jquery.magnific-popup.js',
             'extras/FitVids.js-master/jquery.fitvids.js',
-            'extras/prism/prism.js',
+            'extras/highlightjs/highlight.js',
             'js/page_content.js',
         ),
         'output_filename': 'js/page-content.' + DEPLOY_DATE + '.js',
