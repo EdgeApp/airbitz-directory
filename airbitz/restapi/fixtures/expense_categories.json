@@ -113,7 +113,7 @@
    "model": "directory.ExpenseCategory",
     "pk": "11",
     "fields": {
-      "name": "Expense:Babysitter & Daycar",
+      "name": "Expense:Babysitter & Daycare",
       "description": "",
       "level": 0,
       "created": "2014-01-01 00:00:00.0",
