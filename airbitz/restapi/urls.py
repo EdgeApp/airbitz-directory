@@ -1,10 +1,13 @@
 from django.conf.urls import patterns, url
 
 import views as views
+import restapi.admin as a
 
 from notifications.views import NotificationView, HBitsPromoView, HBitsPromoMod
 
 urlpatterns = patterns('',
+     url(r'^docs/$', 'restapi.views.page_api_v1_documentation'),
+
      url(r'^business/(?P<bizId>\d+)/$', views.BusinessView.as_view()),
      url(r'^business/(?P<bizId>\d+)/photos/$', views.PhotosView.as_view()),
 
@@ -20,5 +23,10 @@ urlpatterns = patterns('',
      url(r'^notifications/?$', NotificationView.as_view()),
      url(r'^hiddenbits/(?P<token>[a-zA-Z0-9]+)/?$', HBitsPromoView.as_view()),
      url(r'^promo/new/?$', HBitsPromoMod.as_view()),
+
+     url(r'^business/submit/?$', a.ThirdPartyBusinessSubmit.as_view()),
+     url(r'^business/list/?$', a.ThirdPartyBusinessList.as_view()),
+     url(r'^business/list/(?P<provider_id>[a-zA-Z0-9]+)/?$', a.ThirdPartyBusinessList.as_view()),
+     url(r'^categories/expense/?$', a.ThirdPartyExpenseCategoriesList.as_view()),
 )
 

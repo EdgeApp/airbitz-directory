@@ -8,16 +8,19 @@ from rest_framework import fields
 from rest_framework import pagination
 from rest_framework import serializers
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import IsAdminUser
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView, UpdateAPIView, \
+    ListAPIView
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 
 import logging
 import datetime
+from rest_framework.views import APIView
 from airbitz import settings
 from airbitz import regions_data
 
-from directory.models import Business, BusinessHours, Category, SocialId
+from directory.models import Business, BusinessHours, Category, SocialId, ThirdPartyBusiness, ThirdPartyBusinessImage, \
+    ThirdPartyBusinessImageTag, ThirdPartyCategory, ExpenseCategory
 from restapi import api
 
 log = logging.getLogger("airbitz." + __name__)
@@ -158,6 +161,7 @@ class ScreencapList(ListCreateAPIView):
     serializer_class = AdminBizSerializer
     model = Business
     allow_empty = True
+
     def get_queryset(self):
         interval = settings.SCREENCAP_INTERVAL
         date1 = datetime.datetime.today()
@@ -467,6 +471,7 @@ class AdminBusinessDetails(RetrieveUpdateDestroyAPIView):
 
 
 
+
 ########################################
 # REGION QUERIES
 ########################################
@@ -666,3 +671,242 @@ class PublishedDetails(ListCreateAPIView):
         serialized = PublishedDetailsSerializer(data=country_counts)
 
         return MetaResponse(data=serialized.data, meta=meta)
+
+
+
+
+########################################
+# EXTERNAL API (bitpay)
+########################################
+
+class ListField(serializers.WritableField):
+
+    def from_native(self, data):
+        if isinstance(data, list):
+            if data:
+                return data
+            else:
+                return []
+        else:
+            msg = self.error_messages['invalid']
+            raise ValidationError(msg)
+
+    def to_native(self, obj):
+        return obj
+
+
+class ExpenseField(serializers.WritableField):
+
+    def from_native(self, data):
+        if ExpenseCategory.objects.filter(name=data).exists():
+            return data
+        else:
+            msg = 'Invalid expense category check api/v1/categories/expense for list of valid expense categories.'
+            raise ValidationError(msg)
+
+    def to_native(self, obj):
+        return obj
+
+
+class ListFieldReadOnly(serializers.Field):
+
+    def to_native(self, obj):
+        return [o.name for o in obj.all()]
+
+
+class ThirdPartyBusinessImageSerializer(serializers.Serializer):
+    url = serializers.URLField(required=True, max_length=2000)
+    tags = ListField(required=False, source='tags')
+
+
+class ThirdPartyBusinessSerializer(serializers.Serializer):
+    name = serializers.CharField(required=False, max_length=200)
+    provider_id = serializers.CharField(required=False, max_length=200)
+    provider_url = serializers.CharField(required=False, max_length=200)
+    website = serializers.URLField(required=False, max_length=2000)
+    phone = serializers.CharField(required=False, max_length=200)
+    description = serializers.CharField(required=False)
+    street_address = serializers.CharField(required=False, max_length=200)
+    neighborhood = serializers.CharField(required=False, max_length=200)
+    admin3_name = serializers.CharField(required=False, max_length=200)
+    admin2_name = serializers.CharField(required=False, max_length=200)
+    admin1_code = serializers.CharField(required=False, max_length=200)
+    postalcode = serializers.CharField(required=False, max_length=200)
+    country = serializers.CharField(required=False, max_length=200)
+    physical_business = serializers.CharField(required=False, max_length=200)
+    online_business = serializers.CharField(required=False, max_length=200)
+    bitcoin_discount = serializers.CharField(required=False, max_length=200)
+    score = serializers.CharField(required=False, max_length=200)
+
+    location = AdminPointField(source='location', required=False)
+    categories = ListField(required=False, source='categories')
+    expense_category = ExpenseField(source="expense_category", required=False)
+    images = ThirdPartyBusinessImageSerializer(required=False, source='images')
+
+
+class ThirdPartyBusinessSubmit(APIView):
+    serializer_class = ThirdPartyBusinessSerializer
+    permission_classes = (IsAdminUser,)
+    authentication_classes = (auth.TokenAuthentication,)
+    model = ThirdPartyBusiness
+
+    def find_existing(self, request):
+        try:
+            return ThirdPartyBusiness.objects.get(user=request.user, provider_id=request.DATA.get('provider_id'))
+        except Exception as e:
+            print e
+
+        return None
+
+    def populate(self, serializer, request):
+        created = False
+        instance = self.find_existing(request)
+
+        if instance is None:
+            instance = ThirdPartyBusiness.objects.create(
+                user=request.user,
+                provider_id=request.DATA['provider_id'],
+                name=request.DATA['name']
+            )
+            created = True
+
+        instance.user = request.user
+        instance.name = serializer.data.get('name')
+        instance.description = serializer.data.get('description')
+        instance.website = serializer.data.get('website')
+        instance.phone = serializer.data.get('phone', None)
+        instance.street_address = serializer.data.get('street_address', None)
+        instance.neighborhood = serializer.data.get('neighborhood', None)
+        instance.admin3_name = serializer.data.get('admin3_name', None)
+        instance.admin2_name = serializer.data.get('admin2_name', None)
+        instance.admin1_code = serializer.data.get('admin1_code', None)
+        instance.postalcode = serializer.data.get('postalcode', None)
+        instance.country = serializer.data.get('country', None)
+        instance.physical_business = serializer.data.get('physical_business', None)
+        instance.online_business = serializer.data.get('online_business', None)
+        instance.bitcoin_discount = serializer.data.get('bitcoin_discount', None)
+        instance.score = serializer.data.get('score', None)
+        instance.location = self.get_value(serializer, 'location')
+
+        for s in serializer.data.get('categories', []):
+            newcat, _ = ThirdPartyCategory.objects.get_or_create(name=s)
+            instance.categories.add(newcat)
+
+        if serializer.data.get('expense_category', None):
+            newexpcat = ExpenseCategory.objects.get(name=serializer.data.get('expense_category', None))
+            instance.expense_category = newexpcat
+
+        for i in serializer.data.get('images', []):
+            newimg, _ = ThirdPartyBusinessImage.objects.get_or_create(url=i['url'], business=instance)
+
+            if i.get('tags'):
+                for t in i.get('tags'):
+                    print t
+                    newtag, _ = ThirdPartyBusinessImageTag.objects.get_or_create(name=t)
+                    newimg.tags.add(newtag)
+
+
+
+        instance.save()
+        return created
+
+    def get_value(self, s, field):
+        return s.get_fields().get(field).from_native(s.data.get(field, None))
+
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.DATA, files=request.FILES)
+
+        if serializer.is_valid():
+            # self.pre_save(serializer.object)
+
+            # set pk for update if already exists)
+            resp_created = "Accepted. You got any more!?!"
+            resp_updated = "Yummy fresh data!  Thank you."
+            if self.populate(serializer, request):
+                return Response(resp_created, status=status.HTTP_201_CREATED)
+            else:
+                return Response(resp_updated, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class ThirdPartyBusinessImageModelSerializer(serializers.ModelSerializer):
+    tags = ListFieldReadOnly(source='tags')
+
+    class Meta:
+        model = ThirdPartyBusinessImage
+        fields = (
+            'url',
+            'tags',
+        )
+
+
+class ThirdPartyBusinessModelSerializer(serializers.ModelSerializer):
+    location = AdminPointField(source='location', required=False)
+    categories = ListFieldReadOnly(source='categories')
+    expense_category = serializers.CharField(required=False, source='expense_category.name')
+    images = ThirdPartyBusinessImageModelSerializer(required=False, source='thirdpartybusinessimage_set')
+
+    class Meta:
+        model = ThirdPartyBusiness
+        fields = (
+            'provider_id',
+            'name',
+            'description',
+            'website',
+            'phone',
+            'street_address',
+            'neighborhood',
+            'admin3_name',
+            'admin2_name',
+            'admin1_code',
+            'postalcode',
+            'country',
+            'physical_business',
+            'online_business',
+            'bitcoin_discount',
+            'score',
+            'location',
+            'images',
+            'categories',
+            'expense_category',
+        )
+
+
+class ThirdPartyBusinessList(ListAPIView):
+    serializer_class = ThirdPartyBusinessModelSerializer
+    authentication_classes = (auth.TokenAuthentication,)
+    model = ThirdPartyBusiness
+    paginate_by = 1000
+
+    def get_queryset(self):
+        query_args = {}
+        query_args['user'] = self.request.user
+
+        if self.kwargs.has_key('provider_id'):
+            query_args['provider_id'] = self.kwargs['provider_id']
+
+        return ThirdPartyBusiness.objects.filter(**query_args)
+
+
+
+class ExpenseCategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ExpenseCategory
+        fields = (
+            'name',
+            'description',
+        )
+
+
+class ThirdPartyExpenseCategoriesList(ListAPIView):
+    serializer_class = ExpenseCategorySerializer
+    authentication_classes = (auth.TokenAuthentication,)
+    model = ExpenseCategory
+    paginate_by = 1000
+
+    def get_queryset(self):
+        return ExpenseCategory.objects.all()

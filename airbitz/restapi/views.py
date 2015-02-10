@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.contrib.gis.measure import Distance
 from django.http import Http404
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from haystack.query import SearchQuerySet
 from rest_framework import authentication as auth
 from rest_framework import exceptions
@@ -262,3 +264,11 @@ class LocationSuggest(APIView):
         results = a.suggestNearText()
         return Response({ 'near':  results })
 
+
+def page_api_v1_documentation(request):
+
+    context = {
+        'page_title': 'Airbitz Directory API v1',
+        'page_description': 'Documentation for use of the Airbitz directory api version 1.',
+    }
+    return render_to_response('pages/page_api_v1_documentation.html', RequestContext(request, context))
