@@ -30,7 +30,10 @@
       <p>Airbitz accepts directory submissions via a RESTful api.  Below you will find examples and capabilities for each REST endpoint.</p>
 
       <h2 id="business-submit">Business Submit</h2>
-      <h3><code>api/v1/business/submit</code></h3>
+      <h3><code>api/v1/business/submit/</code></h3>
+      <p>Use when adding a new business to Airbitz directory.</p>
+      <h3><code>api/v1/business/submit/&lt;provider_id&gt;</code></h3>
+      <p>Use when updating a previously submitted business.</p>
       <p>The following is a table of the required and optional parameters for submitting businesses to the Airbitz directory.</p>
       <div class="table-responsive">
         <table class="table table-bordered table-striped table-condensed table-hover">
@@ -196,6 +199,7 @@
             <td><code>images</code></td>
             <td><code>false</code></td>
             <td>
+              <code>List</code> of <code>imgObjects</code>
               <pre>
                 <code>
 [
