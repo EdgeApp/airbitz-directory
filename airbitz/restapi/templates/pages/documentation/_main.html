@@ -28,12 +28,13 @@
     <div class="col-sm-12">
 
       <p>Airbitz accepts directory submissions via a RESTful api.  Below you will find examples and capabilities for each REST endpoint.</p>
+      <p>To request an <code>API_TOKEN</code>, email <a href="mailto:info@airbitz.co">info@airbitz.co</a> your <strong>name</strong>, <strong>company name</strong>, and <strong>contact</strong> information.</p>
 
-      <h2 id="business-submit">Business Submit</h2>
+      <h2 id="business-submit">Business Submit (Create & Update)</h2>
       <h3><code>api/v1/business/submit/</code></h3>
-      <p>Use when adding a new business to Airbitz directory.</p>
+      <p>Use when <strong>creating</strong> a new business.</p>
       <h3><code>api/v1/business/submit/&lt;provider_id&gt;</code></h3>
-      <p>Use when updating a previously submitted business.</p>
+      <p>Use when <strong>updating</strong> a previously submitted business. <em>You will need the <code>provider_id</code> which was provided when creating the business.</em></p>
       <p>The following is a table of the required and optional parameters for submitting businesses to the Airbitz directory.</p>
       <div class="table-responsive">
         <table class="table table-bordered table-striped table-condensed table-hover">
@@ -258,21 +259,21 @@
       <hr/>
 
       <h2 id="business-list">Business List GET</h2>
-      <h3><code>api/v1/business/list</code></h3>
+      <h3><code>api/v1/business/list/</code></h3>
       <p>Airbitz directory api will also list any businesses that are submitted by any user token.</p>
       <pre><code class="JSON">{% include 'examples/business-list.js' %}</code></pre>
 
       <hr/>
 
-      <h2 id="business-list-id">Business List GET with provider_id</h2>
-      <h3><code>api/v1/business/list/provider_id</code></h3>
-      <p>If a specific provider_id is supplied with the business list endpoint only the matching query will be returned.</p>
+      <h2 id="business-list-id">Business List GET with <code>&lt;provider_id&gt;</code></h2>
+      <h3><code>api/v1/business/list/&lt;provider_id&gt;</code></h3>
+      <p>If a specific &lt;provider_id&gt; is supplied with the business list endpoint only the matching query will be returned.</p>
       <pre><code class="JSON">{% include 'examples/business-list-id.js' %}</code></pre>
 
       <hr/>
 
       <h2 id="categories-expense">Expense Category List GET</h2>
-      <h3><code>api/v1/categories/list</code></h3>
+      <h3><code>api/v1/categories/list/</code></h3>
       <p>If a specific provider_id is supplied with the business list endpoint only the matching query will be returned.</p>
       <pre><code class="JSON">{% include 'examples/categories-expense.js' %}</code></pre>
 
