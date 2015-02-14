@@ -87,10 +87,15 @@ jQuery(function($) {
     $('#email-signup-form').fadeIn();
   }, 5000);
 
+  // hide particles after 5 min
+  setTimeout(function(){
+    $('#landing-particles').hide();
+  }, 300000);
 
-$(window).resize(function(){
-  $('#landing-particles').hide();
-});
+  // on resize hide
+  $(window).resize(function(){
+    $('#landing-particles').hide();
+  });
 
 
 if(!bowser.android && !bowser.ios ) {
