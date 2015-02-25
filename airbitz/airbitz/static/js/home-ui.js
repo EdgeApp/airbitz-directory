@@ -35,7 +35,7 @@ jQuery(function($) {
 
 
   $('#app-demo-slides').carouFredSel({
-    width: 212,
+    width: 214,
     height: 378,
     auto: {
       play: true
@@ -43,7 +43,7 @@ jQuery(function($) {
     scroll: {
       pauseOnHover: true,
       fx: 'crossfade',
-      duration: 1600,
+      duration: 1000,
       onBefore: function() {
         $('#see-app-in-action').css('visibility', 'hidden');
         $('#see-app-in-action').removeClass('animated fadeIn');

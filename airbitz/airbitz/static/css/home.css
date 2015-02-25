@@ -274,8 +274,8 @@ body.home #bottom-slider .et_pb_slide_description h2 {
   width: 241px;
   height: 500px;
   margin: 30px auto 0;
-  padding: 60px 0 0 15px;
-  background: url('../img/landing/ios-bitcoin-wallet.png');
+  padding: 56px 0 0 12px;
+  background: url('../img/landing/android-bitcoin-wallet.png') no-repeat;
   border-radius: 40px;
 }
 .landing-module .iphone-app-slider .iphone-slider #app-demo-slides .slide {
