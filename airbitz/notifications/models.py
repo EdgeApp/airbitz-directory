@@ -33,7 +33,25 @@ class HBitsPromos(models.Model):
 class NotificationAdmin(admin.ModelAdmin):
     pass
 
+def format_string(obj, field):
+    style = "overflow:hidden; white-space:nowrap; max-width:300px; text-overflow:ellipsis; -o-text-overflow:ellipsis;"
+    return "<div style=\"{0}\">{1}</div>".format(style, (getattr(obj, field) or '').strip())
+
+def format_message(obj):
+    return format_string(obj, 'message')
+
+def format_zero_message(obj):
+    return format_string(obj, 'zero_message')
+
+def format_tweet(obj):
+    return format_string(obj, 'tweet')
+
+format_message.allow_tags = True
+format_zero_message.allow_tags = True
+format_tweet.allow_tags = True
+
 class HBitsPromosAdmin(admin.ModelAdmin):
+    list_display = ('token', format_message, format_zero_message, format_tweet, )
     search_fields = ('token',)
 
 admin.site.register(Notification, NotificationAdmin)
