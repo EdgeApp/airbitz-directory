@@ -47,8 +47,11 @@ def format_tweet(obj):
     return format_string(obj, 'tweet')
 
 format_message.allow_tags = True
+format_message.admin_order_field = 'message'
 format_zero_message.allow_tags = True
+format_zero_message.admin_order_field = 'zero_message'
 format_tweet.allow_tags = True
+format_tweet.admin_order_field = 'tweet'
 
 class HBitsPromosAdmin(admin.ModelAdmin):
     list_display = ('token', format_message, format_zero_message, format_tweet, )
