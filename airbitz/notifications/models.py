@@ -34,7 +34,7 @@ class NotificationAdmin(admin.ModelAdmin):
     pass
 
 class HBitsPromosAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ('token',)
 
 admin.site.register(Notification, NotificationAdmin)
 admin.site.register(HBitsPromos, HBitsPromosAdmin)
