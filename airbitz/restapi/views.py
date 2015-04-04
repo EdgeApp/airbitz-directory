@@ -97,7 +97,16 @@ class BusinessView(generics.RetrieveAPIView):
         tasks.ga_send(self.request, 'api::BusinessView');
 
         bizId = self.kwargs['bizId']
-        return SearchQuerySet().models(Business).filter(django_id=bizId)
+        sqs = SearchQuerySet().models(Business).filter(django_id=bizId)
+
+        ll = self.request.QUERY_PARAMS.get('ll', None)
+        if ll:
+            try:
+                point = api.parseGeoLocation(ll)
+                sqs = sqs.distance('location', point)
+            except:
+                log.warn('unable to parse geolocation')
+        return sqs
 
     def retrieve(self, request, *args, **kwargs):
         """
@@ -109,11 +118,6 @@ class BusinessView(generics.RetrieveAPIView):
             self.object = self.get_queryset()[0]
         except:
             raise Http404
-        if self.object.location:
-            ll = self.request.QUERY_PARAMS.get('ll', None)
-            a = api.ApiProcess(ll=ll)
-            distance = Distance(m=a.userLocation().distance(self.object.location) * locapi.DEG_TO_M)
-            setattr(self.object, 'distance', distance)
         serializer = self.get_serializer(self.object)
         return Response(serializer.data)
 
