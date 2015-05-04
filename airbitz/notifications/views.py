@@ -62,6 +62,19 @@ class HBitsPromoSerializer(serializers.ModelSerializer):
                   'claimed',
                   )
 
+class HBitsClaimedPost(object):
+    def __init__(self, claimed):
+        self.claimed = claimed
+
+class HBitsClaimedSeralizer(serializers.Serializer):
+    claimed = serializers.BooleanField(required=True)
+
+    def restore_object(self, attrs, instance=None):
+        if instance is not None:
+            instance.claimed = attrs.get('claimed', instance.claimed)
+            return instance
+        return HBitsClaimedPost(**attrs)
+
 class HBitsPromoView(generics.RetrieveAPIView):
     serializer_class = HBitsPromoSerializer
     lookup_url_kwarg = 'token'
@@ -79,7 +92,37 @@ class HBitsPromoView(generics.RetrieveAPIView):
         serializer = self.get_serializer(self.object)
         return Response(serializer.data)
 
-class HBitsPromoMod(APIView):
+class HBitsPromoList(generics.ListAPIView):
+    serializer_class = HBitsPromoSerializer
+    authentication_classes = PERMS
+    permission_classes = AUTH
+    paginate_by = 50
+    paginate_by_param = 'page_size'
+
+    def get_queryset(self):
+        return HBitsPromos.objects.all()
+
+class HBitsPromoClaimed(APIView):
+    authentication_classes = PERMS
+    permission_classes = AUTH
+    post_serializer = HBitsClaimedSeralizer
+
+    def post(self, request, *args, **kwargs):
+        ser = self.post_serializer(data=request.DATA)
+        if ser.is_valid():
+            o = ser.object
+            try:
+                record = HBitsPromos.objects.get(token=self.kwargs['token'])
+                record.claimed = o.claimed
+                record.save()
+                return Response(status=200, data={'detail': 'Record updated'})
+            except Exception as e:
+                print e
+                return Response(status=404, data={'detail': 'Record does not exist'})
+        else:
+            return Response(status=500, data={'detail': 'Invalid input'})
+
+class HBitsPromoCreate(APIView):
     authentication_classes = PERMS
     permission_classes = ADMIN_AUTH
     post_serializer = HBitsPromoSerializer
