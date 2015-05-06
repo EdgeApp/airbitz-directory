@@ -419,11 +419,12 @@ class ApiProcess(object):
             sqs = sqs.order_by('distance')
 
         if self.location and self.location.bounding:
+            sqs = sqs[:25]
             sqs = self.boundSearchQuery(sqs, self.location)
 
         used = {}
-        sqs = flatten([autocompleteSuggSerialize(s, used) for s in sqs])
-        return filter(lambda x : x is not None, sqs)[:10]
+        sqs = flatten([autocompleteSuggSerialize(s, used) for s in sqs[:10]])
+        return filter(lambda x : x is not None, sqs)
 
     def suggestNearText(self):
         if self.location.ip_accurate:
