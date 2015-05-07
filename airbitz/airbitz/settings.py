@@ -49,7 +49,7 @@ SCREENCAP_INTERVAL = datetime.timedelta(minutes=15)
 # FRONT PAGE QUERY RELATED
 FP_QUERY_INTERVAL = datetime.timedelta(days=7)
 
-DEPLOY_DATE = '20140130'
+DEPLOY_DATE = '20140507'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -334,7 +334,7 @@ PIPELINE_JS = {
             'extras/jQuery.dotdotdot-master/src/js/jquery.dotdotdot.min.js',
             'extras/Readmore.js-master/readmore.min.js',
             'extras/swipebox-master/source/jquery.swipebox.min.js',
-            'extras/bootstrap-hover-dropdown-master/bootstrap-hover-dropdown.min.js',
+            'extras/bootstrap-hover-dropdown-master/bootstrap-hover-dropdown.js',
             'js/frontend-ui.js',
             'js/mobile-download-bar.js'
         ),

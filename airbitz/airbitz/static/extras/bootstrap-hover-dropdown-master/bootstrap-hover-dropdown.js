@@ -103,7 +103,10 @@
     };
 
     $(document).ready(function () {
-        // apply dropdownHover to all elements with the data-hover="dropdown" attribute
-        $('[data-hover="dropdown"]').dropdownHover();
+        var mq = window.matchMedia ? window.matchMedia('(min-width: 979px)') : null;
+        if (mq && mq.matches) {
+          // apply dropdownHover to all elements with the data-hover="dropdown" attribute
+          $('[data-hover="dropdown"]').dropdownHover();
+        }
     });
 })(jQuery, this);
