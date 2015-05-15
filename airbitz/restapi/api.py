@@ -225,8 +225,9 @@ class Location(object):
         return self.filter_current_location
 
 class ApiProcess(object):
-    def __init__(self, locationStr=None, ll=None, ip=None):
+    def __init__(self, locationStr=None, ll=None, ip=None, lang='en'):
         self.location = Location(locationStr=locationStr, ll=ll, ip=ip)
+        self.lang = lang
 
     def userLocation(self):
         return self.location.sortPoint
@@ -266,9 +267,14 @@ class ApiProcess(object):
 
         sqs = SearchQuerySet().models(Business)
         sqs = sqs.filter(is_searchable=True)
+        if self.lang == 'en':
+            lang_cat={'categories':term}
+        else:
+            lang_cat={self.lang + '_categories':term}
+        print lang_cat
         if term:
             formatted = wildcardFormat(term)
-            sqs = sqs.filter(SQ(categories=term)
+            sqs = sqs.filter(SQ(**lang_cat)
                            | SQ(name=term)
                            | SQ(name=formatted)
                            | SQ(description=term))

@@ -24,10 +24,13 @@ class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
     admin3_name = indexes.CharField(model_attr='admin3_name')
 
     categories = indexes.MultiValueField()
+    category_json = indexes.CharField(null=True, indexed=False)
+
+    es_categories = indexes.MultiValueField()
+    es_category_json = indexes.CharField(null=True, indexed=False)
 
     is_searchable = indexes.BooleanField(model_attr='is_searchable')
 
-    category_json = indexes.CharField(null=True, indexed=False)
     mobile_image_json = indexes.CharField(null=True, indexed=False)
     landing_image_json = indexes.CharField(null=True, indexed=False)
     social_json = indexes.CharField(null=True, indexed=False)
@@ -55,6 +58,9 @@ class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
     def prepare_categories(self, obj):
         return [category.name for category in obj.categories.all()]
 
+    def prepare_es_categories(self, obj):
+        return [category.name for category in obj.categoryLang('es')]
+
     def prepare_phone(self, obj):
         if not obj.phone:
             return None
@@ -63,6 +69,10 @@ class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
     def prepare_category_json(self, obj):
         return json.dumps([{'name': c.name,
                             'level': c.level} for c in obj.categories.all()])
+
+    def prepare_es_category_json(self, obj):
+        return json.dumps([{'name': c.name,
+                            'level': c.level} for c in obj.categoryLang('es')])
 
     def prepare_landing_image_json(self, obj):
         if not obj.landing_image:

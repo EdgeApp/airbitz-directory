@@ -93,6 +93,25 @@ class JsonSerializer(serializers.Field):
         else:
             return {}
 
+class CategoryJsonSerializer(JsonSerializer):
+    def __init__(self, *args, **kwargs):
+        super(CategoryJsonSerializer, self).__init__(*args, **kwargs)
+
+    def field_to_native(self, obj, field_name):
+        lang='en'
+        try:
+            if self.context.has_key('request'):
+                request = self.context['request']
+                lang = request.QUERY_PARAMS.get('lang', 'en')
+        except Exception as e:
+            print e
+            pass
+        if lang == 'en':
+            self.source = 'category_json'
+        else:
+            self.source = '{0}_category_json'.format(lang)
+        return super(CategoryJsonSerializer, self).field_to_native(obj, field_name)
+
 class CharSerializer(serializers.Field):
     def field_to_native(self, obj, field_name):
         return get_component(obj, self.source) or ''
@@ -124,7 +143,7 @@ class MiniBusinessSerializer(serializers.ModelSerializer):
     phone = PhoneSerializer(source='phone')
     website = CharSerializer(source='website')
 
-    categories = JsonSerializer(source='category_json', islist=True)
+    categories = CategoryJsonSerializer(islist=True)
     social = JsonSerializer(source='social_json', islist=True)
     profile_image = JsonSerializer(source='mobile_image_json')
     square_image = JsonSerializer(source='landing_image_json')
@@ -172,7 +191,7 @@ class BusinessSerializer(serializers.ModelSerializer):
     square_image = JsonSerializer(source='landing_image_json')
     images = JsonSerializer(source='images_json', islist=True)
     hours = JsonSerializer(source='hours_json', islist=True)
-    categories = JsonSerializer(source='category_json', islist=True)
+    categories = CategoryJsonSerializer(source='category_json', islist=True)
     social = JsonSerializer(source='social_json', islist=True)
     location = PointField()
     distance = DistanceField(source='*')
@@ -215,7 +234,8 @@ class AutoCompleteLocationSerializer(serializers.ModelSerializer):
                  )
 
 class SearchObject(object):
-    def __init__(self, term=None, location=None, ll=None, radius=None, bounds=None, category=None, since=None, sort=None):
+    def __init__(self, term=None, location=None, ll=None, radius=None, bounds=None, category=None,\
+                       since=None, sort=None, lang='en'):
         self.term=term
         self.location=location
         self.ll=ll
@@ -224,6 +244,7 @@ class SearchObject(object):
         self.category=category
         self.since=since
         self.sort=sort
+        self.lang=lang
 
 class SearchSerializer(serializers.Serializer):
     term=serializers.CharField(required=False)
@@ -234,6 +255,7 @@ class SearchSerializer(serializers.Serializer):
     category=serializers.CharField(required=False)
     since=serializers.DateTimeField(required=False)
     sort=serializers.CharField(required=False)
+    lang=serializers.CharField(required=False, default='en')
 
     def restore_object(self, attrs, instance=None):
         if instance is not None:
@@ -246,6 +268,7 @@ class SearchSerializer(serializers.Serializer):
             instance.category = attrs.get('category', instance.category)
             instance.since = attrs.get('since', instance.since)
             instance.sort = attrs.get('sort', instance.sort)
+            instance.lang = attrs.get('lang', instance.lang)
             return instance
         return SearchObject(**attrs)
 

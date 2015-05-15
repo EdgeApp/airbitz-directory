@@ -14,7 +14,7 @@ from rest_framework_throttling.throttling import PerUserThrottle
 
 import logging
 
-from directory.models import Business, BusinessImage, Category
+from directory.models import Business, BusinessImage, Category, CategoryTranslation
 from restapi import api
 from restapi import locapi
 from restapi import serializers 
@@ -62,6 +62,7 @@ class CategoryView(generics.ListAPIView):
         Retrieve business categories. 
 
         sort -- which field sort by, either 'name' or 'level'
+        lang -- the language to search defaults to en
         api_key -- API Key
     """
     model = Category
@@ -77,8 +78,12 @@ class CategoryView(generics.ListAPIView):
     throttle_classes = (PerUserThrottle, )
 
     def get_queryset(self):
+        lang=self.request.QUERY_PARAMS.get('lang', 'en') # default to english
         tasks.ga_send(self.request, 'api::CategoryView');
-        return super(CategoryView, self).get_queryset()
+        if lang == 'en':
+            return super(CategoryView, self).get_queryset()
+        else:
+            return Category.querySetLang(lang)
 
 class BusinessView(generics.RetrieveAPIView):
     """
@@ -152,6 +157,7 @@ class SearchView(generics.ListAPIView):
         page_size -- How many businesses each page, defaults to 20, max of 50 
         page -- Which page of data to return 
         sort --  0: default, best match. 1: sort based off distance
+        lang --  defaults to english
         api_key -- API Key
     """
     serializer_class = serializers.MiniBusinessSerializer
@@ -172,7 +178,7 @@ class SearchView(generics.ListAPIView):
         # Notify google analytics
         tasks.ga_send(self.request, 'api::search');
 
-        a = api.ApiProcess(locationStr=obj.location, ll=obj.ll)
+        a = api.ApiProcess(locationStr=obj.location, ll=obj.ll, lang=obj.lang)
         return a.searchDirectory(term=obj.term, geobounds=obj.bounds, since=obj.since, \
                                  radius=obj.radius, category=obj.category, sort=obj.sort)
 

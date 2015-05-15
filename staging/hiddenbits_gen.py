@@ -35,8 +35,8 @@ def writeRecord(address, privateKey, minikey):
     subprocess.call(["qrencode", "-o", qrpath, uri])
     subprocess.call(["cp", qrpath, "qr"])
 
-    if not postNewPromo(address, minikey):
-        subprocess.call(["rm", "-rf", path])
+    # if not postNewPromo(address, minikey):
+    #     subprocess.call(["rm", "-rf", path])
 
 def postNewPromo(address, minikey):
     token=address[-4:]

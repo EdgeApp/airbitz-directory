@@ -111,8 +111,23 @@ class Category(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+    @staticmethod
+    def querySetLang(lang):
+        return Category.objects.filter(categorytranslation__lang=lang)\
+                        .extra(select={'name': 'directory_categorytranslation.text'})
+
     def __unicode__(self):
         return "{0}".format(self.name)
+
+class CategoryTranslation(models.Model):
+    category = models.ForeignKey('Category', null=False, blank=False)
+    text = models.CharField(max_length=50)
+    lang = models.CharField(max_length=3, blank=False, null=False)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "{0}/{1}".format(self.lang, self.text)
 
 class ImageTag(models.Model):
     name = models.CharField(max_length=30)
@@ -164,6 +179,10 @@ class Business(models.Model):
 
     def __unicode__(self):
         return u'%s (id=%s)' % (self.name, self.pk)
+
+    def categoryLang(self, lang):
+        return self.categories.filter(categorytranslation__lang=lang)\
+                        .extra(select={'name': 'directory_categorytranslation.text'})
 
     def get_screencap(self):
         if self.status == 'PUB':
@@ -502,6 +521,9 @@ class ThirdPartyBusinessImage(models.Model):
 class CategoryAdmin(admin.ModelAdmin):
     pass
 
+class CategoryTranslationAdmin(admin.ModelAdmin):
+    pass
+
 class BusinessAdmin(admin.ModelAdmin):
     pass
 
@@ -532,6 +554,7 @@ class ThirdPartyBusinessImageTagAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(CategoryTranslation, CategoryTranslationAdmin)
 admin.site.register(Business, BusinessAdmin)
 admin.site.register(BusinessImage, BusinessImageAdmin)
 admin.site.register(BusinessHours, BusinessHoursAdmin)
