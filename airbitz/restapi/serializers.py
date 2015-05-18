@@ -8,7 +8,7 @@ from directory.models import Business, BusinessImage, Category
 from location.models import GeoNameZip
 
 from restapi import locapi
-from restapi.api import parseGeoLocation
+from restapi.api import parseGeoLocation, ApiProcess
 
 import json
 
@@ -106,7 +106,7 @@ class CategoryJsonSerializer(JsonSerializer):
         except Exception as e:
             print e
             pass
-        if lang == 'en':
+        if not ApiProcess.isSupportedLang(lang) or lang == 'en':
             self.source = 'category_json'
         else:
             self.source = '{0}_category_json'.format(lang)

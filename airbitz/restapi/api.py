@@ -267,11 +267,7 @@ class ApiProcess(object):
 
         sqs = SearchQuerySet().models(Business)
         sqs = sqs.filter(is_searchable=True)
-        if self.lang == 'en':
-            lang_cat={'categories':term}
-        else:
-            lang_cat={self.lang + '_categories':term}
-        print lang_cat
+        lang_cat=self.catDict(term)
         if term:
             formatted = wildcardFormat(term)
             sqs = sqs.filter(SQ(**lang_cat)
@@ -400,10 +396,25 @@ class ApiProcess(object):
         else:
             return []
 
+    @staticmethod
+    def isSupportedLang(lang):
+        return lang in ('en', 'es')
+
+    def supportedLang(self):
+        return ApiProcess.isSupportedLang(self.lang)
+
+    def catDict(self, term):
+        if not self.supportedLang() or self.lang == 'en':
+            lang_cat={'categories':term}
+        else:
+            lang_cat={self.lang + '_categories':term}
+        return lang_cat
+
     def querySetAddCategories(self, sqs, category):
         f = None
         for cterm in category.split(","):
-            q = SQ(categories=cterm)
+            d=self.catDict(cterm)
+            q = SQ(**d)
             if not f:
                 f = q
             else:
