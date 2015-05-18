@@ -5,7 +5,7 @@ import json
 from directory import utils
 
 from restapi.api import sortedImages
-from directory.models import Business, BusinessHours, Category, SocialId
+from directory.models import Business, BusinessHours, Category, CategoryTranslation, SocialId
 
 class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
     bizId = indexes.IntegerField(model_attr='pk', indexed=False)
@@ -140,7 +140,14 @@ class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
 
 class CategoryIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(model_attr='name', document=True)
+    es_text = indexes.CharField(null=True, indexed=True)
     content_auto = indexes.EdgeNgramField(model_attr='name')
+
+    def prepare_es_text(self, obj):
+        try:
+            return CategoryTranslation.objects.get(category=obj, lang='es').text
+        except:
+            return obj.name
 
     def get_model(self):
         return Category

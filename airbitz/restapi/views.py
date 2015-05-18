@@ -78,9 +78,9 @@ class CategoryView(generics.ListAPIView):
     throttle_classes = (PerUserThrottle, )
 
     def get_queryset(self):
-        lang=self.request.QUERY_PARAMS.get('lang', 'en') # default to english
+        lang=self.request.QUERY_PARAMS.get('lang', api.DEF_LANG) # default to english
         tasks.ga_send(self.request, 'api::CategoryView');
-        if lang == 'en':
+        if lang == api.DEF_LANG:
             return super(CategoryView, self).get_queryset()
         else:
             return Category.querySetLang(lang)
@@ -201,8 +201,9 @@ class AutoCompleteBusiness(APIView):
     def get(self, request, *args, **kwars):
         term = self.request.QUERY_PARAMS.get('term', None)
         location = self.request.QUERY_PARAMS.get('location', None)
+        lang = self.request.QUERY_PARAMS.get('lang', api.DEF_LANG)
         ll = self.request.QUERY_PARAMS.get('ll', None)
-        a = api.ApiProcess(locationStr=location, ll=ll)
+        a = api.ApiProcess(locationStr=location, ll=ll, lang=lang)
         results = a.autocompleteBusiness(term=term)[:DEFAULT_PAGE_SIZE]
         return Response({ 'results':  results })
 

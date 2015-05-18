@@ -15,6 +15,7 @@ import json
 
 log=logging.getLogger("airbitz." + __name__)
 
+DEF_LANG='en'
 DEF_SRID=4326
 DEF_COUNTRY="US"
 DEF_POINT=Point((-117.124603, 33.028400))
@@ -23,7 +24,7 @@ DEF_LOC_STR='United States'
 
 CURRENT_LOCATION='Current Location'
 
-def autocompleteSerialize(row):
+def autocompleteSerialize(row, lang=DEF_LANG):
     if row.model.__name__ == 'Business':
         image = json.loads(row.landing_image_json)
         if image.has_key('thumbnail'):
@@ -32,15 +33,22 @@ def autocompleteSerialize(row):
             thumbnail = None
         return { 'type': 'business', 'bizId': row.pk, 'text': row.content_auto, 'square_image': thumbnail }
     else:
-        return { 'type': 'category', 'text': row.content_auto }
+        if not ApiProcess.isSupportedLang(lang) or lang == DEF_LANG:
+            return { 'type': 'category', 'text': row.text }
+        else:
+            return { 'type': 'category', 'text': getattr(row, lang + '_text') }
 
-def autocompleteSuggSerialize(row, used):
+def autocompleteSuggSerialize(row, used, lang=DEF_LANG):
     res = []
     if not used.has_key(row.content_auto):
         used[row.content_auto] = True
         res.append({ 'type': 'business', 'bizId': row.pk, 'text': row.content_auto })
-    if row.categories:
-        for c in row.categories:
+    if not ApiProcess.isSupportedLang(lang) or lang == DEF_LANG:
+        cats = row.categories
+    else:
+        cats = getattr(row, lang + '_categories')
+    if cats:
+        for c in cats:
             if used.has_key(c):
                 continue
             used[c] = True
@@ -225,7 +233,7 @@ class Location(object):
         return self.filter_current_location
 
 class ApiProcess(object):
-    def __init__(self, locationStr=None, ll=None, ip=None, lang='en'):
+    def __init__(self, locationStr=None, ll=None, ip=None, lang=DEF_LANG):
         self.location = Location(locationStr=locationStr, ll=ll, ip=ip)
         self.lang = lang
 
@@ -355,9 +363,6 @@ class ApiProcess(object):
             return self.suggestNearCategories()
 
         sqs = SearchQuerySet()
-        if term:
-            formatted = wildcardFormat(term)
-            sqs = sqs.filter(content_auto=formatted)
         if location:
             fits = SQ(django_ct='directory.business') & SQ(is_searchable=True)
             if self.location.isWebOnly():
@@ -366,18 +371,25 @@ class ApiProcess(object):
                 fits = fits & SQ(has_online_business=True)
         else:
             fits = SQ(django_ct='directory.business') & SQ(is_searchable=True)
-        fits = (fits) | SQ(django_ct='directory.category')
-        sqs = sqs.filter(fits).models(Business, Category)
+        cats = SQ(django_ct='directory.category')
+        if term:
+            formatted = wildcardFormat(term)
+            # place search
+            fits = fits & SQ(content_auto=formatted)
+            # category search
+            if self.lang == DEF_LANG or not self.supportedLang():
+                c = {'text': formatted}
+            else:
+                c = {self.lang + '_text': formatted}
+            cats = cats & SQ(**c)
+        sqs = sqs.filter(SQ(fits) | SQ(cats)).models(Business, Category)
         if self.location.isOnWeb() or self.location.isWebOnly():
             sqs = sqs.order_by('-has_bitcoin_discount')
         else:
             if self.location and self.location.bounding:
                 sqs = self.boundSearchQuery(sqs, self.location)
-            # if self.userLocation():
-            #     sqs = sqs.distance('location', self.userLocation())
-            #     sqs = sqs.dwithin('location', self.userLocation(), DEF_RADIUS)
         sqs = sqs[:10]
-        return [autocompleteSerialize(result) for result in sqs]
+        return [autocompleteSerialize(result, self.lang) for result in sqs]
 
     def boundSearchQuery(self, sqs, loc):
         newsqs = []
@@ -404,7 +416,7 @@ class ApiProcess(object):
         return ApiProcess.isSupportedLang(self.lang)
 
     def catDict(self, term):
-        if not self.supportedLang() or self.lang == 'en':
+        if not self.supportedLang() or self.lang == DEF_LANG:
             lang_cat={'categories':term}
         else:
             lang_cat={self.lang + '_categories':term}
@@ -440,7 +452,7 @@ class ApiProcess(object):
             sqs = self.boundSearchQuery(sqs, self.location)
 
         used = {}
-        sqs = flatten([autocompleteSuggSerialize(s, used) for s in sqs[:10]])
+        sqs = flatten([autocompleteSuggSerialize(s, used, self.lang) for s in sqs[:10]])
         return filter(lambda x : x is not None, sqs)
 
     def suggestNearText(self):
