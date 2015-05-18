@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import Distance
 from django.core.cache import cache
@@ -22,7 +24,10 @@ DEF_POINT=Point((-117.124603, 33.028400))
 DEF_IP='24.152.191.12'
 DEF_LOC_STR='United States'
 
-CURRENT_LOCATION='Current Location'
+CURRENT_LOCATION='current location'
+CUR_LOC_ARRAY=[CURRENT_LOCATION, 'ubicación actual']
+WEB_LOC_ARRAY=['on the web', 'en la red']
+WEB_ONLY_ARRAY=['web only']
 
 def autocompleteSerialize(row, lang=DEF_LANG):
     if row.model.__name__ == 'Business':
@@ -146,9 +151,9 @@ class Location(object):
             self.userCountry = DEF_COUNTRY
         self.admin_level = 4
         if self.locationStr:
-            self.filter_web_only = self.locationStr.lower() == 'web only'
-            self.filter_on_web = self.locationStr.lower() == 'on the web'
-            self.filter_current_location = self.locationStr.lower() == CURRENT_LOCATION.lower()
+            self.filter_web_only = self.locationStr.lower() in WEB_ONLY_ARRAY
+            self.filter_on_web = self.locationStr.lower() in WEB_LOC_ARRAY
+            self.filter_current_location = self.locationStr.lower() in CUR_LOC_ARRAY
         else:
             self.filter_web_only = False
             self.filter_on_web = False
@@ -247,7 +252,7 @@ class ApiProcess(object):
             return False
 
     def exactMatch(self, term):
-        s = "exact_match_{}:{}".format(term, self.location.locationStr)
+        s = u"exact_match_{}:{}".format(term, self.location.locationStr)
         if cache.get(s, True) == False:
             return (0, [])
 
