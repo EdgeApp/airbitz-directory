@@ -494,6 +494,10 @@ def nearTextFromPoint(point):
 def processGeoIp(ip):
     if ip in ("10.0.2.2", "127.0.0.1"):
         ip = localToPublicIp()
+
+    res = cache.get(ip, None)
+    if res: res
+
     proc = subprocess.Popen(['geoiplookup', ip], stdout=subprocess.PIPE)
     data = proc.stdout.read()
     country = None
@@ -508,18 +512,28 @@ def processGeoIp(ip):
             elif k.__contains__("City"):
                 (point, accuracy) = processCity(v)
             if point:
-                return (point, country, accuracy)
-    return (None, country, False)
+                res = (point, country, accuracy)
+                cache.set(ip, res, 60 * 60)
+                return res
+    res = (None, country, False)
+    cache.set(ip, res, 60 * 60)
+    return res
 
 def localToPublicIp():
     """ This should only be called during development """
+    res = cache.get('local_ip', None)
+    if res:
+        return res
     URL='http://www.networksecuritytoolkit.org/nst/tools/ip.php'
     try:
         import urllib
-        return urllib.urlopen(URL).read().strip()
+        ip = urllib.urlopen(URL).read().strip()
+        cache.set('local_ip', ip)
+        return ip
     except:
         log.warn('unable to look up ip')
     # Just return a default IP
+    cache.set('local_ip', DEF_IP)
     return DEF_IP
 
 def processCountry(row):
