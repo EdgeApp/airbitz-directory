@@ -243,7 +243,7 @@ class ApiProcess(object):
         self.lang = lang
 
     def userLocation(self):
-        return self.location.sortPoint
+        return self.location.userPoint
 
     def isExactCategory(self, term):
         if term:
