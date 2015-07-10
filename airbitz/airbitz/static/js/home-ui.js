@@ -35,15 +35,15 @@ jQuery(function($) {
 
 
   $('#app-demo-slides').carouFredSel({
-    width: 214,
-    height: 378,
+    width: 406,
+    height: 560,
     auto: {
       play: true
     },
     scroll: {
       pauseOnHover: true,
       fx: 'crossfade',
-      duration: 1000,
+      duration: 1500,
       onBefore: function() {
         $('#see-app-in-action').css('visibility', 'hidden');
         $('#see-app-in-action').removeClass('animated fadeIn');
@@ -98,55 +98,55 @@ jQuery(function($) {
   });
 
 
-if(!bowser.android && !bowser.ios ) {
-  /* config dom id (optional) + config particles params */
-  particlesJS('landing-particles', {
-    particles: {
-      color: '#fff',
-      shape: 'circle', // "circle", "edge" or "triangle"
-      opacity:.7,
-      size: 6,
-      size_random: true,
-      nb: 150,
-      line_linked: {
-        enable_auto: true,
-        distance: 360,
-        color: '#fff',
-        opacity:.4,
-        width: 2,
-        condensed_mode: {
-          enable: false,
-          rotateX: 600,
-          rotateY: 600
-        }
-      },
-      anim: {
-        enable: true,
-        speed: 1.25
-      }
-    },
-    interactivity: {
-      enable: true,
-      mouse: {
-        distance: 300
-      },
-      detect_on: 'canvas', // "canvas" or "window"
-      mode: 'grab',
-      line_linked: {
-        opacity: .4
-      },
-      events: {
-        onclick: {
-          enable: true,
-          mode: 'push', // "push" or "remove"
-          nb: 4
-        }
-      }
-    },
-    /* Retina Display Support */
-    retina_detect: true
-  });
-}
+//if(!bowser.android && !bowser.ios ) {
+//  /* config dom id (optional) + config particles params */
+//  particlesJS('landing-particles', {
+//    particles: {
+//      color: '#fff',
+//      shape: 'circle', // "circle", "edge" or "triangle"
+//      opacity:.7,
+//      size: 6,
+//      size_random: true,
+//      nb: 150,
+//      line_linked: {
+//        enable_auto: true,
+//        distance: 360,
+//        color: '#fff',
+//        opacity:.4,
+//        width: 2,
+//        condensed_mode: {
+//          enable: false,
+//          rotateX: 600,
+//          rotateY: 600
+//        }
+//      },
+//      anim: {
+//        enable: true,
+//        speed: 1.25
+//      }
+//    },
+//    interactivity: {
+//      enable: true,
+//      mouse: {
+//        distance: 300
+//      },
+//      detect_on: 'canvas', // "canvas" or "window"
+//      mode: 'grab',
+//      line_linked: {
+//        opacity: .4
+//      },
+//      events: {
+//        onclick: {
+//          enable: true,
+//          mode: 'push', // "push" or "remove"
+//          nb: 4
+//        }
+//      }
+//    },
+//    /* Retina Display Support */
+//    retina_detect: true
+//  });
+//}
 
 
 
