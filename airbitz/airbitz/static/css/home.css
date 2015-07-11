@@ -279,9 +279,16 @@ body.home #bottom-slider .et_pb_slide_description h2 {
 .landing-module .iphone-app-slider .iphone-slider #app-demo-slides .slide {
   position: relative;
   width: 406px;
-  height: 550px;
+  height: 560px;
   text-align: center;
   color: white;
+}
+@media (max-width: 480px) {
+  .landing-module .iphone-app-slider .iphone-slider #app-demo-slides .slide {
+    padding-left: 0;
+    width: 297px;
+    height: 379px;
+  }
 }
 .landing-module .iphone-app-slider .iphone-slider #app-demo-slides .slide .slide-title {
   display: none;

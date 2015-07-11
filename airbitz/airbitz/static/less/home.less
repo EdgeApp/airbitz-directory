@@ -358,10 +358,16 @@ body.home {
                 .slide {
                     position: relative;
                     width: 406px;
-                    height: 550px;
+                    height: 560px;
 //                    background: #333;
                     text-align: center;
                     color: white;
+
+                    @media(max-width: @screen-xs) {
+                        padding-left: 0;
+                        width: 297px;
+                        height: 379px;
+                    }
 
                     .slide-title {
                         display: none;
