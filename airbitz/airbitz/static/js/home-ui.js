@@ -38,7 +38,7 @@ jQuery(function($) {
     width: 406,
     height: 560,
     auto: {
-      play: false
+      play: true
     },
     scroll: {
       pauseOnHover: true,
