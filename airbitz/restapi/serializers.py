@@ -39,6 +39,14 @@ class LastUpdated(serializers.Field):
 
 class DistanceField(serializers.Field):
     def field_to_native(self, obj, field_name):
+        try:
+            if self.context.has_key('request') and hasattr(obj, 'location'):
+                request = self.context['request']
+                userLocation = parseGeoLocation(request.QUERY_PARAMS.get('ll', None))
+                bizLocation = obj.location
+                return Distance(m=bizLocation.distance(userLocation) * locapi.DEG_TO_M).m
+        except:
+            pass
         if hasattr(obj, 'distance') and obj.distance:
             return obj.distance.m
         else:
