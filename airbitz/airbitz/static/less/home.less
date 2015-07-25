@@ -243,6 +243,9 @@ body.home {
     .download-signup {
         margin-top: 60px;
 
+        @media(max-width: @screen-md-min) {
+            margin-top: 20px;
+        }
         .airbitz-logo {
             display: block;
             width: 250px;
@@ -331,6 +334,11 @@ body.home {
         margin: 0 auto;
         text-align: center;
 
+        @media(max-width: @screen-md-min) {
+            width: 300px;
+            padding: 15px;
+        }
+
         .button-centerer {
             position: absolute;
             top: 250px;
@@ -348,10 +356,16 @@ body.home {
 
         .iphone-slider {
             visibility: hidden;
-            padding-left: 48px;
             position: relative;
             width: 406px;
             height: 560px;
+            padding-left: 48px;
+
+            @media(max-width: @screen-md-min) {
+                width: 260px;
+                height: 360px;
+                padding-left: 0;
+            }
 
             #app-demo-slides {
 
@@ -359,14 +373,13 @@ body.home {
                     position: relative;
                     width: 406px;
                     height: 560px;
-//                    background: #333;
                     text-align: center;
                     color: white;
 
-                    @media(max-width: @screen-xs) {
+                    @media(max-width: @screen-md-min) {
                         padding-left: 0;
-                        width: 297px;
-                        height: 379px;
+                        width: 260px;
+                        height: 360px;
                     }
 
                     .slide-title {

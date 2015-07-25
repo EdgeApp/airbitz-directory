@@ -34,9 +34,18 @@ jQuery(function($) {
   $('.container .video').magnificPopup({type: 'iframe'});
 
 
+  var appDemoSliderWidth = 260;
+  var appDemoSliderHeight = 360;
+
+  // only blur bg on larger screens
+  enquire.register(screen_lg, function() {
+    appDemoSliderWidth = 406;
+    appDemoSliderHeight = 560;
+  });
+
   $('#app-demo-slides').carouFredSel({
-    width: 406,
-    height: 560,
+    width: appDemoSliderWidth,
+    height: appDemoSliderHeight,
     auto: {
       play: true
     },
