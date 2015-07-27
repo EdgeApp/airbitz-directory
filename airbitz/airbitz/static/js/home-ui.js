@@ -37,7 +37,7 @@ jQuery(function($) {
   var appDemoSliderWidth = 260;
   var appDemoSliderHeight = 360;
 
-  // only blur bg on larger screens
+  // adjust size for larger screens
   enquire.register(screen_lg, function() {
     appDemoSliderWidth = 406;
     appDemoSliderHeight = 560;
@@ -113,15 +113,15 @@ if(!bowser.android && !bowser.ios ) {
     particles: {
       color: '#fff',
       shape: 'circle', // "circle", "edge" or "triangle"
-      opacity:.7,
-      size: 6,
+      opacity:.4,
+      size: 5,
       size_random: true,
       nb: 150,
       line_linked: {
         enable_auto: true,
         distance: 360,
         color: '#fff',
-        opacity:.4,
+        opacity:.2,
         width: 2,
         condensed_mode: {
           enable: false,
@@ -142,11 +142,11 @@ if(!bowser.android && !bowser.ios ) {
       detect_on: 'canvas', // "canvas" or "window"
       mode: 'grab',
       line_linked: {
-        opacity: .4
+        opacity: .6
       },
       events: {
         onclick: {
-          enable: true,
+          enable: false,
           mode: 'push', // "push" or "remove"
           nb: 4
         }
