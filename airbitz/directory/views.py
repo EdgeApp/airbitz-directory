@@ -13,6 +13,7 @@ from airbitz.settings import GOOGLE_MAP_KEY
 from directory.models import Business, BusinessImage, SocialId
 from directory.models import STATUS_CHOICES, SOCIAL_TYPES
 from restapi import api
+from restapi.serializers import calc_distance
 
 SEARCH_LIMIT = 20
 DISTANCE_LIMIT_KILOMETERS = 20
@@ -136,6 +137,10 @@ def __business_search__(request, action, arg_term=None, arg_category=None, arg_l
         r.landing_image = biz.landing_image
         r.mobile_landing_image = biz.mobile_landing_image
         r.categories = biz.categories
+        try:
+            r.distance = calc_distance(a.userLocation(), biz.center)
+        except Exception as e:
+            print e
 
     context = {
         'search_action': action,

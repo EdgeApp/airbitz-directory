@@ -14,7 +14,7 @@ from rest_framework_throttling.throttling import PerUserThrottle
 
 import logging
 
-from directory.models import Business, BusinessImage, Category, CategoryTranslation
+from directory.models import Business, BusinessImage, Category
 from restapi import api
 from restapi import locapi
 from restapi import serializers 

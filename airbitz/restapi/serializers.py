@@ -2,15 +2,16 @@ from django.db.models import Max
 from rest_framework import fields
 from rest_framework import pagination
 from rest_framework import serializers
-from django.contrib.gis.measure import Distance
 
 from directory.models import Business, BusinessImage, Category
 from location.models import GeoNameZip
 
-from restapi import locapi
-from restapi.api import parseGeoLocation, ApiProcess
+from restapi.api import parseGeoLocation, ApiProcess, calc_distance
 
 import json
+import logging
+
+log=logging.getLogger('airbitz')
 
 class ImageTagsField(serializers.Field):
     def field_to_native(self, obj, field_name):
@@ -43,8 +44,7 @@ class DistanceField(serializers.Field):
             if self.context.has_key('request') and hasattr(obj, 'location'):
                 request = self.context['request']
                 userLocation = parseGeoLocation(request.QUERY_PARAMS.get('ll', None))
-                bizLocation = obj.location
-                return Distance(m=bizLocation.distance(userLocation) * locapi.DEG_TO_M).m
+                return calc_distance(userLocation, obj.location).m
         except:
             pass
         if hasattr(obj, 'distance') and obj.distance:

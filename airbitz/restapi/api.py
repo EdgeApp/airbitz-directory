@@ -67,6 +67,9 @@ def flatten(ls):
 def wildcardFormat(term):
     return WildCard(term)
 
+def calc_distance(userLoc, bizLoc):
+    return Distance(m=bizLoc.distance(userLoc) * locapi.DEG_TO_M)
+
 def parseGeoLocation(ll):
     vals = ll.split(",")
     try:
@@ -243,6 +246,9 @@ class ApiProcess(object):
         self.lang = lang
 
     def userLocation(self):
+        return self.location.userPoint
+
+    def sortLocation(self):
         return self.location.sortPoint
 
     def isExactCategory(self, term):
@@ -260,7 +266,7 @@ class ApiProcess(object):
         sqs = sqs.filter(name=term)
         sqs = sqs.filter(admin3_name=self.location.locationStr)
         sqs = sqs.filter(is_searchable=False)
-        sqs = sqs.distance('location', self.userLocation())
+        sqs = sqs.distance('location', self.sortLocation())
 
         m_len = len(sqs)
         if m_len == 1:
@@ -306,9 +312,9 @@ class ApiProcess(object):
                 sqs = sqs.narrow(u'country:"{0}"'.format(self.location.country()));
                 if self.location.admin1():
                     sqs = sqs.narrow(u'admin1_code:"{0}"'.format(self.location.admin1()))
-            sqs = sqs.distance('location', self.userLocation())
+            sqs = sqs.distance('location', self.sortLocation())
             if radius:
-                sqs = sqs.dwithin('location', self.userLocation(), D(m=radius))
+                sqs = sqs.dwithin('location', self.sortLocation(), D(m=radius))
             if geobounds:
                 (sw, ne) = parseGeoBounds(geobounds)
                 sqs = sqs.within('location', sw, ne)
@@ -408,7 +414,7 @@ class ApiProcess(object):
 
     def autocompleteLocation(self, term=None):
         if term:
-            res = locapi.googleAutocomplete(term, self.userLocation())
+            res = locapi.googleAutocomplete(term, self.sortLocation())
             return [r['description'] for r in res['predictions']]
         else:
             return []
@@ -449,7 +455,7 @@ class ApiProcess(object):
             sqs = sqs.order_by('-has_bitcoin_discount')
         else:
             sqs = sqs.filter(has_physical_business=True)
-            sqs = sqs.distance('location', self.userLocation())
+            sqs = sqs.distance('location', self.sortLocation())
             sqs = sqs.order_by('distance')
 
         if self.location and self.location.bounding:
@@ -462,7 +468,7 @@ class ApiProcess(object):
 
     def suggestNearText(self):
         if self.location.ip_accurate:
-            point = self.userLocation()
+            point = self.sortLocation()
             nearText = nearTextFromPoint(point)
             if nearText:
                 return nearText
