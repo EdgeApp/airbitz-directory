@@ -118,6 +118,58 @@ class WildCard(Clean):
 class AirbitzApiException(BaseException):
     pass
 
+class JoinedQuerySet(SearchQuerySet):
+    def __init__(self, queries=[], *args, **kwargs):
+        super(JoinedQuerySet, self).__init__(*args, **kwargs)
+        self.queries = queries
+
+    def _determine_backend(self):
+        pass
+
+    def __len__(self):
+        if not self._result_count:
+            self._result_count = 0
+            for q in self.queries:
+                self._result_count += q.query.get_count()
+            if not self._result_count:
+                self._result_count = 0
+        return self._result_count - self._ignored_result_count
+
+    def _fill_cache(self, start, end, **kwargs):
+        results = []
+        first = start
+        total = 0
+        page_size = end - start
+        for q in self.queries:
+            count = q.query.get_count()
+            total += count
+            cur_page_size = page_size
+            if cur_page_size > count:
+                cur_page_size = count
+            q.query._reset()
+            if first < total:
+                print first, first + cur_page_size, page_size
+                q.query.set_limits(first, first + cur_page_size)
+                results += q.query.get_results(**kwargs)
+                page_size -= cur_page_size
+            first = max(first - cur_page_size, 0) 
+
+        if results == None or len(results) == 0:
+            return False
+
+        if len(self._result_cache) == 0:
+            self._result_cache = [None for i in range(total)]
+
+        if start is None:
+            start = 0
+
+        if end is None:
+            end = self.query.get_count()
+
+        to_cache = self.post_process_results(results)
+        self._result_cache[start:start + len(to_cache)] = to_cache
+        return True
+
 def toInt(request, key, default):
     try:
         if request.QUERY_PARAMS.has_key(key):
@@ -275,6 +327,9 @@ class ApiProcess(object):
             cache.set(s, False, 60 * 60)
         return m_len, sqs
 
+    def findFeatured(self):
+        sqs = SearchQuerySet().models(Business)
+        return sqs.filter(is_searchable=True, categories='Featured')
 
     def searchDirectory(self, term=None, since=None, geobounds=None,
                               radius=None, category=None, sort=None,
@@ -284,6 +339,7 @@ class ApiProcess(object):
             if len_m == 1:
                 return m
 
+        featured = self.findFeatured()
         sqs = SearchQuerySet().models(Business)
         sqs = sqs.filter(is_searchable=True)
         lang_cat=self.catDict(term)
@@ -319,7 +375,7 @@ class ApiProcess(object):
                 (sw, ne) = parseGeoBounds(geobounds)
                 sqs = sqs.within('location', sw, ne)
             sqs = sqs.order_by('distance')
-        return sqs
+        return JoinedQuerySet(queries=[featured, sqs])
 
     def __filer_on_web__(self, sqs):
         inCountry = []
