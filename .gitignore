@@ -15,7 +15,9 @@ airbitz/media
 config.codekit
 *-ck.js
 
+# staging excludes
 staging/media
+staging/AIRBITZ_SSL
 
 # Ignore postgres database dumps
 *.dump
