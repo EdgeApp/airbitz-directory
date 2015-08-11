@@ -403,6 +403,12 @@ def redirect_blog(request):
 def redirect_about(request):
     return HttpResponseRedirect('https://airbitz.co/go/about/')
 
+def redirect_team(request):
+    return HttpResponseRedirect('https://airbitz.co/go/team/')
+
+def redirect_faq(request):
+    return HttpResponseRedirect('https://airbitz.co/go/faq/')
+
 def redirect_button(request):
     try:
         referer = request.META['HTTP_REFERER']

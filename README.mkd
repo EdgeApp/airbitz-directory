@@ -5,7 +5,7 @@
 1. [Vagrant 1.4.x][vagrantdownload]
 1. Clone airbitz.
 
-    git clone git@github.com:paullinator/airbitz-directory.git
+    git clone git@github.com:airbitz/airbitz-directory.git
 1. [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
 ### Start it up
