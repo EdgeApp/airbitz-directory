@@ -25,10 +25,6 @@ DUMP_FILE=$1
 STAGING_SERVER_USER=devbitz
 STAGING_SERVER_IP=198.61.228.9
 
-PROD_SERVER_USER=bitz
-PROD_SERVER_IP=192.237.240.48
-
-
 if [ "$DUMP_FILE" = "" ]
 then
 	DATE=`date +%Y-%m-%d`
@@ -52,16 +48,16 @@ echo ""
 ./load_backup.sh $DUMP_FILE
 
 echo ""
+echo ${txtcmd}"Syncing MEDIA files now"${txtrst}
+echo ""
+
+cd /staging
+rsync --progress --inplace -avz --rsh 'ssh -i /staging/.ssh/dev_keys' $STAGING_SERVER_USER@$STAGING_SERVER_IP:/home/$STAGING_SERVER_USER/media/ /staging/media/
+
+echo ""
 echo ${txtcmd}"Updating solr index"${txtrst}
 echo ""
 
 cd /home/vagrant/airbitz/ENV/airbitz
 ./rebuild_index.sh
-
-echo ""
-echo ${txtcmd}"Syncing MEDIA files now"${txtrst}
-echo ""
-
-cd /staging
-rsync --progress --inplace -avz --rsh 'ssh -i /staging/.ssh/prod_keys' $PROD_SERVER_USER@$PROD_SERVER_IP:/home/$PROD_SERVER_USER/media/ /staging/media/
 
