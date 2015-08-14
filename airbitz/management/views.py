@@ -403,6 +403,12 @@ def redirect_blog(request):
 def redirect_about(request):
     return HttpResponseRedirect('https://airbitz.co/go/about/')
 
+def redirect_team(request):
+    return HttpResponseRedirect('https://airbitz.co/go/team/')
+
+def redirect_faq(request):
+    return HttpResponseRedirect('https://airbitz.co/go/faq/')
+
 def redirect_button(request):
     try:
         referer = request.META['HTTP_REFERER']
@@ -423,6 +429,15 @@ def redirect_button(request):
 def page_privacy_policy(request):
     context = {}
     return render_to_response('pages/page_privacy-policy.html', RequestContext(request, context))
+
+
+def page_survey(request):
+    return render_to_response('surveys/page_how-are-we-doing.html')
+
+def page_survey_slug(request, slug=None):
+    survey_page_prefix = 'surveys/page_'
+    return render_to_response(survey_page_prefix + slug + '.html')
+
 
 ############################
 # bitcoin card and hiddenbits

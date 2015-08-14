@@ -31,6 +31,8 @@ urlpatterns = patterns('',
     url(r'^vote/$', 'management.views.redirect_vote', name='mgmt_redirect_vote'),
     url(r'^blog/$', 'management.views.redirect_blog', name='mgmt_redirect_blog'),
     url(r'^about/$', 'management.views.redirect_about', name='mgmt_redirect_about'),
+    url(r'^team/$', 'management.views.redirect_team', name='mgmt_redirect_team'),
+    url(r'^faq/$', 'management.views.redirect_faq', name='mgmt_redirect_faq'),
     url(r'^privacy-policy/$', 'management.views.page_privacy_policy', name='page_privacy_policy'),
     url(r'^card/$', 'management.views.page_card', name='page_card'),
     url(r'^hiddenbits/$', 'management.views.page_hiddenbits', name='page_hiddenbits'),
@@ -43,6 +45,8 @@ urlpatterns = patterns('',
     url(r'^bitcoin-wallet-server-api/$', 'management.views.page_bitcoin_wallet_server_api', name='page_bitcoin_wallet_server_api'),
     url(r'^button/$', 'management.views.redirect_button', name='mgmt_redirect_button'),
     url(r'^rsvp/?$', RedirectView.as_view(url='http://www.meetup.com/Bitcoin-in-San-Diego/events/189727482/')),
+    url(r'^survey/?$', 'management.views.page_survey', name='page_survey'),
+    url(r'^survey/(?P<slug>[-\w]+)/?$', 'management.views.page_survey_slug', name='page_survey_slug'),
 )
 
 if settings.DEBUG:
