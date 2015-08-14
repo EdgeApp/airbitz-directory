@@ -1,0 +1,29 @@
+{% extends 'base_simple.html' %}
+{% load compressed %}
+{% load absolute %}
+
+
+{% block navigation_desktop %}{% endblock navigation_desktop %}
+{% block top_bar %}{% endblock top_bar %}
+
+{% block main_content %}
+<style>
+.smcx-embed {
+    width: 102% !important;
+    height: 625px !important;
+}
+.smcx-embed >.smcx-iframe-container {
+    width: 102% !important;
+    height: 625px !important;
+}
+</style>
+
+<div class="row" style="margin-top: 60px; width: 100%; height: 600px;">
+    <div class="col-xs-12">
+        <script>(function(t,e,s,c){var n,o,i;t.SMCX=t.SMCX||[],e.getElementById(c)||(n=e.getElementsByTagName(s),o=n[n.length-1],i=e.createElement(s),i.type="text/javascript",i.async=!0,i.id=c,i.src=["https:"===location.protocol?"https://":"http://","widget.surveymonkey.com/collect/website/js/X60PjM_2FbZ6U7BkIPup90shGF1M0gu92hg_2FMcHPYUvV_2B7ubFHFbBX4KmtgvKcTsAt.js"].join(""),o.parentNode.insertBefore(i,o))})(window,document,"script","smcx-sdk");</script><a style="font: 12px Helvetica, sans-serif; color: #999; text-decoration: none;" href=https://www.surveymonkey.com/mp/customer-satisfaction-surveys/> Create your own user feedback survey </a>
+    </div>
+</div>
+{% endblock main_content %}
+
+
+{% block addthis_sharing %}{% endblock addthis_sharing %}
