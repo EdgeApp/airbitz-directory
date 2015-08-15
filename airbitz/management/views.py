@@ -432,10 +432,11 @@ def page_privacy_policy(request):
 
 
 def page_survey(request):
-    return render_to_response('surveys/page_how-are-we-doing.html')
+    return render_to_response('surveys/how-are-we-doing.html')
 
 def page_survey_slug(request, slug=None):
-    survey_page_prefix = 'surveys/page_'
+    print 'SURVEY :', slug
+    survey_page_prefix = 'surveys/'
     return render_to_response(survey_page_prefix + slug + '.html')
 
 
