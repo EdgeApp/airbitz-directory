@@ -431,13 +431,16 @@ def page_privacy_policy(request):
     return render_to_response('pages/page_privacy-policy.html', RequestContext(request, context))
 
 
-def page_survey(request):
-    return render_to_response('surveys/how-are-we-doing.html')
-
 def page_survey_slug(request, slug=None):
-    print 'SURVEY :', slug
     survey_page_prefix = 'surveys/'
-    return render_to_response(survey_page_prefix + slug + '.html')
+    survey_page = survey_page_prefix + slug + '.html'
+
+    build_number = request.GET.get('build')
+
+    context = {
+        'build_number': build_number
+    }
+    return render_to_response(survey_page, RequestContext(request, context))
 
 
 ############################
