@@ -1,0 +1,37 @@
+{% extends 'base_simple.html' %}
+{% load compressed %}
+{% load absolute %}
+
+
+{% block navigation_desktop %}{% endblock navigation_desktop %}
+{% block top_bar %}{% endblock top_bar %}
+
+{% block main_content %}
+  <style type="text/css">
+    html{
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    iframe{
+      position: absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      top:0;
+      border:0;
+    }
+  </style>
+
+  <div style="margin-top: 30px; width: 100%; height: 600px;">
+    <div>
+      <iframe id="typeform-full" width="100%" height="100%" frameborder="0" src="https://airbitz.typeform.com/to/IOgJsp?build={{ build_number }}&amp;os={{ operating_system }}&amp;embed=full"></iframe>
+      <script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/share.typeform.com/embed.js"></script>
+    </div>
+  </div>
+{% endblock main_content %}
+
+
+{% block addthis_sharing %}{% endblock addthis_sharing %}
+
+{% block footer %}{% endblock footer %}

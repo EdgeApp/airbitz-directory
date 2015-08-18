@@ -23,6 +23,4 @@ staging/AIRBITZ_SSL
 *.dump
 
 # Ignore .ssh keys
-dev_keys
-testing_keys
-prod_keys
+/staging/.ssh

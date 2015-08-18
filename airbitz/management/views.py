@@ -430,6 +430,21 @@ def page_privacy_policy(request):
     context = {}
     return render_to_response('pages/page_privacy-policy.html', RequestContext(request, context))
 
+
+def page_survey_slug(request, slug=None):
+    survey_page_prefix = 'surveys/'
+    survey_page = survey_page_prefix + slug + '.html'
+
+    build_number = request.GET.get('build')
+    os = request.GET.get('os')
+
+    context = {
+        'build_number': build_number,
+        'operating_system': os
+    }
+    return render_to_response(survey_page, RequestContext(request, context))
+
+
 ############################
 # bitcoin card and hiddenbits
 ############################
