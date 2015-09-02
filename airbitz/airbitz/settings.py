@@ -83,6 +83,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
 
     'djcelery',
+    'djrill',
     'haystack',
     'celery_haystack',
     'imagekit',
@@ -578,3 +579,6 @@ else:
     GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-47697034-1'
     API_GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-47697034-3'
 
+# MANDRILL TRANSACTIONAL EMAIL SETTINGS
+EMAIL_BACKEND = 'djrill.mail.backends.djrill.DjrillBackend'
+MANDRILL_API_KEY = "PyTes5t81HtIAenr0KNtxw"

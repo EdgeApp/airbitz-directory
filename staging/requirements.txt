@@ -30,6 +30,7 @@ django-rest-swagger==0.1.11
 django-statsd-mozilla==0.3.14
 django-tastypie==0.11.0
 djangorestframework==2.3.12
+djrill==1.4.0
 foursquare==2013.12.17
 futures==2.1.5
 geopy==0.98.2
@@ -50,4 +51,3 @@ statsd==3.0.1
 subprocess32==3.2.6
 wsgiref==0.1.2
 git+git://github.com/teneighty/django-rest-framework-throttling
-
