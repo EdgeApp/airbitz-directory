@@ -26,22 +26,33 @@ def listings_check_in(chunk_start=0, chunk_end=20, days_ago_published=90):
   # for each of the businesses found build email and send
   for b in biz[chunk_start:chunk_end]:
     listing_screencap = 'https://airbitz.co/media/screencaps/biz-' + str(b.id) + '.jpg'
-    listing_url = 'https://airbitz.co/biz/' + str(b.id) + '?v=checkin'
+    listing_id = str(b.id)
+    listing_url = 'https://airbitz.co/biz/' + listing_id + '?v=checkin'
     listing_name = b.name
     listing_website = b.website
     listing_phone = b.phone
     listing_address = b.address
     listing_admin3_name = b.admin3_name
+    listing_admin2_name = b.admin2_name
+    listing_admin1_code = b.admin1_code
+    listing_postalcode = b.postalcode
     listing_contact1_email = b.contact1_email
+    listing_contact2_email = b.contact2_email
 
-    typeform_full_url = url_with_querystring( 
+    typeform_full_url = url_with_querystring(
       typeform_base_url,
+      id=listing_id,
+      listingurl=listing_url,
       name=listing_name,
       website=listing_website,
       phone=listing_phone,
       address=listing_address,
       admin3name=listing_admin3_name,
+      admin2name=listing_admin2_name,
+      admin1code=listing_admin1_code,
+      postalcode=listing_postalcode,
       contact1email=listing_contact1_email,
+      contact2email=listing_contact2_email,
     )
 
     typeform_bitcoin_yes = typeform_full_url + '&bitcoin=yes'
