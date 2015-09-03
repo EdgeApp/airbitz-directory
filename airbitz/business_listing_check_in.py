@@ -12,13 +12,14 @@ def url_with_querystring(path, **kwargs):
     return path + '?' + url_params
 
 
-def listings_check_in(chunk_start=0, chunk_end=20, days_ago_published=90):
+def listings_check_in(chunk_start=0, chunk_end=20, days_ago_published=90, debug=False):
   older_than = datetime.now() - timedelta(days=days_ago_published)
 
   # find all businesses that are published 90 days or more ago and have email contacts
-  #
-  # biz = Business.objects.all().filter(contact1_email='info@zenthree.com')
-  biz = Business.objects.all().filter(status='PUB', published__lt=older_than, contact1_email__isnull=False).exclude(contact1_email__exact='')
+  if debug:
+    biz = Business.objects.all().filter(contact1_email='info@zenthree.com')
+  else:
+    biz = Business.objects.all().filter(status='PUB', published__lt=older_than, last_check_in__isnull=True, contact1_email__isnull=False).exclude(contact1_email__exact='')
 
   # setup typeform vars
   typeform_base_url = 'https://airbitz.typeform.com/to/Sof1Ld'
@@ -41,18 +42,18 @@ def listings_check_in(chunk_start=0, chunk_end=20, days_ago_published=90):
 
     typeform_full_url = url_with_querystring(
       typeform_base_url,
-      id=listing_id,
-      listingurl=listing_url,
-      name=listing_name,
-      website=listing_website,
-      phone=listing_phone,
-      address=listing_address,
-      admin3name=listing_admin3_name,
-      admin2name=listing_admin2_name,
-      admin1code=listing_admin1_code,
-      postalcode=listing_postalcode,
-      contact1email=listing_contact1_email,
-      contact2email=listing_contact2_email,
+      id=listing_id.encode('utf-8'),
+      listingurl=listing_url.encode('utf-8'),
+      name=listing_name.encode('utf-8'),
+      website=listing_website.encode('utf-8'),
+      phone=listing_phone.encode('utf-8'),
+      address=listing_address.encode('utf-8'),
+      admin3name=listing_admin3_name.encode('utf-8'),
+      admin2name=listing_admin2_name.encode('utf-8'),
+      admin1code=listing_admin1_code.encode('utf-8'),
+      postalcode=listing_postalcode.encode('utf-8'),
+      contact1email=listing_contact1_email.encode('utf-8'),
+      contact2email=listing_contact2_email.encode('utf-8'),
     )
 
     typeform_bitcoin_yes = typeform_full_url + '&bitcoin=yes'
