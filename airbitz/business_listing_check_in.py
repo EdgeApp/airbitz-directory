@@ -27,7 +27,7 @@ def listings_check_in(chunk_start=0, chunk_end=20, days_ago_published=90):
   for b in biz[chunk_start:chunk_end]:
     listing_screencap = 'https://airbitz.co/media/screencaps/biz-' + str(b.id) + '.jpg'
     listing_id = str(b.id)
-    listing_url = 'https://airbitz.co/biz/' + listing_id + '?v=checkin'
+    listing_url = 'https://airbitz.co/biz/' + listing_id
     listing_name = b.name
     listing_website = b.website
     listing_phone = b.phone
@@ -70,7 +70,7 @@ def listings_check_in(chunk_start=0, chunk_end=20, days_ago_published=90):
     msg.template_name = 'business-listing-check-in'
     msg.global_merge_vars = {
       'IMAGE_HEADER_LOGO': 'https://airbitz.co/static/img/logo-email.png',
-      'LISTING_URL': listing_url,
+      'LISTING_URL': listing_url + '?v=checkin',
       'LISTING_SCREENCAP': listing_screencap,
       'LISTING_NAME': listing_name,
       'BITCOIN_YES': typeform_bitcoin_yes,
