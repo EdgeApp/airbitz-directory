@@ -12,14 +12,12 @@ def url_with_querystring(path, **kwargs):
     return path + '?' + url_params
 
 
-
-
-def listings_check_in(chunk_start=0, chunk_end=20, days_ago_published=60):
+def listings_check_in(chunk_start=0, chunk_end=20, days_ago_published=90):
   older_than = datetime.now() - timedelta(days=days_ago_published)
 
   # find all businesses that are published 90 days or more ago and have email contacts
   #
-  # biz = Business.objects.all().filter(contact1_email='damian@airbitz.co')
+  # biz = Business.objects.all().filter(contact1_email='info@zenthree.com')
   biz = Business.objects.all().filter(status='PUB', published__lt=older_than, contact1_email__isnull=False).exclude(contact1_email__exact='')
 
   # setup typeform vars
@@ -34,25 +32,16 @@ def listings_check_in(chunk_start=0, chunk_end=20, days_ago_published=60):
     listing_phone = b.phone
     listing_address = b.address
     listing_admin3_name = b.admin3_name
-    listing_admin2_name = b.admin2_name
-    listing_admin1_code = b.admin1_code
-    listing_postalcode = b.postalcode
     listing_contact1_email = b.contact1_email
-    listing_contact2_email = b.contact2_email
 
     typeform_full_url = url_with_querystring( 
       typeform_base_url,
-      listingurl=listing_url,
       name=listing_name,
       website=listing_website,
       phone=listing_phone,
       address=listing_address,
       admin3name=listing_admin3_name,
-      admin2name=listing_admin2_name,
-      admin1code=listing_admin1_code,
-      postalcode=listing_postalcode,
       contact1email=listing_contact1_email,
-      contact2email=listing_contact2_email,
     )
 
     typeform_bitcoin_yes = typeform_full_url + '&bitcoin=yes'
