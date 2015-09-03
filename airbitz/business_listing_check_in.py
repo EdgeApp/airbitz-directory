@@ -14,12 +14,12 @@ def url_with_querystring(path, **kwargs):
 
 
 
-def listings_check_in(chunk_start=0, chunk_end=20, days_ago_published=60):
+def listings_check_in(chunk_start=0, chunk_end=20, days_ago_published=90):
   older_than = datetime.now() - timedelta(days=days_ago_published)
 
   # find all businesses that are published 90 days or more ago and have email contacts
   #
-  # biz = Business.objects.all().filter(contact1_email='damian@airbitz.co')
+  # biz = Business.objects.all().filter(contact1_email='info@zenthree.com')
   biz = Business.objects.all().filter(status='PUB', published__lt=older_than, contact1_email__isnull=False).exclude(contact1_email__exact='')
 
   # setup typeform vars
@@ -28,7 +28,8 @@ def listings_check_in(chunk_start=0, chunk_end=20, days_ago_published=60):
   # for each of the businesses found build email and send
   for b in biz[chunk_start:chunk_end]:
     listing_screencap = 'https://airbitz.co/media/screencaps/biz-' + str(b.id) + '.jpg'
-    listing_url = 'https://airbitz.co/biz/' + str(b.id) + '?v=checkin'
+    listing_id = str(b.id)
+    listing_url = 'https://airbitz.co/biz/' + listing_id + '?v=checkin'
     listing_name = b.name
     listing_website = b.website
     listing_phone = b.phone
@@ -40,8 +41,9 @@ def listings_check_in(chunk_start=0, chunk_end=20, days_ago_published=60):
     listing_contact1_email = b.contact1_email
     listing_contact2_email = b.contact2_email
 
-    typeform_full_url = url_with_querystring( 
+    typeform_full_url = url_with_querystring(
       typeform_base_url,
+      id=listing_id,
       listingurl=listing_url,
       name=listing_name,
       website=listing_website,
