@@ -502,12 +502,12 @@ def page_bitcoin_wallet(request):
     }
     return render_to_response('pages/page_bitcoin-wallet.html', RequestContext(request, context))
 
-def page_bitcoin_wallet_api_library(request):
+def page_developer_api_library(request):
     context = {
-        'page_title': 'Bitcoin Wallet API Library',
+        'page_title': 'Bitcoin Developer API Library',
         'page_description': 'The Airbitz Core (ABC) gives developers the ability to build Bitcoin products such as currency exchanges, ATMs, POS solutions, games, and payroll services that are fully integrated with accounts and wallets from the Airbitz mobile app.',
     }
-    return render_to_response('pages/page_bitcoin-wallet-api-library.html', RequestContext(request, context))
+    return render_to_response('pages/page_developer-api-library.html', RequestContext(request, context))
 
 def page_bitcoin_wallet_client_server_architecture(request):
     context = {

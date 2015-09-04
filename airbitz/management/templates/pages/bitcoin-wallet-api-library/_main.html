@@ -16,16 +16,20 @@
 
 <div id="section-bitcoin-wallet-platform-details" class="container">
 
-  <h1 class="hidden-xs">
-    <img src="{{ STATIC_URL }}img/icons/airbitz-platform-icon_64px.png" alt="Airbitz Platform" class="" />&nbsp;&nbsp;Bitcoin Wallet API Library (Airbitz Core)
-  </h1>
-  <h1 class="visible-xs-block">
-    <img src="{{ STATIC_URL }}img/icons/genius_32px.png" alt="Airbitz Platform" class="" />&nbsp;&nbsp;Bitcoin Wallet API Library (Airbitz Core)
-  </h1>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <h1 class="col-md-9 hidden-xs">
+      <img src="{{ STATIC_URL }}img/icons/airbitz-platform-icon_64px.png" alt="Airbitz Platform" class="" />&nbsp;&nbsp;Developer API
+    </h1>
+
+    <h1 class="col-xs-offset-3 visible-xs-block">
+      <img src="{{ STATIC_URL }}img/icons/genius_32px.png" alt="Airbitz Platform" class="" />&nbsp;&nbsp;Developer API
+    </h1>
+  </div>
 
   <div class="row">
 
-    <div class="col-md-3">
+    <div class="col-md-3" style="margin-bottom: 40px">
       {% include 'sidebars/bitcoin-platform.html' %}
     </div>
 
@@ -33,40 +37,46 @@
 
       <div class="row">
         <div class="col-sm-12">
-          <p>The <a href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/" title="Airbitz Bitcoin Wallet">Airbitz Bitcoin wallet and directory</a> is available as a powerful, cross platform API library which includes all the functionality and ease-of-use of the Airbitz mobile application. The Airbitz Core (ABC) gives developers the ability to build Bitcoin products such as currency exchanges, ATMs, POS solutions, games, and payroll services that are fully integrated with accounts and wallets from the Airbitz mobile app. The Airbitz mobile app is the first product utilizing this open platform, and the potential for future integrations with other financial and alternative services is vast.</p>
-          <p>The <a href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/" title="Airbitz Bitcoin Wallet">Airbitz Bitcoin Wallet</a> is built on the cross platform, C/C++ Airbitz Core library. This library implements the Airbitz wallet functionality in its entirety, minus the graphical interface. The Airbitz Core library makes it possible to quickly build applications where users control their private keys safely and securely without compromising privacy, features, or usability.</p>
-          <p>The Airbitz Core enables an ecosystem of applications built on the Airbitz platform with both the compatibility and capability to securely access a users’ funds from within various external applications. A wallet created on the Airbitz mobile application can be quickly shared with a multiplayer game to earn Bitcoin from within the app, a mobile shopping app to pay for goods, or financial planning software to help with budgeting and tracking, all from one account.</p>
+          <p>The <a href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/" title="Airbitz Bitcoin Wallet">Airbitz Bitcoin Wallet</a> is built on a platform that provides edge security for digital assets in a mobile-friendly, cross-platform SDK. Available as a powerful, open source software library, the Airbitz Core (ABC) provides all the security functionality and ease-of-use of the Airbitz mobile application including:</p>
+          <ul>
+            <li>Automatic client-side data encryption using users' credentials</li>
+            <li>Automatic backup to P2P server nodes</li>
+            <li>Automatic synchronization between users’ devices</li>
+            <li>One-Touch 2 factor authentication</li>
+            <li>Password recovery</li>
+            <li>Blockchain operations such as private key generation, transaction signing, and blockchain queries</li>
+          </ul>
+          <p>ABC gives developers the ability to build software such as ATMs, POS solutions, games, and payroll services that are fully integrated with accounts from the Airbitz mobile app. The Airbitz mobile app is the first product utilizing this platform, and the potential for future integrations with other applications is vast. Any developer that wishes to secure sensitive user data in a private, zero-knowledge, zero-trust infrastructure will find Airbitz a powerful solution to their data security.</p>
         </div>
       </div>
 
       <div class="row">
         <div class="feature-major col-sm-12">
-          <h3><img src="{{ STATIC_URL }}img/icons/circle-compass_32px.png" alt="Ease of Use"/> Decentralized and Private by Design</h3>
-          <p>The Airbitz Core library can be utilized by other Bitcoin companies and projects. Utilization of the Airbitz Core (ABC) can significantly reduce implementation time for a Bitcoin wallet backend system. ABC implements the following functionality of the Airbitz wallet:</p>
-          <ul>
-            <li>User authentication</li>
-            <li>Account/Wallet Creation</li>
-            <li>Client-side Encryption</li>
-            <li>Multi-device synchronization & Backup</li>
-            <li>Transaction Meta-data management</li>
-            <li>Bitcoin Address generation / key management</li>
-            <li>Transaction signing / broadcasting</li>
-            <li>Decentralized access to bitcoin network</li>
-            <li>Shared wallets w/multisig (Q1 2015)</li>
-          </ul>
+          <h3><img src="{{ STATIC_URL }}img/icons/cloud_32px.png" alt="Decentralized"/> Decentralized</h3>
+          <p>With our deep roots in decentralized technologies such as the blockchain and digital currencies, we immediately see the benefits in decentralizing the majority of our security infrastructure. Our level of decentralization allows users to still access their data and even execute blockchain operations even if Airbitz servers are down. This focus provides the type of resilience and fault tolerance unmatched by other data security platforms.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="feature-major col-sm-12">
+          <h3><img src="{{ STATIC_URL }}img/icons/circle-compass_32px.png" alt="Ease of Use"/> Private by Design</h3>
+          <p>Security and privacy go hand in hand, and ABC provides incredibly high privacy to promote a fundamental disincentive to attackers of the system. No part of ABC collects sensitive user data such as names, emails, addresses or phone numbers. This disassociates the users of our platform from the potentially highly valuable data they may be trying to protect.</p>
         </div>
       </div>
 
       <div class="row">
         <div class="feature-major col-sm-12">
           <h3><img src="{{ STATIC_URL }}img/icons/target_32px.png" alt="Use Cases"/> Use Cases</h3>
-          <p>The Airbitz Core library is designed for Bitcoin projects and any financial service company with the need for Bitcoin wallet functionality.</p>
+          <p>The ABC library is designed for blockchain and digital asset projects with the need to secure high value, user information.</p>
           <p>Potential Airbitz Platform Integrations:</p>
           <ul>
-            <li>Currency Exchanges</li>
-            <li>Payment Processors</li>
-            <li>Payroll Services</li>
+            <li>Financial management software (Quicken / Quickbooks)</li>
+            <li>Health care record tracking</li>
+            <li>Secure messaging applications</li>
+            <li>Secure authentication</li>
+            <li>Payroll software</li>
             <li>POS Solutions</li>
+            <li>Internet of Things devices</li>
             <li>ATMs</li>
             <li>Games</li>
           </ul>
@@ -77,11 +87,11 @@
         <div class="feature-major col-sm-8">
           <h3><img src="{{ STATIC_URL }}img/icons/layers_32px.png" alt="Security"/> Open Source Platform</h3>
           <p>Airbitz was released open source on Oct 31, 2014.</p>
-          <p><a href="http://en.wikipedia.org/wiki/Open-source_software" target="_blank">Open source software</a> provides the transparency required to verify the promised functionality of Bitcoin software. Airbitz strongly believes in the open source model and has contributed significantly to various open source projects, including our own.</p>
+          <p><a href="http://en.wikipedia.org/wiki/Open-source_software" target="_blank">Open source software</a> provides the transparency required to verify the promised functionality of security software. Airbitz strongly believes in the open source model and has contributed significantly to various open source projects, including our own.</p>
           <ul>
             <li><a href="https://github.com/Airbitz/airbitz-ios-gui" target="_blank" title="iPhone Bitcoin Wallet">Open Source iPhone Bitcoin Wallet</a> (GUI)</li>
             <li><a href="https://github.com/Airbitz/airbitz-android-gui" target="_blank" title="Android Bitcoin Wallet">Open Source Android Bitcoin Wallet</a> (GUI)</li>
-            <li><a href="https://github.com/Airbitz/airbitz-core" target="_blank" title="Library for Bitcoin Wallets">Open Source Airbitz Core Library</a> (ABC Bitcoin Wallet Library)</li>
+            <li><a href="https://github.com/Airbitz/airbitz-core" target="_blank" title="Library for Bitcoin Wallets">Open Source Airbitz Core Library</a> (ABC Developer API/Library)</li>
           </ul>
         </div>
 
