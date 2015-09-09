@@ -104,6 +104,7 @@ INSTALLED_APPS = (
     'directory',
     'management',
     'notifications',
+    'verification',
 )
 if DEBUG:
     INSTALLED_APPS += (
