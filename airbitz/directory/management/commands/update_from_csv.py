@@ -62,6 +62,8 @@ class Command(BaseCommand):
 
         # now run some operation on the data:
         for row in row_set:
+            update = 0 # make sure update is reset each time
+
             id = row[ID].value
             published = row[PUBLISHED].value
             update = row[UPDATE].value
@@ -90,6 +92,7 @@ class Command(BaseCommand):
                     print 'UPDATE: [' + str(update) + ']', id, o_name
                     print 'ORIG:', biz
 
+                    # DO NOT UPDATE IF FIELD IS BLANK
                     if not name == '':
                         print 'UPDATE NAME:', name
                         biz.name = name
@@ -110,13 +113,13 @@ class Command(BaseCommand):
                         biz.contact1_email = email_primary
 
                     if not extra == '':
+                        print ''
                         print '%%%%%%%%%%% EXTRA NOTES %%%%%%%%%%%%%%%'
                         print extra
                         print '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
+                        print ''
 
                     biz.save()
 
                 else:
                     print '@@@@@@@@@@@@@@@@@@ NO BIZ @@@@@@@@@@@@@@@@@@'
-
-            update = False
