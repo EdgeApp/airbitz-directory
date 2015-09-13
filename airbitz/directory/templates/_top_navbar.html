@@ -20,10 +20,10 @@
       <ul class="nav navbar-nav navbar-right">
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Bitcoin Wallet <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Bitcoin App <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="https://airbitz.co/go/faq">Frequently Asked Questions</a></li>
-            <li><a href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/">Bitcoin Wallet</a></li>
+            <li><a href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/">Bitcoin App</a></li>
 {#            <li><a href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet-api-library/">Bitcoin Wallet API</a></li>#}
           </ul>
         </li>
@@ -172,10 +172,10 @@
       <ul class="nav navbar-nav">
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Bitcoin Wallet <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Bitcoin App <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="https://airbitz.co/go/faq">Frequently Asked Questions</a></li>
-            <li><a href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/">Bitcoin Wallet</a></li>
+            <li><a href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet/">Bitcoin App</a></li>
 {#            <li><a href="{{ ABSOLUTE_ROOT_URL }}bitcoin-wallet-api-library/">Bitcoin Wallet API</a></li>#}
           </ul>
         </li>
@@ -189,11 +189,11 @@
             <li><a href="https://airbitz.co/go/submit-business/">Submit a Business</a></li>
             <li class="divider"></li>
             <li class="dropdown-header">Find Businesses</li>
-            <li><a href="{% url 'landing' %}search?term=&location=Current+Location">Local Businesses</a></li>
-            <li><a href="{% url 'landing' %}search?term=&location=On+the+Web">Businesses On the Web</a></li>
-            <li><a href="{% url 'landing' %}search?term=Restaurants+%26+Food+Trucks&location=Current+Location">Restaurants & Food Trucks</a></li>
-            <li><a href="{% url 'landing' %}search?term=Bar&location=Current+Location">Bars & Nightclubs</a></li>
-            <li><a href="{% url 'landing' %}search?term=Hotels+%26+Lodging&location=Current+Location">Hotels & Lodging</a></li>
+            <li><a href="{% url 'search' %}?term=&location=Current+Location">Local Businesses</a></li>
+            <li><a href="{% url 'search' %}?term=&location=On+the+Web">Businesses On the Web</a></li>
+            <li><a href="{% url 'search' %}?term=Restaurants+%26+Food+Trucks&location=Current+Location">Restaurants & Food Trucks</a></li>
+            <li><a href="{% url 'search' %}?term=Bar&location=Current+Location">Bars & Nightclubs</a></li>
+            <li><a href="{% url 'search' %}?term=Hotels+%26+Lodging&location=Current+Location">Hotels & Lodging</a></li>
           </ul>
         </li>
 

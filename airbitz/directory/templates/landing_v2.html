@@ -98,11 +98,11 @@ After decades of attempts at securing personal info, money, financial info, and 
                                 <li>
                                   <ul class="sub-menu">
                                     <li><a href="#submit-business" class="submit-business">Submit a Business <span class="tip tip-dark">Get Listed</span></a></li>
-                                    <li><a href="https://airbitz.co/search?term=&location=Current+Location">Local Businesses</a></li>
-                                    <li><a href="https://airbitz.co/search?term=BTM&location=Current+Location">BTM's (Bitcoin ATM's)</a></li>
-                                    <li><a href="https://airbitz.co/search?term=Restaurants&location=Current+Location">Restaurants & Food Trucks</a></li>
-                                    <li><a href="https://airbitz.co/search?term=Bar&location=Current+Location">Bars & Nightclubs</a></li>
-                                    <li><a href="https://airbitz.co/search?term=Hotels+%26+Lodging&location=Current+Location">Hotels & Lodging</a></li>
+                                    <li><a href="{% url 'search' %}?term=&location=Current+Location">Local Businesses</a></li>
+                                    <li><a href="{% url 'search' %}?term=BTM&location=Current+Location">BTM's (Bitcoin ATM's)</a></li>
+                                    <li><a href="{% url 'search' %}?term=Restaurants&location=Current+Location">Restaurants & Food Trucks</a></li>
+                                    <li><a href="{% url 'search' %}?term=Bar&location=Current+Location">Bars & Nightclubs</a></li>
+                                    <li><a href="{% url 'search' %}?term=Hotels+%26+Lodging&location=Current+Location">Hotels & Lodging</a></li>
                                   </ul>
                                 </li>
                               </ul>
@@ -112,13 +112,62 @@ After decades of attempts at securing personal info, money, financial info, and 
                               <ul class="sub-menu">
                                 <li>
                                   <ul class="sub-menu">
-                                    <li><a href="#">United States</a></li>
-                                    <li><a href="#">Canada</a></li>
-                                    <li><a href="#">South America</a></li>
-                                    <li><a href="#">Europe</a></li>
-                                    <li><a href="#">Asia</a></li>
-                                    <li><a href="#">Southeast Asia</a></li>
-                                    <li><a href="#">Oceana</a></li>
+                                    <li class="dropdown-submenu">
+                                      <span>United States</span>
+                                      <ul class="dropdown-menu">
+                                        {% for region in us_active_regions_list %}
+                                          <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                      </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                      <span>Canada</span>
+                                      <ul class="dropdown-menu">
+                                        {% for region in ca_active_regions_list %}
+                                          <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                      </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                      <span>South America</span>
+                                      <ul class="dropdown-menu">
+                                        {% for region in south_america_active_regions_list %}
+                                          <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                      </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                      <span>Europe</span>
+                                      <ul class="dropdown-menu">
+                                        {% for region in eu_active_regions_list %}
+                                          <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                      </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                      <span>Asia</span>
+                                      <ul class="dropdown-menu">
+                                        {% for region in asia_active_regions_list %}
+                                          <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                      </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                      <span>Southeast Asia</span>
+                                      <ul class="dropdown-menu">
+                                        {% for region in southeast_asia_active_regions_list %}
+                                          <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                      </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                      <span>Oceana</span>
+                                      <ul class="dropdown-menu">
+                                        {% for region in oceana_active_regions_list %}
+                                          <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                        {% endfor %}
+                                      </ul>
+                                    </li>
                                   </ul>
                                 </li>
                               </ul>
@@ -128,9 +177,9 @@ After decades of attempts at securing personal info, money, financial info, and 
                               <ul class="sub-menu">
                                 <li>
                                   <ul class="sub-menu">
-                                    <li><a href="#download"><i class="fa fa-download"></i> Download</a></li>
-                                    <li><a href="#bitcoin-wallet"><i class="fa fa-info-circle"></i> Learn More</a></li>
-                                    <li><a href="#faq"><i class="fa fa-question-circle"></i> Frequently Asked Questions</a></li>
+                                    <li><a href="{% url 'app_download' %}"><i class="fa fa-download"></i> Download</a></li>
+                                    <li><a href="{% url 'page_bitcoin_wallet' %}"><i class="fa fa-info-circle"></i> Learn More</a></li>
+                                    <li><a href="{% url 'landing' %}go/faq/"><i class="fa fa-question-circle"></i> Frequently Asked Questions</a></li>
                                   </ul>
                                 </li>
                               </ul>
@@ -145,20 +194,20 @@ After decades of attempts at securing personal info, money, financial info, and 
                       Edge Security Platform
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a href="#bitcoin-wallet-api">Development API</a></li>
-                      <li><a href="#bitcoin-wallet-api">Client Server Architecture</a></li>
-                      <li><a href="#bitcoin-wallet-api">Core White Paper</a></li>
-                      <li><a href="#bitcoin-wallet-api">Data Sync Architecture</a></li>
+                      <li><a href="{% url 'page_developer_api_library' %}">Development API</a></li>
+                      <li><a href="{% url 'page_client_server_architecture' %}">Client Server Architecture</a></li>
+                      <li><a href="{% url 'page_core_white_paper' %}">Core White Paper</a></li>
+                      <li><a href="{% url 'page_data_sync_architecture' %}">Data Sync Architecture</a></li>
                     </ul>
                   </li>
-                  <li><a href="#blog">Blog</a></li>
+                  <li><a href="{% url 'landing' %}go/">Blog</a></li>
                   <li class="dropdown">
                     <a class="dropdown-toggle" href="#">
                       More
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a href="#team">Team</a></li>
-                      <li><a href="#about">About Us</a></li>
+                      <li><a href="{% url 'landing' %}go/team/">Team</a></li>
+                      <li><a href="{% url 'landing' %}go/about/">About Us</a></li>
                       <li><a href="#contact">Contact Us</a></li>
                     </ul>
                   </li>
@@ -264,7 +313,7 @@ After decades of attempts at securing personal info, money, financial info, and 
             </div>
             <div class="col-md-3">
               <div class="get-started">
-                <a href="#" class="btn btn-lg btn-primary">Airbitz Edge Security Platform</a>
+                <a href="{% url 'page_developer_api_library' %}" class="btn btn-lg btn-primary">Airbitz Edge Security Platform</a>
               </div>
             </div>
           </div>
@@ -770,9 +819,9 @@ After decades of attempts at securing personal info, money, financial info, and 
                 <div class="col-md-8">
                   <nav id="sub-menu">
                     <ul>
-                      <li><a href="#faq">FAQ's</a></li>
-                      <li><a href="#bitcoin-app">Bitcoin App</a></li>
-                      <li><a href="#developer-api">Edge Security Platform</a></li>
+                      <li><a href="{% url 'landing' %}go/faq/">App FAQ's</a></li>
+                      <li><a href="{% url 'page_bitcoin_wallet' %}">Bitcoin App</a></li>
+                      <li><a href="{% url 'page_developer_api_library' %}">Edge Security Platform</a></li>
                       <li><a href="#contact">Contact</a></li>
                     </ul>
                   </nav>

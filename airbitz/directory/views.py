@@ -63,12 +63,17 @@ def home_v2(request):
     return render_to_response('home-v2.html', RequestContext(request, {}))
 
 def landing_v2(request):
-    context = {}
+    print 'OLD LANDING'
+    context = {
+        'active_regions': ACTIVE_REGIONS,
+        # 'all_regions': ALL_REGIONS,
+        # 'biz_total': Business.objects.filter(status="PUB", country__in=regions_data.get_active_country_codes()).count(),
+    }
     return render_to_response('landing_v2.html', RequestContext(request, context))
 
 
 def landing(request):
-    print 'LANDING'
+    print 'OLD LANDING'
     context = {
         'active_regions': ACTIVE_REGIONS,
         'all_regions': ALL_REGIONS,
