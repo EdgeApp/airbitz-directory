@@ -1,0 +1,1 @@
+(function($){$("header").hide(),console.log("CUSTOM LOADED")}).apply(this,[jQuery]);

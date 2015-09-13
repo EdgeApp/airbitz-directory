@@ -1,0 +1,60 @@
+/* Header Nav Bar */
+@media (min-width: 992px) {
+	#header.nav-bar {
+
+		.logo {
+			position: relative;
+			top: -4px;
+		}
+
+		.search {
+			clear: $right;
+			margin-top: 8px;
+			margin-bottom: 0;
+		}
+
+		nav ul.nav-top {
+			margin-top: 0;
+			margin-bottom: 0;
+			min-height: 0;
+		}
+
+		.nav-main-collapse {
+			background: #F4F4F4;
+			margin: 35px 0 -8px;
+		}
+
+		nav.nav-main {
+			float: none;
+			ul.nav-main {
+				margin-top: 8px;
+			}
+		}
+
+		.social-icons {
+			margin-top: 12px;
+		}
+
+	}
+
+	body.sticky-menu-active {
+		#header.nav-bar {
+			padding-bottom: 0;
+			top: -112px;
+
+			.social-icons {
+				margin-top: 12px;
+			}
+		}
+	}
+}
+
+@media (max-width: 991px) {
+	#header.nav-bar {
+
+		.btn-responsive-nav {
+			top: 60px;
+		}
+
+	}
+}

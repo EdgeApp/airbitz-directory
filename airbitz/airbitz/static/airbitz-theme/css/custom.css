@@ -1,0 +1,75 @@
+html body {
+  font-size: 1.8em; }
+  html body p {
+    line-height: 1.8em; }
+html .hl-blue {
+  color: #00aaff; }
+html .home-intro {
+  margin-bottom: 100px;
+  background: #333; }
+  html .home-intro h3 {
+    color: white;
+    margin-bottom: 0;
+    text-transform: none;
+    line-height: 1.8em; }
+  html .home-intro p {
+    padding: 0;
+    font-size: 1em;
+    color: #999; }
+    html .home-intro p span {
+      display: inline-block;
+      padding-top: 0;
+      font-size: 1em; }
+    html .home-intro p em {
+      font-family: "Open Sans";
+      font-size: 1.5em; }
+    html .home-intro p .outline {
+      display: inline-block;
+      padding: 0px 5px;
+      border: 1px solid #999;
+      border-radius: 3px;
+      text-transform: capitalize; }
+html .lead {
+  font-size: 1.8em; }
+  html .lead strong {
+    color: #2291cf;
+    white-space: nowrap; }
+html .alternative-font {
+  font-family: "Open Sans";
+  font-size: 1.5em;
+  font-style: italic; }
+html .slider-container .main-label {
+  font-size: 42px;
+  text-shadow: 0 2px 2px #000; }
+html .slider-container .bottom-label {
+  font-weight: 500;
+  text-shadow: 0 2px 2px #000; }
+html section.section {
+  background-color: white;
+  border: none; }
+  html section.section.section-text-light .heading h1, html section.section.section-text-light .heading h2, html section.section.section-text-light .heading h3, html section.section.section-text-light .heading h4, html section.section.section-text-light .heading h5, html section.section.section-text-light .heading h6 {
+    text-shadow: 0 1px 1px #777; }
+  html section.section.section-text-dark .heading h1, html section.section.section-text-dark .heading h2, html section.section.section-text-dark .heading h3, html section.section.section-text-dark .heading h4, html section.section.section-text-dark .heading h5, html section.section.section-text-dark .heading h6 {
+    text-shadow: 0 1px 1px #ddd; }
+  html section.section.section-tall {
+    margin: 100px 0 !important;
+    padding: 100px; }
+html section.airbitz-app {
+  margin: 100px 0; }
+  html section.airbitz-app .airbitz-app-icon {
+    height: 100px;
+    margin-bottom: 20px; }
+html ul > ul {
+  margin-left: 25px; }
+
+#footer {
+  background: #002E48;
+  border: none; }
+  #footer p {
+    color: #ddd; }
+  #footer .footer-copyright {
+    background: #002E48;
+    border: none;
+    font-size: 14px; }
+    #footer .footer-copyright p {
+      color: #ddd; }

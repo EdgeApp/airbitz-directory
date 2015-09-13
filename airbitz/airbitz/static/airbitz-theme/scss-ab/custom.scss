@@ -1,0 +1,141 @@
+$ab-blue: #2291cf;
+$ab-blue-dark: #002E48;
+
+html {
+
+  body {
+    font-size: 1.8em;
+
+    p {
+      line-height: 1.8em;
+    }
+  }
+  // utility classes
+  .hl-blue {
+    color: #00aaff;
+  }
+
+  // home
+  #header {}
+
+  .home-intro {
+    margin-bottom: 100px;
+    background: #333;
+
+    h3 {
+      color: white;
+      margin-bottom: 0;
+      text-transform: none;
+      line-height: 1.8em;
+    }
+    p {
+      padding: 0;
+      font-size: 1em;
+      color: #999;
+
+      span {
+        display: inline-block;
+        padding-top: 0;
+        font-size: 1em;
+
+      }
+      em {
+        font-family: "Open Sans";
+        font-size: 1.5em;
+      }
+      .outline {
+        display: inline-block;
+        padding: 0px 5px;
+        border: 1px solid #999;
+        border-radius: 3px;
+        text-transform: capitalize;
+      }
+    }
+  }
+  .lead {
+    font-size: 1.8em;
+    strong {
+      color: $ab-blue;
+      white-space:nowrap;
+    }
+  }
+  .alternative-font {
+    font-family: "Open Sans";
+    font-size: 1.5em;
+    font-style: italic;
+  }
+
+  .slider-container {
+
+   .main-label {
+    font-size: 42px;
+    text-shadow: 0 2px 2px #000;
+  }
+
+  .bottom-label {
+    font-weight: 500;
+    text-shadow: 0 2px 2px #000;
+  }
+}
+
+section {
+  &.section {
+    background-color: white;
+    border: none;
+
+    &.section-text-light {
+      .heading {
+        h1, h2, h3, h4, h5, h6 {
+          text-shadow: 0 1px 1px #777;
+        }
+      }
+    }
+    &.section-text-dark {
+      .heading {
+        h1, h2, h3, h4, h5, h6 {
+          text-shadow: 0 1px 1px #ddd;
+        }
+      }
+    }
+    &.section-tall {
+      margin: 100px 0 !important;
+      padding: 100px;
+    }
+  }
+
+  &.airbitz-app {
+    margin: 100px 0;
+
+    .airbitz-app-icon {
+      height: 100px;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+ul > ul {
+  margin-left: 25px;
+}
+
+}
+
+footer {
+
+}
+  #footer {
+    background: $ab-blue-dark;
+    border: none;
+
+    p {
+      color: #ddd;
+    }
+    .footer-copyright {
+      background: $ab-blue-dark;
+      border: none;
+      font-size: 14px;
+
+      p {
+        color: #ddd;
+      }
+    }
+  }
