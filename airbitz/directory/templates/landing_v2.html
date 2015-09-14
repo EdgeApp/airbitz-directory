@@ -1,4 +1,4 @@
-
+{% load compressed %}
 {% load static from staticfiles %}
 
 
@@ -237,41 +237,65 @@ After decades of attempts at securing personal info, money, financial info, and 
 
                 <div class="tp-caption main-label sft stb"
                 data-x="20"
-                data-y="240"
+                data-y="220"
                 data-speed="300"
                 data-start="500"
-                data-easing="easeOutExpo">Edge Security Platform</div>
+                data-easing="easeOutExpo">Securing the Future of:</div>
 
                 <div class="tp-caption bottom-label sft stb"
                 data-x="100"
-                data-y="320"
+                data-y="300"
                 data-speed="500"
                 data-start="2500"
-                data-easing="easeOutExpo"><i class="fa fa-check"></i> Client-Side Encryption</div>
+                data-easing="easeOutExpo"><i class="fa fa-check"></i> Blochain Technology</div>
                 <div class="tp-caption bottom-label sft stb"
                 data-x="100"
-                data-y="350"
+                data-y="330"
                 data-speed="500"
                 data-start="3500"
-                data-easing="easeOutExpo"><i class="fa fa-check"></i> Automatic Backup</div>
+                data-easing="easeOutExpo"><i class="fa fa-check"></i> Financial Applications</div>
                 <div class="tp-caption bottom-label sft stb"
                 data-x="100"
-                data-y="380"
+                data-y="360"
                 data-speed="500"
                 data-start="4500"
-                data-easing="easeOutExpo"><i class="fa fa-check"></i> Multi-device Syncronization</div>
+                data-easing="easeOutExpo"><i class="fa fa-check"></i> Bitcoin / Digital Currencies</div>
                 <div class="tp-caption bottom-label sft stb"
                 data-x="100"
-                data-y="410"
+                data-y="390"
                 data-speed="500"
                 data-start="5500"
-                data-easing="easeOutExpo"><i class="fa fa-check"></i> One-Touch 2 Factor Authentication</div>
+                data-easing="easeOutExpo"><i class="fa fa-check"></i> Private Key Authentication</div>
                 <div class="tp-caption bottom-label sft stb"
                 data-x="100"
-                data-y="440"
+                data-y="420"
                 data-speed="500"
                 data-start="6500"
-                data-easing="easeOutExpo"><i class="fa fa-check"></i> Password Recovery</div>
+                data-easing="easeOutExpo"><i class="fa fa-check"></i> Password Management</div>
+                <div class="tp-caption bottom-label sft stb"
+                data-x="100"
+                data-y="450"
+                data-speed="500"
+                data-start="7500"
+                data-easing="easeOutExpo"><i class="fa fa-check"></i> Secure Messaging</div>
+                <div class="tp-caption bottom-label sft stb"
+                data-x="100"
+                data-y="480"
+                data-speed="500"
+                data-start="8500"
+                data-easing="easeOutExpo"><i class="fa fa-check"></i> Internet of Things (IoT)</div>
+                <div class="tp-caption bottom-label sft stb"
+                data-x="100"
+                data-y="510"
+                data-speed="500"
+                data-start="9500"
+                data-easing="easeOutExpo"><i class="fa fa-check"></i> Information Management</div>
+                <div class="tp-caption bottom-label sft stb"
+                data-x="100"
+                data-y="540"
+                data-speed="500"
+                data-start="10500"
+                data-easing="easeOutExpo"><i class="fa fa-check"></i> Healthcare</div>
 
                 <div class="tp-caption customin customout"
                 data-x="right" data-hoffset="0"
@@ -322,8 +346,8 @@ After decades of attempts at securing personal info, money, financial info, and 
       </div>
 
       <div class="container-fluid mb-xl text-center">
-        <h2>Edge <strong>Security</strong> Applications</h2>
-        <p>Below are a few of the current applications for edge security.</p>
+        <h2>Edge Security <strong>Applications</strong></h2>
+        <p>Below are a few of the applications to benefit from edge security.</p>
       </div>
 
       <div class="container">
@@ -351,7 +375,7 @@ After decades of attempts at securing personal info, money, financial info, and 
                   </div>
                   <div class="feature-box-info">
                     <h4 class="mb-xs">Private Key Authentication</h4>
-                    <p>Managing keys and related meta data for easy authentication.</p>
+                    <p>Easy authentication with private keys to eliminate cumbersome and insecure passwords.</p>
                     <!-- <ul>
                       <li>SSH</li>
                       <li>BitID</li>
@@ -367,7 +391,7 @@ After decades of attempts at securing personal info, money, financial info, and 
                   </div>
                   <div class="feature-box-info">
                     <h4 class="mb-xs">Internet of Things (IoT)</h4>
-                    <p>Future automation and convienence require paramount security.</p>
+                    <p>Future automation and convienence requires paramount security.</p>
                     <!-- <ul>
                       <li>Wireless Routers</li>
                       <li>Meters and Appliances</li>
@@ -441,7 +465,7 @@ After decades of attempts at securing personal info, money, financial info, and 
                     <i class="fa fa-bitcoin"></i>
                   </div>
                   <div class="feature-box-info">
-                    <h4 class="mb-xs">Bitcoin App</h4>
+                    <h4 class="mb-xs">Bitcoin / Digital Currencies</h4>
                     <p>The largest distributed computing system is our home.</p>
                   </div>
                 </div>
@@ -455,7 +479,7 @@ After decades of attempts at securing personal info, money, financial info, and 
                   </div>
                   <div class="feature-box-info">
                     <h4 class="mb-xs">Secure Messaging</h4>
-                    <p>Keeing conversations private no matter what medium they traverse.</p>
+                    <p>Keeping conversations private no matter what medium they traverse.</p>
                   </div>
                 </div>
               </div>
@@ -487,17 +511,22 @@ After decades of attempts at securing personal info, money, financial info, and 
           </section>
 
           <div class="container">
-            <div class="row">
-              <div class="col-md-5">
-                <img class="img-responsive appear-animation fadeInRight appear-animation-visible" src="{% static 'airbitz-theme/img-custom/security-paradigm-shift.png' %}" alt="Security Paradigm Shift" data-appear-animation="fadeInRight">
-              </div>
-              <div class="col-md-7">
+            <div class="row mb-xlg">
+              <div class="col-md-12">
                 <p class="lead">
                   Digital security is undergoing a <strong>paradigm shift</strong>.
                 </p>
                 <p>
-                  After decades of attempts at securing personal info, money, financial info, and sensitive documents on centralized servers, we’ve discovered that it simply can’t be done. There is too much incentive to break into the honey-pot troves of digital data on globally accessible internet servers. Every year, multiple large centralized services are hacked and cause massive data breaches.
+                  After decades of striving to secure personal info, money, financial info, and sensitive documents on centralized servers, we’ve discovered that it simply can’t be done. There is too great an incentive to break into the treasure troves of digital data on globally accessible internet servers. Every year, multiple large centralized services are hacked and cause massive data breaches.
                 </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <img class="img-responsive" src="{% static 'airbitz-theme/img-custom/paradigm-shift-new.png' %}" alt="Security Paradigm Shift">
+              </div>
+              <div class="col-md-6">
+                <img class="img-responsive" src="{% static 'airbitz-theme/img-custom/paradigm-shift-old.png' %}" alt="Security Paradigm Shift">
               </div>
             </div>
           </div>
@@ -506,7 +535,7 @@ After decades of attempts at securing personal info, money, financial info, and 
           <section class="parallax section section-tall section-text-light section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-2.jpg' %}); background-size: cover;">
             <div class="container mt-xl">
               <div class="heading">
-                <h2>Engineered to be <strong>Private</strong> by Default</h2>
+                <h2>Edge Security to the <strong>Rescue</strong></h2>
               </div>
             </div>
           </section>
@@ -515,14 +544,19 @@ After decades of attempts at securing personal info, money, financial info, and 
             <div class="row">
               <div class="col-md-7">
                 <p class="lead">
-                  Airbitz provides the <strong>world’s first</strong> edge security platform that allows developers to build apps that secure users’ data at <br>“<strong>The Edge</strong>” utilizing several key technologies simultaneously.
+                  Instead of relying on enterprise server security, <strong>Edge-Security</strong> encrypts data first the user's device before it ever touches a network or server. A server-side hack yields nothing but fully encrypted, private data. A hack on a user’s device yields only the data of that one user vs millions of users. The <strong>incentive</strong> to attack the system is <strong>reduced by orders of magnitude</strong>.
                 </p>
                 <p>
-                  Instead of relying on enterprise server security, edge-security secures data first on users’ devices before it ever touches a network or server. A central server hack yields nothing but fully encrypted, private data. A hack on a user’s device yields only the data of that one user vs millions of users. The incentive to attack the system is reduced by orders of magnitude.
+                  Airbitz provides the <strong>world’s first</strong> edge security platform that allows developers to build apps that secure users’ data at <br>“<strong>The Edge</strong>” utilizing several key technologies simultaneously.
                 </p>
               </div>
               <div class="col-md-5">
-                <img class="img-responsive appear-animation fadeInRight appear-animation-visible" src="{% static 'airbitz-theme/img-custom/edge-security-platform.png' %}" alt="Edge Security Platform" data-appear-animation="fadeInRight">
+                <img class="mb-xlg img-responsive appear-animation fadeInRight appear-animation-visible" src="{% static 'airbitz-theme/img-custom/airbitz-logo.png' %}" alt="Airbitz">
+                <div class="key-tech"><i class="fa fa-check"></i> Client-Side Encryption</div>
+                <div class="key-tech"><i class="fa fa-check"></i> Automatic Backup</div>
+                <div class="key-tech"><i class="fa fa-check"></i> Multi-device Syncronization</div>
+                <div class="key-tech"><i class="fa fa-check"></i> One-Touch 2 Factor Authentication</div>
+                <div class="key-tech"><i class="fa fa-check"></i> Password Recovery</div>
               </div>
             </div>
           </div>
@@ -536,74 +570,65 @@ After decades of attempts at securing personal info, money, financial info, and 
           </section>
 
           <div class="container mt-xl mb-xl">
-            <h2 class="text-center"><i class="fa fa-eye-slash"></i> See No Evil, Hear No Evil, Speak No Evil</h2>
+{#            <h2 class="text-center"><i class="fa fa-eye-slash"></i> See No Evil, Hear No Evil, Speak No Evil</h2>#}
             <div class="row">
               <div class="col-xs-12">
-                <p><strong>Zero Knowledge</strong> means we know nothing about the encrypted data that our client software interfaces with. This unique design means nothing leaves your device until after it is encrypted and is never decrypted until it is unlocked with your password on your device. It's not just "end to end encryption;" it is <strong>Zero Knowledge</strong>.</p>
+                <p><strong>Zero Knowledge</strong> means Airbitz knows nothing about the encrypted data that our client software interfaces with. This unique design means nothing leaves the client device until it is encrypted and is nothin can ever be decrypted until it is unlocked with the user's password on their device. It's not just "end to end encryption;" it is <strong>Zero Knowledge</strong> which is the only way to achieve true security.</p>
               </div>
             </div>
           </div>
 
 
-          <section class="video section section-tall section-text-dark section-video section-center mt-none mt-xlg mb-xlg" data-video-path="{% static 'airbitz-theme/video/light' %}" data-plugin-video-background data-plugin-options='{"posterType": "jpg", "position": "50% 50%", "overlay": true}'>
-            <div class="container">
-              <div class="row">
-                <div class="col-md-offset-2 col-md-8">
-                  <div class="owl-carousel nav-bottom rounded-nav mt-lg mb-none" data-plugin-options='{"items": 1, "loop": true}'>
-                    <div>
-                      <div class="col-md-12">
-                        <div class="testimonial testimonial-style-6 testimonial-with-quotes mb-none">
-                          <blockquote>
-                            <p>If you don’t believe me or don’t get it, I don’t have time to try to convince you, sorry.</p>
-                          </blockquote>
-                          <div class="testimonial-author">
-                            <p><strong>Satoshi Nakamoto</strong><span>Bitcoin / Blockchain Technology - Pseudonymous Creator</span></p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="col-md-12">
-                        <div class="testimonial testimonial-style-6 testimonial-with-quotes mb-none">
-                          <blockquote>
-                            <p>Live Free or Die.</p>
-                          </blockquote>
-                          <div class="testimonial-author">
-                            <p><strong>John Stark</strong><span>US General - Revolutionary War</span></p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+{#          <section class="video section section-tall section-text-dark section-video section-center mt-none mt-xlg mb-xlg" data-video-path="{% static 'airbitz-theme/video/light' %}" data-plugin-video-background data-plugin-options='{"posterType": "jpg", "position": "50% 50%", "overlay": true}'>#}
+{#            <div class="container">#}
+{#              <div class="row">#}
+{#                <div class="col-md-offset-2 col-md-8">#}
+{#                  <div class="owl-carousel nav-bottom rounded-nav mt-lg mb-none" data-plugin-options='{"items": 1, "loop": true}'>#}
+{#                    <div>#}
+{#                      <div class="col-md-12">#}
+{#                        <div class="testimonial testimonial-style-6 testimonial-with-quotes mb-none">#}
+{#                          <blockquote>#}
+{#                            <p>If you don’t believe me or don’t get it, I don’t have time to try to convince you, sorry.</p>#}
+{#                          </blockquote>#}
+{#                          <div class="testimonial-author">#}
+{#                            <p><strong>Satoshi Nakamoto</strong><span>Bitcoin / Blockchain Technology - Pseudonymous Creator</span></p>#}
+{#                          </div>#}
+{#                        </div>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                      <div class="col-md-12">#}
+{#                        <div class="testimonial testimonial-style-6 testimonial-with-quotes mb-none">#}
+{#                          <blockquote>#}
+{#                            <p>Live Free or Die.</p>#}
+{#                          </blockquote>#}
+{#                          <div class="testimonial-author">#}
+{#                            <p><strong>John Stark</strong><span>US General - Revolutionary War</span></p>#}
+{#                          </div>#}
+{#                        </div>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#          </section>#}
 
-
-
-
-          <div class="container mt-xlg mb-xlg">
-            <div class="row mt-xlg mb-xlg">
-
-              <div class="col-md-6">
-                <h2><strong>Who</strong> We Are</h2>
-                <p>We are passionate group of individuals aware of the shift that is occurring in information security and digital assets and we have come together to work towards an anti-fragile future where your data's privacy and security are no longer a luxury but instead a standard.</p>
-              </div>
-
-              <div class="col-md-6">
-                <h2><strong>What</strong> We Do</h2>
-                <p>First we architect distributed systems and applications with opensource, ethical, encryption technologies.  Second we apply our systems to impactful global applications.  Third we use simple and intuitve UI/UX to enable the non-technical user to fully own and control their digital assets as they see fit.</p>
-              </div>
-
+          <div class="row">
+            <div class="col-md-12">
+              <hr class="tall">
             </div>
           </div>
 
+          <div class="container-fluid mb-xl text-center">
+            <h2>The <strong>Team</strong></h2>
+            <p><em>"Live in the future and build what is <strong>missing</strong>.</em>"</p>
+          </div>
 
-          <div class="owl-carousel full-width mt-xlg mb-xlg" data-plugin-options='{"items": 5, "loop": false, "nav": true, "dots": false, autoplayTimeout": 5000}'>
+          <div class="airbitz-team owl-carousel full-width mt-xlg mb-xlg" data-plugin-options='{"autoplay": false, "autoplayTimeout": 8000, "items": 6, "loop": false, "nav": true, "dots": true}'>
             <div>
               <a href="#paul">
-                <span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/paul.jpg' %}" class="img-responsive" alt="">
                     <span class="thumb-info-title">
@@ -617,9 +642,10 @@ After decades of attempts at securing personal info, money, financial info, and 
                 </span>
               </a>
             </div>
+
             <div>
               <a href="#rick">
-                <span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/rick.jpg' %}" class="img-responsive" alt="">
                     <span class="thumb-info-title">
@@ -633,9 +659,10 @@ After decades of attempts at securing personal info, money, financial info, and 
                 </span>
               </a>
             </div>
+
             <div>
               <a href="#tim">
-                <span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/tim.jpg' %}" class="img-responsive" alt="">
                     <span class="thumb-info-title">
@@ -649,9 +676,10 @@ After decades of attempts at securing personal info, money, financial info, and 
                 </span>
               </a>
             </div>
+
             <div>
               <a href="#william">
-                <span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/william.jpg' %}" class="img-responsive" alt="">
                     <span class="thumb-info-title">
@@ -665,14 +693,15 @@ After decades of attempts at securing personal info, money, financial info, and 
                 </span>
               </a>
             </div>
+
             <div>
-              <a href="#damian">
-                <span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+              <a href="#will">
+                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
-                    <img src="{% static 'airbitz-theme/img-custom/portraits/damian.jpg' %}" class="img-responsive" alt="">
+                    <img src="{% static 'airbitz-theme/img-custom/portraits/will.jpg' %}" class="img-responsive" alt="">
                     <span class="thumb-info-title">
-                      <span class="thumb-info-inner">Damian Cutillo</span>
-                      <span class="thumb-info-type">V.P. Design / Co-Founder</span>
+                      <span class="thumb-info-inner">Will Pangman</span>
+                      <span class="thumb-info-type">Marketing Manager</span>
                     </span>
                     <span class="thumb-info-action">
                       <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
@@ -681,9 +710,27 @@ After decades of attempts at securing personal info, money, financial info, and 
                 </span>
               </a>
             </div>
+
+            <div>
+              <a href="#mk">
+                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
+                  <span class="thumb-info-wrapper">
+                    <img src="{% static 'airbitz-theme/img-custom/portraits/mk.jpg' %}" class="img-responsive" alt="">
+                    <span class="thumb-info-title">
+                      <span class="thumb-info-inner">M.K. Lords</span>
+                      <span class="thumb-info-type">Marketing / Community Manager</span>
+                    </span>
+                    <span class="thumb-info-action">
+                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </div>
+
             <div>
               <a href="#scott">
-                <span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/scott.jpg' %}" class="img-responsive" alt="">
                     <span class="thumb-info-title">
@@ -697,9 +744,27 @@ After decades of attempts at securing personal info, money, financial info, and 
                 </span>
               </a>
             </div>
+
+            <div>
+              <a href="#nik">
+                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
+                  <span class="thumb-info-wrapper">
+                    <img src="{% static 'airbitz-theme/img-custom/portraits/nik.jpg' %}" class="img-responsive" alt="">
+                    <span class="thumb-info-title">
+                      <span class="thumb-info-inner">Nik Oraevskiy</span>
+                      <span class="thumb-info-type">Business Development / Analyst</span>
+                    </span>
+                    <span class="thumb-info-action">
+                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </div>
+
             <div>
               <a href="#rj">
-                <span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/rj.jpg' %}" class="img-responsive" alt="">
                     <span class="thumb-info-title">
@@ -713,15 +778,79 @@ After decades of attempts at securing personal info, money, financial info, and 
                 </span>
               </a>
             </div>
+
+            <div>
+              <a href="#vincent">
+                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
+                  <span class="thumb-info-wrapper">
+                    <img src="{% static 'airbitz-theme/img-custom/portraits/vincent.jpg' %}" class="img-responsive" alt="">
+                    <span class="thumb-info-title">
+                      <span class="thumb-info-inner">Vincent Herrera</span>
+                      <span class="thumb-info-type">Curator / QA</span>
+                    </span>
+                    <span class="thumb-info-action">
+                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </div>
+            <div>
+              <a href="#jacob">
+                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
+                  <span class="thumb-info-wrapper">
+                    <img src="{% static 'airbitz-theme/img-custom/portraits/jacob.jpg' %}" class="img-responsive" alt="">
+                    <span class="thumb-info-title">
+                      <span class="thumb-info-inner">Jacob Burrell</span>
+                      <span class="thumb-info-type">Junior Developer / QA</span>
+                    </span>
+                    <span class="thumb-info-action">
+                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </div>
+
+            <div>
+              <a href="#damian">
+                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
+                  <span class="thumb-info-wrapper">
+                    <img src="{% static 'airbitz-theme/img-custom/portraits/damian.jpg' %}" class="img-responsive" alt="">
+                    <span class="thumb-info-title">
+                      <span class="thumb-info-inner">Damian Cutillo</span>
+                      <span class="thumb-info-type">V.P. Design / Co-Founder</span>
+                    </span>
+                    <span class="thumb-info-action">
+                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </div>
+
           </div>
 
 
           <div class="container mt-xlg mb-xlg">
+            <div class="row mt-xlg mb-xlg">
+              <div class="col-md-6">
+                <h2><strong>Who</strong> We Are</h2>
+                <p>We are passionate group of individuals aware of the shift that is occurring in information security and digital assets and we have come together to work towards an anti-fragile future where your data's privacy and security are no longer a luxury but instead a standard.</p>
+              </div>
 
+              <div class="col-md-6">
+                <h2><strong>What</strong> We Do</h2>
+                <p>First we architect distributed systems and applications with opensource, ethical, encryption technologies.  Second we apply our systems to impactful global applications.  Third we use simple and intuitve UI/UX to enable the non-technical user to fully own and control their digital assets as they see fit.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="container mt-xlg mb-xlg">
             <div class="row mt-xlg mb-xlg">
               <div class="col-md-12">
                 <h2><strong>Why</strong> We Do It</h2>
-                <p>At Airbitz, we aim to bring bitcoin to the next billion users through amazingly simple yet feature rich applications focused on ease of use and ease of security. Our focus is to deliver software, services, and products with an amazing user experience, both visually and functionally, simplifying this advanced technology and delivering it to the masses while still retaining Bitcoin’s core principles of decentralization and privacy.</p>
+                <p>At Airbitz, we aim to bring secure, decentralized technologies to the next billion users through amazingly simple yet feature rich applications focused on ease of use and ease of security. Our focus is to deliver software, services, and products with an amazing user experience, both visually and functionally, simplifying this advanced technology and delivering it to the masses while still retaining core principles of decentralization and privacy.</p>
               </div>
             </div>
           </div>
@@ -737,40 +866,99 @@ After decades of attempts at securing personal info, money, financial info, and 
             <div class="container">
               <div class="row">
 
-                <div class="col-md-offset-3 col-md-6 text-center">
+                <div class="app-info col-md-6 col-md-offset-1 text-center">
                   <img class="airbitz-app-icon" src="{% static 'airbitz-theme/img-custom/airbitz-app-icon-512x512.png' %}" alt="Airbitz App">
-                  <h3>Looking for the <strong>Airbitz App</strong>?</h3>
-                  <p>Look no <strong>further</strong></p>
+                  <h3>See Airbitz Edge Security in <strong>Action</strong></h3>
+                  <p>Download the Airbitz Mobile App for Bitcoin</p>
 
                   <div id="app-store-links" class="animated row mb-xlg">
                     <div class="app-install col-sm-12 text-center animated">
                       <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
-                        <img class="app-store animated" src="{{ STATIC_URL }}img/available-on-android.png" alt="Download Bitcoin Wallet from Android Play Store" />
+                        <img class="app-store animated" src="{% static 'img/available-on-android.png' %}" alt="Download Bitcoin Wallet from Android Play Store" />
                       </a>
                       <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
-                        <img class="app-store animated" src="{{ STATIC_URL }}img/available-on-apple-app-store.png" alt="Download Bitcoin Wallet from App Store" />
+                        <img class="app-store animated" src="{% static 'img/available-on-apple-app-store.png' %}" alt="Download Bitcoin Wallet from App Store" />
                       </a>
                       <div class="row">
                         <div style="margin-top: 10px;">or <i class="fa fa-download"></i> <a href="{% url 'landing' %}download/">Android Direct Download</a></div>
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <div class="social-follow row">
-                  <div class="col-sm-12 text-center">
-                    <table style="margin: 0 auto;">
-                      <tr>
-                        <td>
-                          <a href="https://twitter.com/Airbitz" class="twitter-follow-button" data-show-count="false">Follow @Airbitz</a>
-                          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                        </td>
-                        <td><iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fairbitz&amp;width=200&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=543335719036485" scrolling="no" frameborder="0" style="margin-left: 15px; border:none; overflow:hidden; width:140px; height:21px;" allowTransparency="true"></iframe></td>
-                        <td><div class="g-plusone" data-annotation="bubble" data-size="standard" data-width="86" data-href="https://airbitz.co"></div></td>
-                      </tr>
-                    </table>
+                  <div class="social-follow row">
+                    <div class="col-sm-12 text-center">
+                      <table style="margin: 0 auto;">
+                        <tr>
+                          <td>
+                            <a href="https://twitter.com/Airbitz" class="twitter-follow-button" data-show-count="false">Follow @Airbitz</a>
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                          </td>
+                          <td><iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fairbitz&amp;width=200&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=543335719036485" scrolling="no" frameborder="0" style="margin-left: 15px; border:none; overflow:hidden; width:140px; height:21px;" allowTransparency="true"></iframe></td>
+                          <td><div class="g-plusone" data-annotation="bubble" data-size="standard" data-width="86" data-href="https://airbitz.co"></div></td>
+                        </tr>
+                      </table>
+                    </div>
                   </div>
                 </div>
+
+                <div class="app-screenshots col-md-4 text-center">
+                  <div class="thumb-gallery">
+                    <div class="owl-carousel manual thumb-gallery-detail show-nav-hover" id="thumbGalleryDetail">
+                      <div>
+												<span class="img-thumbnail">
+													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-0.png' %}" class="img-responsive">
+												</span>
+                      </div>
+                      <div>
+												<span class="img-thumbnail">
+													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-1.png' %}" class="img-responsive">
+												</span>
+                      </div>
+                      <div>
+												<span class="img-thumbnail">
+													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-2.png' %}" class="img-responsive">
+												</span>
+                      </div>
+                      <div>
+												<span class="img-thumbnail">
+													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-3.png' %}" class="img-responsive">
+												</span>
+                      </div>
+                      <div>
+												<span class="img-thumbnail">
+													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-4.png' %}" class="img-responsive">
+												</span>
+                      </div>
+                    </div>
+                    <div class="owl-carousel manual thumb-gallery-thumbs mt" id="thumbGalleryThumbs">
+                      <div>
+												<span class="img-thumbnail cur-pointer">
+													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-0.png' %}" class="img-responsive">
+												</span>
+                      </div>
+                      <div>
+												<span class="img-thumbnail cur-pointer">
+													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-1.png' %}" class="img-responsive">
+												</span>
+                      </div>
+                      <div>
+												<span class="img-thumbnail cur-pointer">
+													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-2.png' %}" class="img-responsive">
+												</span>
+                      </div>
+                      <div>
+												<span class="img-thumbnail cur-pointer">
+													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-3.png' %}" class="img-responsive">
+												</span>
+                      </div>
+                      <div>
+												<span class="img-thumbnail cur-pointer">
+													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-4.png' %}" class="img-responsive">
+												</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
 
               </div>
             </div>
@@ -781,6 +969,21 @@ After decades of attempts at securing personal info, money, financial info, and 
         <footer id="footer">
           <div class="container">
             <div class="row">
+              <div class="col-md-5">
+                <h4 class="heading-primary">Latest Tweets</h4>
+                <a class="twitter-timeline" href="https://twitter.com/Airbitz" data-widget-id="643434328853114881">Tweets by @Airbitz</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              </div>
+              <div class="col-md-4">
+                <div class="contact-details">
+                  <h4 class="heading-primary">Contact Us</h4>
+                  <ul class="contact">
+                    <li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong> 311 4th Ave, San Diego, CA, United States</p></li>
+                    <li><p><i class="fa fa-phone"></i> <strong>Phone:</strong> +1 (619) 800-0540</p></li>
+                    <li><p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:info@airbitz.co">info@airbitz.co</a></p></li>
+                  </ul>
+                </div>
+              </div>
               <div class="col-md-3">
                 <div class="newsletter">
                   <h4 class="heading-primary">Newsletter</h4>
@@ -794,33 +997,16 @@ After decades of attempts at securing personal info, money, financial info, and 
 
                   <form id="newsletterForm" action="php/newsletter-subscribe.php" method="POST">
                     <div class="input-group">
-                      <input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text" disabled="disabled">
+                      <input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="submit">Go!</button>
                       </span>
                     </div>
                   </form>
                 </div>
-              </div>
-              <div class="col-md-3">
-                <h4 class="heading-primary">Latest Tweets</h4>
-                <div id="tweet" class="twitter" data-plugin-tweets data-plugin-options='{"username": "", "count": 2}'>
-                  <p>Please wait...</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="contact-details">
-                  <h4 class="heading-primary">Contact Us</h4>
-                  <ul class="contact">
-                    <li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong> 311 4th Ave, San Diego, CA, United States</p></li>
-                    <li><p><i class="fa fa-phone"></i> <strong>Phone:</strong> +1 (619) 800-0540</p></li>
-                    <li><p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:info@airbitz.co">info@airbitz.co</a></p></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-md-2">
-                <h4 class="heading-primary">Follow Us</h4>
-                <div class="social-icons">
+
+                <h4 class="heading-primary mt-xlg">Follow Us</h4>
+                <div class="social-icons mb-xlg">
                   <ul class="social-icons">
                     <li class="facebook"><a href="http://www.facebook.com/" target="_blank" data-placement="bottom" data-tooltip title="Facebook">Facebook</a></li>
                     <li class="twitter"><a href="http://www.twitter.com/" target="_blank" data-placement="bottom" data-tooltip title="Twitter">Twitter</a></li>

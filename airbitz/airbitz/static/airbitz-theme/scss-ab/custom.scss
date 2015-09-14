@@ -1,141 +1,313 @@
+@mixin transform($property: none) {
+//  none | <transform-function>
+  @include prefixer(transform, $property, webkit moz ms o spec);
+}
+
+@mixin transform-origin($axes: 50%) {
+// x-axis - left | center | right  | length | %
+// y-axis - top  | center | bottom | length | %
+// z-axis -                          length
+  @include prefixer(transform-origin, $axes, webkit moz ms o spec);
+}
+
+@mixin transform-style ($style: flat) {
+  @include prefixer(transform-style, $style, webkit moz ms o spec);
+}
+
+
+
+
+// TRANSITION //
+// Shorthand mixin. Supports multiple parentheses-deliminated values for each variable.
+// Example: @include transition (all, 2.0s, ease-in-out);
+//          @include transition ((opacity, width), (1.0s, 2.0s), ease-in, (0, 2s));
+//          @include transition ($property:(opacity, width), $delay: (1.5s, 2.5s));
+
+@mixin transition ($properties...) {
+  @if length($properties) >= 1 {
+    @include prefixer(transition, $properties, webkit moz spec);
+  }
+
+  @else {
+    $properties: all 0.15s ease-out 0;
+    @include prefixer(transition, $properties, webkit moz spec);
+  }
+}
+
+@mixin transition-property ($properties...) {
+   -webkit-transition-property: transition-property-names($properties, 'webkit');
+      -moz-transition-property: transition-property-names($properties, 'moz');
+           transition-property: transition-property-names($properties, false);
+}
+
+@mixin transition-duration ($times...) {
+  @include prefixer(transition-duration, $times, webkit moz spec);
+}
+
+@mixin transition-timing-function ($motions...) {
+// ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier()
+  @include prefixer(transition-timing-function, $motions, webkit moz spec);
+}
+
+@mixin transition-delay ($times...) {
+  @include prefixer(transition-delay, $times, webkit moz spec);
+}
+
+
+
+// PREFIXER //
+//************************************************************************//
+// Example: @include prefixer(border-radius, $radii, webkit ms spec);
+//************************************************************************//
+$prefix-for-webkit:    true !default;
+$prefix-for-mozilla:   true !default;
+$prefix-for-microsoft: true !default;
+$prefix-for-opera:     true !default;
+$prefix-for-spec:      true !default; // required for keyframe mixin
+
+@mixin prefixer ($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit {
+      @if $prefix-for-webkit {
+        -webkit-#{$property}: $value;
+      }
+    }
+    @else if $prefix == moz {
+      @if $prefix-for-mozilla {
+        -moz-#{$property}: $value;
+      }
+    }
+    @else if $prefix == ms {
+      @if $prefix-for-microsoft {
+        -ms-#{$property}: $value;
+      }
+    }
+    @else if $prefix == o {
+      @if $prefix-for-opera {
+        -o-#{$property}: $value;
+      }
+    }
+    @else if $prefix == spec {
+      @if $prefix-for-spec {
+        #{$property}: $value;
+      }
+    }
+    @else  {
+      @warn "Unrecognized prefix: #{$prefix}";
+    }
+  }
+}
+
+@mixin disable-prefix-for-all() {
+  $prefix-for-webkit:    false;
+  $prefix-for-mozilla:   false;
+  $prefix-for-microsoft: false;
+  $prefix-for-opera:     false;
+  $prefix-for-spec:      false;
+}
+
+
+
+
+
 $ab-blue: #2291cf;
 $ab-blue-dark: #002E48;
 
 html {
 
-  body {
-    font-size: 1.8em;
+    body {
+        font-size: 1.8em;
 
-    p {
-      line-height: 1.8em;
+        p {
+            line-height: 1.8em;
+        }
     }
-  }
-  // utility classes
-  .hl-blue {
-    color: #00aaff;
-  }
-
-  // home
-  #header {}
-
-  .home-intro {
-    margin-bottom: 100px;
-    background: #333;
-
-    h3 {
-      color: white;
-      margin-bottom: 0;
-      text-transform: none;
-      line-height: 1.8em;
+    // utility classes
+    .hl-blue {
+        color: #00aaff;
     }
-    p {
-      padding: 0;
-      font-size: 1em;
-      color: #999;
 
-      span {
-        display: inline-block;
-        padding-top: 0;
-        font-size: 1em;
+    // home
+    #header {}
 
-      }
-      em {
+    .home-intro {
+        margin-bottom: 100px;
+        background: #333;
+
+        h3 {
+            color: white;
+            margin-bottom: 0;
+            text-transform: none;
+            line-height: 1.8em;
+        }
+        p {
+            padding: 0;
+            font-size: 1em;
+            color: #999;
+
+            span {
+                display: inline-block;
+                padding-top: 0;
+                font-size: 1em;
+
+            }
+            em {
+                font-family: "Open Sans";
+                font-size: 1.5em;
+            }
+            .outline {
+                display: inline-block;
+                padding: 0px 5px;
+                border: 1px solid #999;
+                border-radius: 3px;
+                text-transform: capitalize;
+            }
+        }
+    }
+    .lead {
+        font-size: 1.8em;
+        strong {
+            color: $ab-blue;
+            white-space:nowrap;
+        }
+    }
+    .alternative-font {
         font-family: "Open Sans";
         font-size: 1.5em;
-      }
-      .outline {
-        display: inline-block;
-        padding: 0px 5px;
-        border: 1px solid #999;
-        border-radius: 3px;
-        text-transform: capitalize;
-      }
+        font-style: italic;
     }
-  }
-  .lead {
-    font-size: 1.8em;
-    strong {
-      color: $ab-blue;
-      white-space:nowrap;
-    }
-  }
-  .alternative-font {
-    font-family: "Open Sans";
-    font-size: 1.5em;
-    font-style: italic;
-  }
 
-  .slider-container {
+    .slider-container {
 
-   .main-label {
-    font-size: 42px;
-    text-shadow: 0 2px 2px #000;
-  }
-
-  .bottom-label {
-    font-weight: 500;
-    text-shadow: 0 2px 2px #000;
-  }
-}
-
-section {
-  &.section {
-    background-color: white;
-    border: none;
-
-    &.section-text-light {
-      .heading {
-        h1, h2, h3, h4, h5, h6 {
-          text-shadow: 0 1px 1px #777;
+        .main-label {
+            font-size: 42px;
+            text-shadow: 0 2px 2px #000;
         }
-      }
-    }
-    &.section-text-dark {
-      .heading {
-        h1, h2, h3, h4, h5, h6 {
-          text-shadow: 0 1px 1px #ddd;
+
+        .bottom-label {
+            font-weight: 500;
+            text-shadow: 0 2px 2px #000;
         }
-      }
     }
-    &.section-tall {
-      margin: 100px 0 !important;
-      padding: 100px;
+
+    section {
+        &.section {
+            background-color: white;
+            border: none;
+
+            &.section-text-light {
+                .heading {
+                    h1, h2, h3, h4, h5, h6 {
+                        text-shadow: 0 1px 1px #777;
+                    }
+                }
+            }
+            &.section-text-dark {
+                .heading {
+                    h1, h2, h3, h4, h5, h6 {
+                        text-shadow: 0 1px 1px #ddd;
+                    }
+                }
+            }
+            &.section-tall {
+                margin: 100px 0 !important;
+                padding: 100px;
+            }
+        }
+
+        &.airbitz-app {
+            margin: 100px 0;
+
+            .airbitz-app-icon {
+                height: 100px;
+                margin-bottom: 20px;
+            }
+        }
     }
-  }
 
-  &.airbitz-app {
-    margin: 100px 0;
-
-    .airbitz-app-icon {
-      height: 100px;
-      margin-bottom: 20px;
+    ul > ul {
+        margin-left: 25px;
     }
-  }
-}
 
-ul > ul {
-  margin-left: 25px;
-}
+    .key-tech {
+        margin-bottom: 15px;
+        font-size: 1.4em;
+        color: black;
+    }
+
+
+    .airbitz-team {
+        .thumb-info {
+
+            &.thumb-info-bottom-info {
+                .thumb-info-title {
+                    background: rgba(0,0,0,0.7);
+                    left: 0;
+                    width: 100%;
+                    max-width: 100%;
+                    @include transition (all 0.3s ease);
+                    top: auto;
+                    bottom: 0;
+                    filter: alpha(opacity = 1);
+                    opacity: 1;
+                    padding: 15px;
+                    text-shadow: none;
+                    //text-align: center;
+                    color: white;
+                }
+                .thumb-info-type {
+                    float: none;
+                    background: none;
+                    padding: 0;
+                    margin: 0;
+                }
+                &:hover {
+                    .thumb-info-title {
+                        filter: alpha(opacity = 100);
+                        opacity: 1;
+                        bottom: 0;
+                    }
+                    img {
+                        @include transform(translateY(0px));
+                    }
+                }
+            }
+        }
+    }
+
+    .app-info {
+        margin-bottom: 20px;
+
+        .app-install {
+            img { margin-bottom: 10px}
+        }
+    }
+    .app-screenshots {
+        .img-thumbnail {
+            border-radius: 0;
+            border: none;
+        }
+    }
 
 }
 
 footer {
 
 }
-  #footer {
+#footer {
     background: $ab-blue-dark;
     border: none;
 
     p {
-      color: #ddd;
+        color: #ddd;
     }
     .footer-copyright {
-      background: $ab-blue-dark;
-      border: none;
-      font-size: 14px;
+        background: $ab-blue-dark;
+        border: none;
+        font-size: 14px;
 
-      p {
-        color: #ddd;
-      }
+        p {
+            color: #ddd;
+        }
     }
-  }
+}
