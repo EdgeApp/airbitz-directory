@@ -12,16 +12,12 @@
 
   <title>Airbitz Edge Security Platform</title>
 
-  <meta name="keywords" content="Information Security" />
-  <meta name="description" content="Digital security is undergoing a paradigm shift.
-
-After decades of attempts at securing personal info, money, financial info, and sensitive documents on centralized servers, we’ve discovered that it simply can’t be done.">
+  <meta name="keywords" content="Blockhain Technology, Private Computing, Open source, Information Security" />
+  <meta name="description" content="Airbitz is a blockchain inspired, decentralized, open source, zero knowledge global information security solution.">
   <meta name="author" content="Airbitz">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{{ STATIC_URL }}img/favicon.ico">
-{#  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />#}
-{#  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">#}
 
   <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +27,6 @@ After decades of attempts at securing personal info, money, financial info, and 
 
   <!-- Vendor CSS -->
   <link rel="stylesheet" href="{% static 'airbitz-theme/vendor/bootstrap/bootstrap.css' %}">
-  <!-- <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.css"> -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{% static 'airbitz-theme/vendor/owlcarousel/owl.carousel.min.css' %}" media="screen">
   <link rel="stylesheet" href="{% static 'airbitz-theme/vendor/owlcarousel/owl.theme.default.min.css' %}" media="screen">
@@ -57,272 +52,279 @@ After decades of attempts at securing personal info, money, financial info, and 
   <!-- Head Libs -->
   <script src="{% static 'airbitz-theme/vendor/modernizr/modernizr.js' %}"></script>
 
-    <!--[if IE]>
+  <!--[if IE]>
       <link rel="stylesheet" href="{% static 'airbitz-theme/css/ie.css' %}">
       <![endif]-->
 
-    <!--[if lte IE 8]>
+  <!--[if lte IE 8]>
       <script src="{% static 'airbitz-theme/vendor/respond/respond.js' %}"></script>
       <script src="{% static 'airbitz-theme/vendor/excanvas/excanvas.js' %}"></script>
       <![endif]-->
 
-    </head>
-    <body>
-      <div class="body">
-        <header id="header" class="flat-menu single-menu">
-          <div class="container">
-            <div class="logo">
-              <a href="#home">
-                <img alt="Airbitz" width="100" height="56" data-sticky-width="82" data-sticky-height="46" src="{% static 'airbitz-theme/img-custom/airbitz-logo-mono-blue-100.png' %}">
+</head>
+<body>
+<div class="body">
+  <header id="header" class="flat-menu single-menu">
+    <div class="container">
+      <div class="logo">
+        <a href="#home">
+          <img alt="Airbitz" width="100" height="56" data-sticky-width="82" data-sticky-height="46" src="{% static 'airbitz-theme/img-custom/airbitz-logo-mono-blue-100.png' %}">
+        </a>
+      </div>
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+    <div class="navbar-collapse nav-main-collapse collapse">
+      <div class="container">
+        <nav class="nav-main mega-menu">
+          <ul class="nav nav-pills nav-main" id="mainMenu">
+            <li class="dropdown mega-menu-item mega-menu-fullwidth">
+              <a class="dropdown-toggle" href="#">
+                App
               </a>
-            </div>
-            <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
-              <i class="fa fa-bars"></i>
-            </button>
-          </div>
-          <div class="navbar-collapse nav-main-collapse collapse">
-            <div class="container">
-              <nav class="nav-main mega-menu">
-                <ul class="nav nav-pills nav-main" id="mainMenu">
-                  <li class="dropdown mega-menu-item mega-menu-fullwidth">
-                    <a class="dropdown-toggle" href="#">
-                      App
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li>
-                        <div class="mega-menu-content">
-                          <div class="row">
-                            <div class="col-md-4">
-                              <span class="mega-menu-sub-title">Bitcoin Directory Links</span>
-                              <ul class="sub-menu">
-                                <li>
-                                  <ul class="sub-menu">
-                                    <li><a href="#submit-business" class="submit-business">Submit a Business <span class="tip tip-dark">Get Listed</span></a></li>
-                                    <li><a href="{% url 'search' %}?term=&location=Current+Location">Local Businesses</a></li>
-                                    <li><a href="{% url 'search' %}?term=BTM&location=Current+Location">BTM's (Bitcoin ATM's)</a></li>
-                                    <li><a href="{% url 'search' %}?term=Restaurants&location=Current+Location">Restaurants & Food Trucks</a></li>
-                                    <li><a href="{% url 'search' %}?term=Bar&location=Current+Location">Bars & Nightclubs</a></li>
-                                    <li><a href="{% url 'search' %}?term=Hotels+%26+Lodging&location=Current+Location">Hotels & Lodging</a></li>
-                                  </ul>
-                                </li>
-                              </ul>
-                            </div>
-                            <div class="col-md-4">
-                              <span class="mega-menu-sub-title">Bitcoin Directory Regions</span>
-                              <ul class="sub-menu">
-                                <li>
-                                  <ul class="sub-menu">
-                                    <li class="dropdown-submenu">
-                                      <span>United States</span>
-                                      <ul class="dropdown-menu">
-                                        {% for region in us_active_regions_list %}
-                                          <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
-                                        {% endfor %}
-                                      </ul>
-                                    </li>
-                                    <li class="dropdown-submenu">
-                                      <span>Canada</span>
-                                      <ul class="dropdown-menu">
-                                        {% for region in ca_active_regions_list %}
-                                          <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
-                                        {% endfor %}
-                                      </ul>
-                                    </li>
-                                    <li class="dropdown-submenu">
-                                      <span>South America</span>
-                                      <ul class="dropdown-menu">
-                                        {% for region in south_america_active_regions_list %}
-                                          <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
-                                        {% endfor %}
-                                      </ul>
-                                    </li>
-                                    <li class="dropdown-submenu">
-                                      <span>Europe</span>
-                                      <ul class="dropdown-menu">
-                                        {% for region in eu_active_regions_list %}
-                                          <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
-                                        {% endfor %}
-                                      </ul>
-                                    </li>
-                                    <li class="dropdown-submenu">
-                                      <span>Asia</span>
-                                      <ul class="dropdown-menu">
-                                        {% for region in asia_active_regions_list %}
-                                          <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
-                                        {% endfor %}
-                                      </ul>
-                                    </li>
-                                    <li class="dropdown-submenu">
-                                      <span>Southeast Asia</span>
-                                      <ul class="dropdown-menu">
-                                        {% for region in southeast_asia_active_regions_list %}
-                                          <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
-                                        {% endfor %}
-                                      </ul>
-                                    </li>
-                                    <li class="dropdown-submenu">
-                                      <span>Oceana</span>
-                                      <ul class="dropdown-menu">
-                                        {% for region in oceana_active_regions_list %}
-                                          <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
-                                        {% endfor %}
-                                      </ul>
-                                    </li>
-                                  </ul>
-                                </li>
-                              </ul>
-                            </div>
-                            <div class="col-md-4">
-                              <span class="mega-menu-sub-title">Airbitz Bitcoin App</span>
-                              <ul class="sub-menu">
-                                <li>
-                                  <ul class="sub-menu">
-                                    <li><a href="{% url 'app_download' %}"><i class="fa fa-download"></i> Download</a></li>
-                                    <li><a href="{% url 'page_bitcoin_wallet' %}"><i class="fa fa-info-circle"></i> Learn More</a></li>
-                                    <li><a href="{% url 'landing' %}go/faq/"><i class="fa fa-question-circle"></i> Frequently Asked Questions</a></li>
-                                  </ul>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="dropdown">
-                    <a class="dropdown-toggle" href="#edge-security-platform">
-                      Edge Security Platform
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a href="{% url 'page_developer_api_library' %}">Development API</a></li>
-                      <li><a href="{% url 'page_client_server_architecture' %}">Client Server Architecture</a></li>
-                      <li><a href="{% url 'page_core_white_paper' %}">Core White Paper</a></li>
-                      <li><a href="{% url 'page_data_sync_architecture' %}">Data Sync Architecture</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="{% url 'landing' %}go/">Blog</a></li>
-                  <li class="dropdown">
-                    <a class="dropdown-toggle" href="#">
-                      More
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a href="{% url 'landing' %}go/team/">Team</a></li>
-                      <li><a href="{% url 'landing' %}go/about/">About Us</a></li>
-                      <li><a href="#contact">Contact Us</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </header>
-
-        <div role="main" class="main">
-
-          <div class="slider-container">
-            <div class="slider" id="revolutionSlider"
-            data-plugin-revolution-slider
-            data-plugin-options='{"startheight": 600}'>
-            <ul>
-              <li data-transition="fade" data-slotamount="13" data-masterspeed="300" >
-
-                <img src="{% static 'airbitz-theme/img-custom/bg-earth-from-space.jpg' %}" data-bgfit="cover" data-bgposition="right center" data-bgrepeat="no-repeat" alt="">
-
-                <div class="tp-caption top-image sft stb"
-                data-x="100"
-                data-y="50"
-                data-speed="300"
-                data-start="500"
-                data-easing="easeOutExpo"><img src="{% static 'airbitz-theme/img-custom/airbitz-logo-325.png' %}" alt="Airbitz"></div>
-
-                <div class="tp-caption main-label sft stb"
-                data-x="20"
-                data-y="220"
-                data-speed="300"
-                data-start="500"
-                data-easing="easeOutExpo">Securing the Future of:</div>
-
-                <div class="tp-caption bottom-label sft stb"
-                data-x="100"
-                data-y="300"
-                data-speed="500"
-                data-start="2500"
-                data-easing="easeOutExpo"><i class="fa fa-check"></i> Blochain Technology</div>
-                <div class="tp-caption bottom-label sft stb"
-                data-x="100"
-                data-y="330"
-                data-speed="500"
-                data-start="3500"
-                data-easing="easeOutExpo"><i class="fa fa-check"></i> Financial Applications</div>
-                <div class="tp-caption bottom-label sft stb"
-                data-x="100"
-                data-y="360"
-                data-speed="500"
-                data-start="4500"
-                data-easing="easeOutExpo"><i class="fa fa-check"></i> Bitcoin / Digital Currencies</div>
-                <div class="tp-caption bottom-label sft stb"
-                data-x="100"
-                data-y="390"
-                data-speed="500"
-                data-start="5500"
-                data-easing="easeOutExpo"><i class="fa fa-check"></i> Private Key Authentication</div>
-                <div class="tp-caption bottom-label sft stb"
-                data-x="100"
-                data-y="420"
-                data-speed="500"
-                data-start="6500"
-                data-easing="easeOutExpo"><i class="fa fa-check"></i> Password Management</div>
-                <div class="tp-caption bottom-label sft stb"
-                data-x="100"
-                data-y="450"
-                data-speed="500"
-                data-start="7500"
-                data-easing="easeOutExpo"><i class="fa fa-check"></i> Secure Messaging</div>
-                <div class="tp-caption bottom-label sft stb"
-                data-x="100"
-                data-y="480"
-                data-speed="500"
-                data-start="8500"
-                data-easing="easeOutExpo"><i class="fa fa-check"></i> Internet of Things (IoT)</div>
-                <div class="tp-caption bottom-label sft stb"
-                data-x="100"
-                data-y="510"
-                data-speed="500"
-                data-start="9500"
-                data-easing="easeOutExpo"><i class="fa fa-check"></i> Information Management</div>
-                <div class="tp-caption bottom-label sft stb"
-                data-x="100"
-                data-y="540"
-                data-speed="500"
-                data-start="10500"
-                data-easing="easeOutExpo"><i class="fa fa-check"></i> Healthcare</div>
-
-                <div class="tp-caption customin customout"
-                data-x="right" data-hoffset="0"
-                data-y="0" data-voffset="0"
-                data-customin="x:50;y:150;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:0;transformOrigin:50% 50%;"
-                data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-                data-speed="300"
-                data-start="500"
-                data-easing="Power4.easeOut"
-                data-endspeed="500"
-                data-endeasing="Power4.easeIn"
-                style="z-index: 3"><img src="{% static 'airbitz-theme/img-custom/code-view.png' %}" alt="">
-              </div>
+              <ul class="dropdown-menu">
+                <li>
+                  <div class="mega-menu-content">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <span class="mega-menu-sub-title">Bitcoin Directory Links</span>
+                        <ul class="sub-menu">
+                          <li>
+                            <ul class="sub-menu">
+                              <li><a href="#submit-business" class="submit-business">Submit a Business <span class="tip tip-dark">Get Listed</span></a></li>
+                              <li><a href="{% url 'search' %}?term=&location=Current+Location">Local Businesses</a></li>
+                              <li><a href="{% url 'search' %}?term=BTM&location=Current+Location">BTM's (Bitcoin ATM's)</a></li>
+                              <li><a href="{% url 'search' %}?term=Restaurants&location=Current+Location">Restaurants & Food Trucks</a></li>
+                              <li><a href="{% url 'search' %}?term=Bar&location=Current+Location">Bars & Nightclubs</a></li>
+                              <li><a href="{% url 'search' %}?term=Hotels+%26+Lodging&location=Current+Location">Hotels & Lodging</a></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col-md-4">
+                        <span class="mega-menu-sub-title">Bitcoin Directory Regions</span>
+                        <ul class="sub-menu">
+                          <li>
+                            <ul class="sub-menu">
+                              <li class="dropdown-submenu">
+                                <span>United States</span>
+                                <ul class="dropdown-menu">
+                                  {% for region in us_active_regions_list %}
+                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                  {% endfor %}
+                                </ul>
+                              </li>
+                              <li class="dropdown-submenu">
+                                <span>Canada</span>
+                                <ul class="dropdown-menu">
+                                  {% for region in ca_active_regions_list %}
+                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                  {% endfor %}
+                                </ul>
+                              </li>
+                              <li class="dropdown-submenu">
+                                <span>South America</span>
+                                <ul class="dropdown-menu">
+                                  {% for region in south_america_active_regions_list %}
+                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                  {% endfor %}
+                                </ul>
+                              </li>
+                              <li class="dropdown-submenu">
+                                <span>Europe</span>
+                                <ul class="dropdown-menu">
+                                  {% for region in eu_active_regions_list %}
+                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                  {% endfor %}
+                                </ul>
+                              </li>
+                              <li class="dropdown-submenu">
+                                <span>Asia</span>
+                                <ul class="dropdown-menu">
+                                  {% for region in asia_active_regions_list %}
+                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                  {% endfor %}
+                                </ul>
+                              </li>
+                              <li class="dropdown-submenu">
+                                <span>Southeast Asia</span>
+                                <ul class="dropdown-menu">
+                                  {% for region in southeast_asia_active_regions_list %}
+                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                  {% endfor %}
+                                </ul>
+                              </li>
+                              <li class="dropdown-submenu">
+                                <span>Oceana</span>
+                                <ul class="dropdown-menu">
+                                  {% for region in oceana_active_regions_list %}
+                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
+                                  {% endfor %}
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col-md-4">
+                        <span class="mega-menu-sub-title">Airbitz Bitcoin App</span>
+                        <ul class="sub-menu">
+                          <li>
+                            <ul class="sub-menu">
+                              <li><a href="{% url 'app_download' %}"><i class="fa fa-download"></i> Download</a></li>
+                              <li><a href="{% url 'page_bitcoin_wallet' %}"><i class="fa fa-info-circle"></i> Learn More</a></li>
+                              <li><a href="{% url 'landing' %}go/faq/"><i class="fa fa-question-circle"></i> Frequently Asked Questions</a></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#edge-security-platform">
+                Edge Security Platform
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'page_developer_api_library' %}">Development API</a></li>
+                <li><a href="{% url 'page_client_server_architecture' %}">Client Server Architecture</a></li>
+                <li><a href="{% url 'page_core_white_paper' %}">Core White Paper</a></li>
+                <li><a href="{% url 'page_data_sync_architecture' %}">Data Sync Architecture</a></li>
+              </ul>
+            </li>
+            <li><a href="{% url 'landing' %}go/">Blog</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#">
+                More
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'landing' %}go/team/">Team</a></li>
+                <li><a href="{% url 'landing' %}go/about/">About Us</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+              </ul>
             </li>
           </ul>
-        </div>
+        </nav>
       </div>
+    </div>
+  </header>
 
-      <div class="home-intro">
-        <div class="container">
+  <div role="main" class="main">
 
-          <div class="row">
-            <div class="col-md-9">
-              <h3>The <span class="hl-blue">future</span> will not be <em style="color: #999;">centralized</em>.</h3>
-              <!-- <h3><span class='hl-blue'>Edge Security</span> is an infosec game changer <span class='hl-blue'>EVERYONE</span> can use.</h3> -->
-              <p>
-                The Airbitz platform is a
+    <div class="slider-container">
+      <div class="slider" id="revolutionSlider"
+           data-plugin-revolution-slider
+           data-plugin-options='{"startheight": 600}'>
+        <ul>
+          <li data-transition="fade" data-slotamount="13" data-masterspeed="300" >
+            <img src="{% static 'airbitz-theme/img-custom/bg-earth-from-space.jpg' %}" data-bgfit="cover" data-bgposition="right center" data-bgrepeat="no-repeat" alt="">
+
+            <div class="tp-caption top-image sft stb"
+                 data-x="100"
+                 data-y="50"
+                 data-speed="300"
+                 data-start="500"
+                 data-easing="easeOutExpo"><img src="{% static 'airbitz-theme/img-custom/airbitz-logo-325.png' %}" alt="Airbitz"></div>
+
+            <div class="tp-caption main-label sft stb"
+                 data-x="20"
+                 data-y="220"
+                 data-speed="300"
+                 data-start="500"
+                 data-easing="easeOutExpo">Securing the Future of:</div>
+
+            <div class="tp-caption bottom-label sft stb"
+                 data-x="100"
+                 data-y="300"
+                 data-speed="500"
+                 data-start="2500"
+                 data-easing="easeOutExpo"><i class="fa fa-check"></i> Blochain Technology</div>
+
+            <div class="tp-caption bottom-label sft stb"
+                 data-x="100"
+                 data-y="330"
+                 data-speed="500"
+                 data-start="3500"
+                 data-easing="easeOutExpo"><i class="fa fa-check"></i> Financial Applications</div>
+
+            <div class="tp-caption bottom-label sft stb"
+                 data-x="100"
+                 data-y="360"
+                 data-speed="500"
+                 data-start="4500"
+                 data-easing="easeOutExpo"><i class="fa fa-check"></i> Bitcoin / Digital Currencies</div>
+
+            <div class="tp-caption bottom-label sft stb"
+                 data-x="100"
+                 data-y="390"
+                 data-speed="500"
+                 data-start="5500"
+                 data-easing="easeOutExpo"><i class="fa fa-check"></i> Private Key Authentication</div>
+
+            <div class="tp-caption bottom-label sft stb"
+                 data-x="100"
+                 data-y="420"
+                 data-speed="500"
+                 data-start="6500"
+                 data-easing="easeOutExpo"><i class="fa fa-check"></i> Password Management</div>
+
+            <div class="tp-caption bottom-label sft stb"
+                 data-x="100"
+                 data-y="450"
+                 data-speed="500"
+                 data-start="7500"
+                 data-easing="easeOutExpo"><i class="fa fa-check"></i> Secure Messaging</div>
+
+            <div class="tp-caption bottom-label sft stb"
+                 data-x="100"
+                 data-y="480"
+                 data-speed="500"
+                 data-start="8500"
+                 data-easing="easeOutExpo"><i class="fa fa-check"></i> Internet of Things (IoT)</div>
+
+            <div class="tp-caption bottom-label sft stb"
+                 data-x="100"
+                 data-y="510"
+                 data-speed="500"
+                 data-start="9500"
+                 data-easing="easeOutExpo"><i class="fa fa-check"></i> Information Management</div>
+
+            <div class="tp-caption bottom-label sft stb"
+                 data-x="100"
+                 data-y="540"
+                 data-speed="500"
+                 data-start="10500"
+                 data-easing="easeOutExpo"><i class="fa fa-check"></i> Healthcare</div>
+
+            <div class="tp-caption customin customout"
+                 data-x="right" data-hoffset="0"
+                 data-y="0" data-voffset="0"
+                 data-customin="x:50;y:150;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:0;transformOrigin:50% 50%;"
+                 data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                 data-speed="300"
+                 data-start="500"
+                 data-easing="Power4.easeOut"
+                 data-endspeed="500"
+                 data-endeasing="Power4.easeIn"
+                 style="z-index: 3"><img src="{% static 'airbitz-theme/img-custom/code-view.png' %}" alt="">
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="home-intro">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-9">
+            <h3>The <span class="hl-blue">future</span> will not be <em style="color: #999;">centralized</em>.</h3>
+{#            <h3><span class='hl-blue'>Edge Security</span> is an infosec game changer <span class='hl-blue'>EVERYONE</span> can use.</h3>#}
+            <p>
+              The Airbitz platform is a
                 <span class="word-rotate" data-plugin-options='{"delay": 3000, "animDelay": 300}'>
                   <strong class="inverted inverted-primary">
                     <span class="word-rotate-items">
@@ -333,301 +335,288 @@ After decades of attempts at securing personal info, money, financial info, and 
                     </span>
                   </strong>
                 </span> <strong>global information security solution</strong>.
-              </p>
-            </div>
-            <div class="col-md-3">
-              <div class="get-started">
-                <a href="{% url 'page_developer_api_library' %}" class="btn btn-lg btn-primary">Airbitz Edge Security Platform</a>
-              </div>
+            </p>
+          </div>
+
+          <div class="col-md-3">
+            <div class="get-started">
+              <a href="{% url 'page_developer_api_library' %}" class="btn btn-lg btn-primary">Airbitz Edge Security Platform</a>
             </div>
           </div>
 
         </div>
       </div>
+    </div>
 
-      <div class="container-fluid mb-xl text-center">
-        <h2>Edge Security <strong>Applications</strong></h2>
-        <p>Below are a few of the applications to benefit from edge security.</p>
+    <div class="container-fluid mb-xl text-center">
+      <h2>Edge Security <strong>Applications</strong></h2>
+      <p>Below are a few of the applications to benefit from edge security.</p>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="feature-box feature-box-style-2">
+            <div class="feature-box-icon">
+              <i class="fa fa-sitemap"></i>
+            </div>
+            <div class="feature-box-info">
+              <h4 class="mb-xs">Blockchain Technology</h4>
+              <p>Immutable data solutions for trustless applications.</p>
+{#              <ul>#}
+{#                <li>Augur</li>#}
+{#                <li>Ethereum</li>#}
+{#                <li>Open Bazaar</li>#}
+{#              </ul>#}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box feature-box-style-2">
+            <div class="feature-box-icon">
+              <i class="fa fa-key"></i>
+            </div>
+            <div class="feature-box-info">
+              <h4 class="mb-xs">Private Key Authentication</h4>
+              <p>Easy authentication with private keys to eliminate cumbersome and insecure passwords.</p>
+{#              <ul>#}
+{#                <li>SSH</li>#}
+{#                <li>BitID</li>#}
+{#                <li>Clef</li>#}
+{#              </ul>#}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box feature-box-style-2">
+            <div class="feature-box-icon">
+              <i class="fa fa-power-off"></i>
+            </div>
+            <div class="feature-box-info">
+              <h4 class="mb-xs">Internet of Things (IoT)</h4>
+              <p>Future automation and convienence requires paramount security.</p>
+{#              <ul>#}
+{#                <li>Wireless Routers</li>#}
+{#                <li>Meters and Appliances</li>#}
+{#                <li>...</li>#}
+{#              </ul>#}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-lg">
+        <div class="col-md-4">
+          <div class="feature-box feature-box-style-2">
+            <div class="feature-box-icon">
+              <i class="fa fa-bank"></i>
+            </div>
+            <div class="feature-box-info">
+              <h4 class="mb-xs">Financial Applications</h4>
+              <p>Financial security leads information security into the future.</p>
+{#              <ul>#}
+{#                <li>Quicken</li>#}
+{#                <li>Xero</li>#}
+{#                <li>Mint</li>#}
+{#                <li>GNUCash</li>#}
+{#              </ul>#}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-box feature-box-style-2">
+            <div class="feature-box-icon">
+              <i class="fa fa-expeditedssl"></i>
+            </div>
+            <div class="feature-box-info">
+              <h4 class="mb-xs">Password Management</h4>
+              <p>Traditional authentication has become unweildy and cumbersome.</p>
+{#              <ul>#}
+{#                <li>Lastpass</li>#}
+{#                <li>1Password</li>#}
+{#                <li>Onepass</li>#}
+{#                <li>Keepass</li>#}
+{#              </ul>#}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-box feature-box-style-2">
+            <div class="feature-box-icon">
+              <i class="fa fa-eye-slash"></i>
+            </div>
+            <div class="feature-box-info">
+              <h4 class="mb-xs">Information Management</h4>
+              <p>Information that is private but always available from any device.</p>
+{#              <ul>#}
+{#                <li>Evernote</li>#}
+{#                <li>Google Keep</li>#}
+{#                <li>Nimble</li>#}
+{#                <li>Contacts</li>#}
+{#              </ul>#}
+            </div>
+          </div>
+        </div>
       </div>
 
+      <div class="row mt-lg">
+        <div class="col-md-4">
+          <div class="feature-box feature-box-style-2">
+            <div class="feature-box-icon">
+              <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="feature-box-info">
+              <h4 class="mb-xs">Bitcoin / Digital Currencies</h4>
+              <p>The largest distributed computing system is our home.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-box feature-box-style-2">
+            <div class="feature-box-icon">
+              <i class="fa fa-comments-o"></i>
+            </div>
+            <div class="feature-box-info">
+              <h4 class="mb-xs">Secure Messaging</h4>
+              <p>Keeping conversations private no matter what medium they traverse.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-box feature-box-style-2">
+            <div class="feature-box-icon">
+              <i class="fa fa-stethoscope"></i>
+            </div>
+            <div class="feature-box-info">
+              <h4 class="mb-xs">Healthcare</h4>
+              <p>Security is paramount for medical record privacy.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="parallax section section-tall section-text-light section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-1.jpg' %}); background-size: cover;">
+      <div class="container mt-xl">
+        <div class="heading">
+          <h2>A Trustless <strong>Global</strong> Security Platform </h2>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="row mb-xlg">
+        <div class="col-md-12">
+          <p class="lead">
+            Digital security is undergoing a <strong>paradigm shift</strong>.
+          </p>
+          <p>
+            After decades of striving to secure personal info, money, financial info, and sensitive documents on centralized servers, we’ve discovered that it simply can’t be done. There is too great an incentive to break into the treasure troves of digital data on globally accessible internet servers. Every year, multiple large centralized services are hacked and cause massive data breaches.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <img class="img-responsive" src="{% static 'airbitz-theme/img-custom/paradigm-shift-new.png' %}" alt="Security Paradigm Shift">
+        </div>
+        <div class="col-md-6">
+          <img class="img-responsive" src="{% static 'airbitz-theme/img-custom/paradigm-shift-old.png' %}" alt="Security Paradigm Shift">
+        </div>
+      </div>
+    </div>
+
+    <section class="parallax section section-tall section-text-light section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-2.jpg' %}); background-size: cover;">
+      <div class="container mt-xl">
+        <div class="heading">
+          <h2>Edge Security to the <strong>Rescue</strong></h2>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <p class="lead">
+            Instead of relying on enterprise server security, <strong>Edge-Security</strong> encrypts data first the user's device before it ever touches a network or server. A server-side hack yields nothing but fully encrypted, private data. A hack on a user’s device yields only the data of that one user vs millions of users. The <strong>incentive</strong> to attack the system is <strong>reduced by orders of magnitude</strong>.
+          </p>
+          <p>
+            Airbitz provides the <strong>world’s first</strong> edge security platform that allows developers to build apps that secure users’ data at <br>“<strong>The Edge</strong>” utilizing several key technologies simultaneously.
+          </p>
+        </div>
+        <div class="col-md-5">
+          <img class="mb-xlg img-responsive appear-animation fadeInRight appear-animation-visible" src="{% static 'airbitz-theme/img-custom/airbitz-logo.png' %}" alt="Airbitz">
+          <div class="key-tech"><i class="fa fa-check"></i> Client-Side Encryption</div>
+          <div class="key-tech"><i class="fa fa-check"></i> Automatic Backup</div>
+          <div class="key-tech"><i class="fa fa-check"></i> Multi-device Syncronization</div>
+          <div class="key-tech"><i class="fa fa-check"></i> One-Touch 2 Factor Authentication</div>
+          <div class="key-tech"><i class="fa fa-check"></i> Password Recovery</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="parallax section section-tall section-text-light section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-3.jpg' %}); background-size: cover;">
+      <div class="container mt-xl">
+        <div class="heading">
+          <h2>A <strong>Zero Knowledge</strong> Distributed System</h2>
+        </div>
+      </div>
+    </section>
+
+    <div class="container mt-xl mb-xl">
+      {#            <h2 class="text-center"><i class="fa fa-eye-slash"></i> See No Evil, Hear No Evil, Speak No Evil</h2>#}
+      <div class="row">
+        <div class="col-xs-12">
+          <p><strong>Zero Knowledge</strong> means Airbitz knows nothing about the encrypted data that our client software interfaces with. This unique design means nothing leaves the client device until it is encrypted and is nothin can ever be decrypted until it is unlocked with the user's password on their device. It's not just "end to end encryption;" it is <strong>Zero Knowledge</strong> which is the only way to achieve true security.</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="video section section-tall section-text-dark section-video section-center mt-none mt-xlg mb-xlg" data-video-path="{% static 'airbitz-theme/video/light' %}" data-plugin-video-background data-plugin-options='{"posterType": "jpg", "position": "50% 50%", "overlay": true}'>
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
-            <div class="feature-box feature-box-style-2">
-              <div class="feature-box-icon">
-                <i class="fa fa-sitemap"></i>
-              </div>
-              <div class="feature-box-info">
-                <h4 class="mb-xs">Blockchain Technology</h4>
-                <p>Immutable data solutions for trustless applications.</p>
-  <!--                   <ul>
-                      <li>Augur</li>
-                      <li>Ethereum</li>
-                      <li>Open Bazaar</li>
-                    </ul> -->
+          <div class="col-md-offset-1 col-md-10">
+            <div class="owl-carousel nav-bottom rounded-nav mt-lg mb-none" data-plugin-options='{"items": 1, "loop": true}'>
+              <div>
+                <div class="col-md-12">
+                  <div class="testimonial testimonial-style-6 testimonial-with-quotes mb-none">
+                    <blockquote>
+                      <p>If you want to accomplish something in the world, idealism is not enough - you need to choose a method that works to achieve the goal.</p>
+                    </blockquote>
+                    <div class="testimonial-author">
+                      <p><strong>Richard Stallman</strong><span> - GNU Project Creator and Free Software Champion</span></p>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="feature-box feature-box-style-2">
-                  <div class="feature-box-icon">
-                    <i class="fa fa-key"></i>
-                  </div>
-                  <div class="feature-box-info">
-                    <h4 class="mb-xs">Private Key Authentication</h4>
-                    <p>Easy authentication with private keys to eliminate cumbersome and insecure passwords.</p>
-                    <!-- <ul>
-                      <li>SSH</li>
-                      <li>BitID</li>
-                      <li>Clef</li>
-                    </ul> -->
+              <div>
+                <div class="col-md-12">
+                  <div class="testimonial testimonial-style-6 testimonial-with-quotes mb-none">
+                    <blockquote>
+                      <p>When we are no longer able to change a situation - we are challenged to change ourselves.</p>
+                    </blockquote>
+                    <div class="testimonial-author">
+                      <p><strong>Viktor Frankl</strong></p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <div class="feature-box feature-box-style-2">
-                  <div class="feature-box-icon">
-                    <i class="fa fa-power-off"></i>
-                  </div>
-                  <div class="feature-box-info">
-                    <h4 class="mb-xs">Internet of Things (IoT)</h4>
-                    <p>Future automation and convienence requires paramount security.</p>
-                    <!-- <ul>
-                      <li>Wireless Routers</li>
-                      <li>Meters and Appliances</li>
-                      <li>...</li>
-                    </ul> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row mt-lg">
-              <div class="col-md-4">
-                <div class="feature-box feature-box-style-2">
-                  <div class="feature-box-icon">
-                    <i class="fa fa-bank"></i>
-                  </div>
-                  <div class="feature-box-info">
-                    <h4 class="mb-xs">Financial Applications</h4>
-                    <p>Financial security leads information security into the future.</p>
-                    <!-- <ul>
-                      <li>Quicken</li>
-                      <li>Xero</li>
-                      <li>Mint</li>
-                      <li>GNUCash</li>
-                    </ul> -->
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="feature-box feature-box-style-2">
-                  <div class="feature-box-icon">
-                    <i class="fa fa-expeditedssl"></i>
-                  </div>
-                  <div class="feature-box-info">
-                    <h4 class="mb-xs">Password Management</h4>
-                    <p>Traditional authentication has become unweildy and cumbersome.</p>
-                    <!-- <ul>
-                      <li>Lastpass</li>
-                      <li>1Password</li>
-                      <li>Onepass</li>
-                      <li>Keepass</li>
-                    </ul> -->
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="feature-box feature-box-style-2">
-                  <div class="feature-box-icon">
-                    <i class="fa fa-eye-slash"></i>
-                  </div>
-                  <div class="feature-box-info">
-                    <h4 class="mb-xs">Information Management</h4>
-                    <p>Information that is private but always available from any device.</p>
-                    <!-- <ul>
-                      <li>Evernote</li>
-                      <li>Google Keep</li>
-                      <li>Nimble</li>
-                      <li>Contacts</li>
-                    </ul> -->
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="row mt-lg">
-              <div class="col-md-4">
-                <div class="feature-box feature-box-style-2">
-                  <div class="feature-box-icon">
-                    <i class="fa fa-bitcoin"></i>
-                  </div>
-                  <div class="feature-box-info">
-                    <h4 class="mb-xs">Bitcoin / Digital Currencies</h4>
-                    <p>The largest distributed computing system is our home.</p>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="col-md-4">
-                <div class="feature-box feature-box-style-2">
-                  <div class="feature-box-icon">
-                    <i class="fa fa-comments-o"></i>
-                  </div>
-                  <div class="feature-box-info">
-                    <h4 class="mb-xs">Secure Messaging</h4>
-                    <p>Keeping conversations private no matter what medium they traverse.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="feature-box feature-box-style-2">
-                  <div class="feature-box-icon">
-                    <i class="fa fa-stethoscope"></i>
-                  </div>
-                  <div class="feature-box-info">
-                    <h4 class="mb-xs">Healthcare</h4>
-                    <p>Security is paramount for medical record privacy.</p>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-
-
-          <section class="parallax section section-tall section-text-light section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-1.jpg' %}); background-size: cover;">
-            <div class="container mt-xl">
-              <div class="heading">
-                <h2>A Trustless <strong>Global</strong> Security Platform </h2>
-              </div>
-            </div>
-          </section>
-
-          <div class="container">
-            <div class="row mb-xlg">
-              <div class="col-md-12">
-                <p class="lead">
-                  Digital security is undergoing a <strong>paradigm shift</strong>.
-                </p>
-                <p>
-                  After decades of striving to secure personal info, money, financial info, and sensitive documents on centralized servers, we’ve discovered that it simply can’t be done. There is too great an incentive to break into the treasure troves of digital data on globally accessible internet servers. Every year, multiple large centralized services are hacked and cause massive data breaches.
-                </p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <img class="img-responsive" src="{% static 'airbitz-theme/img-custom/paradigm-shift-new.png' %}" alt="Security Paradigm Shift">
-              </div>
-              <div class="col-md-6">
-                <img class="img-responsive" src="{% static 'airbitz-theme/img-custom/paradigm-shift-old.png' %}" alt="Security Paradigm Shift">
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
 
+    <div class="container-fluid mb-xl text-center">
+      <h2>The <strong>Team</strong></h2>
+      <p><em>We try to live in the future and build what is <strong>missing</strong>.</em></p>
+    </div>
 
-          <section class="parallax section section-tall section-text-light section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-2.jpg' %}); background-size: cover;">
-            <div class="container mt-xl">
-              <div class="heading">
-                <h2>Edge Security to the <strong>Rescue</strong></h2>
-              </div>
-            </div>
-          </section>
-
-          <div class="container">
-            <div class="row">
-              <div class="col-md-7">
-                <p class="lead">
-                  Instead of relying on enterprise server security, <strong>Edge-Security</strong> encrypts data first the user's device before it ever touches a network or server. A server-side hack yields nothing but fully encrypted, private data. A hack on a user’s device yields only the data of that one user vs millions of users. The <strong>incentive</strong> to attack the system is <strong>reduced by orders of magnitude</strong>.
-                </p>
-                <p>
-                  Airbitz provides the <strong>world’s first</strong> edge security platform that allows developers to build apps that secure users’ data at <br>“<strong>The Edge</strong>” utilizing several key technologies simultaneously.
-                </p>
-              </div>
-              <div class="col-md-5">
-                <img class="mb-xlg img-responsive appear-animation fadeInRight appear-animation-visible" src="{% static 'airbitz-theme/img-custom/airbitz-logo.png' %}" alt="Airbitz">
-                <div class="key-tech"><i class="fa fa-check"></i> Client-Side Encryption</div>
-                <div class="key-tech"><i class="fa fa-check"></i> Automatic Backup</div>
-                <div class="key-tech"><i class="fa fa-check"></i> Multi-device Syncronization</div>
-                <div class="key-tech"><i class="fa fa-check"></i> One-Touch 2 Factor Authentication</div>
-                <div class="key-tech"><i class="fa fa-check"></i> Password Recovery</div>
-              </div>
-            </div>
-          </div>
-
-          <section class="parallax section section-tall section-text-light section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-3.jpg' %}); background-size: cover;">
-            <div class="container mt-xl">
-              <div class="heading">
-                <h2>A <strong>Zero Knowledge</strong> Distributed System</h2>
-              </div>
-            </div>
-          </section>
-
-          <div class="container mt-xl mb-xl">
-{#            <h2 class="text-center"><i class="fa fa-eye-slash"></i> See No Evil, Hear No Evil, Speak No Evil</h2>#}
-            <div class="row">
-              <div class="col-xs-12">
-                <p><strong>Zero Knowledge</strong> means Airbitz knows nothing about the encrypted data that our client software interfaces with. This unique design means nothing leaves the client device until it is encrypted and is nothin can ever be decrypted until it is unlocked with the user's password on their device. It's not just "end to end encryption;" it is <strong>Zero Knowledge</strong> which is the only way to achieve true security.</p>
-              </div>
-            </div>
-          </div>
-
-
-{#          <section class="video section section-tall section-text-dark section-video section-center mt-none mt-xlg mb-xlg" data-video-path="{% static 'airbitz-theme/video/light' %}" data-plugin-video-background data-plugin-options='{"posterType": "jpg", "position": "50% 50%", "overlay": true}'>#}
-{#            <div class="container">#}
-{#              <div class="row">#}
-{#                <div class="col-md-offset-2 col-md-8">#}
-{#                  <div class="owl-carousel nav-bottom rounded-nav mt-lg mb-none" data-plugin-options='{"items": 1, "loop": true}'>#}
-{#                    <div>#}
-{#                      <div class="col-md-12">#}
-{#                        <div class="testimonial testimonial-style-6 testimonial-with-quotes mb-none">#}
-{#                          <blockquote>#}
-{#                            <p>If you don’t believe me or don’t get it, I don’t have time to try to convince you, sorry.</p>#}
-{#                          </blockquote>#}
-{#                          <div class="testimonial-author">#}
-{#                            <p><strong>Satoshi Nakamoto</strong><span>Bitcoin / Blockchain Technology - Pseudonymous Creator</span></p>#}
-{#                          </div>#}
-{#                        </div>#}
-{#                      </div>#}
-{#                    </div>#}
-{#                    <div>#}
-{#                      <div class="col-md-12">#}
-{#                        <div class="testimonial testimonial-style-6 testimonial-with-quotes mb-none">#}
-{#                          <blockquote>#}
-{#                            <p>Live Free or Die.</p>#}
-{#                          </blockquote>#}
-{#                          <div class="testimonial-author">#}
-{#                            <p><strong>John Stark</strong><span>US General - Revolutionary War</span></p>#}
-{#                          </div>#}
-{#                        </div>#}
-{#                      </div>#}
-{#                    </div>#}
-{#                  </div>#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#          </section>#}
-
-          <div class="row">
-            <div class="col-md-12">
-              <hr class="tall">
-            </div>
-          </div>
-
-          <div class="container-fluid mb-xl text-center">
-            <h2>The <strong>Team</strong></h2>
-            <p><em>"Live in the future and build what is <strong>missing</strong>.</em>"</p>
-          </div>
-
-          <div class="airbitz-team owl-carousel full-width mt-xlg mb-xlg" data-plugin-options='{"autoplay": false, "autoplayTimeout": 8000, "items": 6, "loop": false, "nav": true, "dots": true}'>
-            <div>
-              <a href="#paul">
+    <div class="airbitz-team owl-carousel full-width mt-xlg mb-xlg" data-plugin-options='{"autoplay": false, "autoplayTimeout": 8000, "items": 6, "loop": false, "nav": true, "dots": true}'>
+      <div>
+        <a href="#paul">
                 <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/paul.jpg' %}" class="img-responsive" alt="">
@@ -640,11 +629,11 @@ After decades of attempts at securing personal info, money, financial info, and 
                     </span>
                   </span>
                 </span>
-              </a>
-            </div>
+        </a>
+      </div>
 
-            <div>
-              <a href="#rick">
+      <div>
+        <a href="#rick">
                 <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/rick.jpg' %}" class="img-responsive" alt="">
@@ -657,11 +646,11 @@ After decades of attempts at securing personal info, money, financial info, and 
                     </span>
                   </span>
                 </span>
-              </a>
-            </div>
+        </a>
+      </div>
 
-            <div>
-              <a href="#tim">
+      <div>
+        <a href="#tim">
                 <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/tim.jpg' %}" class="img-responsive" alt="">
@@ -674,11 +663,11 @@ After decades of attempts at securing personal info, money, financial info, and 
                     </span>
                   </span>
                 </span>
-              </a>
-            </div>
+        </a>
+      </div>
 
-            <div>
-              <a href="#william">
+      <div>
+        <a href="#william">
                 <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/william.jpg' %}" class="img-responsive" alt="">
@@ -691,11 +680,11 @@ After decades of attempts at securing personal info, money, financial info, and 
                     </span>
                   </span>
                 </span>
-              </a>
-            </div>
+        </a>
+      </div>
 
-            <div>
-              <a href="#will">
+      <div>
+        <a href="#will">
                 <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/will.jpg' %}" class="img-responsive" alt="">
@@ -708,11 +697,11 @@ After decades of attempts at securing personal info, money, financial info, and 
                     </span>
                   </span>
                 </span>
-              </a>
-            </div>
+        </a>
+      </div>
 
-            <div>
-              <a href="#mk">
+      <div>
+        <a href="#mk">
                 <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/mk.jpg' %}" class="img-responsive" alt="">
@@ -725,11 +714,11 @@ After decades of attempts at securing personal info, money, financial info, and 
                     </span>
                   </span>
                 </span>
-              </a>
-            </div>
+        </a>
+      </div>
 
-            <div>
-              <a href="#scott">
+      <div>
+        <a href="#scott">
                 <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/scott.jpg' %}" class="img-responsive" alt="">
@@ -742,11 +731,11 @@ After decades of attempts at securing personal info, money, financial info, and 
                     </span>
                   </span>
                 </span>
-              </a>
-            </div>
+        </a>
+      </div>
 
-            <div>
-              <a href="#nik">
+      <div>
+        <a href="#nik">
                 <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/nik.jpg' %}" class="img-responsive" alt="">
@@ -759,11 +748,11 @@ After decades of attempts at securing personal info, money, financial info, and 
                     </span>
                   </span>
                 </span>
-              </a>
-            </div>
+        </a>
+      </div>
 
-            <div>
-              <a href="#rj">
+      <div>
+        <a href="#rj">
                 <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/rj.jpg' %}" class="img-responsive" alt="">
@@ -776,11 +765,11 @@ After decades of attempts at securing personal info, money, financial info, and 
                     </span>
                   </span>
                 </span>
-              </a>
-            </div>
+        </a>
+      </div>
 
-            <div>
-              <a href="#vincent">
+      <div>
+        <a href="#vincent">
                 <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/vincent.jpg' %}" class="img-responsive" alt="">
@@ -793,10 +782,10 @@ After decades of attempts at securing personal info, money, financial info, and 
                     </span>
                   </span>
                 </span>
-              </a>
-            </div>
-            <div>
-              <a href="#jacob">
+        </a>
+      </div>
+      <div>
+        <a href="#jacob">
                 <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/jacob.jpg' %}" class="img-responsive" alt="">
@@ -809,11 +798,11 @@ After decades of attempts at securing personal info, money, financial info, and 
                     </span>
                   </span>
                 </span>
-              </a>
-            </div>
+        </a>
+      </div>
 
-            <div>
-              <a href="#damian">
+      <div>
+        <a href="#damian">
                 <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
                   <span class="thumb-info-wrapper">
                     <img src="{% static 'airbitz-theme/img-custom/portraits/damian.jpg' %}" class="img-responsive" alt="">
@@ -826,275 +815,270 @@ After decades of attempts at securing personal info, money, financial info, and 
                     </span>
                   </span>
                 </span>
-              </a>
-            </div>
+        </a>
+      </div>
 
-          </div>
+    </div>
 
-
-          <div class="container mt-xlg mb-xlg">
-            <div class="row mt-xlg mb-xlg">
-              <div class="col-md-6">
-                <h2><strong>Who</strong> We Are</h2>
-                <p>We are passionate group of individuals aware of the shift that is occurring in information security and digital assets and we have come together to work towards an anti-fragile future where your data's privacy and security are no longer a luxury but instead a standard.</p>
-              </div>
-
-              <div class="col-md-6">
-                <h2><strong>What</strong> We Do</h2>
-                <p>First we architect distributed systems and applications with opensource, ethical, encryption technologies.  Second we apply our systems to impactful global applications.  Third we use simple and intuitve UI/UX to enable the non-technical user to fully own and control their digital assets as they see fit.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="container mt-xlg mb-xlg">
-            <div class="row mt-xlg mb-xlg">
-              <div class="col-md-12">
-                <h2><strong>Why</strong> We Do It</h2>
-                <p>At Airbitz, we aim to bring secure, decentralized technologies to the next billion users through amazingly simple yet feature rich applications focused on ease of use and ease of security. Our focus is to deliver software, services, and products with an amazing user experience, both visually and functionally, simplifying this advanced technology and delivering it to the masses while still retaining core principles of decentralization and privacy.</p>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="row">
-            <div class="col-md-12">
-              <hr class="tall">
-            </div>
-          </div>
-
-          <section class="airbitz-app call-to-action mb-xl mt-xl">
-            <div class="container">
-              <div class="row">
-
-                <div class="app-info col-md-6 col-md-offset-1 text-center">
-                  <img class="airbitz-app-icon" src="{% static 'airbitz-theme/img-custom/airbitz-app-icon-512x512.png' %}" alt="Airbitz App">
-                  <h3>See Airbitz Edge Security in <strong>Action</strong></h3>
-                  <p>Download the Airbitz Mobile App for Bitcoin</p>
-
-                  <div id="app-store-links" class="animated row mb-xlg">
-                    <div class="app-install col-sm-12 text-center animated">
-                      <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
-                        <img class="app-store animated" src="{% static 'img/available-on-android.png' %}" alt="Download Bitcoin Wallet from Android Play Store" />
-                      </a>
-                      <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
-                        <img class="app-store animated" src="{% static 'img/available-on-apple-app-store.png' %}" alt="Download Bitcoin Wallet from App Store" />
-                      </a>
-                      <div class="row">
-                        <div style="margin-top: 10px;">or <i class="fa fa-download"></i> <a href="{% url 'landing' %}download/">Android Direct Download</a></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="social-follow row">
-                    <div class="col-sm-12 text-center">
-                      <table style="margin: 0 auto;">
-                        <tr>
-                          <td>
-                            <a href="https://twitter.com/Airbitz" class="twitter-follow-button" data-show-count="false">Follow @Airbitz</a>
-                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                          </td>
-                          <td><iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fairbitz&amp;width=200&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=543335719036485" scrolling="no" frameborder="0" style="margin-left: 15px; border:none; overflow:hidden; width:140px; height:21px;" allowTransparency="true"></iframe></td>
-                          <td><div class="g-plusone" data-annotation="bubble" data-size="standard" data-width="86" data-href="https://airbitz.co"></div></td>
-                        </tr>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="app-screenshots col-md-4 text-center">
-                  <div class="thumb-gallery">
-                    <div class="owl-carousel manual thumb-gallery-detail show-nav-hover" id="thumbGalleryDetail">
-                      <div>
-												<span class="img-thumbnail">
-													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-0.png' %}" class="img-responsive">
-												</span>
-                      </div>
-                      <div>
-												<span class="img-thumbnail">
-													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-1.png' %}" class="img-responsive">
-												</span>
-                      </div>
-                      <div>
-												<span class="img-thumbnail">
-													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-2.png' %}" class="img-responsive">
-												</span>
-                      </div>
-                      <div>
-												<span class="img-thumbnail">
-													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-3.png' %}" class="img-responsive">
-												</span>
-                      </div>
-                      <div>
-												<span class="img-thumbnail">
-													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-4.png' %}" class="img-responsive">
-												</span>
-                      </div>
-                    </div>
-                    <div class="owl-carousel manual thumb-gallery-thumbs mt" id="thumbGalleryThumbs">
-                      <div>
-												<span class="img-thumbnail cur-pointer">
-													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-0.png' %}" class="img-responsive">
-												</span>
-                      </div>
-                      <div>
-												<span class="img-thumbnail cur-pointer">
-													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-1.png' %}" class="img-responsive">
-												</span>
-                      </div>
-                      <div>
-												<span class="img-thumbnail cur-pointer">
-													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-2.png' %}" class="img-responsive">
-												</span>
-                      </div>
-                      <div>
-												<span class="img-thumbnail cur-pointer">
-													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-3.png' %}" class="img-responsive">
-												</span>
-                      </div>
-                      <div>
-												<span class="img-thumbnail cur-pointer">
-													<img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-4.png' %}" class="img-responsive">
-												</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-              </div>
-            </div>
-          </section>
-
+    <div class="container mt-xlg mb-xlg">
+      <div class="row mt-xlg mb-xlg">
+        <div class="col-md-6">
+          <h2><strong>Who</strong> We Are</h2>
+          <p>We are passionate group of individuals aware of the shift that is occurring in information security and digital assets and we have come together to work towards an anti-fragile future where your data's privacy and security are no longer a luxury but instead a standard.</p>
         </div>
 
-        <footer id="footer">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-5">
-                <h4 class="heading-primary">Latest Tweets</h4>
-                <a class="twitter-timeline" href="https://twitter.com/Airbitz" data-widget-id="643434328853114881">Tweets by @Airbitz</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-              <div class="col-md-4">
-                <div class="contact-details">
-                  <h4 class="heading-primary">Contact Us</h4>
-                  <ul class="contact">
-                    <li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong> 311 4th Ave, San Diego, CA, United States</p></li>
-                    <li><p><i class="fa fa-phone"></i> <strong>Phone:</strong> +1 (619) 800-0540</p></li>
-                    <li><p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:info@airbitz.co">info@airbitz.co</a></p></li>
-                  </ul>
+        <div class="col-md-6">
+          <h2><strong>What</strong> We Do</h2>
+          <p>First we architect distributed systems and applications with opensource, ethical, encryption technologies.  Second we apply our systems to impactful global applications.  Third we use simple and intuitve UI/UX to enable the non-technical user to fully own and control their digital assets as they see fit.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-xlg mb-xlg">
+      <div class="row mt-xlg mb-xlg">
+        <div class="col-md-12">
+          <h2><strong>Why</strong> We Do It</h2>
+          <p>At Airbitz, we aim to bring secure, decentralized technologies to the next billion users through amazingly simple yet feature rich applications focused on ease of use and ease of security. Our focus is to deliver software, services, and products with an amazing user experience, both visually and functionally, simplifying this advanced technology and delivering it to the masses while still retaining core principles of decentralization and privacy.</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="airbitz-app call-to-action mb-xl mt-xl">
+      <div class="container">
+        <div class="row">
+
+          <div class="app-info col-md-6 col-md-offset-1 text-center">
+            <img class="airbitz-app-icon" src="{% static 'airbitz-theme/img-custom/airbitz-app-icon-512x512.png' %}" alt="Airbitz App">
+            <h3>See Airbitz Edge Security in <strong>Action</strong></h3>
+            <p>Download the Airbitz Mobile App for Bitcoin</p>
+
+            <div id="app-store-links" class="animated row mb-xlg">
+              <div class="app-install col-sm-12 text-center animated">
+                <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
+                  <img class="app-store animated" src="{% static 'img/available-on-android.png' %}" alt="Download Bitcoin Wallet from Android Play Store" />
+                </a>
+                <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
+                  <img class="app-store animated" src="{% static 'img/available-on-apple-app-store.png' %}" alt="Download Bitcoin Wallet from App Store" />
+                </a>
+                <div class="row">
+                  <div style="margin-top: 10px;">or <i class="fa fa-download"></i> <a href="{% url 'landing' %}download/">Android Direct Download</a></div>
                 </div>
               </div>
-              <div class="col-md-3">
-                <div class="newsletter">
-                  <h4 class="heading-primary">Newsletter</h4>
-                  <p>Keep up on our always evolving product features and technology. Enter your e-mail and subscribe to our newsletter.</p>
+            </div>
+            <div class="social-follow row">
+              <div class="col-sm-12 text-center">
+                <table style="margin: 0 auto;">
+                  <tr>
+                    <td>
+                      <a href="https://twitter.com/Airbitz" class="twitter-follow-button" data-show-count="false">Follow @Airbitz</a>
+                      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    </td>
+                    <td><iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fairbitz&amp;width=200&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=543335719036485" scrolling="no" frameborder="0" style="margin-left: 15px; border:none; overflow:hidden; width:140px; height:21px;" allowTransparency="true"></iframe></td>
+                    <td><div class="g-plusone" data-annotation="bubble" data-size="standard" data-width="86" data-href="https://airbitz.co"></div></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
 
-                  <div class="alert alert-success hidden" id="newsletterSuccess">
-                    <strong>Success!</strong> You've been added to our email list.
-                  </div>
+          <div class="app-screenshots col-md-4 text-center">
+            <div class="thumb-gallery">
+              <div class="owl-carousel manual thumb-gallery-detail show-nav-hover" id="thumbGalleryDetail">
+                <div>
+                        <span class="img-thumbnail">
+                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-0.png' %}" class="img-responsive">
+                        </span>
+                </div>
+                <div>
+                        <span class="img-thumbnail">
+                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-1.png' %}" class="img-responsive">
+                        </span>
+                </div>
+                <div>
+                        <span class="img-thumbnail">
+                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-2.png' %}" class="img-responsive">
+                        </span>
+                </div>
+                <div>
+                        <span class="img-thumbnail">
+                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-3.png' %}" class="img-responsive">
+                        </span>
+                </div>
+                <div>
+                        <span class="img-thumbnail">
+                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-4.png' %}" class="img-responsive">
+                        </span>
+                </div>
+              </div>
+              <div class="owl-carousel manual thumb-gallery-thumbs mt" id="thumbGalleryThumbs">
+                <div>
+                        <span class="img-thumbnail cur-pointer">
+                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-0.png' %}" class="img-responsive">
+                        </span>
+                </div>
+                <div>
+                        <span class="img-thumbnail cur-pointer">
+                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-1.png' %}" class="img-responsive">
+                        </span>
+                </div>
+                <div>
+                        <span class="img-thumbnail cur-pointer">
+                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-2.png' %}" class="img-responsive">
+                        </span>
+                </div>
+                <div>
+                        <span class="img-thumbnail cur-pointer">
+                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-3.png' %}" class="img-responsive">
+                        </span>
+                </div>
+                <div>
+                        <span class="img-thumbnail cur-pointer">
+                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-4.png' %}" class="img-responsive">
+                        </span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                  <div class="alert alert-danger hidden" id="newsletterError"></div>
 
-                  <form id="newsletterForm" action="php/newsletter-subscribe.php" method="POST">
-                    <div class="input-group">
-                      <input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
+        </div>
+      </div>
+    </section>
+
+
+
+
+  </div>
+
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5">
+          <h4 class="heading-primary">Latest Tweets</h4>
+          <a class="twitter-timeline" href="https://twitter.com/Airbitz" data-widget-id="643434328853114881">Tweets by @Airbitz</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+        <div class="col-md-4">
+          <div class="contact-details">
+            <h4 class="heading-primary">Contact Us</h4>
+            <ul class="contact">
+              <li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong> 311 4th Ave, San Diego, CA, United States</p></li>
+              <li><p><i class="fa fa-phone"></i> <strong>Phone:</strong> +1 (619) 800-0540</p></li>
+              <li><p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:info@airbitz.co">info@airbitz.co</a></p></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="newsletter">
+            <h4 class="heading-primary">Newsletter</h4>
+            <p>Keep up on our always evolving product features and technology. Enter your e-mail and subscribe to our newsletter.</p>
+
+            <div class="alert alert-success hidden" id="newsletterSuccess">
+              <strong>Success!</strong> You've been added to our email list.
+            </div>
+
+            <div class="alert alert-danger hidden" id="newsletterError"></div>
+
+            <form id="newsletterForm" action="php/newsletter-subscribe.php" method="POST">
+              <div class="input-group">
+                <input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="submit">Go!</button>
                       </span>
-                    </div>
-                  </form>
-                </div>
+              </div>
+            </form>
+          </div>
 
-                <h4 class="heading-primary mt-xlg">Follow Us</h4>
-                <div class="social-icons mb-xlg">
-                  <ul class="social-icons">
-                    <li class="facebook"><a href="http://www.facebook.com/" target="_blank" data-placement="bottom" data-tooltip title="Facebook">Facebook</a></li>
-                    <li class="twitter"><a href="http://www.twitter.com/" target="_blank" data-placement="bottom" data-tooltip title="Twitter">Twitter</a></li>
-                    <li class="linkedin"><a href="http://www.linkedin.com/" target="_blank" data-placement="bottom" data-tooltip title="Linkedin">Linkedin</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+          <h4 class="heading-primary mt-xlg">Follow Us</h4>
+          <div class="social-icons mb-xlg">
+            <ul class="social-icons">
+              <li class="facebook"><a href="http://www.facebook.com/" target="_blank" data-placement="bottom" data-tooltip title="Facebook">Facebook</a></li>
+              <li class="twitter"><a href="http://www.twitter.com/" target="_blank" data-placement="bottom" data-tooltip title="Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="http://www.linkedin.com/" target="_blank" data-placement="bottom" data-tooltip title="Linkedin">Linkedin</a></li>
+            </ul>
           </div>
-          <div class="footer-copyright">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-1">
-                  <a href="#home" class="logo">
-                    <img alt="Airbitz Edge Security Platform" class="img-responsive" src="{% static 'airbitz-theme/img-custom/airbitz-logo-mono-white-100.png' %}">
-                  </a>
-                </div>
-                <div class="col-md-3">
-                  <p>© Copyright 2015. All Rights Reserved.</p>
-                </div>
-                <div class="col-md-8">
-                  <nav id="sub-menu">
-                    <ul>
-                      <li><a href="{% url 'landing' %}go/faq/">App FAQ's</a></li>
-                      <li><a href="{% url 'page_bitcoin_wallet' %}">Bitcoin App</a></li>
-                      <li><a href="{% url 'page_developer_api_library' %}">Edge Security Platform</a></li>
-                      <li><a href="#contact">Contact</a></li>
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
+        </div>
       </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-1">
+            <a href="#home" class="logo">
+              <img alt="Airbitz Edge Security Platform" class="img-responsive" src="{% static 'airbitz-theme/img-custom/airbitz-logo-mono-white-100.png' %}">
+            </a>
+          </div>
+          <div class="col-md-3">
+            <p>© Copyright 2015. All Rights Reserved.</p>
+          </div>
+          <div class="col-md-8">
+            <nav id="sub-menu">
+              <ul>
+                <li><a href="{% url 'landing' %}go/faq/">App FAQ's</a></li>
+                <li><a href="{% url 'page_bitcoin_wallet' %}">Bitcoin App</a></li>
+                <li><a href="{% url 'page_developer_api_library' %}">Edge Security Platform</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
 
-      <!-- Vendor -->
-    <!--[if lt IE 9]>
+<!-- Vendor -->
+<!--[if lt IE 9]>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <![endif]-->
-    <!--[if gte IE 9]><!-->
-    <script src="{% static 'airbitz-theme/vendor/jquery/jquery.js' %}"></script>
-    <!--<![endif]-->
-    <script src="{% static 'airbitz-theme/vendor/jquery.appear/jquery.appear.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/jquery.easing/jquery.easing.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/jquery-cookie/jquery-cookie.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/bootstrap/bootstrap.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/common/common.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/jquery.validation/jquery.validation.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/jquery.stellar/jquery.stellar.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/jquery.gmap/jquery.gmap.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/isotope/jquery.isotope.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/owlcarousel/owl.carousel.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/jflickrfeed/jflickrfeed.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/magnific-popup/jquery.magnific-popup.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/vide/vide.js' %}"></script>
+<!--[if gte IE 9]><!-->
+<script src="{% static 'airbitz-theme/vendor/jquery/jquery.js' %}"></script>
+<!--<![endif]-->
+<script src="{% static 'airbitz-theme/vendor/jquery.appear/jquery.appear.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/jquery.easing/jquery.easing.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/jquery-cookie/jquery-cookie.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/bootstrap/bootstrap.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/common/common.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/jquery.validation/jquery.validation.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/jquery.stellar/jquery.stellar.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/jquery.gmap/jquery.gmap.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/isotope/jquery.isotope.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/owlcarousel/owl.carousel.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/jflickrfeed/jflickrfeed.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/magnific-popup/jquery.magnific-popup.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/vide/vide.js' %}"></script>
 
-    <!-- Theme Base, Components and Settings -->
-    <script src="{% static 'airbitz-theme/js/theme.js' %}"></script>
+<!-- Theme Base, Components and Settings -->
+<script src="{% static 'airbitz-theme/js/theme.js' %}"></script>
 
-    <!-- Specific Page Vendor and Views -->
-    <script src="{% static 'airbitz-theme/vendor/rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>
-    <script src="{% static 'airbitz-theme/vendor/circle-flip-slideshow/js/jquery.flipshow.js' %}"></script>
-    <script src="{% static 'airbitz-theme/js/views/view.home.js' %}"></script>
+<!-- Specific Page Vendor and Views -->
+<script src="{% static 'airbitz-theme/vendor/rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>
+<script src="{% static 'airbitz-theme/vendor/circle-flip-slideshow/js/jquery.flipshow.js' %}"></script>
+<script src="{% static 'airbitz-theme/js/views/view.home.js' %}"></script>
 
-    <!-- Theme Custom -->
-    <script src="{% static 'airbitz-theme/js/custom.js' %}"></script>
+<!-- Theme Custom -->
+<script src="{% static 'airbitz-theme/js/custom.js' %}"></script>
 
-    <!-- Theme Initialization Files -->
-    <script src="{% static 'airbitz-theme/js/theme.init.js' %}"></script>
+<!-- Theme Initialization Files -->
+<script src="{% static 'airbitz-theme/js/theme.init.js' %}"></script>
 
-    <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
-    <script type="text/javascript">
+<!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
+<script type="text/javascript">
 
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-12345678-1']);
-      _gaq.push(['_trackPageview']);
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-12345678-1']);
+  _gaq.push(['_trackPageview']);
 
-      (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+  (function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 
-    </script>
-  -->
+</script>
+-->
 
 </body>
 </html>
