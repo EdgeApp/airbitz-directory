@@ -1,14 +1,58 @@
-    <html>
-      <head>
-      
-        <script src='//www.google.com/recaptcha/api.js'></script>
-      </head>
-      <body>
-      	<center>
-      		<h1>Please verify you're not a robot.</h1>
-	    	<form action="#" method="POST">
-	    	<div class="g-recaptcha" data-sitekey="6Le6_QsTAAAAAHc1LarEOKa13gzoOriNHVVwoumD"></div>
-	    	</form>
-      	</center>
-      </body>
-    </html>
+<html>
+  <head>
+  <title>Verify</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}/js/notify.min.js"></script>
+  <script src="{{STATIC_URL}}/js/core.js"></script>
+  <script>
+  $.ajaxSetup({
+      crossDomain: false,
+      beforeSend: function(xhr, settings) {
+              xhr.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
+      }
+  });
+  var captchaContainer = null;
+  var loadCaptcha = function() {
+    captchaContainer = grecaptcha.render('captcha_container', {
+      'sitekey' : '6Le6_QsTAAAAAHc1LarEOKa13gzoOriNHVVwoumD',
+      'callback' : function(response) {
+        console.log("In JSON" + JSON.stringify({"g-recaptcha-response":response})); 
+        $.post("/verification/", JSON.stringify({"g-recaptcha-response":response}) )
+        .done(function(status) {
+          console.log("Success");
+          $("#captcha_container").notify("Successfully verified",
+          { 
+            position:"bottom center",
+            className: 'success',
+          }
+           );
+        })
+        .fail(function(status) {
+          console.log("Failed");
+          $("#captcha_container").notify("Successfully verified",
+          { 
+            position:"bottom center",
+            className: 'error',
+          }
+           );
+        });
+        console.log("Sent request");
+      }
+
+
+    });
+  };
+  </script>
+  </head>
+  <body>
+  	<center>
+  		<h1>Please verify you're not a robot.</h1>
+    	<form>
+
+    	<div id="captcha_container"></div>
+    	</form>
+  	</center>
+
+  	<script src="https://www.google.com/recaptcha/api.js?onload=loadCaptcha&render=explicit" async defer></script>
+  </body>
+</html>

@@ -1,18 +1,33 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
-from recaptcha.client import captcha
+from .models import MailVerify
+import requests
+import json
 
+def verify(request):
+	if request.method == 'POST':
+		print request.body
+		json.loads(request.body)
+		jRequest = json.loads(request.body)
+		payload = {
+		'secret': '6Le6_QsTAAAAABNk7sjeubFi38k-ElnYlv7Np8eu',
+		'response': jRequest['g-recaptcha-response'], 
+		'remoteip': request.META['REMOTE_ADDR']
+		}
+		r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=payload)
+		if r.json()['success'] == True:
+			print "Successfully validated captcha"
+			return HttpResponse(status=200) # Tell the client the captcha was successfully validated.
+			#record that validation was successful
+		else:
+			print "Error validating Captcha token"
+			return HttpResponse(status=401) # Tell the client there was an error validating.
 
-def verify(veriy_id):
-	return render(veriy_id, 'verification/index.html')
+	else:
+		print ""
+		return render(request, 'verification/index.html')
+		
 
-# class verifyAPI(serializers.Serializer):
-#     claimed = serializers.BooleanField(required=True)
-
-#     def restore_object(self, attrs, instance=None):
-#         if instance is not None:
-#             instance.claimed = attrs.get('claimed', instance.claimed)
-#             return instance
-#         return HBitsClaimedPost(**attrs)
 
 # Create more views here.
