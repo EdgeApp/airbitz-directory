@@ -79,114 +79,9 @@
       <div class="container">
         <nav class="nav-main mega-menu">
           <ul class="nav nav-pills nav-main" id="mainMenu">
-            <li class="dropdown mega-menu-item mega-menu-fullwidth">
-              <a class="dropdown-toggle" href="#">
-                App
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <div class="mega-menu-content">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <span class="mega-menu-sub-title">Bitcoin Directory Links</span>
-                        <ul class="sub-menu">
-                          <li>
-                            <ul class="sub-menu">
-                              <li><a href="#submit-business" class="submit-business">Submit a Business <span class="tip tip-dark">Get Listed</span></a></li>
-                              <li><a href="{% url 'search' %}?term=&location=Current+Location">Local Businesses</a></li>
-                              <li><a href="{% url 'search' %}?term=BTM&location=Current+Location">BTM's (Bitcoin ATM's)</a></li>
-                              <li><a href="{% url 'search' %}?term=Restaurants&location=Current+Location">Restaurants & Food Trucks</a></li>
-                              <li><a href="{% url 'search' %}?term=Bar&location=Current+Location">Bars & Nightclubs</a></li>
-                              <li><a href="{% url 'search' %}?term=Hotels+%26+Lodging&location=Current+Location">Hotels & Lodging</a></li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="col-md-4">
-                        <span class="mega-menu-sub-title">Bitcoin Directory Regions</span>
-                        <ul class="sub-menu">
-                          <li>
-                            <ul class="sub-menu">
-                              <li class="dropdown-submenu">
-                                <span>United States</span>
-                                <ul class="dropdown-menu">
-                                  {% for region in us_active_regions_list %}
-                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
-                                  {% endfor %}
-                                </ul>
-                              </li>
-                              <li class="dropdown-submenu">
-                                <span>Canada</span>
-                                <ul class="dropdown-menu">
-                                  {% for region in ca_active_regions_list %}
-                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
-                                  {% endfor %}
-                                </ul>
-                              </li>
-                              <li class="dropdown-submenu">
-                                <span>South America</span>
-                                <ul class="dropdown-menu">
-                                  {% for region in south_america_active_regions_list %}
-                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
-                                  {% endfor %}
-                                </ul>
-                              </li>
-                              <li class="dropdown-submenu">
-                                <span>Europe</span>
-                                <ul class="dropdown-menu">
-                                  {% for region in eu_active_regions_list %}
-                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
-                                  {% endfor %}
-                                </ul>
-                              </li>
-                              <li class="dropdown-submenu">
-                                <span>Asia</span>
-                                <ul class="dropdown-menu">
-                                  {% for region in asia_active_regions_list %}
-                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
-                                  {% endfor %}
-                                </ul>
-                              </li>
-                              <li class="dropdown-submenu">
-                                <span>Southeast Asia</span>
-                                <ul class="dropdown-menu">
-                                  {% for region in southeast_asia_active_regions_list %}
-                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
-                                  {% endfor %}
-                                </ul>
-                              </li>
-                              <li class="dropdown-submenu">
-                                <span>Oceana</span>
-                                <ul class="dropdown-menu">
-                                  {% for region in oceana_active_regions_list %}
-                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>
-                                  {% endfor %}
-                                </ul>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="col-md-4">
-                        <span class="mega-menu-sub-title">Airbitz Bitcoin App</span>
-                        <ul class="sub-menu">
-                          <li>
-                            <ul class="sub-menu">
-                              <li><a href="{% url 'app_download' %}"><i class="fa fa-download"></i> Download</a></li>
-                              <li><a href="{% url 'page_bitcoin_wallet' %}"><i class="fa fa-info-circle"></i> Learn More</a></li>
-                              <li><a href="{% url 'landing' %}go/faq/"><i class="fa fa-question-circle"></i> Frequently Asked Questions</a></li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </li>
             <li class="dropdown">
               <a class="dropdown-toggle" href="#edge-security-platform">
-                Edge Security Platform
+                Developer API/SDK
               </a>
               <ul class="dropdown-menu">
                 <li><a href="{% url 'page_developer_api_library' %}">Development API</a></li>
@@ -195,6 +90,122 @@
                 <li><a href="{% url 'page_data_sync_architecture' %}">Data Sync Architecture</a></li>
               </ul>
             </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#mobile-app">
+                Mobile App
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'app_download' %}"><i class="fa fa-download"></i> Download</a></li>
+                <li><a href="{% url 'page_bitcoin_wallet' %}"><i class="fa fa-info-circle"></i> Learn More</a></li>
+                <li><a href="{% url 'landing' %}go/faq/"><i class="fa fa-question-circle"></i> Frequently Asked Questions</a></li>
+                <li><a href="{% url 'search' %}?term=&location=Current+Location"><i class="fa fa-search"></i> Merchant Directory</a></li>
+              </ul>
+            </li>
+{#            <li class="dropdown mega-menu-item mega-menu-fullwidth">#}
+{#              <a class="dropdown-toggle" href="#">#}
+{#                Mobile App#}
+{#              </a>#}
+{#              <ul class="dropdown-menu">#}
+{#                <li>#}
+{#                  <div class="mega-menu-content">#}
+{#                    <div class="row">#}
+{#                      <div class="col-md-4">#}
+{#                        <span class="mega-menu-sub-title">Bitcoin Directory Links</span>#}
+{#                        <ul class="sub-menu">#}
+{#                          <li>#}
+{#                            <ul class="sub-menu">#}
+{#                              <li><a href="#submit-business" class="submit-business">Submit a Business <span class="tip tip-dark">Get Listed</span></a></li>#}
+{#                              <li><a href="{% url 'search' %}?term=&location=Current+Location">Local Businesses</a></li>#}
+{#                              <li><a href="{% url 'search' %}?term=BTM&location=Current+Location">BTM's (Bitcoin ATM's)</a></li>#}
+{#                              <li><a href="{% url 'search' %}?term=Restaurants&location=Current+Location">Restaurants & Food Trucks</a></li>#}
+{#                              <li><a href="{% url 'search' %}?term=Bar&location=Current+Location">Bars & Nightclubs</a></li>#}
+{#                              <li><a href="{% url 'search' %}?term=Hotels+%26+Lodging&location=Current+Location">Hotels & Lodging</a></li>#}
+{#                            </ul>#}
+{#                          </li>#}
+{#                        </ul>#}
+{#                      </div>#}
+{#                      <div class="col-md-4">#}
+{#                        <span class="mega-menu-sub-title">Bitcoin Directory Regions</span>#}
+{#                        <ul class="sub-menu">#}
+{#                          <li>#}
+{#                            <ul class="sub-menu">#}
+{#                              <li class="dropdown-submenu">#}
+{#                                <span>United States</span>#}
+{#                                <ul class="dropdown-menu">#}
+{#                                  {% for region in us_active_regions_list %}#}
+{#                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>#}
+{#                                  {% endfor %}#}
+{#                                </ul>#}
+{#                              </li>#}
+{#                              <li class="dropdown-submenu">#}
+{#                                <span>Canada</span>#}
+{#                                <ul class="dropdown-menu">#}
+{#                                  {% for region in ca_active_regions_list %}#}
+{#                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>#}
+{#                                  {% endfor %}#}
+{#                                </ul>#}
+{#                              </li>#}
+{#                              <li class="dropdown-submenu">#}
+{#                                <span>South America</span>#}
+{#                                <ul class="dropdown-menu">#}
+{#                                  {% for region in south_america_active_regions_list %}#}
+{#                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>#}
+{#                                  {% endfor %}#}
+{#                                </ul>#}
+{#                              </li>#}
+{#                              <li class="dropdown-submenu">#}
+{#                                <span>Europe</span>#}
+{#                                <ul class="dropdown-menu">#}
+{#                                  {% for region in eu_active_regions_list %}#}
+{#                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>#}
+{#                                  {% endfor %}#}
+{#                                </ul>#}
+{#                              </li>#}
+{#                              <li class="dropdown-submenu">#}
+{#                                <span>Asia</span>#}
+{#                                <ul class="dropdown-menu">#}
+{#                                  {% for region in asia_active_regions_list %}#}
+{#                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>#}
+{#                                  {% endfor %}#}
+{#                                </ul>#}
+{#                              </li>#}
+{#                              <li class="dropdown-submenu">#}
+{#                                <span>Southeast Asia</span>#}
+{#                                <ul class="dropdown-menu">#}
+{#                                  {% for region in southeast_asia_active_regions_list %}#}
+{#                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>#}
+{#                                  {% endfor %}#}
+{#                                </ul>#}
+{#                              </li>#}
+{#                              <li class="dropdown-submenu">#}
+{#                                <span>Oceana</span>#}
+{#                                <ul class="dropdown-menu">#}
+{#                                  {% for region in oceana_active_regions_list %}#}
+{#                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>#}
+{#                                  {% endfor %}#}
+{#                                </ul>#}
+{#                              </li>#}
+{#                            </ul>#}
+{#                          </li>#}
+{#                        </ul>#}
+{#                      </div>#}
+{#                      <div class="col-md-4">#}
+{#                        <span class="mega-menu-sub-title">Airbitz Bitcoin App</span>#}
+{#                        <ul class="sub-menu">#}
+{#                          <li>#}
+{#                            <ul class="sub-menu">#}
+{#                              <li><a href="{% url 'app_download' %}"><i class="fa fa-download"></i> Download</a></li>#}
+{#                              <li><a href="{% url 'page_bitcoin_wallet' %}"><i class="fa fa-info-circle"></i> Learn More</a></li>#}
+{#                              <li><a href="{% url 'landing' %}go/faq/"><i class="fa fa-question-circle"></i> Frequently Asked Questions</a></li>#}
+{#                            </ul>#}
+{#                          </li>#}
+{#                        </ul>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                </li>#}
+{#              </ul>#}
+{#            </li>#}
             <li><a href="{% url 'landing' %}go/">Blog</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" href="#">
@@ -340,7 +351,7 @@
 
           <div class="col-md-3">
             <div class="get-started">
-              <a href="{% url 'page_developer_api_library' %}" class="btn btn-lg btn-primary">Airbitz Edge Security Platform</a>
+              <a href="{% url 'page_developer_api_library' %}" class="btn btn-lg btn-primary">Edge Security Developer API</a>
             </div>
           </div>
 
@@ -394,7 +405,7 @@
             </div>
             <div class="feature-box-info">
               <h4 class="mb-xs">Internet of Things (IoT)</h4>
-              <p>Future automation and convienence requires paramount security.</p>
+              <p>Edge Security for devices operating at the edge of technology.</p>
 {#              <ul>#}
 {#                <li>Wireless Routers</li>#}
 {#                <li>Meters and Appliances</li>#}
@@ -430,7 +441,7 @@
             </div>
             <div class="feature-box-info">
               <h4 class="mb-xs">Password Management</h4>
-              <p>Traditional authentication has become unweildy and cumbersome.</p>
+              <p>Bringing sanity to unweildy and cumbersome traditional authentication.</p>
 {#              <ul>#}
 {#                <li>Lastpass</li>#}
 {#                <li>1Password</li>#}
@@ -468,7 +479,7 @@
             </div>
             <div class="feature-box-info">
               <h4 class="mb-xs">Bitcoin / Digital Currencies</h4>
-              <p>The largest distributed computing system is our home.</p>
+              <p>The largest decentralized computing system is our home.</p>
             </div>
           </div>
         </div>
@@ -509,7 +520,7 @@
 
     <div class="container">
       <div class="row mb-xlg">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <p class="lead">
             Digital security is undergoing a <strong>paradigm shift</strong>.
           </p>
@@ -517,26 +528,25 @@
             After decades of striving to secure personal info, money, financial info, and sensitive documents on centralized servers, we’ve discovered that it simply can’t be done. There is too great an incentive to break into the treasure troves of digital data on globally accessible internet servers. Every year, multiple large centralized services are hacked and cause massive data breaches.
           </p>
         </div>
-      </div>
-      <div class="row">
+
         <div class="col-md-6">
           <img class="img-responsive" src="{% static 'airbitz-theme/img-custom/paradigm-shift-new.png' %}" alt="Security Paradigm Shift">
-        </div>
-        <div class="col-md-6">
-          <img class="img-responsive" src="{% static 'airbitz-theme/img-custom/paradigm-shift-old.png' %}" alt="Security Paradigm Shift">
         </div>
       </div>
     </div>
 
-    <section class="parallax section section-tall section-text-light section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-2.jpg' %}); background-size: cover;">
-      <div class="container mt-xl">
-        <div class="heading">
-          <h2>Edge Security to the <strong>Rescue</strong></h2>
-        </div>
+    <section class="section section-tall section-text-light section-center" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-2.jpg' %}); background-position: center center; background-size: cover;">
+      <div class="row">
+        <div class="col-md-12"><br><br><br><br><br><br><br><br><br><br><br><br></div>
       </div>
     </section>
 
     <div class="container">
+      <div class="row text-center mb-xlg">
+        <div class="heading">
+          <h2>Edge Security to the <strong>Rescue</strong></h2>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-7">
           <p class="lead">
@@ -553,6 +563,7 @@
           <div class="key-tech"><i class="fa fa-check"></i> Multi-device Syncronization</div>
           <div class="key-tech"><i class="fa fa-check"></i> One-Touch 2 Factor Authentication</div>
           <div class="key-tech"><i class="fa fa-check"></i> Password Recovery</div>
+          <div class="key-tech"><i class="fa fa-check"></i> Revision Control / Rollback</div>
         </div>
       </div>
     </div>
@@ -830,7 +841,7 @@
 
         <div class="col-md-6">
           <h2><strong>What</strong> We Do</h2>
-          <p>We architect distributed systems and applications with opensource, ethical, encryption technologies.  We apply our systems to impactful global applications.  Finally we use simple and intuitve UI/UX to enable the non-technical user to fully own and control their digital assets as they see fit.</p>
+          <p>We architect distributed systems with opensource, ethical, encryption technologies.  We apply our systems to impactful global applications.  Finally we use simple and intuitive UI/UX to enable the non-technical user to fully own and control their digital assets as they see fit.</p>
         </div>
       </div>
     </div>
@@ -887,11 +898,6 @@
               <div class="owl-carousel manual thumb-gallery-detail show-nav-hover" id="thumbGalleryDetail">
                 <div>
                         <span class="img-thumbnail">
-                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-0.png' %}" class="img-responsive">
-                        </span>
-                </div>
-                <div>
-                        <span class="img-thumbnail">
                           <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-1.png' %}" class="img-responsive">
                         </span>
                 </div>
@@ -912,11 +918,6 @@
                 </div>
               </div>
               <div class="owl-carousel manual thumb-gallery-thumbs mt" id="thumbGalleryThumbs">
-                <div>
-                        <span class="img-thumbnail cur-pointer">
-                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-0.png' %}" class="img-responsive">
-                        </span>
-                </div>
                 <div>
                         <span class="img-thumbnail cur-pointer">
                           <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-1.png' %}" class="img-responsive">
