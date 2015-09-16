@@ -235,7 +235,6 @@ html {
         color: black;
     }
 
-
     .airbitz-team {
         .thumb-info {
 
@@ -277,6 +276,9 @@ html {
     .app-info {
         margin-bottom: 20px;
 
+        h3 {
+            line-height: 1.3em;
+        }
         .app-install {
             img { margin-bottom: 10px}
         }

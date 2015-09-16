@@ -574,7 +574,8 @@
       </div>
     </div>
 
-    <section class="video section section-tall section-text-dark section-video section-center mt-none mt-xlg mb-xlg" data-video-path="{% static 'airbitz-theme/video/light' %}" data-plugin-video-background data-plugin-options='{"posterType": "jpg", "position": "50% 50%", "overlay": true}'>
+{#    <section class="video section section-tall section-text-dark section-video section-center mt-none mt-xlg mb-xlg" data-video-path="{% static 'airbitz-theme/video/light' %}" data-plugin-video-background data-plugin-options='{"posterType": "jpg", "position": "50% 50%", "overlay": true}'>#}
+    <section class="parallax section section-tall section-text-dark section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-team.jpg' %}); background-size: cover;">
       <div class="container">
         <div class="row">
           <div class="col-md-offset-1 col-md-10">
@@ -829,7 +830,7 @@
 
         <div class="col-md-6">
           <h2><strong>What</strong> We Do</h2>
-          <p>First we architect distributed systems and applications with opensource, ethical, encryption technologies.  Second we apply our systems to impactful global applications.  Third we use simple and intuitve UI/UX to enable the non-technical user to fully own and control their digital assets as they see fit.</p>
+          <p>We architect distributed systems and applications with opensource, ethical, encryption technologies.  We apply our systems to impactful global applications.  Finally we use simple and intuitve UI/UX to enable the non-technical user to fully own and control their digital assets as they see fit.</p>
         </div>
       </div>
     </div>
@@ -850,7 +851,7 @@
           <div class="app-info col-md-6 col-md-offset-1 text-center">
             <img class="airbitz-app-icon" src="{% static 'airbitz-theme/img-custom/airbitz-app-icon-512x512.png' %}" alt="Airbitz App">
             <h3>See Airbitz Edge Security in <strong>Action</strong></h3>
-            <p>Download the Airbitz Mobile App for Bitcoin</p>
+            <p>Download the <a href="{% static 'app_download' %}">Airbitz Mobile App for Bitcoin</a></p>
 
             <div id="app-store-links" class="animated row mb-xlg">
               <div class="app-install col-sm-12 text-center animated">

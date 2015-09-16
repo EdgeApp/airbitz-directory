@@ -97,6 +97,8 @@ html .airbitz-team .thumb-info.thumb-info-bottom-info:hover img {
   transform: translateY(0px); }
 html .app-info {
   margin-bottom: 20px; }
+  html .app-info h3 {
+    line-height: 1.3em; }
   html .app-info .app-install img {
     margin-bottom: 10px; }
 html .app-screenshots .img-thumbnail {
