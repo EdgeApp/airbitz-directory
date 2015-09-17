@@ -16,10 +16,8 @@
     captchaContainer = grecaptcha.render('captcha_container', {
       'sitekey' : '6Le6_QsTAAAAAHc1LarEOKa13gzoOriNHVVwoumD',
       'callback' : function(response) {
-        console.log("In JSON" + JSON.stringify({"g-recaptcha-response":response})); 
         $.post("/verification/", JSON.stringify({"g-recaptcha-response":response}) )
         .done(function(status) {
-          console.log("Success");
           $("#captcha_container").notify("Successfully verified",
           { 
             position:"bottom center",
@@ -28,7 +26,6 @@
            );
         })
         .fail(function(status) {
-          console.log("Failed");
           $("#captcha_container").notify("Successfully verified",
           { 
             position:"bottom center",
@@ -36,7 +33,6 @@
           }
            );
         });
-        console.log("Sent request");
       }
 
 
