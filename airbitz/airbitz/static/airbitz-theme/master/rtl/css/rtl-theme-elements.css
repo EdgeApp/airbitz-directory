@@ -2313,7 +2313,7 @@ section.video .container {
 }
 
 section.video .video-overlay {
-	background: transparent url(../img/video-overlay.png) repeat 0 0;
+	background: transparent url(/static/airbitz-theme/img/video-overlay.png) repeat 0 0;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -3040,7 +3040,7 @@ hr.pattern, .divider.pattern {
 }
 
 hr.pattern:after, .divider.pattern:after {
-	background: transparent url(../img/patterns/worn_dots.png) repeat 0 0;
+	background: transparent url(/static/airbitz-theme/img/patterns/worn_dots.png) repeat 0 0;
 	content: "";
 	display: block;
 	height: 15px;
@@ -3051,7 +3051,7 @@ hr.pattern:after, .divider.pattern:after {
 }
 
 hr.pattern.pattern-2:after, .divider.pattern.pattern-2:after {
-	background-image: url(../img/patterns/az_subtle.png);
+	background-image: url(/static/airbitz-theme/img/patterns/az_subtle.png);
 }
 
 /* Sort Source Wrapper */
@@ -5110,7 +5110,7 @@ ul.social-icons li {
 	-webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;
 	transition: all 0.3s ease;
-	background-image: url(../img/social-sprites.png);
+	background-image: url(/static/airbitz-theme/img/social-sprites.png);
 	background-repeat: no-repeat;
 	background-position: 0 100px;
 	display: inline-block;
@@ -5440,7 +5440,7 @@ ul.social-icons li.vk:hover {
 
 /* Arrows */
 .arrow {
-	background: transparent url(../img/arrows.png) no-repeat 0 0;
+	background: transparent url(/static/airbitz-theme/img/arrows.png) no-repeat 0 0;
 	width: 47px;
 	height: 120px;
 	display: inline-block;
@@ -6478,7 +6478,7 @@ ul.history li p {
 }
 
 ul.history li .thumb {
-	background: transparent url(../img/history-thumb.png) no-repeat 0 0;
+	background: transparent url(/static/airbitz-theme/img/history-thumb.png) no-repeat 0 0;
 	background-position: 0 -200px;
 	width: 227px;
 	height: 160px;
