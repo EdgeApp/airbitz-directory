@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     # url(r'^btc-email-request/template-email-request_android.html/$', 'directory.views.email_request_template_android', name='email_request_template_android'),
     # url(r'^home2/$', 'directory.views.home_v2', name='home_v2'),
     url(r'^home/$', 'directory.views.landing_v2', name='home'),
-    url(r'^$', 'directory.views.landing_v2', name='landing'),
+    url(r'^$', 'directory.views.landing', name='landing'),
     # url(r'^$', 'directory.views.landing', name='landing'),
     url(r'^blackfriday$', 'directory.views.blackfriday', name='blackfriday'),
 )
