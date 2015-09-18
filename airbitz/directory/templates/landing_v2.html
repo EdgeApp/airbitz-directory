@@ -95,7 +95,7 @@
                 Mobile App
               </a>
               <ul class="dropdown-menu">
-                <li><a href="{% url 'app_download' %}">Download</a></li>
+                <li><a href="#app">Download</a></li>
                 <li><a href="{% url 'page_bitcoin_wallet' %}">Learn More</a></li>
                 <li><a href="{% url 'landing' %}go/faq/">Frequently Asked Questions</a></li>
                 <li><a href="{% url 'search' %}?term=&location=Current+Location">Merchant Directory</a></li>
@@ -212,9 +212,9 @@
                 More
               </a>
               <ul class="dropdown-menu">
-                <li><a href="{% url 'landing' %}go/team/">Team</a></li>
-                <li><a href="{% url 'landing' %}go/about/">About Us</a></li>
-                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#team-quote">Team</a></li>
+                <li><a href="#team">About Us</a></li>
+                <li><a href="#contact" data-uv-trigger>Contact Us</a></li>
               </ul>
             </li>
           </ul>
@@ -584,7 +584,7 @@
     </div>
 
 {#    <section class="video section section-tall section-text-dark section-video section-center mt-none mt-xlg mb-xlg" data-video-path="{% static 'airbitz-theme/video/light' %}" data-plugin-video-background data-plugin-options='{"posterType": "jpg", "position": "50% 50%", "overlay": true}'>#}
-    <section class="parallax section section-tall section-text-dark section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-team.jpg' %}); background-size: cover;">
+    <section id="team-quote" class="parallax section section-tall section-text-dark section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-team.jpg' %}); background-size: cover;">
       <div class="container">
         <div class="row">
           <div class="col-md-offset-1 col-md-10">
@@ -619,49 +619,19 @@
       </div>
     </section>
 
-    <div class="container-fluid mb-xl text-center">
+    <div id="team" class="container-fluid mb-xl text-center">
       <h2>The <strong>Team</strong></h2>
     </div>
 
     <div class="airbitz-team owl-carousel full-width mt-xlg" data-plugin-options='{"autoplay": false, "autoplayTimeout": 8000, "items": 6, "loop": false, "nav": true, "dots": false}'>
       {% for info in team_info_row_1 %}
-      <div>
-        <a href="#{{ info.name|slugify }}" data-toggle="modal" data-target="#modal-{{ info.name|slugify }}">
-          <span class="thumb-info thumb-info-lighten thumb-info-bottom-info thumb-info-no-borders">
-            <span class="thumb-info-wrapper">
-              <img src="{% static info.img_path %}" class="img-responsive" alt="Paul Puey">
-              <span class="thumb-info-title">
-                <span class="thumb-info-inner">{{ info.name }}</span>
-                <span class="thumb-info-type">{{ info.title }}</span>
-              </span>
-              <span class="thumb-info-action">
-                <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
-              </span>
-            </span>
-          </span>
-        </a>
-      </div>
+        {% include 'landing/_team-profile-square.html' %}
       {% endfor %}
     </div>
 
     <div class="airbitz-team owl-carousel full-width mb-xlg" data-plugin-options='{"autoplay": false, "autoplayTimeout": 8000, "items": 6, "loop": false, "nav": true, "dots": false}'>
       {% for info in team_info_row_2 %}
-      <div>
-        <a href="#{{ info.name|slugify }}" data-toggle="modal" data-target="#modal-{{ info.name|slugify }}">
-          <span class="thumb-info thumb-info-lighten thumb-info-bottom-info thumb-info-no-borders">
-            <span class="thumb-info-wrapper">
-              <img src="{% static info.img_path %}" class="img-responsive" alt="Paul Puey">
-              <span class="thumb-info-title">
-                <span class="thumb-info-inner">{{ info.name }}</span>
-                <span class="thumb-info-type">{{ info.title }}</span>
-              </span>
-              <span class="thumb-info-action">
-                <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
-              </span>
-            </span>
-          </span>
-        </a>
-      </div>
+        {% include 'landing/_team-profile-square.html' %}
       {% endfor %}
     </div>
 
@@ -686,6 +656,14 @@
           <p>At Airbitz, we aim to bring secure, decentralized technologies to the next billion users through amazingly simple yet feature rich applications focused on ease of use and ease of security. Our focus is to deliver software, services, and products with an amazing user experience, both visually and functionally, simplifying this advanced technology and delivering it to the masses while still retaining core principles of decentralization and privacy.</p>
         </div>
       </div>
+    </div>
+
+    <div class="row">
+      <hr id="app">
+    </div>
+
+    <div class="container-fluid mb-xl mt-xl text-center">
+      <h2>Airbitz <strong>Mobile App</strong></h2>
     </div>
 
     <section class="airbitz-app call-to-action mb-xl mt-xl">
@@ -730,46 +708,46 @@
             <div class="thumb-gallery">
               <div class="owl-carousel manual thumb-gallery-detail show-nav-hover" id="thumbGalleryDetail">
                 <div>
-                        <span class="img-thumbnail">
-                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-1.png' %}" class="img-responsive">
-                        </span>
+                  <span class="img-thumbnail">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-1.png' %}" class="img-responsive">
+                  </span>
                 </div>
                 <div>
-                        <span class="img-thumbnail">
-                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-2.png' %}" class="img-responsive">
-                        </span>
+                  <span class="img-thumbnail">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-2.png' %}" class="img-responsive">
+                  </span>
                 </div>
                 <div>
-                        <span class="img-thumbnail">
-                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-3.png' %}" class="img-responsive">
-                        </span>
+                  <span class="img-thumbnail">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-3.png' %}" class="img-responsive">
+                  </span>
                 </div>
                 <div>
-                        <span class="img-thumbnail">
-                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-4.png' %}" class="img-responsive">
-                        </span>
+                  <span class="img-thumbnail">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-4.png' %}" class="img-responsive">
+                  </span>
                 </div>
               </div>
               <div class="owl-carousel manual thumb-gallery-thumbs mt" id="thumbGalleryThumbs">
                 <div>
-                        <span class="img-thumbnail cur-pointer">
-                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-1.png' %}" class="img-responsive">
-                        </span>
+                  <span class="img-thumbnail cur-pointer">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-1.png' %}" class="img-responsive">
+                  </span>
                 </div>
                 <div>
-                        <span class="img-thumbnail cur-pointer">
-                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-2.png' %}" class="img-responsive">
-                        </span>
+                  <span class="img-thumbnail cur-pointer">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-2.png' %}" class="img-responsive">
+                  </span>
                 </div>
                 <div>
-                        <span class="img-thumbnail cur-pointer">
-                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-3.png' %}" class="img-responsive">
-                        </span>
+                  <span class="img-thumbnail cur-pointer">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-3.png' %}" class="img-responsive">
+                  </span>
                 </div>
                 <div>
-                        <span class="img-thumbnail cur-pointer">
-                          <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-4.png' %}" class="img-responsive">
-                        </span>
+                  <span class="img-thumbnail cur-pointer">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-4.png' %}" class="img-responsive">
+                  </span>
                 </div>
               </div>
             </div>
@@ -800,6 +778,8 @@
               <li><p><i class="fa fa-phone"></i> <strong>Phone:</strong> +1 (619) 800-0540</p></li>
               <li><p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:info@airbitz.co">info@airbitz.co</a></p></li>
             </ul>
+
+            <a data-uv-trigger href="#" class="btn btn-danger"><i class="fa fa-comment"></i> Quick Message</a>
           </div>
         </div>
         <div class="col-md-3">
@@ -876,13 +856,13 @@
 <script src="{% static 'airbitz-theme/vendor/common/common.js' %}"></script>
 <script src="{% static 'airbitz-theme/vendor/jquery.validation/jquery.validation.js' %}"></script>
 <script src="{% static 'airbitz-theme/vendor/jquery.stellar/jquery.stellar.js' %}"></script>
-<script src="{% static 'airbitz-theme/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js' %}"></script>
-<script src="{% static 'airbitz-theme/vendor/jquery.gmap/jquery.gmap.js' %}"></script>
-<script src="{% static 'airbitz-theme/vendor/isotope/jquery.isotope.js' %}"></script>
+{#<script src="{% static 'airbitz-theme/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js' %}"></script>#}
+{#<script src="{% static 'airbitz-theme/vendor/jquery.gmap/jquery.gmap.js' %}"></script>#}
+{#<script src="{% static 'airbitz-theme/vendor/isotope/jquery.isotope.js' %}"></script>#}
 <script src="{% static 'airbitz-theme/vendor/owlcarousel/owl.carousel.js' %}"></script>
-<script src="{% static 'airbitz-theme/vendor/jflickrfeed/jflickrfeed.js' %}"></script>
-<script src="{% static 'airbitz-theme/vendor/magnific-popup/jquery.magnific-popup.js' %}"></script>
-<script src="{% static 'airbitz-theme/vendor/vide/vide.js' %}"></script>
+{#<script src="{% static 'airbitz-theme/vendor/jflickrfeed/jflickrfeed.js' %}"></script>#}
+{#<script src="{% static 'airbitz-theme/vendor/magnific-popup/jquery.magnific-popup.js' %}"></script>#}
+{#<script src="{% static 'airbitz-theme/vendor/vide/vide.js' %}"></script>#}
 
 <!-- Theme Base, Components and Settings -->
 <script src="{% static 'airbitz-theme/js/theme.js' %}"></script>
@@ -892,6 +872,54 @@
 <script src="{% static 'airbitz-theme/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>
 <script src="{% static 'airbitz-theme/vendor/circle-flip-slideshow/js/jquery.flipshow.js' %}"></script>
 <script src="{% static 'airbitz-theme/js/views/view.home.js' %}"></script>
+
+<script type="text/javascript">
+  $(function() {
+    // Include the UserVoice JavaScript SDK (only needed once on a page)
+    UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/sf1HfQGz9aR6JlwkmTvKbQ.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+
+    //
+    // UserVoice Javascript SDK developer documentation:
+    // https://www.uservoice.com/o/javascript-sdk
+    //
+
+    // Set colors
+    UserVoice.push(['set', {
+      accent_color: '#448dd6',
+      trigger_color: 'white',
+      trigger_background_color: '#6aba2e'
+    }]);
+
+    // Identify the user and pass traits
+    // To enable, replace sample data with actual user traits and uncomment the line
+    UserVoice.push(['identify', {
+      //email:      'john.doe@example.com', // User’s email address
+      //name:       'John Doe', // User’s real name
+      //created_at: 1364406966, // Unix timestamp for the date the user signed up
+      //id:         123, // Optional: Unique id of the user (if set, this should not change)
+      //type:       'Owner', // Optional: segment your users by type
+      //account: {
+      //  id:           123, // Optional: associate multiple users with a single account
+      //  name:         'Acme, Co.', // Account name
+      //  created_at:   1364406966, // Unix timestamp for the date the account was created
+      //  monthly_rate: 9.99, // Decimal; monthly rate of the account
+      //  ltv:          1495.00, // Decimal; lifetime value of the account
+      //  plan:         'Enhanced' // Plan name for the account
+      //}
+    }]);
+
+    // Add default trigger to the bottom-right corner of the window:
+    UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-left' }]);
+
+    // Or, use your own custom trigger:
+    //UserVoice.push(['addTrigger', '#id', { mode: 'contact' }]);
+
+    // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
+    UserVoice.push(['autoprompt', {}]);
+
+
+  });
+</script>
 
 <!-- Theme Custom -->
 <script src="{% static 'airbitz-theme/js/custom.js' %}"></script>

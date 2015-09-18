@@ -1,0 +1,18 @@
+{% load static from staticfiles %}
+
+<div>
+  <a href="#{{ info.name|slugify }}" data-toggle="modal" data-target="#modal-{{ info.name|slugify }}">
+    <span class="thumb-info thumb-info-lighten thumb-info-bottom-info thumb-info-no-borders">
+      <span class="thumb-info-wrapper">
+        <img src="{% static info.img_path %}" class="img-responsive" alt="{{ info.name }}">
+        <span class="thumb-info-title">
+          <span class="thumb-info-inner">{{ info.name }}</span>
+          <span class="thumb-info-type">{{ info.title }}</span>
+        </span>
+        <span class="thumb-info-action">
+          <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
+        </span>
+      </span>
+    </span>
+  </a>
+</div>
