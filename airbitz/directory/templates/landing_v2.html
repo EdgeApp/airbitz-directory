@@ -625,210 +625,46 @@
       <h2>The <strong>Team</strong></h2>
     </div>
 
-    <div class="airbitz-team owl-carousel full-width mt-xlg mb-xlg" data-plugin-options='{"autoplay": false, "autoplayTimeout": 8000, "items": 6, "loop": false, "nav": true, "dots": true}'>
+    <div class="airbitz-team owl-carousel full-width mt-xlg" data-plugin-options='{"autoplay": false, "autoplayTimeout": 8000, "items": 6, "loop": false, "nav": true, "dots": false}'>
+      {% for info in team_info_row_1 %}
       <div>
-        <a href="/go/team/#paul">
-                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
-                  <span class="thumb-info-wrapper">
-                    <img src="{% static 'airbitz-theme/img-custom/portraits/paul.jpg' %}" class="img-responsive" alt="">
-                    <span class="thumb-info-title">
-                      <span class="thumb-info-inner">Paul Puey</span>
-                      <span class="thumb-info-type">CEO / Co-Founder</span>
-                    </span>
-                    <span class="thumb-info-action">
-                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
-                    </span>
-                  </span>
-                </span>
+        <a href="#{{ info.name|slugify }}" data-toggle="modal" data-target="#modal-{{ info.name|slugify }}">
+          <span class="thumb-info thumb-info-lighten thumb-info-bottom-info thumb-info-no-borders">
+            <span class="thumb-info-wrapper">
+              <img src="{% static info.img_path %}" class="img-responsive" alt="Paul Puey">
+              <span class="thumb-info-title">
+                <span class="thumb-info-inner">{{ info.name }}</span>
+                <span class="thumb-info-type">{{ info.title }}</span>
+              </span>
+              <span class="thumb-info-action">
+                <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
+              </span>
+            </span>
+          </span>
         </a>
       </div>
+      {% endfor %}
+    </div>
 
+    <div class="airbitz-team owl-carousel full-width mb-xlg" data-plugin-options='{"autoplay": false, "autoplayTimeout": 8000, "items": 6, "loop": false, "nav": true, "dots": false}'>
+      {% for info in team_info_row_2 %}
       <div>
-        <a href="/go/team/#tim">
-                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
-                  <span class="thumb-info-wrapper">
-                    <img src="{% static 'airbitz-theme/img-custom/portraits/tim.jpg' %}" class="img-responsive" alt="">
-                    <span class="thumb-info-title">
-                      <span class="thumb-info-inner">Tim Horton</span>
-                      <span class="thumb-info-type">CTO / Co-Founder</span>
-                    </span>
-                    <span class="thumb-info-action">
-                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
-                    </span>
-                  </span>
-                </span>
+        <a href="#{{ info.name|slugify }}" data-toggle="modal" data-target="#modal-{{ info.name|slugify }}">
+          <span class="thumb-info thumb-info-lighten thumb-info-bottom-info thumb-info-no-borders">
+            <span class="thumb-info-wrapper">
+              <img src="{% static info.img_path %}" class="img-responsive" alt="Paul Puey">
+              <span class="thumb-info-title">
+                <span class="thumb-info-inner">{{ info.name }}</span>
+                <span class="thumb-info-type">{{ info.title }}</span>
+              </span>
+              <span class="thumb-info-action">
+                <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
+              </span>
+            </span>
+          </span>
         </a>
       </div>
-
-      <div>
-        <a href="/go/team/#rick">
-                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
-                  <span class="thumb-info-wrapper">
-                    <img src="{% static 'airbitz-theme/img-custom/portraits/rick.jpg' %}" class="img-responsive" alt="">
-                    <span class="thumb-info-title">
-                      <span class="thumb-info-inner">Rick Chan</span>
-                      <span class="thumb-info-type">COO</span>
-                    </span>
-                    <span class="thumb-info-action">
-                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
-                    </span>
-                  </span>
-                </span>
-        </a>
-      </div>
-
-      <div>
-        <a href="/go/team/#william">
-                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
-                  <span class="thumb-info-wrapper">
-                    <img src="{% static 'airbitz-theme/img-custom/portraits/william.jpg' %}" class="img-responsive" alt="">
-                    <span class="thumb-info-title">
-                      <span class="thumb-info-inner">William Swanson</span>
-                      <span class="thumb-info-type">Chief Architect / Co-Founder</span>
-                    </span>
-                    <span class="thumb-info-action">
-                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
-                    </span>
-                  </span>
-                </span>
-        </a>
-      </div>
-
-      <div>
-        <a href="/go/team/#damian">
-                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
-                  <span class="thumb-info-wrapper">
-                    <img src="{% static 'airbitz-theme/img-custom/portraits/damian.jpg' %}" class="img-responsive" alt="">
-                    <span class="thumb-info-title">
-                      <span class="thumb-info-inner">Damian Cutillo</span>
-                      <span class="thumb-info-type">V.P. Design / Co-Founder</span>
-                    </span>
-                    <span class="thumb-info-action">
-                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
-                    </span>
-                  </span>
-                </span>
-        </a>
-      </div>
-
-      <div>
-        <a href="/go/team/#will">
-                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
-                  <span class="thumb-info-wrapper">
-                    <img src="{% static 'airbitz-theme/img-custom/portraits/will.jpg' %}" class="img-responsive" alt="">
-                    <span class="thumb-info-title">
-                      <span class="thumb-info-inner">Will Pangman</span>
-                      <span class="thumb-info-type">Marketing Manager</span>
-                    </span>
-                    <span class="thumb-info-action">
-                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
-                    </span>
-                  </span>
-                </span>
-        </a>
-      </div>
-
-      <div>
-        <a href="/go/team/#mk">
-                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
-                  <span class="thumb-info-wrapper">
-                    <img src="{% static 'airbitz-theme/img-custom/portraits/mk.jpg' %}" class="img-responsive" alt="">
-                    <span class="thumb-info-title">
-                      <span class="thumb-info-inner">M.K. Lords</span>
-                      <span class="thumb-info-type">Community Manager</span>
-                    </span>
-                    <span class="thumb-info-action">
-                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
-                    </span>
-                  </span>
-                </span>
-        </a>
-      </div>
-
-      <div>
-        <a href="/go/team/#scott">
-                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
-                  <span class="thumb-info-wrapper">
-                    <img src="{% static 'airbitz-theme/img-custom/portraits/scott.jpg' %}" class="img-responsive" alt="">
-                    <span class="thumb-info-title">
-                      <span class="thumb-info-inner">Scott Morgan</span>
-                      <span class="thumb-info-type">H.R. Accounting / Co-Founder</span>
-                    </span>
-                    <span class="thumb-info-action">
-                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
-                    </span>
-                  </span>
-                </span>
-        </a>
-      </div>
-
-      <div>
-        <a href="/go/team/#nik">
-                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
-                  <span class="thumb-info-wrapper">
-                    <img src="{% static 'airbitz-theme/img-custom/portraits/nik.jpg' %}" class="img-responsive" alt="">
-                    <span class="thumb-info-title">
-                      <span class="thumb-info-inner">Nik Oraevskiy</span>
-                      <span class="thumb-info-type">Business Development / Analyst</span>
-                    </span>
-                    <span class="thumb-info-action">
-                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
-                    </span>
-                  </span>
-                </span>
-        </a>
-      </div>
-
-      <div>
-        <a href="#rj">
-                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
-                  <span class="thumb-info-wrapper">
-                    <img src="{% static 'airbitz-theme/img-custom/portraits/rj.jpg' %}" class="img-responsive" alt="">
-                    <span class="thumb-info-title">
-                      <span class="thumb-info-inner">“RJ” Raljoseph Ricasata</span>
-                      <span class="thumb-info-type">Lead Curator / QA</span>
-                    </span>
-                    <span class="thumb-info-action">
-                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
-                    </span>
-                  </span>
-                </span>
-        </a>
-      </div>
-
-      <div>
-        <a href="#vincent">
-                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
-                  <span class="thumb-info-wrapper">
-                    <img src="{% static 'airbitz-theme/img-custom/portraits/vincent.jpg' %}" class="img-responsive" alt="">
-                    <span class="thumb-info-title">
-                      <span class="thumb-info-inner">Vincent Herrera</span>
-                      <span class="thumb-info-type">Curator / QA</span>
-                    </span>
-                    <span class="thumb-info-action">
-                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
-                    </span>
-                  </span>
-                </span>
-        </a>
-      </div>
-      <div>
-        <a href="#jacob">
-                <span class="thumb-info thumb-info-bottom-info thumb-info-no-borders">
-                  <span class="thumb-info-wrapper">
-                    <img src="{% static 'airbitz-theme/img-custom/portraits/jacob.jpg' %}" class="img-responsive" alt="">
-                    <span class="thumb-info-title">
-                      <span class="thumb-info-inner">Jacob Burrell</span>
-                      <span class="thumb-info-type">Junior Developer / QA</span>
-                    </span>
-                    <span class="thumb-info-action">
-                      <span class="thumb-info-action-icon"><i class="fa fa-info"></i></span>
-                    </span>
-                  </span>
-                </span>
-        </a>
-      </div>
-
+      {% endfor %}
     </div>
 
     <div class="container mt-xlg mb-xlg">
@@ -946,10 +782,9 @@
       </div>
     </section>
 
-
-
-
   </div>
+
+  {% include 'landing/team-modals.html' %}
 
   <footer id="footer">
     <div class="container">

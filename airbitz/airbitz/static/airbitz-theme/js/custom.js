@@ -2,6 +2,9 @@
 
 	console.log('LOADED: Airbitz Theme');
 
+	$('.team-profile.modal a').each(function(){
+		$(this).attr('target','_blank');
+	});
 
 	/*
 	 THUMB GALLERY

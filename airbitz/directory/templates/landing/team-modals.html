@@ -1,0 +1,41 @@
+{% load static from staticfiles %}
+
+
+{% for info in team_info %}
+<div class="team-profile modal fade" id="modal-{{ info.name|slugify }}" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h2 class="modal-title" id="largeModalLabel"><strong>{{ info.name }}</strong> <em style="white-space: nowrap">{{ info.title }}</em></h2>
+        <h3 class="nickname">{{ info.nickname }}</h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-8">
+            {{ info.bio_html|safe }}
+          </div>
+          <div class="col-sm-4">
+            <aside class="sidebar">
+                <span class="img-thumbnail">
+                  <img src="{% static info.img_path %}" class="img-responsive" alt="{{ info.name }}">
+                </span>
+              </span>
+
+              <h5 class="skills-title">Skills</h5>
+              <ul class="skills">
+              {% for skill in info.skills %}
+                <li class="skill">{{ skill }}</li>
+              {% endfor %}
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-inverse" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
