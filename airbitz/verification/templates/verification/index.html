@@ -16,7 +16,7 @@
     captchaContainer = grecaptcha.render('captcha_container', {
       'sitekey' : '6Le6_QsTAAAAAHc1LarEOKa13gzoOriNHVVwoumD',
       'callback' : function(response) {
-        $.post("/verification/", JSON.stringify({"g-recaptcha-response":response}) )
+        $.post(window.location.pathname, JSON.stringify({"g-recaptcha-response":response}) )
         .done(function(status) {
           $("#captcha_container").notify("Successfully verified",
           { 
