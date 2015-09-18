@@ -88,7 +88,7 @@ def landing_v2(request):
             "title": "Cheif Operating Officer",
             "nickname": "Worldwide Deal Wizard",
             "bio_html": "<p>Rick thrives on putting things together in a unique way and brings a diverse background to Airbitz. After graduating from the University of Rochester with a B.S. in Optics, Rick spent four years working in the Optical Engineering field before moving on to grad school. At Thunderbird, he specialized in Finance and International Management.</p><p>Since grad school, Rick has successfully connected investors, tech and great opportunities as he worked with a variety of startups, global FinTech ventures and Wall Streeters. Rick brings extensive startup experience in mobile, tech, social media, gaming, gamification, entertainment, FinTech and Bitcoin. He was a co-founder of AlphaPoint and served as COO. In addition, Rick's extensive knowledge of boutiques and Fortune 500 companies adds a broad perspective. Name a financial center around the world and Rick has probably been there, but there are still so many more to explore!</p><p>Rick loves scuba diving in tropical water. He is also a bokeholic.</p>",
-            "skills": ["Software Architecture", "Business Development", "UI/UX", "Bitcoin Community Evangelist"]
+            "skills": ["Serial Entrepreneur", "Broad Startup Experience", "Global FinTech", "International Wall St & BTC Passion"]
         },
         {
             "name": "William Swanson",
