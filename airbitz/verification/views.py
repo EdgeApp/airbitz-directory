@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -5,10 +6,8 @@ from .models import MailVerify
 import requests
 import json
 
-def verify(request):
+def verify(request, verify_id):
 	if request.method == 'POST':
-		print request.body
-		json.loads(request.body)
 		jRequest = json.loads(request.body)
 		payload = {
 		'secret': '6Le6_QsTAAAAABNk7sjeubFi38k-ElnYlv7Np8eu',
@@ -27,7 +26,16 @@ def verify(request):
 	else:
 		print ""
 		return render(request, 'verification/index.html')
-		
-
+@csrf_exempt
+def new(request): # Get request with json object of email and verification token.
+	if request.method == 'POST':
+		print request.body
+		jRequest = json.loads(request.body)
+		email = jRequest['email']
+		verify_id = jRequest['verify_id']
+		MailVerify(verify_id=verify_id, mail=email, verify_date=None).save();
+		return HttpResponse("New verification added")
+	else:
+		return HttpResponse("Please send a POST request")
 
 # Create more views here.
