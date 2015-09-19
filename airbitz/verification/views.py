@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from .models import MailVerify
 import requests
 import json
+import datetime
 
 def verify(request, verify_id):
 	if request.method == 'POST':
@@ -16,7 +17,10 @@ def verify(request, verify_id):
 		}
 		r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=payload)
 		if r.json()['success'] == True:
-			print "Successfully validated captcha"
+			v = MailVerify.objects.get(verify_id=verify_id)
+			v.verify_date = datetime.datetime.now()
+			v.save()
+			print "Successfully validated captcha for email: " + v.mail
 			return HttpResponse(status=200) # Tell the client the captcha was successfully validated.
 			#record that validation was successful
 		else:
