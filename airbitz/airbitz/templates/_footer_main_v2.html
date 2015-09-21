@@ -1,0 +1,81 @@
+{% load static from staticfiles %}
+
+
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <h4 class="heading-primary">Latest Tweets</h4>
+        <a class="twitter-timeline" href="https://twitter.com/Airbitz" data-widget-id="643434328853114881">Tweets by @Airbitz</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-details">
+          <h4 class="heading-primary">Contact Us</h4>
+          <ul class="contact">
+            <li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong><br /> 311 4th Ave, San Diego, CA, United States</p></li>
+            <li><p><i class="fa fa-phone"></i> <strong>Phone:</strong><br /> +1 (619) 800-0540</p></li>
+            <li><p><i class="fa fa-envelope"></i> <strong>Email:</strong><br /> <a href="mailto:info@airbitz.co">info@airbitz.co</a></p></li>
+          </ul>
+
+          <a data-uv-trigger href="#" class="btn btn-danger"><i class="fa fa-comment"></i> Quick Message</a>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="newsletter">
+          <h4 class="heading-primary">Newsletter</h4>
+          <p>Keep up on our always evolving product features and technology. Enter your e-mail and subscribe to our newsletter.</p>
+
+          <div class="alert alert-success hidden" id="newsletterSuccess">
+            <strong>Success!</strong> You've been added to our email list.
+          </div>
+
+          <div class="alert alert-danger hidden" id="newsletterError"></div>
+
+          <form id="newsletterForm" action="php/newsletter-subscribe.php" method="POST">
+            <div class="input-group">
+              <input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">Go!</button>
+                      </span>
+            </div>
+          </form>
+        </div>
+
+        <h4 class="heading-primary mt-xlg">Follow Us</h4>
+        <div class="social-icons mb-xlg">
+          <ul class="social-icons">
+            <li class="facebook"><a href="https://www.facebook.com/airbitz" target="_blank" data-placement="bottom" data-tooltip title="Facebook">Facebook</a></li>
+            <li class="twitter"><a href="https://twitter.com/airbitz" target="_blank" data-placement="bottom" data-tooltip title="Twitter">Twitter</a></li>
+            <li class="linkedin"><a href="https://www.linkedin.com/company/airbitz" target="_blank" data-placement="bottom" data-tooltip title="Linkedin">Linkedin</a></li>
+            <li class="googleplus"><a href="https://plus.google.com/118173667510609425617" target="_blank" data-placement="bottom" data-tooltip title="Google +">Google Plus</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1">
+          <a href="#home" class="logo">
+            <img alt="Airbitz Edge Security Platform" class="img-responsive" src="{% static 'airbitz-theme/img-custom/airbitz-logo-mono-white-100.png' %}">
+          </a>
+        </div>
+        <div class="col-md-3">
+          <p>© Copyright 2015. All Rights Reserved.</p>
+        </div>
+        <div class="col-md-8">
+          <nav id="sub-menu">
+            <ul>
+              <li><a href="{% url 'landing' %}go/faq/">App FAQ's</a></li>
+              <li><a href="{% url 'page_bitcoin_wallet' %}">Bitcoin App</a></li>
+              <li><a href="{% url 'page_developer_api_library' %}">Edge Security Platform</a></li>
+              <li><a  href="#contact" data-uv-trigger>Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
