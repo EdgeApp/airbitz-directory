@@ -164,3 +164,8 @@ html .app-screenshots .img-thumbnail {
     font-size: 14px; }
     #footer .footer-copyright p {
       color: #ddd; }
+  #footer label.valid {
+    color: #80c342;
+    text-indent: 0; }
+  #footer label.error {
+    color: #FF1C1C; }

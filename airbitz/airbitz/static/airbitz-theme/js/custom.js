@@ -1,3 +1,5 @@
+
+
 (function($){
 
 	console.log('LOADED: Airbitz Theme');
@@ -5,6 +7,32 @@
 	$('.team-profile.modal a').each(function(){
 		$(this).attr('target','_blank');
 	});
+
+
+	// NEWSLETTER SIGNUPS
+	$('#inputEmailSignupSuccess').slideUp();
+
+	function afterEmailSubmission(resp){
+		console.log('submitted');
+		if (resp.result === 'success') {
+			$('.email-signup').val('');
+			console.log('success');
+		}
+		if (resp.result === 'error') {
+			console.log('failed');
+		}
+	}
+
+  $('#email-signup-form input').on('click', function() {
+		$.ajaxSetup({ crossDomain: true });
+		console.log('crossdomain: true');
+  });
+
+	$('#email-signup-form').ajaxChimp({
+		url: 'https://airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=b7bd36890d',
+		callback: afterEmailSubmission,
+	});
+
 
 	/*
 	 THUMB GALLERY
@@ -53,26 +81,6 @@
 					flag = false;
 				}
 			});
-
-
-	// EMAIL NEWSLETTER SIGNUP
-	function afterEmailSubmission(resp){
-		if (resp.result === 'success') {
-			$('.inputEmail').val('');
-			$('.inputText').val('');
-		}
-	}
-
-	$('#newsletterForm').on('click', function() {
-		$.ajaxSetup({ crossDomain: true });
-	});
-
-	$('#newsletterForm').ajaxChimp({
-		url: 'https://airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=b7bd36890d',
-		callback: afterEmailSubmission
-	});
-
-
 
 }).apply(this, [jQuery]);
 

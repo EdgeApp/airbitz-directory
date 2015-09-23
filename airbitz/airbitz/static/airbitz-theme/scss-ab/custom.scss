@@ -270,9 +270,6 @@ html {
 }
 
 
-footer {
-
-}
 #footer {
     background: $ab-blue-dark;
     border: none;
@@ -287,6 +284,15 @@ footer {
 
         p {
             color: #ddd;
+        }
+    }
+    label {
+        &.valid {
+            color: $ab-green;
+            text-indent: 0;
+        }
+        &.error {
+            color: #FF1C1C;
         }
     }
 }

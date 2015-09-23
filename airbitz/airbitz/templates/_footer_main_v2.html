@@ -30,14 +30,13 @@
             <strong>Success!</strong> You've been added to our email list.
           </div>
 
-          <div class="alert alert-danger hidden" id="newsletterError"></div>
-
-          <form id="newsletterForm" action="php/newsletter-subscribe.php" method="POST">
+          <form id="email-signup-form" class="form" role="form">
+            <label id="inputEmailSignupMessage" for="inputEmailSignup" class="control-label" style="margin-bottom: 10px;">Email Newsletter Signup</label>
             <div class="input-group">
-              <input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
-                      <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">Go!</button>
-                      </span>
+              <input class="email-signup form-control" placeholder="Email Address" id="inputEmailSignup" type="email">
+                <span class="input-group-btn">
+                  <button class="btn btn-success" type="submit">Go!</button>
+                </span>
             </div>
           </form>
         </div>
