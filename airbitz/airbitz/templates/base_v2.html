@@ -13,17 +13,52 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{% block title %}Edge Security API SDK Platform{% endblock title %} | Airbitz</title>
-
-    <meta name="keywords" content="Blockhain Technology, Private Computing, Open source, Information Security" />
-    <meta name="description" content="Airbitz is a blockchain inspired, decentralized, open source, zero knowledge global information security solution.">
-    <meta name="author" content="Airbitz">
-
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ STATIC_URL }}img/favicon.ico">
+    <link rel="icon" type="image/png" href="{% block meta_favicon_url %}{{ STATIC_URL }}img/favicon.ico{% endblock meta_favicon_url %}">
 
     <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"">
+
+    {# DEFINE DEFAULT SEO TITLE FOR BASE TEMPLATE #}
+    {% with SEO_TITLE="Edge Security API SDK Platform" SEO_DESCRIPTION="Airbitz is a blockchain inspired, decentralized, open source, zero knowledge global information security solution." SEO_KEYWORDS="Blockhain Technology, Private Computing, Open source, Information Security" %}
+
+      {% block head_seo_social %}
+
+        {% block seo_meta %}
+          <title>{% block title %}{{ SEO_TITLE }}{% endblock title %} | Airbitz</title>
+          <meta name="description" content="{% block meta_description %}{{ SEO_DESCRIPTION }}{% endblock meta_description %}">
+          <meta name="news_keywords" content="{% block meta_news_keywords %}{{ SEO_KEYWORDS }}{% endblock meta_news_keywords %}">
+          <meta name="keywords" content="{{ SEO_KEYWORDS }}" />
+          <meta name="author" content="Airbitz">
+        {% endblock seo_meta %}
+
+        {% block og_meta %}
+          <meta property="og:title" content="{% block og_title %}{{ SEO_TITLE }}{% endblock og_title %}">
+          <meta property="og:description" content="{% block og_description %}{{ SEO_DESCRIPTION }}{% endblock og_description %}">
+          <meta property="og:type" content="{% block og_type %}Article{% endblock og_type %}">
+          <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock og_url %}">
+          <meta property="og:image" content="{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock og_image %}">
+          <meta property="og:site_name" content="{% block og_site_name %}Airbitz{% endblock og_site_name %}">
+          {#        <meta property="fb:admins" content="{% block og_fb_admins %}{% endblock og_fb_admins %}">#}
+        {% endblock og_meta %}
+
+        {% block twitter_meta %}
+          <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock twitter_card %}">
+          <meta name="twitter:site" content="{% block twitter_site %}@airbitz{% endblock twitter_site %}">
+          <meta name="twitter:title" content="{% block twitter_title %}{{ SEO_TITLE }}{% endblock twitter_title %}">
+          <meta name="twitter:description" content="{% block twitter_description %}{{ SEO_DESCRIPTION }}{% endblock twitter_description %}">
+          <meta name="twitter:creator" content="{% block twitter_creator %}@airbitz{% endblock twitter_creator %}">
+          <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock twitter_image_src %}">
+          <meta name="twitter:domain" content="{% block twitter_domain %}{{ request.META.HTTP_HOST }}{% endblock twitter_domain %}">
+          <meta name="twitter:url" content="{% block twitter_url %}{{ request.build_absolute_uri }}{% endblock twitter_url %}">
+          <meta name="twitter:author" content="{% block twitter_author %}@airbitz{% endblock twitter_author %}">
+          <meta name="twitter:app:id:iphone" content="{% block twitter_app_id_iphone %}id843536046{% endblock twitter_app_id_iphone %}">
+          <meta name="twitter:app:id:ipad" content="{% block twitter_app_id_ipad %}id843536046{% endblock twitter_app_id_ipad %}">
+        {% endblock twitter_meta %}
+
+      {% endblock head_seo_social %}
+
+    {% endwith %}
 
     <!-- Web Fonts  -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
