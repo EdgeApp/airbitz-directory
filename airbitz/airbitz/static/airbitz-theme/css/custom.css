@@ -9,12 +9,13 @@ html .home-intro {
   background: #333; }
   html .home-intro h3 {
     color: white;
-    margin-bottom: 0;
+    margin-bottom: 10px;
     text-transform: none;
-    line-height: 1.8em; }
+    line-height: 1em; }
   html .home-intro p {
     padding: 0;
     font-size: 1em;
+    line-height: 1em;
     color: #999; }
     html .home-intro p span {
       display: inline-block;
@@ -64,10 +65,13 @@ html .key-tech {
   margin-bottom: 15px;
   font-size: 1.4em;
   color: black; }
+  @media (max-width: 768px) {
+    html .key-tech {
+      font-size: 1em; } }
 html .airbitz-team {
   margin-bottom: 0; }
   html .airbitz-team .owl-controls {
-    display: none; }
+    margin-top: 0; }
   html .airbitz-team .thumb-info.thumb-info-bottom-info .thumb-info-title {
     background: rgba(0, 0, 0, 0.7);
     left: 0;
@@ -110,6 +114,12 @@ html .app-screenshots .img-thumbnail {
 
 .modal.team-profile .modal-content {
   padding: 20px; }
+  @media (max-width: 992px) {
+    .modal.team-profile .modal-content {
+      zoom: .8; } }
+  @media (max-width: 768px) {
+    .modal.team-profile .modal-content {
+      zoom: .65; } }
 .modal.team-profile .modal-header {
   border: none; }
   .modal.team-profile .modal-header h2 {

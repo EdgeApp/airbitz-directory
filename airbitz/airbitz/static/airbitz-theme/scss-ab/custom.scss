@@ -7,7 +7,8 @@ $ab-green: #80c342;
 $ab-green-dark: #55af00;
 
 
-@import 'mixins.scss';
+@import 'mixins';
+@import 'bootstrap-scss/variables';
 
 
 
@@ -34,13 +35,14 @@ html {
 
         h3 {
             color: white;
-            margin-bottom: 0;
+            margin-bottom: 10px;
             text-transform: none;
-            line-height: 1.8em;
+            line-height: 1em;
         }
         p {
             padding: 0;
             font-size: 1em;
+            line-height: 1em;
             color: #999;
 
             span {
@@ -131,13 +133,17 @@ html {
         margin-bottom: 15px;
         font-size: 1.4em;
         color: black;
+
+        @media (max-width: $screen-sm) {
+            font-size: 1em;
+        }
     }
 
     .airbitz-team {
         margin-bottom: 0;
 
         .owl-controls {
-            display: none;
+            margin-top: 0;
         }
         .thumb-info {
 
@@ -201,6 +207,13 @@ html {
 
     .modal-content {
         padding: 20px;
+
+        @media(max-width: $screen-md) {
+            zoom: .8;
+        }
+        @media(max-width: $screen-sm) {
+            zoom: .65;
+        }
     }
     .modal-header {
         border: none;
