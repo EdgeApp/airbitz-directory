@@ -3,7 +3,7 @@ TEAM_INFO_ROW_1 = [
         "name": "Paul Puey",
         "img_path": "airbitz-theme/img-custom/portraits/paul.jpg",
         "title": "CEO / Co-Founder",
-        "nickname": "Cheif Inspirator",
+        "nickname": "Chief Inspirator",
         "bio_html": "<p>Paul is a proud Electrical Engineering and Computer Science graduate of UC Berkeley with a wide range of technical skills from low-level 3D graphics engineering to development of custom web CMS systems, even before people knew what a CMS was. He held lead engineering positions with Nvidia and Chromatic Research, but most recently owned and operated several non-technical small businesses throughout California. There he learned the importance of the intersection of people, business, and technology.</p><p>Today, Paul aims to bring Bitcoin mainstream with software and products aimed at simplifying Bitcoin and making it insanely easy to send and secure this revolutionary currency while maintaining the highest level of privacy.</p><p>When not converting people to bitcoin you'll likely find him climbing a rock in Joshua Tree or at a local climbing gym.</p>",
         "skills": ["Software Architecture", "Business Development", "UI/UX", "Bitcoin Community Evangelist"]
     },
@@ -18,7 +18,7 @@ TEAM_INFO_ROW_1 = [
     {
         "name": "Rick \"Henri\" Chan",
         "img_path": "airbitz-theme/img-custom/portraits/rick.jpg",
-        "title": "Cheif Operating Officer",
+        "title": "Chief Operating Officer",
         "nickname": "Worldwide Deal Wizard",
         "bio_html": "<p>Rick thrives on putting things together in a unique way and brings a diverse background to Airbitz. After graduating from the University of Rochester with a B.S. in Optics, Rick spent four years working in the Optical Engineering field before moving on to grad school. At Thunderbird, he specialized in Finance and International Management.</p><p>Since grad school, Rick has successfully connected investors, tech and great opportunities as he worked with a variety of startups, global FinTech ventures and Wall Streeters. Rick brings extensive startup experience in mobile, tech, social media, gaming, gamification, entertainment, FinTech and Bitcoin. He was a co-founder of AlphaPoint and served as COO. In addition, Rick's extensive knowledge of boutiques and Fortune 500 companies adds a broad perspective. Name a financial center around the world and Rick has probably been there, but there are still so many more to explore!</p><p>Rick loves scuba diving in tropical water. He is also a bokeholic.</p>",
         "skills": ["Serial Entrepreneur", "Broad Startup Experience", "Global FinTech", "International Wall St & BTC Passion"]
@@ -26,7 +26,7 @@ TEAM_INFO_ROW_1 = [
     {
         "name": "William Swanson",
         "img_path": "airbitz-theme/img-custom/portraits/william.jpg",
-        "title": "Cheif Architect / Co-Founder",
+        "title": "Chief Architect / Co-Founder",
         "nickname": "Code Plumber",
         "bio_html": '<p>William Swanson has been writing software since he was 11 years old. Although he has a degree in Electical Engineering from Cal Poly San Luis Obispo, he is just as comfortable working with software as he is with electronics. He has built systems at every level of the technology stack, from custom circuit boards with embedded firmware up through web sites and 3D graphics applications.</p><p>Through his work with AirBitz, William Swanson has become an official contributor to the <a href="http://libbitcoin.dyne.org/">libbitcoin</a> project, where he has written and contributed several new functional modules.</p><p>In April 2014 William teamed up with Amir Taaki, Pablo Martin of the Libbitcoin and <a href="http://darkwallet.is">DarkWallet</a> project along with Damian Cutillo of Airbitz in Toronto for the <a href="http://bitcoinexpo.ca/hackathon/">2014 Bitcoin Expo Hackathon</a>. The team won first place with the <a href="https://airbitz.co/go/airbitz-dark-wallet-win-bitcoin-hackathon-darkmarket/">DarkMarket</a> project, a proof of concept for one of the world\'s first fully decentralized, anonymous, peer to peer marketplaces. The hackathon prize money was donated to the Libbitcoin project\'s future development.</p>',
         "skills": ["Bitcoin Protocol", "C / C++", "Shell Scripting", "Electronics"]
