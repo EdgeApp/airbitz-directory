@@ -1,7 +1,3 @@
-html body {
-  font-size: 1.8em; }
-  html body p {
-    line-height: 1.8em; }
 html .hl-blue {
   color: #00aaff; }
 html .home-intro {
@@ -44,6 +40,8 @@ html .slider-container .main-label {
 html .slider-container .bottom-label {
   font-weight: 500;
   text-shadow: 0 2px 2px #000; }
+html .slider-container .tp-caption .fa-check {
+  color: #80c342; }
 html section.section {
   background-color: white;
   border: none; }
@@ -72,6 +70,8 @@ html .airbitz-team {
   margin-bottom: 0; }
   html .airbitz-team .owl-controls {
     margin-top: 0; }
+  html .airbitz-team .owl-nav {
+    display: none; }
   html .airbitz-team .thumb-info.thumb-info-bottom-info .thumb-info-title {
     background: rgba(0, 0, 0, 0.7);
     left: 0;
@@ -111,6 +111,50 @@ html .app-info {
 html .app-screenshots .img-thumbnail {
   border-radius: 0;
   border: none; }
+html body.home {
+  font-size: 1.8em; }
+  html body.home p {
+    line-height: 1.8em; }
+html body.api-sdk h3 {
+  text-transform: none; }
+html body.api-sdk .section {
+  padding: 25px 0;
+  border-radius: 5px; }
+  html body.api-sdk .section.gradient-blue {
+    background: -moz-linear-gradient(left, #002e48 0%, rgba(125, 185, 232, 0.01) 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #002e48), color-stop(100%, rgba(125, 185, 232, 0.01)));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, #002e48 0%, rgba(125, 185, 232, 0.01) 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, #002e48 0%, rgba(125, 185, 232, 0.01) 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, #002e48 0%, rgba(125, 185, 232, 0.01) 100%);
+    /* IE10+ */
+    background: linear-gradient(to right, #002e48 0%, rgba(125, 185, 232, 0.01) 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#002e48', endColorstr='#037db9e8',GradientType=1 );
+    /* IE6-9 */ }
+  html body.api-sdk .section.gradient-green {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#478900+0,7db9e8+100&amp;1+0,0+100 */
+    background: -moz-linear-gradient(left, #478900 0%, rgba(125, 185, 232, 0) 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #478900), color-stop(100%, rgba(125, 185, 232, 0)));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, #478900 0%, rgba(125, 185, 232, 0) 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, #478900 0%, rgba(125, 185, 232, 0) 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, #478900 0%, rgba(125, 185, 232, 0) 100%);
+    /* IE10+ */
+    background: linear-gradient(to right, #478900 0%, rgba(125, 185, 232, 0) 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#478900', endColorstr='#007db9e8',GradientType=1 );
+    /* IE6-9 */ }
+  html body.api-sdk .section h3 {
+    font-weight: 200;
+    margin-bottom: 0;
+    margin-left: 30px; }
 
 .modal.team-profile .modal-content {
   padding: 20px; }

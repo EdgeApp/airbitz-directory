@@ -1,0 +1,771 @@
+{% extends 'base_v2.html' %}
+{% load compressed %}
+{% load static from staticfiles %}
+
+
+{% block body_tag %}class="api-sdk"{% endblock body_tag %}
+
+{% block body %}
+
+  {% block header_navigation %}
+    {% include 'navigation/_home-header.html' %}
+  {% endblock header_navigation %}
+
+  {% block main %}
+    <div role="main" class="remain">
+
+      {% include 'api-sdk/slides.html' %}
+
+      <div class="container" style="margin-top: 90px">
+        <div class="row">
+          <div class="col-md-3">
+            <aside class="sidebar" id="sidebar" data-plugin-sticky data-plugin-options='{"minWidth": 991, "containerSelector": ".container", "padding": {"top": 110}}'>
+
+              <h4 class="heading-primary">Airbitz Architecture</h4>
+              <ul class="nav nav-list mb-xl show-bg-active">
+                <li><a data-hash href="#overview">Overview</a></li>
+                <li><a data-hash href="#params">Core Parameters</a></li>
+                <li><a data-hash href="#account-recovery">Account Recovery</a></li>
+                <li><a data-hash href="#account-encryption">Account Encryption</a></li>
+                <li><a data-hash href="#account-server-authentication">Account Server Authentication</a></li>
+                <li><a data-hash href="#accessing-account-sync-directory">Accessing the Account Sync Directory</a></li>
+              </ul>
+            </aside>
+          </div>
+          <div class="col-md-9">
+
+            <h2 class="mb-sm" id="overview">Airbitz Client Server <strong>Architecture</strong></h2>
+            <p>Airbitz believes in full transparency of the technology that is protecting your financial privacy and security.  This document is meant to map out the pieces.</p>
+
+            <section id="params" class="mt-xlg section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-code"></i> Core <strong>Parameters</strong></h3>
+              </div>
+            </section>
+            <h2 id="params-user" class="mt-xlg">User-supplied parameters</h2>
+            <div class="table-responsive">
+              <table class="mb-xlg table table-bordered table-striped table-condensed table-hover">
+                <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Definition</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><code>L</code></td>
+                  <td>Login</td>
+                </tr>
+                <tr>
+                  <td><code>P</code></td>
+                  <td>Password</td>
+                </tr>
+                <tr>
+                  <td><code>RQ</code></td>
+                  <td>Concatenated list of recovery questions</td>
+                </tr>
+                <tr>
+                  <td><code>RA</code></td>
+                  <td>Concatenated list of recovery answers</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2 id="params-scrypt" class="mt-xlg">Scrypt parameters</h2>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-condensed table-hover">
+                <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Definition</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><code>SNRP1</code></td>
+                  <td>Predefined salt and scrypt NRP values compiled into core library. Used when sending login and/or password to server.</td>
+                </tr>
+                <tr>
+                  <td><code>SNRP2</code></td>
+                  <td>Random salt and scrypt NRP values generated client-side at account create. Used for scrypting LP2 (used for wallet keys).</td>
+                </tr>
+                <tr>
+                  <td><code>SNRP3</code></td>
+                  <td>Random salt and scrypt NRP values generated client-side at account create. Used for scrypting LRA3 (used for password recovery).</td>
+                </tr>
+                <tr>
+                  <td><code>SNRP4</code></td>
+                  <td>Random salt and scrypt NRP values generated client-side at account create. Used for scrypting password for L4 (used for recovery questions, sync keys, relogin).</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <section id="account-recovery" class="mt-xlg section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-user"></i> Account <strong>Recovery</strong></h3>
+              </div>
+            </section>
+            <h2 class="mt-xlg">Recovery questions</h2>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-condensed table-hover">
+                <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Definition</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><code>L4</code></td>
+                  <td><code>Scrypt(L, SNRP4)</code></td>
+                </tr>
+                <tr>
+                  <td><code>ERQ</code></td>
+                  <td><code>AES256(RQ, L4)</code></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+            <section id="account-encryption" class="mt-xlg section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-lock"></i> Account <strong>Encryption</strong></h3>
+              </div>
+            </section>
+            <h2 class="mt-xlg">Account data encryption</h2>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-condensed table-hover">
+                <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Definition</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><code>MK</code></td>
+                  <td>256-bit random key, generated client-side at account create, used to encrypt account sync directory contents.</td>
+                </tr>
+                <tr>
+                  <td><code>EMK_LP2</code></td>
+                  <td><code>AES256(MK, LP2)</code></td>
+                </tr>
+                <tr>
+                  <td><code>EMK_LRA3</code></td>
+                  <td><code>AES256(MK, LRA3)</code></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+            <section id="account-server-authentication" class="mt-xlg section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-sign-in"></i> Account <strong>Authentication</strong></h3>
+              </div>
+            </section>
+            <h2 class="mt-xlg">SQL server authentication</h2>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-condensed table-hover">
+                <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Definition</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><code>L1</code></td>
+                  <td><code>Scrypt(L, SNRP1)</code></td>
+                </tr>
+                <tr>
+                  <td><code>LP1</code></td>
+                  <td><code>Scrypt(L + P, SNRP1)</code></td>
+                </tr>
+                <tr>
+                  <td><code>LRA1</code></td>
+                  <td><code>Scrypt(L + RA, SNRP1)</code></td>
+                </tr>
+                <tr>
+                  <td><code>LP1'</code></td>
+                  <td><code>Scrypt(LP1, <i>&lt;random salt&gt;</i>) + <i>&lt;random salt&gt;</i></code> (server-side only)</td>
+                </tr>
+                <tr>
+                  <td><code>LRA1'</code></td>
+                  <td><code>Scrypt(LRA1, <i>&lt;random salt&gt;</i>) + <i>&lt;random salt&gt;</i></code> (server-side only)</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2 class="mt-xlg">Atomic SQL server login change</h2>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-condensed table-hover">
+                <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Definition</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><code>ELP1</code></td>
+                  <td><code>AES256(LP1, MK)</code></td>
+                </tr>
+                <tr>
+                  <td><code>ELRA1</code></td>
+                  <td><code>AES256(LRA1, MK)</code></td>
+                </tr>
+                <tr>
+                  <td colspan="2">Or use a counter to ensure sequential updates</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2 class="mt-xlg">Account sync-data access</h2>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-condensed table-hover">
+                <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Definition</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><code>RepoAcctKey</code></td>
+                  <td>Account repository read/write key</td>
+                </tr>
+                <tr>
+                  <td><code>ERepoAcctKey</code></td>
+                  <td><code>AWS256(RepoAcctKey, MK)</code></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2 class="mt-xlg">Data packages available for download</h2>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-condensed table-hover">
+                <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Definition</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><code>CarePackage</code></td>
+                  <td><code>ERQ, SNRP2, SNRP3, SNRP4</code></td>
+                </tr>
+                <tr>
+                  <td><code>LoginPackage</code></td>
+                  <td><code>EMK_LP2, EMK_LRA3 ERepoAcctKey, ELP1, ELRA1</code></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2 class="mt-xlg">Wallet sync-data encryption</h2>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-condensed table-hover">
+                <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Definition</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><code>MK_<i>&lt;wallet_uuid&gt;</i></code></td>
+                  <td>256-bit random key, generated client-side at wallet create, used to encrypt wallet data data.</td>
+                </tr>
+                <tr>
+                  <td><code>EMK_<i>&lt;wallet_uuid&gt;</i></code></td>
+                  <td><code>AES256(MK_<i>&lt;wallet_uuid&gt;</i>, MK)</code></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2 class="mt-xlg">Wallet sync-data access</h2>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-condensed table-hover">
+                <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Definition</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><code>RepoWalletKey_<i>&lt;wallet_uuid&gt;</i></code></td>
+                  <td>Wallet repository read/write key</td>
+                </tr>
+                <tr>
+                  <td><code>ERepoWalletKey_<i>&lt;wallet_uuid&gt;</i></code></td>
+                  <td><code>AES256(RepoWalletKey, MK)</code></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2 class="mt-xlg">PIN-based login</h2>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-condensed table-hover">
+                <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Definition</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><code>LPIN1</code></td>
+                  <td><code>Scrypt(L + PIN, SNRP1)</code></td>
+                </tr>
+                <tr>
+                  <td><code>LPIN2</code></td>
+                  <td><code>Scrypt(L + PIN, SNRP2)</code></td>
+                </tr>
+                <tr>
+                  <td><code>PINK</code></td>
+                  <td>256-bit random key used to encrypt MK (in memory only)</td>
+                </tr>
+                <tr>
+                  <td><code>EMK_PINK</code></td>
+                  <td><code>AES256(MK, PINK)</code> (stored on device)</td>
+                </tr>
+                <tr>
+                  <td><code>EPINK</code></td>
+                  <td><code>AES256(PINK, LPIN2)</code> (stored on server)</td>
+                </tr>
+                <tr>
+                  <td><code>DID</code></td>
+                  <td>Unique Device ID</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2 class="mt-xlg">Data Storage</h2>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-condensed table-hover">
+                <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Storage Location</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><code>L1</code></td>
+                  <td>Server Database</td>
+                </tr>
+                <tr>
+                  <td><code>LP1’</code></td>
+                  <td>Server Database</td>
+                </tr>
+                <tr>
+                  <td><code>LRA1’</code></td>
+                  <td>Server Database</td>
+                </tr>
+                <tr>
+                  <td><code>DID, LPIN1’, EPINK</code></td>
+                  <td>Server Database</td>
+                </tr>
+                <tr>
+                  <td><code>CarePackage</code> (requires L1 to obtain)</td>
+                  <td>Server Database</td>
+                </tr>
+                <tr>
+                  <td><code>LoginPackage</code> (requires L1 & LP1 or LRA1 to obtain)</td>
+                  <td>Server Database</td>
+                </tr>
+                <tr>
+                  <td><code>SNRP1</code></td>
+                  <td>Compiled into Core Library</td>
+                </tr>
+                <tr>
+                  <td><code>CarePackage (ERQ, SNRP2, SNRP3, SNRP4)</code></td>
+                  <td>Phone Cache</td>
+                </tr>
+                <tr>
+                  <td><code>LoginPlackage (EMK_LP2, EMK_LRA3, ERepoAcctKey, ELP1, ELRA1)</code></td>
+                  <td>Phone Cache</td>
+                </tr>
+                <tr>
+                  <td><code>EMK_PINK</code></td>
+                  <td>Phone Cache</td>
+                </tr>
+                <tr>
+                  <td><code>EMK_PINK</code></td>
+                  <td>Phone Cache</td>
+                </tr>
+                <tr>
+                  <td><code>ERepoWalletKey_<i>&lt;wallet_uuid&gt;<i></code></td>
+                  <td>Account sync repo <strong>encrypted</strong> with account <code>MK</code></td>
+                </tr>
+                <tr>
+                  <td><code>EMK_<i>&lt;wallet_uuid&gt;<i></code></td>
+                  <td>Account sync repo <strong>encrypted</strong> with account <code>MK</code></td>
+                </tr>
+                <tr>
+                  <td>PIN, Settings, categories, etc…</td>
+                  <td>Account sync repo <strong>encrypted</strong> with account <code>MK</code></td>
+                </tr>
+                <tr>
+                  <td>Addresses, transactions, currency, etc…</td>
+                  <td>Wallet sync repo <strong>encrypted</strong> with wallet <code>MK</code></td>
+                </tr>
+                <tr>
+                  <td><code>ERecoveryPackage</code></td>
+                  <td>Stored in Email</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2 class="mt-xlg">N,r,p Scrypt parameter values</h2>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-condensed table-hover">
+                <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><code>SNRP1</code></td>
+                  <td>16384,1,1</td>
+                </tr>
+                <tr>
+                  <td><code>SNRP2, SNRP3, SNRP4</code></td>
+                  <td>Minimum 16384,1,1 for slowest devices (iphone 4)</td>
+                </tr>
+                <tr>
+                  <td><code>N</code>, <code>r</code></td>
+                  <td>scaled up to target 2-second hash time on device account is created on.
+                    Approximately 16384,8,1 on iPhone 5s</td>
+                </tr>
+                <tr>
+                  <td>Server <code>N</code>,<code>r</code>, <code>p</code> value for <code>LP1’</code> & <code>LRA1’</code></td>
+                  <td>16384,8,1</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <section id="accessing-account-sync-directory" class="mt-xlg section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-refresh"></i> Accessing the Account <strong>Sync Directory</strong></h3>
+              </div>
+            </section>
+            <p>These procedures all gain access to MK, which then permits sycning, account decryption, etc..</p>
+
+            <hr/>
+
+            <h3><strong>Standard</strong> - user knows password and data is on the phone</h3>
+            <p class="contextual-bg bg-warning"><strong>Note:</strong> No server interaction required, however, client will regularly check for a new CarePackage and LoginPackage.</p>
+            <ol>
+              <li>User enters login (<code>L</code>) and password (<code>P</code>)</li>
+              <li><code>LP2</code> is created using <code>Scrypt(L+P, SNRP2)</code></li>
+              <li><code>MK</code> is decrypted from <code>EMK</code> using <code>LP2</code></li>
+            </ol>
+
+            <hr/>
+
+            <h3><strong>New Device</strong> - user knows password and no data is on the phone</h3>
+            <ol>
+              <li>User enters login (<code>L</code>) and password (<code>P</code>)</li>
+              <li><code>L1</code> is created using <code>Scrypt(L, SNRP1)</code></li>
+              <li><code>LP1</code> is created using <code>Scrypt(L+P, SNRP1)</code></li>
+              <li><code>L1</code> and <code>LP1</code> are sent to the server</li>
+              <li>Server checks for <code>L1</code> in the table (validates user’s login and locates <code>LP1’</code>)</li>
+              <li>Server extracts the random salt from stored <code>LP1’</code> and using scrypt with <code>LP1</code> and that salt, checks this value against the stored <code>LP1’</code></li>
+              <li>Server has now validated the user</li>
+              <li>Server sends back <code>CarePackage</code> and <code>LoginPackage</code></li>
+              <li><code>LP2</code> is created using <code>Scrypt(L+P, SNRP2)</code></li>
+              <li><code>MK</code> is decrypted from <code>EMK</code> using <code>LP2</code></li>
+              <li>Client creates an account directory under accounts directory</li>
+              <li>Client stores account name in the account directory.</li>
+              <li>Client caches <code>CarePackage</code> and <code>LoginPackage</code> in the account directory.</li>
+            </ol>
+
+            <hr/>
+
+            <h3><strong>Forgot Password w/Old Device</strong> - user does not know password but data is on the phone</h3>
+            <ol>
+              <li>User enters login (<code>L</code>)</li>
+              <li><code>L4</code> is created using <code>Scrypt(L, SNRP4)</code></li>
+              <li><code>RQ</code> is decrypted from <code>ERQ</code> using <code>AES256</code> and key <code>L4</code></li>
+              <li>Client now has recovery questions</li>
+              <li>User answers recovery questions</li>
+              <li><code>RA</code> is created by concatenated answers together</li>
+              <li><code>LRA3</code> is created using <code>Scrypt(L + RA, SNRP3)</code></li>
+              <li><code>MK</code> is decrypted from <code>EMK_LRA3</code> using <code>AES256</code> and key <code>LRA3</code></li>
+              <li>User proceeds to Change Password process.</li>
+            </ol>
+
+            <hr/>
+
+            <h3><strong>Forgot Password w/New Device</strong> - user does not know password and data is not on phone</h3>
+            <ol>
+              <li>User enters login (<code>L</code>)</li>
+              <li><code>L1</code> is created using <code>Scrypt(L, SNRP1)</code></li>
+              <li><code>L1</code> is sent to the server</li>
+              <li>Server checks for <code>L1</code> in the table (login validated)</li>
+              <li>Server sends <code>CarePackage</code> </li>
+              <li><code>L4</code> is created using <code>Scrypt(L, SNRP4)</code></li>
+              <li><code>RQ</code> is decrypted from ERQ using <code>AES256</code> and key <code>L4</code></li>
+              <li>Client now has recovery questions</li>
+              <li>User answers recovery questions</li>
+              <li><code>RA</code> is created by concatenating answers together</li>
+              <li><code>LRA1</code> is created by using <code>Scrypt(L + RA, SNRP1)</code></li>
+              <li>Client sends <code>L1</code> and <code>LRA1</code> to Server</li>
+              <li>Server checks for <code>L1</code> in the table (validates user’s login and locates <code>LRA1’</code>)</li>
+              <li>Server extracts the random salt from stored <code>LRA1’</code> and using scrypt with <code>LRA1</code> and that salt, checks this value against the stored <code>LRA1’</code></li>
+              <li>Server has now validated the user</li>
+              <li>Server sends back the <code>LoginPackage</code></li>
+              <li><code>LRA3</code> is created using <code>Scrypt(L + RA, SNRP3)</code></li>
+              <li><code>MK</code> is decrypted from <code>EMK_ELRA3</code> using <code>AES256</code> and key <code>LRA3</code></li>
+              <li>Client creates an account directory under accounts directory</li>
+              <li>Client stores account name in the account directory.</li>
+              <li>Client caches the <code>LoginPackage</code> and <code>CarePackage</code> in the account directory.</li>
+              <li>User proceeds to Change Password process</li>
+            </ol>
+
+            <hr/>
+
+            <h3><strong>New Account</strong></h3>
+            <ol>
+              <li>User enters new login (<code>L</code>)</li>
+              <li>User enters new password (<code>P</code>)</li>
+              <li><code>L1</code> is created using <code>Scrypt(L, SNRP1)</code></li>
+              <li><code>L1</code> is sent to the server</li>
+              <li>Server verifies that <code>L1</code> does not currently exist</li>
+              <li><code>CarePackage</code> is created by holding <code>SNRP2</code>, <code>SNRP3</code>, <code>SNRP4</code></li>
+              <li><code>LP2</code> is created using <code>Scrypt(L+P, SNRP2)</code></li>
+              <li>Client creates a master key, <code>MK</code>, for the account</li>
+              <li><code>EMK_LP2</code> is created by encrypting <code>MK</code> with <code>AES256</code> using <code>LP2</code> as the key</li>
+              <li>Client creates a read-write repository <code>RepoAcctKey</code> key for a new repository for the account</li>
+              <li><code>ERepoAcctKey</code> created by encrypting <code>RepoAcctKey</code> with <code>AES256</code> using <code>MK</code> as the key</li>
+              <li><code>LoginPackage</code> is created from <code>EMK_LP2</code>, <code>ERepoAcctKey</code></li>
+              <li><code>LP1</code> is created using <code>Scrypt(L+P, SNRP1)</code></li>
+              <li>Client sends <code>L1</code>, <code>LP1</code>, <code>CarePackage</code>, <code>LoginPackage</code>, and <code>RepoAcctKey</code> to the server</li>
+              <li>Server stores <code>L1</code></li>
+              <li>Server creates <code>LP1’</code> and stores it</li>
+              <li>Server creates <code>LRA1’</code> and stores it</li>
+              <li>Server stores <code>CarePackage</code></li>
+              <li>Server stores <code>LoginPackage</code></li>
+              <li>Server creates a new repository for the account with <code>RepoAcctKey</code> as the key</li>
+              <li>Client creates an account directory under accounts directory</li>
+              <li>Client stores account name in the local account directory.</li>
+              <li>Client caches <code>CarePackage</code> and <code>LoginPackage</code> in the local account directory.</li>
+            </ol>
+
+            <h2>Changing Login</h2>
+            <p>These procedures assume that the user has gained access to <code>MK</code></p>
+
+            <hr/>
+
+            <h3><strong>Change Password when Old Password is Known</strong></h3>
+            <ol>
+              <li>User enters login (<code>L</code>) and password (<code>P</code>)</li>
+              <li><code>L1</code> is created using <code>Scrypt(L, SNRP1)</code></li>
+              <li><code>LP1</code> is created using <code>Scrypt(L+P, SNRP1)</code></li>
+              <li><code>LP2</code> is created using <code>Scrypt(L+P, SNRP2)</code></li>
+              <li><code>new_LP1</code> is created using <code>Scrypt(L+new_P, SNRP1)</code></li>
+              <li><code>new_LP2</code> is created using <code>Scrypt(L+new_P, SNRP2)</code></li>
+              <li><code>MK</code> is decrypted from <code>EMK_LP2</code> using <code>AES256</code> and key <code>LP2</code></li>
+              <li><code>new_EMK_LP2</code> is created by encrypting <code>MK</code> with <code>new_LP2</code></li>
+              <li>Client creates <code>new_LoginPackage</code> by replacing <code>EMK_LP2</code> with <code>new_EMK_LP2</code></li>
+              <li>Client sends <code>L1</code>, <code>LP1</code>, <code>new_LP1</code> and <code>new_LoginPackage</code> to the server</li>
+              <li>Server checks for <code>L1</code> in the table (validates user’s login and locates <code>LP1</code>’)</li>
+              <li>Server extracts the random salt from stored <code>LP1’</code> and using scrypt with <code>old_P1</code> and that salt, checks this value against the stored <code>LP1’</code></li>
+              <li>Server has now validated the user</li>
+              <li>Server creates <code>new_LP1’</code> from <code>new_LP1</code>.</li>
+              <li>Server stores <code>new_LP1’</code> as <code>LP1’</code></li>
+              <li>Client replaces cached <code>LoginPackage</code> with <code>new_LoginPackage</code></li>
+            </ol>
+
+            <hr/>
+
+            <h3><strong>Change Password when Old Password is Unknown</strong></h3>
+            <ol>
+              <li>User enters login (<code>L</code>)</li>
+              <li><code>L1</code> is created using <code>Scrypt(L, SNRP1)</code></li>
+              <li><code>L4</code> is created using <code>Scrypt(L, SNRP4)</code></li>
+              <li><code>RQ</code> is decrypted from <code>ERQ</code> using <code>AES256</code> and key <code>L4</code></li>
+              <li>Client now has recovery questions</li>
+              <li>User answers recovery questions</li>
+              <li><code>RA</code> is created by concatenated answers together</li>
+              <li><code>LRA1</code> is created by using <code>Scrypt(L+RA, SNRP1)</code></li>
+              <li><code>LRA3</code> is created using <code>Scrypt(L+RA, SNRP3)</code></li>
+              <li><code>MK</code> is decrypted from <code>EMK_LRA3</code> using <code>AES256</code> and key <code>LRA3</code></li>
+              <li>User enters new password (<code>new_P</code>)</li>
+              <li><code>new_LP2</code> is created using <code>Scrypt(L+new_P, SNRP2)</code></li>
+              <li><code>new_EMK_LP2</code> is created by encrypting <code>MK</code> with <code>AES256</code> using <code>new_LP2</code> as the key</li>
+              <li>Client creates <code>new_LoginPackage</code> by replacing <code>EMK_LP2</code> with <code>new_EMK_LP2</code></li>
+              <li>Client sends <code>L1</code>, <code>LRA1</code>, <code>new_LP1</code> and <code>new_LoginPackage</code> to the server</li>
+              <li>Server checks for <code>L1</code> in the table (validates user’s login and locates <code>LP1’</code>)</li>
+              <li>Server extracts the random salt from stored <code>LP1’</code> and using scrypt with <code>old_P1</code> and that salt, checks this value against the stored <code>LP1’</code></li>
+              <li>Server has now validated the user</li>
+              <li>Server creates <code>new_LP1’</code> from <code>new_LP1</code>.</li>
+              <li>Server stores <code>new_LP1’</code> as <code>LP1’</code></li>
+              <li>Client replaces cached <code>LoginPackage</code> with <code>new_LoginPackage</code></li>
+            </ol>
+
+            <hr/>
+
+            <h3><strong>Change Recover Questions when Password is Known</strong></h3>
+            <ol>
+              <li>User enters login (L) and password (P)</li>
+              <li><code>L1</code> is created using <code>Scrypt(L, SNRP1)</code></li>
+              <li><code>LP1</code> is created using <code>Scrypt(L+P, SNRP1)</code></li>
+              <li><code>LP2</code> is created using <code>Scrypt(L+P, SNRP2)</code></li>
+              <li>User selects new recovery questions</li>
+              <li>User answers questions</li>
+              <li><code>new_RQ</code> created using the new questions selected</li>
+              <li><code>new_RA</code> is created by concatenated answers together</li>
+              <li><code>L4</code> is created using <code>Scrypt(L, SNRP4)</code></li>
+              <li><code>new_ERQ</code> created by encrypting <code>new_RQ</code> with <code>AES256</code> using <code>L4</code> as the key</li>
+              <li><code>new_CarePackage</code> is created by holding <code>new_ERQ</code>, <code>SNRP2</code>, <code>SNRP3</code>, <code>SNRP4</code></li>
+              <li><code>new_LRA3</code> is created using <code>Scrypt(L+new_RA, SNRP3)</code></li>
+              <li><code>new_EML_LRA3</code> is created by encrypting <code>MK</code> with <code>AES256</code> using <code>LRA3</code> as the key</li>
+              <li>Client creates <code>new_LoginPackage</code> by replacing <code>EMK_LRA3</code> with <code>new_EMK_LRA3</code></li>
+              <li><code>new_LRA1</code> is created by using  <code>Scrypt(L+new_RA, SNRP1)</code></li>
+              <li>Client sends <code>L1</code>, <code>LP1</code>, <code>new_LRA1</code>, <code>new_CarePackage</code>, <code>new_LoginPackage</code> to the server</li>
+              <li>Server checks for L1 in the table (validates user’s login and locates LP1’)</li>
+              <li>Server extracts the random salt from stored <code>LP1’</code> and using scrypt with <code>old_P1</code> and that salt, checks this value against the stored <code>LP1’</code></li>
+              <li>Server has now validated the user</li>
+              <li>Server stores <code>new_CarePackage</code> and <code>new_LoginPackage</code></li>
+              <li>Server creates <code>new_LRA1’</code> from <code>new_LRA1</code>.</li>
+              <li>Server stores <code>new_LRA1’</code> as <code>LRA1’</code></li>
+              <li>Client replaces cached <code>CarePackage</code> and <code>LoginPackage</code> with new versions</li>
+            </ol>
+
+            <h2>Gaining access to wallet sync directory</h2>
+            <p>This requires first having access to the account sync directory.</p>
+
+            <hr/>
+
+            <h3><strong>Standard</strong> - data is on phone</h3>
+            <ol>
+              <li><code>MK_<i>&lt;wallet_uuid&gt;</i></code> is decrypted from <code>EMK_<i>&lt;wallet_uuid&gt;</i></code> (found in the account sync directory) using account <code>MK</code>.</li>
+            </ol>
+
+            <hr/>
+
+            <h3><strong>New Device</strong> - data is not on phone</h3>
+            <ol>
+              <li>Client finds <code>ERepoWalletKey_<i>&lt;wallet_uuid&gt;</i></code> in account sync directory</li>
+              <li><code>RepoWalletKey_<i>&lt;wallet_uuid&gt;</i></code> is decrypted from <code>ERepoWalletKey_<i>&lt;wallet_uuid&gt;</i></code> using <code>AES256</code> and account key <code>MK</code></li>
+              <li>Client creates <code><i>&lt;wallet_uuid&gt;</i></code> directory under wallets directory</li>
+              <li>Client sync’s <code><i>&lt;wallet_uuid&gt;</i></code> directory using RepoWalletKey_<i>&lt;wallet_uuid&gt;</i></li>
+              <li><code>MK_<i>&lt;wallet_uuid&gt;</i></code> is decrypted from <code>EMK_<i>&lt;wallet_uuid&gt;</i></code> (found in the account sync directory) using <code>AES256</code> and key <code>MK</code></li>
+            </ol>
+
+            <hr/>
+
+            <h3><strong>New Wallet</strong></h3>
+            <ol>
+              <li>User enters login (<code>L</code>) and password (<code>P</code>)</li>
+              <li>Client accesses account in the normal way</li>
+              <li><code>L1</code> is created using <code>Scrypt(L, SNRP1)</code></li>
+              <li><code>LP1</code> is created using <code>Scrypt(L+P, SNRP1)</code></li>
+              <li>User enters the name for the new wallet</li>
+              <li>User specifies fiat currency</li>
+              <li>Client generates a <code>UUID</code> for the wallet</li>
+              <li>Client creates a new directory <code><i>&lt;wallet_uuid&gt;</i></code> under the Wallets directory</li>
+              <li>Client saves wallet name in the new directory</li>
+              <li>Client saves a bitcoin private seed in the new directory</li>
+              <li>Client creates a git repository key <code>RepoWalletKey_<i>&lt;wallet_uuid&gt;</i></code></li>
+              <li><code>L1</code>, <code>LP1</code> and <code>RepoWalletKey_<i>&lt;wallet_uuid&gt;</i></code> are sent to the server with a request to create the repository</li>
+              <li>Server checks for <code>L1</code> in the table (validates user’s login and locates <code>LP1’</code>)</li>
+              <li>Server extracts the random salt from stored <code>LP1’</code> and using scrypt with <code>LP1</code> and that salt, checks this value against the stored <code>LP1’</code></li>
+              <li>Server has now validated the user</li>
+              <li>Server creates the new wallet repository with <code>RepoWalletKey_<i>&lt;wallet_uuid&gt;</i></code></li>
+              <li>Client now has a repository for their wallet</li>
+              <li><code>MK_<i>&lt;wallet_uuid&gt;</i></code> is created via random number generator</li>
+              <li><code>EMK_<i>&lt;wallet_uuid&gt;</i></code> is created by encrypting  <code>MK_<i>&lt;wallet_uuid&gt;</i></code> with <code>AES256</code> and account <code>MK</code> and stored in the appropriate account sync directory</li>
+              <li><code>ERepoWalletKey_<i>&lt;wallet_uuid&gt;</i></code> is created by encrypting <code>RepoWalletKey_<i>&lt;wallet_uuid&gt;</i></code> with <code>AES256</code> and account <code>MK</code> and stored in the appropriate account sync directory</li>
+              <li>Client adds the <code><i>&lt;wallet_uuid&gt;</i></code> to the list of wallets in the appropriate account sync directory</li>
+              <li>Client creates <code><i>&lt;wallet_uuid&gt;</i></code> directory in the Wallets directory</li>
+              <li>Client creates all default wallet data files (i.e., Wallet_Name, FiatCurrency, etc) and stores them in the <code><i>&lt;wallet_uuid&gt;</i></code> directory </li>
+              <li>Client syncs <code><i>&lt;wallet_uuid&gt;</i></code> directory using the <code>RepoWalletKey_<i>&lt;wallet_uuid&gt;</i></code> key</li>
+            </ol>
+
+            <hr/>
+
+            <h3><strong>Re-login on same device using only PIN</strong></h3>
+            <ol>
+              <li>After login, application creates <strong>ReLoginPackage</strong> and encrypts using <strong>RLEK</strong> to get <code>EReLoginPackage</code></li>
+              <li>Application saves <code>EReLoginPackage</code> on flash storage along with cleartext login of user</li>
+              <li>Application hashes <code>L</code> + <code>PIN</code> to create <code>LPIN1</code></li>
+              <li>Application transmits <code>L1</code>, <code>ERLEK</code>, <code>LPIN1</code>, and the (<code>ALI</code>) auto-logout interval from settings to be saved on auth server.</li>
+              <li>Auth server hashes <code>L1</code> to <code>L1’</code> and finds row entry in database of that user and saves <code>ERLEK</code>, <code>LPIN1</code>, and <code>ALI</code></li>
+              <li>Auth server auto deletes <code>ERLEK</code> & <code>LPIN1</code> once auto-logout interval expires</li>
+              <li>When application comes back from a shutdown, it looks for an <code>EReLoginPackage</code> on flash.</li>
+              <li>If found, user is asked to enter <code>PIN</code></li>
+              <li><code>PIN</code> is hashed to create <code>LPIN1</code></li>
+              <li>Application sends <code>L1</code> and <code>LPIN1</code> to auth server</li>
+              <li>If authentication is successful, auth server sends back <code>ERLEK</code> to application</li>
+              <li>Application decrypts <code>ERLEK</code> using <code>L4</code></li>
+              <li>Application decrypts <code>EReLoginPackage</code> using <code>RLEK</code></li>
+              <li>Application logs in using <code>ReLoginPackage</code></li>
+            </ol>
+
+            <hr/>
+
+            <h3><strong>Password Recovery v2.0</strong></h3>
+            <ol>
+              <li>After login, application creates <code>ReLoginPackage</code> and encrypts using <code>RLEK</code> to get <code>EReLoginPackage</code></li>
+              <li>Application triggers mobile email application of user and creates a self-addressed email back to the user with the <code>EReLoginPackage</code> attached</li>
+              <li>Application UI requests 2 to 6 recovery questions and answers</li>
+              <li>One question is a non-publicly known recovery question requiring at least 6 characters</li>
+              <li>User must then supply 1 to 5 more questions and answers with their own created questions.</li>
+              <li>Application creates <code>LRA1</code> from all concatenated recovery answers and transmits <code>L1</code>, <code>ERLEK</code>, <code>ERQ</code>, and <code>LRA1</code> to be saved on auth server.</li>
+              <li>Auth server hashes <code>L1</code> to <code>L1’</code>, <code>LRA1</code> to <code>LRA1’</code> and finds row entry in database of that user based on <code>L1’</code> and saves <code>ERLEK</code> and <code>LRA1’</code></li>
+              <li>When user requests a password recovery, application directs user to email to find their “SpareBitz key”</li>
+              <li>When user clicks on SpareBitz URI in email, application launches and requests their login.</li>
+              <li>Application hashes login into <code>L1</code></li>
+              <li>Application sends <code>L1</code> to auth server</li>
+              <li>Auth server hashes <code>L1</code> to <code>L1’</code> and if there is a match, returns <code>ERQ</code></li>
+              <li><code>ERQ</code> is decrypted using <code>L4</code></li>
+              <li>User is asked to complete answers to the recovery questions</li>
+              <li>Answers are concatenated and hashed into <code>LRA1</code> and sent to auth server</li>
+              <li>If authentication is successful, auth server sends back <code>ERLEK</code> to application</li>
+              <li>Application decrypts <code>ERLEK</code> using <code>L4</code></li>
+              <li>Application decrypts <code>EReLoginPackage</code> using <code>RLEK</code></li>
+              <li>Application logs in using <code>ReLoginPackage</code></li>
+            </ol>
+
+            <h2>Server Commands</h2>
+            <ul>
+              <li>Check that account is available. This checks that a given <code>L1</code> is available for use.</li>
+              <li>Create account - <code>L1</code>, <code>LP1</code>, <code>LRA1</code>, <code>CarePackage</code>, <code>LoginPackage</code>, and <code>RepoAcctKey</code></li>
+              <li>Get <code>CarePackage</code> - <code>L1</code></li>
+              <li>Get <code>LoginPackage</code> - <code>L1</code>, <code>LP1</code>/<code>LRA1</code></li>
+              <li>Change password - <code>L1</code>, <code>LP1</code>/<code>LRA1</code>, <code>new_LP1</code>, <code>new_LoginPackage</code></li>
+              <li>Change recovery questions - <code>L1</code>, <code>LP1</code>, <code>new_LRA1</code>, <code>new_CarePackage</code>, <code>new_LoginPackage</code></li>
+              <li>Create wallet - <code>L1</code>, <code>LP1</code>, <code>RepoWalletKey_<i>&lt;wallet_uuid&gt;</i></code></li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  {% endblock main %}
+
+{% endblock body %}
+
+{% block body_modals %}{% endblock body_modals %}

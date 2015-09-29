@@ -1,0 +1,121 @@
+{% extends 'base_v2.html' %}
+{% load compressed %}
+{% load static from staticfiles %}
+
+
+{% block body_tag %}class="api-sdk"{% endblock body_tag %}
+
+{% block body %}
+
+  {% block header_navigation %}
+    {% include 'navigation/_home-header.html' %}
+  {% endblock header_navigation %}
+
+  {% block main %}
+    <div role="main" class="main">
+
+      {% include 'api-sdk/slides.html' %}
+
+      <div class="container" style="margin-top: 90px">
+        <div class="row">
+          <div class="col-md-3">
+            <aside class="sidebar" id="sidebar" data-plugin-sticky data-plugin-options='{"minWidth": 991, "containerSelector": ".container", "padding": {"top": 110}}'>
+
+              <h4 class="heading-primary">Edge Security API/SDK</h4>
+              <ul class="nav nav-list mb-xl show-bg-active">
+                <li><a data-hash href="#overview">Overview</a></li>
+                <li>
+                  <a data-hash href="#features">Features</a>
+                  <ul>
+                    <li><a data-hash href="#decentralized">Decentralized</a></li>
+                    <li><a data-hash href="#private">Private</a></li>
+                    <li><a data-hash href="#zero-knowledge">Zero Knowledge</a></li>
+                  </ul>
+                </li>
+                <li><a data-hash href="#applications">Applications</a></li>
+                <li><a data-hash href="#open-source">Open Source</a></li>
+              </ul>
+
+            </aside>
+          </div>
+          <div class="col-md-9">
+
+            <h2 class="mb-sm" id="overview">Developer API/SDK <strong>Overview</strong></h2>
+            <p>The <a href="{% url 'page_bitcoin_wallet' %}" title="Airbitz Mobile Bitcoin App">Airbitz Mobile Bitcoin App</a> is built on a platform that provides edge security for digital assets in a mobile-friendly, cross-platform SDK. Available as a powerful, open source software library, the Airbitz Core (ABC) provides all the security functionality and ease-of-use of the Airbitz mobile application including:</p>
+
+            <section id="features" class="section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-gears"></i> Platform <strong>Features</strong></h3>
+              </div>
+            </section>
+            <ul>
+              <li>Automatic client-side data encryption using users' credentials</li>
+              <li>Automatic backup to P2P server nodes</li>
+              <li>Automatic synchronization between users’ devices</li>
+              <li>One-Touch 2 factor authentication</li>
+              <li>Password recovery</li>
+              <li>Data revision history and rollback</li>
+              <li>Blockchain operations such as private key generation, transaction signing, and blockchain queries</li>
+            </ul>
+            <p>ABC gives developers the ability to build software such as ATMs, POS solutions, games, and payroll services that are fully integrated with accounts from the Airbitz mobile app. The Airbitz mobile app is the first product utilizing this platform, and the potential for future integrations with other applications is vast. Any developer that wishes to secure sensitive user data in a private, zero-knowledge, zero-trust infrastructure will find Airbitz a powerful solution to their data security.</p>
+
+            <section id="decentralized" class="section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-cloud"></i> Distributed and <strong>Decentralized</strong></h3>
+              </div>
+            </section>
+            <p>With our deep roots in decentralized technologies such as the blockchain and digital currencies, we immediately see the benefits in decentralizing the majority of our security infrastructure. Our level of decentralization allows users to still access their data and even execute blockchain operations even if Airbitz servers are down. This focus provides the type of resilience and fault tolerance unmatched by other data security platforms.</p>
+
+            <section id="private" class="section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-shield"></i> Private by <strong>Design</strong></h3>
+              </div>
+            </section>
+            <p>Security and privacy go hand in hand, and ABC provides incredibly high privacy to promote a fundamental disincentive to attackers of the system. No part of ABC collects sensitive user data such as names, emails, addresses or phone numbers. This disassociates the users of our platform from the potentially highly valuable data they may be trying to protect.</p>
+
+            <section id="zero-knowledge" class="section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-eye-slash"></i> Zero Knowledge <strong>Architecture</strong></h3>
+              </div>
+            </section>
+            <p><strong>Zero Knowledge</strong> means Airbitz knows nothing about the encrypted data that our client software interfaces with. This unique design means nothing leaves the client device until it is encrypted and nothing can ever be decrypted until it is unlocked with the user's password on their device. It's not just "end to end encryption;" it is <strong>Zero Knowledge</strong> which is the only way to achieve true security.</p>
+
+            <section id="applications" class="section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-cubes"></i> Types of <strong>Applications</strong></h3>
+              </div>
+            </section>
+            <p>Airbitz can be used to create user value for almost any application where incorruptable data and overall security is crucial to the user or project.  This implies that most applications stand to benefit from the platform.</p>
+
+            {% include 'api-sdk/applications.html' %}
+
+            <section id="open-source" class="section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-github"></i> Distributed <strong>Open Source</strong></h3>
+              </div>
+            </section>
+            <div class="row">
+              <div class="col-md-9">
+                <p>Airbitz was released open source on Oct 31, 2014.</p>
+                <p><a href="http://en.wikipedia.org/wiki/Open-source_software" target="_blank">Open source software</a> provides the transparency required to verify the promised functionality of security software. Airbitz strongly believes in the open source model and has contributed significantly to various open source projects, including our own.</p>
+                <ul>
+                  <li><a href="https://github.com/Airbitz/airbitz-core" target="_blank" title="Library for Bitcoin Wallets">Open Source Airbitz Core Library</a> (ABC Developer API/Library)</li>
+                  <li><a href="https://github.com/Airbitz/airbitz-ios-gui" target="_blank" title="iPhone Bitcoin App">Open Source iPhone Bitcoin App</a> (GUI)</li>
+                  <li><a href="https://github.com/Airbitz/airbitz-android-gui" target="_blank" title="Android Bitcoin App">Open Source Android Bitcoin App</a> (GUI)</li>
+                </ul>
+              </div>
+              <div class="col-md-3">
+                <img src="{% static 'img/bitcoin-wallet/open-source-software.jpg' %}" alt="Open Source via Github" class="pull-right img-responsive" />
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {% endblock main %}
+
+{% endblock body %}
+
+{% block body_modals %}{% endblock body_modals %}

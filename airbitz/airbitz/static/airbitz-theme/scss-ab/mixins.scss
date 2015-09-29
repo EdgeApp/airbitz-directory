@@ -1,3 +1,25 @@
+// CUSTOM COLORED GRADIENTS
+@mixin gradient-blue-transparent() {
+  background: -moz-linear-gradient(left,  rgba(0,46,72,1) 0%, rgba(125,185,232,0.01) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,46,72,1)), color-stop(100%,rgba(125,185,232,0.01))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left,  rgba(0,46,72,1) 0%,rgba(125,185,232,0.01) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left,  rgba(0,46,72,1) 0%,rgba(125,185,232,0.01) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left,  rgba(0,46,72,1) 0%,rgba(125,185,232,0.01) 100%); /* IE10+ */
+  background: linear-gradient(to right,  rgba(0,46,72,1) 0%,rgba(125,185,232,0.01) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#002e48', endColorstr='#037db9e8',GradientType=1 ); /* IE6-9 */
+}
+@mixin gradient-green-transparent() {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#478900+0,7db9e8+100&amp;1+0,0+100 */
+  background: -moz-linear-gradient(left,  rgba(71,137,0,1) 0%, rgba(125,185,232,0) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(71,137,0,1)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left,  rgba(71,137,0,1) 0%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left,  rgba(71,137,0,1) 0%,rgba(125,185,232,0) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left,  rgba(71,137,0,1) 0%,rgba(125,185,232,0) 100%); /* IE10+ */
+  background: linear-gradient(to right,  rgba(71,137,0,1) 0%,rgba(125,185,232,0) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#478900', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 */
+}
+
+
 @mixin transform($property: none) {
 //  none | <transform-function>
   @include prefixer(transform, $property, webkit moz ms o spec);

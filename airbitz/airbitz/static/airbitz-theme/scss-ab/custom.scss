@@ -13,20 +13,11 @@ $ab-green-dark: #55af00;
 
 
 html {
-
-    body {
-        font-size: 1.8em;
-
-        p {
-            line-height: 1.8em;
-        }
-    }
     // utility classes
     .hl-blue {
         color: #00aaff;
     }
 
-    // home
     #header {}
 
     .home-intro {
@@ -83,10 +74,14 @@ html {
             font-size: 42px;
             text-shadow: 0 2px 2px #000;
         }
-
         .bottom-label {
             font-weight: 500;
             text-shadow: 0 2px 2px #000;
+        }
+        .tp-caption {
+            .fa-check {
+                color: $ab-green;
+            }
         }
     }
 
@@ -145,6 +140,11 @@ html {
         .owl-controls {
             margin-top: 0;
         }
+        .owl-nav {
+                display: none;
+            @media (min-width: $screen-md) {
+            }
+        }
         .thumb-info {
 
             &.thumb-info-bottom-info {
@@ -196,6 +196,39 @@ html {
         .img-thumbnail {
             border-radius: 0;
             border: none;
+        }
+    }
+
+
+    body {
+        &.home {
+            font-size: 1.8em;
+
+            p {
+                line-height: 1.8em;
+            }
+        }
+        &.api-sdk {
+
+            h3 {
+                text-transform: none;
+            }
+            .section {
+                padding: 25px 0;
+                border-radius: 5px;
+
+                &.gradient-blue {
+                    @include gradient-blue-transparent();
+                }
+                &.gradient-green {
+                    @include gradient-green-transparent();
+                }
+                h3 {
+                    font-weight: 200;
+                    margin-bottom: 0;
+                    margin-left: 30px;
+                }
+            }
         }
     }
 
@@ -309,3 +342,6 @@ html {
         }
     }
 }
+
+
+
