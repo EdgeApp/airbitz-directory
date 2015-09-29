@@ -1,5 +1,6 @@
-TEAM_INFO_ROW_1 = [
+TEAM_INFO = [
     {
+        "id": "paul",
         "name": "Paul Puey",
         "img_path": "airbitz-theme/img-custom/portraits/paul.jpg",
         "title": "CEO / Co-Founder",
@@ -8,6 +9,7 @@ TEAM_INFO_ROW_1 = [
         "skills": ["Software Architecture", "Business Development", "UI/UX", "Bitcoin Community Evangelist"]
     },
     {
+        "id": "tim",
         "name": "Tim Horton",
         "img_path": "airbitz-theme/img-custom/portraits/tim.jpg",
         "title": "CTO / Co-Founder",
@@ -16,6 +18,7 @@ TEAM_INFO_ROW_1 = [
         "skills": ["System Administration", "Java", "Python", "C"]
     },
     {
+        "id": "rick",
         "name": "Rick \"Henri\" Chan",
         "img_path": "airbitz-theme/img-custom/portraits/rick.jpg",
         "title": "Chief Operating Officer",
@@ -24,6 +27,7 @@ TEAM_INFO_ROW_1 = [
         "skills": ["Serial Entrepreneur", "Broad Startup Experience", "Global FinTech", "International Wall St & BTC Passion"]
     },
     {
+        "id": "william",
         "name": "William Swanson",
         "img_path": "airbitz-theme/img-custom/portraits/william.jpg",
         "title": "Chief Architect / Co-Founder",
@@ -32,6 +36,7 @@ TEAM_INFO_ROW_1 = [
         "skills": ["Bitcoin Protocol", "C / C++", "Shell Scripting", "Electronics"]
     },
     {
+        "id": "damian",
         "name": "Damian Cutillo",
         "img_path": "airbitz-theme/img-custom/portraits/damian.jpg",
         "title": "V.P. Design / Co-Founder",
@@ -40,6 +45,7 @@ TEAM_INFO_ROW_1 = [
         "skills": ["Design / Development", "Django / WordPress", "UI/UX", "SEO / SEM"]
     },
     {
+        "id": "will",
         "name": "Will Pangman",
         "img_path": "airbitz-theme/img-custom/portraits/will.jpg",
         "title": "Marketing Manager",
@@ -47,10 +53,8 @@ TEAM_INFO_ROW_1 = [
         "bio_html": "<p>Will discovered Bitcoin in late 2012 and immediately engaged in building the human networks around this new technology. He founded Bitcoin Milwaukee, a 150+ volunteer community advocacy organization that quickly became known as one of the most active and successful Bitcoin outreach groups in North America. For the past year, he served as COO for the Bitcoin startup, Tapeke, and remains as an advisor to the company.</p><p>Before Bitcoin, Will worked as a production manager in the film and TV industry in New York City, and then as a marketing and business development consultant helping to update small businesses for the digital age. Will excels at relating the complexities of bitcoin to people of diverse backgrounds and awakening their curiosity to the power of distributed networks and stateless money.</p><p>Will has been a guest on many podcasts, frequently contributes to the World Crypto Network's flagship program The Bitcoin Group, and volunteers support to various standards and education projects in the space. Will brings his full sector knowledge, deep network, and relentless optimism to the Airbitz team, and looks forward to scaling the Airbitz tech stack to its first million users and beyond.</p>",
         "skills": ["User Engagement", "Public Speaking", "Social Networking", "Propaganda"]
     },
-]
-
-TEAM_INFO_ROW_2 = [
     {
+        "id": "mk",
         "name": "M.K. Lords",
         "img_path": "airbitz-theme/img-custom/portraits/mk.jpg",
         "title": "Marketing Manager",
@@ -59,6 +63,7 @@ TEAM_INFO_ROW_2 = [
         "skills": ["Writing / Editing", "Public Speaking", "Content Creation", "Social Media Management"]
     },
     {
+        "id": "scott",
         "name": "Scott Morgan",
         "img_path": "airbitz-theme/img-custom/portraits/scott.jpg",
         "title": "H.R. Accounting / Co-Founder",
@@ -67,6 +72,7 @@ TEAM_INFO_ROW_2 = [
         "skills": ["California CPA", "Partnering & Networking", "Wallet User", "Ruby Newbie"]
     },
     {
+        "id": "nik",
         "name": "Nik Oraevkiy",
         "img_path": "airbitz-theme/img-custom/portraits/nik.jpg",
         "title": "Business Development / Analyst",
@@ -75,6 +81,7 @@ TEAM_INFO_ROW_2 = [
         "skills": ["Financial Analysis", "BI/CI/MI", "Deep Research", "Exchange Analysis"]
     },
     {
+        "id": "rj",
         "name": "\"RJ\" Raljoseph Ricasta",
         "img_path": "airbitz-theme/img-custom/portraits/rj.jpg",
         "title": "Lead Curator / QA",
@@ -83,6 +90,7 @@ TEAM_INFO_ROW_2 = [
         "skills": ["Quality Assurance", "Data Analysis", "Research", "Bitcoin Enthusiast"]
     },
     {
+        "id": "vince",
         "name": "Vincent Herrera",
         "img_path": "airbitz-theme/img-custom/portraits/vincent.jpg",
         "title": "Curator / QA",
@@ -91,6 +99,7 @@ TEAM_INFO_ROW_2 = [
         "skills": ["Quality Assurance", "Data Visualization", "Finance", "Fieldwork"]
     },
     {
+        "id": "jacob",
         "name": "Jacob Burrell",
         "img_path": "airbitz-theme/img-custom/portraits/jacob.jpg",
         "title": "Junior Developer / QA",

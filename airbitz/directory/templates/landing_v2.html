@@ -312,16 +312,58 @@
         <h2>The <strong>Team</strong></h2>
       </div>
 
-      <div class="airbitz-team owl-carousel full-width mt-xlg" data-plugin-options='{"autoplay": false, "autoplayTimeout": 8000, "items": 6, "loop": false, "nav": true, "dots": false}'>
-        {% for info in team_info_row_1 %}
-          {% include 'landing/_team-profile-square.html' %}
-        {% endfor %}
+      {#  LARGE  #}
+      <div class="visible-lg visible-md mt-xlg mb-xlg">
+        <div class="airbitz-team  carousel-6 owl-carousel full-width">
+          {% for info in team_info_lg_row_1 %}
+            {% include 'landing/_team-profile-square.html' %}
+          {% endfor %}
+        </div>
+
+        <div class="airbitz-team  carousel-6 owl-carousel full-width">
+          {% for info in team_info_lg_row_2 %}
+            {% include 'landing/_team-profile-square.html' %}
+          {% endfor %}
+        </div>
       </div>
 
-      <div class="airbitz-team owl-carousel full-width mb-xlg" data-plugin-options='{"autoplay": false, "autoplayTimeout": 8000, "items": 6, "loop": false, "nav": true, "dots": false}'>
-        {% for info in team_info_row_2 %}
-          {% include 'landing/_team-profile-square.html' %}
-        {% endfor %}
+      {#  SMALL  #}
+      <div class="visible-sm visible-xs mt-xlg mb-xlg">
+        <div class="airbitz-team carousel-2 owl-carousel full-width">
+          {% for info in team_info_sm_row_1 %}
+            {% include 'landing/_team-profile-square.html' %}
+          {% endfor %}
+        </div>
+
+        <div class="airbitz-team carousel-2 owl-carousel full-width">
+          {% for info in team_info_sm_row_2 %}
+            {% include 'landing/_team-profile-square.html' %}
+          {% endfor %}
+        </div>
+
+        <div class="airbitz-team carousel-2 owl-carousel full-width">
+          {% for info in team_info_sm_row_3 %}
+            {% include 'landing/_team-profile-square.html' %}
+          {% endfor %}
+        </div>
+
+        <div class="airbitz-team carousel-2 owl-carousel full-width">
+          {% for info in team_info_sm_row_4 %}
+            {% include 'landing/_team-profile-square.html' %}
+          {% endfor %}
+        </div>
+
+        <div class="airbitz-team carousel-2 owl-carousel full-width">
+          {% for info in team_info_sm_row_5 %}
+            {% include 'landing/_team-profile-square.html' %}
+          {% endfor %}
+        </div>
+
+        <div class="airbitz-team  carousel-2 owl-carousel full-width">
+          {% for info in team_info_sm_row_6 %}
+            {% include 'landing/_team-profile-square.html' %}
+          {% endfor %}
+        </div>
       </div>
 
       <div class="container mt-xlg mb-xlg">
