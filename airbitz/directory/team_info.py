@@ -86,7 +86,7 @@ TEAM_INFO = [
         "img_path": "airbitz-theme/img-custom/portraits/rj.jpg",
         "title": "Lead Curator / QA",
         "nickname": "Bug Slayer",
-        "bio_html": '<p>More on RJ coming soon.</p>',
+        "bio_html": '<p>RJ stepped into the bitcoin space in 2012. Fascinated by the idea and grandeur of bitcoin, RJ joined Airbitz to help promote its core values of privacy, security, and decentralization. He is honored to be a part of a talented team making bitcoin easier to use for the masses.</p><p>At Airbitz, RJ maintains the merchant directory and reviews product design to ensure continual improvement and customer satisfaction. His area of expertise includes quality assurance, technical support, and analysis. He received his B.S. degree in Accounting from San Diego State University. Prior to his current position, he worked in computer software companies. Outside of work, RJ is an avid gamer and a fan of boxing.</p>',
         "skills": ["Quality Assurance", "Data Analysis", "Research", "Bitcoin Enthusiast"]
     },
     {
