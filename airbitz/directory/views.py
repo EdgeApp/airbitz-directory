@@ -13,6 +13,7 @@ from airbitz.settings import GOOGLE_MAP_KEY
 from directory.models import Business, BusinessImage, SocialId
 from directory.models import STATUS_CHOICES, SOCIAL_TYPES
 from directory.team_info import TEAM_INFO
+from directory.applications_info import APPLICATIONS_INFO
 from restapi import api
 from restapi.serializers import calc_distance
 
@@ -126,8 +127,8 @@ def landing_v2(request):
         'team_info_sm_row_6': team_info['sm-6'],
         'team_info_lg_row_1': team_info['lg-1'],
         'team_info_lg_row_2': team_info['lg-2'],
-
-        'team_info': TEAM_INFO
+        'team_info': TEAM_INFO,
+        'applications_info': APPLICATIONS_INFO,
         # 'all_regions': ALL_REGIONS,
         # 'biz_total': Business.objects.filter(status="PUB", country__in=regions_data.get_active_country_codes()).count(),
     }
