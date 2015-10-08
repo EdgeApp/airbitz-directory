@@ -1,7 +1,8 @@
+from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
-
+# Non-Django stuff
 from .models import MailVerify
 import requests
 import json
@@ -17,12 +18,11 @@ def verify(request, verify_id):
 		}
 		r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=payload)
 		if r.json()['success'] == True:
-			v = MailVerify.objects.get(verify_id=verify_id)
+			v = MailVerify.objects.get(verify_id=verify_id) # Record that validation was successful
 			v.verify_date = datetime.datetime.now()
 			v.save()
 			print "Successfully validated captcha for email: " + v.mail
 			return HttpResponse(status=200) # Tell the client the captcha was successfully validated.
-			#record that validation was successful
 		else:
 			print "Error validating Captcha token"
 			return HttpResponse(status=401) # Tell the client there was an error validating.
@@ -41,5 +41,16 @@ def new(request): # Get request with json object of email and verification token
 		return HttpResponse("New verification added")
 	else:
 		return HttpResponse("Please send a POST request")
+def since(request, verify_id):
+	if verify_id == "all":
+		print "All of them that have been verified"
+		results = serializers.serialize("json", MailVerify.objects.filter(verify_date__lt=datetime.datetime.now()).order_by('verify_date'), fields=('verify_id'))
+		return HttpResponse(results)
+	else:
+		sinceObj = get_object_or_404(MailVerify,verify_id=verify_id)
+		sinceTime = sinceObj.verify_date
+		print "Since Time: " + str(sinceTime)
+		results = serializers.serialize("json", MailVerify.objects.filter(verify_date__gt=sinceTime).order_by('verify_date'), fields=('verify_id'))
+		return HttpResponse(results)
 
 # Create more views here.

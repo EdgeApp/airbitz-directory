@@ -19,7 +19,7 @@
         $.post(window.location.pathname, JSON.stringify({"g-recaptcha-response":response}) )
         .done(function(status) {
           $("#captcha_container").notify("Successfully verified",
-          { 
+          {
             position:"bottom center",
             className: 'success',
           }
