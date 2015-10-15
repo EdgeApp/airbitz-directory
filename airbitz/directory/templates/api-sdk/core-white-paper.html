@@ -1,0 +1,112 @@
+{% extends 'base_v2.html' %}
+{% load compressed %}
+{% load static from staticfiles %}
+
+
+{% block body_tag %}class="api-sdk"{% endblock body_tag %}
+
+{% block body %}
+
+  {% block header_navigation %}
+    {% include 'navigation/_home-header.html' %}
+  {% endblock header_navigation %}
+
+  {% block main %}
+    <div role="main" class="main">
+
+      {% include 'api-sdk/slides.html' %}
+
+      <div class="container" style="margin-top: 90px">
+        <div class="row">
+          <div class="col-md-3">
+            <aside class="sidebar" id="sidebar" data-plugin-sticky data-plugin-options='{"minWidth": 991, "containerSelector": ".container", "padding": {"top": 110}}'>
+
+              <h4 class="heading-primary">Airbitz Core</h4>
+              <ul class="nav nav-list mb-xl show-bg-active">
+                <li><a data-hash href="#overview">Overview</a></li>
+                <li><a data-hash href="#client-server-architecture">Client Server Architecture</a></li>
+                <li><a data-hash href="#account-creation">Account Creation</a></li>
+                <li><a data-hash href="#wallet-creation">Wallet Creation</a></li>
+                <li><a data-hash href="#encryption-hashing">Encryption & Hashing</a></li>
+                <li><a data-hash href="#access-bitcoin-network">Accessing Bitcoin Network</a></li>
+              </ul>
+
+            </aside>
+          </div>
+          <div class="col-md-9">
+
+            <h2 class="mb-sm" id="overview">Airitz Core <strong>White Paper</strong></h2>
+            <p>The Airbitz mobile digital wallet implements a decentralized, secure, peer-to-peer synchronized, and backed up bitcoin wallet with a clean, easy to use interface.  Integrated with the wallet is a proximity enabled and searchable business directory to help consumers find merchants that accept bitcoin as payment.</p>
+            <p>The Airbitz wallet is a fully client-side wallet that creates, manages, and encrypts private keys, public keys, and transactions on the client device and uses server side assistance for backup and synchronization of encrypted data and for authenticating users. Airbitz users retain full control of their private keys at all times with neither Airbitz nor third parties having access to private keys or transaction data. Sending and detecting of received funds is done through publicly accessible Libbitcoin Obelisk nodes.</p>
+            <p>The Airbitz mobile wallet is implemented using a GUI written in the native language and platform of the device. iOS implementations are written in Objective-C in Apple’s NS framework and Android devices are written in Java. Common wallet functionality is implemented in a cross platform C/C++ library which is compiled into the platform and operating system of each device. This is referred to as the Airbitz Core or ABC. ABC implements all account and wallet creation, user authentication, management of transaction data, encryption, and synchronization across devices. Compiled into the ABC library is the Libbitcoin library which is used for core bitcoin protocol operations such as private/public key creation and transaction signing. ABC utilizes the libbitcoin-client library to talk directly to open source Obelisk bitcoin full nodes which also run Libbitcoin.</p>
+            <p>The ABC architecture is inherently “client-strong” meaning nearly all wallet logic exists and operates on the client device. Servers exists only to assist in authentication, for encrypted backups, and as nodes on the bitcoin network. ABC leaves control of the private keys entirely in the hands of the user or application which controls the login and password of the account. Airbitz servers have no capability of spending funds on users’ behalf.</p>
+
+            <section id="client-server-architecture" class="section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-gears"></i> Client Server <strong>Architecture</strong></h3>
+              </div>
+            </section>
+            <p><img class="pull-right ml-lg col-md-6 img-thumbnail img-responsive" src="{{ STATIC_URL }}img/bitcoin-wallet-core-white-paper/image00.png" alt="Airbitz Client Server Architecture"/>ABC utilizes a “95% decentralized” client-server architecture which utilizes 3 separate types of servers.</p>
+            <ol>
+              <li>The first is a conventional app server developed in Python/Django with a PostgresSQL database. Although this is auto-replicated and backed up, this is still a centralized server. It is utilized for creating new accounts and authenticating existing accounts. In ABC, it is referred to as the ‘auth server’. Unavailability of the auth-server still allows Airbitz wallets to function for send, receive, and synchronize between devices which have accounts that were previously logged in.</li>
+              <li>ABC utilizes a semi-decentralized, peer-to-peer network of data-sync backup servers running the Git protocol and software. Referred to as ‘sync-servers’, this pool of Git servers only hosts data that is pre-encrypted by the client devices running ABC. These are true peer-to-peer servers in that there are no primary or secondary servers, however all sync-servers and the auth-server are operated by Airbitz. A client can connect to any of the sync servers to upload or download data. Any new or modified data sent to a sync-server is automatically replicated to other sync-servers, utilizing the Git protocol to resolve conflicts and provide modification history and rollback if needed. To scale this architecture, “pools” of sync-servers will be created in the future such that each pool will replicate data across the sync-servers in the pool, but not across other pools. If all sync-servers were unavailable, Airbitz wallets can still function to Send and Receive funds directly from public bitcoin nodes.</li>
+              <li>ABC relies on public bitcoin full nodes running Libbitcoin/Obelisk for doing transaction detection and broadcast. These are servers hosted by Airbitz, and in the future, other projects deploying publicly accessible Obelisk servers such as Dark Wallet and Open Bazaar. In this way, wallets can seamlessly be able to send and receive funds even if all of the Airbitz server infrastructure were to be unavailable, a feature no other wallet API can provide.</li>
+            </ol>
+
+            <section id="account-creation" class="section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-user"></i> Account <strong>Creation</strong></h3>
+              </div>
+            </section>
+            <p><img class="pull-right ml-lg col-md-6 img-thumbnail img-responsive" src="{{ STATIC_URL }}img/bitcoin-wallet-core-white-paper/image01.png" alt="Airbitz Client Server Architecture"/>New account creation is initiated on the client device by taking the user selected login & password and hashing it with a pre-defined, public salt (S1) into L1 & LP1. The client then creates a random value, RepoAcctKey, which is the name of the Git repo it will use to sync the account directory on the client. The RepoAcctKey is encrypted with a random 256 bit key (MK) and referred to as ERepoAcctKey.</p>
+            <p>The user’s login + password are then hashed again using another pre-defined, public salt (S2) and hashed into LP2. The MK is encrypted using LP2 as the key.</p>
+            <p>The client then sends L1, LP1, ERepoAcctKey, and RepoAcctKey to the auth server for account creation. The auth server verifies that L1 doesn’t already exist as an account, and if so, hashes LP1 again to create LP1’ and saves L1, LP1’, and ERepoAcctKey as an entry in the SQL database. The auth-server then creates a repo on each sync-server with the name equal to RepoAcctKey. RepoAcctKey is NOT saved after repo creation.</p>
+            <p>After repo creation, the client can now sync account directory data to the sync-servers using RepoAccountKey as the Git repo name.</p>
+
+            <section id="wallet-creation" class="section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-bitcoin"></i> Wallet <strong>Creation</strong></h3>
+              </div>
+            </section>
+            <p><img class="pull-right ml-lg col-md-6 img-thumbnail img-responsive" src="{{ STATIC_URL }}img/bitcoin-wallet-core-white-paper/image02.png" alt="Airbitz Wallet Creation Diagram"/>To create a wallet in the account, the client generates another unique wallet uuid then generates a unique Git repo name (RepoWalletKey_<wallet_uuid>). The repo name is encrypted using the MK (ERepoWalletKey_<wallet_uuid>) and saved in the account directory.</p>
+            <p>The clients sends L1, LP1, RepoWalletKey_<wallet_uuid>, and ERepoWalletKey_<wallet_uuid> to the auth-server to have it create a wallet repo on the sync-servers.</p>
+            <p>The client can now create a local directory on the device corresponding with the wallet_uuid and sync its contents using the RepoWalletKey_<wallet_uuid>.</p>
+            <p>The private BIP32 seed for wallet_uuid is created, encrypted with MK, and stored in the account directory.</p>
+            <p>This system disassociates the actual contents of an account and corresponding wallets from the database SQL row associated with the account login & password.</p>
+            <p>In this manner, any information in the account or wallet repos cannot be associated back to a login in the auth-server.</p>
+
+            <section id="encryption-hashing" class="section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-lock"></i> Encryption & <strong>Hashing</strong></h3>
+              </div>
+            </section>
+            <p>All encryption utilizing AES256 encryption with proper randomized IV values. Hashing is implemented using Scrypt with N,r,p paraments of (16384,1,1) for LP1 & L1, (32768,8,1) for LP1’, and variable parameters for LP2 ranging from (16384,1,1) to (163840,8,1) depending on the speed of the client device.</p>
+
+            <section id="data-model" class="section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-database"></i> Data <strong>Model</strong></h3>
+              </div>
+            </section>
+            <p><img class="pull-right col-md-6 ml-lg img-thumbnail img-responsive" src="{{ STATIC_URL }}img/bitcoin-wallet-core-white-paper/image03.png" alt="Airbitz Wallet Data Model"/>Airbitz stores account specific information in the Account directory which is Git sync’ed to the RepoAcctKey repo. The Account directory contains encrypted private seeds for each wallet in the account, general account settings, encrypted wallet repo keys (ERepoWalletKey<wallet_uuid>) and the account PIN.</p>
+            <p>The wallet directories are named after the random uuid values of each wallet. Each wallet directory contains the public addresses and transaction IDs of each wallet hashed for privacy. In addition, the metadata of each transaction is also encrypted and saved in the wallet directories and backed up to sync-servers.</p>
+            <p>Before any wallet is used, the BIP32 HD private seed is encrypted and backed up to sync-servers. ABC ensures that the private key is successfully synced before allowing any operations on the wallet. This ensures that any damage to the device will still allow keys to be recovered.</p>
+            <p>Every transaction in ABC will either create a new receive public address or a new change address for sent funds. New addresses are created from the HD private seed, and transaction addresses and data are lazily backed up to sync-servers within a specified time interval. Lost transaction data and new public addresses is non-critical as they can always be regenerated by the private seed which is always backed-up.</p>
+            <p>To help minimize corrupted private or public keys due to random memory corruption, ABC will pre-generate 10 addresses ‘ahead’ of the currently needed public address and store them in the encrypted wallet repo. When a new address is needed, it is again generated by the public seed and compared to the previously generated addresses. If they differ, ABC assumes a corrupted address and skips the address, moving to the next in the BIP32 chain. Upon successfully selecting a public address, ABC verifies the remaining pre-generated addresses, and generates yet another address for future use.</p>
+
+            <section id="access-bitcoin-network" class="section section-text-light gradient-blue">
+              <div class="heading">
+                <h3><i class="fa fa-magic"></i> Accessing <strong>Bitcoin Network</strong></h3>
+              </div>
+            </section>
+            <p>ABC is compiled with the Libbitcoin library originally developed for Dark Wallet. Queries of the blockchain access the network utilizing the Libbitcoin client library and connecting to Obelisk servers which are the server component of Libbitcoin. ABC retrieves a list of Obelisk servers from the auth-server and randomly chooses which server to connect to. Should one of the servers be unavailable, it will connect to the next server in its list. ABC apps can also force a rotation to a different Obelisk server.</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {% endblock main %}
+
+{% endblock body %}
+
+{% block body_modals %}{% endblock body_modals %}

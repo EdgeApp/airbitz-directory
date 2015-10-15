@@ -1,0 +1,448 @@
+{% extends 'base_v2.html' %}
+{% load compressed %}
+{% load static from staticfiles %}
+
+
+{% block body_tag %}class="home"{% endblock body_tag %}
+
+{% block body %}
+
+  {% block header_navigation %}
+    {% include 'navigation/_home-header.html' %}
+  {% endblock header_navigation %}
+
+  {% block main %}
+    <div role="main" class="main">
+
+      {% include 'landing/slides.html' %}
+
+      <div class="home-intro">
+        <div class="container">
+          <div class="row">
+
+            <div class="col-md-9">
+              <h3>The <span class="hl-blue">future</span> will not be <em style="color: #999;">centralized</em>.</h3>
+              {#            <h3><span class='hl-blue'>Edge Security</span> is an infosec game changer <span class='hl-blue'>EVERYONE</span> can use.</h3>#}
+              <p>
+                The Airbitz platform is a
+                <span class="word-rotate hidden-xs" data-plugin-options='{"delay": 3000, "animDelay": 300}'>
+                  <strong class="inverted inverted-primary">
+                    <span class="word-rotate-items">
+                      <span style="color: white;">blockchain inspired</span>
+                      <span style="color: white;">decentralized</span>
+                      <span style="color: white;">open source</span>
+                      <span style="color: white;">zero knowledge</span>
+                    </span>
+                  </strong>
+                </span> <strong>global information security solution</strong>.
+              </p>
+            </div>
+
+            <div class="col-md-3">
+              <div class="get-started">
+                <a href="{% url 'page_developer_api_library' %}" class="btn btn-lg btn-primary">Edge Security Developer API</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid mt-xlg mb-xl text-center">
+        <h2>Edge Security <strong>Applications</strong></h2>
+        <p>Below are a few of the applications to benefit from edge security.</p>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="feature-box feature-box-style-2">
+              <div class="feature-box-icon">
+                <i class="fa fa-sitemap"></i>
+              </div>
+              <div class="feature-box-info">
+                <h4 class="mb-xs">Blockchain Technology</h4>
+                <p>Immutable data solutions for trustless applications.</p>
+                {#              <ul>#}
+                {#                <li>Augur</li>#}
+                {#                <li>Ethereum</li>#}
+                {#                <li>Open Bazaar</li>#}
+                {#              </ul>#}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-box feature-box-style-2">
+              <div class="feature-box-icon">
+                <i class="fa fa-key"></i>
+              </div>
+              <div class="feature-box-info">
+                <h4 class="mb-xs">Private Key Authentication</h4>
+                <p>Easy authentication with private keys to eliminate cumbersome and insecure passwords.</p>
+                {#              <ul>#}
+                {#                <li>SSH</li>#}
+                {#                <li>BitID</li>#}
+                {#                <li>Clef</li>#}
+                {#              </ul>#}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-box feature-box-style-2">
+              <div class="feature-box-icon">
+                <i class="fa fa-power-off"></i>
+              </div>
+              <div class="feature-box-info">
+                <h4 class="mb-xs">Internet of Things (IoT)</h4>
+                <p>Edge Security for devices operating at the edge of technology.</p>
+                {#              <ul>#}
+                {#                <li>Wireless Routers</li>#}
+                {#                <li>Meters and Appliances</li>#}
+                {#                <li>...</li>#}
+                {#              </ul>#}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-lg">
+          <div class="col-md-4">
+            <div class="feature-box feature-box-style-2">
+              <div class="feature-box-icon">
+                <i class="fa fa-bank"></i>
+              </div>
+              <div class="feature-box-info">
+                <h4 class="mb-xs">Financial Applications</h4>
+                <p>Financial security leads information security into the future.</p>
+                {#              <ul>#}
+                {#                <li>Quicken</li>#}
+                {#                <li>Xero</li>#}
+                {#                <li>Mint</li>#}
+                {#                <li>GNUCash</li>#}
+                {#              </ul>#}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="feature-box feature-box-style-2">
+              <div class="feature-box-icon">
+                <i class="fa fa-expeditedssl"></i>
+              </div>
+              <div class="feature-box-info">
+                <h4 class="mb-xs">Password Management</h4>
+                <p>Bringing sanity to unwieldy and cumbersome traditional authentication.</p>
+                {#              <ul>#}
+                {#                <li>Lastpass</li>#}
+                {#                <li>1Password</li>#}
+                {#                <li>Onepass</li>#}
+                {#                <li>Keepass</li>#}
+                {#              </ul>#}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="feature-box feature-box-style-2">
+              <div class="feature-box-icon">
+                <i class="fa fa-eye-slash"></i>
+              </div>
+              <div class="feature-box-info">
+                <h4 class="mb-xs">Information Management</h4>
+                <p>Information that is private but always available from any device.</p>
+                {#              <ul>#}
+                {#                <li>Evernote</li>#}
+                {#                <li>Google Keep</li>#}
+                {#                <li>Nimble</li>#}
+                {#                <li>Contacts</li>#}
+                {#              </ul>#}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-lg">
+          <div class="col-md-4">
+            <div class="feature-box feature-box-style-2">
+              <div class="feature-box-icon">
+                <i class="fa fa-bitcoin"></i>
+              </div>
+              <div class="feature-box-info">
+                <h4 class="mb-xs">Bitcoin / Digital Currencies</h4>
+                <p>The largest decentralized computing system is our home.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="feature-box feature-box-style-2">
+              <div class="feature-box-icon">
+                <i class="fa fa-comments-o"></i>
+              </div>
+              <div class="feature-box-info">
+                <h4 class="mb-xs">Secure Messaging</h4>
+                <p>Keeping conversations private no matter what medium they traverse.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="feature-box feature-box-style-2">
+              <div class="feature-box-icon">
+                <i class="fa fa-stethoscope"></i>
+              </div>
+              <div class="feature-box-info">
+                <h4 class="mb-xs">Healthcare</h4>
+                <p>Security is paramount for medical record privacy.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="parallax section section-tall section-text-light section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-1.jpg' %}); background-size: cover;">
+        <div class="container mt-xl">
+          <div class="heading">
+            <h2>A Trustless <strong>Global</strong> Security Platform </h2>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="row mb-xlg">
+          <div class="col-md-6">
+            <p class="lead">
+              Digital security is undergoing a <strong>paradigm shift</strong>.
+            </p>
+            <p>
+              After decades of striving to secure personal info, money, financial info, and sensitive documents on centralized servers, we’ve discovered that it simply can’t be done. There is too great an incentive to break into the treasure troves of digital data on globally accessible internet servers. Every year, multiple large centralized services are hacked and cause massive data breaches.
+            </p>
+          </div>
+
+          <div class="col-md-6">
+            <img class="img-responsive" src="{% static 'airbitz-theme/img-custom/paradigm-shift-new.png' %}" alt="Security Paradigm Shift">
+          </div>
+        </div>
+      </div>
+
+      <section class="section section-tall section-text-light section-center" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-2.jpg' %}); background-position: center center; background-size: cover;">
+        <div class="row">
+          <div class="col-md-12"><br><br><br><br><br><br><br><br><br><br><br><br></div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+            <p class="lead">
+              Edge Security to the <strong>Rescue</strong>.
+            </p>
+            <p>
+              Instead of relying on enterprise server security, <strong>Edge-Security</strong> encrypts data first the user's device before it ever touches a network or server. A server-side hack yields nothing but fully encrypted, private data. A hack on a user’s device yields only the data of that one user vs millions of users. The <strong>incentive</strong> to attack the system is <strong>reduced by orders of magnitude</strong>.
+            </p>
+            <p>
+              Airbitz provides the <strong>world’s first</strong> edge security platform that allows developers to build apps that secure users’ data at <br>“<strong>The Edge</strong>” utilizing several key technologies simultaneously.
+            </p>
+          </div>
+          <div class="col-md-5">
+            <img class="mb-xlg img-responsive appear-animation fadeInRight appear-animation-visible" src="{% static 'airbitz-theme/img-custom/airbitz-logo.png' %}" alt="Airbitz">
+            <div class="key-tech"><i class="fa fa-check"></i> Client-Side Encryption</div>
+            <div class="key-tech"><i class="fa fa-check"></i> Automatic Backup</div>
+            <div class="key-tech"><i class="fa fa-check"></i> Multi-device synchronization</div>
+            <div class="key-tech"><i class="fa fa-check"></i> One-Touch 2 Factor Authentication</div>
+            <div class="key-tech"><i class="fa fa-check"></i> Password Recovery</div>
+            <div class="key-tech"><i class="fa fa-check"></i> Revision Control / Rollback</div>
+          </div>
+        </div>
+      </div>
+
+      <section class="parallax section section-tall section-text-light section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-3.jpg' %}); background-size: cover;">
+        <div class="container mt-xl">
+          <div class="heading">
+            <h2>A <strong>Zero Knowledge</strong> Distributed System</h2>
+          </div>
+        </div>
+      </section>
+
+      <div class="container mt-xl mb-xl">
+        {#            <h2 class="text-center"><i class="fa fa-eye-slash"></i> See No Evil, Hear No Evil, Speak No Evil</h2>#}
+        <div class="row">
+          <div class="col-xs-12">
+            <p><strong>Zero Knowledge</strong> means Airbitz knows nothing about the encrypted data that our client software interfaces with. This unique design means nothing leaves the client device until it is encrypted and nothing can ever be decrypted until it is unlocked with the user's password on their device. It's not just "end to end encryption;" it is <strong>Zero Knowledge</strong> which is the only way to achieve true security.</p>
+          </div>
+        </div>
+      </div>
+
+      {#    <section class="video section section-tall section-text-dark section-video section-center mt-none mt-xlg mb-xlg" data-video-path="{% static 'airbitz-theme/video/light' %}" data-plugin-video-background data-plugin-options='{"posterType": "jpg", "position": "50% 50%", "overlay": true}'>#}
+      <section id="team-quote" class="visible-lg visible-md hidden-sm hidden-xs parallax section section-tall section-text-dark section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-team.jpg' %}); background-size: cover;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-offset-1 col-md-10">
+              <div class="owl-carousel nav-bottom rounded-nav mt-lg mb-none" data-plugin-options='{"items": 1, "loop": true}'>
+                <div>
+                  <div class="col-md-12">
+                    <div class="testimonial testimonial-style-6 testimonial-with-quotes mb-none">
+                      <blockquote>
+                        <p>If you want to accomplish something in the world, idealism is not enough - you need to choose a method that works to achieve the goal.</p>
+                      </blockquote>
+                      <div class="testimonial-author">
+                        <p><strong>Richard Stallman</strong><span> - GNU Project Creator and Free Software Champion</span></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="col-md-12">
+                    <div class="testimonial testimonial-style-6 testimonial-with-quotes mb-none">
+                      <blockquote>
+                        <p>Live in the future and build what is missing.</p>
+                      </blockquote>
+                      <div class="testimonial-author">
+                        <p><strong>Paul Graham</strong><span> - Co-Founder of Y Combinator</span></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="team" class="container-fluid mb-xl text-center">
+        <h2>The <strong>Team</strong></h2>
+      </div>
+      {% include 'landing/_team-profiles.html' %}
+
+      <div class="container mt-xlg mb-xlg">
+        <div class="row mt-xlg mb-xlg">
+          <div class="col-md-6">
+            <h2><strong>Who</strong> We Are</h2>
+            <p>We are passionate group of individuals aware of the shift that is occurring in information security and digital assets and we have come together to work towards an anti-fragile future where your data's privacy and security are no longer a luxury but instead a standard.</p>
+          </div>
+
+          <div class="col-md-6">
+            <h2><strong>What</strong> We Do</h2>
+            <p>We architect distributed systems with opensource, ethical, encryption technologies.  We apply our systems to impactful global applications.  Finally we use simple and intuitive UI/UX to enable the non-technical user to fully own and control their digital assets as they see fit.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mt-xlg mb-xlg">
+        <div class="row mt-xlg mb-xlg">
+          <div class="col-md-12">
+            <h2><strong>Why</strong> We Do It</h2>
+            <p>At Airbitz, we aim to bring secure, decentralized technologies to the next billion users through amazingly simple yet feature rich applications focused on ease of use and ease of security. Our focus is to deliver software, services, and products with an amazing user experience, both visually and functionally, simplifying this advanced technology and delivering it to the masses while still retaining core principles of decentralization and privacy.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <hr id="app">
+        </div>
+      </div>
+
+      <div class="container-fluid mb-xl mt-xl text-center">
+        <h2>Airbitz <strong>Mobile App</strong></h2>
+      </div>
+
+      <section class="airbitz-app call-to-action mb-xl mt-xl">
+        <div class="container">
+          <div class="row">
+
+            <div class="app-info col-md-6 col-md-offset-1 text-center">
+              <img class="airbitz-app-icon" src="{% static 'airbitz-theme/img-custom/airbitz-app-icon-512x512.png' %}" alt="Airbitz App">
+              <h3>See Airbitz Edge Security in <strong>Action</strong></h3>
+              <p>Download the <a href="{% url 'app_download' %}">Airbitz Mobile App for Bitcoin</a></p>
+
+              <div id="app-store-links" class="animated row mb-xlg">
+                <div class="app-install col-sm-12 text-center animated">
+                  <a href="https://play.google.com/store/apps/details?id=com.airbitz" target="_blank">
+                    <img class="app-store animated" src="{% static 'img/available-on-android.png' %}" alt="Download Bitcoin Wallet from Android Play Store" />
+                  </a>
+                  <a href="https://itunes.apple.com/us/app/airbitz/id843536046?mt=8" target="_blank">
+                    <img class="app-store animated" src="{% static 'img/available-on-apple-app-store.png' %}" alt="Download Bitcoin Wallet from App Store" />
+                  </a>
+                  <div class="row">
+                    <div style="margin-top: 10px;">or <i class="fa fa-download"></i> <a href="{% url 'landing' %}download/">Android Direct Download</a></div>
+                  </div>
+                </div>
+              </div>
+              <div class="social-follow row">
+                <div class="col-sm-12 text-center">
+                  <table style="margin: 0 auto;">
+                    <tr>
+                      <td>
+                        <a href="https://twitter.com/Airbitz" class="twitter-follow-button" data-show-count="false">Follow @Airbitz</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                      </td>
+                      <td><iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fairbitz&amp;width=200&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=543335719036485" scrolling="no" frameborder="0" style="margin-left: 15px; border:none; overflow:hidden; width:140px; height:21px;" allowTransparency="true"></iframe></td>
+                      <td><div class="g-plusone" data-annotation="bubble" data-size="standard" data-width="86" data-href="https://airbitz.co"></div></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="app-screenshots col-md-4 text-center">
+              <div class="thumb-gallery">
+                <div class="owl-carousel manual thumb-gallery-detail show-nav-hover" id="thumbGalleryDetail">
+                  <div>
+                  <span class="img-thumbnail">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-1.png' %}" class="img-responsive">
+                  </span>
+                  </div>
+                  <div>
+                  <span class="img-thumbnail">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-2.png' %}" class="img-responsive">
+                  </span>
+                  </div>
+                  <div>
+                  <span class="img-thumbnail">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-3.png' %}" class="img-responsive">
+                  </span>
+                  </div>
+                  <div>
+                  <span class="img-thumbnail">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-4.png' %}" class="img-responsive">
+                  </span>
+                  </div>
+                </div>
+                <div class="owl-carousel manual thumb-gallery-thumbs mt" id="thumbGalleryThumbs">
+                  <div>
+                  <span class="img-thumbnail cur-pointer">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-1.png' %}" class="img-responsive">
+                  </span>
+                  </div>
+                  <div>
+                  <span class="img-thumbnail cur-pointer">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-2.png' %}" class="img-responsive">
+                  </span>
+                  </div>
+                  <div>
+                  <span class="img-thumbnail cur-pointer">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-3.png' %}" class="img-responsive">
+                  </span>
+                  </div>
+                  <div>
+                  <span class="img-thumbnail cur-pointer">
+                    <img alt="Project Image" src="{% static 'airbitz-theme/img-custom/app-screenshots/nexus5-4.png' %}" class="img-responsive">
+                  </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+  {% endblock main %}
+
+{% endblock body %}
+
+{% block body_modals %}
+  {% include 'landing/team-modals.html' %}
+{% endblock body_modals %}

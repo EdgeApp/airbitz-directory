@@ -1,0 +1,60 @@
+{% extends 'base_v2.html' %}
+{% load compressed %}
+{% load static from staticfiles %}
+
+
+{% block body_tag %}class="api-sdk"{% endblock body_tag %}
+
+{% block body %}
+
+  {% block header_navigation %}
+    {% include 'navigation/_home-header.html' %}
+  {% endblock header_navigation %}
+
+  {% block main %}
+    <div role="main" class="main">
+
+      {% include 'api-sdk/slides.html' %}
+
+      <div class="container" style="margin-top: 90px">
+        <div class="row">
+          <div class="col-md-3">
+            <aside class="sidebar" id="sidebar" data-plugin-sticky data-plugin-options='{"minWidth": 991, "containerSelector": ".container", "padding": {"top": 110}}'>
+
+              <h4 class="heading-primary">Data Sync Architecture</h4>
+              <ul class="nav nav-list mb-xl show-bg-active">
+                <li><a data-hash href="#overview">Overview</a></li>
+              </ul>
+
+            </aside>
+          </div>
+          <div class="col-md-9">
+            <h2 class="mb-sm" id="overview">Airitz <strong>Data Sync</strong> Architecture</h2>
+            <ul>
+              <li>Peer to peer Git servers in cloud accessible via https w/no built in authentication security.</li>
+              <li>Client creates random 20 byte sync key (similar to Bittorrent Sync).</li>
+              <li>Sync keys are sent from clients to SQL auth server.</li>
+              <li>SQL Auth server creates repo w/name = sync key on all Git servers</li>
+              <li>SQL Auth server connects to Git servers via private SSH keys</li>
+              <li>One repo per sync key.</li>
+              <li>Repos are only created by auth server</li>
+              <li>Each repo is named after the sync key hashed into directories by first 2 bytes</li>
+              <li>All users have access to all repos.</li>
+              <li>Attacker can't access another user’s repo unless they know it's name which is hard to know (large, random value).</li>
+              <li>Disallow mobile client user from creating their own repos</li>
+              <li>Post commit Git-hooks (python script) on server which auto pushes changes to all other Git servers.</li>
+              <li>Private repo only admin accessible holds list of Git servers.</li>
+              <li>Client using libgit2. Polls for changes on server every 5-10 secs</li>
+              <li>Client Wallet core pulls list of Git servers from auth server</li>
+              <li>Client Wallet core randomly chooses a Git server and triggers Push to server on every file change.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {% endblock main %}
+
+{% endblock body %}
+
+{% block body_modals %}{% endblock body_modals %}

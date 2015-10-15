@@ -211,6 +211,183 @@ else:
     PIPELINE_VERSION = False # currently using DEPLOY_DATE to manually accomplish this feature
     PIPELINE_JS_COMPRESSOR = False # yuglify does not include all files (seems to leave out things that fail linting)
 
+PIPELINE_JS = {
+    'core': {
+        'source_filenames': (
+            'js/jquery-1.11.0.min.js',
+            'bootstrap/js/bootstrap.min.js',
+            'extras/jquery-cookie-master/src/jquery.cookie.js',
+            'js/modernizr.js',
+            'js/bowser.js',
+            'js/enquire.js',
+            'js/core.js',
+            'js/holder.js',
+            'js/typeahead.bundle.js',
+            'extras/retinajs-master/retina.js',
+            'extras/jQuery.dotdotdot-master/src/js/jquery.dotdotdot.min.js',
+            'extras/Readmore.js-master/readmore.min.js',
+            'extras/swipebox-master/source/jquery.swipebox.min.js',
+            'extras/bootstrap-hover-dropdown-master/bootstrap-hover-dropdown.js',
+            'js/frontend-ui.js',
+            'js/mobile-download-bar.js'
+        ),
+        'output_filename': 'js/core.' + DEPLOY_DATE + '.js',
+    },
+    'home': {
+        'source_filenames': (
+            'extras/backstretch/backstretch.js',
+            'extras/ajaxchimp/jquery.ajaxchimp.js',
+            'extras/carouFredSel-6.2.1/jquery.carouFredSel-6.2.1-packed.js',
+            'extras/Magnific-Popup-master/dist/jquery.magnific-popup.js',
+            'extras/particlesjs/particles.js',
+            'js/home-ui.js',
+        ),
+        'output_filename': 'js/home.' + DEPLOY_DATE + '.js',
+    },
+    'airbitz-theme-head': {
+        'source_filenames': (
+            'airbitz-theme/vendor/modernizr/modernizr.js',
+        ),
+        'output_filename': 'js/airbitz-theme-head.' + DEPLOY_DATE + '.js',
+    },
+    'airbitz-theme-head-ie-8': {
+        'source_filenames': (
+            'airbitz-theme/vendor/respond/respond.js',
+            'airbitz-theme/vendor/excanvas/excanvas.js',
+        ),
+        'output_filename': 'js/airbitz-theme-head-ie-8.' + DEPLOY_DATE + '.js',
+    },
+    'airbitz-theme-footer-jquery-gt-ie-9': {
+        'source_filenames': (
+            'airbitz-theme/vendor/jquery/jquery.js',
+        ),
+        'output_filename': 'js/airbitz-theme-footer-jquery-gt-ie-9.' + DEPLOY_DATE + '.js',
+    },
+    'airbitz-theme-footer': {
+        'source_filenames': (
+            'airbitz-theme/vendor/jquery.appear/jquery.appear.js',
+            'airbitz-theme/vendor/jquery.easing/jquery.easing.js',
+            'airbitz-theme/vendor/jquery-cookie/jquery-cookie.js',
+            'airbitz-theme/vendor/bootstrap/bootstrap.js',
+            'airbitz-theme/vendor/common/common.js',
+            'airbitz-theme/vendor/jquery.validation/jquery.validation.js',
+            'airbitz-theme/vendor/jquery.stellar/jquery.stellar.js',
+            'airbitz-theme/vendor/owlcarousel/owl.carousel.js',
+
+            'airbitz-theme/js/theme.js',
+
+            'airbitz-theme/vendor/rs-plugin/js/jquery.themepunch.tools.min.js',
+            'airbitz-theme/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js',
+            'airbitz-theme/vendor/circle-flip-slideshow/js/jquery.flipshow.js',
+
+            'extras/ajaxchimp/jquery.ajaxchimp.js',
+
+            'airbitz-theme/js/custom.js',
+            'airbitz-theme/js/theme.init.js',
+        ),
+        'output_filename': 'js/airbitz-theme.' + DEPLOY_DATE + '.js',
+    },
+    'page_content': {
+        'source_filenames': (
+            'extras/backstretch/backstretch.js',
+            'extras/carouFredSel-6.2.1/jquery.carouFredSel-6.2.1-packed.js',
+            'extras/Magnific-Popup-master/dist/jquery.magnific-popup.js',
+            'extras/FitVids.js-master/jquery.fitvids.js',
+            'extras/highlightjs/highlight.js',
+            'js/page_content.js',
+        ),
+        'output_filename': 'js/page-content.' + DEPLOY_DATE + '.js',
+    },
+    'management': {
+        'source_filenames': (
+            'js/jquery.hotkeys.js',
+            'js/json2.js',
+            'js/underscore-min.js',
+            'js/backbone-min.js',
+            'js/handlebars.js',
+            'js/moment.min.js',
+            'js/parsley.js',
+            'extras/select2/select2.js',
+            'extras/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.min.js',
+            'js/mgmt-ui.js',
+        ),
+        'output_filename': 'js/management.' + DEPLOY_DATE + '.js',
+    },
+    'directory': {
+        'source_filenames': (
+            'extras/gmaps/gmaps.js',
+            'extras/masonry/masonry.pkgd.min.js',
+            'extras/blur.js/blur.js',
+            'extras/ajaxchimp/jquery.ajaxchimp.js',
+            'js/directory.js',
+        ),
+        'output_filename': 'js/directory.' + DEPLOY_DATE + '.js',
+    },
+    'search': {
+        'source_filenames': (
+            'extras/gmaps/gmaps.js',
+            'extras/masonry/masonry.pkgd.min.js',
+            'extras/blur.js/blur.js',
+            'extras/ajaxchimp/jquery.ajaxchimp.js',
+            'js/directory.js',
+        ),
+        'output_filename': 'js/search.' + DEPLOY_DATE + '.js',
+    },
+    'search_starter': {
+        'source_filenames': (
+            'searchStarter/app.js',
+            'searchStarter/controllers/.js',
+        ),
+        'output_filename': 'js/search-starter.min.js',
+    },
+    'business_add': {
+        'source_filenames': (
+            'extras/blur.js/blur.js',
+            'extras/select2/select2.js',
+            'js/moment.min.js',
+            'extras/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.min.js',
+            'extras/bootstrap-datetimepicker-master/build/js/bootstrap-datetimepicker.min.js',
+            'angular/ngAutocomplete.js',
+            'businessAdd/app.js',
+            'businessAdd/controllers/addBizCtrl.js',
+            'businessAdd/controllers/collectAllInfo.js',
+            'businessAdd/controllers/generalInfoCtrl.js',
+            'businessAdd/controllers/locationInfoCtrl.js',
+            'businessAdd/controllers/geoInfoCtrl.js',
+            'businessAdd/controllers/socialInfoCtrl.js',
+            'businessAdd/controllers/bizHoursCtrl.js',
+            'businessAdd/controllers/bizQueryCtrl.js',
+            'businessAdd/services/abDataFactory.js',
+            'businessAdd/filters/miscFilters.js',
+            'js/business-add.js',
+        ),
+        'output_filename': 'js/business-add.min.js',
+    },
+    'angularjs': {
+        'source_filenames': (
+            # 'angular/angular-1.3.0-beta.11.min.js',
+            # 'angular/angular-1.2.17.js',
+            'angular/angular.js',
+            'angular/angular-ui-router.js',
+            'angular/angular-animate.js',
+        ),
+        'output_filename': 'js/angular.js',
+    },
+    'dataTables': {
+        'source_filenames': (
+            # 'extras/DataTables-1.9.4/media/js/jquery.dataTables.min.js',
+            'extras/DataTables-1.10.0/media/js/jquery.dataTables.min.js',
+            'extras/dataTables.fixedHeader/dataTables.fixedHeader.min.js',
+        ),
+        'output_filename': 'js/dataTables.' + DEPLOY_DATE + '.js',
+    },
+    'googlePlaceAutocomplete': {
+        'source_filenames': (
+            'extras/Google/placeAutocomplete.js',
+        ),
+        'output_filename': 'js/googlePlaceAutocomplete.' + DEPLOY_DATE + '.js',
+    },
+}
 PIPELINE_CSS = {
     'global': {
         'source_filenames': (
@@ -320,140 +497,6 @@ PIPELINE_CSS = {
         'extra_context': {
             'media': 'screen,projection',
         },
-    },
-}
-PIPELINE_JS = {
-    'core': {
-        'source_filenames': (
-            'js/jquery-1.11.0.min.js',
-            'bootstrap/js/bootstrap.min.js',
-            'extras/jquery-cookie-master/src/jquery.cookie.js',
-            'js/modernizr.js',
-            'js/bowser.js',
-            'js/enquire.js',
-            'js/core.js',
-            'js/holder.js',
-            'js/typeahead.bundle.js',
-            'extras/retinajs-master/retina.js',
-            'extras/jQuery.dotdotdot-master/src/js/jquery.dotdotdot.min.js',
-            'extras/Readmore.js-master/readmore.min.js',
-            'extras/swipebox-master/source/jquery.swipebox.min.js',
-            'extras/bootstrap-hover-dropdown-master/bootstrap-hover-dropdown.js',
-            'js/frontend-ui.js',
-            'js/mobile-download-bar.js'
-        ),
-        'output_filename': 'js/core.' + DEPLOY_DATE + '.js',
-    },
-    'home': {
-        'source_filenames': (
-            'extras/backstretch/backstretch.js',
-            'extras/ajaxchimp/jquery.ajaxchimp.js',
-            'extras/carouFredSel-6.2.1/jquery.carouFredSel-6.2.1-packed.js',
-            'extras/Magnific-Popup-master/dist/jquery.magnific-popup.js',
-            'extras/particlesjs/particles.js',
-            'js/home-ui.js',
-        ),
-        'output_filename': 'js/home.' + DEPLOY_DATE + '.js',
-    },
-    'page_content': {
-        'source_filenames': (
-            'extras/backstretch/backstretch.js',
-            'extras/carouFredSel-6.2.1/jquery.carouFredSel-6.2.1-packed.js',
-            'extras/Magnific-Popup-master/dist/jquery.magnific-popup.js',
-            'extras/FitVids.js-master/jquery.fitvids.js',
-            'extras/highlightjs/highlight.js',
-            'js/page_content.js',
-        ),
-        'output_filename': 'js/page-content.' + DEPLOY_DATE + '.js',
-    },
-    'management': {
-        'source_filenames': (
-            'js/jquery.hotkeys.js',
-            'js/json2.js',
-            'js/underscore-min.js',
-            'js/backbone-min.js',
-            'js/handlebars.js',
-            'js/moment.min.js',
-            'js/parsley.js',
-            'extras/select2/select2.js',
-            'extras/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.min.js',
-            'js/mgmt-ui.js',
-        ),
-        'output_filename': 'js/management.' + DEPLOY_DATE + '.js',
-    },
-    'directory': {
-        'source_filenames': (
-            'extras/gmaps/gmaps.js',
-            'extras/masonry/masonry.pkgd.min.js',
-            'extras/blur.js/blur.js',
-            'extras/ajaxchimp/jquery.ajaxchimp.js',
-            'js/directory.js',
-        ),
-        'output_filename': 'js/directory.' + DEPLOY_DATE + '.js',
-    },
-    'search': {
-        'source_filenames': (
-            'extras/gmaps/gmaps.js',
-            'extras/masonry/masonry.pkgd.min.js',
-            'extras/blur.js/blur.js',
-            'extras/ajaxchimp/jquery.ajaxchimp.js',
-            'js/directory.js',
-        ),
-        'output_filename': 'js/search.' + DEPLOY_DATE + '.js',
-    },
-    'search_starter': {
-        'source_filenames': (
-            'searchStarter/app.js',
-            'searchStarter/controllers/.js',
-        ),
-        'output_filename': 'js/search-starter.min.js',
-    },
-    'business_add': {
-        'source_filenames': (
-            'extras/blur.js/blur.js',
-            'extras/select2/select2.js',
-            'js/moment.min.js',
-            'extras/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.min.js',
-            'extras/bootstrap-datetimepicker-master/build/js/bootstrap-datetimepicker.min.js',
-            'angular/ngAutocomplete.js',
-            'businessAdd/app.js',
-            'businessAdd/controllers/addBizCtrl.js',
-            'businessAdd/controllers/collectAllInfo.js',
-            'businessAdd/controllers/generalInfoCtrl.js',
-            'businessAdd/controllers/locationInfoCtrl.js',
-            'businessAdd/controllers/geoInfoCtrl.js',
-            'businessAdd/controllers/socialInfoCtrl.js',
-            'businessAdd/controllers/bizHoursCtrl.js',
-            'businessAdd/controllers/bizQueryCtrl.js',
-            'businessAdd/services/abDataFactory.js',
-            'businessAdd/filters/miscFilters.js',
-            'js/business-add.js',
-        ),
-        'output_filename': 'js/business-add.min.js',
-    },
-    'angularjs': {
-        'source_filenames': (
-            # 'angular/angular-1.3.0-beta.11.min.js',
-            # 'angular/angular-1.2.17.js',
-            'angular/angular.js',
-            'angular/angular-ui-router.js',
-            'angular/angular-animate.js',
-        ),
-        'output_filename': 'js/angular.js',
-    },
-    'dataTables': {
-        'source_filenames': (
-            # 'extras/DataTables-1.9.4/media/js/jquery.dataTables.min.js',
-            'extras/DataTables-1.10.0/media/js/jquery.dataTables.min.js',
-            'extras/dataTables.fixedHeader/dataTables.fixedHeader.min.js',
-        ),
-        'output_filename': 'js/dataTables.' + DEPLOY_DATE + '.js',
-    },
-    'googlePlaceAutocomplete': {
-        'source_filenames': (
-            'extras/Google/placeAutocomplete.js',
-        ),
-        'output_filename': 'js/googlePlaceAutocomplete.' + DEPLOY_DATE + '.js',
     },
 }
 

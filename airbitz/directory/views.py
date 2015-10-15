@@ -12,6 +12,7 @@ from airbitz.regions_data import ACTIVE_REGIONS, ALL_REGIONS
 from airbitz.settings import GOOGLE_MAP_KEY
 from directory.models import Business, BusinessImage, SocialId
 from directory.models import STATUS_CHOICES, SOCIAL_TYPES
+from directory.team_info import TEAM_INFO
 from restapi import api
 from restapi.serializers import calc_distance
 
@@ -62,7 +63,79 @@ def get_biz(request, *args, **kwargs):
 def home_v2(request):
     return render_to_response('home-v2.html', RequestContext(request, {}))
 
+
+
+def get_team_info():
+    # set up team info rows for mobile and desktop
+    team_id_sm_row_1 = ['paul', 'tim']
+    team_id_sm_row_2 = ['rick', 'william']
+    team_id_sm_row_3 = ['damian', 'will']
+    team_id_sm_row_4 = ['mk', 'scott']
+    team_id_sm_row_5 = ['nik', 'rj']
+    team_id_sm_row_6 = ['vince', 'jacob']
+    team_id_lg_row_1 = team_id_sm_row_1 + team_id_sm_row_2 + team_id_sm_row_3
+    team_id_lg_row_2 = team_id_sm_row_4 + team_id_sm_row_5 + team_id_sm_row_6
+
+    # initialize 8 empty list variables
+    team_info_sm_row_1, team_info_sm_row_2, team_info_sm_row_3, \
+    team_info_sm_row_4, team_info_sm_row_5, team_info_sm_row_6, \
+    team_info_lg_row_1, team_info_lg_row_2 = ([] for i in range(8))
+
+    for profile in TEAM_INFO:
+        if profile['id'] in team_id_sm_row_1:
+            team_info_sm_row_1.append(profile)
+        if profile['id'] in team_id_sm_row_2:
+            team_info_sm_row_2.append(profile)
+        if profile['id'] in team_id_sm_row_3:
+            team_info_sm_row_3.append(profile)
+        if profile['id'] in team_id_sm_row_4:
+            team_info_sm_row_4.append(profile)
+        if profile['id'] in team_id_sm_row_5:
+            team_info_sm_row_5.append(profile)
+        if profile['id'] in team_id_sm_row_6:
+            team_info_sm_row_6.append(profile)
+
+        if profile['id'] in team_id_lg_row_1:
+            team_info_lg_row_1.append(profile)
+        if profile['id'] in team_id_lg_row_2:
+            team_info_lg_row_2.append(profile)
+
+    team_info = {}
+    team_info.update({'sm-1': team_info_sm_row_1})
+    team_info.update({'sm-2': team_info_sm_row_2})
+    team_info.update({'sm-3': team_info_sm_row_3})
+    team_info.update({'sm-4': team_info_sm_row_4})
+    team_info.update({'sm-5': team_info_sm_row_5})
+    team_info.update({'sm-6': team_info_sm_row_6})
+    team_info.update({'lg-1': team_info_lg_row_1})
+    team_info.update({'lg-2': team_info_lg_row_2})
+
+    return team_info
+
+
+def landing_v2(request):
+    team_info = get_team_info()
+    
+    context = {
+        'active_regions': ACTIVE_REGIONS,
+        'team_info_sm_row_1': team_info['sm-1'],
+        'team_info_sm_row_2': team_info['sm-2'],
+        'team_info_sm_row_3': team_info['sm-3'],
+        'team_info_sm_row_4': team_info['sm-4'],
+        'team_info_sm_row_5': team_info['sm-5'],
+        'team_info_sm_row_6': team_info['sm-6'],
+        'team_info_lg_row_1': team_info['lg-1'],
+        'team_info_lg_row_2': team_info['lg-2'],
+
+        'team_info': TEAM_INFO
+        # 'all_regions': ALL_REGIONS,
+        # 'biz_total': Business.objects.filter(status="PUB", country__in=regions_data.get_active_country_codes()).count(),
+    }
+    return render_to_response('landing_v2.html', RequestContext(request, context))
+
+
 def landing(request):
+    print 'OLD LANDING'
     context = {
         'active_regions': ACTIVE_REGIONS,
         'all_regions': ALL_REGIONS,

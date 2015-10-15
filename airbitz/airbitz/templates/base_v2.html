@@ -1,0 +1,233 @@
+{% load compressed %}
+{% load static from staticfiles %}
+{% load google_analytics %}
+{% load absolute %}
+
+<!doctype html>
+<html {% block html_open_tag %}{% endblock html_open_tag %}>
+
+<head>
+  {% block head %}
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% block meta_favicon_url %}{{ STATIC_URL }}img/favicon.ico{% endblock meta_favicon_url %}">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    {# DEFINE DEFAULT SEO TITLE FOR BASE TEMPLATE #}
+    {% with SEO_TITLE="Edge Security API SDK Platform" SEO_DESCRIPTION="Airbitz is a blockchain inspired, decentralized, open source, zero knowledge global information security solution." SEO_KEYWORDS="Blockhain Technology, Private Computing, Open source, Information Security" %}
+
+      {% block head_seo_social %}
+
+        {% block seo_meta %}
+          <title>{% block title %}{{ SEO_TITLE }}{% endblock title %} | Airbitz</title>
+          <meta name="description" content="{% block meta_description %}{{ SEO_DESCRIPTION }}{% endblock meta_description %}">
+          <meta name="news_keywords" content="{% block meta_news_keywords %}{{ SEO_KEYWORDS }}{% endblock meta_news_keywords %}">
+          <meta name="keywords" content="{{ SEO_KEYWORDS }}" />
+          <meta name="author" content="Airbitz">
+        {% endblock seo_meta %}
+
+        {% block og_meta %}
+          <meta property="og:title" content="{% block og_title %}{{ SEO_TITLE }}{% endblock og_title %}">
+          <meta property="og:description" content="{% block og_description %}{{ SEO_DESCRIPTION }}{% endblock og_description %}">
+          <meta property="og:type" content="{% block og_type %}Article{% endblock og_type %}">
+          <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock og_url %}">
+          <meta property="og:image" content="{% block og_image %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock og_image %}">
+          <meta property="og:site_name" content="{% block og_site_name %}Airbitz{% endblock og_site_name %}">
+          {#        <meta property="fb:admins" content="{% block og_fb_admins %}{% endblock og_fb_admins %}">#}
+        {% endblock og_meta %}
+
+        {% block twitter_meta %}
+          <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock twitter_card %}">
+          <meta name="twitter:site" content="{% block twitter_site %}@airbitz{% endblock twitter_site %}">
+          <meta name="twitter:title" content="{% block twitter_title %}{{ SEO_TITLE }}{% endblock twitter_title %}">
+          <meta name="twitter:description" content="{% block twitter_description %}{{ SEO_DESCRIPTION }}{% endblock twitter_description %}">
+          <meta name="twitter:creator" content="{% block twitter_creator %}@airbitz{% endblock twitter_creator %}">
+          <meta name="twitter:image:src" content="{% block twitter_image_src %}{{ ABSOLUTE_ROOT_URL }}static/img/og-home.jpg{% endblock twitter_image_src %}">
+          <meta name="twitter:domain" content="{% block twitter_domain %}{{ request.META.HTTP_HOST }}{% endblock twitter_domain %}">
+          <meta name="twitter:url" content="{% block twitter_url %}{{ request.build_absolute_uri }}{% endblock twitter_url %}">
+          <meta name="twitter:author" content="{% block twitter_author %}@airbitz{% endblock twitter_author %}">
+          <meta name="twitter:app:id:iphone" content="{% block twitter_app_id_iphone %}id843536046{% endblock twitter_app_id_iphone %}">
+          <meta name="twitter:app:id:ipad" content="{% block twitter_app_id_ipad %}id843536046{% endblock twitter_app_id_ipad %}">
+        {% endblock twitter_meta %}
+
+      {% endblock head_seo_social %}
+
+    {% endwith %}
+
+    <!-- Web Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{% static 'airbitz-theme/vendor/bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'airbitz-theme/vendor/owlcarousel/owl.carousel.min.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'airbitz-theme/vendor/owlcarousel/owl.theme.default.min.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'airbitz-theme/vendor/magnific-popup/magnific-popup.css' %}" media="screen">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="{% static 'airbitz-theme/css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'airbitz-theme/css/theme-elements.css' %}">
+    <link rel="stylesheet" href="{% static 'airbitz-theme/css/theme-blog.css' %}">
+    <link rel="stylesheet" href="{% static 'airbitz-theme/css/theme-shop.css' %}">
+    <link rel="stylesheet" href="{% static 'airbitz-theme/css/theme-animate.css' %}">
+
+    <!-- Current Page CSS -->
+    <link rel="stylesheet" href="{% static 'airbitz-theme/vendor/rs-plugin/css/settings.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'airbitz-theme/vendor/circle-flip-slideshow/css/component.css' %}" media="screen">
+
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="{% static 'airbitz-theme/css/skins/default.css' %}">
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{% static 'airbitz-theme/css/custom.css' %}">
+
+    <!-- Head Libs -->
+    {#  <script src="{% static 'airbitz-theme/vendor/modernizr/modernizr.js' %}"></script>#}
+    {% block javascript_head %}
+      {% compressed_js 'airbitz-theme-head' %}
+    {% endblock javascript_head %}
+
+    <!--[if IE]>
+      <link rel="stylesheet" href="{% static 'airbitz-theme/css/ie.css' %}">
+      <![endif]-->
+
+    <!--[if lte IE 8]>
+{#      <script src="{% static 'airbitz-theme/vendor/respond/respond.js' %}"></script>#}
+{#      <script src="{% static 'airbitz-theme/vendor/excanvas/excanvas.js' %}"></script>#}
+  {% compressed_js 'airbitz-theme-head-ie-8' %}
+      <![endif]-->
+
+  {% endblock head %}
+</head>
+
+<body {% block body_tag %}{% endblock body_tag %}>
+
+<div class="body">
+  {% block body %}
+
+    {% block header_navigation %}{% endblock header_navigation %}
+    {% block main %}{% endblock main %}
+
+  {% endblock body %}
+
+  {% block body_modals %}{% endblock body_modals %}
+</div>
+
+{% block footer %}
+  {% include '_footer_main_v2.html' %}
+{% endblock footer %}
+
+
+{% block javascript_body %}
+  <!-- Vendor -->
+  <!--[if lt IE 9]>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+  <!--[if gte IE 9]><!-->
+  {#<script src="{% static 'airbitz-theme/vendor/jquery/jquery.js' %}"></script>#}
+  {% compressed_js 'airbitz-theme-footer-jquery-gt-ie-9' %}
+  <!--<![endif]-->
+  {#<script src="{% static 'airbitz-theme/vendor/jquery.appear/jquery.appear.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/jquery.easing/jquery.easing.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/jquery-cookie/jquery-cookie.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/bootstrap/bootstrap.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/common/common.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/jquery.validation/jquery.validation.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/jquery.stellar/jquery.stellar.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/jquery.gmap/jquery.gmap.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/isotope/jquery.isotope.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/owlcarousel/owl.carousel.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/jflickrfeed/jflickrfeed.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/magnific-popup/jquery.magnific-popup.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/vide/vide.js' %}"></script>#}
+
+  <!-- Theme Base, Components and Settings -->
+  {#<script src="{% static 'airbitz-theme/js/theme.js' %}"></script>#}
+
+  <!-- Specific Page Vendor and Views -->
+  {#<script src="{% static 'airbitz-theme/vendor/rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/vendor/circle-flip-slideshow/js/jquery.flipshow.js' %}"></script>#}
+  {#<script src="{% static 'airbitz-theme/js/views/view.home.js' %}"></script>#}
+  {% compressed_js 'airbitz-theme-footer' %}
+
+  <script type="text/javascript">
+    $(function() {
+      // Include the UserVoice JavaScript SDK (only needed once on a page)
+      UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/sf1HfQGz9aR6JlwkmTvKbQ.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+
+      //
+      // UserVoice Javascript SDK developer documentation:
+      // https://www.uservoice.com/o/javascript-sdk
+      //
+
+      // Set colors
+      UserVoice.push(['set', {
+        accent_color: '#448dd6',
+        trigger_color: 'white',
+        trigger_background_color: '#6aba2e'
+      }]);
+
+      // Identify the user and pass traits
+      // To enable, replace sample data with actual user traits and uncomment the line
+      UserVoice.push(['identify', {
+        //email:      'john.doe@example.com', // User’s email address
+        //name:       'John Doe', // User’s real name
+        //created_at: 1364406966, // Unix timestamp for the date the user signed up
+        //id:         123, // Optional: Unique id of the user (if set, this should not change)
+        //type:       'Owner', // Optional: segment your users by type
+        //account: {
+        //  id:           123, // Optional: associate multiple users with a single account
+        //  name:         'Acme, Co.', // Account name
+        //  created_at:   1364406966, // Unix timestamp for the date the account was created
+        //  monthly_rate: 9.99, // Decimal; monthly rate of the account
+        //  ltv:          1495.00, // Decimal; lifetime value of the account
+        //  plan:         'Enhanced' // Plan name for the account
+        //}
+      }]);
+
+      // Add default trigger to the bottom-right corner of the window:
+      UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-left' }]);
+
+      // Or, use your own custom trigger:
+      //UserVoice.push(['addTrigger', '#id', { mode: 'contact' }]);
+
+      // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
+      UserVoice.push(['autoprompt', {}]);
+    });
+  </script>
+
+  <!-- Theme Custom -->
+{#  <script src="{% static 'airbitz-theme/js/custom.js' %}"></script>#}
+
+  <!-- Theme Initialization Files -->
+{#  <script src="{% static 'airbitz-theme/js/theme.init.js' %}"></script>#}
+
+
+
+  {#  RETARGETING CODE FROM BRETT STAPPER #}
+  <script type="text/javascript">
+    (function() {
+      window._pa = window._pa || {};
+      // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+      // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+      // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+      var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+      pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/55a936c7993b1d3295000184.js";
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+    })();
+  </script>
+
+  {% google_analytics %}
+
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+{% endblock javascript_body %}
+</body>
+</html>

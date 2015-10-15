@@ -1,0 +1,161 @@
+{% load static from staticfiles %}
+
+
+<header id="header" class="flat-menu single-menu">
+  <div class="container">
+    <div class="logo">
+      <a href="{% url 'landing' %}">
+        <img alt="Airbitz" width="100" height="56" data-sticky-width="82" data-sticky-height="46" src="{% static 'airbitz-theme/img-custom/airbitz-logo-mono-blue-100.png' %}">
+      </a>
+    </div>
+    <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
+      <i class="fa fa-bars"></i>
+    </button>
+  </div>
+  <div class="navbar-collapse nav-main-collapse collapse">
+    <div class="container">
+      <nav class="nav-main mega-menu">
+        <ul class="nav nav-pills nav-main" id="mainMenu">
+          <li class="dropdown">
+            <a class="dropdown-toggle" href="#edge-security-platform">
+              Developer API/SDK
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'page_developer_api_library' %}">Development API</a></li>
+              <li><a href="{% url 'page_client_server_architecture' %}">Client Server Architecture</a></li>
+              <li><a href="{% url 'page_core_white_paper' %}">Core White Paper</a></li>
+              <li><a href="{% url 'page_data_sync_architecture' %}">Data Sync Architecture</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" href="#mobile-app">
+              Mobile App
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#app">Download</a></li>
+              <li><a href="{% url 'page_bitcoin_wallet' %}">Learn More</a></li>
+              <li><a href="{% url 'landing' %}go/faq/">Frequently Asked Questions</a></li>
+              <li><a href="{% url 'search' %}?term=&location=Current+Location">Merchant Directory</a></li>
+            </ul>
+          </li>
+          {#            <li class="dropdown mega-menu-item mega-menu-fullwidth">#}
+          {#              <a class="dropdown-toggle" href="#">#}
+          {#                Mobile App#}
+          {#              </a>#}
+          {#              <ul class="dropdown-menu">#}
+          {#                <li>#}
+          {#                  <div class="mega-menu-content">#}
+          {#                    <div class="row">#}
+          {#                      <div class="col-md-4">#}
+          {#                        <span class="mega-menu-sub-title">Bitcoin Directory Links</span>#}
+          {#                        <ul class="sub-menu">#}
+          {#                          <li>#}
+          {#                            <ul class="sub-menu">#}
+          {#                              <li><a href="#submit-business" class="submit-business">Submit a Business <span class="tip tip-dark">Get Listed</span></a></li>#}
+          {#                              <li><a href="{% url 'search' %}?term=&location=Current+Location">Local Businesses</a></li>#}
+          {#                              <li><a href="{% url 'search' %}?term=BTM&location=Current+Location">BTM's (Bitcoin ATM's)</a></li>#}
+          {#                              <li><a href="{% url 'search' %}?term=Restaurants&location=Current+Location">Restaurants & Food Trucks</a></li>#}
+          {#                              <li><a href="{% url 'search' %}?term=Bar&location=Current+Location">Bars & Nightclubs</a></li>#}
+          {#                              <li><a href="{% url 'search' %}?term=Hotels+%26+Lodging&location=Current+Location">Hotels & Lodging</a></li>#}
+          {#                            </ul>#}
+          {#                          </li>#}
+          {#                        </ul>#}
+          {#                      </div>#}
+          {#                      <div class="col-md-4">#}
+          {#                        <span class="mega-menu-sub-title">Bitcoin Directory Regions</span>#}
+          {#                        <ul class="sub-menu">#}
+          {#                          <li>#}
+          {#                            <ul class="sub-menu">#}
+          {#                              <li class="dropdown-submenu">#}
+          {#                                <span>United States</span>#}
+          {#                                <ul class="dropdown-menu">#}
+          {#                                  {% for region in us_active_regions_list %}#}
+          {#                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>#}
+          {#                                  {% endfor %}#}
+          {#                                </ul>#}
+          {#                              </li>#}
+          {#                              <li class="dropdown-submenu">#}
+          {#                                <span>Canada</span>#}
+          {#                                <ul class="dropdown-menu">#}
+          {#                                  {% for region in ca_active_regions_list %}#}
+          {#                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>#}
+          {#                                  {% endfor %}#}
+          {#                                </ul>#}
+          {#                              </li>#}
+          {#                              <li class="dropdown-submenu">#}
+          {#                                <span>South America</span>#}
+          {#                                <ul class="dropdown-menu">#}
+          {#                                  {% for region in south_america_active_regions_list %}#}
+          {#                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>#}
+          {#                                  {% endfor %}#}
+          {#                                </ul>#}
+          {#                              </li>#}
+          {#                              <li class="dropdown-submenu">#}
+          {#                                <span>Europe</span>#}
+          {#                                <ul class="dropdown-menu">#}
+          {#                                  {% for region in eu_active_regions_list %}#}
+          {#                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>#}
+          {#                                  {% endfor %}#}
+          {#                                </ul>#}
+          {#                              </li>#}
+          {#                              <li class="dropdown-submenu">#}
+          {#                                <span>Asia</span>#}
+          {#                                <ul class="dropdown-menu">#}
+          {#                                  {% for region in asia_active_regions_list %}#}
+          {#                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>#}
+          {#                                  {% endfor %}#}
+          {#                                </ul>#}
+          {#                              </li>#}
+          {#                              <li class="dropdown-submenu">#}
+          {#                                <span>Southeast Asia</span>#}
+          {#                                <ul class="dropdown-menu">#}
+          {#                                  {% for region in southeast_asia_active_regions_list %}#}
+          {#                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>#}
+          {#                                  {% endfor %}#}
+          {#                                </ul>#}
+          {#                              </li>#}
+          {#                              <li class="dropdown-submenu">#}
+          {#                                <span>Oceana</span>#}
+          {#                                <ul class="dropdown-menu">#}
+          {#                                  {% for region in oceana_active_regions_list %}#}
+          {#                                    <li><a href="{% url 'landing' %}search?location={{ region.1 }}" title="Businesses Accepting Bitcoin in {{ region.1 }}">{{ region.0 }}</a></li>#}
+          {#                                  {% endfor %}#}
+          {#                                </ul>#}
+          {#                              </li>#}
+          {#                            </ul>#}
+          {#                          </li>#}
+          {#                        </ul>#}
+          {#                      </div>#}
+          {#                      <div class="col-md-4">#}
+          {#                        <span class="mega-menu-sub-title">Airbitz Bitcoin App</span>#}
+          {#                        <ul class="sub-menu">#}
+          {#                          <li>#}
+          {#                            <ul class="sub-menu">#}
+          {#                              <li><a href="{% url 'app_download' %}"><i class="fa fa-download"></i> Download</a></li>#}
+          {#                              <li><a href="{% url 'page_bitcoin_wallet' %}"><i class="fa fa-info-circle"></i> Learn More</a></li>#}
+          {#                              <li><a href="{% url 'landing' %}go/faq/"><i class="fa fa-question-circle"></i> Frequently Asked Questions</a></li>#}
+          {#                            </ul>#}
+          {#                          </li>#}
+          {#                        </ul>#}
+          {#                      </div>#}
+          {#                    </div>#}
+          {#                  </div>#}
+          {#                </li>#}
+          {#              </ul>#}
+          {#            </li>#}
+          <li><a href="{% url 'landing' %}go/">Blog</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" href="#">
+              More
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#team-quote">Team</a></li>
+              <li><a href="#team">About Us</a></li>
+              <li><a href="#contact" data-uv-trigger>Contact Us</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
