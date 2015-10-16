@@ -21,6 +21,8 @@ from management.forms import CategoryForm, ImageTagForm, \
                              SocialFormSet, SocialFormHelper
 from urlparse import urlparse
 from bs4 import BeautifulSoup
+from directory.applications_info import APPLICATIONS_INFO
+
 
 import logging
 logger = logging.getLogger(__name__)
@@ -506,6 +508,7 @@ def page_developer_api_library(request):
     context = {
         'page_title': 'Bitcoin Developer API Library',
         'page_description': 'The Airbitz Core (ABC) gives developers the ability to build Bitcoin products such as currency exchanges, ATMs, POS solutions, games, and payroll services that are fully integrated with accounts and wallets from the Airbitz mobile app.',
+        'applications_info': APPLICATIONS_INFO
     }
     return render_to_response('api-sdk/security-api-sdk-library.html', RequestContext(request, context))
 
