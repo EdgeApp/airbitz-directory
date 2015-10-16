@@ -1,15 +1,36 @@
-<html>
-  <head>
-  <title>Verify</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script type="text/javascript" src="{{STATIC_URL}}/js/notify.min.js"></script>
-  <script src="{{STATIC_URL}}/js/core.js"></script>
-  <script>
+{% extends 'base_v2.html' %}
+{% load compressed %}
+{% load static from staticfiles %}
+{% block header_navigation %}
+{% include 'navigation/_home-header.html' %}
+{% endblock header_navigation %}
+{% block title %}Airbitz Verification{% endblock title %}
+{% block main %}
+<div class="container text-center" style="margin: 100px auto 250px auto;">
+  <h1>Please verify you're not a robot.</h1>
+  <div class="row">
+    <div class="col-xs-12">
+      <form class="form text-center">
+        <center>
+        <div id="captcha_container"></div>
+        </center>
+      </form>
+    </div>
+  </div>  
+
+</div>
+{% endblock main %}
+{% block javascript_body %}
+{{block.super}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}/js/notify.min.js"></script>
+<script src="{{STATIC_URL}}/js/core.js"></script>
+<script>
   $.ajaxSetup({
-      crossDomain: false,
-      beforeSend: function(xhr, settings) {
-              xhr.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
-      }
+    crossDomain: false,
+    beforeSend: function(xhr, settings) {
+      xhr.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
+    }
   });
   var captchaContainer = null;
   var loadCaptcha = function() {
@@ -23,7 +44,7 @@
             position:"bottom center",
             className: 'success',
           }
-           );
+          );
         })
         .fail(function(status) {
           $("#captcha_container").notify("Successfully verified",
@@ -31,22 +52,11 @@
             position:"bottom center",
             className: 'error',
           }
-           );
+          );
         });
       }
     });
   };
-  </script>
-  </head>
-  <body>
-  	<center>
-  		<h1>Please verify you're not a robot.</h1>
-    	<form>
-
-    	<div id="captcha_container"></div>
-    	</form>
-  	</center>
-
-  	<script src="https://www.google.com/recaptcha/api.js?onload=loadCaptcha&render=explicit" async defer></script>
-  </body>
-</html>
+</script>
+<script src="https://www.google.com/recaptcha/api.js?onload=loadCaptcha&render=explicit" async defer></script>
+{% endblock javascript_body %}
