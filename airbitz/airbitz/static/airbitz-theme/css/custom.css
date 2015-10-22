@@ -111,16 +111,16 @@ html .app-info {
 html .app-screenshots .img-thumbnail {
   border-radius: 0;
   border: none; }
-html body.home {
+html body.home, html body.bitcoin-app {
   font-size: 1.8em; }
-  html body.home p {
+  html body.home p, html body.bitcoin-app p {
     line-height: 1.8em; }
-html body.api-sdk h3 {
+html body.api-sdk h3, html body.bitcoin-app h3 {
   text-transform: none; }
-html body.api-sdk .section {
+html body.api-sdk .section, html body.bitcoin-app .section {
   padding: 25px 0;
   border-radius: 5px; }
-  html body.api-sdk .section.gradient-blue {
+  html body.api-sdk .section.gradient-blue, html body.bitcoin-app .section.gradient-blue {
     background: -moz-linear-gradient(left, #002e48 0%, rgba(125, 185, 232, 0.01) 100%);
     /* FF3.6+ */
     background: -webkit-gradient(linear, left top, right top, color-stop(0%, #002e48), color-stop(100%, rgba(125, 185, 232, 0.01)));
@@ -135,7 +135,7 @@ html body.api-sdk .section {
     /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#002e48', endColorstr='#037db9e8',GradientType=1 );
     /* IE6-9 */ }
-  html body.api-sdk .section.gradient-green {
+  html body.api-sdk .section.gradient-green, html body.bitcoin-app .section.gradient-green {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#478900+0,7db9e8+100&amp;1+0,0+100 */
     background: -moz-linear-gradient(left, #478900 0%, rgba(125, 185, 232, 0) 100%);
     /* FF3.6+ */
@@ -151,10 +151,18 @@ html body.api-sdk .section {
     /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#478900', endColorstr='#007db9e8',GradientType=1 );
     /* IE6-9 */ }
-  html body.api-sdk .section h3 {
+  html body.api-sdk .section h3, html body.bitcoin-app .section h3 {
     font-weight: 200;
     margin-bottom: 0;
     margin-left: 30px; }
+html body.api-sdk .sdk-signup {
+  background: #002e48;
+  border-radius: 5px;
+  border: 1px solid #dddddd;
+  padding: 20px 0; }
+  html body.api-sdk .sdk-signup h2 {
+    margin-bottom: 5px;
+    color: white; }
 
 .modal.team-profile .modal-content {
   padding: 20px; }

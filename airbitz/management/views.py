@@ -23,8 +23,8 @@ from urlparse import urlparse
 from bs4 import BeautifulSoup
 from directory.applications_info import APPLICATIONS_INFO
 
-
 import logging
+import mailchimp
 logger = logging.getLogger(__name__)
 
 LOGIN_URL='/mgmt/login'
@@ -505,6 +505,31 @@ def page_bitcoin_wallet(request):
     return render_to_response('pages/page_bitcoin-wallet.html', RequestContext(request, context))
 
 def page_developer_api_library(request):
+
+    if request.POST:
+        mc_source = request.POST['signup_source']
+        mc_email = request.POST['email']
+        mc_fname = request.POST['first']
+        mc_lname = request.POST['last']
+
+        mc_list_id = 'b7bd36890d'
+        mc_list = mailchimp.utils.get_connection().get_list_by_id(mc_list_id)
+
+        mc_merge_vars = {
+            'SOURCE': mc_source,
+            'FNAME': mc_fname,
+            'LNAME': mc_lname
+        }
+
+        mc_list.subscribe(
+            email_address=mc_email,
+            double_optin=True,
+            update_existing=True,
+            merge_vars=mc_merge_vars
+        )
+
+        return HttpResponseRedirect(reverse('page_api_library'))
+
     context = {
         'page_title': 'Bitcoin Developer API Library',
         'page_description': 'The Airbitz Core (ABC) gives developers the ability to build Bitcoin products such as currency exchanges, ATMs, POS solutions, games, and payroll services that are fully integrated with accounts and wallets from the Airbitz mobile app.',

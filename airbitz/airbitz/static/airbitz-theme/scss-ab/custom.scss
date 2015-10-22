@@ -201,14 +201,16 @@ html {
 
 
     body {
-        &.home {
+        &.home,
+        &.bitcoin-app {
             font-size: 1.8em;
 
             p {
                 line-height: 1.8em;
             }
         }
-        &.api-sdk {
+        &.api-sdk,
+        &.bitcoin-app {
 
             h3 {
                 text-transform: none;
@@ -230,8 +232,20 @@ html {
                 }
             }
         }
-    }
+        &.api-sdk {
+            .sdk-signup {
+                background: #002e48;
+                border-radius: 5px;
+                border: 1px solid #dddddd;
+                padding: 20px 0;
 
+                h2 {
+                    margin-bottom: 5px;
+                    color: white;
+                }
+            }
+        }
+    }
 }
 
 

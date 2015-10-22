@@ -84,6 +84,7 @@ INSTALLED_APPS = (
 
     'djcelery',
     'djrill',
+    'mailchimp',
     'haystack',
     'celery_haystack',
     'imagekit',
@@ -613,6 +614,7 @@ LOGGING = {
     },
 }
 
+
 # GOOGLE ANALYTICS
 if DEBUG:
     # bogus id unless in production to prevent analytics pollution
@@ -622,6 +624,11 @@ else:
     GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-47697034-1'
     API_GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-47697034-3'
 
+
 # MANDRILL TRANSACTIONAL EMAIL SETTINGS
 EMAIL_BACKEND = 'djrill.mail.backends.djrill.DjrillBackend'
 MANDRILL_API_KEY = "PyTes5t81HtIAenr0KNtxw"
+
+
+# MAILCHIMP API KEYS
+MAILCHIMP_API_KEY = "8e5665e638ab8540f17772fbfa96d15e-us3"
