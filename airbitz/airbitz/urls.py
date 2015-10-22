@@ -48,6 +48,7 @@ urlpatterns = patterns('',
     url(r'^button/$', 'management.views.redirect_button', name='mgmt_redirect_button'),
     url(r'^rsvp/?$', RedirectView.as_view(url='http://www.meetup.com/Bitcoin-in-San-Diego/events/189727482/')),
     url(r'^survey/(?P<slug>[-\w]+)/?$', 'management.views.page_survey_slug', name='page_survey_slug'),
+    url(r'^verification/', include('verification.urls')),
 )
 
 if settings.DEBUG:
