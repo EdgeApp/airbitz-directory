@@ -523,7 +523,7 @@ def page_developer_api_library(request):
 
         mc_list.subscribe(
             email_address=mc_email,
-            double_optin=True,
+            double_optin=False,
             update_existing=True,
             merge_vars=mc_merge_vars
         )
