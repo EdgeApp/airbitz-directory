@@ -155,12 +155,12 @@ html body.api-sdk .section, html body.bitcoin-app .section {
     font-weight: 200;
     margin-bottom: 0;
     margin-left: 30px; }
-html body.api-sdk .sdk-signup {
+html body .sdk-signup {
   background: #002e48;
   border-radius: 5px;
   border: 1px solid #dddddd;
   padding: 20px 0; }
-  html body.api-sdk .sdk-signup h2 {
+  html body .sdk-signup h2 {
     margin-bottom: 5px;
     color: white; }
 

@@ -232,17 +232,16 @@ html {
                 }
             }
         }
-        &.api-sdk {
-            .sdk-signup {
-                background: #002e48;
-                border-radius: 5px;
-                border: 1px solid #dddddd;
-                padding: 20px 0;
+        &.api-sdk {}
+        .sdk-signup {
+            background: #002e48;
+            border-radius: 5px;
+            border: 1px solid #dddddd;
+            padding: 20px 0;
 
-                h2 {
-                    margin-bottom: 5px;
-                    color: white;
-                }
+            h2 {
+                margin-bottom: 5px;
+                color: white;
             }
         }
     }

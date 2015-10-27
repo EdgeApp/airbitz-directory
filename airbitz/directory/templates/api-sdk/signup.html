@@ -4,7 +4,7 @@
       <h2>Register Today for an <strong>API Key</strong> and <strong>Early Access</strong></h2>
       <form method="post" action="" class="form form-horizontal">
         {% csrf_token %}
-{#        <input type="hidden" name="signup_source" value="sdk">#}
+        <input type="hidden" name="signup_type" value="mailchimp">
         <div class="form-group">
           <div class="col-sm-4"><label>First name</label><input name="first" type="text" class="form-control" placeholder="First"></div>
           <div class="col-sm-4"><label>Last name</label><input name="last" type="text" class="form-control" placeholder="Last"></div>

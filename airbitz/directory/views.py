@@ -10,6 +10,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from airbitz import regions_data
 from airbitz.regions_data import ACTIVE_REGIONS, ALL_REGIONS
 from airbitz.settings import GOOGLE_MAP_KEY
+from directory.utils import mailchimp_list_signup
 from directory.models import Business, BusinessImage, SocialId
 from directory.models import STATUS_CHOICES, SOCIAL_TYPES
 from directory.team_info import TEAM_INFO
@@ -115,6 +116,9 @@ def get_team_info():
 
 
 def landing_v2(request):
+    if request.POST.get('signup_type') == 'mailchimp':
+        mailchimp_list_signup(request)
+
     team_info = get_team_info()
     
     context = {
