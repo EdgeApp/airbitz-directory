@@ -160,9 +160,19 @@ html body .sdk-signup {
   border-radius: 5px;
   border: 1px solid #dddddd;
   padding: 20px 0; }
+  @media (max-width: 768px) {
+    html body .sdk-signup {
+      padding-left: 20px;
+      padding-right: 20px; } }
   html body .sdk-signup h2 {
     margin-bottom: 5px;
     color: white; }
+    @media (max-width: 768px) {
+      html body .sdk-signup h2 {
+        zoom: .75; } }
+  @media (max-width: 768px) {
+    html body .sdk-signup .submit-row {
+      margin-left: 20px; } }
 
 .modal.team-profile .modal-content {
   padding: 20px; }
