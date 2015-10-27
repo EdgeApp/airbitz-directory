@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.template.defaultfilters import slugify
 
 from directory.models import STATUS_CHOICES, SOCIAL_TYPES, \
                              Category, ImageTag, \
@@ -507,12 +508,16 @@ def page_bitcoin_wallet(request):
 def page_developer_api_library(request):
 
     if request.POST:
-        mc_source = request.POST['signup_source']
-        mc_email = request.POST['email']
-        mc_fname = request.POST['first']
-        mc_lname = request.POST['last']
+        if request.POST.get('signup_source', False): # try to get signup source from form else use url
+            mc_source = request.POST.get('signup_source', 'unknown')
+        else:
+            mc_source = slugify(request.path_info)
 
-        mc_list_id = 'b7bd36890d'
+        mc_email = request.POST.get('email', '')
+        mc_fname = request.POST.get('first', '')
+        mc_lname = request.POST.get('last', '')
+
+        mc_list_id = settings.MAILCHIMP_LIST_AIRBITZ_MAIN
         mc_list = mailchimp.utils.get_connection().get_list_by_id(mc_list_id)
 
         mc_merge_vars = {
@@ -528,7 +533,7 @@ def page_developer_api_library(request):
             merge_vars=mc_merge_vars
         )
 
-        return HttpResponseRedirect(reverse('page_api_library'))
+        return HttpResponseRedirect(reverse('page_developer_api_library'))
 
     context = {
         'page_title': 'Bitcoin Developer API Library',
