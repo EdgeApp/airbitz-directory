@@ -173,6 +173,12 @@ html body .sdk-signup {
   @media (max-width: 768px) {
     html body .sdk-signup .submit-row {
       margin-left: 20px; } }
+html body footer#footer .heading-primary {
+  color: #697D8F !important; }
+html body footer#footer .support-details {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #385667;
+  margin-bottom: 20px; }
 
 .modal.team-profile .modal-content {
   padding: 20px; }

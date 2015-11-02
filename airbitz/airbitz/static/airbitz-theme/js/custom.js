@@ -104,5 +104,10 @@
 				}
 			});
 
+  $('.btn-contact').on('click', function(){
+    FreshWidget.show();
+    return false;
+  });
+
 }).apply(this, [jQuery]);
 
