@@ -49,7 +49,9 @@ class NotificationView(generics.ListAPIView):
         if not android_build and not ios_build:
             q = q & Q(android_build_last__isnull=True) & Q(ios_build_last__isnull=True)
 
-        return Notification.objects.filter(q).order_by('id')
+        qs = Notification.objects.filter(q).order_by('id')
+        qs = qs.filter(users__in=[self.request.user])
+        return qs
 
 
 class HBitsPromoSerializer(serializers.ModelSerializer):

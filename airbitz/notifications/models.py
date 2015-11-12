@@ -1,5 +1,5 @@
-from django.contrib import admin
 from django.contrib.gis.db import models
+from django.conf import settings
 
 import logging
 
@@ -16,6 +16,7 @@ class Notification(models.Model):
     message = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
 
     def __unicode__(self):
         return "{0}".format(self.message)
