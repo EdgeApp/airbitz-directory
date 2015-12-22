@@ -27,7 +27,8 @@ html .home-intro {
       border-radius: 3px;
       text-transform: capitalize; }
 html .lead {
-  font-size: 1.8em; }
+  font-size: 1.8em;
+  line-height: 1.2em !important; }
   html .lead strong {
     color: #2291cf; }
 html .alternative-font {
@@ -51,9 +52,10 @@ html section.section {
     text-shadow: 0 1px 1px #777; }
   html section.section.section-text-dark .heading h1, html section.section.section-text-dark .heading h2, html section.section.section-text-dark .heading h3, html section.section.section-text-dark .heading h4, html section.section.section-text-dark .heading h5, html section.section.section-text-dark .heading h6 {
     text-shadow: 0 1px 1px #ddd; }
-  html section.section.section-tall {
-    margin: 100px 0 !important;
-    padding: 100px; }
+  @media all and (min-width: 768px) {
+    html section.section.section-tall {
+      margin: 100px 0 !important;
+      padding: 100px; } }
 html section.airbitz-app {
   margin: 100px 0; }
   html section.airbitz-app .airbitz-app-icon {

@@ -4,6 +4,7 @@ import views as views
 import restapi.admin as a
 
 from notifications.views import NotificationView, HBitsPromoView, HBitsPromoList, HBitsPromoCreate, HBitsPromoClaimed
+from statistics.views import EventView
 
 urlpatterns = patterns('',
      url(r'^docs/$', 'restapi.views.page_api_v1_documentation'),
@@ -30,5 +31,7 @@ urlpatterns = patterns('',
      url(r'^business/list/?$', a.ThirdPartyBusinessList.as_view()),
      url(r'^business/list/(?P<provider_id>[a-zA-Z0-9]+)/?$', a.ThirdPartyBusinessList.as_view()),
      url(r'^categories/expense/?$', a.ThirdPartyExpenseCategoriesList.as_view()),
+
+     url(r'^events/?$', EventView.as_view()),
 )
 

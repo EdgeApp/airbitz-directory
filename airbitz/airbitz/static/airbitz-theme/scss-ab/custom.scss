@@ -57,6 +57,8 @@ html {
     }
     .lead {
         font-size: 1.8em;
+        line-height: 1.2em !important;
+
         strong {
             color: $ab-blue;
             //white-space:nowrap;
@@ -105,8 +107,10 @@ html {
                 }
             }
             &.section-tall {
-                margin: 100px 0 !important;
-                padding: 100px;
+                @media all and (min-width: $screen-sm) {
+                    margin: 100px 0 !important;
+                    padding: 100px;
+                }
             }
         }
 
