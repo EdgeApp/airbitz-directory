@@ -28,11 +28,11 @@
             </ul>
           </li>
           <li class="dropdown">
-            <a class="dropdown-toggle" href="#mobile-app">
+            <a class="dropdown-toggle" href="{% url 'landing' %}bitcoin-wallet/">
               Mobile App
             </a>
             <ul class="dropdown-menu">
-              <li><a href="{% url 'page_bitcoin_wallet' %}">Download</a></li>
+              <!--<li><a href="{% url 'page_bitcoin_wallet' %}">Download</a></li>-->
               <li><a href="{% url 'page_bitcoin_wallet' %}">Learn More</a></li>
               <li><a href="{% url 'landing' %}go/faq/">Frequently Asked Questions</a></li>
               <li><a href="{% url 'search' %}?term=&location=Current+Location">Merchant Directory</a></li>
@@ -149,9 +149,9 @@
               More
             </a>
             <ul class="dropdown-menu">
-              <li><a href="#team-quote">Team</a></li>
-              <li><a href="#team">About Us</a></li>
-              <li><a href="#contact" class="btn-contact">Contact Us</a></li>
+              <li><a href="{% url 'landing' %}#team-quote">Team</a></li>
+              <li><a href="{% url 'landing' %}#team">About Us</a></li>
+              <li><a href="{% url 'landing' %}#contact" class="btn-contact">Contact Us</a></li>
             </ul>
           </li>
         </ul>

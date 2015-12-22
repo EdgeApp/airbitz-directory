@@ -2381,11 +2381,11 @@ aside ul.nav-list > li > a {
 }
 
 .slider-container .main-label {
-	color: #FFF;
-	font-size: 62px;
-	line-height: 62px;
-	font-weight: 800;
-	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+	color: #666;
+	font-size: 42px;
+	line-height: 42px;
+	font-weight: 500;
+	/*text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);*/
 }
 
 .slider-container .featured-label {
@@ -2397,13 +2397,14 @@ aside ul.nav-list > li > a {
 }
 
 .slider-container .bottom-label {
-	color: #FFF;
+	color: #444;
 	font-size: 20px;
 	font-weight: 300;
 }
 
 .slider-container .blackboard-text {
-	color: #BAB9BE;
+	/*color: #BAB9BE;*/
+	color: #555555;
 	font-size: 46px;
 	line-height: 46px;
 	font-family: "Shadows Into Light", cursive;

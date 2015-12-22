@@ -36,15 +36,6 @@ TEAM_INFO = [
         "skills": ["Bitcoin Protocol", "C / C++", "Shell Scripting", "Electronics"]
     },
     {
-        "id": "damian",
-        "name": "Damian Cutillo",
-        "img_path": "airbitz-theme/img-custom/portraits/damian.jpg",
-        "title": "V.P. Design / Co-Founder",
-        "nickname": "Web Geek",
-        "bio_html": "<p>Damian has been involved with computer networking and system administration since 1999 and in 2006 he started building applications with open source internet technologies. Damian is a member of several open source communities and enjoys building things that are intuitive and beautiful in design and function. If it's a project that can help the planet evolve in a more balanced and harmonious way that promotes the evolution of consciousness then you can count Damian in.</p><p>In 2012, Damian co-founded Breadcrumbs, a mobile app to track your time and where you spend it. Breadcrumbs received awards at Uplinq 2012 conference, $50k in seed investment, and were accepted to the Qualcomm Labs EvoNexus startup incubator program in San Diego.</p><p>In April 2014 Damian teamed up with Amir Taaki, Pablo Martin, and William Swanson of the Libbitcoin and DarkWallet project in Toronto for the 2014 Bitcoin Expo Hackathon. The team won first place with the DarkMarket project, a proof of concept for one of the world's first fully decentralized, anonymous, peer to peer marketplaces. The hackathon prize money was donated to the Libbitcoin project's future development.</p>",
-        "skills": ["Design / Development", "Django / WordPress", "UI/UX", "SEO / SEM"]
-    },
-    {
         "id": "will",
         "name": "Will Pangman",
         "img_path": "airbitz-theme/img-custom/portraits/will.jpg",
@@ -63,17 +54,8 @@ TEAM_INFO = [
         "skills": ["Writing / Editing", "Public Speaking", "Content Creation", "Social Media Management"]
     },
     {
-        "id": "scott",
-        "name": "Scott Morgan",
-        "img_path": "airbitz-theme/img-custom/portraits/scott.jpg",
-        "title": "H.R. Accounting / Co-Founder",
-        "nickname": "Number Muncher",
-        "bio_html": "<p>Scott has been on the finance side of the equation for most of his career. He has started several start ups and enjoys the excitement of building something new with a great team...and Airbitz is a great team!</p><p>Scott enjoys all things crypto and was bitten hard by the bug in 2012. He is excited to be in a space which can be created to help all individuals succeed in defining and achieving their own definition of success.</p>",
-        "skills": ["California CPA", "Partnering & Networking", "Wallet User", "Ruby Newbie"]
-    },
-    {
         "id": "nik",
-        "name": "Nik Oraevkiy",
+        "name": "Nik Oraevskiy",
         "img_path": "airbitz-theme/img-custom/portraits/nik.jpg",
         "title": "Business Development / Analyst",
         "nickname": "Insight Escavator",
@@ -97,14 +79,5 @@ TEAM_INFO = [
         "nickname": "Data Wrapper",
         "bio_html": "<p>More on Vincent coming soon.</p>",
         "skills": ["Quality Assurance", "Data Visualization", "Finance", "Fieldwork"]
-    },
-    {
-        "id": "jacob",
-        "name": "Jacob Burrell",
-        "img_path": "airbitz-theme/img-custom/portraits/jacob.jpg",
-        "title": "Junior Developer / QA",
-        "nickname": "Nitpicking Ninja",
-        "bio_html": "<p>More on Jacob coming soon.</p>",
-        "skills": ["Entrepreneur", "Quality Assurance", "Data Collection", "Scripting"]
     },
 ]

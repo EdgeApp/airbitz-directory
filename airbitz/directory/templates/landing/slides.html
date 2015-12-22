@@ -1,103 +1,116 @@
 {% load static from staticfiles %}
 
-<div class="slides-landing slider-container">
-  <div class="slider" id="revolutionSlider"
-       data-plugin-revolution-slider
-       data-plugin-options='{"startheight": 600}'>
-    <ul>
-      <li data-transition="fade" data-slotamount="13" data-masterspeed="300" >
-        <img src="{% static 'airbitz-theme/img-custom/bg-earth-from-space.jpg' %}" data-bgfit="cover" data-bgposition="right center" data-bgrepeat="no-repeat" alt="">
+<div class="slider-container" style="background-image: url({% static 'airbitz-theme/img-custom/bg-white-geometric.jpg' %});
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center center;
+    text-align: center">
+  <br><br><br><br>
+  <img src="{% static 'airbitz-theme/img-custom/airbitz-logo-325.png' %}" alt="Airbitz">
+  <br><br>
+  <div class="main-label">Edge Security Platform</div>
+  <br><br>
+  <div class="main-label" style="font-family: Lato; font-size: x-large">Securing the Future of Blockchain Technology</div><br>
+  <br><br><br><br>
 
-        <div class="tp-caption top-image sft stb"
-             data-x="100"
-             data-y="25"
-             data-speed="300"
-             data-start="500"
-             data-easing="easeOutExpo"><img src="{% static 'airbitz-theme/img-custom/airbitz-logo-325.png' %}" alt="Airbitz"></div>
+  <!--<div class="slider" id="revolutionSlider"-->
+       <!--data-plugin-revolution-slider-->
+       <!--data-plugin-options='{"startheight": 600}'>-->
+    <!--<ul>-->
+      <!--<li data-transition="fade" data-slotamount="13" data-masterspeed="300" >-->
+        <!--<img src="{% static 'airbitz-theme/img-custom/bg-white-geometric.jpg' %}" data-bgfit="cover" data-bgposition="right center" data-bgrepeat="no-repeat" alt="">-->
 
-        <div class="tp-caption main-label sft stb"
-             data-x="20"
-             data-y="195"
-             data-speed="300"
-             data-start="500"
-             data-easing="easeOutExpo">Securing the Future of:</div>
+        <!--<div class="tp-caption top-image sft stb"-->
+             <!--data-x="100"-->
+             <!--data-y="25"-->
+             <!--data-speed="300"-->
+             <!--data-start="500"-->
+             <!--data-easing="easeOutExpo"><img src="{% static 'airbitz-theme/img-custom/airbitz-logo-325.png' %}" alt="Airbitz"></div>-->
 
-        <div class="tp-caption bottom-label sft stb"
-             data-x="100"
-             data-y="270"
-             data-speed="500"
-             data-start="2500"
-             data-easing="easeOutExpo"><i class="fa fa-check"></i> Blockchain Technology</div>
+        <!--<div class="tp-caption main-label sft stb"-->
+             <!--data-x="45"-->
+             <!--data-y="195"-->
+             <!--data-speed="300"-->
+             <!--data-start="500"-->
+             <!--data-easing="easeOutExpo">Securing the Future of</div>-->
 
-        <div class="tp-caption bottom-label sft stb"
-             data-x="100"
-             data-y="300"
-             data-speed="500"
-             data-start="3000"
-             data-easing="easeOutExpo"><i class="fa fa-check"></i> Bitcoin / Digital Currencies</div>
+        <!--<div class="tp-caption bottom-label sft stb"-->
+             <!--data-x="125"-->
+             <!--data-y="270"-->
+             <!--data-speed="500"-->
+             <!--data-start="2500"-->
+             <!--data-easing="easeOutExpo">Blockchain Technology</div>-->
 
-        <div class="tp-caption bottom-label sft stb"
-             data-x="100"
-             data-y="330"
-             data-speed="500"
-             data-start="3500"
-             data-easing="easeOutExpo"><i class="fa fa-check"></i> Financial Applications</div>
+        <!--<div class="tp-caption bottom-label sft stb"-->
+             <!--data-x="125"-->
+             <!--data-y="300"-->
+             <!--data-speed="500"-->
+             <!--data-start="3000"-->
+             <!--data-easing="easeOutExpo">Bitcoin / Digital Currencies</div>-->
 
-        <div class="tp-caption bottom-label sft stb"
-             data-x="100"
-             data-y="360"
-             data-speed="500"
-             data-start="4000"
-             data-easing="easeOutExpo"><i class="fa fa-check"></i> Private Key Authentication</div>
+        <!--<div class="tp-caption bottom-label sft stb"-->
+             <!--data-x="125"-->
+             <!--data-y="330"-->
+             <!--data-speed="500"-->
+             <!--data-start="3500"-->
+             <!--data-easing="easeOutExpo">Financial Applications</div>-->
 
-        <div class="tp-caption bottom-label sft stb"
-             data-x="100"
-             data-y="390"
-             data-speed="500"
-             data-start="4500"
-             data-easing="easeOutExpo"><i class="fa fa-check"></i> Password Management</div>
+        <!--<div class="tp-caption bottom-label sft stb"-->
+             <!--data-x="125"-->
+             <!--data-y="360"-->
+             <!--data-speed="500"-->
+             <!--data-start="4000"-->
+             <!--data-easing="easeOutExpo">Private Key Authentication</div>-->
 
-        <div class="tp-caption bottom-label sft stb"
-             data-x="100"
-             data-y="420"
-             data-speed="500"
-             data-start="5000"
-             data-easing="easeOutExpo"><i class="fa fa-check"></i> Secure Messaging</div>
+        <!--<div class="tp-caption bottom-label sft stb"-->
+             <!--data-x="125"-->
+             <!--data-y="390"-->
+             <!--data-speed="500"-->
+             <!--data-start="4500"-->
+             <!--data-easing="easeOutExpo">Password Management</div>-->
 
-        <div class="tp-caption bottom-label sft stb"
-             data-x="100"
-             data-y="450"
-             data-speed="500"
-             data-start="5500"
-             data-easing="easeOutExpo"><i class="fa fa-check"></i> Internet of Things (IoT)</div>
+        <!--<div class="tp-caption bottom-label sft stb"-->
+             <!--data-x="125"-->
+             <!--data-y="420"-->
+             <!--data-speed="500"-->
+             <!--data-start="5000"-->
+             <!--data-easing="easeOutExpo">Private Messaging</div>-->
 
-        <div class="tp-caption bottom-label sft stb"
-             data-x="100"
-             data-y="480"
-             data-speed="500"
-             data-start="6000"
-             data-easing="easeOutExpo"><i class="fa fa-check"></i> Information Management</div>
+        <!--<div class="tp-caption bottom-label sft stb"-->
+             <!--data-x="125"-->
+             <!--data-y="450"-->
+             <!--data-speed="500"-->
+             <!--data-start="5500"-->
+             <!--data-easing="easeOutExpo">Internet of Things (IoT)</div>-->
 
-        <div class="tp-caption bottom-label sft stb"
-             data-x="100"
-             data-y="510"
-             data-speed="500"
-             data-start="6500"
-             data-easing="easeOutExpo"><i class="fa fa-check"></i> Healthcare</div>
+        <!--<div class="tp-caption bottom-label sft stb"-->
+             <!--data-x="125"-->
+             <!--data-y="480"-->
+             <!--data-speed="500"-->
+             <!--data-start="6000"-->
+             <!--data-easing="easeOutExpo">Information Management</div>-->
 
-        <div class="tp-caption customin customout"
-             data-x="right" data-hoffset="0"
-             data-y="0" data-voffset="0"
-             data-customin="x:50;y:150;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:0;transformOrigin:50% 50%;"
-             data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-             data-speed="300"
-             data-start="500"
-             data-easing="Power4.easeOut"
-             data-endspeed="500"
-             data-endeasing="Power4.easeIn"
-             style="z-index: 3"><img src="{% static 'airbitz-theme/img-custom/code-view.png' %}" alt="">
-        </div>
-      </li>
-    </ul>
-  </div>
+        <!--&lt;!&ndash;<div class="tp-caption bottom-label sft stb"&ndash;&gt;-->
+             <!--&lt;!&ndash;data-x="100"&ndash;&gt;-->
+             <!--&lt;!&ndash;data-y="510"&ndash;&gt;-->
+             <!--&lt;!&ndash;data-speed="500"&ndash;&gt;-->
+             <!--&lt;!&ndash;data-start="6500"&ndash;&gt;-->
+             <!--&lt;!&ndash;data-easing="easeOutExpo"><i class="fa fa-check"></i> Healthcare</div>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;<div class="tp-caption customin customout"&ndash;&gt;-->
+             <!--&lt;!&ndash;data-x="right" data-hoffset="0"&ndash;&gt;-->
+             <!--&lt;!&ndash;data-y="0" data-voffset="0"&ndash;&gt;-->
+             <!--&lt;!&ndash;data-customin="x:50;y:150;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:0;transformOrigin:50% 50%;"&ndash;&gt;-->
+             <!--&lt;!&ndash;data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"&ndash;&gt;-->
+             <!--&lt;!&ndash;data-speed="300"&ndash;&gt;-->
+             <!--&lt;!&ndash;data-start="500"&ndash;&gt;-->
+             <!--&lt;!&ndash;data-easing="Power4.easeOut"&ndash;&gt;-->
+             <!--&lt;!&ndash;data-endspeed="500"&ndash;&gt;-->
+             <!--&lt;!&ndash;data-endeasing="Power4.easeIn"&ndash;&gt;-->
+             <!--&lt;!&ndash;style="z-index: 3">&ndash;&gt;-->
+          <!--&lt;!&ndash;<img src="{% static 'airbitz-theme/img-custom/code-view.pg' %}" alt="">&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+      <!--</li>-->
+    <!--</ul>-->
+  <!--</div>-->
 </div>

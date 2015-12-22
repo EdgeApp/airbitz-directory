@@ -3,7 +3,7 @@ APPLICATIONS_INFO = [
         "id": "blockchain",
         "title": "Blockchain Technology",
         "icon_class": "fa fa-sitemap",
-        "description": "Immutable data solutions for trustless applications.",
+        "description": "Private key management for decentralized applications.",
     },
     {
         "id": "private_key_authentication",
@@ -24,18 +24,6 @@ APPLICATIONS_INFO = [
         "description": "Financial security leads information security into the future.",
     },
     {
-        "id": "password_management",
-        "title": "Password Management",
-        "icon_class": "fa fa-expeditedssl",
-        "description": "Bringing sanity to unwieldy and cumbersome traditional authentication.",
-    },
-    {
-        "id": "information_management",
-        "title": "Information Management",
-        "icon_class": "fa fa-eye-slash",
-        "description": "Information that is private but always available from any device.",
-    },
-    {
         "id": "bitcoin",
         "title": "Bitcoin / Digital Currencies",
         "icon_class": "fa fa-bitcoin",
@@ -43,14 +31,8 @@ APPLICATIONS_INFO = [
     },
     {
         "id": "messaging",
-        "title": "Secure Messaging",
+        "title": "Private Messaging",
         "icon_class": "fa fa-comments-o",
         "description": "Keeping conversations private no matter what medium they traverse.",
-    },
-    {
-        "id": "healthcare",
-        "title": "Healthcare",
-        "icon_class": "fa fa-stethoscope",
-        "description": "Security is paramount for medical record privacy.",
     },
 ]
