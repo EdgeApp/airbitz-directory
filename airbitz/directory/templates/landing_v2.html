@@ -23,16 +23,17 @@
               <h3>The <span class="hl-blue">future</span> will not be <em style="color: #999;">centralized</em>.</h3>
               <p>
                 The Airbitz platform is a
-                <span class="word-rotate hidden-xs" data-plugin-options='{"delay": 3000, "animDelay": 300}'>
-                  <strong class="inverted inverted-primary">
-                    <span class="word-rotate-items">
+                <!--<span class="word-rotate hidden-xs" data-plugin-options='{"delay": 3000, "animDelay": 300}'>-->
+                  <strong>
+                    <!--<span class="word-rotate-items">-->
                       <span style="color: white;">blockchain inspired</span>
-                      <span style="color: white;">decentralized</span>
-                      <span style="color: white;">open source</span>
-                      <span style="color: white;">zero knowledge</span>
-                    </span>
+                      <!--<span style="color: white;">decentralized</span>-->
+                      <!--<span style="color: white;">open source</span>-->
+                      <!--<span style="color: white;">zero knowledge</span>-->
+                    <!--</span>-->
                   </strong>
-                </span> <strong>global information security solution</strong>.
+                <!--</span>-->
+                <strong>data security solution</strong>.
               </p>
             </div>
             <div class="col-md-3">
@@ -43,44 +44,6 @@
           </div>
         </div>
       </div>
-
-      <div class="container-fluid mt-xlg mb-xl text-center">
-        <h2>Edge Security <strong>Applications</strong></h2>
-        <p>Below are a few of the applications to benefit from edge security.</p>
-      </div>
-
-
-      <div class="container">
-        {% for app in applications_info %}
-          {% if forloop.first or forloop.counter0|divisibleby:"3" %}
-            <div class="row">
-          {% endif %}
-        <div class="col-md-4">
-          <div class="feature-box feature-box-style-2">
-            <div class="feature-box-icon">
-              <i class="{{ app.icon_class }}"></i>
-            </div>
-            <div class="feature-box-info">
-              <h4 class="mb-xs">{{ app.title }}</h4>
-              <p>{{ app.description }}</p>
-            </div>
-          </div>
-        </div>
-        {% if forloop.last or forloop.counter|divisibleby:"3" %}
-          </div>
-        {% endif %}
-        {% endfor %}
-      </div>
-
-      {% include 'api-sdk/signup.html' %}
-
-      <section class="parallax section section-tall section-text-light section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-1.jpg' %}); background-size: cover;">
-        <div class="container mt-xl">
-          <div class="heading">
-            <h2>A Trustless <strong>Global</strong> Security Platform </h2>
-          </div>
-        </div>
-      </section>
 
       <div class="container">
         <div class="row mb-xlg">
@@ -99,10 +62,15 @@
         </div>
       </div>
 
-      <section class="section section-tall section-text-light section-center" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-2.jpg' %}); background-position: center center; background-size: cover;">
-        <div class="row">
-          <div class="col-md-12"><br><br><br><br><br><br><br><br><br><br><br><br></div>
+      <section class="parallax section section-tall section-text-light section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-mountains-water-trees-lake.jpg' %}); background-position: center center; background-size: cover;">
+        <div class="container mt-xl">
+          <div class="heading">
+            <h2>A Trustless & <strong>Private</strong> Security Platform </h2>
+          </div>
         </div>
+        <!--<div class="row">-->
+        <!--<div class="col-md-12"><br><br><br><br><br><br><br><br><br><br><br><br></div>-->
+        <!--</div>-->
       </section>
 
       <div class="container">
@@ -146,6 +114,44 @@
           </div>
         </div>
       </div>
+
+      <section class="parallax section section-tall section-text-light section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-section-1.jpg' %}); background-size: cover;">
+        <div class="container mt-xl">
+          <div class="heading">
+            <h2><strong>Decentralized</strong> & Peer to Peer</h2>
+          </div>
+        </div>
+      </section>
+
+      <div class="container-fluid mt-xlg mb-xl text-center">
+        <h2>Edge Security <strong>Applications</strong></h2>
+        <p>Below are a few applications that could benefit from Edge Security.</p>
+      </div>
+
+
+      <div class="container">
+        {% for app in applications_info %}
+        {% if forloop.first or forloop.counter0|divisibleby:"3" %}
+        <div class="row">
+          {% endif %}
+          <div class="col-md-4">
+            <div class="feature-box feature-box-style-2">
+              <div class="feature-box-icon">
+                <i class="{{ app.icon_class }}"></i>
+              </div>
+              <div class="feature-box-info">
+                <h4 class="mb-xs">{{ app.title }}</h4>
+                <p>{{ app.description }}</p>
+              </div>
+            </div>
+          </div>
+          {% if forloop.last or forloop.counter|divisibleby:"3" %}
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+
+      {% include 'api-sdk/signup.html' %}
 
       {#    <section class="video section section-tall section-text-dark section-video section-center mt-none mt-xlg mb-xlg" data-video-path="{% static 'airbitz-theme/video/light' %}" data-plugin-video-background data-plugin-options='{"posterType": "jpg", "position": "50% 50%", "overlay": true}'>#}
       <section id="team-quote" class="visible-lg visible-md hidden-sm hidden-xs parallax section section-tall section-text-dark section-parallax section-center" data-stellar-background-ratio=".25" style="background-image: url({% static 'airbitz-theme/img-custom/bg-team.jpg' %}); background-size: cover;">

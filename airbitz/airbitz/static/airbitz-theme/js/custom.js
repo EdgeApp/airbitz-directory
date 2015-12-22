@@ -34,7 +34,7 @@
 	});
 
 
-	$('.airbitz-team.carousel-2').owlCarousel({
+	$('.airbitz-team.carousel-3').owlCarousel({
 		navigation : false,
 		dots: false,
 		loop : false,
@@ -42,7 +42,29 @@
 		autoplayTimeout : 8000,
 		slideSpeed : 300,
 		paginationSpeed : 400,
-		items: 2,
+		items: 3,
+	})
+
+	$('.airbitz-team.carousel-4').owlCarousel({
+		navigation : false,
+		dots: false,
+		loop : false,
+		autoplay : false,
+		autoplayTimeout : 8000,
+		slideSpeed : 300,
+		paginationSpeed : 400,
+		items: 4,
+	})
+
+	$('.airbitz-team.carousel-5').owlCarousel({
+		navigation : false,
+		dots: false,
+		loop : false,
+		autoplay : false,
+		autoplayTimeout : 8000,
+		slideSpeed : 300,
+		paginationSpeed : 400,
+		items: 5,
 	})
 
 	$('.airbitz-team.carousel-6').owlCarousel({
@@ -55,7 +77,6 @@
 		paginationSpeed : 400,
 		items: 6,
 	})
-
 	/*
 	 THUMB GALLERY
 	 */
