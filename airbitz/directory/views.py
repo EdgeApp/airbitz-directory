@@ -69,15 +69,16 @@ def home_v2(request):
 
 def get_team_info():
     # set up team info rows for mobile and desktop
-    team_id_sm_row_1 = ['paul', 'tim', 'rick']
-    team_id_sm_row_2 = ['william', 'will', 'mk']
-    team_id_sm_row_3 = ['nik', 'rj', 'vince']
-    team_id_lg_row_1 = ['paul', 'tim', 'rick', 'william']
-    team_id_lg_row_2 = ['will', 'mk', 'nik', 'rj', 'vince']
+    team_id_sm_row_1 = ['paul', 'tim']
+    team_id_sm_row_2 = ['william', 'lucas']
+    team_id_sm_row_3 = ['will','mk']
+    team_id_sm_row_4 = ['rj','nik']
+    team_id_lg_row_1 = ['paul', 'tim', 'william','lucas']
+    team_id_lg_row_2 = ['will','mk', 'rj', 'nik']
 
     # initialize 8 empty list variables
-    team_info_sm_row_1, team_info_sm_row_2, team_info_sm_row_3, \
-    team_info_lg_row_1, team_info_lg_row_2 = ([] for i in range(5))
+    team_info_sm_row_1, team_info_sm_row_2, team_info_sm_row_3, team_info_sm_row_4, \
+    team_info_lg_row_1, team_info_lg_row_2 = ([] for i in range(6))
 
     for profile in TEAM_INFO:
         if profile['id'] in team_id_sm_row_1:
@@ -86,6 +87,8 @@ def get_team_info():
             team_info_sm_row_2.append(profile)
         if profile['id'] in team_id_sm_row_3:
             team_info_sm_row_3.append(profile)
+        if profile['id'] in team_id_sm_row_4:
+            team_info_sm_row_4.append(profile)
 
         if profile['id'] in team_id_lg_row_1:
             team_info_lg_row_1.append(profile)
@@ -96,6 +99,7 @@ def get_team_info():
     team_info.update({'sm-1': team_info_sm_row_1})
     team_info.update({'sm-2': team_info_sm_row_2})
     team_info.update({'sm-3': team_info_sm_row_3})
+    team_info.update({'sm-4': team_info_sm_row_4})
     team_info.update({'lg-1': team_info_lg_row_1})
     team_info.update({'lg-2': team_info_lg_row_2})
 
@@ -113,6 +117,7 @@ def landing_v2(request):
         'team_info_sm_row_1': team_info['sm-1'],
         'team_info_sm_row_2': team_info['sm-2'],
         'team_info_sm_row_3': team_info['sm-3'],
+        'team_info_sm_row_4': team_info['sm-4'],
         'team_info_lg_row_1': team_info['lg-1'],
         'team_info_lg_row_2': team_info['lg-2'],
         'team_info': TEAM_INFO,

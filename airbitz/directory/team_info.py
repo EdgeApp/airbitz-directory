@@ -18,15 +18,6 @@ TEAM_INFO = [
         "skills": ["System Administration", "Java", "Python", "C"]
     },
     {
-        "id": "rick",
-        "name": "Rick \"Henri\" Chan",
-        "img_path": "airbitz-theme/img-custom/portraits/rick.jpg",
-        "title": "Chief Operating Officer",
-        "nickname": "Worldwide Deal Wizard",
-        "bio_html": "<p>Rick thrives on putting things together in a unique way and brings a diverse background to Airbitz. After graduating from the University of Rochester with a B.S. in Optics, Rick spent four years working in the Optical Engineering field before moving on to grad school. At Thunderbird, he specialized in Finance and International Management.</p><p>Since grad school, Rick has successfully connected investors, tech and great opportunities as he worked with a variety of startups, global FinTech ventures and Wall Streeters. Rick brings extensive startup experience in mobile, tech, social media, gaming, gamification, entertainment, FinTech and Bitcoin. He was a co-founder of AlphaPoint and served as COO. In addition, Rick's extensive knowledge of boutiques and Fortune 500 companies adds a broad perspective. Name a financial center around the world and Rick has probably been there, but there are still so many more to explore!</p><p>Rick loves scuba diving in tropical water. He is also a bokeholic.</p>",
-        "skills": ["Serial Entrepreneur", "Broad Startup Experience", "Global FinTech", "International Wall St & BTC Passion"]
-    },
-    {
         "id": "william",
         "name": "William Swanson",
         "img_path": "airbitz-theme/img-custom/portraits/william.jpg",
@@ -48,7 +39,7 @@ TEAM_INFO = [
         "id": "mk",
         "name": "M.K. Lords",
         "img_path": "airbitz-theme/img-custom/portraits/mk.jpg",
-        "title": "Marketing Manager",
+        "title": "Community Manager",
         "nickname": "Strategy Ninja",
         "bio_html": "<p>M.K. Lords became interested in the disruptive and charitable potential of technology after being a writer for several years. She is best known as the editor of Bitcoin Not Bombs which was formed out of an alliance with Antiwar.com. Her focus has been on how block chain technology can help disadvantaged people and controversial organizations. She has written for Bitcoin Magazine, Bitcoin Not Bombs, been published in the educational book Bitcoin: At Issue, and featured in Forbes. M.K. also brings her experience from the financial services sector as the former office/media manager for Roberts & Roberts Brokerage.</p><p>While much of her work is written, she also has done extensive video interviews with prominent voices in the Bitcoin space. She has spoken on nonprofits, activism, and philosophy at tech and liberty themed conferences and also organized two Bitcoin conferences. She applies her experience in multiple fields as the Community Manager for Airbitz. When not writing and speaking, she fire dances and co-hosts the radio show Freedom Feens.</p>",
         "skills": ["Writing / Editing", "Public Speaking", "Content Creation", "Social Media Management"]
@@ -72,12 +63,12 @@ TEAM_INFO = [
         "skills": ["Quality Assurance", "Data Analysis", "Research", "Bitcoin Enthusiast"]
     },
     {
-        "id": "vince",
-        "name": "Vincent Herrera",
-        "img_path": "airbitz-theme/img-custom/portraits/vincent.jpg",
-        "title": "Curator / QA",
-        "nickname": "Data Wrapper",
-        "bio_html": "<p>More on Vincent coming soon.</p>",
-        "skills": ["Quality Assurance", "Data Visualization", "Finance", "Fieldwork"]
+        "id": "lucas",
+        "name": "Lucas Betschart",
+        "img_path": "airbitz-theme/img-custom/portraits/lucas.jpg",
+        "title": "Core Developer",
+        "nickname": "Swiss Army Knife",
+        "bio_html": "<p>Details coming soon</p>",
+        "skills": ["Build Systems", "Bitcoin Protocol", "C / C++", "Blockchain Technology"]
     },
 ]
