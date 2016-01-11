@@ -34,6 +34,17 @@
 	});
 
 
+	$('.airbitz-team.carousel-2').owlCarousel({
+		navigation : false,
+		dots: false,
+		loop : false,
+		autoplay : false,
+		autoplayTimeout : 8000,
+		slideSpeed : 300,
+		paginationSpeed : 400,
+		items: 2,
+	})
+
 	$('.airbitz-team.carousel-3').owlCarousel({
 		navigation : false,
 		dots: false,
