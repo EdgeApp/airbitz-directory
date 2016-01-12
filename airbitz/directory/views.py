@@ -69,12 +69,12 @@ def home_v2(request):
 
 def get_team_info():
     # set up team info rows for mobile and desktop
-    team_id_sm_row_1 = ['paul', 'tim']
-    team_id_sm_row_2 = ['william', 'lucas']
-    team_id_sm_row_3 = ['will','mk']
-    team_id_sm_row_4 = ['rj','nik']
-    team_id_lg_row_1 = ['paul', 'tim', 'william','lucas']
-    team_id_lg_row_2 = ['will','mk', 'rj', 'nik']
+    team_id_sm_row_1 = ['paul']
+    team_id_sm_row_2 = ['tim', 'william']
+    team_id_sm_row_3 = ['lucas', 'will']
+    team_id_sm_row_4 = ['mk','rj']
+    team_id_lg_row_1 = ['paul', 'tim', 'william']
+    team_id_lg_row_2 = ['lucas','will','mk', 'rj']
 
     # initialize 8 empty list variables
     team_info_sm_row_1, team_info_sm_row_2, team_info_sm_row_3, team_info_sm_row_4, \
