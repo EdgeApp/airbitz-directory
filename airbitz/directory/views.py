@@ -207,6 +207,7 @@ def __business_search__(request, action, arg_term=None, arg_category=None, arg_l
         try:
             r.distance = calc_distance(a.userLocation(), biz.center)
         except Exception as e:
+            r.distance = None
             print e
 
     context = {

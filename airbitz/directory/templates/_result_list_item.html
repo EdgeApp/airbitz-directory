@@ -37,7 +37,7 @@
                     {% elif biz.admin3_name %}
                         <span class="biz-address-city"><i class="fa fa-map-marker"></i> {{ biz.admin3_name }}</span>
                     {% endif %}
-                    {% if biz.gmap_directions_url %}
+                    {% if biz.distance and biz.gmap_directions_url %}
                         &nbsp;
                         <a class="btn btn-xs btn-danger pull-right" href="{{ biz.gmap_directions_url }}" target="_blank" title="Get Directions to {{ biz.name }}">
                             {% if biz.distance %}
