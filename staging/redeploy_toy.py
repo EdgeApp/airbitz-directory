@@ -70,10 +70,12 @@ class Redeploy:
             cin.write("source /etc/profile.d/environment_vars.sh 1>>/tmp/redeploy_toy.log 2>&1\n")
             if production:
                 print 'Pulling Deploy'
-                cin.write("git pull origin deploy 1>>/tmp/redeploy_toy.log 2>&1\n")
+                cin.write("git fetch 1>>/tmp/redeploy_toy.log 2>&1\n")
+                cin.write("git reset --hard origin/deploy 1>>/tmp/redeploy_toy.log 2>&1\n")
             else:
                 print 'Pulling Deploy'
-                cin.write("git pull origin staging 1>>/tmp/redeploy_toy.log 2>&1\n")
+                cin.write("git fetch 1>>/tmp/redeploy_toy.log 2>&1\n")
+                cin.write("git reset --hard origin/staging 1>>/tmp/redeploy_toy.log 2>&1\n")
             if self.static_files:
                 print 'Running collectstatic'
                 cin.write("python manage.py collectstatic --noinput 1>>/tmp/redeploy_toy.log 2>&1\n")
