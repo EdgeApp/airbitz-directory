@@ -103,6 +103,7 @@
 
         var markersJSON = [
         {% for biz in results %}
+            {% if biz.center.y and biz.center.x %}
             {   lat: {{ biz.center.y }},
                 lon: {{ biz.center.x }},
                 name: "{{ biz.name }}",
@@ -112,6 +113,7 @@
                 url: '{{ biz.get_absolute_url }}',
                 directions_url: '{{ biz.gmap_directions_url }}'
             },
+            {% endif %}
         {% endfor %}
         {} ];
 
