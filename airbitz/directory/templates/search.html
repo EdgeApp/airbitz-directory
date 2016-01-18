@@ -8,7 +8,7 @@
 
 {% block javascript_headers %}
     {{ block.super }}
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={% if not DEBUG %}{{ mapkey }}{% endif %}&sensor=false"> </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={% if not DEBUG %}{{ mapkey }}{% endif %}"> </script>
     {% compressed_js 'search' %}
 {% endblock javascript_headers %}
 
