@@ -611,7 +611,7 @@ def processCity(row):
         v = row.strip().split(",")
         if v[1].strip() == 'N/A':
             accuracy = False
-        lat, lon = float(v[4]), float(v[5])
+        lat, lon = float(v[5]), float(v[6])
         return (Point(lon, lat), accuracy)
     except Exception as e:
         try:
