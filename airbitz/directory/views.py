@@ -287,6 +287,21 @@ def redirect_blf(request):
 
     address = request.GET['address']
     url = 'bitcoin:' + address
+
+    # print '\n------------------------------------\n'
+    # print 'ADDRESS:', address
+    # print 'URL BUILT:', url
+    # print '\n------------------------------------\n'
+    response = HttpResponse("", status=302)
+    response['Location'] = str(url)
+    return response
+
+# handles email redirects for desktop or android gmail
+def redirect_hlf(request):
+
+    hbits = request.GET['hbits']
+    url = 'hbits://' + hbits
+
     # print '\n------------------------------------\n'
     # print 'ADDRESS:', address
     # print 'URL BUILT:', url
