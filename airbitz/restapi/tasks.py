@@ -5,6 +5,7 @@ import logging
 import requests
 import urllib
 import time
+import json
 
 log=logging.getLogger("restapi." + __name__)
 
@@ -53,5 +54,25 @@ def __ga_post__(path, title, campaign=None, cid=None, ip=None, version=1,
         payload['cip'] = ip
     if useragent:
         payload['ua'] = useragent
+    r = requests.post('https://analytics.it.airbitz.co/analytics/piwik/piwik.php', data=payload)
+    log.info('{0}: {1}'.format(r.status_code, payload))
+
+def send_purchase(btc, partner, event_type, event_network):
+    timestamp = int(time.time())
+    send_purchase_task(btc, partner, event_type, event_network, timestamp)
+
+@task()
+def send_purchase_task(btc, partner, event_type, event_network, timestamp):
+    payload=dict(
+        _cvar=json.dumps({"1":["Event Type",event_type],"2":["Partner", partner],"3":["Network", event_network], "4":["BTC", btc]}),
+        idsite=settings.API_PIWIK_STATS_SITE_ID,
+        token_auth=settings.API_PIWIK_TOKEN,
+        action_name='Event',
+        send_image=0,
+        uid='airbitz',
+        rec=1,
+        cdt=timestamp,
+        url=urllib.quote_plus('https://plugins.airbitz.co/')
+    )
     r = requests.post('https://analytics.it.airbitz.co/analytics/piwik/piwik.php', data=payload)
     log.info('{0}: {1}'.format(r.status_code, payload))
