@@ -47,6 +47,7 @@ urlpatterns = patterns('',
     url(r'^server-api/$', 'management.views.page_server_api', name='page_server_api'),
     url(r'^button/$', 'management.views.redirect_button', name='mgmt_redirect_button'),
     url(r'^rsvp/?$', RedirectView.as_view(url='http://www.meetup.com/Bitcoin-in-San-Diego/events/189727482/')),
+    url(r'^savemoney/?$', RedirectView.as_view(url='https://airbitz.co/go/savemoney/')),
     url(r'^survey/(?P<slug>[-\w]+)/?$', 'management.views.page_survey_slug', name='page_survey_slug'),
     url(r'^verification/', include('verification.urls')),
 )
