@@ -176,7 +176,8 @@ class SearchView(generics.ListAPIView):
 
         a = api.ApiProcess(locationStr=obj.location, ll=obj.ll, lang=obj.lang)
         return a.searchDirectory(term=obj.term, geobounds=obj.bounds, since=obj.since, \
-                                 radius=obj.radius, category=obj.category, sort=obj.sort)
+                                 radius=obj.radius, category=obj.category, sort=obj.sort, \
+                                 user=self.request.user)
 
 
 

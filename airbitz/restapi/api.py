@@ -28,6 +28,7 @@ CURRENT_LOCATION='current location'
 CUR_LOC_ARRAY=[CURRENT_LOCATION, 'ubicación actual']
 WEB_LOC_ARRAY=['on the web', 'en la red']
 WEB_ONLY_ARRAY=['web only']
+LOCKED_USERS = [35]
 
 def autocompleteSerialize(row, lang=DEF_LANG):
     if row.model.__name__ == 'Business':
@@ -333,7 +334,7 @@ class ApiProcess(object):
 
     def searchDirectory(self, term=None, since=None, geobounds=None,
                               radius=None, category=None, sort=None,
-                              show_hidden=True):
+                              show_hidden=True, user=None):
         if show_hidden:
             (len_m, m) = self.exactMatch(term)
             if len_m == 1:
@@ -341,6 +342,8 @@ class ApiProcess(object):
 
         featured = self.findFeatured()
         sqs = SearchQuerySet().models(Business)
+        if user and user.id in LOCKED_USERS:
+            sqs = sqs.filter(owner=user.id)
         sqs = sqs.filter(is_searchable=True)
         lang_cat=self.catDict(term)
         if term:

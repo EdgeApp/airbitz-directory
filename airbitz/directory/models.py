@@ -137,6 +137,7 @@ class ImageTag(models.Model):
         return "{0}".format(self.name)
 
 class Business(models.Model):
+    owner = models.ForeignKey(User, null=True, blank=True)
     status = models.CharField(max_length=5, choices=STATUS_CHOICES, default='DR')
     name = models.CharField(max_length=200, blank=False)
     slug = models.SlugField(max_length=200, blank=True, null=True)

@@ -10,6 +10,7 @@ from directory.models import Business, BusinessHours, Category, CategoryTranslat
 class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
     bizId = indexes.IntegerField(model_attr='pk', indexed=False)
     text = indexes.CharField(document=True, use_template=True)
+    owner = indexes.IntegerField()
     name = indexes.CharField(model_attr='name', boost=1.2)
     description = indexes.CharField(model_attr='description', null=True)
 
@@ -49,6 +50,10 @@ class BusinessIndex(CelerySearchIndex, indexes.SearchIndex, indexes.Indexable):
     def prepare(self, obj):
         data = super(BusinessIndex, self).prepare(obj)
         data['bizId'] = obj.pk
+        if obj.owner:
+            data['owner'] = obj.owner.id
+        else:
+            data['owner'] = None
 
         minLevel = min([c.level for c in obj.categories.all()], 0)
         if minLevel >= 1:
