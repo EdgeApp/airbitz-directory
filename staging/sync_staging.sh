@@ -23,7 +23,7 @@ ques=${bldblu}?${txtrst}
 
 DUMP_FILE=$1
 STAGING_SERVER_USER=devbitz
-STAGING_SERVER_IP=198.61.228.9
+STAGING_SERVER_IP=admin.airbitz.co
 
 if [ "$DUMP_FILE" = "" ]
 then
