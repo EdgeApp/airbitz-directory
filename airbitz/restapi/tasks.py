@@ -6,6 +6,7 @@ import requests
 import urllib
 import time
 import json
+import random
 
 log=logging.getLogger("restapi." + __name__)
 
@@ -69,7 +70,7 @@ def send_purchase_task(btc, partner, event_type, event_network, timestamp):
         token_auth=settings.API_PIWIK_TOKEN,
         action_name='Event',
         send_image=0,
-        uid='airbitz',
+        uid=random.randint(0, 1000000),
         rec=1,
         cdt=timestamp,
         url=urllib.quote_plus('https://plugins.airbitz.co/')
