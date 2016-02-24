@@ -2,6 +2,8 @@ from django.contrib.gis.db import models
 from django.contrib import admin
 import json
 
+from actions import export_buysell_action
+
 class Event(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -10,14 +12,17 @@ class Event(models.Model):
     event_network = models.CharField(max_length=30)
 
     def btc(self):
-        try:
-            return json.loads(self.event_text)['btc']
-        except:
-            return ''
+        return self.j('btc')
 
     def partner(self):
+        return self.j('partner')
+
+    def user(self):
+        return self.j('user')
+
+    def j(self, k):
         try:
-            return json.loads(self.event_text)['partner']
+            return json.loads(self.event_text)[k]
         except:
             return ''
 
@@ -32,5 +37,9 @@ class EventAdmin(admin.ModelAdmin):
                     'partner',
                     'event_text',
                     )
+    actions = [
+        export_buysell_action()
+    ]
 
 admin.site.register(Event, EventAdmin)
+
