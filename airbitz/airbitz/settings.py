@@ -102,6 +102,7 @@ INSTALLED_APPS = (
     'clear_cache',
 
     'restapi',
+    'affiliates',
     'location',
     'directory',
     'management',
