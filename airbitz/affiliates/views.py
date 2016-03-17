@@ -113,7 +113,9 @@ def touch(request, token):
         ip_address = request.META.get('REMOTE_ADDR')
         campaign = AffiliateCampaign.objects.filter(token=token).last()
         if campaign:
-            AffiliateLink.objects.get_or_create(campaign=campaign, ip_address=ip_address)
+            (link, _) = AffiliateLink.objects.get_or_create(campaign=campaign, ip_address=ip_address)
+            link.created = datetime.now(pytz.utc)
+            link.save()
     except Exception as e:
         print e
 
@@ -124,7 +126,7 @@ def touch(request, token):
         url = 'https://itunes.apple.com/us/app/bitcoin-wallet-airbitz/id843536046?mt=8'
     return HttpResponseRedirect(url)
 
-EXPIRED_MINUTES = 10
+EXPIRED_MINUTES = 3
 
 class QueryView(APIView):
     authentication_classes = PERMS
