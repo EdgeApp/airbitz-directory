@@ -52,7 +52,14 @@ def check_signature(affiliate):
         return bitid.address_valid(affiliate.bitid_address)
 
 def random_token():
-    return ''.join([random.choice(string.digits + string.letters) for i in range(0, 10)])
+    valid_token = False
+    while not valid_token:
+        try:
+            token = ''.join([random.choice(string.digits + string.letters) for i in range(0, 3)])
+            AffiliateCampaign.objects.get(token=token)
+        except AffiliateCampaign.DoesNotExist:
+            valid_token = True
+    return token
 
 class RegistrationView(APIView):
     post_serializer = RegistrationFormSerializer
@@ -89,8 +96,12 @@ class RegistrationView(APIView):
                         key='gift_card_affiliate_fee',
                         key_type='percent',
                         value='20')
+            uri = request.build_absolute_uri()
+            affiliate_link = request.build_absolute_uri(reverse('affiliate_touch_short', args=(campaign.token, )))
+            if uri.find('airbitz.co') > -1:
+                affiliate_link = 'https://airbitz.co' + reverse('affiliate_touch_short', args=(campaign.token, ))
             return statusResponse(data={
-                'affiliate_link': request.build_absolute_uri(reverse('affiliate_touch', args=(campaign.token, )))
+                'affiliate_link': affiliate_link
             })
         else:
             return errInvalidRequest(data={
@@ -107,10 +118,10 @@ def touch(request, token):
         print e
 
     ua = request.META.get('HTTP_USER_AGENT', '').lower()
-    if ua.find('iOS'):
-        url = 'https://itunes.apple.com/us/app/bitcoin-wallet-airbitz/id843536046?mt=8'
-    else:
+    if ua.find('android') > -1 or ua.find('linux') > -1:
         url = 'https://play.google.com/store/apps/details?id=com.airbitz'
+    else:
+        url = 'https://itunes.apple.com/us/app/bitcoin-wallet-airbitz/id843536046?mt=8'
     return HttpResponseRedirect(url)
 
 EXPIRED_MINUTES = 10
