@@ -95,7 +95,7 @@ class RegistrationView(APIView):
                         campaign=campaign,
                         key='gift_card_affiliate_fee',
                         key_type='percent',
-                        value='20')
+                        value='0.25')
             uri = request.build_absolute_uri()
             affiliate_link = request.build_absolute_uri(reverse('affiliate_touch_short', args=(campaign.token, )))
             if uri.find('airbitz.co') > -1:
