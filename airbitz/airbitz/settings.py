@@ -638,6 +638,10 @@ else:
     API_PIWIK_SITE_ID = 2
     API_PIWIK_STATS_SITE_ID = 8
 
+if DEBUG:
+    DEVELOPER_BITID_HOST = 'http://10.10.8.155:8000/bitid-login/'
+else:
+    DEVELOPER_BITID_HOST = 'https://developer.airbitz.co/bitid-login/'
 
 # MANDRILL TRANSACTIONAL EMAIL SETTINGS
 EMAIL_BACKEND = 'djrill.mail.backends.djrill.DjrillBackend'
