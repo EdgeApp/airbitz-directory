@@ -55,7 +55,7 @@ def random_token():
     valid_token = False
     while not valid_token:
         try:
-            token = ''.join([random.choice(string.digits + string.letters) for i in range(0, 3)])
+            token = ''.join([random.choice(string.digits + string.letters) for i in range(0, 3)]).upper()
             AffiliateCampaign.objects.get(token=token)
         except AffiliateCampaign.DoesNotExist:
             valid_token = True
@@ -111,7 +111,7 @@ class RegistrationView(APIView):
 def touch(request, token):
     try:
         ip_address = request.META.get('REMOTE_ADDR')
-        campaign = AffiliateCampaign.objects.filter(token=token).last()
+        campaign = AffiliateCampaign.objects.filter(token=token.upper()).last()
         if campaign:
             (link, _) = AffiliateLink.objects.get_or_create(campaign=campaign, ip_address=ip_address)
             link.created = datetime.now(pytz.utc)
