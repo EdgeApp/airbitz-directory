@@ -1,11 +1,14 @@
-import datetime
 from django.contrib.gis.measure import D
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
-from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+import datetime
+import requests
 
 from airbitz import regions_data
 from airbitz.regions_data import ACTIVE_REGIONS, ALL_REGIONS
@@ -328,3 +331,11 @@ def email_request_template_android(request):
 # app download fallback page
 def app_download(request):
     return render_to_response('app-download.html')
+
+@csrf_exempt
+def forward_bitid_login(request):
+    print request.body
+    r = requests.post(settings.DEVELOPER_BITID_HOST, data=request.body, headers={
+        'Content-Type': 'application/json'
+    })
+    return HttpResponse(status=r.status_code)

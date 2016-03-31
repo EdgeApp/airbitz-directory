@@ -17,6 +17,11 @@ class EventView(APIView):
     permission_classes = AUTH
     post_serializer = EventSerializer
 
+    def get(self, request, format=None):
+        events = Event.objects.all()
+        serializer = EventSerializer(events, many=True)
+        return Response(serializer.data)
+
     def post(self, request, *args, **kwargs):
         ser = self.post_serializer(data=request.DATA)
         if ser.is_valid():

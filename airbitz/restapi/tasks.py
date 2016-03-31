@@ -55,7 +55,7 @@ def __ga_post__(path, title, campaign=None, cid=None, ip=None, version=1,
         payload['cip'] = ip
     if useragent:
         payload['ua'] = useragent
-    r = requests.post('https://analytics.it.airbitz.co/analytics/piwik/piwik.php', data=payload)
+    r = requests.post('https://analytics.airbitz.co/analytics/piwik/piwik.php', data=payload)
     log.info('{0}: {1}'.format(r.status_code, payload))
 
 def send_purchase(btc, partner, event_type, event_network):
@@ -75,5 +75,5 @@ def send_purchase_task(btc, partner, event_type, event_network, timestamp):
         cdt=timestamp,
         url=urllib.quote_plus('https://plugins.airbitz.co/')
     )
-    r = requests.post('https://analytics.it.airbitz.co/analytics/piwik/piwik.php', data=payload)
+    r = requests.post('https://analytics.airbitz.co/analytics/piwik/piwik.php', data=payload)
     log.info('{0}: {1}'.format(r.status_code, payload))
