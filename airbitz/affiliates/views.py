@@ -124,7 +124,7 @@ def touch(request, token):
         url = 'https://play.google.com/store/apps/details?id=com.airbitz'
     else:
         url = 'https://itunes.apple.com/us/app/bitcoin-wallet-airbitz/id843536046?mt=8'
-    return HttpResponseRedirect(url)
+    return HttpResponseRedirect('https://airbitz.co/go/hold-up/')
 
 EXPIRED_MINUTES = 3
 
