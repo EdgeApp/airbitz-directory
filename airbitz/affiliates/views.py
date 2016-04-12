@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
 from pybitid import bitid
 from rest_framework import serializers
 from rest_framework import status
@@ -118,13 +118,7 @@ def touch(request, token):
             link.save()
     except Exception as e:
         print e
-
-    ua = request.META.get('HTTP_USER_AGENT', '').lower()
-    if ua.find('android') > -1 or ua.find('linux') > -1:
-        url = 'https://play.google.com/store/apps/details?id=com.airbitz'
-    else:
-        url = 'https://itunes.apple.com/us/app/bitcoin-wallet-airbitz/id843536046?mt=8'
-    return HttpResponseRedirect('https://airbitz.co/go/hold-up/')
+    return render_to_response('affiliate-download.html')
 
 EXPIRED_MINUTES = 3
 
