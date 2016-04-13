@@ -301,10 +301,7 @@ def redirect_blf(request):
     return response
 
 def hlf(request):
-    hbits = request.GET['hbits']
-    return render_to_response('hlf-landing.html', RequestContext(request, {
-        'hbits_url': 'hbits:' + hbits
-    }))
+    return render_to_response('hlf-landing.html', RequestContext(request, { }))
 
 def redirect_hlf(request, hbits):
     url = 'hbits://' + hbits
