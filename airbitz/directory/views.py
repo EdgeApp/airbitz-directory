@@ -300,16 +300,14 @@ def redirect_blf(request):
     response['Location'] = str(url)
     return response
 
-# handles email redirects for desktop or android gmail
-def redirect_hlf(request):
-
+def hlf(request):
     hbits = request.GET['hbits']
-    url = 'hbits://' + hbits
+    return render_to_response('hlf-landing.html', RequestContext(request, {
+        'hbits_url': 'hbits:' + hbits
+    }))
 
-    # print '\n------------------------------------\n'
-    # print 'ADDRESS:', address
-    # print 'URL BUILT:', url
-    # print '\n------------------------------------\n'
+def redirect_hlf(request, hbits):
+    url = 'hbits://' + hbits
     response = HttpResponse("", status=302)
     response['Location'] = str(url)
     return response
