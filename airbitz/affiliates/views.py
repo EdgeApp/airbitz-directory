@@ -131,7 +131,11 @@ class QueryView(APIView):
         ip_address = request.META.get('REMOTE_ADDR')
         try:
             expired = datetime.now(pytz.utc) - timedelta(minutes=EXPIRED_MINUTES)
-            link = AffiliateLink.objects.get(ip_address=ip_address)
+            link = AffiliateLink.objects.filter(ip_address=ip_address).order_by('-created').first()
+            if not link:
+                return errInvalidRequest(data={
+                    "error": "No matching device"
+                })
             if link.created >= expired:
                 variables = [{
                     'key': c.key,
