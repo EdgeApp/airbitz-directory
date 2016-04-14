@@ -54,7 +54,9 @@
     </head>
     <body {% block body_tag %}{% endblock body_tag %}>
 
-        {% include '_mobile-app-download.html' %}
+        {% block app_download %}
+            {% include '_mobile-app-download.html' %}
+        {% endblock app_download %}
 
         <div id="wrap">
             {% block top_bg %}{% endblock %}

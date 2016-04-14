@@ -5,6 +5,9 @@
 {% load absolute %}
 {% load ab_custom_tags %}
 
+{% block app_download %}
+{% endblock app_download %}
+
 {% block javascript_headers %}
   {{ block.super }}
   {% compressed_js 'app_download' %}
@@ -14,17 +17,17 @@
 {% block javascript %}
   <script type="text/javascript">
     $(function() {
-        var url = '{% url "redirect_hlf" request.GET.hbits %}';
-        if (bowser.ios) {
-            document.location = url;
-        } else if (bowser.android) {
-            document.location = url;
-        }
-        $('#image').click(function() {
-            if (bowser.android || bowser.ios) {
+        {% if hbits %}
+            var url = '{% url "redirect_hlf" hbits %}';
+            if (bowser.ios) {
+                document.location = url;
+            } else if (bowser.android) {
                 document.location = url;
             }
-        });
+            $('#image').click(function() {
+                document.location = url;
+            });
+        {% endif %}
     });
   </script>
 {% endblock javascript %}

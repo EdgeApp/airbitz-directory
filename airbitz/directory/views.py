@@ -300,8 +300,16 @@ def redirect_blf(request):
     response['Location'] = str(url)
     return response
 
-def hlf(request):
-    return render_to_response('hlf-landing.html', RequestContext(request, { }))
+def hlf_old(request):
+    hbits = request.GET.get('hbits', '')
+    return render_to_response('hlf-landing.html', RequestContext(request, {
+        'hbits': hbits
+    }))
+
+def hlf(request, hbits):
+    return render_to_response('hlf-landing.html', RequestContext(request, {
+        'hbits': hbits
+    }))
 
 def redirect_hlf(request, hbits):
     url = 'hbits://' + hbits
