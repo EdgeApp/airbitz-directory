@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from models import Affiliate, AffiliateCampaign, CampaignVariable, AffiliateLink
+from restapi.tasks import ga_send
 from restapi.views import AUTH, PERMS 
 
 import pytz
@@ -128,20 +129,26 @@ class QueryView(APIView):
 
     def get(self, request):
         ip_address = request.META.get('REMOTE_ADDR')
-        print ip_address
         try:
             expired = datetime.now(pytz.utc) - timedelta(minutes=EXPIRED_MINUTES)
-            link = AffiliateLink.objects.get(ip_address=ip_address, created__gte=expired)
-            variables = [{
-                'key': c.key,
-                'key_type': c.key_type,
-                'value': c.value
-            } for c in CampaignVariable.objects.filter(campaign=link.campaign).order_by('key')] 
-            return statusResponse(data={
-                'expires': (link.created + timedelta(minutes=EXPIRED_MINUTES)),
-                'affiliate_address': link.campaign.payment_address,
-                'objects': variables
-            })
+            link = AffiliateLink.objects.get(ip_address=ip_address)
+            if link.created >= expired:
+                variables = [{
+                    'key': c.key,
+                    'key_type': c.key_type,
+                    'value': c.value
+                } for c in CampaignVariable.objects.filter(campaign=link.campaign).order_by('key')] 
+                ga_send(self.request, 'affiliate::query', path='/affiliates/query/{0}'.format(link.campaign.token))
+                return statusResponse(data={
+                    'expires': (link.created + timedelta(minutes=EXPIRED_MINUTES)),
+                    'affiliate_address': link.campaign.payment_address,
+                    'objects': variables
+                })
+            else:
+                ga_send(self.request, 'affiliate::query', path='/affiliates/query/{0}-expired'.format(link.campaign.token))
+                return errInvalidRequest(data={
+                    "error": "No matching device"
+                })
         except AffiliateLink.DoesNotExist as e:
             print e
         return errInvalidRequest(data={
