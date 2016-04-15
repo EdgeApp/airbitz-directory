@@ -121,7 +121,7 @@ def touch(request, token):
         print e
     return render_to_response('affiliate-download.html')
 
-EXPIRED_MINUTES = 3
+EXPIRED_MINUTES = 5
 
 class QueryView(APIView):
     authentication_classes = PERMS
