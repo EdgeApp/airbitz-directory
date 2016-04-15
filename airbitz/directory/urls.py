@@ -2,6 +2,8 @@ from django.conf.urls import patterns, url, include
 from django.conf import settings
 from django.views.generic import TemplateView
 
+import views
+
 urlpatterns = patterns('',
     url(r'^app', 'directory.views.app_download', name='app_download'),
     url(r'^search$', 'directory.views.business_search', name='search'),
@@ -25,6 +27,8 @@ urlpatterns = patterns('',
     url(r'^$', 'directory.views.landing_v2', name='landing'),
     # url(r'^$', 'directory.views.landing', name='landing'),
     url(r'^blackfriday$', 'directory.views.blackfriday', name='blackfriday'),
+
+    url(r'^api/v1/plugins/?$', views.PluginDetailsView.as_view()),
 )
 
 

@@ -514,7 +514,9 @@ class ThirdPartyBusinessImage(models.Model):
     tags = models.ManyToManyField(ThirdPartyBusinessImageTag, blank=True, null=True)
     business = models.ForeignKey(ThirdPartyBusiness, null=False)
 
-
+class PluginDetails(models.Model):
+    business = models.ForeignKey(Business, null=False)
+    enabled = models.BooleanField(default=False)
 
 
 ##############################
@@ -550,10 +552,8 @@ class ThirdPartyBusinessImageAdmin(admin.ModelAdmin):
 class ThirdPartyBusinessImageTagAdmin(admin.ModelAdmin):
     pass
 
-
-
-
-
+class PluginDetailsAdmin(admin.ModelAdmin):
+    pass
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(CategoryTranslation, CategoryTranslationAdmin)
@@ -567,8 +567,5 @@ admin.site.register(ExpenseCategory, ExpenseCategoryAdmin)
 admin.site.register(ThirdPartyBusinessImage, ThirdPartyBusinessImageAdmin)
 admin.site.register(ThirdPartyBusinessImageTag, ThirdPartyBusinessImageTagAdmin)
 
-
-
-
-
+admin.site.register(PluginDetails, PluginDetailsAdmin)
 

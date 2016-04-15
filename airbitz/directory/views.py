@@ -14,11 +14,12 @@ from airbitz import regions_data
 from airbitz.regions_data import ACTIVE_REGIONS, ALL_REGIONS
 from airbitz.settings import GOOGLE_MAP_KEY
 from directory.utils import mailchimp_list_signup
-from directory.models import Business, BusinessImage, SocialId
+from directory.models import Business, BusinessImage, SocialId, PluginDetails
 from directory.models import STATUS_CHOICES, SOCIAL_TYPES
 from directory.team_info import TEAM_INFO
 from directory.applications_info import APPLICATIONS_INFO
 from restapi import api
+from restapi.views import AUTH, PERMS
 from restapi.serializers import calc_distance
 
 SEARCH_LIMIT = 20
@@ -342,3 +343,18 @@ def forward_bitid_login(request):
         'Content-Type': 'application/json'
     })
     return HttpResponse(status=r.status_code)
+
+from rest_framework import generics
+from rest_framework import serializers
+class PluginDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PluginDetails
+        fields = ('business', 'enabled', )
+
+class PluginDetailsView(generics.ListAPIView):
+    model = PluginDetails
+    serializer_class = PluginDataSerializer
+    queryset = PluginDetails.objects.all()
+    authentication_classes = PERMS
+    permission_classes = AUTH
+
