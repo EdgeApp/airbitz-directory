@@ -110,6 +110,7 @@ class RegistrationView(APIView):
             })
 
 def touch(request, token):
+    ga_send(request, 'affiliate::touch', path='/af/{0}/requested'.format(token))
     try:
         ip_address = request.META.get('REMOTE_ADDR')
         campaign = AffiliateCampaign.objects.filter(token=token.upper()).last()
