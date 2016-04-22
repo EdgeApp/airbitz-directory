@@ -110,7 +110,6 @@ class RegistrationView(APIView):
             })
 
 def touch(request, token):
-    ga_send(request, 'affiliate::touch', path='/af/{0}/requested'.format(token))
     try:
         ip_address = request.META.get('REMOTE_ADDR')
         campaign = AffiliateCampaign.objects.filter(token=token.upper()).last()
@@ -118,11 +117,12 @@ def touch(request, token):
             (link, _) = AffiliateLink.objects.get_or_create(campaign=campaign, ip_address=ip_address)
             link.created = datetime.now(pytz.utc)
             link.save()
+        ga_send(request, 'affiliate::touch', path='/af/{0}/requested'.format(token))
     except Exception as e:
         print e
     return render_to_response('affiliate-download.html')
 
-EXPIRED_MINUTES = 5
+EXPIRED_MINUTES = 15
 
 class QueryView(APIView):
     authentication_classes = PERMS
