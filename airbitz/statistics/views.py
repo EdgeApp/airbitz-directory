@@ -10,7 +10,7 @@ from statistics.models import Event
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ('event_type', 'event_text', 'event_network',)
+        fields = ('event_type', 'event_text', 'event_network', 'created')
 
 class EventView(APIView):
     authentication_classes = PERMS
