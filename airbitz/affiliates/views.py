@@ -117,7 +117,7 @@ def touch(request, token):
             (link, _) = AffiliateLink.objects.get_or_create(campaign=campaign, ip_address=ip_address)
             link.created = datetime.now(pytz.utc)
             link.save()
-        ga_send(request, 'affiliate::touch', path='/af/{0}/requested'.format(token))
+            ga_send(request, 'affiliate::touch', path='/af/{0}/requested'.format(token))
     except Exception as e:
         print e
     return render_to_response('affiliate-download.html')
