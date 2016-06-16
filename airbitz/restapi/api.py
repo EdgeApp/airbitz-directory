@@ -28,7 +28,7 @@ CURRENT_LOCATION='current location'
 CUR_LOC_ARRAY=[CURRENT_LOCATION, 'ubicación actual']
 WEB_LOC_ARRAY=['on the web', 'en la red']
 WEB_ONLY_ARRAY=['web only']
-LOCKED_USERS = [35]
+LOCKED_USERS = [35, 37] # rackwallet and coinsource
 
 def autocompleteSerialize(row, lang=DEF_LANG):
     if row.model.__name__ == 'Business':
