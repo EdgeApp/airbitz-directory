@@ -26,6 +26,8 @@ urlpatterns = patterns('',
      url(r'^hiddenbits/?$', HBitsPromoList.as_view()),
      url(r'^promo/new/?$', HBitsPromoCreate.as_view()),
 
+     url(r'^buyselloverride/?$', views.BuySellRedirectView.as_view()),
+
      url(r'^business/submit/?$', a.ThirdPartyBusinessSubmit.as_view()),
      url(r'^business/list/?$', a.ThirdPartyBusinessList.as_view()),
      url(r'^business/list/(?P<provider_id>[a-zA-Z0-9]+)/?$', a.ThirdPartyBusinessList.as_view()),

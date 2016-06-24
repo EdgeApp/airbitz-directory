@@ -14,7 +14,7 @@ from rest_framework_throttling.throttling import PerUserThrottle
 
 import logging
 
-from directory.models import Business, BusinessImage, Category
+from directory.models import Business, BusinessImage, Category, BuySellRedirect
 from restapi import api
 from restapi import locapi
 from restapi import serializers 
@@ -270,6 +270,16 @@ class LocationSuggest(APIView):
         a = api.ApiProcess(ll=ll, ip=ip)
         results = a.suggestNearText()
         return Response({ 'near':  results })
+
+class BuySellRedirectView(APIView):
+    authentication_classes = PERMS
+    permission_classes = AUTH
+    throttle_classes = (PerUserThrottle, )
+
+    def get(self, request, *args, **kwargs):
+        return Response([
+            {b.currency_code: b.url}
+            for b in BuySellRedirect.objects.all()])
 
 
 def page_api_v1_documentation(request):
