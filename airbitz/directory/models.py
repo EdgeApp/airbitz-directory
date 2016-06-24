@@ -518,6 +518,12 @@ class PluginDetails(models.Model):
     business = models.ForeignKey(Business, null=False)
     enabled = models.BooleanField(default=False)
 
+class BuySellRedirect(models.Model):
+    url = models.URLField(max_length=2000, blank=True, null=True)
+    currency_code = models.CharField(max_length=200, blank=True, null=True)
+
+    def __unicode__(self):
+        return "{0} - {1}".format(self.currency_code, self.url)
 
 ##############################
 # DJANGO ADMIN
@@ -555,6 +561,13 @@ class ThirdPartyBusinessImageTagAdmin(admin.ModelAdmin):
 class PluginDetailsAdmin(admin.ModelAdmin):
     pass
 
+class BuySellRedirectAdmin(admin.ModelAdmin):
+    pass
+
+
+
+
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(CategoryTranslation, CategoryTranslationAdmin)
 admin.site.register(Business, BusinessAdmin)
@@ -566,6 +579,7 @@ admin.site.register(ThirdPartyCategory, ThirdPartyCategoryAdmin)
 admin.site.register(ExpenseCategory, ExpenseCategoryAdmin)
 admin.site.register(ThirdPartyBusinessImage, ThirdPartyBusinessImageAdmin)
 admin.site.register(ThirdPartyBusinessImageTag, ThirdPartyBusinessImageTagAdmin)
+admin.site.register(BuySellRedirect, BuySellRedirectAdmin)
 
 admin.site.register(PluginDetails, PluginDetailsAdmin)
 
