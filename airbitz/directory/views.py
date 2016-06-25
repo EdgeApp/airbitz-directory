@@ -2,7 +2,7 @@ from django.contrib.gis.measure import D
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
@@ -13,14 +13,15 @@ import requests
 from airbitz import regions_data
 from airbitz.regions_data import ACTIVE_REGIONS, ALL_REGIONS
 from airbitz.settings import GOOGLE_MAP_KEY
-from directory.utils import mailchimp_list_signup
-from directory.models import Business, BusinessImage, SocialId, PluginDetails
+from directory.applications_info import APPLICATIONS_INFO
+from directory.models import Business, BusinessImage, SocialId, PluginDetails, BuySellRedirect
 from directory.models import STATUS_CHOICES, SOCIAL_TYPES
 from directory.team_info import TEAM_INFO
-from directory.applications_info import APPLICATIONS_INFO
+from directory.utils import mailchimp_list_signup
 from restapi import api
-from restapi.views import AUTH, PERMS
 from restapi.serializers import calc_distance
+from restapi.tasks import ga_send
+from restapi.views import AUTH, PERMS
 
 SEARCH_LIMIT = 20
 DISTANCE_LIMIT_KILOMETERS = 20
@@ -239,6 +240,13 @@ def blackfriday(request, **kwargs):
     kwargs['template'] = 'specials.html'
     return __business_search__(request, reverse('blackfriday'), **kwargs)
 
+def buysellredirect(request, code):
+    try:
+        redirect = BuySellRedirect.objects.get(currency_code=code)
+        ga_send(request, 'buysellredirect')
+        return HttpResponseRedirect(redirect.url)
+    except BuySellRedirect.DoesNotExist:
+        return HttpResponseRedirect("https://airbitz.co")
 
 def business_search_no_results(request, action):
     context = {

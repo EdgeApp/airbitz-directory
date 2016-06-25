@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.gis.measure import Distance
+from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -279,7 +280,7 @@ class BuySellRedirectView(APIView):
 
     def get(self, request, *args, **kwargs):
         return Response([
-            {b.currency_code: b.url}
+            {b.currency_code: request.build_absolute_uri(reverse('buysellredirect', args=(b.currency_code, )))}
             for b in BuySellRedirect.objects.all()])
 
 

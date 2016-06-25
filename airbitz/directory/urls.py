@@ -28,6 +28,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'directory.views.landing', name='landing'),
     url(r'^blackfriday$', 'directory.views.blackfriday', name='blackfriday'),
 
+    url(r'^buysellredirect/(?P<code>.+)/$', 'directory.views.buysellredirect', name='buysellredirect'),
+
     url(r'^api/v1/plugins/?$', views.PluginDetailsView.as_view()),
 )
 
