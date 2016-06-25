@@ -279,9 +279,10 @@ class BuySellRedirectView(APIView):
     throttle_classes = (PerUserThrottle, )
 
     def get(self, request, *args, **kwargs):
-        return Response([
-            {b.currency_code: request.build_absolute_uri(reverse('buysellredirect', args=(b.currency_code, )))}
-            for b in BuySellRedirect.objects.all()])
+        d = {}
+        for b in BuySellRedirect.objects.all():
+            d[b.currency_code] = request.build_absolute_uri(reverse('buysellredirect', args=(b.currency_code, )))
+        return Response(d)
 
 
 def page_api_v1_documentation(request):
