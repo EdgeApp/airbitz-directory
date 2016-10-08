@@ -1,0 +1,68 @@
+/*
+* lime : #cddc39
+*/
+
+::selection {
+    background: #cddc39;
+    color: #fff;
+}
+
+::-moz-selection {
+    background: #cddc39;
+    color: #fff;
+}
+
+#preloader,
+.sticky-wrapper.is-sticky .navbar-custom,
+#subscribe,
+.contact-section .contact-info,
+.back-to-top:hover,
+.btn-custom,
+.scroll-indicator.go-top:before,
+.scroll-indicator:before,
+.scroll-indicator:after,
+.dropdown-menu>li>a:focus,
+.dropdown-menu>li>a:hover,
+.trial,
+.checkbox input[type=checkbox]:checked + .checkbox-material .check {
+    background-color: #cddc39 !important;
+}
+
+.team .card {
+    -webkit-box-shadow:0px 0px 60px 0px rgba(205, 220, 57, 0.63);
+    box-shadow:0px 0px 60px 0px rgba(205, 220, 57, 0.63);
+}
+
+.best-price,
+.card .header-primary,
+.card-layer,
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:focus,
+.nav-pills > li.active > a:hover,
+.btn.btn-primary,
+.btn.btn-primary:hover,
+.btn.btn-primary:focus,
+.btn.btn-primary:active,
+.btn.btn-primary:active:focus,
+.btn.btn-primary:active:hover {
+    background-color: #cddc39;
+    box-shadow: 0 16px 26px -10px rgba(205, 220, 57, 0.48), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(156, 39, 176, 0.2);
+}
+
+.clients {
+    background-color: #cddc39;
+    color: #fff;
+}
+
+a,
+.form-group.is-focused label,
+.form-group.is-focused label.control-label,
+.icon.icon-primary {
+    color: #cddc39;
+}
+
+.form-group.is-focused .form-control {
+    background-image: -webkit-linear-gradient(#cddc39, #cddc39);
+    background-image: -o-linear-gradient(#cddc39, #cddc39);
+    background-image: linear-gradient(#cddc39, #cddc39);
+}
