@@ -2,6 +2,8 @@ from django.conf.urls import patterns, url, include
 from django.conf import settings
 from django.views.generic import TemplateView
 
+import views
+
 urlpatterns = patterns('',
     url(r'^app', 'directory.views.app_download', name='app_download'),
     url(r'^search$', 'directory.views.business_search', name='search'),
@@ -14,7 +16,9 @@ urlpatterns = patterns('',
     url(r'^biz/(?P<biz_id>\d+)/(?P<biz_slug>[\w-]+)/$', 'directory.views.business_info', name='business_info_slug'),
     url(r'^add-biz/?$', 'directory.views.add_business', name='business_add'),
     url(r'^blf/$', 'directory.views.redirect_blf', name='redirect_blf'),
-    url(r'^hlf/$', 'directory.views.redirect_hlf', name='redirect_hlf'),
+    url(r'^hlf/redirect/(?P<hbits>.+)/$', 'directory.views.redirect_hlf', name='redirect_hlf'),
+    url(r'^hlf/(?P<hbits>.+)/$', 'directory.views.hlf', name='hlf'),
+    url(r'^hlf/$', 'directory.views.hlf_old', name='hlf_old'),
     # url(r'^btc-email-request/$', 'directory.views.btc_email_request', name='btc_email_request'),
     # url(r'^btc-email-request/template-email-request.html/$', 'directory.views.email_request_template', name='email_request_template'),
     # url(r'^btc-email-request/template-email-request_android.html/$', 'directory.views.email_request_template_android', name='email_request_template_android'),
@@ -23,6 +27,10 @@ urlpatterns = patterns('',
     url(r'^$', 'directory.views.landing_v2', name='landing'),
     # url(r'^$', 'directory.views.landing', name='landing'),
     url(r'^blackfriday$', 'directory.views.blackfriday', name='blackfriday'),
+
+    url(r'^buysellredirect/(?P<code>.+)/$', 'directory.views.buysellredirect', name='buysellredirect'),
+
+    url(r'^api/v1/plugins/?$', views.PluginDetailsView.as_view()),
 )
 
 

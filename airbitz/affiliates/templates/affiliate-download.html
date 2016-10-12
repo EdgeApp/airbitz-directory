@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load imagekit %}
+{% load humanize %}
+{% load compressed %}
+{% load absolute %}
+{% load ab_custom_tags %}
+
+{% block javascript_headers %}
+  {{ block.super }}
+  {% compressed_js 'app_download' %}
+  {% compressed_css 'app_download' %}
+
+  <script type="text/javascript">
+    $(function() {
+        _gaq.push(function() {
+            if (bowser.android) {
+                window.location.href = 'https://play.google.com/store/apps/details?id=com.airbitz'
+            }
+            if (bowser.ios) {
+                window.location.href = 'https://itunes.apple.com/us/app/airbitz/id843536046'
+            }
+        });
+    });
+  </script>
+{% endblock javascript_headers %}
+
+{% block title %}Airbitz Bitcoin Mobile App {% endblock %}
+
+{% block search %}{% endblock %}
+
+{% block main_content %}
+
+<!--
+  <div class="row" style="padding-top: 20px">
+      <div class="col-sm-12">
+        <h1 class="text-center">Download Airbitz Bitcoin Wallet and Directory</h1>
+      </div>
+  </div>
+-->
+
+  <div class="promo-video row" style="padding-top: 20px">
+    <div class="col-sm-12 text-center">
+		<article id="post-1123" class="post-1123 page type-page status-publish hentry">
+			<div class="entry-content">
+				<p><img class="aligncenter size-full wp-image-1124" src="https://airbitz.co/go/wp-content/uploads/2016/04/Affiliate-Page.jpg" alt="Affiliate-Page" style="max-height: 400px; width: auto;" width="1600" height="1067" /></p>
+			</div> <!-- .entry-content -->
+		</article>
+    </div>
+  </div>
+
+  <div class="app-store-links row">
+    <div class="col-sm-3">&nbsp;</div>
+    <div class="col-sm-6 text-center">
+      <a href="https://itunes.apple.com/us/app/airbitz/id843536046">
+        <img class="app-store" src="https://airbitz.co/static/img/available-on-apple-app-store.png" alt="Airbitz on iOS"></a>
+      <a href="https://play.google.com/store/apps/details?id=com.airbitz">
+        <img class="app-store" src="https://airbitz.co/static/img/available-on-android.png" alt="Airbitz on Android"></a>
+    </div>
+    <div class="col-sm-3">&nbsp;</div>
+  </div>
+
+{% endblock main_content %}

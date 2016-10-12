@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.gis.measure import Distance
+from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -14,7 +15,7 @@ from rest_framework_throttling.throttling import PerUserThrottle
 
 import logging
 
-from directory.models import Business, BusinessImage, Category
+from directory.models import Business, BusinessImage, Category, BuySellRedirect
 from restapi import api
 from restapi import locapi
 from restapi import serializers 
@@ -271,6 +272,17 @@ class LocationSuggest(APIView):
         a = api.ApiProcess(ll=ll, ip=ip)
         results = a.suggestNearText()
         return Response({ 'near':  results })
+
+class BuySellRedirectView(APIView):
+    authentication_classes = PERMS
+    permission_classes = AUTH
+    throttle_classes = (PerUserThrottle, )
+
+    def get(self, request, *args, **kwargs):
+        d = {}
+        for b in BuySellRedirect.objects.all():
+            d[b.currency_code] = request.build_absolute_uri(reverse('buysellredirect', args=(b.currency_code, )))
+        return Response(d)
 
 
 def page_api_v1_documentation(request):

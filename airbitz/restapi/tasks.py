@@ -12,9 +12,9 @@ log=logging.getLogger("restapi." + __name__)
 
 DEF_CID=555
 
-def ga_send(request, title):
+def ga_send(request, title, path=None):
     timestamp = int(time.time())
-    __ga_post__.delay(request.path, title, campaign=request.user.username, \
+    __ga_post__.delay(path or request.path, title, campaign=request.user.username, \
                       cid=request.META.get('HTTP_X_CLIENT_ID', DEF_CID),
                       useragent=request.META.get('HTTP_USER_AGENT', None),
                       ip=request.META.get('REMOTE_ADDR', None), timestamp=timestamp)

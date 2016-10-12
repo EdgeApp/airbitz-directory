@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
 from pybitid import bitid
 from rest_framework import serializers
 from rest_framework import status
@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from models import Affiliate, AffiliateCampaign, CampaignVariable, AffiliateLink
+from restapi.tasks import ga_send
 from restapi.views import AUTH, PERMS 
 
 import pytz
@@ -116,17 +117,12 @@ def touch(request, token):
             (link, _) = AffiliateLink.objects.get_or_create(campaign=campaign, ip_address=ip_address)
             link.created = datetime.now(pytz.utc)
             link.save()
+            ga_send(request, 'affiliate::touch', path='/af/{0}/requested'.format(token))
     except Exception as e:
         print e
+    return render_to_response('affiliate-download.html')
 
-    ua = request.META.get('HTTP_USER_AGENT', '').lower()
-    if ua.find('android') > -1 or ua.find('linux') > -1:
-        url = 'https://play.google.com/store/apps/details?id=com.airbitz'
-    else:
-        url = 'https://itunes.apple.com/us/app/bitcoin-wallet-airbitz/id843536046?mt=8'
-    return HttpResponseRedirect(url)
-
-EXPIRED_MINUTES = 3
+EXPIRED_MINUTES = 15
 
 class QueryView(APIView):
     authentication_classes = PERMS
@@ -134,20 +130,30 @@ class QueryView(APIView):
 
     def get(self, request):
         ip_address = request.META.get('REMOTE_ADDR')
-        print ip_address
         try:
             expired = datetime.now(pytz.utc) - timedelta(minutes=EXPIRED_MINUTES)
-            link = AffiliateLink.objects.get(ip_address=ip_address, created__gte=expired)
-            variables = [{
-                'key': c.key,
-                'key_type': c.key_type,
-                'value': c.value
-            } for c in CampaignVariable.objects.filter(campaign=link.campaign).order_by('key')] 
-            return statusResponse(data={
-                'expires': (link.created + timedelta(minutes=EXPIRED_MINUTES)),
-                'affiliate_address': link.campaign.payment_address,
-                'objects': variables
-            })
+            link = AffiliateLink.objects.filter(ip_address=ip_address).order_by('-created').first()
+            if not link:
+                return errInvalidRequest(data={
+                    "error": "No matching device"
+                })
+            if link.created >= expired:
+                variables = [{
+                    'key': c.key,
+                    'key_type': c.key_type,
+                    'value': c.value
+                } for c in CampaignVariable.objects.filter(campaign=link.campaign).order_by('key')] 
+                ga_send(self.request, 'affiliate::query', path='/affiliates/query/{0}'.format(link.campaign.token))
+                return statusResponse(data={
+                    'expires': (link.created + timedelta(minutes=EXPIRED_MINUTES)),
+                    'affiliate_address': link.campaign.payment_address,
+                    'objects': variables
+                })
+            else:
+                ga_send(self.request, 'affiliate::query', path='/affiliates/query/{0}-expired'.format(link.campaign.token))
+                return errInvalidRequest(data={
+                    "error": "No matching device"
+                })
         except AffiliateLink.DoesNotExist as e:
             print e
         return errInvalidRequest(data={
