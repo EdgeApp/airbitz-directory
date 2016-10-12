@@ -43,14 +43,10 @@
      // Typing text
      $(".animated-text").typed({
          strings: [
-             "material design",
-             "fully responsive",
-             "onepage template.",
-             "mobile first",
-             "multi-purpose"
+             ""
          ],
-         typeSpeed: 50,
-         loop: true,
+         typeSpeed: 30,
+         loop: false,
      });
 
 

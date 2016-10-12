@@ -3,12 +3,31 @@
    Version: 1.0
 */
  /* General Styles*/
- 
+
+ .parallax {
+     perspective: 1px;
+     height: 100vh;
+     overflow-x: hidden;
+     overflow-y: auto;
+ }
+ .parallax__layer {
+     position: absolute;
+     top: 0;
+     right: 0;
+     bottom: 0;
+     left: 0;
+ }
+ .parallax__layer--base {
+     transform: translateZ(0);
+ }
+ .parallax__layer--back {
+     transform: translateZ(-1px);
+ }
+
  body {
      background-color: #fff;
      color: #3C4858;
-     font-family: 'Roboto', sans-serif;
- }
+     font-family: 'Source Sans Pro', sans-serif; }
  
  a {
      color: #9158d9;
@@ -23,7 +42,7 @@
  * {
      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
      -webkit-tap-highlight-color: transparent;
-     font-family: "Roboto", sans-serif;
+     font-family: 'Source Sans Pro', sans-serif;
  }
  
  *:focus {
@@ -45,7 +64,7 @@
  h4,
  h5,
  h6 {
-     font-family: "Roboto", sans-serif !important;
+     font-family: 'Source Sans Pro', sans-serif;
  }
  
  p {
@@ -57,7 +76,7 @@
  }
  
  .title {
-     font-family: 'Roboto', sans-serif;
+     font-family: 'Source Sans Pro', sans-serif;
  }
  
  .btn {
@@ -654,6 +673,12 @@
  
  h2 {
      font-size: 2.6em;
+
+     /*font-size: 64px;*/
+     /*line-height: 1.0625;*/
+     font-weight: 100;
+     /*letter-spacing: -.02em;*/
+
  }
  
  h4 {
@@ -677,7 +702,7 @@
  .card-title,
  .info-title {
      font-weight: 700;
-     font-family: "Roboto Slab", "Times New Roman", serif;
+     font-family: 'Source Sans Pro', sans-serif;
  }
  
  .title,
@@ -1258,7 +1283,9 @@
  
  .navbar .navbar-brand {
      height: auto;
-     width: 68px;
+     width: 100px;
+     margin-top: 5px;
+     margin-bottom: 5px;
  }
  
  .section-white {
@@ -1275,9 +1302,19 @@
  /* Home */
  
  #home {
-     background-image: url('http://placehold.it/1200x800');
+     /*background-image: url('http://placehold.it/1200x800');*/
+     background-image: url('../img/jtree-night-stars.jpg');
  }
- 
+
+ .top-of-fold {
+     margin: 0 auto;
+     display: inline-block;
+ }
+
+ .full-height {
+     height: 100vh;
+ }
+
  .page-hero {
      background-position: center center;
      background-size: cover;
