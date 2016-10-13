@@ -34,7 +34,7 @@ psql -c "DROP ROLE IF EXISTS #{$DBUSER};"
 
 createdb -E UTF8 template_postgis2.1
 psql -d postgres -c "UPDATE pg_database SET datistemplate='true' WHERE datname='template_postgis2.1'"
-psql -d template_postgis2.1 -f /usr/share/postgresql/9.3/extension/postgis--2.1.7.sql
+psql -d template_postgis2.1 -c "CREATE EXTENSION postgis;"
 psql -d template_postgis2.1 -c "GRANT ALL ON geometry_columns TO PUBLIC;"
 psql -d template_postgis2.1 -c "GRANT ALL ON geography_columns TO PUBLIC;"
 psql -d template_postgis2.1 -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;"
