@@ -931,7 +931,8 @@ a.box:active {
 }
 
 .button.is-info {
-    background-color: #";
+    /*unsure of what background-color should be*/
+    /*background-color: #";*/
     border-width: 0;
     color: white;
 }
@@ -1155,6 +1156,40 @@ a.box:active {
 
 .content {
     color: #4a4a4a;
+}
+
+@media (max-width: 540px) {
+  .hero-box {
+    height: 300px !important;
+  }
+}
+
+@media (max-width: 467px) {
+  .github {
+    height: 230px !important;
+  }
+}
+@media (max-width: 486px) {
+  .hero-box .content {
+    width: 215px;
+  }
+  #apk-download {
+    display: block;
+  }
+  .hero-box {
+    height: 350px !important;
+  }
+  .app-store-buttons {
+    margin-left: -95px !important;
+  }
+}
+
+.open-source-info {
+  width: 100%
+}
+
+#github-buttons {
+  margin-bottom: 20px;
 }
 
 .content:not(:last-child) {
@@ -2522,7 +2557,7 @@ a.box:active {
 }
 
 .title + .subtitle {
-    margin-top: -10px;
+    margin-top: -15px;
 }
 
 .title.is-1 {
@@ -2593,6 +2628,22 @@ a.box:active {
     line-height: 1.125;
 }
 
+
+@media (max-width: 540px) {
+    .subtitle {
+      margin-left: -60px;
+      margin-top: 40px !important;
+    }
+    .content h1.airbitz {
+      font-size: 3em;
+      margin-top: -5px;
+    }
+}
+
+.subtitle.primary {
+    margin-left: 0px !important;
+    margin-top: 0px !important;
+}
 .subtitle code {
     border-radius: 3px;
     display: inline-block;
@@ -2684,10 +2735,11 @@ a.box:active {
     position: relative;
 }
 
-@media screen and (min-width: 980px) {
-    .container {
-        margin: 0 auto;
-        max-width: 960px;
+@media screen and (min-width: 1100px) {
+    .hero-box {
+        /*margin: 0 auto;*/
+        margin-left: 8%;
+        max-width: 500px;
     }
     .container.is-fluid {
         margin: 0 20px;
@@ -2695,10 +2747,18 @@ a.box:active {
     }
 }
 
-@media screen and (min-width: 1180px) {
-    .container {
-        max-width: 1200px;
-    }
+.hero-box {
+  max-width: 500px;
+}
+
+@media screen and (max-width: 1100px) {
+  .hero-box {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .hero-body {
+    padding-top: 96px;
+  }
 }
 
 .delete {
@@ -5828,7 +5888,11 @@ a.panel-block:hover {
     flex-grow: 1;
     -ms-flex-negative: 0;
     flex-shrink: 0;
-    padding: 40px 20px;
+    padding: 40px 20px 40px 20px;
+}
+
+.top-margin {
+  margin-top: 60px;
 }
 
 @media screen and (min-width: 1240px) {
@@ -6690,7 +6754,7 @@ a.panel-block:hover {
     }
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 1100px) {
     .hero.is-large .hero-body {
         padding-bottom: 240px;
         padding-top: 240px;
