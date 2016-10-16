@@ -763,10 +763,10 @@
         </a>
         <nav class="nav-collapse">
             <ul>
-                <li><a class="nav-link" href="https://airbitz.co/" data-scroll>Home</a></li>
-                <li><a class="nav-link" href="https://developer.airbitz.co/" data-scroll>Developer SDK</a></li>
-                <li><a class="nav-link" href="https://airbitz.co/bitcoin-wallet/" data-scroll>Bitcoin Wallet</a></li>
-                <li><a class="nav-link" href="https://airbitz.co/go" data-scroll>Blog</a></li>
+                <li><a class="nav-link" href="/" data-scroll>Home</a></li>
+                <li><a class="nav-link" href="/#sdk" data-scroll>Developer SDK</a></li>
+                <li><a class="nav-link" href="/bitcoin-wallet/">Bitcoin Wallet</a></li>
+                <li><a class="nav-link" href="https://airbitz.co/go">Blog + More</a></li>
             </ul>
         </nav>
     </header>
@@ -1798,7 +1798,7 @@
                 var o, i = document.querySelector( ".nav-collapse ul" ), a = i.querySelectorAll( "a" ), c = function () {
                     o = [], e( a, function ( e ) {
                         var t = a[ e ].getAttribute( "href" ).replace( "#", "" );
-                        //  o.push( document.getElementById( t ).offsetTop + 200 )
+                          o.push( document.getElementById( t ).offsetTop + 200 )
                     } )
                 };
                 c(), window.addEventListener( "resize", function () {c()}, !1 );
