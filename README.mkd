@@ -64,4 +64,19 @@ Start Celery worker
     local> vagrant plugin install vagrant-digitalocean
     local> vagrant up --provider=digital_ocean
 
+### Deploying to Production or Staging
+
+    # SSH in, change into the environment and update code
+    ssh user@server
+    source quick_bitz.sh
+    git fetch
+
+    git reset --hard origin/deploy
+    # or
+    git reset --hard origin/staging
+
+    # Copy static files and restart gunicorn
+    ./manage.py collectstatic
+    ./restart_gunicorn.sh
+    
 [vagrantdownload]: http://www.vagrantup.com/downloads.html
