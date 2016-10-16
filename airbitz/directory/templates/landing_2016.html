@@ -182,7 +182,7 @@
             margin: 15px;
             font: 24px "Source Sans Pro", sans-serif;
             line-height: 30px;
-            position: absolute;
+            position: static;
             letter-spacing: -1px;
             margin-top: 70px;
             margin-left: 15px;
@@ -406,7 +406,7 @@
 
         #edgelogin-screenshot {
             vertical-align: top;
-            background: url("/static/2016-theme/img/mac-desk-6HD.jpg");
+            /*background: url("/static/2016-theme/img/mac-desk-6HD.jpg");*/
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
@@ -507,6 +507,13 @@
              it's a cool effect on SPAs (single page apps) but might be a little cheesy for a multipage website */
             background: transparent !important;
         }
+
+        video
+        {
+            width: 100%;
+            height: auto;
+            max-height: 100%;
+        }
     </style>
 
     <link rel="stylesheet" type="text/css" src="/static/2016-theme/css/snipped-footer.css">
@@ -523,9 +530,9 @@
         <nav class=nav-collapse>
             <ul>
                 <li class=active><a href="#home" data-scroll>Home</a></li>
-                <li><a href="#sdk" data-scroll>Developer SDK</a></li>
-                <li><a href="https://airbitz.co/bitcoin-wallet" data-scroll>Bitcoin Wallet</a></li>
-                <li><a href="https://airbitz.co/go" data-scroll>Blog</a></li>
+                <li><a href="/#sdk" data-scroll>Developer SDK</a></li>
+                <li><a href="/bitcoin-wallet" data-scroll>Bitcoin Wallet</a></li>
+                <li><a href="https://airbitz.co/go" data-scroll>Blog + More</a></li>
             </ul>
         </nav>
     </header>
@@ -543,17 +550,18 @@
         </div>
     </section>
 
-    <section class="hero is-light">
+    <section class="hero is-dark divider">
         <div class="hero-body">
-            <div class="container has-text-centered">
+            <div class="container parallax-divider" style="font-size: 28px">
+                Airbitz is a <b>single-signon</b> security platform for blockchain apps
             </div>
         </div>
     </section>
 
-    <section>
+    <section class="hero">
         <div class="container">
             <p class="slide-title">
-                <span>Introducing Edge Login.</span>
+                <span>Introducing Edge Login</span>
             </p>
             <p class="slide-subtitle">
                 <span>The world’s first zero-knowledge single sign-on solution.</span>
@@ -561,8 +569,14 @@
         </div>
     </section>
 
-    <section id="edgelogin-screenshot" class="hero is-fullheight">
-        <div class="container"></div>
+    <section class="hero">
+        <!--id="edgelogin-screenshot" class="hero is-fullheight">-->
+        <div class="container">
+            <video autoplay>
+                <source src="/static/2016-theme/img/slide-anim.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
     </section>
 
     <section id="animation-caption-boxes">
@@ -800,7 +814,7 @@ var abcUiContext = abcui.makeABCUIContext({
   privateKey = account.repoInfo.dataKey.toString( 'base64' ) <br>});</code></pre>
 
                         <center>
-                            <img src="/static/2016-theme/img/airbitz-login.png" width="500px" style="margin: 0px auto;">
+                            <img src="/static/2016-theme/img/airbitz-login.png" width="700px" style="margin: 0px auto;">
                         </center>
                     </span>
                 </div>
@@ -817,7 +831,7 @@ var abcUiContext = abcui.makeABCUIContext({
     </section>
 
     <section id="github">
-        <div class="container has-text-centered github" style="height: 150px; padding: 33px;">
+        <div class="container has-text-centered github" style="height: auto; padding: 33px;">
             <div class="content">
                 <h2>
                     Developers, check out our open source SDKs on Github:
@@ -836,6 +850,12 @@ var abcUiContext = abcui.makeABCUIContext({
                     <span class="fa fa-github">&nbsp;</span>Java / Android
                 </a>
             </center>
+            <br>
+            <div class="content" style="margin-bottom: 10px">
+                <a class="button is-outlined" href="/developer-api-library/" style="border-color:#6c95cc; color:#6c95cc">
+                    <span class="">&nbsp;</span>SDK Overview
+                </a>
+            </div>
         </div>
     </section>
 
@@ -1810,7 +1830,7 @@ var abcUiContext = abcui.makeABCUIContext({
             var o, i = document.querySelector( ".nav-collapse ul" ), a = i.querySelectorAll( "a" ), c = function () {
                 o = [], e( a, function ( e ) {
                     var t = a[ e ].getAttribute( "href" ).replace( "#", "" );
-                    //    o.push( document.getElementById( t ).offsetTop + 200 )
+                        o.push( document.getElementById( t ).offsetTop + 200 )
                 } )
             };
             c(), window.addEventListener( "resize", function () {c()}, !1 );
