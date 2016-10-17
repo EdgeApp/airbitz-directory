@@ -551,7 +551,7 @@
         </div>
     </section>
 
-    <section class="hero is-dark divider">
+    <section class="hero is-dark divider" id="single-signon-section">
         <div class="hero-body">
             <div class="container parallax-divider" style="font-size: 28px">
                 Airbitz is a <b>single-signon</b> security platform for blockchain apps
@@ -573,7 +573,7 @@
     <section class="hero">
         <!--id="edgelogin-screenshot" class="hero is-fullheight">-->
         <div class="container">
-            <video autoplay>
+            <video loop id="login-video">
                 <source src="/static/2016-theme/img/slide-anim.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -1421,7 +1421,18 @@ var abcUiContext = abcui.makeABCUIContext({
 
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
+
+    $(window).on('scroll', function() {
+        var scroll = $(window).scrollTop();
+        var elpos = $('#single-signon-section').offset().top
+
+        if (scroll > (elpos - 100)) {
+            $('#login-video')[0].play()
+        }
+    });
+
+
     var tpj = jQuery;
 
     var revapi12;
@@ -1860,7 +1871,8 @@ var abcUiContext = abcui.makeABCUIContext({
             } )
         }
     }();
-</script>
+
+    </script>
 
 </body>
 </html>
