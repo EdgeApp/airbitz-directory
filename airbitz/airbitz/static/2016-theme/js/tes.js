@@ -30,6 +30,12 @@ function Waves(options) {
  * render.
  */
 Waves.prototype.draw = function(time) {
+
+    var doc = document.documentElement;
+    var top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
+
+    time = top * 15;
+
     for(var i = 0, len = this.vectors.length; i < len; i++) {
         this.vectors[i].update(time);
     }
