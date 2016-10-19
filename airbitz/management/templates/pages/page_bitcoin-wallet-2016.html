@@ -47,7 +47,7 @@
         }
 
         #slide-19-layer-1 {
-            cursor: url('../orbiform/img/fingerprint.png'), pointer;
+            /*cursor: url('../orbiform/img/fingerprint.png'), pointer;*/
         }
 
         .transparent {
@@ -782,14 +782,14 @@
 <body>
 
     <header>
-        <a href="#home" class=logo data-scroll>
+        <a href="/" class=logo>
             <img src="/static/2016-theme/img/airbitz-brandlogo-lg.png" alt="Logo" id="logo" width="80px">
         </a>
         <nav class="nav-collapse">
             <ul>
-                <li><a class="nav-link" href="/" data-scroll>Home</a></li>
-                <li><a class="nav-link" href="/#sdk" data-scroll>Developer SDK</a></li>
-                <li><a class="nav-link" href="/bitcoin-wallet/">Bitcoin Wallet</a></li>
+                <li><a class="nav-link" href="/">Home</a></li>
+                <li><a class="nav-link" href="/#sdk">Developer SDK</a></li>
+                <li class="active"><a class="nav-link" href="">Bitcoin Wallet</a></li>
                 <li><a class="nav-link" href="https://airbitz.co/go">Blog + More</a></li>
             </ul>
         </nav>
@@ -1908,8 +1908,11 @@
                                                                       (document.documentElement.className += " android");
                 var o, i = document.querySelector( ".nav-collapse ul" ), a = i.querySelectorAll( "a" ), c = function () {
                     o = [], e( a, function ( e ) {
-                        var t = a[ e ].getAttribute( "href" ).replace( "#", "" );
-                          o.push( document.getElementById( t ).offsetTop + 200 )
+                        var t = a[ e ].getAttribute( "href" );
+                        if (t.startsWith('#')) {
+                            var t = t.replace( "#", "");
+                            o.push( document.getElementById( t ).offsetTop + 200 )
+                        }
                     } )
                 };
                 c(), window.addEventListener( "resize", function () {c()}, !1 );
@@ -1928,10 +1931,13 @@
                                                                    history.pushState( "", document.title, window.location.pathname ), d()
                 }, !1 ), e( a, function ( e ) {
                     a[ e ].addEventListener( "click", function ( t ) {
-                        t.preventDefault(), u = !0, r( e );
-                        var n = this.getAttribute( "href" ).replace( "#", "" ), o = document.getElementById( n );
-                        "home" !== n ? (o.removeAttribute( "id" ), location.hash = "#" + n, o.setAttribute( "id", n )) :
-                        history.pushState && history.pushState( "", document.title, window.location.pathname ), d()
+                        var n = this.getAttribute( "href" )
+                        if (n.startsWith('#')) {
+                            t.preventDefault(), u = !0, r( e );
+                            n = n.replace( "#", "" ), o = document.getElementById( n );
+                            "home" !== n ? (o.removeAttribute( "id" ), location.hash = "#" + n, o.setAttribute( "id", n )) :
+                            history.pushState && history.pushState( "", document.title, window.location.pathname ), d()
+                        }
                     }, !1 )
                 } )
             }

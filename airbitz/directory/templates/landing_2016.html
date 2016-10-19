@@ -538,15 +538,15 @@
     <div id="canvas-container"></div>
 
     <header>
-        <a href="#home" class=logo data-scroll>
+        <a href="/" class=logo>
             <img src="/static/2016-theme/img/airbitz-brandlogo-lg.png" alt="Logo" id="logo" width="80px">
         </a>
         <nav class=nav-collapse>
             <ul>
-                <li class=active><a href="#home" data-scroll>Home</a></li>
-                <li><a href="/#sdk" data-scroll>Developer SDK</a></li>
-                <li><a href="/bitcoin-wallet" data-scroll>Bitcoin Wallet</a></li>
-                <li><a href="https://airbitz.co/go" data-scroll>Blog + More</a></li>
+                <li class=active><a href="/">Home</a></li>
+                <li><a href="#sdk" data-scroll>Developer SDK</a></li>
+                <li><a href="/bitcoin-wallet">Bitcoin Wallet</a></li>
+                <li><a href="https://airbitz.co/go">Blog + More</a></li>
             </ul>
         </nav>
     </header>
@@ -791,7 +791,7 @@
         </div>
     </section>
 
-    <a name="sdk"></a>
+    <a id="sdk" name="sdk"></a>
 
     <section class="hero is-dark divider">
         <div class="hero-body">
@@ -932,6 +932,8 @@ var abcUiContext = abcui.makeABCUIContext({
                         </a>
                     </div>
                 </div>
+            </div>
+            <div class="container">
                 <div class="columns">
                     <div class="column is-3">
                         <a href="http://cointelegraph.com/news/113739/airbitz-invents-first-one-touch-2-factor-authentication-for-mobile-wallet">
@@ -1947,8 +1949,11 @@ var abcUiContext = abcui.makeABCUIContext({
                                                                   (document.documentElement.className += " android");
             var o, i = document.querySelector( ".nav-collapse ul" ), a = i.querySelectorAll( "a" ), c = function () {
                 o = [], e( a, function ( e ) {
-                    var t = a[ e ].getAttribute( "href" ).replace( "#", "" );
+                    var t = a[ e ].getAttribute( "href" );
+                    if (t.startsWith('#')) {
+                        var t = t.replace( "#", "");
                         o.push( document.getElementById( t ).offsetTop + 200 )
+                    }
                 } )
             };
             c(), window.addEventListener( "resize", function () {c()}, !1 );
@@ -1967,10 +1972,13 @@ var abcUiContext = abcui.makeABCUIContext({
                                                                history.pushState( "", document.title, window.location.pathname ), d()
             }, !1 ), e( a, function ( e ) {
                 a[ e ].addEventListener( "click", function ( t ) {
-                    t.preventDefault(), u = !0, r( e );
-                    var n = this.getAttribute( "href" ).replace( "#", "" ), o = document.getElementById( n );
-                    "home" !== n ? (o.removeAttribute( "id" ), location.hash = "#" + n, o.setAttribute( "id", n )) :
-                    history.pushState && history.pushState( "", document.title, window.location.pathname ), d()
+                    var n = this.getAttribute( "href" )
+                    if (n.startsWith('#')) {
+                        t.preventDefault(), u = !0, r( e );
+                        n = n.replace( "#", "" ), o = document.getElementById( n );
+                        "home" !== n ? (o.removeAttribute( "id" ), location.hash = "#" + n, o.setAttribute( "id", n )) :
+                        history.pushState && history.pushState( "", document.title, window.location.pathname ), d()
+                    }
                 }, !1 )
             } )
         }
