@@ -506,7 +506,7 @@ def page_bitcoin_wallet(request):
         'page_title': 'Bitcoin Wallet',
         'page_description': 'Airbitz builds the easiest to use and easiest to secure mobile Bitcoin wallet alongside a comprehensive and quality Bitcoin business directory.',
     }
-    return render_to_response('pages/page_bitcoin-wallet.html', RequestContext(request, context))
+    return render_to_response('pages/page_bitcoin-wallet-2016.html', RequestContext(request, context))
 
 def page_developer_api_library(request):
     if request.POST.get('signup_type') == 'mailchimp':

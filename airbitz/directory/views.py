@@ -130,7 +130,7 @@ def landing_v2(request):
         # 'all_regions': ALL_REGIONS,
         # 'biz_total': Business.objects.filter(status="PUB", country__in=regions_data.get_active_country_codes()).count(),
     }
-    return render_to_response('landing_v2.html', RequestContext(request, context))
+    return render_to_response('landing_2016.html', RequestContext(request, context))
 
 
 def landing(request):
