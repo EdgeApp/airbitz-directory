@@ -309,6 +309,16 @@ def redirect_blf(request):
     response['Location'] = str(url)
     return response
 
+
+# handles button redirects for edge login requests
+def redirect_elf(request):
+
+    url = 'airbitz-ret://x-callback-uri/edgelogin/' + request.GET['address']
+
+    response = HttpResponse("", status=302)
+    response['Location'] = str(url)
+    return response
+
 def hlf_old(request):
     hbits = request.GET.get('hbits', '')
     return render_to_response('hlf-landing.html', RequestContext(request, {
