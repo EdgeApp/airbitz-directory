@@ -156,7 +156,9 @@ if not DEBUG:
             'test-directory.airbitz.co',
             'api.airbitz.co',
             'demo.airbitz.co',
-            'airbitz.co']
+            'airbitz.co',
+            'www.airbitz.co',
+            ]
 
 if os.environ.has_key('DATABASE_HOST'):
     DB_HOST = os.environ.get('DATABASE_HOST')
