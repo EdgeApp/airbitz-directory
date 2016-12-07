@@ -28,7 +28,8 @@ CURRENT_LOCATION='current location'
 CUR_LOC_ARRAY=[CURRENT_LOCATION, 'ubicación actual']
 WEB_LOC_ARRAY=['on the web', 'en la red']
 WEB_ONLY_ARRAY=['web only']
-LOCKED_USERS = [35, 39] # rackwallet and coinsource
+LOCKED_USERS = [39] # coinsource
+LOCKED_ATM_USERS = [35] # rackwallet
 
 def autocompleteSerialize(row, lang=DEF_LANG):
     if row.model.__name__ == 'Business':
@@ -344,6 +345,8 @@ class ApiProcess(object):
         sqs = SearchQuerySet().models(Business)
         if user and user.id in LOCKED_USERS:
             sqs = sqs.filter(owner=user.id)
+        if user and user.id in LOCKED_ATM_USERS:
+            sqs = sqs.narrow('categories:ATM')
         sqs = sqs.filter(is_searchable=True)
         lang_cat=self.catDict(term)
         if term:
