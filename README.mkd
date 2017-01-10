@@ -12,7 +12,7 @@
 
     local> cd vagrant
     local> vagrant plugin install vagrant-omnibus # install required vagrant plugin
-    local> vagrant up 
+    local> vagrant up
 
 ### Hack away
 
@@ -26,6 +26,15 @@ Enter development environment
 
 Sync database
 
+    vm> python manage.py syncdb
+    vm> python manage.py migrate
+
+If you encounter a PostGis/GeoPython error ensure you are on 'deploy' branch, and try again
+If you still encounter the error, try the following:
+    vm> exit
+    local> vagrant provision
+    local> vagrant ssh
+    vm> source ./quick_bitz.sh
     vm> python manage.py syncdb
     vm> python manage.py migrate
 
@@ -78,5 +87,5 @@ Start Celery worker
     # Copy static files and restart gunicorn
     ./manage.py collectstatic
     ./restart_gunicorn.sh
-    
+
 [vagrantdownload]: http://www.vagrantup.com/downloads.html
