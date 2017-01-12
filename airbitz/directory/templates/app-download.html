@@ -8,6 +8,16 @@
     <title>Airbitz</title>
 
     <script src="/static/2016-theme/js/jquery.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        if (navigator.userAgent.toLowerCase().includes("android")) {
+          window.location.href = 'https://play.google.com/store/apps/details?id=com.airbitz'
+        }
+        if (navigator.userAgent.toLowerCase().includes("iphone")) {
+          window.location.href = 'https://itunes.apple.com/us/app/airbitz/id843536046'
+        }
+      })
+    </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="/static/2016-theme/css/hero.css">
