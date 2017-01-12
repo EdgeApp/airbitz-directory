@@ -1,47 +1,2010 @@
-{% extends 'base.html' %}
-{% load imagekit %}
-{% load humanize %}
-{% load compressed %}
-{% load absolute %}
-{% load ab_custom_tags %}
+<!DOCTYPE html>
+<html>
 
-{% block javascript_headers %}
-  {{ block.super }}
-  {% compressed_js 'app_download' %}
-  {% compressed_css 'app_download' %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Airbitz</title>
 
-  <script type="text/javascript">
-    if(bowser.android) {
-      window.location.href = 'https://play.google.com/store/apps/details?id=com.airbitz'
+    <script src="/static/2016-theme/js/jquery.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        if (navigator.userAgent.toLowerCase().includes("android")) {
+          window.location.href = 'https://play.google.com/store/apps/details?id=com.airbitz'
+        }
+        if (navigator.userAgent.toLowerCase().includes("iphone")) {
+          window.location.href = 'https://itunes.apple.com/us/app/airbitz/id843536046'
+        }
+      })
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/2016-theme/css/hero.css">
+
+    <!-- Syntax highlighting library -->
+    <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/tomorrow.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+
+    <script type="text/javascript" src="/static/2016-theme/js/bulma.js"></script>
+    <script src="/static/2016-theme/js/pixi.js"></script>
+    <script src="/static/2016-theme/js/tes.js"></script>
+    <script async src="/static/2016-theme/js/velocity.min.js"></script>
+
+    <link rel="stylesheet" href="/static/2016-theme/css/responsive-nav.css">
+    <script src="/static/2016-theme/js/responsive-nav.js"></script>
+
+    <style type="text/css">
+        #rev_slider_12_1_wrapper .tp-loader.spinner2 {
+            background-color: #000000 !important;
+        }
+    </style>
+
+    <!-- REVOLUTION JS FILES -->
+    <script type="text/javascript" src="/static/2016-theme/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="/static/2016-theme/js/jquery.themepunch.revolution.min.js"></script>
+
+    <!--&lt;!&ndash; SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems -->
+    <!--<link rel="stylesheet" href="/static/2016-theme/css/style.css">-->
+
+    <link rel="stylesheet" type="text/css" href="/static/2016-theme/css/style.css">
+    <style>
+        @import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300';
+        #slide-20-layer-2 {
+            /* Slide 2 Image: The clicked phone showing the 'photo' of the barcode */
+            animation-duration: 100ms;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            display: inline;
+        }
+
+        .transparent {
+            display: none !important;
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #7ac142;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        pre {
+            display: block;
+            padding: 9.5px;
+            margin: 0 0 10px;
+            font-size: 13px;
+            line-height: 1.42857143;
+            word-break: break-all;
+            word-wrap: break-word;
+            color: #333333;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        pre code {
+            padding: 0;
+            font-size: inherit;
+            color: inherit;
+            white-space: pre-wrap;
+            background-color: transparent;
+            border-radius: 0;
+        }
+
+        .pre-scrollable {
+            max-height: 340px;
+            overflow-y: scroll;
+        }
+
+        .checkmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            margin: 10% auto;
+            box-shadow: inset 0px 0px 0px #7ac142;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+
+        .is-primary {
+            background-color: #78bc61 !important;
+        }
+
+        .is-outlined {
+            background-color: transparent;
+        }
+
+        .is-outlined:hover {
+            background-color: white;
+        }
+
+        a .is_primary {
+            color: #78bc61 !important;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes scale {
+            0%,
+            100% {
+                transform: none;
+            }
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 30px #7ac142;
+            }
+        }
+
+        .fadeInUp {
+            animation-name: fadeInUp;
+        }
+
+        .tp-caption {
+            font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
+        }
+
+        .header-image {
+            height: 100vh;
+        }
+
+        .slide-title {
+            font: 42px/1.37 "Source Sans Pro", Ubuntu, sans-serif;
+            position: absolute;
+            letter-spacing: -1px;
+            margin-top: 15px;
+            margin-left: 15px;
+        }
+
+        .slide-subtitle {
+            margin: 15px;
+            font: 24px "Source Sans Pro", sans-serif;
+            line-height: 30px;
+            position: static;
+            letter-spacing: -1px;
+            margin-top: 70px;
+            margin-left: 15px;
+        }
+
+        @media all and (max-width: 640px) {
+            .slide-title {
+                font: 36px "Source Sans Pro", Ubuntu, sans-serif;
+                letter-spacing: -1px;
+                line-height: 52px;
+                position: absolute;
+                margin-top: 5px;
+            }
+        }
+
+        .slide-title span {
+            display: inline;
+            color: #363732;
+            padding: 0.25rem;
+        }
+
+        .slide-subtitle span {
+            display: inline;
+            color: #363732;
+            padding: 0.25rem;
+        }
+
+        .slide-caption {
+            margin: 75px;
+            bottom: 0px;
+            left: 0px;
+            font: 24px "Source Sans Pro", Ubuntu, sans-serif;
+            position: absolute;
+            text-transform: none;
+        }
+
+        .slide-caption span {
+            display: inline;
+            background: #2291cf;
+            color: white;
+            padding: 0.25rem;
+        }
+
+        .column-left {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            clear: both;
+        }
+
+        .is-5 {
+            font-size: 24px !important;
+            animation: fadeInUp;
+        }
+
+        .divider {
+            text-align: center;
+        }
+
+        .light-text-overlay {
+            top: 0px;
+        }
+
+        .parallax-divider {
+            text-align: center;
+            display: inline;
+            font-family: "Source Sans Pro", sans-serif;
+            font-size: 36px;
+            background-position: center center;
+        }
+
+        canvas {
+            width: 100vw;
+            min-height: 100vh;
+            height: 100vh;
+            position: absolute;
+        }
+
+        code {
+            background: transparent !important;
+        }
+
+        .clearfix {
+            margin: 5px;
+        }
+
+        .logo-main a.is-outlined {
+            margin: 15px;
+        }
+
+        #logo {}
+
+        .logo-main {
+            max-width: 350px;
+            overflow: auto;
+            position: relative;
+        }
+
+        .logo-main {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #section1>.header-image {
+            background: transparent;
+            background-size: 100% 100%;
+        }
+
+        .panel {
+            height: 100%;
+            width: 100%;
+        }
+
+        .panel.green {
+            margin-bottom: 400px;
+        }
+
+        .iphone {
+            background: url('./img/IPhone_7_Jet_Black.svg.png');
+            background-size: 100% 100%;
+        }
+
+        columns {
+            margin: 15px;
+        }
+
+        .coolors-transparent {
+            display: none !important;
+        }
+
+        div#alttext-container,
+        div#alttext-image {
+            border-width: 0px !important;
+            display: none !important;
+        }
+
+        .app-features {
+            height: 800px;
+        }
+
+        .app-panel {
+            /* specify a minimum width to prevent columns from getting smooshed*/
+            min-width: 400px;
+        }
+
+        #center-iphone-panel {
+            background: url("/img/IPhone_7_Jet_Black.svg.png");
+            background-size: 100% 100%;
+        }
+
+        section.is-light>* {
+            background: white;
+        }
+
+        #animation-caption-boxes div.column>div {
+            min-height: 125px;
+            font-family: "Source Sans Pro" !important;
+            font-size: 16px;
+        }
+
+        #animation-caption-boxes div.columns {
+            margin-left: 7.5px;
+            margin-right: 7.5px;
+        }
+
+        #animation-caption-boxes div.column {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        #copy {
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        #copy {
+            width: 100%;
+            background: linear-gradient(0deg, #eff4f7 0%, whitesmoke 25%, whitesmoke 75%, #eff4f7 100%);
+        }
+
+        .content-wrapper {
+            padding: 30px;
+        }
+
+        #animation-caption-boxes {
+            background: linear-gradient(#eef7fb 0%, rgba(43, 120, 150, .2) 50%);
+        }
+
+        .is-dark {
+            background-color: #eff4f7 !important;
+            color: #182825 !important;
+        }
+
+        #airbitz-cta {
+            background-image: url('/static/2016-theme/img/mountains.jpeg');
+            background-size: cover;
+            background-position: 0% 40%;
+            background-attachment: fixed;
+        }
+
+        #airbitz-cta>* {
+            color: #131200;
+        }
+
+        #github a:hover {
+            background: linear-gradient(45deg, #a6bbd6 0%, #cdccd6 100%);
+            color: white;
+        }
+
+        #funding {
+            background-color: whitesmoke;
+
+        }
+        #funding h2 {
+            font-family: "Source Sans Pro", sans-serif;
+            font-size: 36px;
+        }
+        #press h2 {
+            font-family: "Source Sans Pro", sans-serif;
+            font-size: 36px;
+        }
+
+        .light-text-overlay {
+            top: 30px;
+            left: 0;
+            margin-top: 0px;
+            color: white;
+            z-index: 99;
+            height: 300px;
+        }
+
+        #edgelogin-screenshot {
+            vertical-align: top;
+            /*background: url("/static/2016-theme/img/mac-desk-6HD.jpg");*/
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            padding-left: 0px;
+        }
+
+        #wallet-screenshot {
+            vertical-align: top;
+            background: url("/static/2016-theme/img/airbitz-tiltshift2.jpg");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            padding-left: 0px;
+        }
+
+        #wallet-screenshot>* {
+            margin-top: 50px;
+            color: white;
+        }
+
+        #wallet-screenshot article {
+            height: 700px;
+        }
+
+        #wallet-screenshot h1 {
+            height: 0px;
+            margin-top: -5px;
+            color: white;
+        }
+
+        @media (max-width: 470px) {
+            #wallet-screenshot h1 {
+                font-size: 20px;
+            }
+        }
+
+        #wallet-screenshot a {
+            color: white;
+            transition: all 1000ms ease-out;
+        }
+
+        #wallet-screenshot a:hover {
+            color: #2b92cd;
+            animation: fadeInUp;
+        }
+
+        footer a {
+            color: #00a0ba !important;
+        }
+
+        html {
+            background: white;
+        }
+
+        #rev_slider_12_1_wrapper {
+            min-height: 100vh;
+        }
+
+        .nav-item {
+            margin-right: 30px;
+            margin-left: 30px;
+        }
+
+        #logo {
+            margin-top: 15px;
+            height: 36px;
+            width: auto;
+            margin-bottom: 15px;
+        }
+
+        header {
+            border-bottom: 1px solid rgba(256, 256, 256, .2);
+            padding: 0px 15px 0px 0px !important;
+            height: 66px !important;
+            background: linear-gradient(rgba(104, 135, 227, .9) 0%, rgba(104, 135, 227, .7) 100%) !important;
+            transition: all 1s ease-in-out !important;
+        }
+
+        header:hover {
+            background: linear-gradient(rgba(104, 135, 227, 1)0%, rgba(113, 117, 226, 1) 100%) !important;
+        }
+
+        header .closed a:hover {
+            background: rgba(108, 224, 199, .8);
+            border-radius: 5px;
+            transform: translateY(-5px);
+        }
+
+        .closed a {
+            background: transparent;
+            margin: 15px 0 15px;
+            border: none;
+            transition: all .2s ease-in-out;
+        }
+
+        .closed .active a {
+            /* this selector gives you the option to highlight the current site section in the nav bar.
+             it's a cool effect on SPAs (single page apps) but might be a little cheesy for a multipage website */
+            background: transparent !important;
+        }
+
+        video
+        {
+            width: 105%;
+            height: auto;
+            max-height: 105%;
+        }
+
+        #login-video-img
+        {
+            width: 105%;
+            height: auto;
+            max-height: 105%;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" src="/static/2016-theme/css/snipped-footer.css">
+</head>
+
+<body>
+
+    <div id="canvas-container"></div>
+
+    <header>
+        <a href="/" class=logo>
+            <img src="/static/2016-theme/img/airbitz-brandlogo-lg.png" alt="Logo" id="logo" width="80px">
+        </a>
+        <nav class=nav-collapse>
+            <ul>
+                <li class=active><a href="/">Home</a></li>
+                <li><a href="#sdk" data-scroll>Developer SDK</a></li>
+                <li><a href="/bitcoin-wallet">Bitcoin Wallet</a></li>
+                <li><a href="https://airbitz.co/go">Blog + More</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero is-primary is-large header-image">
+        <div class="hero-body">
+            <div class="container has-text-centered logo-main" style="overflow:hidden; -ms-overflow-style: none">
+                <div>
+                    <img src="/static/2016-theme/img/airbitzlogo.png">
+                    <h2 class="subtitle primary is-5 fadeInUp">
+                      Securing the Future of Blockchain Technology
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero is-dark divider" id="single-signon-section">
+        <div class="hero-body">
+            <div class="container parallax-divider" style="font-size: 28px">
+                Airbitz is a <b>single-signon</b> security platform for blockchain apps
+            </div>
+        </div>
+    </section>
+
+    <section class="hero">
+        <div class="container">
+            <p class="slide-title">
+                <span>Introducing Edge Login</span>
+            </p>
+            <p class="slide-subtitle">
+                <span>The world’s first zero-knowledge single sign-on solution.</span>
+            </p>
+        </div>
+    </section>
+
+    <section class="hero">
+        <!--id="edgelogin-screenshot" class="hero is-fullheight">-->
+        <div class="container">
+            <video loop id="login-video" poster="/static/2016-theme/img/mac-desk-w-phone-backup.jpg">
+                <source src="/static/2016-theme/img/slide-anim.mp4" type="video/mp4">
+                <source src="/static/2016-theme/img/slide-anim.webm" type="video/webm" />
+                <source src="/static/2016-theme/img/slide-anim.ogv" type="video/ogg" />
+                <img src="/static/2016-theme/img/mac-desk-w-phone-backup.jpg">
+            </video>
+            <img id="login-video-img" src="/static/2016-theme/img/mac-desk-w-phone-backup.jpg">
+        </div>
+    </section>
+
+    <section id="animation-caption-boxes">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-one-third">
+                    <div class="box">
+                        <article class="media">
+                            <figure class="media-left">
+                                <p class="image is-48x48">
+                                    <img src="/static/2016-theme/img/barcode2.png" width="48px" height="48px">
+                                </p>
+                            </figure>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="column-right">Use the Airbitz wallet to login to decentralized blockchain apps with the scan of a barcode.</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="column is-one-third">
+                    <div class="box">
+                        <article class="media">
+                            <figure class="media-left">
+                                <p class="image is-48x48">
+                                    <img src="/static/2016-theme/img/vault.png" width="48px" height="48px"></p>
+                            </figure>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="column-right">Private keys are instantly created, encrypted, and backed up.</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </article>
+                    </div>
+                </div>
+                <div class="column is-one-third">
+                    <div class="box">
+                        <article class="media">
+                            <figure class="media-left">
+                                <p class="image is-48x48">
+                                    <img src="/static/2016-theme/img/magicwand.png" width="48px" height="48px"></p>
+                            </figure>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="column-right">No words to write down, no files to save, no data to encrypt. It all happens automatically, magically.</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column is-12 has-text-centered" style="margin-bottom: 50px">
+                    <a class="button is-outlined" href="https://youtu.be/73ISfWw_jNk"
+                       style="border-color:#444; color:#444">
+                        <span class="fa fa-play">&nbsp;</span>Watch the full Edge-Login video
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="theft-prevention" class="hero is-dark divider">
+        <div class="hero-body">
+            <div class="container parallax-divider" style="">
+                A Trustless & Private Security Platform
+            </div>
+        </div>
+    </section>
+
+    <section id="copy">
+        <div class="container">
+            <div class="box">
+                <div class="content">
+                    <span class="content-wrapper">
+                        <h1>Edge Security to the Rescue</h1>
+                        <p>For decades, we've utilized the enterprise security model which centralizes valuable data with trusted custodians. Over and over, this model
+                        has been proven to be flawed, with countless hacks, breakins, and thefts of consumer information and data.</p>
+                        <p>Instead of relying on enterprise server security, Edge-Security encrypts data first the user's device before it ever touches a network or server. </p>
+                        <p> A server-side hack yields nothing but fully encrypted, private data. A hack on a user’s device yields only the data of that one user vs millions of users. The incentive to attack the system is reduced by orders of magnitude.</p>
+                        <p>Airbitz provides the world’s first edge security platform that allows developers to build apps that secure users’ data at "The Edge."</p>
+                    </span>
+                    <div class="columns">
+                        <div class="column is-one-third">
+                            <div class="box">
+                                <article class="media">
+                                    <figure class="media-left">
+                                        <p class="image is-64x64">
+                                            <img src="/static/2016-theme/img/synchronization.png">
+                                        </p>
+                                    </figure>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p>
+                                                <strong>Automatic Backup</strong>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="column is-one-third">
+                            <div class="box">
+                                <article class="media">
+                                    <figure class="media-left">
+                                        <p class="image is-64x64">
+                                            <img src="/static/2016-theme/img/clientside.png">
+                                        </p>
+                                    </figure>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p>
+                                                <strong>Client-Side Encryption</strong>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="column is-one-third">
+                            <div class="box">
+                                <article class="media">
+                                    <figure class="media-left">
+                                        <p class="image is-64x64">
+                                            <img src="/static/2016-theme/img/devicesync.png">
+                                        </p>
+                                    </figure>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p>
+                                                <strong>Multi-device synchronization</strong>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-one-third">
+                            <div class="box">
+                                <article class="media">
+                                    <figure class="media-left">
+                                        <p class="image is-64x64">
+                                            <img src="/static/2016-theme/img/fingerprint2.png">
+                                        </p>
+                                    </figure>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p>
+                                                <strong>One-Touch 2 Factor Authentication</strong>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="column is-one-third">
+                            <div class="box">
+                                <article class="media">
+                                    <figure class="media-left">
+                                        <p class="image is-64x64">
+                                            <img src="/static/2016-theme/img/brain.png">
+                                        </p>
+                                    </figure>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p>
+                                                <strong>Password Recovery</strong>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="column is-one-third">
+                            <div class="box">
+                                <article class="media">
+                                    <figure class="media-left">
+                                        <p class="image is-64x64">
+                                            <img src="/static/2016-theme/img/fork.png">
+                                        </p>
+                                    </figure>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p>
+                                                <strong>Revision Control / Rollback</strong>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a id="sdk" name="sdk"></a>
+
+    <section class="hero is-dark divider">
+        <div class="hero-body">
+            <div class="container parallax-divider" style="">
+                Developer SDK
+            </div>
+        </div>
+    </section>
+
+    <section class="hero is-large">
+        <div class="container" style="padding: 10px">
+            <div>
+                <div class="content">
+                    <span class="content-wrapper">
+                        <h2>Use Case</h2>
+                        Utilize the Airbitz SDK to secure your blockchain application in just a few lines of code.
+                        Users create an account and login to your app with an easy and familiar username and password. Current Airbitz Wallet users can simply scan a barcode.
+
+                        <h2>Easy NPM install</h2>
+
+                        <pre><code>npm install airbitz-core-js-ui --save</code></pre>
+
+                        <h2>Initialize the library</h2>
+
+                        <pre><code>var abcui = require('airbitz-core-js-ui')
+var abcUiContext = abcui.makeABCUIContext({
+    'apiKey': 'api-key-here',
+    'accountType': 'account:repo:com.mydomain.myapp',
+    'bundlePath': '/path-to-abcui/',
+    'vendorName': 'My Awesome Project',
+    'vendorImageUrl': 'https://mydomain.com/mylogo.jpg'
+});</code></pre>
+
+
+                        <h2>Open an overlay login window and get back a master private key once the user authenticates</h2>
+
+                        <pre><code>abcUiContext.openLoginWindow(function( error, account ) {
+  privateKey = account.repoInfo.dataKey.toString( 'base64' ) <br>});</code></pre>
+
+                        <center>
+                            <img src="/static/2016-theme/img/airbitz-login.png" width="700px" style="margin: 0px auto;">
+                        </center>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero is-dark divider">
+        <div class="hero-body">
+            <div class="container parallax-divider" style="">
+                Try Airbitz Today
+            </div>
+        </div>
+    </section>
+
+    <section id="github">
+        <div class="container has-text-centered github" style="height: auto; padding: 33px;">
+            <div class="content">
+                <h2>
+                    Developers, check out our open source SDKs on Github:
+                </h2>
+            </div>
+            <center>
+                <a class="button is-outlined" href="https://github.com/Airbitz/airbitz-core-js-ui" style="border-color:#6c95cc; color:#6c95cc">
+                    <span class="fa fa-github">&nbsp;</span>Javascript
+                </a>
+
+                <a class="button is-outlined" href="https://github.com/Airbitz/airbitz-core-objc" style="border-color:#6c95cc; color:#6c95cc">
+                    <span class="fa fa-github">&nbsp;</span>ObjC Mac/iOS
+                </a>
+
+                <a class="button is-outlined" href="https://github.com/Airbitz/airbitz-core-java" style="border-color:#6c95cc; color:#6c95cc">
+                    <span class="fa fa-github">&nbsp;</span>Java / Android
+                </a>
+            </center>
+            <br>
+            <div class="content" style="margin-bottom: 10px">
+                <a class="button is-outlined" href="/developer-api-library/" style="border-color:#6c95cc; color:#6c95cc">
+                    <span class="">&nbsp;</span>Airbitz Architecture Overview
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="wallet-screenshot" class="hero is-fullheight">
+        <div>
+            <div class="container">
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content has-text-centered">
+                            <h1 class="title light-text-overlay">
+                                See Edge Security in Action
+                            </h1>
+                            <h2 class="subtitle">
+                                <a href="/bitcoin-wallet" class="button is-outlined">
+                                    <span class="fa fa-btc" aria-hidden="true" style="font-size:14px;"></span>&nbsp;
+                                    Airbitz Mobile Wallet
+                                </a>
+                            </h2>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <a name="press"></a>
+    <section id="press">
+        <div class="container has-text-centered github" style="height: auto; padding: 33px;">
+            <div class="content">
+                <h2>
+                    Press
+                </h2>
+                As seen in...
+            </div>
+
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-3">
+                        <a href="http://www.ibtimes.co.uk/ethereum-prediction-market-augur-teams-blockchain-security-experts-airbitz-1563842">
+                        <img src="/static/2016-theme/img/ibtimes-192x192.png" width="96px" height="96px">
+                        </a>
+                    </div>
+                    <div class="column is-3">
+                        <a href="http://www.examiner.com/article/venture-capital-arrives-to-airbitz-bitcoin-walllet">
+                        <img src="/static/2016-theme/img/Examinercom-Logo-Font.jpg" width="192px" height="96px"></p>
+                        </a>
+                    </div>
+                    <div class="column is-3">
+                        <a href="http://www.marketwatch.com/story/block26-leads-seed-round-in-bitcoin-wallet-platform-airbitz-with-450000-investment-2015-07-10">
+                        <img src="/static/2016-theme/img/market-watch-wsj-web-logo.png" width="192px" height="96px"></p>
+                        </a>
+                    </div>
+                    <div class="column is-3">
+                        <a href="http://www.coindesk.com/vc-firm-block26-makes-first-bitcoin-bet-on-airbitz-wallet/">
+                        <img src="/static/2016-theme/img/coindesk.png" width="192px" height="96px"></p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-3">
+                        <a href="http://cointelegraph.com/news/113739/airbitz-invents-first-one-touch-2-factor-authentication-for-mobile-wallet">
+                        <img src="/static/2016-theme/img/cointelegraph.png" width="192px" height="96px"></p>
+                        </a>
+                    </div>
+                    <div class="column is-3">
+                        <a href="https://bitcoinmagazine.com/articles/airbitz-enables-ble-driven-wireless-payments-iphone-android-1424407464">
+                        <img src="/static/2016-theme/img/bitcoin_magazine.png" width="192px" height="96px"></p>
+                        </a>
+                    </div>
+                    <div class="column is-3">
+                        <a href="https://news.bitcoin.com/airbitz-bitcoin-third-apps-plugin-api/">
+                            <img src="/static/2016-theme/img/bitcoin-com.png" width="192px" height="96px"></p>
+                        </a>
+                    </div>
+                    <div class="column is-3">
+                        <a href="http://bitcoinist.net/airbitz-password-recovery/">
+                            <img src="/static/2016-theme/img/bitcoinist.png" width="192px" height="96px"></p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+
+    <!--Footer Styles-->
+
+
+<style>
+    /* #Footer */
+    #footer {
+        background: #0e0e0e;
+        border-top: 4px solid #0e0e0e;
+        /*font-size: 0.9em;*/
+        margin-top: 0px;
+        padding: 40px 0 0;
+        position: relative;
+        clear: both;
+        font-family: "Source Sans Pro", sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+
     }
-    if(bowser.ios) {
-      window.location.href = 'https://itunes.apple.com/us/app/airbitz/id843536046'
+
+    #footer p {
+        margin: 0px;
     }
-  </script>
-{% endblock javascript_headers %}
 
-{% block title %}Airbitz Bitcoin Mobile App {% endblock %}
+    #footer .container .row > div {
+        margin-bottom: 25px;
+    }
 
-{% block search %}{% endblock %}
+    #footer .container input:focus {
+        box-shadow: none;
+    }
 
-{% block main_content %}
+    #footer a:hover {
+        color: #CCC;
+    }
 
-  <div class="app-store-links row">
-    <h1 class="text-center">Download Airbitz Bitcoin Wallet and Directory</h1>
-    <div class="col-sm-3">&nbsp;</div>
-    <div class="col-sm-6 text-center">
-      <a href="https://itunes.apple.com/us/app/airbitz/id843536046">
-        <img class="app-store" src="https://airbitz.co/static/img/available-on-apple-app-store.png" alt="Airbitz on iOS"></a>
-      <a href="https://play.google.com/store/apps/details?id=com.airbitz">
-        <img class="app-store" src="https://airbitz.co/static/img/available-on-android.png" alt="Airbitz on Android"></a>
+    #footer h1, #footer h2, #footer h3, #footer h4, #footer a {
+        color: #FFF !important;
+    }
+
+    #footer h4 {
+        font-size: 1.8em;
+        font-weight: 200;
+    }
+
+    #footer h5 {
+        color: #CCC !important;
+    }
+
+    #footer ul.nav-list > li a {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        line-height: 20px;
+        padding-bottom: 11px;
+    }
+
+    #footer ul.nav-list > li:last-child a {
+        border-bottom: 0;
+    }
+
+    #footer ul.nav-list > li a:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    #footer ul.list.icons li {
+        margin-bottom: 5px;
+    }
+
+    #footer form {
+        filter: alpha(opacity=85);
+        opacity: 0.85;
+    }
+
+    #footer form label.error {
+        line-height: 16px;
+        margin: 5px 0 -5px;
+        display: block;
+        clear: both;
+    }
+
+    #footer form .alert {
+        padding: 6px;
+        text-align: center;
+    }
+
+    #footer .footer-ribbon {
+        background: #999;
+        position: absolute;
+        margin: -90px 0 0 14px;
+        padding: 10px 20px 6px 20px;
+    }
+
+    #footer .footer-ribbon:before {
+        border-right: 10px solid #646464;
+        border-top: 16px solid transparent;
+        content: "";
+        display: block;
+        height: 0;
+        left: -10px;
+        position: absolute;
+        top: 0;
+        width: 7px;
+    }
+
+    #footer .footer-ribbon span {
+        color: #FFF;
+        font-size: 1.6em;
+        font-family: "Shadows Into Light", cursive;
+    }
+
+    #footer .newsletter form {
+        width: 100%;
+        max-width: 262px;
+    }
+
+    #footer .newsletter form input.form-control {
+        height: 34px;
+        padding: 6px 12px;
+    }
+
+    #footer .alert a {
+        color: #222 !important;
+    }
+
+    #footer .alert a:hover {
+        color: #666 !important;
+    }
+
+    #footer .twitter .fa {
+        clear: both;
+        font-size: 1.5em;
+        position: relative;
+        top: 3px;
+    }
+
+    #footer .twitter .meta {
+        color: #999;
+        display: block;
+        font-size: 0.9em;
+        padding-top: 3px;
+    }
+
+    #footer .twitter ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    #footer .twitter ul li {
+        padding-bottom: 20px;
+    }
+
+    #footer .twitter ul li:last-child {
+        padding-bottom: 0;
+    }
+
+    #footer .twitter-account {
+        color: #FFF;
+        display: block;
+        font-size: 0.9em;
+        margin: -15px 0 5px;
+        filter: alpha(opacity=55);
+        opacity: 0.55;
+    }
+
+    #footer .twitter-account:hover {
+        filter: alpha(opacity=100);
+        opacity: 1;
+    }
+
+    #footer .contact {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    #footer .contact p {
+        font-size: 16px;
+        font-weight: 600;
+    }
+    #footer .contact i {
+        display: block;
+        float: left;
+        margin-top: 3px ;
+        margin-right: 12px;
+        margin-left: 0;
+        /*margin-bottom: 10px;*/
+        /*margin: 7px 8px 10px 0;*/
+        position: relative;
+        text-align: center;
+        top: -2px;
+        width: 16px;
+    }
+
+    /*#footer .contact i.fa-envelope {*/
+    /*font-size: 1em;*/
+    /*top: 0;*/
+    /*}*/
+
+    #footer .contact p {
+        margin-bottom: 10px;
+    }
+
+    #footer .logo {
+        display: block;
+    }
+
+    /*#footer .logo.mb-xl {*/
+    /*margin-bottom: 12px;*/
+    /*}*/
+
+    #footer .footer-copyright {
+        background: #060606;
+        border-top: 4px solid #060606;
+        margin-top: 40px;
+        padding: 30px 0 10px;
+    }
+
+    #footer .footer-copyright nav {
+        float: right;
+    }
+
+    #footer .footer-copyright nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    #footer .footer-copyright nav ul li {
+        border-left: 1px solid #505050;
+        display: inline-block;
+        line-height: 12px;
+        margin: 0;
+        padding: 0 8px;
+    }
+
+    #footer .footer-copyright nav ul li:first-child {
+        border: medium none;
+        padding-left: 0;
+    }
+
+    #footer .footer-copyright p {
+        color: #555;
+        margin: 0;
+        padding: 0;
+    }
+
+    #footer .phone {
+        color: #FFF;
+        font-size: 26px;
+        font-weight: bold;
+        display: block;
+        padding-bottom: 15px;
+        margin-top: -5px;
+    }
+
+    #footer .narrow-phone {
+        text-align: right;
+        margin: -2px 0 0 0;
+    }
+
+    #footer .narrow-phone .phone {
+        font-size: 16px;
+        padding-bottom: 0;
+        margin-top: -13px;
+    }
+
+    /*#footer .recent-work {*/
+    /*list-style: none;*/
+    /*padding: 0;*/
+    /*margin: 0;*/
+    /*}*/
+
+    /*#footer .recent-work li {*/
+    /*float: left;*/
+    /*width: 30%;*/
+    /*margin: 10px 3% 0 0;*/
+    /*}*/
+
+    /*#footer .recent-work img {*/
+    /*border: 0;*/
+    /*width: 100%;*/
+    /*filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");*/
+    /*filter: gray;*/
+    /*-webkit-filter: grayscale(100%);*/
+    /*}*/
+
+    /*#footer .recent-work .img-thumbnail-hover-icon {*/
+    /*border: 0;*/
+    /*}*/
+
+    /*#footer .recent-work .img-thumbnail-hover-icon:after {*/
+    /*font-size: 22px;*/
+    /*margin-left: -2px;*/
+    /*}*/
+
+    /*#footer .view-more-recent-work {*/
+    /*padding: 12px;*/
+    /*}*/
+
+    #footer.short {
+        padding-top: 50px;
+    }
+
+    #footer.short .footer-copyright {
+        background: transparent;
+        border: 0;
+        padding-top: 0;
+        margin-top: 0;
+    }
+
+    #footer.light {
+        padding-top: 60px;
+        background: #FFF;
+        border-top: 1px solid #DDD;
+    }
+
+    #footer.light .footer-ribbon {
+        margin-top: -76px;
+        margin-left: 14px;
+    }
+
+    #footer.light .footer-copyright {
+        margin-top: 15px;
+        background: #FFF;
+        border-top: 1px solid #DDD;
+    }
+
+    #footer.light .footer-copyright p {
+        color: #777;
+    }
+
+    #footer.light .phone,
+    #footer.light .twitter-account {
+        color: #777 !important;
+    }
+
+    #footer.light ul.nav-pills > li.active > a {
+        color: #FFF !important;
+    }
+
+    #footer.narrow {
+        padding-top: 30px;
+    }
+
+    #footer.narrow .footer-copyright {
+        margin-top: 0;
+    }
+
+    #footer.narrow .nav > li > a {
+        padding: 5px 12px;
+    }
+
+    #footer.color {
+        color: #FFF;
+    }
+
+    #footer.color p {
+        color: #FFF;
+    }
+
+    #footer.color .footer-copyright nav ul li {
+        border-left-color: #FFF;
+    }
+
+    /* Responsive */
+    /*@media (max-width: 991px) {*/
+    /*#footer .phone {*/
+    /*font-size: 20px;*/
+    /*}*/
+    /*}*/
+
+    /*@media (max-width: 767px) {*/
+    /*!* Footer *!*/
+    /*#footer .phone {*/
+    /*font-size: 20px;*/
+    /*}*/
+    /*}*/
+
+    #footer {
+        background-color: #21262d;
+        border-color: #21262d;
+        color: #777777;
+    }
+
+    footer#footer .heading-primary {
+        color: #697D8F !important;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    footer#footer .support-details {
+        padding-bottom: 20px;
+        border-bottom: 1px solid #385667;
+        margin-bottom: 20px; }
+
+    #footer {
+        background: #002E48;
+        border: none; }
+    #footer p {
+        color: #ddd; }
+    #footer .footer-copyright {
+        background: #002E48;
+        border: none;
+        /*font-size: 14px; */
+    }
+    #footer .footer-copyright p {
+        color: #ddd; }
+    #footer label.valid {
+        color: #80c342;
+        text-indent: 0; }
+    #footer label.error {
+        color: #FF1C1C; }
+    #footer i.social-icons {
+        margin-right: 10px;
+    }
+    #footer li.social-follow {
+        display: inline;
+    }
+
+</style>
+
+<footer id="footer">
+    <div class="container" style="padding-left: 20px; padding-right: 20px; max-width: none">
+        <div class="columns">
+            <!--<div class="col-md-5">-->
+            <!--<h4 class="heading-primary">Latest Tweets</h4>-->
+            <!--<a class="twitter-timeline" href="https://twitter.com/Airbitz" data-widget-id="643434328853114881">Tweets by @Airbitz</a>-->
+            <!--<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>-->
+            <!--</div>-->
+
+            <div class="column is-6 is-full-mobile">
+                <div class="support-details">
+                    <h4 class="heading-primary">Help & Support</h4>
+                    <ul class="contact">
+                        <li><p><i class="fa fa-envelope"></i> <a href="mailto:support@airbitz.co">support@airbitz.co</a></p></li>
+                        <li><p><i class="fa fa-phone"></i> +1-844-928-9744</p></li>
+                        <li><p><i class="fa fa-paper-plane"></i> <a href="https://telegram.airbitz.co">Telegram Chat</a></p></li>
+                        <li><p><i class="fa fa-slack"></i> <a href="https://slack.airbitz.co">Slack</a></p></li>
+                        <li><p><i class="fa fa-whatsapp"></i> <a href="https://whatsapp.airbitz.co">WhatsApp</a></p></li>
+                    </ul>
+                </div>
+                <div class="support-details">
+                    <h4 class="heading-primary" style="margin-top: 20px;">Contact Us</h4>
+                    <ul class="contact">
+                        <li><p><i class="fa fa-envelope"></i> <a href="mailto:info@airbitz.co">info@airbitz.co</a></p></li>
+                        <li><p><i class="fa fa-map-marker"></i> <a href="https://www.google.com/maps/place/311+4th+Ave,+San+Diego,+CA+92101/@32.7086454,-117.162943,17z/data=!3m1!4b1!4m2!3m1!1s0x80d9535a1446d07f:0x77b9114c1ddb2011">311 4th Ave #413, San Diego CA 92101, USA</a></p></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column is-6 is-full-mobile">
+                <div class="newsletter">
+                    <h4 class="heading-primary">Newsletter</h4>
+                    <!--<form id="email-signup-form" class="form">-->
+                    <!--<label id="inputEmailSignupMessage" for="inputEmailSignup" class="control-label">Email Newsletter Signup</label>-->
+                    <!--<div class="input-group" style="margin-top: 5px;">-->
+                    <!--&lt;!&ndash;<input class="email-signup form-control" placeholder="Email Address" id="inputEmailSignup" type="email">&ndash;&gt;-->
+                    <!--<input class="email-signup input" placeholder="Email Address" id="inputEmailSignup" type="email"><button class="button is-primary" type="submit">Go!</button>-->
+                    <!--<input type="hidden" name="source" value="airbitz-footer">-->
+                    <!--&lt;!&ndash;<span class="input-group-btn">&ndash;&gt;-->
+                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                    <!--</div>-->
+                    <!--</form>-->
+
+                    <label id="inputEmailSignupMessage" class="control-label">Email Newsletter Signup</label>
+                    <!-- Begin MailChimp Signup Form -->
+                    <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+                    <style type="text/css">
+                        /*#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif;  width:300px;}*/
+                        /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+                           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+                    </style>
+                    <div id="mc_embed_signup">
+                        <form action="//airbitz.us3.list-manage.com/subscribe/post?u=af7e442f9bcaaff857bb5da03&amp;id=a416fec934" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                            <div id="mc_embed_signup_scroll">
+
+                                <input class="input" type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+                                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_af7e442f9bcaaff857bb5da03_a416fec934" tabindex="-1" value=""></div>
+                                <div class="clear"><input type="submit" value="Go!" name="subscribe" id="mc-embedded-subscribe" class="is-primary button"></div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--End mc_embed_signup-->
+
+
+                    <p style="margin-bottom: 10px;">Keep up on our always evolving product features and technology. Enter your e-mail and subscribe to our newsletter.</p>
+
+                    <div class="is-hidden" id="newsletterSuccess">
+                        <strong>Success!</strong> You've been added to our email list.
+                    </div>
+
+                </div>
+
+                <h4 class="heading-primary mt-xlg">Follow Us</h4>
+                <div class="mb-xlg">
+                    <ul class="">
+                        <!--<li class="facebook"><a href="https://www.facebook.com/airbitz" target="_blank" data-placement="bottom" data-tooltip title="Facebook">Facebook</a></li>-->
+                        <li class="social-follow facebook"><a href="https://www.facebook.com/airbitz" target="_blank" data-placement="bottom" data-tooltip title="Facebook"><i class="social-icons fa fa-facebook"></i></a></li>
+                        <li class="social-follow twitter"><a href="https://twitter.com/airbitz" target="_blank" data-placement="bottom" data-tooltip title="Twitter"><i class="social-icons fa fa-twitter"></i></a></li>
+                        <li class="social-follow linkedin"><a href="https://www.linkedin.com/company/airbitz" target="_blank" data-placement="bottom" data-tooltip title="Linkedin"><i class="social-icons fa fa-linkedin"></i></a></li>
+                        <li class="social-follow googleplus"><a href="https://plus.google.com/118173667510609425617" target="_blank" data-placement="bottom" data-tooltip title="Google +"><i class="social-icons fa fa-google"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-sm-3">&nbsp;</div>
-  </div>
-
-  <div class="promo-video row">
-    <div class="col-sm-12 text-center embed-responsive embed-responsive-16by9">
-      <iframe src="//www.youtube.com/embed/E3Z7-ya-h5Y" frameborder="0" allowfullscreen></iframe>
+    <div class="footer-copyright" style="padding-left: 20px; padding-right: 20px; max-width: none">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-1 is-full-tablet">
+                        <img alt="Airbitz Edge Security Platform" class="img-responsive" src="/static/airbitz-theme/img-custom/airbitz-logo-mono-white-100.png">
+                </div>
+                <div class="column is-3 is-full-tablet">
+                    <p>© Copyright 2016. All Rights Reserved.</p>
+                </div>
+                <div class="column is-8 is-full-tablet">
+                    <nav id="sub-menu">
+                        <ul>
+                            <li><a href="/go/faq/">Mobile Wallet FAQ</a></li>
+                            <li><a href="/bitcoin-wallet/">Mobile Wallet</a></li>
+                            <li><a href="/developer-api-library/">Edge Security Platform</a></li>
+                            <li><a href="https://www.weusecoins.com">What is Bitcoin</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+    <div style="height: 30px">
+    </div>
+</footer>
 
-{% endblock main_content %}
+
+
+
+
+
+
+<script type="text/javascript">
+
+    $(window).on('scroll', function() {
+        var scroll = $(window).scrollTop();
+        var elpos = $('#single-signon-section').offset().top
+
+        if (scroll > (elpos - 100)) {
+            $('#login-video')[0].play()
+        }
+    });
+
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        $('#login-video').hide()
+        $('#login-video-img').show()
+    } else {
+        $('#login-video').show()
+        $('#login-video-img').hide()
+    }
+
+    var tpj = jQuery;
+
+    var revapi12;
+    tpj( document ).ready( function () {
+        if ( tpj( "#rev_slider_12_1" ).revolution == undefined ) {
+            revslider_showDoubleJqueryError( "#rev_slider_12_1" );
+        } else {
+            revapi12 = tpj( "#rev_slider_12_1" ).show().revolution( {
+                                                                        sliderType :                "standard",
+                                                                        jsFileLocation :            "../revslider-standalone/revslider/public/assets/js/",
+                                                                        sliderLayout :              "fullscreen",
+                                                                        dottedOverlay :             "none",
+                                                                        delay :                     9000,
+                                                                        navigation :                {
+                                                                            keyboardNavigation :    "off",
+                                                                            keyboard_direction :    "horizontal",
+                                                                            mouseScrollNavigation : "off",
+                                                                            mouseScrollReverse :    "default",
+                                                                            onHoverStop :           "off",
+                                                                            touch :                 {
+                                                                                touchenabled :        "on",
+                                                                                swipe_threshold :     75,
+                                                                                swipe_min_touches :   1,
+                                                                                swipe_direction :     "horizontal",
+                                                                                drag_block_vertical : false
+                                                                            }
+                                                                        },
+                                                                        responsiveLevels :          [ 1240, 1024, 778,
+                                                                                                      480 ],
+                                                                        visibilityLevels :          [ 1240, 1024, 778,
+                                                                                                      480 ],
+                                                                        gridwidth :                 [ 1240, 1024, 778,
+                                                                                                      480 ],
+                                                                        gridheight :                [ 900, 768, 960,
+                                                                                                      720 ],
+                                                                        lazyType :                  "single",
+                                                                        parallax :                  {
+                                                                            type :   "mouse",
+                                                                            origo :  "slidercenter",
+                                                                            speed :  300,
+                                                                            levels : [ 2, 4, 6, 8, 10, 12, 14, 16, 18,
+                                                                                       20, 22, 24, 49, 50, 51, 55 ],
+                                                                            type :   "mouse",
+                                                                        },
+                                                                        shadow :                    0,
+                                                                        spinner :                   "spinner2",
+                                                                        stopLoop :                  "on",
+                                                                        stopAfterLoops :            0,
+                                                                        stopAtSlide :               1,
+                                                                        shuffle :                   "off",
+                                                                        autoHeight :                "off",
+                                                                        fullScreenAutoWidth :       "off",
+                                                                        fullScreenAlignForce :      "off",
+                                                                        fullScreenOffsetContainer : "",
+                                                                        fullScreenOffset :          "",
+                                                                        disableProgressBar :        "on",
+                                                                        hideThumbsOnMobile :        "off",
+                                                                        hideSliderAtLimit :         0,
+                                                                        hideCaptionAtLimit :        0,
+                                                                        hideAllCaptionAtLilmit :    0,
+                                                                        debugMode :                 false,
+                                                                        fallbacks :                 {
+                                                                            simplifyAll :            "off",
+                                                                            nextSlideOnWindowFocus : "off",
+                                                                            disableFocusListener :   false,
+                                                                        }
+                                                                    } );
+        }
+    } );
+    /*ready*/
+    var clicked,
+        hasArrow,
+        thread1;
+
+    clicked = false;
+    $( '#slide-19-layer-1' ).hover(
+            function ( el ) {
+                hasArrow = true;
+                console.log( "[heavy breathing]" );
+            },
+
+            function ( el ) {
+                hasArrow                                                = false;
+                document.querySelector( '#slide-19-layer-4' ).innerHTML = '';
+            }
+    );
+
+    window.setInterval( function ( el ) {
+        // hook to capture the click event
+        clicked = true;
+        window.setTimeout( function ( x ) {
+            $( '#slide-20-layer-3' ).hide().delay( 350 ).fadeIn( 1000 ).removeClass( 'transparent' );
+            $( "#slide-20-layer-2" ).delay( 3000 ).show( 1000 ).animate( { 'left' : "350px" }, "fast" );
+            $( '.slide2-caption1' ).delay( 1000 ).show( 1000 );
+            $( '.slide2-caption2' ).delay( 2000 ).show( 1000 );
+            $( '.slide2-caption3' ).delay( 3000 ).show( 1000 );
+
+        }, 1500 );
+    } );
+    $.fn.mathSpace = function () {
+        return $( this ).each( function () {
+            $( this ).children( 'span' ).each( function () {
+                var el   = $( this );
+                var text = el.text();
+                el.text(
+                        text.split( ' ' ).join( '\u205f' )
+                );
+            } );
+        } );
+    }
+
+    $( '.slide-title' ).mathSpace();
+    $( '.slide-caption' ).mathSpace();
+
+    //            $('.slide-caption').hide();
+    $( '.slide2-caption1' ).hide();
+    $( '.slide2-caption2' ).hide();
+    $( '.slide2-caption3' ).hide();
+
+    window.setTimeout( function ( x ) {
+        $( '#slide-19-layer-1' ).click();
+        $( "#rev_slider_12_1_wrapper" ).css( { "background" : "/static/2016-theme/img/mac-desk-5HD.png" } )
+    }, 5000 );
+    //
+    //    $('#nav').hide();
+    //
+    //    $('#nav-toggle').click(function() {
+    //        console.log("click");
+    //        $('#nav').show();
+    //    });
+    /**
+     * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
+     *
+     * @version 1.0.0
+     * @codingstandard ftlabs-jsv2
+     * @copyright The Financial Times Limited [All Rights Reserved]
+     * @license MIT License (see LICENSE.txt)
+     */
+    function FastClick ( t ) {
+        "use strict";
+        function e ( t, e ) {return function () {return t.apply( e, arguments )}}
+
+        var i;
+        this.trackingClick = !1, this.trackingClickStart = 0, this.targetElement = null, this.touchStartX =
+                0, this.touchStartY = 0, this.lastTouchIdentifier = 0, this.touchBoundary = 10, this.layer =
+                t, FastClick.notNeeded( t ) || (deviceIsAndroid &&
+                                                (t.addEventListener( "mouseover", e( this.onMouse, this ), !0 ), t.addEventListener( "mousedown", e( this.onMouse, this ), !0 ), t.addEventListener( "mouseup", e( this.onMouse, this ), !0 )), t.addEventListener( "click", e( this.onClick, this ), !0 ), t.addEventListener( "touchstart", e( this.onTouchStart, this ), !1 ), t.addEventListener( "touchmove", e( this.onTouchMove, this ), !1 ), t.addEventListener( "touchend", e( this.onTouchEnd, this ), !1 ), t.addEventListener( "touchcancel", e( this.onTouchCancel, this ), !1 ), Event.prototype.stopImmediatePropagation ||
+                   (t.removeEventListener = function ( e, i, n ) {
+                       var s = Node.prototype.removeEventListener;
+                       "click" === e ? s.call( t, e, i.hijacked || i, n ) : s.call( t, e, i, n )
+                   }, t.addEventListener = function ( e, i, n ) {
+                       var s = Node.prototype.addEventListener;
+                       "click" === e ?
+                       s.call( t, e, i.hijacked || (i.hijacked = function ( t ) {t.propagationStopped || i( t )}), n ) :
+                       s.call( t, e, i, n )
+                   }), "function" == typeof t.onclick &&
+                       (i = t.onclick, t.addEventListener( "click", function ( t ) {i( t )}, !1 ), t.onclick = null))
+    }
+    var deviceIsAndroid = navigator.userAgent.indexOf( "Android" ) >
+                          0, deviceIsIOS = /iP(ad|hone|od)/.test( navigator.userAgent ), deviceIsIOS4 = deviceIsIOS &&
+                                                                                                        /OS 4_\d(_\d)?/.test( navigator.userAgent ), deviceIsIOSWithBadTarget = deviceIsIOS &&
+                                                                                                                                                                                /OS ([6-9]|\d{2})_\d/.test( navigator.userAgent );
+    FastClick.prototype.needsClick = function ( t ) {
+        "use strict";
+        switch ( t.nodeName.toLowerCase() ) {
+            case"button":
+            case"select":
+            case"textarea":
+                if ( t.disabled )return !0;
+                break;
+            case"input":
+                if ( deviceIsIOS && "file" === t.type || t.disabled )return !0;
+                break;
+            case"label":
+            case"video":
+                return !0
+        }
+        return /\bneedsclick\b/.test( t.className )
+    }, FastClick.prototype.needsFocus = function ( t ) {
+        "use strict";
+        switch ( t.nodeName.toLowerCase() ) {
+            case"textarea":
+                return !0;
+            case"select":
+                return !deviceIsAndroid;
+            case"input":
+                switch ( t.type ) {
+                    case"button":
+                    case"checkbox":
+                    case"file":
+                    case"image":
+                    case"radio":
+                    case"submit":
+                        return !1
+                }
+                return !t.disabled && !t.readOnly;
+            default:
+                return /\bneedsfocus\b/.test( t.className )
+        }
+    }, FastClick.prototype.sendClick = function ( t, e ) {
+        "use strict";
+        var i, n;
+        document.activeElement && document.activeElement !== t && document.activeElement.blur(), n =
+                e.changedTouches[ 0 ], i =
+                document.createEvent( "MouseEvents" ), i.initMouseEvent( this.determineEventType( t ), !0, !0, window, 1, n.screenX, n.screenY, n.clientX, n.clientY, !1, !1, !1, !1, 0, null ), i.forwardedTouchEvent =
+                !0, t.dispatchEvent( i )
+    }, FastClick.prototype.determineEventType = function ( t ) {
+        "use strict";
+        return deviceIsAndroid && "select" === t.tagName.toLowerCase() ? "mousedown" : "click"
+    }, FastClick.prototype.focus = function ( t ) {
+        "use strict";
+        var e;
+        deviceIsIOS && t.setSelectionRange && 0 !== t.type.indexOf( "date" ) && "time" !== t.type ?
+        (e = t.value.length, t.setSelectionRange( e, e )) : t.focus()
+    }, FastClick.prototype.updateScrollParent = function ( t ) {
+        "use strict";
+        var e, i;
+        if ( e = t.fastClickScrollParent, !e || !e.contains( t ) ) {
+            i = t;
+            do {
+                if ( i.scrollHeight > i.offsetHeight ) {
+                    e = i, t.fastClickScrollParent = i;
+                    break
+                }
+                i = i.parentElement
+            } while ( i )
+        }
+        e && (e.fastClickLastScrollTop = e.scrollTop)
+    }, FastClick.prototype.getTargetElementFromEventTarget = function ( t ) {
+        "use strict";
+        return t.nodeType === Node.TEXT_NODE ? t.parentNode : t
+    }, FastClick.prototype.onTouchStart = function ( t ) {
+        "use strict";
+        var e, i, n;
+        if ( t.targetTouches.length > 1 )return !0;
+        if ( e = this.getTargetElementFromEventTarget( t.target ), i = t.targetTouches[ 0 ], deviceIsIOS ) {
+            if ( n = window.getSelection(), n.rangeCount && !n.isCollapsed )return !0;
+            if ( !deviceIsIOS4 ) {
+                if ( i.identifier === this.lastTouchIdentifier )return t.preventDefault(), !1;
+                this.lastTouchIdentifier = i.identifier, this.updateScrollParent( e )
+            }
+        }
+        return this.trackingClick = !0, this.trackingClickStart = t.timeStamp, this.targetElement =
+                e, this.touchStartX = i.pageX, this.touchStartY = i.pageY, t.timeStamp - this.lastClickTime < 200 &&
+                                                                           t.preventDefault(), !0
+    }, FastClick.prototype.touchHasMoved = function ( t ) {
+        "use strict";
+        var e = t.changedTouches[ 0 ], i = this.touchBoundary;
+        return Math.abs( e.pageX - this.touchStartX ) > i || Math.abs( e.pageY - this.touchStartY ) > i ? !0 : !1
+    }, FastClick.prototype.onTouchMove = function ( t ) {
+        "use strict";
+        return this.trackingClick ?
+               ((this.targetElement !== this.getTargetElementFromEventTarget( t.target ) || this.touchHasMoved( t )) &&
+                (this.trackingClick = !1, this.targetElement = null), !0) : !0
+    }, FastClick.prototype.findControl = function ( t ) {
+        "use strict";
+        return void 0 !== t.control ? t.control : t.htmlFor ? document.getElementById( t.htmlFor ) :
+                                                  t.querySelector( "button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea" )
+    }, FastClick.prototype.onTouchEnd = function ( t ) {
+        "use strict";
+        var e, i, n, s, o, r = this.targetElement;
+        if ( !this.trackingClick )return !0;
+        if ( t.timeStamp - this.lastClickTime < 200 )return this.cancelNextClick = !0, !0;
+        if ( this.cancelNextClick = !1, this.lastClickTime = t.timeStamp, i =
+                        this.trackingClickStart, this.trackingClick = !1, this.trackingClickStart =
+                        0, deviceIsIOSWithBadTarget && (o = t.changedTouches[ 0 ], r =
+                        document.elementFromPoint( o.pageX - window.pageXOffset, o.pageY - window.pageYOffset ) ||
+                        r, r.fastClickScrollParent = this.targetElement.fastClickScrollParent), n =
+                        r.tagName.toLowerCase(), "label" === n ) {
+            if ( e = this.findControl( r ) ) {
+                if ( this.focus( r ), deviceIsAndroid )return !1;
+                r = e
+            }
+        } else if ( this.needsFocus( r ) )return t.timeStamp - i > 100 ||
+                                                 deviceIsIOS && window.top !== window && "input" === n ?
+                                                 (this.targetElement = null, !1) :
+                                                 (this.focus( r ), this.sendClick( r, t ), deviceIsIOS4 &&
+                                                                                           "select" === n ||
+                                                                                           (this.targetElement =
+                                                                                                   null, t.preventDefault()), !1);
+        return deviceIsIOS && !deviceIsIOS4 &&
+               (s = r.fastClickScrollParent, s && s.fastClickLastScrollTop !== s.scrollTop) ? !0 :
+               (this.needsClick( r ) || (t.preventDefault(), this.sendClick( r, t )), !1)
+    }, FastClick.prototype.onTouchCancel = function () {
+        "use strict";
+        this.trackingClick = !1, this.targetElement = null
+    }, FastClick.prototype.onMouse = function ( t ) {
+        "use strict";
+        return this.targetElement ? t.forwardedTouchEvent ? !0 :
+                                    t.cancelable && (!this.needsClick( this.targetElement ) || this.cancelNextClick) ?
+                                    (t.stopImmediatePropagation ? t.stopImmediatePropagation() :
+                                     t.propagationStopped = !0, t.stopPropagation(), t.preventDefault(), !1) : !0 : !0
+    }, FastClick.prototype.onClick = function ( t ) {
+        "use strict";
+        var e;
+        return this.trackingClick ? (this.targetElement = null, this.trackingClick = !1, !0) :
+               "submit" === t.target.type && 0 === t.detail ? !0 :
+               (e = this.onMouse( t ), e || (this.targetElement = null), e)
+    }, FastClick.prototype.destroy = function () {
+        "use strict";
+        var t = this.layer;
+        deviceIsAndroid &&
+        (t.removeEventListener( "mouseover", this.onMouse, !0 ), t.removeEventListener( "mousedown", this.onMouse, !0 ), t.removeEventListener( "mouseup", this.onMouse, !0 )), t.removeEventListener( "click", this.onClick, !0 ), t.removeEventListener( "touchstart", this.onTouchStart, !1 ), t.removeEventListener( "touchmove", this.onTouchMove, !1 ), t.removeEventListener( "touchend", this.onTouchEnd, !1 ), t.removeEventListener( "touchcancel", this.onTouchCancel, !1 )
+    }, FastClick.notNeeded = function ( t ) {
+        "use strict";
+        var e, i;
+        if ( "undefined" == typeof window.ontouchstart )return !0;
+        if ( i = +(/Chrome\/([0-9]+)/.exec( navigator.userAgent ) || [ , 0 ])[ 1 ] ) {
+            if ( !deviceIsAndroid )return !0;
+            if ( e = document.querySelector( "meta[name=viewport]" ) ) {
+                if ( -1 !== e.content.indexOf( "user-scalable=no" ) )return !0;
+                if ( i > 31 && window.innerWidth <= window.screen.width )return !0
+            }
+        }
+        return "none" === t.style.msTouchAction ? !0 : !1
+    }, FastClick.attach = function ( t ) {
+        "use strict";
+        return new FastClick( t )
+    }, "undefined" != typeof define && define.amd ? define( function () {
+        "use strict";
+        return FastClick
+    } ) : "undefined" != typeof module && module.exports ?
+          (module.exports = FastClick.attach, module.exports.FastClick = FastClick) : window.FastClick = FastClick;
+    window.smoothScroll = function ( e, t, n ) {
+        "use strict";
+        var a = {
+            speed :          500,
+            easing :         "easeInOutCubic",
+            updateURL :      !1,
+            callbackBefore : function () {},
+            callbackAfter :  function () {}
+        }, r  = function ( e, t ) {
+            for ( var n in t )e[ n ] = t[ n ];
+            return e
+        }, u  = function ( e, t ) {
+            return "easeInQuad" == e ? t * t : "easeOutQuad" == e ? t * (2 - t) : "easeInOutQuad" == e ?
+                                                                                  .5 > t ? 2 * t * t :
+                                                                                  -1 + (4 - 2 * t) * t :
+                                                                                  "easeInCubic" == e ? t * t * t :
+                                                                                  "easeOutCubic" == e ?
+                                                                                  --t * t * t + 1 :
+                                                                                  "easeInOutCubic" == e ?
+                                                                                  .5 > t ? 4 * t * t * t :
+                                                                                  (t - 1) * (2 * t - 2) * (2 * t - 2) +
+                                                                                  1 :
+                                                                                  "easeInQuart" == e ? t * t * t * t :
+                                                                                  "easeOutQuart" == e ?
+                                                                                  1 - --t * t * t * t :
+                                                                                  "easeInOutQuart" == e ?
+                                                                                  .5 > t ? 8 * t * t * t * t :
+                                                                                  1 - 8 * --t * t * t * t :
+                                                                                  "easeInQuint" == e ?
+                                                                                  t * t * t * t * t :
+                                                                                  "easeOutQuint" == e ?
+                                                                                  1 + --t * t * t * t * t :
+                                                                                  "easeInOutQuint" == e ?
+                                                                                  .5 > t ? 16 * t * t * t * t * t :
+                                                                                  1 + 16 * --t * t * t * t * t : t
+        }, i  = function ( e, t ) {
+            var n = 0;
+            if ( e.offsetParent )do n += e.offsetTop, e = e.offsetParent; while ( e );
+            return n -= t, n >= 0 ? n : 0
+        }, o  = function ( e ) {
+            if ( null === e || e === n )return {};
+            var t = {};
+            return e = e.split( ";" ), e.forEach( function ( e ) {
+                e = e.trim(), "" !== e && (e = e.split( ":" ), t[ e[ 0 ] ] = e[ 1 ].trim())
+            } ), t
+        }, c  = function ( e, t ) {
+            t !== !0 && "true" !== t || !history.pushState || history.pushState( { pos : e.id }, "", e )
+        }, s  = function ( n, s, l, f ) {
+            l = r( a, l || {} );
+            var d, p, h, v = o( n ? n.getAttribute( "data-options" ) : null ), b = v.speed || l.speed, O = v.easing ||
+                                                                                                           l.easing, g = v.updateURL ||
+                                                                                                                         l.updateURL, I = 55, y = e.pageYOffset, Q = i( t.querySelector( s ), I ), A = Q -
+                                                                                                                                                                                                       y, S = 0;
+            n && "A" === n.tagName && f && f.preventDefault(), c( s, g );
+            var m = function ( a, r, u ) {
+                var i = e.pageYOffset;
+                (a == r || i == r || e.innerHeight + i >= t.body.scrollHeight) &&
+                (clearInterval( u ), l.callbackAfter( n, s ))
+            }, k  = function () {
+                S += 16, p = S / b, p = p > 1 ? 1 : p, h =
+                        y + A * u( O, p ), e.scrollTo( 0, Math.floor( h ) ), m( h, Q, d )
+            }, w  = function () {l.callbackBefore( n, s ), d = setInterval( k, 16 )};
+            0 === e.pageYOffset && e.scrollTo( 0, 0 ), w()
+        }, l  = function ( n ) {
+            if ( "querySelector" in t && "addEventListener" in e && Array.prototype.forEach ) {
+                n     = r( a, n || {} );
+                var u = t.querySelectorAll( "[data-scroll]" );
+                Array.prototype.forEach.call( u, function ( e ) {e.addEventListener( "click", s.bind( null, e, e.getAttribute( "href" ), n ), !1 )} )
+            }
+        };
+        return {
+            init :          l,
+            animateScroll : s
+        }
+    }( window, document );
+    !function () {
+        "use strict";
+        if ( "querySelector" in document && "addEventListener" in window ) {
+            var e = function ( e, t, n ) {
+                for ( var o = 0; o < e.length; o++ )t.call( n, o, e[ o ] )
+            };
+            FastClick.attach( document.body ), smoothScroll.init();
+            var t = responsiveNav( ".nav-collapse", { closeOnNavClick : !0 } ), n = document.createElement( "div" );
+            n.className = "mask", document.body.appendChild( n ), null !== navigator.userAgent.match( /Android/i ) &&
+                                                                  (document.documentElement.className += " android");
+            var o, i = document.querySelector( ".nav-collapse ul" ), a = i.querySelectorAll( "a" ), c = function () {
+                o = [], e( a, function ( e ) {
+                    var t = a[ e ].getAttribute( "href" );
+                    if (t.startsWith('#')) {
+                        var t = t.replace( "#", "");
+                        o.push( document.getElementById( t ).offsetTop + 200 )
+                    }
+                } )
+            };
+            c(), window.addEventListener( "resize", function () {c()}, !1 );
+            var r = function ( t ) {
+                e( a, function ( e ) {
+                    a[ e ].parentNode.className = ""
+                } ), a[ t ].parentNode.className = "active"
+            }, u  = !1;
+            window.addEventListener( "scroll", function () {
+                var t = window.pageYOffset, n = document.body.offsetHeight, i = window.innerHeight;
+                u || e( o, function ( e, o ) {o > t && (t + 300 > o || t + i >= n) && r( e )} )
+            }, !1 ), n.addEventListener( "click", function ( e ) {e.preventDefault(), t.close()}, !1 );
+            var d = function () {setTimeout( function () {u = !1}, 500 )};
+            document.querySelector( ".logo" ).addEventListener( "click", function ( e ) {
+                e.preventDefault(), u = !0, r( 0 ), t.close(), history.pushState &&
+                                                               history.pushState( "", document.title, window.location.pathname ), d()
+            }, !1 ), e( a, function ( e ) {
+                a[ e ].addEventListener( "click", function ( t ) {
+                    var n = this.getAttribute( "href" )
+                    if (n.startsWith('#')) {
+                        t.preventDefault(), u = !0, r( e );
+                        n = n.replace( "#", "" ), o = document.getElementById( n );
+                        "home" !== n ? (o.removeAttribute( "id" ), location.hash = "#" + n, o.setAttribute( "id", n )) :
+                        history.pushState && history.pushState( "", document.title, window.location.pathname ), d()
+                    }
+                }, !1 )
+            } )
+        }
+    }();
+
+    </script>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-47697034-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+</body>
+</html>
