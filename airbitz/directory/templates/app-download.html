@@ -12,11 +12,11 @@
       $(document).ready(function() {
         if (navigator.userAgent.toLowerCase().includes("android")) {
           window.location.href = 'https://play.google.com/store/apps/details?id=com.airbitz'
-        }
-        if (navigator.userAgent.toLowerCase().includes("iphone")) {
+        } else if (navigator.userAgent.toLowerCase().includes("iphone")) {
           window.location.href = 'https://itunes.apple.com/us/app/airbitz/id843536046'
+        } else {
+          window.location.href = 'https://www.airbitz.co/bitcoin-wallet'
         }
-        window.location.href = 'https://www.airbitz.co/bitcoin-wallet'
       })
     </script>
 </head>
