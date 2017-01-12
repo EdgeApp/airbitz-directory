@@ -31,6 +31,7 @@ Sync database
 
 If you encounter a PostGis/GeoPython error ensure you are on 'deploy' branch, and try again
 If you still encounter the error, try the following:
+
     vm> exit
     local> vagrant provision
     local> vagrant ssh
