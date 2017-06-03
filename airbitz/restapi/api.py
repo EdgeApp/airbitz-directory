@@ -28,7 +28,7 @@ CURRENT_LOCATION='current location'
 CUR_LOC_ARRAY=[CURRENT_LOCATION, 'ubicación actual']
 WEB_LOC_ARRAY=['on the web', 'en la red']
 WEB_ONLY_ARRAY=['web only']
-LOCKED_USERS = [39, 41] # coinsource, rockitcoin
+LOCKED_USERS = [39, 41, 43] # coinsource, rockitcoin, bitcoindepot
 LOCKED_ATM_USERS = [35] # rackwallet
 
 def autocompleteSerialize(row, lang=DEF_LANG):
