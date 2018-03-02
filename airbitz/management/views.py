@@ -215,7 +215,10 @@ def business_copy(request, bizId):
             h.business = biz
             h.save()
         for i in images:
-            i.duplicate(biz)
+            try:
+                i.duplicate(biz)
+            except Exception as ea:
+                print ea
     except Exception as e:
         print e
     return HttpResponseRedirect(reverse('mgmt_biz_view', args=(biz.id, )))
