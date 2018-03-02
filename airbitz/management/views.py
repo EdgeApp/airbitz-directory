@@ -201,20 +201,23 @@ def business_copy(request, bizId):
     hours = biz.businesshours_set.all()
     images = biz.businessimage_set.all()
 
-    biz.pk = None
-    biz.save()
-    for c in categories:
-        biz.categories.add(c)
-    for s in socials:
-        s.pk = None
-        s.business = biz
-        s.save()
-    for h in hours:
-        h.pk = None
-        h.business = biz
-        h.save()
-    for i in images:
-        i.duplicate(biz)
+    try:
+        biz.pk = None
+        biz.save()
+        for c in categories:
+            biz.categories.add(c)
+        for s in socials:
+            s.pk = None
+            s.business = biz
+            s.save()
+        for h in hours:
+            h.pk = None
+            h.business = biz
+            h.save()
+        for i in images:
+            i.duplicate(biz)
+    except Exception as e:
+        print e
     return HttpResponseRedirect(reverse('mgmt_biz_view', args=(biz.id, )))
 
 @user_passes_test(isManager, login_url=LOGIN_URL)
