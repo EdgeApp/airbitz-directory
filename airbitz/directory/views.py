@@ -313,7 +313,7 @@ def redirect_blf(request):
 # handles button redirects for edge login requests
 def redirect_elf(request):
 
-    url = 'airbitz-ret://x-callback-uri/edgelogin/' + request.GET['address']
+    url = 'edge-ret://edge/' + request.GET['address']
 
     response = HttpResponse("", status=302)
     response['Location'] = str(url)
