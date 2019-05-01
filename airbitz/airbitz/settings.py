@@ -8,6 +8,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
+# TODO: This uuid thing is a hack, just trying to get this thing to run.
+# See https://stackoverflow.com/a/39586528
+import uuid
+uuid._uuid_generate_random = None
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import getpass

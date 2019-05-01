@@ -26,3 +26,4 @@ staging/AIRBITZ_SSL
 
 # Ignore .ssh keys
 /staging/.ssh
+/airbitz/.env
